@@ -44,6 +44,9 @@ DESCRIPTION
 #include "gaia_transport_gatt.h"
 #endif
 
+#ifdef GAIA_TRANSPORT_IAP2
+#include "gaia_transport_iap2.h"
+#endif
 
 #include "rwcp_server.h"
 #include "gaia_db.h"
@@ -3764,6 +3767,11 @@ void GaiaBuildAndSendSynch(GAIA_TRANSPORT *transport,
         gaiaTransportGattSend((gaia_transport *) transport, vendor_id, command_id, status, size_payload, payload, FALSE);
         break;
 #endif
+#ifdef GAIA_TRANSPORT_IAP2
+    case gaia_transport_iap2:
+        gaiaTransportIap2Send((gaia_transport *) transport, vendor_id, command_id, status, size_payload, payload);
+        break;
+#endif
     case gaia_transport_rfcomm:
     case gaia_transport_spp:
         {
@@ -3923,6 +3931,13 @@ bool GaiaTransportGetBdAddr(GAIA_TRANSPORT *transport, typed_bdaddr *taddr)
         if (transport_type == gaia_transport_gatt)
         {
             result = VmGetBdAddrtFromCid(((gaia_transport *) transport)->state.gatt.cid, &current_addr);
+        }
+        else
+#endif
+#ifdef GAIA_TRANSPORT_IAP2
+        if (transport_type == gaia_transport_iap2)
+        {
+            result = gaiaTransportIap2GetBdAddr((gaia_transport *) transport, &current_addr.taddr);
         }
         else
 #endif

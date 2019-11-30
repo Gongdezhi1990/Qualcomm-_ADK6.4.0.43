@@ -414,7 +414,14 @@ If ENABLE_BROADCAST_AUDIO is selected, afh_update_method must be set.
                     <option name="1">ENABLE_HID</option>
                 </options>
             </property>
-            
+            <property name="enable_iap2">
+                <description>Enable iAP2</description>
+                <default>ENABLE_IAP2</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0">ENABLE_IAP2</option>
+                </options>
+            </property>
             <property name="battery_operation">
                 <description>Enable Battery Charger</description>
                 <default/>

@@ -3696,6 +3696,11 @@ static void handleUEMessage  ( Task task, MessageId id, Message message )
                 sinkGaiaProcessUpgradeOptimisation(m->apply);
             }
             break;
+#ifdef ENABLE_IAP2
+            case EventUsrAccessoryLaunch:
+                sinkAccessoryLaunch();
+            break;
+#endif
 
 #ifdef ENABLE_PEER
         case EventSysPeerStreamTimeout:
@@ -4545,6 +4550,17 @@ void app_handler(Task task, MessageId id, Message message)
             sppSetSinkData(m->sink);
         }
     }
+#ifdef ENABLE_IAP2
+    else if (id >= IAP_MESSAGE_BASE && id < IAP2_MESSAGE_TOP)
+    {
+        sinkAccessoryMsgHandler(task, id, message);
+    }
+    else if (id >= TRANSPORT_MGR_MESSAGE_BASE && id < TRANSPORT_MGR_TOP)
+    {
+    /*  th10: TODO: these will need their own handler  */
+        sinkAccessoryMsgHandler(task, id, message);
+    }
+#endif
     else
     {
         MAIN_DEBUG_L1(("MSGTYPE ? [%x]\n", id)) ;

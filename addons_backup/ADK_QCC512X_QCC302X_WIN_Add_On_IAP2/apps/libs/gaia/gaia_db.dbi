@@ -1,0 +1,42 @@
+#ifndef __GAIA_DB_DBI__
+#define __GAIA_DB_DBI__
+
+#include "gaia_uuids.h"
+
+primary_service {
+    uuid : UUID_GAIA_SERVICE,
+    name : "GAIA_SERVICE",
+    characteristic {
+        uuid        : UUID_GAIA_COMMAND_ENDPOINT,
+        name        : "GAIA_COMMAND_ENDPOINT",
+        flags       : [ FLAG_IRQ, FLAG_DYNLEN, FLAG_ENCR_W ],
+        properties  : [ write ],
+        value       : 0x0
+    },
+	characteristic {
+        uuid        : UUID_GAIA_RESPONSE_ENDPOINT,
+        name        : "GAIA_RESPONSE_ENDPOINT",
+        flags       : [ FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read, notify ],
+        value       : 0x0,
+        client_config
+        {
+            name  : "GAIA_RESPONSE_CLIENT_CONFIG",
+            flags : [ FLAG_IRQ , FLAG_DYNLEN ]
+        }
+    },
+	characteristic {
+        uuid        : UUID_GAIA_DATA_ENDPOINT,
+        name        : "GAIA_DATA_ENDPOINT",
+        flags       : [ FLAG_IRQ, FLAG_DYNLEN, FLAG_ENCR_W, FLAG_ENCR_R ],
+        properties  : [ write_cmd, notify, read ],
+        value       : 0x0,
+        client_config
+        {
+            name  : "GAIA_DATA_CLIENT_CONFIG",
+            flags : [ FLAG_IRQ , FLAG_DYNLEN ]
+        }
+	}
+},
+#endif /* __GAIA_DB_DBI__ */
+

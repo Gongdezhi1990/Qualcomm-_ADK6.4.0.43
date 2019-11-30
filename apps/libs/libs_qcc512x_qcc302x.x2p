@@ -1118,7 +1118,28 @@
     <folder name="hydra_dev">
         <file path="hydra_dev/hydra_dev.h"/>
     </folder>
-    
+    <folder name="iap2">
+        <file path="iap2/iap2.h"/>
+        <file path="iap2/iap2_common.c"/>
+        <file path="iap2/iap2_connect.c"/>
+        <file path="iap2/iap2_connect.h"/>
+        <file path="iap2/iap2_cp.c"/>
+        <file path="iap2/iap2_cp.h"/>
+        <file path="iap2/iap2_debug.h"/>
+        <file path="iap2/iap2_eap.c"/>
+        <file path="iap2/iap2_eap.h"/>
+        <file path="iap2/iap2_init.c"/>
+        <file path="iap2/iap2_init.h"/>
+        <file path="iap2/iap2_link.c"/>
+        <file path="iap2/iap2_link.h"/>
+        <file path="iap2/iap2_link_setup.c"/>
+        <file path="iap2/iap2_link_setup.h"/>
+        <file path="iap2/iap2_message.c"/>
+        <file path="iap2/iap2_message_handler.c"/>
+        <file path="iap2/iap2_packet.c"/>
+        <file path="iap2/iap2_packet.h"/>
+        <file path="iap2/iap2_private.h"/>
+    </folder>
     <folder name="kalimba_if">
         <file path="kalimba_if/kalimba_if.h"/>
     </folder>

@@ -1,0 +1,44 @@
+<ModuleData Name="Sink_accessory">
+    <!-- accessory Feature Configuration Set Extensions. -->
+    <!-- This XML file extends the base ADK Sink Application Configuration Set. -->
+    <!-- See CS-337027-UG for definitions of the XML tokens used in this file. -->
+    
+    <ConfigGroup Id="accessory" ShortId="sink_accessory_readonly" Node="Basic"  ConfigGroupPath="./[@ShortId='accessory']/[@ShortId='accessory Supported Features']">
+              <ConfigItem
+                Id="Model Identifier"
+                ShortId="accessory_model_id"                
+                Type="AsciiString"
+                DefaultValue="DevBoard"
+                MaxStrLenBytes="16"
+                Desc="Must match the accessory's marking and packaging. See MFI specification"/>
+
+              <ConfigItem
+                Id="Bundle Identifier"
+                ShortId="accessory_bundle_id"
+                Type="AsciiString"
+                DefaultValue="XXXXXX"
+                MaxStrLenBytes="6"
+                Desc="Preferred Bundle Seed Identifier of application. This is a reverse DNS string. See MFI specification, AppMatchTeamId"/>
+
+            <ConfigItem
+                Id="Hardware Version [hex]"
+                ShortId="accessory_version"
+                Size="16"
+                DefaultValue="0x0310"
+                Type="uint"
+                PresentHex="true"
+                Desc="Should be set as appropriate for the hardware version, where: 0xABCD = versionAB.C.D"/>
+       </ConfigGroup>
+
+
+       <ConfigGroup Id="iOS Application"  ShortId="sink_accessory_ios_app_name"  Node="Basic">
+            <ConfigItem
+                Id="iOS Application Name"
+                ShortId="app_name"
+                Type="AsciiString"
+                DefaultValue=" "
+                MaxStrLenBytes="36"
+                Desc="This contains the name of the iOS application to launch in reverse DNS format."/>
+        </ConfigGroup>              
+       
+</ModuleData>

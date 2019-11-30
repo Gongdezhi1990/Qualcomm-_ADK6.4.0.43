@@ -1,0 +1,631 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project path="">
+    <file path="../../main.c" />
+    <folder name="GATT_database">
+        <file path="../../sink_gatt_db.db" />
+    </folder>
+    <folder name="include">
+        <file path="../../ahi_host_trb.h" />
+        <file path="../../ahi_host_usb.h" />
+        <file path="../../ahi_test.h" />
+        <file path="../../main.h" />
+        <file path="../../sink_a2dp.h" />
+        <file path="../../sink_a2dp_aptx_adaptive.h" />
+        <file path="../../sink_a2dp_capabilities.h" />
+        <file path="../../sink_accessory.h" />
+        <file path="../../sink_ahi.h" />
+        <file path="../../sink_ama.h" />
+        <file path="../../sink_anc.h" />
+        <file path="../../sink_at_commands.h" />
+        <file path="../../sink_audio.h" />
+        <file path="../../sink_audio_indication.h" />
+        <file path="../../sink_audio_prompts.h" />
+        <file path="../../sink_audio_routing.h" />
+        <file path="../../sink_audio_ttp.h" />
+        <file path="../../sink_auth.h" />
+        <file path="../../sink_auto_power_off.h" />
+        <file path="../../sink_avrcp.h" />
+        <file path="../../sink_avrcp_browsing.h" />
+        <file path="../../sink_avrcp_browsing_channel.h" />
+        <file path="../../sink_avrcp_qualification.h" />
+        <file path="../../sink_ba.h" />
+        <file path="../../sink_ba_ble_gap.h" />
+        <file path="../../sink_ba_broadcaster.h" />
+        <file path="../../sink_ba_broadcaster_association.h" />
+        <file path="../../sink_ba_broadcaster_encryption.h" />
+        <file path="../../sink_ba_broadcaster_packetiser.h" />
+        <file path="../../sink_ba_broadcaster_scm.h" />
+        <file path="../../sink_ba_common.h" />
+        <file path="../../sink_ba_receiver.h" />
+        <file path="../../sink_ble.h" />
+        <file path="../../sink_ble_advertising.h" />
+        <file path="../../sink_ble_gap.h" />
+        <file path="../../sink_ble_sc.h" />
+        <file path="../../sink_ble_scanning.h" />
+        <file path="../../sink_buttonmanager.h" />
+        <file path="../../sink_buttons.h" />
+        <file path="../../sink_callmanager.h" />
+        <file path="../../sink_config.h" />
+        <file path="../../sink_configmanager.h" />
+        <file path="../../sink_csr_features.h" />
+        <file path="../../sink_debug.h" />
+        <file path="../../sink_development.h" />
+        <file path="../../sink_device_id.h" />
+        <file path="../../sink_devicemanager.h" />
+        <file path="../../sink_dfu_ps.h" />
+        <file path="../../sink_display.h" />
+        <file path="../../sink_dormant.h" />
+        <file path="../../sink_downloadable_caps.h" />
+        <file path="../../sink_dsp_capabilities.h" />
+        <file path="../../sink_dut.h" />
+        <file path="../../sink_event_queue.h" />
+        <file path="../../sink_events.h" />
+        <file path="../../sink_fast_pair.h" />
+        <file path="../../sink_fm.h" />
+        <file path="../../sink_gaia.h" />
+        <file path="../../sink_gatt.h" />
+        <file path="../../sink_gatt_client.h" />
+        <file path="../../sink_gatt_client_ancs.h" />
+        <file path="../../sink_gatt_client_ba.h" />
+        <file path="../../sink_gatt_client_battery.h" />
+        <file path="../../sink_gatt_client_dis.h" />
+        <file path="../../sink_gatt_client_gatt.h" />
+        <file path="../../sink_gatt_client_hid.h" />
+        <file path="../../sink_gatt_client_hrs.h" />
+        <file path="../../sink_gatt_client_ias.h" />
+        <file path="../../sink_gatt_client_spc.h" />
+        <file path="../../sink_gatt_common.h" />
+        <file path="../../sink_gatt_device.h" />
+        <file path="../../sink_gatt_hid_qualification.h" />
+        <file path="../../sink_gatt_hid_remote_control.h" />
+        <file path="../../sink_gatt_init.h" />
+        <file path="../../sink_gatt_manager.h" />
+        <file path="../../sink_gatt_server.h" />
+        <file path="../../sink_gatt_server_ama.h" />
+        <file path="../../sink_gatt_server_ba.h" />
+        <file path="../../sink_gatt_server_battery.h" />
+        <file path="../../sink_gatt_server_dis.h" />
+        <file path="../../sink_gatt_server_fps.h" />
+        <file path="../../sink_gatt_server_gap.h" />
+        <file path="../../sink_gatt_server_gatt.h" />
+        <file path="../../sink_gatt_server_hrs.h" />
+        <file path="../../sink_gatt_server_ias.h" />
+        <file path="../../sink_gatt_server_lls.h" />
+        <file path="../../sink_gatt_server_logging.h" />
+        <file path="../../sink_gatt_server_rscs.h" />
+        <file path="../../sink_gatt_server_tps.h" />
+        <file path="../../sink_hf_indicators.h" />
+        <file path="../../sink_hfp_data.h" />
+        <file path="../../sink_hid.h" />
+        <file path="../../sink_hid_device_service_record.h" />
+        <file path="../../sink_indicators.h" />
+        <file path="../../sink_init.h" />
+        <file path="../../sink_input_manager.h" />
+        <file path="../../sink_inquiry.h" />
+        <file path="../../sink_ir_remote_control.h" />
+        <file path="../../sink_led_err.h" />
+        <file path="../../sink_led_manager.h" />
+        <file path="../../sink_leddata.h" />
+        <file path="../../sink_leds.h" />
+        <file path="../../sink_link_policy.h" />
+        <file path="../../sink_linkloss.h" />
+        <file path="../../sink_main_task.h" />
+        <file path="../../sink_malloc_debug.h" />
+        <file path="../../sink_mapc.h" />
+        <file path="../../sink_multi_channel.h" />
+        <file path="../../sink_multipoint.h" />
+        <file path="../../sink_music_processing.h" />
+        <file path="../../sink_nfc.h" />
+        <file path="../../sink_partymode.h" />
+        <file path="../../sink_pbap.h" />
+        <file path="../../sink_peer.h" />
+        <file path="../../sink_peer_qualification.h" />
+        <file path="../../sink_pio.h" />
+        <file path="../../sink_pio_debounce.h" />
+        <file path="../../sink_pmalloc_pools.h" />
+        <file path="../../sink_powermanager.h" />
+        <file path="../../sink_private_data.h" />
+        <file path="../../sink_sbc.h" />
+        <file path="../../sink_sc.h" />
+        <file path="../../sink_scan.h" />
+        <file path="../../sink_slc.h" />
+        <file path="../../sink_speech_recognition.h" />
+        <file path="../../sink_sport_health.h" />
+        <file path="../../sink_sport_health_sm.h" />
+        <file path="../../sink_spp_qualification.h" />
+        <file path="../../sink_statemanager.h" />
+        <file path="../../sink_states.h" />
+        <file path="../../sink_swat.h" />
+        <file path="../../sink_tap_ui.h" />
+        <file path="../../sink_tones.h" />
+        <file path="../../sink_upgrade.h" />
+        <file path="../../sink_usb.h" />
+        <file path="../../sink_usb_debug.h" />
+        <file path="../../sink_usb_descriptors.h" />
+        <file path="../../sink_utils.h" />
+        <file path="../../sink_va_if.h" />
+        <file path="../../sink_volume.h" />
+        <file path="../../sink_watchdog.h" />
+        <file path="../../sink_wired.h" />
+    </folder>
+    <folder name="source">
+        <file path="../../ahi_host_trb.c" />
+        <file path="../../ahi_host_usb.c" />
+        <file path="../../sink_a2dp.c" />
+        <file path="../../sink_a2dp_aptx_adaptive.c" />
+        <file path="../../sink_a2dp_capabilities.c" />
+        <file path="../../sink_accessory.c" />
+        <file path="../../sink_ahi.c" />
+        <file path="../../sink_ama.c" />
+        <file path="../../sink_anc.c" />
+        <file path="../../sink_at_commands.c" />
+        <file path="../../sink_audio.c" />
+        <file path="../../sink_audio_clock.c" />
+        <file path="../../sink_audio_indication.c" />
+        <file path="../../sink_audio_prompts.c" />
+        <file path="../../sink_audio_routing.c" />
+        <file path="../../sink_audio_ttp.c" />
+        <file path="../../sink_auth.c" />
+        <file path="../../sink_auto_power_off.c" />
+        <file path="../../sink_avrcp.c" />
+        <file path="../../sink_avrcp_browsing.c" />
+        <file path="../../sink_avrcp_browsing_channel.c" />
+        <file path="../../sink_avrcp_qualification.c" />
+        <file path="../../sink_ba.c" />
+        <file path="../../sink_ba_ble_gap.c" />
+        <file path="../../sink_ba_broadcaster.c" />
+        <file path="../../sink_ba_broadcaster_association.c" />
+        <file path="../../sink_ba_broadcaster_encryption.c" />
+        <file path="../../sink_ba_broadcaster_packetiser.c" />
+        <file path="../../sink_ba_broadcaster_scm.c" />
+        <file path="../../sink_ba_receiver.c" />
+        <file path="../../sink_ble.c" />
+        <file path="../../sink_ble_advertising.c" />
+        <file path="../../sink_ble_gap.c" />
+        <file path="../../sink_ble_sc.c" />
+        <file path="../../sink_ble_scanning.c" />
+        <file path="../../sink_buttonmanager.c" />
+        <file path="../../sink_buttons.c" />
+        <file path="../../sink_callmanager.c" />
+        <file path="../../sink_config.c" />
+        <file path="../../sink_configmanager.c" />
+        <file path="../../sink_csr_features.c" />
+        <file path="../../sink_device_id.c" />
+        <file path="../../sink_devicemanager.c" />
+        <file path="../../sink_dfu_ps.c" />
+        <file path="../../sink_display.c" />
+        <file path="../../sink_dormant.c" />
+        <file path="../../sink_downloadable_caps.c" />
+        <file path="../../sink_dsp_capabilities.c" />
+        <file path="../../sink_dut.c" />
+        <file path="../../sink_enum.c" />
+        <file path="../../sink_event_queue.c" />
+        <file path="../../sink_fast_pair.c" />
+        <file path="../../sink_gaia.c" />
+        <file path="../../sink_gatt.c" />
+        <file path="../../sink_gatt_client.c" />
+        <file path="../../sink_gatt_client_ancs.c" />
+        <file path="../../sink_gatt_client_ba.c" />
+        <file path="../../sink_gatt_client_battery.c" />
+        <file path="../../sink_gatt_client_dis.c" />
+        <file path="../../sink_gatt_client_gatt.c" />
+        <file path="../../sink_gatt_client_hid.c" />
+        <file path="../../sink_gatt_client_hrs.c" />
+        <file path="../../sink_gatt_client_ias.c" />
+        <file path="../../sink_gatt_client_spc.c" />
+        <file path="../../sink_gatt_common.c" />
+        <file path="../../sink_gatt_hid_qualification.c" />
+        <file path="../../sink_gatt_hid_remote_control.c" />
+        <file path="../../sink_gatt_init.c" />
+        <file path="../../sink_gatt_manager.c" />
+        <file path="../../sink_gatt_server.c" />
+        <file path="../../sink_gatt_server_ama.c" />
+        <file path="../../sink_gatt_server_ba.c" />
+        <file path="../../sink_gatt_server_battery.c" />
+        <file path="../../sink_gatt_server_dis.c" />
+        <file path="../../sink_gatt_server_fps.c" />
+        <file path="../../sink_gatt_server_gap.c" />
+        <file path="../../sink_gatt_server_gatt.c" />
+        <file path="../../sink_gatt_server_hrs.c" />
+        <file path="../../sink_gatt_server_ias.c" />
+        <file path="../../sink_gatt_server_lls.c" />
+        <file path="../../sink_gatt_server_logging.c" />
+        <file path="../../sink_gatt_server_rscs.c" />
+        <file path="../../sink_gatt_server_tps.c" />
+        <file path="../../sink_hf_indicators.c" />
+        <file path="../../sink_hfp_data.c" />
+        <file path="../../sink_hid.c" />
+        <file path="../../sink_indicators.c" />
+        <file path="../../sink_init.c" />
+        <file path="../../sink_input_manager.c" />
+        <file path="../../sink_inquiry.c" />
+        <file path="../../sink_led_manager.c" />
+        <file path="../../sink_leds.c" />
+        <file path="../../sink_link_policy.c" />
+        <file path="../../sink_linkloss.c" />
+        <file path="../../sink_main_task.c" />
+        <file path="../../sink_malloc_debug.c" />
+        <file path="../../sink_mapc.c" />
+        <file path="../../sink_multi_channel.c" />
+        <file path="../../sink_multipoint.c" />
+        <file path="../../sink_music_processing.c" />
+        <file path="../../sink_nfc.c" />
+        <file path="../../sink_partymode.c" />
+        <file path="../../sink_pbap.c" />
+        <file path="../../sink_peer.c" />
+        <file path="../../sink_peer_qualification.c" />
+        <file path="../../sink_pio.c" />
+        <file path="../../sink_pio_debounce.c" />
+        <file path="../../sink_pmalloc_pools.c" />
+        <file path="../../sink_powermanager.c" />
+        <file path="../../sink_private_data.c" />
+        <file path="../../sink_sbc.c" />
+        <file path="../../sink_sc.c" />
+        <file path="../../sink_scan.c" />
+        <file path="../../sink_slc.c" />
+        <file path="../../sink_speech_recognition.c" />
+        <file path="../../sink_sport_health.c" />
+        <file path="../../sink_sport_health_sm.c" />
+        <file path="../../sink_spp_qualification.c" />
+        <file path="../../sink_statemanager.c" />
+        <file path="../../sink_tap_ui.c" />
+        <file path="../../sink_tones.c" />
+        <file path="../../sink_upgrade.c" />
+        <file path="../../sink_usb.c" />
+        <file path="../../sink_usb_debug.c" />
+        <file path="../../sink_utils.c" />
+        <file path="../../sink_va_if.c" />
+        <file path="../../sink_volume.c" />
+        <file path="../../sink_watchdog.c" />
+        <file path="../../sink_wired.c" />
+    </folder>
+    <configurations>
+        <configuration name="Speaker" options="clean|build|deploy|run">
+            <devkitConfiguration>application</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <deployProject>deploy</deployProject>
+            <property name="BUILD_TYPE">DEBUG</property>
+            <property name="CHIP_TYPE">qcc512x_qcc302x</property>
+            <property name="DBG_CORE">app/p1</property>
+            <property name="BUILD_ID">sdk://tools/ubuild/maker/buildid/examples/timestamp.py</property>
+            <property name="DEFAULT_LIBS">usb_early_init</property>
+            <property name="DEFS">__KALIMBA__ HAVE_32BIT_DATA_WIDTH INSTALL_HYDRA_LOG BLUELAB HYDRACORE</property>
+            <property name="EXTRA_WARNINGS">FALSE</property>
+            <property name="HW_VARIANT">CF376_CF429</property>
+            <property name="FLASH_CONFIG">..\..\64Mbit_default_flash_config.py</property>
+            <property name="INCPATHS">..\..\..\..\installed_libs\include\profiles\default_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x\app sdk://apps\installed_libs\include\firmware_qcc512x_qcc302x sdk://apps\installed_libs\include\firmware_qcc512x_qcc302x\app sdk://apps\installed_libs\include\standard</property>
+            <property name="LIBPATHS">..\..\..\..\installed_libs\lib\default_qcc512x_qcc302x\native ..\..\..\..\installed_libs\lib\os\qcc512x_qcc302x sdk://apps\installed_libs\lib\os\qcc512x_qcc302x</property>
+            <property name="LIBS">a2dp audio_output audio_mixer audio_hardware audio_ports audio_processor_speed operators chain cryptoalgo custom_operator file_list hfp audio audio_plugin_common avrcp connection bdaddr audio_voice_hfp audio_i2s_common audio_input_voice_prompts pblock pio_common power power_onchip power_onchip_adapter region sdp_parse gain_utils service vmal gatt gatt_device_info_server gatt_gap_server gatt_manager gatt_server gatt_client gatt_heart_rate_client gatt_transmit_power_server gatt_battery_server gatt_imm_alert_server gatt_imm_alert_client usb_device_class display display_plugin_midas upgrade byte_utils_hydra audio_input_a2dp audio_input_analogue audio_input_i2s audio_input_common audio_plugin_music_variants audio_plugin_voice_variants audio_input_usb tws_packetiser audio_input_tws gaia gatt_hid_client audio_config audio_music_processing ahi config_store ps_dynamic_config_store gatt_apple_notification_client gatt_device_info_client  gatt_device_info_server gatt_scan_params_client gatt_link_loss_server gatt_battery_client gatt_heart_rate_server obex md5 pbapc audio_input_spdif rtime packetiser_helper system_clock tws_synchronised_control audio_instance hid_upgrade hid audio_plugin_forwarding audio_output_tws audio_voice_common audio_voice_usb resource_manager rwcp_server anc audio_voice_assistant_low_power local_device spp_common spps sppc transport_adaptation transport_manager voice_assistant_audio_manager protobuf gatt_fast_pair_server audio_anc_tuning rsa_pss_constants rsa_decrypt</property>
+            <property name="OUTPUT">sink</property>
+            <property name="OUTPUT_TYPE">EXECUTABLE</property>
+            <property name="PRESERVED_LIBS">qcc512x_qcc302x</property>
+            <property name="STRIP_SYMBOLS">FALSE</property>
+            <property name="SW_VARIANT">Speaker_with_TWS</property>
+            <property alias="DEFS" name="adk_nfc" />
+            <property alias="DEFS" name="afh_update_method" />
+            <property alias="DEFS" name="ahi_transport">ENABLE_AHI_USB_HOST</property>
+            <property name="argument" />
+            <property alias="DEFS" name="battery_operation">ENABLE_BATTERY_OPERATION ENABLE_CHARGER_V2 ENABLE_USB_TYPE_C</property>
+            <property alias="DEFS" name="ble_power_off_behaviour">BLE_ENABLED_WHEN_OFF</property>
+            <property name="default" />
+            <property name="description" />
+            <property alias="DEFS" name="device_id_pskey">DEVICE_ID_PSKEY</property>
+            <property name="devkit_group" />
+            <property alias="DEFS" name="display_scrolling">ENABLE_DISPLAY ENABLE_DISPLAY_MIDAS</property>
+            <property alias="DEFS" name="enable_active_noise_cancelling" />
+            <property alias="DEFS" name="enable_anc_tuning_mode" />
+            <property alias="DEFS" name="enable_audio_clock">ENABLE_AUDIO_CLOCK</property>
+            <property alias="DEFS" name="enable_audio_ttp">ENABLE_AUDIO_TTP</property>
+            <property alias="DEFS" name="enable_avrcp">ENABLE_AVRCP</property>
+            <property alias="DEFS" name="enable_avrcp_browsing" />
+            <property alias="DEFS" name="enable_avrcp_now_playing" />
+            <property alias="DEFS" name="enable_avrcp_player_app" />
+            <property alias="DEFS" name="enable_bredr_sc">ENABLE_BREDR_SC</property>
+            <property alias="DEFS" name="enable_dormant_support">ENABLE_DORMANT_SUPPORT</property>
+            <property alias="DEFS" name="enable_downloadable_caps">ENABLE_DOWNLOADABLE_CAPS</property>
+            <property alias="DEFS" name="enable_fast_pair" />
+            <property alias="DEFS" name="enable_findme_client">GATT_IAS_CLIENT</property>
+            <property alias="DEFS" name="enable_gaia">ENABLE_GAIA</property>
+            <property alias="DEFS" name="enable_gaia_persistent_user_eq_bank" />
+            <property alias="DEFS" name="enable_gaia_rfcomm" />
+            <property alias="DEFS" name="enable_gatt">GATT_ENABLED</property>
+            <property alias="DEFS" name="enable_gatt_ancs_client">GATT_ANCS_CLIENT</property>
+            <property alias="DEFS" name="enable_gatt_battery_server">GATT_BATTERY_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_findme_server">GATT_IAS_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_peer_battery_server">GATT_BATTERY_SERVER_PEER</property>
+            <property alias="DEFS" name="enable_gatt_proximity_server">GATT_IAS_SERVER GATT_LLS_SERVER GATT_TPS_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_remote_battery_server">GATT_BATTERY_SERVER_REMOTE</property>
+            <property alias="DEFS" name="enable_heart_rate_server" />
+            <property alias="DEFS" name="enable_hi_res_audio" />
+            <property alias="DEFS" name="enable_hid_client">GATT_BATTERY_CLIENT GATT_DIS_CLIENT GATT_SPC_CLIENT GATT_HID_CLIENT</property>
+            <property alias="DEFS" name="enable_hid_selfie" />
+            <property alias="DEFS" name="enable_hrs_client" />
+            <property alias="DEFS" name="enable_linkkey_display" />
+            <property alias="DEFS" name="enable_mapc" />
+            <property alias="DEFS" name="enable_partymode" />
+            <property alias="DEFS" name="enable_pbap">ENABLE_PBAP</property>
+            <property alias="DEFS" name="enable_peer_battery_level">ENABLE_PEER_BATTERY_LEVEL</property>
+            <property alias="DEFS" name="enable_peer_device">ENABLE_PEER PEER_TWS PEER_AVRCP</property>
+            <property alias="DEFS" name="enable_upgrade">ENABLE_UPGRADE</property>
+            <property alias="DEFS" name="enable_usb">ENABLE_USB</property>
+            <property alias="DEFS" name="enable_usb_audio">ENABLE_USB_AUDIO</property>
+            <property alias="DEFS" name="enable_usb_hid_upgrade">ENABLE_USB_HID_UPGRADE</property>
+            <property alias="DEFS" name="enable_voice_assistant" />
+            <property alias="DEFS" name="enable_watchdog">ENABLE_WATCHDOG</property>
+            <property alias="DEFS" name="enable_wired">ENABLE_WIRED</property>
+            <property alias="DEFS" name="enable_allow_usb_debug" />
+            <property alias="DEFS" name="gatt_gaia_server">GATT_GAIA_SERVER</property>
+            <property alias="DEFS" name="include_a2dp_extra_codecs">INCLUDE_A2DP_EXTRA_CODECS</property>
+            <property alias="DEFS" name="include_aptx_acl_sprint">INCLUDE_APTX_ACL_SPRINT</property>
+            <property alias="DEFS" name="include_aptx_adaptive" />
+            <property alias="DEFS" name="include_dsp">INCLUDE_DSP</property>
+            <property name="permission" />
+            <property alias="DEFS" name="sbc_encoder_conformance" />
+            <property alias="DEFS" name="test_hf_indicators" />
+            <property alias="DEFS" name="test_scom" />
+            <property alias="DEFS" name="three_way_calling">THREE_WAY_CALLING</property>
+            <property alias="DEFS" name="usb_app_stereo">ENABLE_USB_AUDIO_APP_STEREO_DESCRIPTORS</property>
+            <property alias="DEFS" name="usb_hub">ENABLE_USB_HUB_SUPPORT</property>
+        </configuration>
+        <configuration name="Headset" options="clean|build|deploy|run|default">
+            <devkitConfiguration>application</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <deployProject>deploy</deployProject>
+            <property name="BUILD_TYPE">DEBUG</property>
+            <property name="CHIP_TYPE">qcc512x_qcc302x</property>
+            <property name="DBG_CORE">app/p1</property>
+            <property name="BUILD_ID">sdk://tools/ubuild/maker/buildid/examples/timestamp.py</property>
+            <property name="DEFAULT_LIBS">usb_early_init</property>
+            <property name="DEFS">__KALIMBA__ HAVE_32BIT_DATA_WIDTH INSTALL_HYDRA_LOG BLUELAB HYDRACORE</property>
+            <property name="EXTRA_WARNINGS">FALSE</property>
+            <property name="HW_VARIANT">CF376_CF429</property>
+            <property name="FLASH_CONFIG">..\..\64Mbit_default_flash_config.py</property>
+            <property name="INCPATHS">..\..\..\..\installed_libs\include\profiles\default_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x\app sdk://apps\installed_libs\include\firmware_qcc512x_qcc302x sdk://apps\installed_libs\include\firmware_qcc512x_qcc302x\app sdk://apps\installed_libs\include\standard</property>
+            <property name="LIBPATHS">..\..\..\..\installed_libs\lib\default_qcc512x_qcc302x\native ..\..\..\..\installed_libs\lib\os\qcc512x_qcc302x sdk://apps\installed_libs\lib\os\qcc512x_qcc302x</property>
+            <property name="LIBS">a2dp audio_output audio_mixer audio_hardware audio_ports audio_processor_speed operators chain cryptoalgo custom_operator file_list hfp audio audio_plugin_common avrcp connection bdaddr audio_voice_hfp audio_i2s_common audio_input_voice_prompts pblock pio_common power power_onchip power_onchip_adapter region sdp_parse gain_utils service vmal gatt gatt_device_info_server gatt_gap_server gatt_manager gatt_server gatt_client gatt_heart_rate_client gatt_transmit_power_server gatt_battery_server gatt_imm_alert_server gatt_imm_alert_client usb_device_class display display_plugin_midas upgrade byte_utils_hydra audio_input_a2dp audio_input_analogue audio_input_i2s audio_input_common audio_plugin_music_variants audio_plugin_voice_variants audio_input_usb tws_packetiser audio_input_tws gaia gatt_hid_client audio_config audio_music_processing ahi config_store ps_dynamic_config_store gatt_apple_notification_client gatt_device_info_client gatt_device_info_server gatt_scan_params_client gatt_link_loss_server gatt_battery_client gatt_heart_rate_server obex md5 pbapc audio_input_spdif rtime packetiser_helper system_clock tws_synchronised_control audio_instance hid_upgrade hid audio_plugin_forwarding audio_output_tws audio_voice_common audio_voice_usb resource_manager rwcp_server anc audio_voice_assistant_low_power local_device spp_common spps sppc transport_adaptation transport_manager voice_assistant_audio_manager protobuf gatt_fast_pair_server audio_anc_tuning rsa_pss_constants rsa_decrypt</property>
+            <property name="OUTPUT">sink</property>
+            <property name="OUTPUT_TYPE">EXECUTABLE</property>
+            <property name="PRESERVED_LIBS">qcc512x_qcc302x</property>
+            <property name="STRIP_SYMBOLS">FALSE</property>
+            <property name="SW_VARIANT">Headset-Gaming</property>
+            <property alias="DEFS" name="adk_nfc" />
+            <property alias="DEFS" name="afh_update_method" />
+            <property alias="DEFS" name="ahi_transport">ENABLE_AHI_USB_HOST</property>
+            <property name="argument" />
+            <property alias="DEFS" name="battery_operation">ENABLE_BATTERY_OPERATION ENABLE_CHARGER_V2 ENABLE_USB_TYPE_C</property>
+            <property alias="DEFS" name="ble_power_off_behaviour">BLE_ENABLED_WHEN_OFF</property>
+            <property name="default" />
+            <property name="description" />
+            <property alias="DEFS" name="device_id_pskey">DEVICE_ID_PSKEY</property>
+            <property name="devkit_group" />
+            <property alias="DEFS" name="display_scrolling">ENABLE_DISPLAY ENABLE_DISPLAY_MIDAS</property>
+            <property alias="DEFS" name="enable_active_noise_cancelling" />
+            <property alias="DEFS" name="enable_anc_tuning_mode" />
+            <property alias="DEFS" name="enable_audio_clock">ENABLE_AUDIO_CLOCK</property>
+            <property alias="DEFS" name="enable_audio_ttp">ENABLE_AUDIO_TTP</property>
+            <property alias="DEFS" name="enable_avrcp">ENABLE_AVRCP</property>
+            <property alias="DEFS" name="enable_avrcp_browsing" />
+            <property alias="DEFS" name="enable_avrcp_now_playing" />
+            <property alias="DEFS" name="enable_avrcp_player_app" />
+            <property alias="DEFS" name="enable_bredr_sc">ENABLE_BREDR_SC</property>
+            <property alias="DEFS" name="enable_dormant_support">ENABLE_DORMANT_SUPPORT</property>
+            <property alias="DEFS" name="enable_downloadable_caps">ENABLE_DOWNLOADABLE_CAPS</property>
+            <property alias="DEFS" name="enable_fast_pair" />
+            <property alias="DEFS" name="enable_findme_client">GATT_IAS_CLIENT</property>
+            <property alias="DEFS" name="enable_gaia">ENABLE_GAIA</property>
+            <property alias="DEFS" name="enable_gaia_persistent_user_eq_bank" />
+            <property alias="DEFS" name="enable_gaia_rfcomm" />
+            <property alias="DEFS" name="enable_gatt">GATT_ENABLED</property>
+            <property alias="DEFS" name="enable_gatt_ancs_client">GATT_ANCS_CLIENT</property>
+            <property alias="DEFS" name="enable_gatt_battery_server">GATT_BATTERY_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_findme_server">GATT_IAS_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_peer_battery_server" />
+            <property alias="DEFS" name="enable_gatt_proximity_server">GATT_IAS_SERVER GATT_LLS_SERVER GATT_TPS_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_remote_battery_server" />
+            <property alias="DEFS" name="enable_heart_rate_server" />
+            <property alias="DEFS" name="enable_hi_res_audio" />
+            <property alias="DEFS" name="enable_hid_client" />
+            <property alias="DEFS" name="enable_hid_selfie" />
+            <property alias="DEFS" name="enable_hrs_client" />
+            <property alias="DEFS" name="enable_linkkey_display" />
+            <property alias="DEFS" name="enable_mapc" />
+            <property alias="DEFS" name="enable_partymode" />
+            <property alias="DEFS" name="enable_pbap">ENABLE_PBAP</property>
+            <property alias="DEFS" name="enable_peer_battery_level" />
+            <property alias="DEFS" name="enable_peer_device" />
+            <property alias="DEFS" name="enable_upgrade">ENABLE_UPGRADE</property>
+            <property alias="DEFS" name="enable_usb">ENABLE_USB</property>
+            <property alias="DEFS" name="enable_usb_audio" />
+            <property alias="DEFS" name="enable_usb_hid_upgrade">ENABLE_USB_HID_UPGRADE</property>
+            <property alias="DEFS" name="enable_voice_assistant" />
+            <property alias="DEFS" name="enable_watchdog">ENABLE_WATCHDOG</property>
+            <property alias="DEFS" name="enable_wired" />
+            <property alias="DEFS" name="enable_allow_usb_debug" />
+            <property alias="DEFS" name="gatt_gaia_server">GATT_GAIA_SERVER</property>
+            <property alias="DEFS" name="include_a2dp_extra_codecs">INCLUDE_A2DP_EXTRA_CODECS</property>
+            <property alias="DEFS" name="include_aptx_acl_sprint">INCLUDE_APTX_ACL_SPRINT</property>
+            <property alias="DEFS" name="include_aptx_adaptive" />
+            <property alias="DEFS" name="include_dsp">INCLUDE_DSP</property>
+            <property name="permission" />
+            <property alias="DEFS" name="sbc_encoder_conformance" />
+            <property alias="DEFS" name="test_hf_indicators" />
+            <property alias="DEFS" name="test_scom" />
+            <property alias="DEFS" name="three_way_calling">THREE_WAY_CALLING</property>
+            <property alias="DEFS" name="usb_app_stereo">ENABLE_USB_AUDIO_APP_STEREO_DESCRIPTORS</property>
+            <property alias="DEFS" name="usb_hub">ENABLE_USB_HUB_SUPPORT</property>
+        </configuration>
+        <configuration name="Speaker_Broadcast" options="clean|build|deploy|run">
+            <devkitConfiguration>application</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <deployProject>deploy</deployProject>
+            <property name="BUILD_TYPE">DEBUG</property>
+            <property name="CHIP_TYPE">qcc512x_qcc302x</property>
+            <property name="DBG_CORE">app/p1</property>
+            <property name="BUILD_ID">sdk://tools/ubuild/maker/buildid/examples/timestamp.py</property>
+            <property name="DEFAULT_LIBS">usb_early_init</property>
+            <property name="DEFS">__KALIMBA__ HAVE_32BIT_DATA_WIDTH INSTALL_HYDRA_LOG BLUELAB HYDRACORE BROADCAST_PACKETISER_IS_CONTROLLED_BY_APP</property>
+            <property name="EXTRA_WARNINGS">FALSE</property>
+            <property name="FLASH_CONFIG">..\..\64Mbit_default_flash_config.py</property>
+            <property name="HW_VARIANT">CF376_CF429</property>
+            <property name="INCPATHS">..\..\..\..\installed_libs\include\profiles\default_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x\app sdk://apps\installed_libs\include\firmware_qcc512x_qcc302x sdk://apps\installed_libs\include\firmware_qcc512x_qcc302x\app sdk://apps\installed_libs\include\standard</property>
+            <property name="LIBPATHS">..\..\..\..\installed_libs\lib\default_qcc512x_qcc302x\native ..\..\..\..\installed_libs\lib\os\qcc512x_qcc302x sdk://apps\installed_libs\lib\os\qcc512x_qcc302x</property>
+            <property name="LIBS">a2dp audio_output audio_mixer audio_hardware audio_ports audio_processor_speed operators chain cryptoalgo custom_operator file_list hfp audio audio_plugin_common avrcp connection bdaddr audio_voice_hfp audio_i2s_common audio_input_voice_prompts pblock pio_common power power_onchip power_onchip_adapter region sdp_parse gain_utils service vmal gatt gatt_device_info_server gatt_gap_server gatt_manager gatt_server gatt_client gatt_heart_rate_client gatt_transmit_power_server gatt_battery_server gatt_imm_alert_server gatt_imm_alert_client usb_device_class display display_plugin_midas upgrade byte_utils_hydra audio_input_a2dp audio_input_analogue audio_input_i2s audio_input_common audio_plugin_music_variants audio_plugin_voice_variants audio_input_usb tws_packetiser audio_input_tws gaia gatt_hid_client audio_config audio_music_processing ahi config_store ps_dynamic_config_store gatt_apple_notification_client gatt_device_info_client gatt_device_info_server gatt_scan_params_client gatt_link_loss_server gatt_battery_client gatt_heart_rate_server obex md5 pbapc audio_input_spdif rtime packetiser_helper system_clock tws_synchronised_control audio_instance hid_upgrade hid audio_plugin_forwarding anc audio_voice_common audio_voice_usb audio_output_broadcast broadcast_cmd broadcast_packetiser erasure_coding broadcast broadcast_context gatt_broadcast_server gatt_broadcast_client scm scm_transport broadcast_stream_service_record audio_input_broadcast afh_channel_map resource_manager rwcp_server anc audio_voice_assistant_low_power local_device spp_common spps sppc transport_adaptation transport_manager voice_assistant_audio_manager protobuf gatt_fast_pair_server audio_anc_tuning rsa_pss_constants rsa_decrypt</property>
+            <property name="OUTPUT">sink</property>
+            <property name="OUTPUT_TYPE">EXECUTABLE</property>
+            <property name="PRESERVED_LIBS">qcc512x_qcc302x</property>
+            <property name="STRIP_SYMBOLS">FALSE</property>
+            <property name="SW_VARIANT">Speaker_with_BA</property>
+            <property alias="DEFS" name="adk_nfc" />
+            <property alias="DEFS" name="afh_update_method">AFH_UPDATE_METHOD_SYNC_TRAIN</property>
+            <property alias="DEFS" name="ahi_transport">ENABLE_AHI_USB_HOST</property>
+            <property name="argument" />
+            <property alias="DEFS" name="battery_operation">ENABLE_BATTERY_OPERATION ENABLE_CHARGER_V2 ENABLE_USB_TYPE_C</property>
+            <property alias="DEFS" name="ble_power_off_behaviour">BLE_ENABLED_WHEN_OFF</property>
+            <property name="default" />
+            <property name="description" />
+            <property alias="DEFS" name="device_id_pskey">DEVICE_ID_PSKEY</property>
+            <property name="devkit_group" />
+            <property alias="DEFS" name="display_scrolling">ENABLE_DISPLAY ENABLE_DISPLAY_MIDAS</property>
+            <property alias="DEFS" name="enable_active_noise_cancelling" />
+            <property alias="DEFS" name="enable_anc_tuning_mode" />
+            <property alias="DEFS" name="enable_audio_clock">ENABLE_AUDIO_CLOCK</property>
+            <property alias="DEFS" name="enable_audio_ttp">ENABLE_AUDIO_TTP</property>
+            <property alias="DEFS" name="enable_avrcp">ENABLE_AVRCP</property>
+            <property alias="DEFS" name="enable_avrcp_browsing" />
+            <property alias="DEFS" name="enable_avrcp_now_playing" />
+            <property alias="DEFS" name="enable_avrcp_player_app" />
+            <property alias="DEFS" name="enable_bredr_sc">ENABLE_BREDR_SC</property>
+            <property alias="DEFS" name="enable_dormant_support">ENABLE_DORMANT_SUPPORT</property>
+            <property alias="DEFS" name="enable_downloadable_caps">ENABLE_DOWNLOADABLE_CAPS</property>
+            <property alias="DEFS" name="enable_fast_pair" />
+            <property alias="DEFS" name="enable_findme_client">GATT_IAS_CLIENT</property>
+            <property alias="DEFS" name="enable_gaia">ENABLE_GAIA</property>
+            <property alias="DEFS" name="enable_gaia_persistent_user_eq_bank" />
+            <property alias="DEFS" name="enable_gaia_rfcomm" />
+            <property alias="DEFS" name="enable_gatt">GATT_ENABLED</property>
+            <property alias="DEFS" name="enable_gatt_ancs_client">GATT_ANCS_CLIENT</property>
+            <property alias="DEFS" name="enable_gatt_battery_server">GATT_BATTERY_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_findme_server">GATT_IAS_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_peer_battery_server">GATT_BATTERY_SERVER_PEER</property>
+            <property alias="DEFS" name="enable_gatt_proximity_server">GATT_IAS_SERVER GATT_LLS_SERVER GATT_TPS_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_remote_battery_server">GATT_BATTERY_SERVER_REMOTE</property>
+            <property alias="DEFS" name="enable_heart_rate_server" />
+            <property alias="DEFS" name="enable_hi_res_audio" />
+            <property alias="DEFS" name="enable_hid_client">GATT_BATTERY_CLIENT GATT_DIS_CLIENT GATT_SPC_CLIENT GATT_HID_CLIENT</property>
+            <property alias="DEFS" name="enable_hid_selfie" />
+            <property alias="DEFS" name="enable_hrs_client" />
+            <property alias="DEFS" name="enable_linkkey_display" />
+            <property alias="DEFS" name="enable_mapc" />
+            <property alias="DEFS" name="enable_partymode" />
+            <property alias="DEFS" name="enable_pbap">ENABLE_PBAP</property>
+            <property alias="DEFS" name="enable_peer_battery_level" />
+            <property alias="DEFS" name="enable_peer_device">ENABLE_BROADCAST_AUDIO</property>
+            <property alias="DEFS" name="enable_upgrade">ENABLE_UPGRADE</property>
+            <property alias="DEFS" name="enable_usb">ENABLE_USB</property>
+            <property alias="DEFS" name="enable_usb_audio">ENABLE_USB_AUDIO</property>
+            <property alias="DEFS" name="enable_usb_hid_upgrade">ENABLE_USB_HID_UPGRADE</property>
+            <property alias="DEFS" name="enable_voice_assistant" />
+            <property alias="DEFS" name="enable_watchdog">ENABLE_WATCHDOG</property>
+            <property alias="DEFS" name="enable_wired">ENABLE_WIRED</property>
+            <property alias="DEFS" name="enable_allow_usb_debug" />
+            <property alias="DEFS" name="gatt_gaia_server">GATT_GAIA_SERVER</property>
+            <property alias="DEFS" name="include_a2dp_extra_codecs" />
+            <property alias="DEFS" name="include_aptx_acl_sprint">INCLUDE_APTX_ACL_SPRINT</property>
+            <property alias="DEFS" name="include_aptx_adaptive" />
+            <property alias="DEFS" name="include_dsp">INCLUDE_DSP</property>
+            <property name="permission" />
+            <property alias="DEFS" name="test_hf_indicators" />
+            <property alias="DEFS" name="test_scom" />
+            <property alias="DEFS" name="three_way_calling">THREE_WAY_CALLING</property>
+            <property alias="DEFS" name="usb_app_stereo">ENABLE_USB_AUDIO_APP_STEREO_DESCRIPTORS</property>
+            <property alias="DEFS" name="usb_hub">ENABLE_USB_HUB_SUPPORT</property>
+        </configuration>
+        <configuration name="Activity_Monitoring_Headset" options="clean|build|deploy|run">
+            <devkitConfiguration>application</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <deployProject>deploy</deployProject>
+            <property name="BUILD_TYPE">DEBUG</property>
+            <property name="CHIP_TYPE">qcc512x_qcc302x</property>
+            <property name="DBG_CORE">app/p1</property>
+            <property name="BUILD_ID">sdk://tools/ubuild/maker/buildid/examples/timestamp.py</property>
+            <property name="DEFAULT_LIBS">usb_early_init</property>
+            <property name="DEFS">__KALIMBA__ HAVE_32BIT_DATA_WIDTH INSTALL_HYDRA_LOG BLUELAB HYDRACORE GATT_RSCS_SERVER ADD_STEP_TO_RSCS GATT_RSCS_SERVER ACTIVITY_MONITORING SPORTS_HEALTH_LOGGING_DISABLE </property>
+            <property name="EXTRA_WARNINGS">FALSE</property>
+            <property name="FLASH_CONFIG">..\..\64Mbit_default_flash_config.py</property>
+            <property name="HW_VARIANT">CF376_CF429</property>
+            <property name="INCPATHS">..\..\..\..\installed_libs\include\profiles\default_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x\app sdk://apps\installed_libs\include\firmware_qcc512x_qcc302x sdk://apps\installed_libs\include\firmware_qcc512x_qcc302x\app sdk://apps\installed_libs\include\standard</property>
+            <property name="LIBPATHS">..\..\..\..\installed_libs\lib\default_qcc512x_qcc302x\native ..\..\..\..\installed_libs\lib\os\qcc512x_qcc302x sdk://apps\installed_libs\lib\os\qcc512x_qcc302x</property>
+            <property name="LIBS">a2dp audio_output audio_mixer audio_hardware audio_ports audio_processor_speed operators chain cryptoalgo custom_operator file_list hfp audio audio_plugin_common avrcp connection bdaddr audio_voice_hfp audio_i2s_common audio_input_voice_prompts pblock pio_common power power_onchip power_onchip_adapter region sdp_parse gain_utils service vmal gatt gatt_device_info_server gatt_gap_server gatt_manager gatt_server gatt_client gatt_heart_rate_client gatt_transmit_power_server gatt_battery_server gatt_imm_alert_server gatt_imm_alert_client usb_device_class display display_plugin_midas upgrade byte_utils_hydra audio_input_a2dp audio_input_analogue audio_input_i2s audio_input_common audio_plugin_music_variants audio_plugin_voice_variants audio_input_usb tws_packetiser audio_input_tws gaia gatt_hid_client audio_config audio_music_processing ahi config_store ps_dynamic_config_store gatt_apple_notification_client gatt_device_info_client  gatt_device_info_server gatt_scan_params_client gatt_link_loss_server gatt_battery_client gatt_heart_rate_server obex md5 pbapc audio_input_spdif rtime packetiser_helper system_clock tws_synchronised_control audio_instance hid_upgrade hid audio_plugin_forwarding audio_output_tws audio_voice_common audio_voice_usb resource_manager rwcp_server anc audio_voice_assistant_low_power local_device  gatt_running_speed_cadence_server sport_health_algorithms sport_health_hub sport_health_driver sport_health_logging sport_health_driver_imu_bmi160 sport_health_driver_ppg_max30102 spp_common spps sppc transport_adaptation transport_manager voice_assistant_audio_manager protobuf gatt_fast_pair_server audio_anc_tuning rsa_pss_constants rsa_decrypt</property>
+            <property name="OUTPUT">sink</property>
+            <property name="OUTPUT_TYPE">EXECUTABLE</property>
+            <property name="PRESERVED_LIBS">qcc512x_qcc302x</property>
+            <property name="STRIP_SYMBOLS">FALSE</property>
+            <property name="SW_VARIANT">Headset-Gaming</property>
+            <property alias="DEFS" name="adk_nfc" />
+            <property alias="DEFS" name="afh_update_method" />
+            <property alias="DEFS" name="ahi_transport">ENABLE_AHI_USB_HOST</property>
+            <property name="argument" />
+            <property alias="DEFS" name="battery_operation">ENABLE_BATTERY_OPERATION ENABLE_CHARGER_V2 ENABLE_USB_TYPE_C</property>
+            <property alias="DEFS" name="ble_power_off_behaviour" />
+            <property name="default" />
+            <property name="description" />
+            <property alias="DEFS" name="device_id_pskey">DEVICE_ID_PSKEY</property>
+            <property name="devkit_group" />
+            <property alias="DEFS" name="display_scrolling" />
+            <property alias="DEFS" name="enable_active_noise_cancelling" />
+            <property alias="DEFS" name="enable_anc_tuning_mode" />
+            <property alias="DEFS" name="enable_audio_clock">ENABLE_AUDIO_CLOCK</property>
+            <property alias="DEFS" name="enable_audio_ttp">ENABLE_AUDIO_TTP</property>
+            <property alias="DEFS" name="enable_avrcp">ENABLE_AVRCP</property>
+            <property alias="DEFS" name="enable_avrcp_browsing" />
+            <property alias="DEFS" name="enable_avrcp_now_playing" />
+            <property alias="DEFS" name="enable_avrcp_player_app" />
+            <property alias="DEFS" name="enable_bredr_sc">ENABLE_BREDR_SC</property>
+            <property alias="DEFS" name="enable_dormant_support">ENABLE_DORMANT_SUPPORT</property>
+            <property alias="DEFS" name="enable_downloadable_caps">ENABLE_DOWNLOADABLE_CAPS</property>
+            <property alias="DEFS" name="enable_fast_pair" />
+            <property alias="DEFS" name="enable_findme_client" />
+            <property alias="DEFS" name="enable_gaia" />
+            <property alias="DEFS" name="enable_gaia_persistent_user_eq_bank" />
+            <property alias="DEFS" name="enable_gaia_rfcomm" />
+            <property alias="DEFS" name="enable_gatt">GATT_ENABLED</property>
+            <property alias="DEFS" name="enable_gatt_ancs_client" />
+            <property alias="DEFS" name="enable_gatt_battery_server">GATT_BATTERY_SERVER</property>
+            <property alias="DEFS" name="enable_gatt_findme_server" />
+            <property alias="DEFS" name="enable_gatt_peer_battery_server" />
+            <property alias="DEFS" name="enable_gatt_proximity_server" />
+            <property alias="DEFS" name="enable_gatt_remote_battery_server" />
+            <property alias="DEFS" name="enable_heart_rate_server">GATT_HRS_SERVER GATT_DIS_SERVER</property>
+            <property alias="DEFS" name="enable_hi_res_audio" />
+            <property alias="DEFS" name="enable_hid_client" />
+            <property alias="DEFS" name="enable_hid_selfie" />
+            <property alias="DEFS" name="enable_hrs_client" />
+            <property alias="DEFS" name="enable_linkkey_display" />
+            <property alias="DEFS" name="enable_mapc" />
+            <property alias="DEFS" name="enable_partymode" />
+            <property alias="DEFS" name="enable_pbap">ENABLE_PBAP</property>
+            <property alias="DEFS" name="enable_peer_battery_level" />
+            <property alias="DEFS" name="enable_peer_device" />
+            <property alias="DEFS" name="enable_upgrade" />
+            <property alias="DEFS" name="enable_usb">ENABLE_USB</property>
+            <property alias="DEFS" name="enable_usb_audio" />
+            <property alias="DEFS" name="enable_usb_hid_upgrade" />
+            <property alias="DEFS" name="enable_voice_assistant" />
+            <property alias="DEFS" name="enable_watchdog">ENABLE_WATCHDOG</property>
+            <property alias="DEFS" name="enable_wired" />
+            <property alias="DEFS" name="enable_allow_usb_debug" />
+            <property alias="DEFS" name="gatt_gaia_server" />
+            <property alias="DEFS" name="include_a2dp_extra_codecs">INCLUDE_A2DP_EXTRA_CODECS</property>
+            <property alias="DEFS" name="include_aptx_acl_sprint">INCLUDE_APTX_ACL_SPRINT</property>
+            <property alias="DEFS" name="include_aptx_adaptive" />
+            <property alias="DEFS" name="include_dsp">INCLUDE_DSP</property>
+            <property name="permission" />
+            <property alias="DEFS" name="sbc_encoder_conformance" />
+            <property alias="DEFS" name="test_hf_indicators" />
+            <property alias="DEFS" name="test_scom" />
+            <property alias="DEFS" name="three_way_calling">THREE_WAY_CALLING</property>
+            <property alias="DEFS" name="usb_app_stereo" />
+            <property alias="DEFS" name="usb_hub">ENABLE_USB_HUB_SUPPORT</property>
+        </configuration>
+    </configurations>
+</project>

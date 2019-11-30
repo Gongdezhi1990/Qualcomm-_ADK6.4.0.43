@@ -29,6 +29,9 @@ Copyright (c) 2011 - 2018 Qualcomm Technologies International, Ltd.
 #include "gaia_transport_gatt.h"
 #endif
 
+#ifdef GAIA_TRANSPORT_IAP2
+#include "gaia_transport_iap2.h"
+#endif
 
 
 static const uint8 gaia_transport_rfcomm_service_record[] =
@@ -333,6 +336,11 @@ void gaiaTransportDisconnectReq(gaia_transport *transport) {
         transport->state.gatt.active = FALSE;
         break;
 #endif
+#ifdef GAIA_TRANSPORT_IAP2
+    case gaia_transport_iap2:
+        gaiaTransportIap2DisconnectReq(transport);
+        break;
+#endif
     default:
         GAIA_TRANS_DEBUG(("Unknown Gaia transport %d\n", transport->type));
         GAIA_PANIC();
@@ -410,6 +418,11 @@ void gaiaTransportDropState(gaia_transport *transport)
             gaiaTransportGattDropState(transport);
             break;
 #endif
+#ifdef GAIA_TRANSPORT_IAP2
+        case gaia_transport_iap2:
+            gaiaTransportIap2DropState(transport);
+            break;
+#endif
         default:
             GAIA_TRANS_DEBUG(("Unknown Gaia transport %d\n", transport->type));
             GAIA_PANIC();
@@ -454,6 +467,11 @@ void gaiaTransportStartService(gaia_transport_type transport_type)
         break;
 #endif
 
+#ifdef GAIA_TRANSPORT_IAP2
+    case gaia_transport_iap2:
+        gaiaTransportIap2StartService();
+        break;
+#endif
     default:
         GAIA_TRANS_DEBUG(("Unknown Gaia transport %d\n", transport_type));
         GAIA_PANIC();
@@ -522,6 +540,11 @@ void gaiaTransportSendPacket(Task task, gaia_transport *transport,
             gaiaTransportGattSendPacket(task, transport, length, data);
             break;
 #endif
+#ifdef GAIA_TRANSPORT_IAP2
+        case gaia_transport_iap2:
+            gaiaTransportIap2SendPacket(task, transport, length, data);
+            break;
+#endif
         default:
             GAIA_TRANS_DEBUG(("gaia: unknown transport %d\n", transport->type));
             GAIA_PANIC();
@@ -548,6 +571,10 @@ Source gaiaTransportGetSource(gaia_transport *transport) {
         return StreamSourceFromSink(gaiaTransportGattGetSink(transport));
 #endif
 
+#ifdef GAIA_TRANSPORT_IAP2
+        case gaia_transport_iap2:
+            return NULL;
+#endif
 
         default:
             GAIA_TRANS_DEBUG(("Unknown Gaia transport %d\n", transport->type));

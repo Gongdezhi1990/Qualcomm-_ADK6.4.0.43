@@ -16,6 +16,9 @@ Copyright (c) 2017 - 2018 Qualcomm Technologies International, Ltd.
 
 #define GAIA_VA_MAX_EA_FRAMES (3)
 
+#ifdef GAIA_TRANSPORT_IAP2
+#include "gaia_transport_iap2.h"
+#endif
 
 /*************************************************************************
 NAME
@@ -55,8 +58,14 @@ DESCRIPTION
 */
 static bool gaiaVoiceAssistantCapable(gaia_transport *transport)
 {
+#ifdef GAIA_TRANSPORT_IAP2
+    return (transport->type == gaia_transport_iap2) ||
+           (transport->type == gaia_transport_spp) ||
+           (transport->type == gaia_transport_rfcomm);
+#else
     return (transport->type == gaia_transport_spp) ||
            (transport->type == gaia_transport_rfcomm);
+#endif /* def  GAIA_TRANSPORT_IAP2 */
 }
 
 
@@ -442,6 +451,96 @@ static bool gaiaVoiceAssistantFlushData(Sink sink, uint16 payload_size, const ui
 }
 
 
+#ifdef GAIA_TRANSPORT_IAP2
+/*************************************************************************
+NAME
+    gaiaVoiceAssistantSendSinglePacketToEap
+
+DESCRIPTION
+    Sends a GAIA_COMMAND_VA_VOICE_DATA header plus voice data using the
+    External Accessory Protocol on the supplied transport
+    
+RETURNS
+    TRUE if the packet was successfully queued for transmission.
+*/
+static bool gaiaVoiceAssistantSendSinglePacketToEap(gaia_transport *transport,
+                                                    uint16 length,
+                                                    const uint8 *data)
+{
+    uint16 packet_length;
+    uint8 *packet;
+    bool ok = FALSE;
+    
+    packet_length = length + GAIA_OFFS_PAYLOAD;
+    
+    packet = malloc(packet_length);
+    if (packet)
+    {
+        gaiaBuildVaDataPacket(packet, data, length);
+        ok = gaiaIap2SendOrFreeData(transport, packet_length, packet);
+    }
+    else
+    {
+        GAIA_DEBUG(("gaia: va: out of memory\n"));
+    }
+    
+    return ok;
+}
+
+/*************************************************************************
+NAME
+    gaiaVoiceAssistantSendToEap
+
+DESCRIPTION
+    Sends one or more GAIA_COMMAND_VA_VOICE_DATA packets using the
+    External Accessory Protocol on the supplied transport
+    
+    The number of packets attempted is calculated from the available
+    space reported by the iAP2 library and bound by GAIA_VA_MAX_EA_FRAMES.
+    
+RETURNS
+    Length of voice data sent or 0 if an error occurred
+*/
+static uint16 gaiaVoiceAssistantSendToEap(gaia_transport *transport,
+                                          uint16 length,
+                                          const uint8 *data,
+                                          uint16 num_packets)
+{
+    uint16 sent_length = 0;
+    uint16 slack = Iap2GetSlackForLink(transport->state.iap2.link);
+    uint16 size_packet = length / num_packets;
+    
+    GAIA_VA_DEBUG(("gaia: va: t=%lu len=%u packets=%u, slack=%u\n", VmGetClock(), length, num_packets, slack));
+    
+    if (num_packets > GAIA_VA_MAX_EA_FRAMES)
+    {
+        num_packets = GAIA_VA_MAX_EA_FRAMES;
+    }
+
+    if (num_packets && (slack >= GAIA_OFFS_PAYLOAD + size_packet))
+    {
+        uint16 size_payload;
+        
+        size_payload = num_packets * size_packet;
+        slack -= GAIA_OFFS_PAYLOAD;
+        
+        while (num_packets && (size_payload > slack))
+        {
+            --num_packets;
+            size_payload -= size_packet;
+        }
+        
+        GAIA_VA_DEBUG(("gaia: va: try %u * %u packets\n", num_packets, size_packet));
+        if (num_packets && gaiaVoiceAssistantSendSinglePacketToEap(transport, size_payload, data))
+        {
+            sent_length = size_payload;
+        }
+    }
+    
+    GAIA_VA_DEBUG(("gaia: va: sent %u bytes\n", sent_length));
+    return sent_length;
+}
+#endif /* def GAIA_TRANSPORT_IAP2 */
 
 
 /*************************************************************************
@@ -524,6 +623,13 @@ uint16 GaiaVoiceAssistantSendData(uint16 length, const uint8 *data, uint16 num_p
         
     if (transport)
     {
+#ifdef GAIA_TRANSPORT_IAP2
+        if (transport->type == gaia_transport_iap2)
+        {
+            sent_data_len = gaiaVoiceAssistantSendToEap(transport, length, data, num_packets);
+        }
+        else
+#endif
         {
             sent_data_len = gaiaVoiceAssistantSendToSink(transport, length, data, num_packets);
         }

@@ -25,6 +25,9 @@ Copyright (c) 2010 - 2018 Qualcomm Technologies International, Ltd.
 
 #include "transport_manager.h"
 
+#ifdef GAIA_TRANSPORT_IAP2
+#include <iap2.h>
+#endif
 
 /*  GAIA API Version 2.0  */
 #define GAIA_API_VERSION_MAJOR (2)
@@ -262,7 +265,11 @@ typedef enum
     gaia_transport_rfcomm = transport_mgr_type_rfcomm,  /*!< RFCOMM using CSR GAIA UUID */
     gaia_transport_spp,                                 /*!< Serial Port Profile (SPP) transport */
     gaia_transport_gatt,                                /*!< GATT (LE) transport */
+#ifdef GAIA_TRANSPORT_IAP2
+    gaia_transport_iap2,                                /*!< iAP2 / Bluetooth transport */
+#else
     gaia_transport_accessory,                           /*!< Accessory transport (included in an add-on installer) */
+#endif
     FORCE_ENUM_TO_MIN_16BIT(gaia_transport_type)
 } gaia_transport_type;
 
@@ -928,6 +935,27 @@ uint16 GaiaGetCidOverGattTransport(void);
 
 void GaiaVoiceAssistantCancelRequest(GAIA_TRANSPORT *transport, gaia_va_cancel_reason_t reason);
 
+#ifdef GAIA_TRANSPORT_IAP2
+/*! @brief Handle an IAP2_EA_SESSION_START_IND message from the iap2 library.
+ */
+void GaiaHandleIap2EaSessionStartInd(const IAP2_EA_SESSION_START_IND_T *ind);
+
+/*! @brief Handle an IAP2_EA_SESSION_STOP_IND message from the iap2 library.
+ */
+void GaiaHandleIap2EaSessionStopInd(const IAP2_EA_SESSION_STOP_IND_T *ind);
+
+/*! @brief Handle an IAP2_DISCONNECT_IND message from the iap2 library.
+ */
+void GaiaHandleIap2DisconnectInd(const IAP2_DISCONNECT_IND_T *ind);
+
+/*! @brief Handle an IAP2_DISCONNECT_CFM message from the iap2 library.
+ */
+void GaiaHandleIap2DisconnectCfm(const IAP2_DISCONNECT_CFM_T *cfm);
+
+/*! @brief Handle an IAP2_EA_SESSION_DATA_IND message from the iap2 library.
+ */
+void GaiaHandleIap2EaSessionDataInd(const IAP2_EA_SESSION_DATA_IND_T *ind);
+#endif /* GAIA_TRANSPORT_IAP2 */
 
 /*! @brief Process the GAIA data received on GAIA data endpoint.
  */

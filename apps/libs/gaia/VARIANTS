@@ -38,3 +38,18 @@ CFLAGS_rfcomm_debug := -DGAIA_TRANSPORT_NO_SPP -DGAIA_TRANSPORT_RFCOMM \
                     -DDEBUG_GAIA_TRANSPORT
 
 
+#ifdef GAIA_TRANSPORT_IAP2
+
+# Compilation variants for Generic Application Interface Architecture library
+#  iap2           GATT, SPP and iAP2 transports
+#  iap2_debug     GATT, SPP and iAP2 transports; verbose debugging
+
+VARIANTS += iap2 iap2_debug
+
+CFLAGS_iap2 := -DGAIA_TRANSPORT_IAP2
+
+CFLAGS_iap2_debug := -DGAIA_TRANSPORT_IAP2 \
+                     -DDEBUG_GAIA \
+                     -DDEBUG_GAIA_COMMAND
+
+#endif

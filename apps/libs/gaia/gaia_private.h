@@ -38,10 +38,16 @@ for (I = 0; T = &gaia->transport[I], I < gaia->transport_count; ++I)
 #include <sppc.h>
 #endif
 
+#ifdef GAIA_TRANSPORT_IAP2
+/* include the iAP2 header if we're having this transport */
+#include <iap2.h>
+#endif
 
 /* sanity check; we must have at least one of the transports defined */
+#ifndef GAIA_TRANSPORT_IAP2
 #if !defined(GAIA_TRANSPORT_RFCOMM) && !defined(GAIA_TRANSPORT_SPP) && !defined(GAIA_TRANSPORT_GATT)
 #error : no transport defined
+#endif
 #endif
 
 #define MAX_SUPPORTED_GAIA_TRANSPORTS   5           /*!< Maximum number of transports Gaia can support */
@@ -413,6 +419,15 @@ typedef struct
 } gaia_transport_gatt_data;
 #endif /* GAIA_TRANSPORT_GATT */
 
+#ifdef GAIA_TRANSPORT_IAP2
+/*! @brief GAIA iAP2 transport state.
+*/
+typedef struct
+{
+    iap2_link *link; /*!< iAP2 accessory link. */
+    uint16 session_id; /*!< iAP2 External Accessory session identifier. */
+} gaia_transport_iap2_data;
+#endif /* GAIA_TRANSPORT_IAP2 */
 
 /*! @brief Generic Gaia transport data structure.
  */
@@ -456,6 +471,9 @@ struct _gaia_transport
 #endif
 #ifdef GAIA_TRANSPORT_GATT
         gaia_transport_gatt_data gatt;
+#endif
+#ifdef GAIA_TRANSPORT_IAP2
+        gaia_transport_iap2_data iap2;
 #endif
     } state;
 
