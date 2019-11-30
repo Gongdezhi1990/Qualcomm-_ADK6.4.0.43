@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <!-- The enumeration that defines the button events -->
+  <xs:simpleType name="buttonEvent_t">
+    <xs:annotation>
+      <xs:documentation>
+        Messages are triggered when the specified PIO match the specified state defined for that message.
+        NOTE: With the 'enter' and 'held' actions a 'repeat' modifier can be used so that the message is repeatedly sent while a button is held down
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ENTER">
+        <xs:annotation>
+          <xs:documentation>
+            send a message when the PIO state changes to match
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RELEASE">
+        <xs:annotation>
+          <xs:documentation>
+            send a message when the PIO state changes to not match
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HELD">
+        <xs:annotation>
+          <xs:documentation>
+            send a message when the PIO has been in the state 
+            for the specified time period
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HELD_RELEASE">
+        <xs:annotation>
+          <xs:documentation>
+            start a timer when the PIO enters the specified state. If the PIO changes state AFTER the timer expires then
+            send the message when the PIO state changes back.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DOUBLE">
+        <xs:annotation>
+          <xs:documentation>
+            send a message when the PIO state changes to match, twice within a specified time period (double button tap).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="debounce_t">
+    <xs:sequence>
+      <xs:element name ="nreads" type="xs:unsignedShort">
+        <xs:annotation>
+          <xs:documentation>
+            Required: The number of samples that must be the same before accepting.
+            * If "nreads" is 1 then the debouncing mechanism is disabled; any perceived
+            * change on the pio pins provokes an evt.
+            * If "nreads" is 0 then any stimulus, either from pioint or from
+            * piodebounce_kick() provokes an evt.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name ="period" type="xs:unsignedShort">
+        <xs:annotation>
+          <xs:documentation>
+            Required: The number of milliseconds to wait between samples
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <!-- The structure that maps a friendly name to a pin -->
+  <xs:complexType name="pio_t">
+    <xs:sequence>
+      <xs:element name ="pinFriendlyName" type="xs:ID">
+        <xs:annotation>
+          <xs:documentation>
+            Required: A friendly name for this pio e.g. pio77 = "VOLUME_UP"
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name ="pad">
+        <xs:annotation>
+          <xs:documentation>
+            Required: The number for this pio
+          </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:unsignedLong">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="95"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name ="pioIsVirtual" type="xs:boolean" fixed="true" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Optional: The presence of this element in the XML shall define this PIO to be virtual
+            i.e. The state change for this PIO will be explicitly driven through the VM application
+            not through physical PIO. A state change of virtual PIO will be managed in an identical manner
+            to physical PIO (the state change maps to a message which is posted to the defined message handler)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name ="pioIsCharger" type="xs:boolean" fixed="true" minOccurs="0" maxOccurs="1"/>
+      <xs:element name ="pioIsVreg" type="xs:boolean" fixed="true" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Message definition (as mapped to a button event) -->
+  <xs:complexType name="message_t">
+    <xs:sequence>
+      <xs:element name ="messageName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>
+            Required: The name of the message that will be posted when this event is triggered
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name ="buttonEvent" type="buttonEvent_t">
+        <xs:annotation>
+          <xs:documentation>
+            Required: The type of event that triggers this message i.e. enter, release, held...
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="activePinFriendlyName" type="xs:IDREF" minOccurs ="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            The name of the pio(s) instance that have to be high to trigger this message
+            Note: At least one of activePinFriendlyName or negatePinFriendlyName is required.
+            Note: Any number of pio may be defined as being required to be active or negated in order
+                  for the associated message to be triggered
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="negatePinFriendlyName" type="xs:IDREF" minOccurs ="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            The name of the pio(s) instance that have to be low to trigger this message
+            Note: At least one of activePinFriendlyName or negatePinFriendlyName is required.
+            Note: Any number of pio may be defined as being required to be active or negated in order
+                  for the associated message to be triggered
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="timeout_ms" type="xs:unsignedShort" minOccurs ="0">
+        <xs:annotation>
+          <xs:documentation>
+            Optional: The message will not be posted until the event is active for this period of time
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="repeat_ms" type="xs:unsignedShort" minOccurs ="0">
+        <xs:annotation>
+          <xs:documentation>
+            Optional: The message, while the event is active, will be posted at every repeat_ms interval
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- The complete definition of mapping pio events to messages -->
+  <xs:element name="pio_map">
+    <xs:complexType>
+      <xs:sequence>
+
+        <!-- Optional debounce parameters -->
+        <xs:element name="pio_debounce" type="debounce_t" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>
+              Optional: Parameter that specifies the PIO debounce parameters
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="charger_debounce" type="debounce_t" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>
+              Optional: Parameter that specifies the charger debounce parameters
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+
+        <xs:element name="pio" type="pio_t" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>
+              Required: Maps a custom name to a pio pad. Will be either a message mapped pio (if mapped to a message)
+              or a 'raw' pio if not mapped to a message
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="message_map">
+    <xs:complexType>
+      <xs:sequence>
+
+        <xs:element name="message" type="message_t" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>
+              Required: Parameter that defines a message
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+
+      </xs:sequence>
+    </xs:complexType>
+
+  </xs:element>
+</xs:schema>

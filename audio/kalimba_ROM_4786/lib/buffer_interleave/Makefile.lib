@@ -1,0 +1,8 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Dummy makefile to allow this lib to coexist with BlueLab build system
+# There's nothing for it to do here

@@ -1,0 +1,11 @@
+Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+All Rights Reserved.
+Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+The following devices have ROM support and do not need MIB keys:
+
+Adesto AT25SL321
+Adesto AT25SL641
+Adesto AT25SL128A

@@ -1,0 +1,1377 @@
+<ModuleData Name="sink_audio_routing">
+    <DefineGroup>
+        <DefineList Id="Audio Sources" ShortId="audio_source">
+            <enum key="None"
+                value="0"/>
+            <enum key="FM"
+                value="1"/>
+            <enum key="Analogue"
+                value="2"/>
+            <enum key="S/PDIF"
+                value="3"/>
+            <enum key="I2S"
+                value="4"/>
+            <enum key="USB"
+                value="5"/>
+            <enum key="A2DP1"
+                value="6"/>
+            <enum key="A2DP2"
+                value="7"/>
+            <enum key="BA"
+                value="8"/>
+        </DefineList>
+        
+        <DefineList Id="Audio Quality" ShortId="audio_quality">
+            <enum key="Low Power"
+                value="0"/>
+            <enum key="High Quality"
+                value="1"/>
+        </DefineList>
+        
+        <DefineList Id="Microphone Left Channel Options" ShortId="available_mics_left">
+            <enum key="Microphone 1"
+                  value="1"/>
+            <enum key="Microphone 2"
+                  value="2"/>
+            <enum key="Microphone 3"
+                  value="3"/>
+            <enum key="Microphone 4"
+                  value="4"/>
+            <enum key="Microphone 5"
+                  value="5"/>
+            <enum key="Microphone 6"
+                  value="6"/>
+        </DefineList>
+        
+        <DefineList Id="Microphone Right Channel Options" ShortId="available_mics_right">
+            <enum key="Microphone 1"
+                  value="1"/>
+            <enum key="Microphone 2"
+                  value="2"/>
+            <enum key="Microphone 3"
+                  value="3"/>
+            <enum key="Microphone 4"
+                  value="4"/>
+            <enum key="Microphone 5"
+                  value="5"/>
+            <enum key="Microphone 6"
+                  value="6"/>
+        </DefineList>
+
+        <DefineList Id="Microphone Bias Voltage" ShortId="mic_bias_voltage">
+        <BuildVariant HwVariant="CE446_CE692 CF376_CE692H3 CF376_H13732 R13568v4 R13568v4_A05" SwVariant="All">
+            <enum key="2.10 Volts"
+                value="0"/>
+        </BuildVariant>
+        <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+            <enum key="2.10 Volts"
+                value="0"/>
+            <enum key="2.00 Volts"
+                value="2"/>
+            <enum key="1.90 Volts"
+                value="3"/>
+            <enum key="1.80 Volts"
+                value="4"/>
+            <enum key="1.70 Volts"
+                value="5"/>
+            <enum key="1.60 Volts"
+                value="6"/>
+            <enum key="1.50 Volts"
+                value="7"/>
+        </BuildVariant>
+        <BuildVariant HwVariant="H13179v2_H13478v2 H13503v2 CNS10001v4 CNS11012v2 20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1" SwVariant="All">
+            <enum key="1.71 Volts"
+                value="0"/>
+            <enum key="1.76 Volts"
+                value="1"/>
+            <enum key="1.82 Volts"
+                value="2"/>
+            <enum key="1.87 Volts"
+                value="3"/>
+            <enum key="1.95 Volts"
+                value="4"/>
+            <enum key="2.02 Volts"
+                value="5"/>
+            <enum key="2.10 Volts"
+                value="6"/>
+            <enum key="2.18 Volts"
+                value="7"/>
+            <enum key="2.32 Volts"
+                value="8"/>
+            <enum key="2.43 Volts"
+                value="9"/>
+            <enum key="2.56 Volts"
+                value="10"/>
+            <enum key="2.69 Volts"
+                value="11"/>
+            <enum key="2.90 Volts"
+                value="12"/>
+            <enum key="3.08 Volts"
+                value="13"/>
+            <enum key="3.33 Volts"
+                value="14"/>
+            <enum key="3.57 Volts"
+                value="15"/>
+        </BuildVariant>
+        </DefineList>
+
+        <DefineStruct Id="Microphone Bias Drive Settings" ShortId="mic_bias_drive_settings">
+            <ConfigItem
+                Id="Mic Bias 0"
+                ShortId="mic_bias_0_voltage"
+                Desc="Microphone Bias Drive Voltage for Mic Bias 0"
+                Type="enum"
+                Size="16">
+                <List use="mic_bias_voltage"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Mic Bias 1"
+                ShortId="mic_bias_1_voltage"
+                Desc="Microphone Bias Drive Voltage for Mic Bias 1"
+                Type="enum"
+                Size="16">
+                <List use="mic_bias_voltage"/>
+            </ConfigItem>
+        </DefineStruct>
+                
+        <DefineStruct Id="Audio Quality Settings" ShortId="audio_quality_settings">
+            <ConfigItem
+                Id="Voice Quality"
+                ShortId="voice_quality"
+                Desc="Quality setting for voice audio"
+                Type="enum"
+                Size="16">
+                <List use="audio_quality"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Music Quality"
+                ShortId="music_quality"
+                Desc="Quality setting for music audio"
+                Type="enum"
+                Size="16">
+                <List use="audio_quality"/>
+            </ConfigItem>
+        </DefineStruct>
+        
+        <DefineStruct Id="Audio Plugin Features" ShortId="AudioPluginFeatures">
+            <ConfigItem
+                Id="Audio Input Selection"
+                ShortId="manual_source_selection"
+                Desc="Selects between automatic priority based input switching (typically used in a headset) and manual source selection driven by user events."
+                Type="enum" Size="1">
+                <enum key="Auto"
+                      value="0"/>
+                <enum key="Manual"
+                      value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Audio Input Routing"
+                ShortId="audio_input_routing"
+                Desc="This configuration item specifies whether incoming audio comes from wired analogue, I2S or SPDIF. If USB is being used as an input audio source, this setting should be configured to 'Internal' (this is currently required because any back channel present must be relayed to the connected PC via USB, and this is currently only supported for the Analogue Input plugin - configured here as 'Internal').&#10;&#10;Warning: when the Audio Input Routing has been changed to I2S or SPDIF, the USB back channel cannot be used."
+                Type="enum"
+                Size="2">
+                <enum key="Internal"
+                      value="0"/>
+                <enum key="I2S"
+                      value="1"/>
+                <enum key="SPDIF"
+                      value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Supported SPDIF Input Codecs"
+                ShortId="spdif_supported_data_types"
+                Desc="This bitmask specifies which codecs are to be supported as SPDIF inputs. If no bits are checked SPDIF input will expect PCM. N.b."
+                Type="bitfield"
+                Size="4">
+                <bitfield key="AAC"
+                          value="1"/>
+                <bitfield key="MP3"
+                          value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="DUT audio input"
+                ShortId="dut_input"
+                Desc="Input to use in test mode."
+                Type="enum"
+                Size="3">
+                <enum key="DUT mic A"
+                      value="0"/>
+                <enum key="DUT mic B"
+                      value="1"/>
+                <enum key="DUT mic C"
+                      value="2"/>
+                <enum key="DUT mic D"
+                      value="3"/>
+                <enum key="DUT I2S Input"
+                      value="4"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Force Re-sampling of Tones"
+                ShortId="force_resampling_of_tones"
+                Desc="Enable this to force the re-sampling of tones and route playback via the DSP"
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="One Mic Back Channel DSP Kap File Selection"
+                ShortId="use_one_mic_back_channel"
+                Desc="Determines if the low latency DSP applications should be used when negotiating the aptX and Faststream codecs which provide additional CVC wideband back channel support."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Two mic Back Channel DSP Kap File Selection"
+                ShortId="use_two_mic_back_channel"
+                Desc="Determines if the low latency DSP applications should be used when negotiating the aptX and Faststream codecs which provide additional CVC wideband back channel support."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Enable Mixing of Voice and Audio"
+                ShortId="enableMixingOfVoiceAndAudio"
+                Desc="Determines if Voice (HFP) audio is mixed with Analogue audio input."
+                Type="bool"
+                Size="1"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Silence Detect Settings" ShortId="silence_detect_settings">
+            <ConfigItem
+                Id="Threshold"
+                ShortId="threshold"
+                Desc="This threshold is used to configure the silence detection used in the DSP. It is a linear level expressed as a 16 bit integer, where 32767 is full scale and specifying a value of zero will disable the feature. If you wish to convert this into a value in dB units, the threshold to be set can be calculated as:&#10;&#10;32767 * 10 ^ (dBthresh / 20)&#10;&#10;Where dBthresh is the threshold level (quoted as dBFS).&#10;&#10;10 is a reasonable default for the threshold (it equates to -70 dBFS)."
+                Type="uint"
+                Range="Min=0,Max=32767"
+                Size="16"/>
+            <ConfigItem
+                Id="Trigger Time [s]"
+                ShortId="trigger_time"
+                Desc="The time delay between silence being detected and the Audio Active PIO being driven, specified in seconds."
+                Type="uint"
+                Size="16"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Common Mic Params" ShortId="common_mic_params_t">
+            <ConfigStruct
+                Id="Mic 1 parameters"
+                ShortId="mic_1"
+                Desc=" "
+                Type="struct"
+                Struct="audio_mic_params"/>
+            <ConfigStruct
+                Id="Mic 2 parameters"
+                ShortId="mic_2"
+                Desc=" "
+                Type="struct"
+                Struct="audio_mic_params"/>
+            <ConfigStruct
+                Id="Mic 3 parameters"
+                ShortId="mic_3"
+                Desc=" "
+                Type="struct"
+                Struct="audio_mic_params"/>
+            <ConfigStruct
+                Id="Mic 4 parameters"
+                ShortId="mic_4"
+                Desc=" "
+                Type="struct"
+                Struct="audio_mic_params"/>
+            <ConfigStruct
+                Id="Mic 5 parameters"
+                ShortId="mic_5"
+                Desc=" "
+                Type="struct"
+                Struct="audio_mic_params"/>
+            <ConfigStruct
+                Id="Mic 6 parameters"
+                ShortId="mic_6"
+                Desc=" "
+                Type="struct"
+                Struct="audio_mic_params"/>
+        </DefineStruct>
+        
+        <DefineStruct Id="Common Analogue Params" ShortId="common_analogue_params">
+            <ConfigStruct
+                Id="Common analogue parameters"
+                ShortId="analogue_in"
+                Desc=" "
+                Type="struct"
+                Struct="analogue_input_params"/>
+        </DefineStruct>
+
+        <DefineStruct Id="User eq band" ShortId="user_eq_band">
+            <ConfigItem
+                Id="User eq filter"
+                ShortId="filter"
+                Desc=" "
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="frequency"
+                ShortId="freq"
+                Desc=" "
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="gain"
+                ShortId="gain"
+                Desc=" "
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Q Value"
+                ShortId="Q"
+                Desc=" "
+                Type="uint"
+                Size="16"/>
+        </DefineStruct>
+
+        <DefineStruct Id="User eq bank" ShortId="user_eq_bank">
+            <ConfigItem
+                Id="User eq filter"
+                ShortId="preGain"
+                Desc=" "
+                Type="uint"
+                Size="16"/>
+            <ConfigArray
+                Id="embedded array"
+                ShortId="bands"
+                Desc="User eq band"
+                Type="array"
+                ElementType="struct"
+                ElementStruct="user_eq_band"
+                ArraySize="5" />
+        </DefineStruct>
+    </DefineGroup>
+
+    <ConfigGroup
+        Id="Sink audio read only config data"
+        ShortId="sink_audio_readonly"
+        Node="Basic">
+        <ConfigStruct
+            Id="Audio Quality"
+            ShortId="audio_quality"
+            Desc=" "
+            Type="struct"
+            Struct="audio_quality_settings">
+            <StructElementConfigItem
+                Id="Voice Quality"
+                ShortId="voice_quality"
+                ConfigGroupPath="./[@ShortId='audio']"
+                Desc="Quality setting for voice audio. The high quality option will use full voice processing for the best quality audio. The low power option will use reduced voice processing for the best power consumption. And also if low power is set then any 'CVC' selected under 'Voice > HFP Plug-in' is ignored"
+                DefaultValue="High Quality">
+                <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="Headset-Gaming" Value="Low Power"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Music Quality"
+                ShortId="music_quality"
+                ConfigGroupPath="./[@ShortId='audio']"
+                Desc="Quality setting for music audio. The high quality option will use full music processing for the best quality audio. The low power option will use reduced music processing for the best power consumption."
+                DefaultValue="High Quality">
+                <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="Headset-Gaming" Value="Low Power"/>
+            </StructElementConfigItem>
+        </ConfigStruct>
+        <ConfigStruct
+            Id="Audio Plugin Features Instance"
+            ShortId="PluginFeatures"
+            Desc=" "
+            Type="struct"
+            Struct="AudioPluginFeatures">
+            <StructElementConfigItem
+                Id="Audio Input Selection"
+                ShortId="manual_source_selection"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+                Desc="Selects between automatic priority based input switching (typically used in a headset) and manual source selection driven by user events."
+                DefaultValue="Auto" >
+                <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="Manual"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Audio Input Routing"
+                ShortId="audio_input_routing"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']"
+                Desc="This configuration item specifies whether incoming audio comes from wired analogue, I2S or SPDIF. If USB is being used as an input audio source, this setting should be configured to 'Internal' (this is currently required because any back channel present must be relayed to the connected PC via USB, and this is currently only supported for the Analogue Input plugin - configured here as 'Internal').&#10;&#10;Warning: when the Audio Input Routing has been changed to I2S or SPDIF, the USB back channel cannot be used."
+                DefaultValue="Internal" />
+            <StructElementConfigItem
+                Id="Supported SPDIF Input Codecs"
+                ShortId="spdif_supported_data_types"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='spdif_configuration']"
+                Desc="This bitmask specifies which codecs are to be supported as SPDIF inputs. If no bits are checked SPDIF input will expect PCM. N.b."
+                DefaultValue="" />
+            <StructElementConfigItem
+                Id="DUT Input"
+                ShortId="dut_input"
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                Desc="Input to use in test mode."
+                DefaultValue="DUT mic A" />
+            <StructElementConfigItem
+                Id="Force Re-sampling of Tones"
+                ShortId="force_resampling_of_tones"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='output']"
+                Desc="Enable this to force the re-sampling of tones and route playback via the DSP"
+                DefaultValue="false" />
+            <StructElementConfigItem
+                Id="One Mic Back Channel DSP Kap File Selection"
+                ShortId="use_one_mic_back_channel"
+                ConfigGroupPath="./[@ShortId='hfp_voice']"
+                Desc="Determines if the low latency DSP applications should be used when negotiating the aptX and Faststream codecs which provide additional CVC wideband back channel support."
+                DefaultValue="true" >
+                <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="false"/>
+                <BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE678-H1 20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1" SwVariant="All" Value="false"/>
+                <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="false"/>
+                <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="false" />
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Two Mic Back Channel DSP Kap File Selection"
+                ShortId="use_two_mic_back_channel"
+                ConfigGroupPath="./[@ShortId='hfp_voice']"
+                Desc="Determines if the low latency DSP applications should be used when negotiating the aptX and Faststream codecs which provide additional CVC wideband back channel support."
+                DefaultValue="false" />
+            <StructElementConfigItem
+                Id="Enable Mixing of Voice and Audio"
+                ShortId="enableMixingOfVoiceAndAudio"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_plugin_features']"
+                Desc="Determines if Voice (HFP) audio is mixed with Analogue audio input."
+                DefaultValue="false" />
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="Microphone Bias Drive Voltage"
+            ShortId="mic_bias_drive_voltage"
+            Desc=" "
+            Type="struct"
+            Struct="mic_bias_drive_settings">
+            <StructElementConfigItem
+                Id="Microphone Bias 0 voltage"
+                ShortId="mic_bias_0_voltage"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']"
+                Desc="Set the voltage for microphone bias 0"
+                DefaultValue="2.10 Volts">
+                <BuildVariant HwVariant="H13179v2_H13478v2 H13503v2 CNS10001v4 CNS11012v2 20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1" SwVariant="All"
+                    Value="1.71 Volts"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Microphone Bias 1 voltage"
+                ShortId="mic_bias_1_voltage"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']"
+                Desc="Set the voltage for microphone bias 1"
+                DefaultValue="2.10 Volts">
+                <BuildVariant HwVariant="H13179v2_H13478v2 H13503v2 CNS10001v4 CNS11012v2 20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1" SwVariant="All"
+                    Value="1.71 Volts"/>
+            </StructElementConfigItem>
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="Voice mic params"
+            ShortId="common_mic_params"
+            Desc=" "
+            Type="struct"
+            Struct="common_mic_params_t">
+            <StructElementConfigItem
+                Id="Mic 1 Params"
+                ShortId="mic_1_params"
+                Desc=" ">
+                <!-- MIC 1 -->
+                <StructElementConfigItem
+                    Id="Bias Drive Voice Mic 1"
+                    ShortId="bias_config_mic_1"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_1_parameters']"
+                    DefaultValue="Mic Bias 0" >
+                    <BuildVariant HwVariant="CF819 QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Drive PIO" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 1 Preamplifier"
+                    ShortId="pre_amp_mic_1"
+                    Desc="Enables the microphone preamplifier when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_1_parameters']"
+                    DefaultValue="true"/>
+                <StructElementConfigItem
+                    Id="Drive PIO for Voice Mic 1"
+                    ShortId="pio_mic_1"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_1_parameters']/[@ShortId='voice_mic_1_drive_pio']"
+                    DefaultValue="PIO 0" >
+                    <BuildVariant HwVariant="CF819" SwVariant="All" Value="PIO 21" />
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="PIO 19" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Gain for Voice Mic 1"
+                    ShortId="gain_mic_1"
+                    Desc="Sets the gain of the microphone input path. Only values 0-22 are valid, where the gain of the input path is configured in steps of 2.5dB and 3.5dB alternately, from -45dB to 21dB."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_1_parameters']"
+                    DefaultValue="0x5"/>
+                <StructElementConfigItem
+                    Id="Audio Instance for Voice Mic 1"
+                    ShortId="instance_mic_1"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_1_parameters']"
+                    DefaultValue="Audio Instance 0">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Instance 1"/>
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Audio Instance 0" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 1 Digital"
+                    ShortId="digital_mic_1"
+                    Desc="Selects the digital microphone inputs when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_1_parameters']"
+                    DefaultValue="false" >
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="true" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Audio channel for Voice Mic 1"
+                    ShortId="channel_mic_1"
+                    Desc="Selects the audio channel to be used for Mic 1"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_1_parameters']"
+                    DefaultValue="Audio Channel A">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Channel A"/>
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Mic 2 Params"
+                ShortId="mic_2_params"
+                Desc=" ">
+                <!-- MIC 2 -->
+                <StructElementConfigItem
+                    Id="Bias Drive Voice Mic 2"
+                    ShortId="bias_config_mic_2"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_2_parameters']"
+                    DefaultValue="Mic Bias 1">
+                    <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF44 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF376_CE692 CF376_CE692H3 CF376_H13732" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="CF819 QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Drive PIO" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 2 Preamplifier"
+                    ShortId="pre_amp_mic_2"
+                    Desc="Enables the microphone preamplifier when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_2_parameters']"
+                    DefaultValue="true"/>
+                <StructElementConfigItem
+                    Id="Drive PIO for Voice Mic 2"
+                    ShortId="pio_mic_2"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_2_parameters']/[@ShortId='voice_mic_2_drive_pio']"
+                    DefaultValue="PIO 0" >
+                    <BuildVariant HwVariant="CF819" SwVariant="All" Value="PIO 21" />
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="PIO 19" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Gain for Voice Mic 2"
+                    ShortId="gain_mic_2"
+                    Desc="Sets the gain of the microphone input path. Only values 0-22 are valid, where the gain of the input path is configured in steps of 2.5dB and 3.5dB alternately, from -45dB to 21dB."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_2_parameters']"
+                    DefaultValue="0x5"/>
+                <StructElementConfigItem
+                    Id="Audio Instance for Voice Mic 2"
+                    ShortId="instance_mic_2"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_2_parameters']"
+                    DefaultValue="Audio Instance 0">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Instance 1"/>
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Audio Instance 0" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 2 Digital"
+                    ShortId="digital_mic_2"
+                    Desc="Selects the digital microphone inputs when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_2_parameters']"
+                    DefaultValue="false" >
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="true" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Audio channel for Voice Mic 2"
+                    ShortId="channel_mic_2"
+                    Desc="Selects the audio channel to be used for Mic 2"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_2_parameters']"
+                    DefaultValue="Audio Channel B">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Channel B"/>
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Mic 3 Params"
+                ShortId="mic_3_params"
+                Desc=" ">
+                <!-- MIC 3 -->
+                <StructElementConfigItem
+                    Id="Bias Drive Voice Mic 3"
+                    ShortId="bias_config_mic_3"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_3_parameters']"
+                    DefaultValue="Mic Bias 1">
+                    <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF376_CE692 CF376_CE692H3 CF376_H13732" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="20-CE972-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="CF819 QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Drive PIO" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 3 Preamplifier"
+                    ShortId="pre_amp_mic_3"
+                    Desc="Enables the microphone preamplifier when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_3_parameters']"
+                    DefaultValue="true"/>
+                <StructElementConfigItem
+                    Id="Drive PIO for Voice Mic 3"
+                    ShortId="pio_mic_3"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_3_parameters']/[@ShortId='voice_mic_3_drive_pio']"
+                    DefaultValue="PIO 0" >
+                    <BuildVariant HwVariant="CF819" SwVariant="Headset-Gaming" Value="PIO 18" />
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="PIO 54" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Gain for Voice Mic 3"
+                    ShortId="gain_mic_3"
+                    Desc="Sets the gain of the microphone input path. Only values 0-22 are valid, where the gain of the input path is configured in steps of 2.5dB and 3.5dB alternately, from -45dB to 21dB."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_3_parameters']"
+                    DefaultValue="0x5"/>
+                <StructElementConfigItem
+                    Id="Audio Instance for Voice Mic 3"
+                    ShortId="instance_mic_3"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_3_parameters']"
+                    DefaultValue="Audio Instance 0">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Audio Instance 1"/>
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 3 Digital"
+                    ShortId="digital_mic_3"
+                    Desc="Selects the digital microphone inputs when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_3_parameters']"
+                    DefaultValue="false" >
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="true" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Audio channel for Voice Mic 3"
+                    ShortId="channel_mic_3"
+                    Desc="Selects the audio channel to be used for Mic 3"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_3_parameters']"
+                    DefaultValue="Audio Channel A"> 
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Channel A"/>
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Mic 4 Params"
+                ShortId="mic_4_params"
+                Desc=" ">
+                <!-- MIC 4 -->
+                <StructElementConfigItem
+                    Id="Bias Drive Voice Mic 4"
+                    ShortId="bias_config_mic_4"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_4_parameters']"
+                    DefaultValue="Mic Bias 1">
+                    <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF376_CE692 CF376_CE692H3 CF376_H13732" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="20-CE972-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="CF819" SwVariant="All" Value="Mic Bias 0" />
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Drive PIO" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 4 Preamplifier"
+                    ShortId="pre_amp_mic_4"
+                    Desc="Enables the microphone preamplifier when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_4_parameters']"
+                    DefaultValue="true"/>
+                <StructElementConfigItem
+                    Id="Drive PIO for Voice Mic 4"
+                    ShortId="pio_mic_4"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_4_parameters']/[@ShortId='voice_mic_4_drive_pio']"
+                    DefaultValue="PIO 0" >
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="PIO 54" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Gain for Voice Mic 4"
+                    ShortId="gain_mic_4"
+                    Desc="Sets the gain of the microphone input path. Only values 0-22 are valid, where the gain of the input path is configured in steps of 2.5dB and 3.5dB alternately, from -45dB to 21dB."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_4_parameters']"
+                    DefaultValue="0x5"/>
+                <StructElementConfigItem
+                    Id="Audio Instance for Voice Mic 4"
+                    ShortId="instance_mic_4"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_4_parameters']"
+                    DefaultValue="Audio Instance 0">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Audio Instance 1"/>
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 4 Digital"
+                    ShortId="digital_mic_4"
+                    Desc="Selects the digital microphone inputs when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_4_parameters']"
+                    DefaultValue="false" >
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="true" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Audio channel for Voice Mic 4"
+                    ShortId="channel_mic_4"
+                    Desc="Selects the audio channel to be used for Mic 4"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_4_parameters']"
+                    DefaultValue="Audio Channel B">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Channel B"/>
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Mic 5 Params"
+                ShortId="mic5_params"
+                Desc=" ">
+                <!-- MIC 3a -->
+                <StructElementConfigItem
+                    Id="Bias Drive Voice Mic 5"
+                    ShortId="bias_config_mic_5"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_5_parameters']"
+                    DefaultValue="Mic Bias 1">
+                    <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF376_CE692 CF376_CE692H3 CF376_H13732" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="20-CE972-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="CF819" SwVariant="All" Value="Mic Bias 0" />
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Drive PIO" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 5 Preamplifier"
+                    ShortId="pre_amp_mic_5"
+                    Desc="Enables the microphone preamplifier when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_5_parameters']"
+                    DefaultValue="true"/>
+                <StructElementConfigItem
+                    Id="Drive PIO for Voice Mic 5"
+                    ShortId="pio_mic_5"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_5_parameters']/[@ShortId='voice_mic_5_drive_pio']"
+                    DefaultValue="PIO 0" >
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="PIO 15" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Gain for Voice Mic 5"
+                    ShortId="gain_mic_5"
+                    Desc="Sets the gain of the microphone input path. Only values 0-22 are valid, where the gain of the input path is configured in steps of 2.5dB and 3.5dB alternately, from -45dB to 21dB."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_5_parameters']"
+                    DefaultValue="0x5"/>
+                <StructElementConfigItem
+                    Id="Audio Instance for Voice Mic 5"
+                    ShortId="instance_mic_5"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_5_parameters']"
+                    DefaultValue="Audio Instance 0">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Instance 1"/>
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Audio Instance 2" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 5 Digital"
+                    ShortId="digital_mic_5"
+                    Desc="Selects the digital microphone inputs when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_5_parameters']"
+                    DefaultValue="false" >
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="true" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Audio channel for Voice Mic 5"
+                    ShortId="channel_mic_5"
+                    Desc="Selects the audio channel to be used for Mic 5"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_5_parameters']"
+                    DefaultValue="Audio Channel A">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Channel A"/>
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Mic 6 Params"
+                ShortId="mic_6_params"
+                Desc=" ">
+                <!-- MIC 6 -->
+                <StructElementConfigItem
+                    Id="Bias Drive Voice Mic 6"
+                    ShortId="bias_config_mic_6"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_6_parameters']"
+                    DefaultValue="Mic Bias 1">
+                    <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF376_CE692 CF376_CE692H3 CF376_H13732" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="20-CE972-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="Mic Bias 0"/>
+                    <BuildVariant HwVariant="CF819" SwVariant="All" Value="Mic Bias 0" />
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Drive PIO" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 6 Preamplifier"
+                    ShortId="pre_amp_mic_6"
+                    Desc="Enables the microphone preamplifier when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_6_parameters']"
+                    DefaultValue="true"/>
+                <StructElementConfigItem
+                    Id="Drive PIO for Voice Mic 6"
+                    ShortId="pio_mic_6"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_6_parameters']/[@ShortId='voice_mic_6_drive_pio']"
+                    DefaultValue="PIO 0" >
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="PIO 15" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Gain for Voice Mic 6"
+                    ShortId="gain_mic_6"
+                    Desc="Sets the gain of the microphone input path. Only values 0-22 are valid, where the gain of the input path is configured in steps of 2.5dB and 3.5dB alternately, from -45dB to 21dB."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_6_parameters']"
+                    DefaultValue="0x5"/>
+                <StructElementConfigItem
+                    Id="Audio Instance for Voice Mic 6"
+                    ShortId="instance_mic_6"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_6_parameters']"
+                    DefaultValue="Audio Instance 0">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Instance 1"/>
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Audio Instance 2" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Voice Mic 6 Digital"
+                    ShortId="digital_mic_6"
+                    Desc="Selects the digital microphone inputs when set."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_6_parameters']"
+                    DefaultValue="false" >
+                    <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="true" />
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Audio channel for Voice Mic 6"
+                    ShortId="channel_mic_6"
+                    Desc="Selects the audio channel to be used for Mic 6"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='voice_microphone']/[@ShortId='voice_microphone_6_parameters']"
+                    DefaultValue="Audio Channel B">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05" SwVariant="All" Value="Audio Channel B"/>
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="Analogue params"
+            ShortId="analogue_input"
+                    Desc=" "
+            Type="struct"
+            Struct="analogue_input_params">
+                <StructElementConfigItem
+                    Id="Analogue In Preamplifier"
+                    ShortId="pre_amp_analogue_in"
+                    Desc="Enables the preamplifier when set"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='line_input']"
+                    DefaultValue="false">
+                    <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="true"/>
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="Gain for Analogue In"
+                    ShortId="gain_analogue_in"
+                    Desc="Sets the gain of the analogue input path.  Only values 0-22 are valid, where the gain of the input path is configured in steps of 2.5dB and 3.5dB alternately, from -45dB to 21dB."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='line_input']"
+                    DefaultValue="0xf"/>
+                <StructElementConfigItem
+                    Id="Audio Instance for Analogue In"
+                    ShortId="instance_line_in"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='line_input']"
+                    DefaultValue="Audio Instance 0"/>
+                <StructElementConfigItem
+                    Id="Analogue Input Resolution Instance"
+                    ShortId="analogue_input_resolution_instance"
+                Desc="This configuration item specifies the ADC Input audio bit resolution. Note: This configuration item is only relevant for analogue audio input and this is only applicable where the hardware supports it."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='line_input']"
+                DefaultValue="16 Bit Audio">
+                <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA" SwVariant="All" Value="24 Bit Audio"/>
+            </StructElementConfigItem>
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="Silence Detect Instance"
+            ShortId="SilenceDetSettings"
+            Desc=" "
+            Type="struct"
+            Struct="silence_detect_settings">
+            <StructElementConfigItem
+                Id="Threshold"
+                ShortId="threshold_default"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_plugin_features']/[@ShortId='silence_detection_features']"
+                Desc="This threshold is used to configure the silence detection used in the DSP. It is a linear level expressed as a 16 bit integer, where 32767 is full scale and specifying a value of zero will disable the feature. If you wish to convert this into a value in dB units, the threshold to be set can be calculated as:&#10;&#10;32767 * 10 ^ (dBthresh / 20)&#10;&#10;Where dBthresh is the threshold level (quoted as dBFS).&#10;&#10;10 is a reasonable default for the threshold (it equates to -70 dBFS)."
+                DefaultValue="0x000A" >
+                <BuildVariant HwVariant="All" SwVariant="Headset-Gaming" Value="0x0"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Trigger Time [s]"
+                ShortId="trigger_time_default"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_plugin_features']/[@ShortId='silence_detection_features']"
+                Desc="The time delay between silence being detected and the Audio Active PIO being driven, specified in seconds."
+                DefaultValue="0x0258" >
+                <BuildVariant HwVariant="All" SwVariant="Headset-Gaming" Value="0x0"/>
+            </StructElementConfigItem>
+        </ConfigStruct>
+        <ConfigItem
+            Id="Microphone A"
+            ShortId="voice_mic_a"
+            Type="enum"
+            DefaultValue="Microphone 1"
+            Size="4"
+            ConfigGroupPath="./[@ShortId='hfp_voice']"
+            Desc="Select which microphone from Audio > Input > Microphone, microphone A is to use.       Note: Voice Microphone configuration is applicable for HFP and/or Voice Assistant based on the feature set enabled">
+            <List use="available_mics_left"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Microphone B"
+            ShortId="voice_mic_b"
+            Type="enum"
+            DefaultValue="Microphone 2"
+            Size="4"
+            ConfigGroupPath="./[@ShortId='hfp_voice']"
+            Desc="Select which microphone from Audio > Input > Microphone, microphone B is to use.  Microphone B is only valid when a 2-Mic HFP Plug-in is specified.       Note: Voice Microphone configuration is applicable for HFP and/or Voice Assistant based on the feature set enabled">
+            <List use="available_mics_right"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Mute duration on Power Up [ms]"
+            ShortId="AudioAmpUnmuteTime_ms"
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"
+            Desc="The delay in milliseconds between the Power state output pin indicating system power up and the Audio Mute pin being released."
+            Type="uint"
+            Size="16"
+            DefaultValue="0xa"/>
+        <ConfigItem
+            Id="Mute duration on Power down [ms]"
+            ShortId="AudioAmpMuteTime_ms"
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"
+            Desc="The delay in milliseconds between the Audio Mute pin being driven and the Power state output pin indicating power down."
+            Type="uint"
+            Size="16"
+            DefaultValue="0xa"/>
+        <ConfigItem
+            Id="Audio source switching delay after disconnection"
+            ShortId="audio_switch_delay_after_disconn"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Configurable audio source switching delay after source disconnection [in msec]"
+            Type="uint"
+            DefaultValue="1500"
+            Range="Min=0,Max=5000"
+            Size="16"/>
+        <ConfigItem
+            Id="Delay for audio active pio going to the active state for TWS [ms]"
+            ShortId="TwsAudioActiveDelay_ms"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Delay for audio active PIO to be enabled in milliseconds for TWS audio. Delays the audio output from being enabled, in order to mask audio glitches when an AG starts or resumes A2DP playback for TWS."
+            Type="uint"
+            DefaultValue="0"
+            Range="Min=0,Max=1500"
+            Size="16"/>
+        <ConfigItem
+            Id="Use Low Power Audio Codecs"
+            ShortId="UseLowPowerAudioCodecs"
+            ConfigGroupPath="./[@ShortId='audio']"
+            Desc="Setting this bit will result in the Sink using the low power audio codec options to help reduce Sink power consumption."
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="Assume AG Suspends on Call"
+            ShortId="AssumeAutoSuspendOnCall"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']"
+            Desc="When set the Sink assumes that the AG is responsible for suspending the media connection when receiving an incoming call."
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="Routing for highest BT Address"
+            ShortId="TwsMasterAudioRouting"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']/[@ShortId='audio_routing']"
+            Desc="Audio routing mode for peer with highest BT Address in a TWS session. Warning: Changing this audio routing mode will have no effect on a TWS device that has already been paired, as the routing is stored persistently in the paired device attributes. This routing choice is only stored on initial TWS pairing. For single channel rendering mode, the valid channel options are either left or right."
+            Type="enum"
+            DefaultValue="Left"
+            Size="2">
+            <enum key="Stereo"
+                  value="0"/>
+            <enum key="Left"
+                  value="1"/>
+            <enum key="Right"
+                  value="2"/>
+            <enum key="Downmix"
+                  value="3"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Routing for lowest BT Address"
+            ShortId="TwsSlaveAudioRouting"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']/[@ShortId='audio_routing']"
+            Desc="Audio routing mode for peer with lowest BT Address in a TWS session. Warning: Changing this audio routing mode will have no effect on a TWS device that has already been paired, as the routing is stored persistently in the paired device attributes. This routing choice is only stored on initial TWS pairing. For single channel rendering mode, the valid channel options are either left or right."
+            Type="enum"
+            DefaultValue="Right"
+            Size="2">
+            <enum key="Stereo"
+                  value="0"/>
+            <enum key="Left"
+                  value="1"/>
+            <enum key="Right"
+                  value="2"/>
+            <enum key="Downmix"
+                  value="3"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Audio Rendering Mode"
+            ShortId="AudioRenderingMode"
+            ConfigGroupPath="./[@ShortId='audio']"
+            Desc="Setting Single Channel Rendering will result in local device playing one channel. Setting Multi Channel Rendering will result in local device playing multi channel(Stereo/ Stereo Bass/ Stereo Crossover) or downmix mono. Channel selection can be configured in Routing for highest BT Address and Routing for lowest BT Address settings."
+            Type="enum"
+            DefaultValue="Multi Channel Rendering"
+            Size="1">
+            <enum key="Single Channel Rendering"
+                  value="0"/>
+            <enum key="Multi Channel Rendering"
+                  value="1"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Use SRAM"
+            ShortId="useSram"
+            ConfigGroupPath="./[@ShortId='audio']"
+            Desc="Setting this bit will result in using using SRAM for Audio buffering else internal memory will be used. Note: Set this bit only for hardware platform having SRAM modules."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"/>
+        <ConfigItem
+            Id="Compander Band Selection"
+            ShortId="CompanderBandSelection"
+            ConfigGroupPath="./[@ShortId='audio']"
+            Desc="Setting compander band will result in changing the type of compander used in music processing audio chain. Warning: When selecting either the 2 or 3 band option then please refer to the user documentation for limitations"
+            Type="enum"
+            DefaultValue="Full Band"
+            Size="2">
+            <enum key="Full Band"
+                  value="0"/>
+            <enum key="2-Band"
+                  value="1"/>
+            <enum key="3-Band"
+                  value="2"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Audio Active"
+            ShortId="AudioActivePIO"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"
+            Desc="Configures the PIO to drive when audio is active"
+            Type="enum"
+            DefaultValue="N/A"
+            Size="8">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Aux Out Detect PIO"
+            ShortId="aux_out_detect"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='input_pios']"
+            Desc="This configures a PIO to detect whether the aux output is connected at power on. If configured this will mute the main output and un-mute the aux output on power on. If disabled all outputs will be un-muted at power on. This should be used in conjunction with main/aux mute events to mute the main output when aux output is connected."
+            Type="enum"
+            DefaultValue="N/A"
+            Size="8">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Power On"
+            ShortId="PowerOnPIO"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"
+            Desc="Configures the PIO to drive when the device powers up."
+            Type="enum"
+            DefaultValue="PIO 14"
+            Size="8">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+            <BuildVariant HwVariant="CNS10001v4"
+                          SwVariant="All"
+                          Value="PIO 4"/>
+            <BuildVariant HwVariant="H13503v2"
+                          SwVariant="All"
+                          Value="PIO 16"/>
+            <BuildVariant HwVariant="CNS11012v2"
+                          SwVariant="All"
+                          Value="PIO 4"/>
+            <BuildVariant HwVariant="20-CE751-H1 20-CE752-H1"
+                          SwVariant="All"
+                          Value="PIO 10"/>
+            <BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE678-H1 20-CE742-H1 20-CE729-H1 20-CE889-H1 20-CE890-H1"
+                          SwVariant="All"
+                          Value="PIO 17"/>
+            <BuildVariant HwVariant="20-CE690-H1"
+                          SwVariant="All"
+                          Value="PIO 1"/>
+            <BuildVariant HwVariant="CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="N/A" />
+        </ConfigItem>
+        <ConfigItem
+            Id="Power On Audio Mute"
+            ShortId="AudioMutePIO"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"
+            Desc="Configures the PIO to drive for the audio mute line used to mask state transitions of the Power on PIO."
+            Type="enum"
+            DefaultValue="N/A"
+            Size="8">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+            <BuildVariant HwVariant="CF376_CE826 CF376_CF212 QCC5124-BA_FORMFACTOR-AA"
+                          SwVariant="All"
+                          Value="PIO 32" />
+            <BuildVariant HwVariant="CF376_CG724" SwVariant="All" Value="PIO 58" />
+        </ConfigItem>
+        <ConfigItem
+            Id="Enable audio source by assigning it to Priority 1."
+            ShortId="seqSourcePriority1"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Enable audio source by assigning it to Priority 1."
+            Type="enum"
+            DefaultValue="A2DP1"
+            Size="4">
+            <List use="audio_source"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Enable audio source by assigning it to Priority 2."
+            ShortId="seqSourcePriority2"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Enable audio source by assigning it to Priority 2."
+            Type="enum"
+            DefaultValue="A2DP2"
+            Size="4">
+            <List use="audio_source"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Enable audio source by assigning it to Priority 3."
+            ShortId="seqSourcePriority3"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Enable audio source by assigning it to Priority 3."
+            Type="enum"
+            DefaultValue="USB"
+            Size="4">
+            <List use="audio_source"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Enable audio source by assigning it to Priority 4."
+            ShortId="seqSourcePriority4"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Enable audio source by assigning it to Priority 4."
+            Type="enum"
+            DefaultValue="Analogue"
+            Size="4">
+            <List use="audio_source"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Enable audio source by assigning it to Priority 5."
+            ShortId="seqSourcePriority5"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Enable audio source by assigning it to Priority 5."
+            Type="enum"
+            DefaultValue="FM"
+            Size="4">
+            <List use="audio_source"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Enable audio source by assigning it to Priority 6."
+            ShortId="seqSourcePriority6"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Enable audio source by assigning it to Priority 6."
+            Type="enum"
+            DefaultValue="BA"
+            Size="4">
+            <List use="audio_source"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Enable audio source by assigning it to Priority 7."
+            ShortId="seqSourcePriority7"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Enable audio source by assigning it to Priority 7."
+            Type="enum"
+            DefaultValue="None"
+            Size="4">
+            <List use="audio_source"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Enable audio source by assigning it to Priority 8."
+            ShortId="seqSourcePriority8"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="Enable audio source by assigning it to Priority 8."
+            Type="enum"
+            DefaultValue="None"
+            Size="4">
+            <List use="audio_source"/>
+        </ConfigItem>
+
+        <ConfigItem
+            Id="Default Source at Power On:"
+            ShortId="defaultSource"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='src_selection']"
+            Desc="If source selected above is anything else but 'Previously Saved' then it MUST be also enabled and prioritised in one of the i.e. 'Enable audio source by assigning it to Priority 1' fields.Setting is applicable to 'Manual' Audio Input Selection."
+            Type="enum"
+            DefaultValue="Previously Saved"
+            Size="3">
+            <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="A2DP1"/>
+            <enum key="Previously Saved"
+                value="0"/>
+            <enum key="FM"
+                value="1"/>
+            <enum key="ANALOG"
+                value="2"/>
+            <enum key="S/PDIF"
+                value="3"/>
+            <enum key="I2S"
+                value="4"/>
+            <enum key="USB"
+                value="5"/>
+            <enum key="A2DP1"
+                value="6"/>
+            <enum key="A2DP2"
+                value="7"/>
+            <enum key="BA"
+                value="8"/>
+        </ConfigItem>
+    </ConfigGroup>
+
+    <!--Read/Writeable by the Sink VM Application, but not set by the Config Tool-->
+    <ConfigGroup
+        Id="Sink audio writeable config data"
+        ShortId="sink_audio_writeable"
+        Node="Basic"
+        ConfigGroupPath="./[@ShortId='advanced_settings']">
+        <ConfigItem
+            Id="Requested audio source"
+            ShortId="requested_audio_source"
+            Desc="The last requested audio source."
+            Type="enum"
+            DefaultValue="None"
+            Size="16">
+            <List use="audio_source"/>
+        </ConfigItem>
+        <ConfigStruct
+            Id="User Eq Bank Struct"
+            ShortId="PEQ"
+            Desc=" "
+            Type="struct"
+            Struct="user_eq_bank">
+            <StructElementConfigItem
+                Id="Pre gain"
+                ShortId="preGaIn"
+                Desc=" "
+                DefaultValue="0x0000"/>
+            <StructElementConfigItem
+                Id="Embedded structure user_eq_band"
+                ShortId="user_eq_band_struct"
+                Desc=" ">
+                <ArrayElementConfigItem
+                    Id="Struct Array Item 1"
+                    ShortId="user_eq_band_struct_array_item_1"
+                    Desc="Band 1 params" >
+                    <StructElementConfigItem
+                        Id="Band 1 Filter Type"
+                        ShortId="band_1_filter"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 1 Frequency"
+                        ShortId="band_1_freq"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 1 gain"
+                        ShortId="band_1_gain"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 1 Q value"
+                        ShortId="band_1_q"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                </ArrayElementConfigItem>
+                <ArrayElementConfigItem
+                    Id="Struct Array Item 2"
+                    ShortId="user_eq_band_struct_array_item_2"
+                    Desc="Band 2 params" >
+                    <StructElementConfigItem
+                        Id="Band 2 Filter Type"
+                        ShortId="band_2_filter"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 2 Frequency"
+                        ShortId="band_2_freq"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 2 gain"
+                        ShortId="band_2_gain"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 2 Q value"
+                        ShortId="band_2_q"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                </ArrayElementConfigItem>
+                <ArrayElementConfigItem
+                    Id="Struct Array Item 3"
+                    ShortId="user_eq_band_struct_array_item_3"
+                    Desc="Band 3 params" >
+                    <StructElementConfigItem
+                        Id="Band 3 Filter Type"
+                        ShortId="band_3_filter"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 3 Frequency"
+                        ShortId="band_3_freq"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 3 gain"
+                        ShortId="band_3_gain"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 3 Q value"
+                        ShortId="band_3_q"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                </ArrayElementConfigItem>
+                <ArrayElementConfigItem
+                    Id="Struct Array Item 4"
+                    ShortId="user_eq_band_struct_array_item_4"
+                    Desc="Band 4 params" >
+                    <StructElementConfigItem
+                        Id="Band 4 Filter Type"
+                        ShortId="band_4_filter"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 4 Frequency"
+                        ShortId="band_4_freq"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 4 gain"
+                        ShortId="band_4_gain"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 4 Q value"
+                        ShortId="band_4_q"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                </ArrayElementConfigItem>
+                <ArrayElementConfigItem
+                    Id="Struct Array Item 5"
+                    ShortId="user_eq_band_struct_array_item_5"
+                    Desc="Band 5 params" >
+                    <StructElementConfigItem
+                        Id="Band 5 Filter Type"
+                        ShortId="band_5_filter"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 5 Frequency"
+                        ShortId="band_5_freq"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 5 gain"
+                        ShortId="band_5_gain"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                    <StructElementConfigItem
+                        Id="Band 5 Q value"
+                        ShortId="band_5_q"
+                        Desc=" "
+                        DefaultValue="0x0000" />
+                </ArrayElementConfigItem>
+            </StructElementConfigItem>
+        </ConfigStruct>
+    </ConfigGroup>
+</ModuleData>

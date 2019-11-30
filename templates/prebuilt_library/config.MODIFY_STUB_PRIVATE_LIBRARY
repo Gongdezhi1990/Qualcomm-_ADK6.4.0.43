@@ -1,0 +1,13 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+
+# Prebuilt library files (.a and .reloc) must be placed under
+#
+# <PROJECT_ROOT>\audio\kalimba\kymera\lib_release\stre_rom_v02_release\
+
+%list PREBUILT_LIBS
+lib@@@plib_name@@@.a

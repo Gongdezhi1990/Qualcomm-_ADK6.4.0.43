@@ -1,0 +1,19 @@
+Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+All Rights Reserved.
+Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+The following devices have ROM support and do not need MIB keys:
+
+MX25U6435F
+MX25U12835F
+MX25U25645G
+MX25U51245G
+
+
+Although the following devices have ROM support, MIB keys MUST be used
+due to an issue discovered with the ROM configuration for these devices:
+
+MX25U1635E/MX25U1635F
+MX25U3235E/MX25U3235F

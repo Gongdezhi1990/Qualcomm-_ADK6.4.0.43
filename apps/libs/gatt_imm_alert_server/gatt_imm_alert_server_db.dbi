@@ -1,0 +1,47 @@
+/******************************************************************************
+Copyright (c) 2014 - 2015 Qualcomm Technologies International, Ltd.
+ *  %%version
+ *  %%appversion
+ *
+ *  FILE
+ *      gatt_imm_alert_server_db.dbi
+ *
+ *  DESCRIPTION
+ *      This file defines the IAS Service in JSON format, which is 
+ *      fairly human readable.  This file is included in the main 
+ *      application data base file which is used to produce ATT flat data 
+ *      base.
+ *
+ *****************************************************************************/
+#ifndef __GATT_IMM_ALERT_SERVER_DB_DBI__
+#define __GATT_IMM_ALERT_SERVER_DB_DBI__
+
+#include "gatt_imm_alert_server_uuids.h"
+
+/* For service details, refer http://developer.bluetooth.org/gatt/services/
+ * Pages/ServiceViewer.aspx?u=org.bluetooth.service.tx_power.xml
+ */
+
+/* Primary service declaration of Immediate Alert service */
+primary_service {
+    uuid : UUID_IMM_ALERT_SERVICE,
+    name : "IMM_ALERT_SERVICE",
+	
+	/* TX power level characteristic */
+
+    /* Tx Power Level characteristic supports IRQ flag, thereby reads and 
+     * writes on characteristic value are handled by application. Read 
+     * access to Tx power level characteristic value requires encryption to be 
+     * enabled.
+     */
+	 
+    characteristic {
+        uuid        : UUID_IMM_ALERT_LEVEL,
+        name        : "IMM_ALERT_LEVEL",
+        flags       : [ FLAG_IRQ, FLAG_ENCR_W],
+        properties  : [ write_cmd ],
+        value       : 0x0
+    }
+},
+#endif /* __GATT_IMM_ALERT_SERVER_DB_DBI__ */
+

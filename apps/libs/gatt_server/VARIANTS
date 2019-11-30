@@ -1,0 +1,5 @@
+VARIANTS := caching
+
+# Include DEBUG
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+CFLAGS_caching := -DGATT_CACHING

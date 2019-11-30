@@ -1,0 +1,20 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# XMC XM25QH256B
+QSPIFRAMLUTBaseParams = [00 20 60 19 40 00 01 a5 00]
+QSPIFRAMLUTSPIReadParams = [00 13 01]
+QSPIFRAMLUTSPIConfVector =  [00 00]
+QSPIFRAMLUTFastConfVector =  [00 00]
+QSPIFRAMLUTWriteCmds =  [00 12 06]
+QSPIFRAMLUTEraseCmds = [00 dc 60]
+QSPIFRAMLUTStatusReadParams = [00 01 01 02 01]
+QSPIFRAMLUTStatusReadVector = [00 03 01 01 05]
+QSPIFRAMLUTDPDCmds = [00 b9 ab]
+QSPIFRAMLUTFastReadParams = [00 03 ec 00 04]
+QSPIFRAMLUTResetVector = [00 05 02 01 66 01 99]
+QSPIFRAMLUT4BAMCmds = [00 00 00]
+QSPIFRAMLUTSuspendResumeCmds = [00 75 7A 75 7A]

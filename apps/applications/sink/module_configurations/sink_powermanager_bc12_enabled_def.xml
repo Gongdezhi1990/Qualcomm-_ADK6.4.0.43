@@ -1,0 +1,39 @@
+<ModuleData Name="sink_powermanager_charger_bc12_enabled" HeaderName="sink_power_manager_charger_bc12">
+
+    <DefineGroup>
+        <!-- Empty define section required. -->
+    </DefineGroup>
+
+    <ConfigGroup ShortId="bc_1_2" Id="BC 1.2"
+        ConfigGroupPath="./[@ShortId='battery']/[@ShortId='charger_voltage_vchg']"
+        Node="Basic">
+        <ConfigGroup ShortId="current_determination" Id="BC 1.2 Required Operating Range"
+            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='usb_power']"
+            Node="Basic">
+            <ConfigStruct Id="Instance of a current_determination_structure"
+                ShortId="charger_current_determination" Desc="." Type="struct" Struct="current_determination_structure">
+                <StructElementConfigItem Id="Vchg Current Limit Threshold [V]"
+                    ShortId="current_limit_threshold"
+                    Desc="The fast charge current is increased until Vchg drops to this limiting threshold."
+                    DefaultValue="4.55V" />
+                <StructElementConfigItem Id="Vchg Current Recovery Threshold [V]"
+                    ShortId="current_recovery_threshold"
+                    Desc="If Vchg drops to the limiting threshold then the fast charge current is decreased until Vchg recovers to this higher threshold."
+                    DefaultValue="4.65V" />
+                <StructElementConfigItem Id="Vchg Current Limit Read Period [ms]"
+                    ShortId="current_limit_read_period"
+                    Desc="The period between reading Vchg when determining the charger current."
+                    DefaultValue="100" />
+                <StructElementConfigItem Id="Positive current step [mA]"
+                    ShortId="positive_current_step"
+                    Desc="The step size for increasing the charger current."
+                    DefaultValue="10" />
+                <StructElementConfigItem Id="Negative current step [mA]"
+                    ShortId="negative_current_step"
+                    Desc="The step size for decreasing the charger current."
+                    DefaultValue="10" />
+            </ConfigStruct>
+        </ConfigGroup>
+    </ConfigGroup>
+
+</ModuleData>

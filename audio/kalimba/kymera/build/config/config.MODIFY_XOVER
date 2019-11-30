@@ -1,0 +1,21 @@
+# Definitions required to build the XOVER
+
+
+#
+# Capabilities to include in the build
+#
+%list CFG_CAPABILITIES
+XOVER
+
+%list ALL_SRCDIRS
+capabilities/xover
+
+
+# List of global include paths
+%list ALL_INCDIRS
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/xover/xover
+

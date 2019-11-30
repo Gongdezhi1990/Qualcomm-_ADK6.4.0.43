@@ -1,0 +1,140 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  Common capability download build system rules, part 2
+#
+#               This file defines the second 'common' part of capability 
+#               download makefiles. Used by the makefile generated from 
+#               ../tools/KCSMaker/templates/makefile_tmpl
+############################################################################
+
+COMPILE_EXTRA_DEFS += $(addprefix -DINSTALL_OPERATOR_,$(CFG_CAPABILITIES))
+
+#########################################################################
+# The final target files MUST be set by the top level makefile and passed
+# as a parameter to makefile_exe. Final target will be an exe file (TGT_EXE)
+#########################################################################
+TGT_LIB = 
+
+#########################################################################
+# Include generic make rules.
+#########################################################################
+# NB This includes the rule for 'make help'.
+include $(BUILD_ROOT)/makerules_common.mkf
+
+MAKE_DEPS+=	$(BUILD_ROOT)/download_rules_prefix.mkf	\
+		$(BUILD_ROOT)/download_rules_suffix.mkf
+
+#########################################################################
+# Autogeneration phase: run 'make autogen' for all libs and top-level exe
+#
+# This is designed such that we could, if we wanted, separate the 
+# autogeneration of headers from that of source files. To do that you 
+# would build with different targets: autogen_hdr and autogen_src.
+#########################################################################
+LDIRS=			$(dir $(LIBS) $(AUTOGEN_ONLY_LIBS))
+AUTOGEN_LIB=		${LDIRS:%=%_autogen}
+AUTOGEN_PRE_EXE=	${TGT_EXE:%=%_autogen_pre_exe}
+AUTOGEN_POST_EXE=	${TGT_EXE:%=%_autogen_post_exe}
+
+ifneq ($(strip $(AUTOGEN_DEPS)),)
+# Parse any autogen dependencies
+# Because the list can contain multiple entries, the result of the text substitution is output to a file
+# which is then subsequently included by this makefile.
+# (It isn't possible to directly expand the list variable to multiple lines)
+SUBST_COLON = $(subst :,/_autogen:$(KYMERA_ROOT)/,$(AUTOGEN_DEPS))
+SUFFIX_EACH_WORD = $(addsuffix /_autogen,$(SUBST_COLON))
+AUTOGEN_DEP_TMP = $(addprefix $(KYMERA_ROOT)/, $(SUFFIX_EACH_WORD))
+$(info $(shell $(RM_F) $(call ospath,$(OUTPUT_ROOT)/autogen_deps.mkf) $(STDERR_DEV_NULL)))
+$(foreach dep, $(AUTOGEN_DEP_TMP), $(info $(shell echo $(dep) >> $(call ospath,$(OUTPUT_ROOT)/autogen_deps.mkf))))
+include $(OUTPUT_ROOT)/autogen_deps.mkf
+endif
+
+.PHONY:		$(AUTOGEN_LIB) $(AUTOGEN_PRE_EXE) $(AUTOGEN_POST_EXE) DO_BOILERPLATE
+
+DO_BOILERPLATE:
+ifneq ($(findstring verbose, $(MAKECMDGOALS)), )
+	$(info ----------------------------------------------------)
+	$(info Making $(CURDIR)/make $(MAKEFLAGS) $(MAKECMDGOALS))
+	$(info For download $(TARGET_OUTPUT_DIR))
+	$(info Build environment:)
+	@echo UNAME !!! uname -a
+	@echo MAKE!! make --version | grep -i "GNU Make"
+	$(info COMPILE: $(COMPILE))
+	$(info  kcc from $(KTOOLS_ROOT))
+	$(PYTHON) -V
+	$(info ----------------------------------------------------)
+else
+# Do nothing
+	@$(TRUE)
+endif
+
+# Per-component autogen. Ignore any further definition for GEN_PIDS, we don't have patches in downloadable builds.
+$(AUTOGEN_LIB): $(AUTOGEN_PRE_EXE)
+ifeq ($(findstring clean, $(MAKECMDGOALS)), )
+	$(info Autogenerating $@...)
+	$(MAKE) -C $(@D) autogen GEN_PIDS=
+else
+# Don't bother autogenerating if all we want to do is clean.
+	@$(TRUE)
+endif
+
+# Top-level autogen BEFORE the per-component stuff
+$(AUTOGEN_PRE_EXE): DO_BOILERPLATE
+ifeq ($(findstring clean, $(MAKECMDGOALS)), )
+	$(info Autogenerating components for $@...)
+	${MAKE} -f $(BUILD_ROOT)/makefile_exe autogen_pre_exe TGT_EXE='${TGT_EXE}' TGT_LIB='${TGT_LIB}' CFG_LIBS='$(CFG_LIBS)' PREBUILT_LIBS='$(PREBUILT_LIBS)' BUILD_ROOT='$(BUILD_ROOT)' CONFIG='${CONFIG}' TARGET_MAKEFILE='${TARGET_MAKEFILE}' GEN_EXTRA_TASK_DIRS='$(GEN_EXTRA_TASK_DIRS)';
+else
+# Don't bother autogenerating if all we want to do is clean.
+	@$(TRUE)
+endif
+
+# Top-level autogen AFTER the per-component stuff. Do nothing as autogen_post_exe only runs make_patch_defs.py
+$(AUTOGEN_POST_EXE): $(AUTOGEN_LIB)
+	@$(TRUE)
+
+
+##########################################################################
+# Clean up definitions
+##########################################################################
+# Clean up script to summarise warnings and errors at end of build process
+# The first argument must be the temporary log file
+export CLEANUP = $(BUILD_ROOT)/cleanup.py
+
+#########################################################################
+# Make sure autogeneration is done, then kick off the main build.
+# The first step is to create the err_logfile used by cleanup which is created
+# here so it happens only once
+# makefile_exe takes the following parameters
+#   TGT_EXE - Target EXE name. Not required if TGT_LIB is specified
+#   TGT_LIB - Target LIB name. Not required if TGT_EXE is specified
+#   INIT_C_PATH - Initial value for C_PATH.
+#   INIT_H_PATH - Initial value for H_PATH.
+#   INIT_C_SRC - Initial value for C_SRC.
+#   INIT_S_SRC - Initial value for S_SRC.
+# In addition makefile_exe requires top level makefile to specify build
+# root, config, compile flags etc.
+#########################################################################
+
+export H_PATH += $(DOWNLOAD_BUILD_DIR)/../struct_share/lib_hdr
+
+$(LINKSCRIPT_PATH)/$(LINKSCRIPT_NAME): $(LINKSCRIPT_PATH)/linkscript_download 
+	$(COPY) $(call ospath,$<) $(call ospath,$@)
+
+.PHONY:		MAKE_ALL_TARGETS_ONCE 
+$(ALL_GOALS_EXCEPT_HELP):	MAKE_ALL_TARGETS_ONCE
+
+
+MAKE_ALL_TARGETS_ONCE:	 $(MAKE_DEPS) $(AUTOGEN_POST_EXE) $(LINKSCRIPT_PATH)/$(LINKSCRIPT_NAME)
+# Since we pass on all the MAKECMDGOALS to makefile_exe, we only need to execute
+# this rule once for all targets.
+	$(info Autogeneration phase finished. Starting make proper...)
+	@echo "" > $(ERR_LOGFILE)
+	${MAKE} -f $(BUILD_ROOT)/makefile_exe $(MAKECMDGOALS) TGT_EXE='${TGT_EXE}' INIT_C_PATH='${C_PATH}' INIT_H_PATH='${H_PATH}' INIT_S_PATH='$(S_PATH)' INIT_C_SRC='${C_SRC}' INIT_S_SRC='${S_SRC}' CFG_LIBS='$(CFG_LIBS)' PREBUILT_LIBS='$(PREBUILT_LIBS)' BUILD_ROOT='$(BUILD_ROOT)' CONFIG='${CONFIG}' COMPILE_EXTRA_DEFS='${COMPILE_EXTRA_DEFS}' ASSEMBLE_EXTRA_DEFS='${ASSEMBLE_EXTRA_DEFS}' LINK_EXTRA_FLAGS='${LINK_EXTRA_FLAGS}' PRINT_DEFINES='${PRINT_DEFINES}' TARGET_MAKEFILE='${TARGET_MAKEFILE}' EXTRA_TASKS='${EXTRA_TASKS}' EXTRA_INCDIRS='${EXTRA_INCDIRS}' KALELF_OUTPUT='${KALELF_OUTPUT}' FINAL_OUTPUT='${FINAL_OUTPUT}'
+
+

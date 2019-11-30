@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project path="">
+    <file path="../../../dev_board_common/dev_board_buttons.c" />
+    <file path="../../../dev_board_common/dev_board_buttons.h" />
+    <file path="../../../dev_board_common/dev_board_lcd.c" />
+    <file path="../../../dev_board_common/dev_board_lcd.h" />
+    <file path="../../main.c" />
+    <configurations>
+        <configuration name="debug" options="clean|build|deploy|run|default">
+            <devkitConfiguration>application</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <deployProject>deploy</deployProject>
+            <property name="BUILD_TYPE">DEBUG</property>
+            <property name="CHIP_TYPE">qcc512x_qcc302x</property>
+            <property name="DBG_CORE">app/p1</property>
+            <property name="BUILD_ID">sdk://tools/ubuild/maker/buildid/examples/timestamp.py</property>
+            <property name="DEFAULT_LIBS">usb_early_init</property>
+            <property name="DEFS">__KALIMBA__ HAVE_32BIT_DATA_WIDTH INSTALL_HYDRA_LOG BLUELAB PIOS_PER_BANK=32 HYDRACORE</property>
+            <property name="EXTRA_WARNINGS">FALSE</property>
+            <property name="FLASH_CONFIG" />
+            <property name="HW_VARIANT" />
+            <property name="INCPATHS">..\..\..\dev_board_common ..\..\..\..\installed_libs\include\profiles\default_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x ..\..\..\..\installed_libs\include\firmware_qcc512x_qcc302x\app ..\..\..\..\installed_libs\include\standard ..\..\..\..\audio\kalimba\kymera\common\interface\gen\k32 ..</property>
+            <property name="LIBPATHS">..\..\..\..\installed_libs\lib\default_qcc512x_qcc302x\native ..\..\..\..\installed_libs\lib\os\qcc512x_qcc302x</property>
+            <property name="LIBS">vmal</property>
+            <property name="OUTPUT">dev_board_sample</property>
+            <property name="OUTPUT_TYPE">EXECUTABLE</property>
+            <property name="PRESERVED_LIBS">qcc512x_qcc302x</property>
+            <property name="STRIP_SYMBOLS">FALSE</property>
+            <property name="SW_VARIANT">Headset-Gaming</property>
+            <property name="argument" />
+            <property name="default" />
+            <property name="description" />
+            <property name="devkit_group" />
+            <property alias="DEFS" name="example_feature">ENABLE_EXAMPLE_FEATURE_MODE_1</property>
+            <property alias="DEFS" name="hw" />
+            <property name="permission" />
+        </configuration>
+    </configurations>
+</project>

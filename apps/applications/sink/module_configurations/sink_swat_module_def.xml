@@ -1,0 +1,219 @@
+<ModuleData Name="sink_swat">
+    <DefineGroup>
+        <DefineStruct
+            Id="Synchronous connection configuration parameters"
+            ShortId="sync_config_params" >
+            <ConfigItem
+                Id="Tx Bandwidth Lower Bytes"
+                ShortId="tx_bandwidth_low"
+                Desc="Bandwidth to use for enhanced HFP audio."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Tx Bandwidth Higher Bytes"
+                ShortId="tx_bandwidth_high"
+                Desc="Bandwidth to use for enhanced HFP audio."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Rx Bandwidth Lower Bytes"
+                ShortId="rx_bandwidth_low"
+                Desc="Bandwidth to use for enhanced HFP audio."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Rx Bandwidth"
+                ShortId="rx_bandwidth_high"
+                Desc="Bandwidth to use for enhanced HFP audio."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Maximum Latency"
+                ShortId="swat_max_latency"
+                Desc="Specifies the maximum latency."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Voice Settings"
+                ShortId="voice_settings"
+                Desc="HFP 1.5 voice settings."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Retransmission Effort"
+                ShortId="retx_effort"
+                Desc="Retransmission Effort"
+                Type="enum"
+                Size="16">
+                <enum key="retx_disabled"
+                      value="0"/>
+                <enum key="retx_power_usage"
+                      value="1"/>
+                <enum key="retx_link_quality"
+                      value="2"/>
+                <enum key="retx_dont_care"
+                      value="3"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Synchronous packet types"
+                ShortId="sync_packet_type"
+                Desc="These are bit-field values. Be aware that some of the values indicate which synchronous packet types may be used while other values indicate the reverse, e.g. which synchronous packet types may NOT be used."
+                Type="enum"
+                Size="16">
+                <enum key="not_specified"
+                      value="0x0000"/>
+                <enum key="hv1"
+                      value="0x0001"/>
+                <enum key="hv2"
+                      value="0x0002"/>
+                <enum key="hv3"
+                      value="0x0004"/>
+                <enum key="all_sco"
+                      value="0x0007"/>
+                <enum key="ev3"
+                      value="0x0008"/>
+                <enum key="ev4"
+                      value="0x0010"/>
+                <enum key="ev5"
+                      value="0x0020"/>
+                <enum key="all_esco"
+                      value="0x0038"/>
+                <enum key="2ev3"
+                      value="0x0040"/>
+                <enum key="3ev3"
+                      value="0x0080"/>
+                <enum key="2ev5"
+                      value="0x0100"/>
+                <enum key="3ev5"
+                      value="0x0200"/>
+                <enum key="all_edr_esco"
+                      value="0x03C0"/>
+                <enum key="all_pkt_types"
+                      value="0x03FF"/>
+            </ConfigItem>
+        </DefineStruct>
+
+        <DefineStruct
+            Id="BD Address"
+            ShortId="bd_address" >
+            <ConfigItem
+                Id="BD Address LAP MSB"
+                ShortId="lap_msb"
+                Type="uint"
+                Size="16"
+                Desc=" "/>
+            <ConfigItem
+                Id="BD Address LAP LSB"
+                ShortId="lap_lsb"
+                Type="uint"
+                Size="16"
+                Desc=" "/>
+            <ConfigItem
+                Id="BD Address UAP"
+                ShortId="uap"
+                Type="uint"
+                Size="8"
+                Desc=" "/>
+            <ConfigItem
+                Id="BD Address NAP"
+                ShortId="nap"
+                Type="uint"
+                Size="16"
+                Desc=" "/>
+        </DefineStruct>
+    </DefineGroup>
+
+    <ConfigGroup
+        ShortId="sink_swat_readonly"
+        Id="Sink SWAT Readonly Config Data"
+        Node="Expert">
+        <ConfigStruct
+            Id="Instance of a structure sync_config_params"
+            ShortId="esco_params"
+            Desc="Use of a structure sync_config_params"
+            Type="struct"
+            Struct="sync_config_params">
+            <StructElementConfigItem
+                Id="Tx Bandwidth Lower word"
+                ShortId="Tx_bandwidth_low"
+                Desc=" "
+                DefaultValue="0x0000" />
+            <StructElementConfigItem
+                Id="Tx Bandwidth Higher word"
+                ShortId="Tx_bandwidth_high"
+                Desc=" "
+                DefaultValue="0x0000" />
+            <StructElementConfigItem
+                Id="Rx Bandwidth Lower word"
+                ShortId="Rx_bandwidth_low"
+                Desc=" " 
+                DefaultValue="0x0000" />
+            <StructElementConfigItem
+                Id="Rx Bandwidth Higher word"
+                ShortId="Rx_bandwidth_high"
+                Desc=" "
+                DefaultValue="0x0000" />
+            <StructElementConfigItem
+                Id="SWAT Maximum Latency"
+                ShortId="Swat_max_latency"
+                Desc=" "
+                DefaultValue="0x0000" />
+            <StructElementConfigItem
+                Id="SWAT Voice Settings"
+                ShortId="Voice_settings"
+                Desc=" "
+                DefaultValue="0x0000" />
+            <StructElementConfigItem
+                Id="SWAT Retransmission Effort"
+                ShortId="Retx_effort"
+                Desc=" "
+                DefaultValue="retx_disabled" />
+            <StructElementConfigItem
+                Id="Synchronous Packet Types"
+                ShortId="Sync_packet_type"
+                Desc=" "
+                DefaultValue="not_specified" />
+        </ConfigStruct>
+        <ConfigItem
+            Id="Limit RSSI Subwoofer Pairing"
+            ShortId="LimitRssiSubwooferPairing"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="When set this enables subwoofer RSSI pairing that ensures signal strength is higher than the configured threshold."
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="sink_swat_writeable"
+        Id="Sink SWAT Writeable Config Data"
+        Node="Expert">
+        <ConfigStruct
+            Id="Subwoofer BD Address"
+            ShortId="bd_addr"
+            Desc="BD Address of the paired subwoofer device"
+            Type="struct"
+            Struct="bd_address">
+            <StructElementConfigItem
+                Id="Subwoofer BD Address LAP MSB"
+                ShortId="struct_bd_address_lap_msb"
+                Desc=" "
+                DefaultValue="0x0000" />
+            <StructElementConfigItem
+                Id="Subwoofer BD Address LAP LSB"
+                ShortId="struct_bd_address_lap_lsb"
+                Desc=" "
+                DefaultValue="0x0000" />
+            <StructElementConfigItem
+                Id="Subwoofer BD Address UAP"
+                ShortId="struct_bd_address_uap"
+                Desc=" "
+                DefaultValue="0x00" />
+            <StructElementConfigItem
+                Id="Subwoofer BD Address NAP"
+                ShortId="struct_bd_address_nap"
+                Desc=" "
+                DefaultValue="0x0000" />
+        </ConfigStruct>
+    </ConfigGroup>
+</ModuleData>

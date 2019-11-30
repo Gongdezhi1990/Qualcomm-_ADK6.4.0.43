@@ -1,0 +1,4 @@
+file=audio2
+
+#This key offloads the capability processing to audio P1 processor, providing the capability to QCC5125.
+#AudioThreadOffload = 0x01

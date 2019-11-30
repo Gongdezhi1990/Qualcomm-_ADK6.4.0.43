@@ -1,0 +1,403 @@
+<ModuleData Name="sink_peer">
+    <DefineGroup>
+        <DefinePattern
+            PatternName="Peer Device UUID"
+            ShortId="peer_device_uuid" >
+            <ConfigItem
+                Id="word 1 [hex]"
+                Desc="word 1 [hex]"
+                ShortId="word_1"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 2 [hex]"
+                Desc="word 2 [hex]"
+                ShortId="word_2"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 3 [hex]"
+                Desc="word 3 [hex]"
+                ShortId="word_3"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 4 [hex]"
+                Desc="word 4 [hex]"
+                ShortId="word_4"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 5 [hex]"
+                Desc="word 5 [hex]"
+                ShortId="word_5"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 6 [hex]"
+                Desc="word 6 [hex]"
+                ShortId="word_6"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 7 [hex]"
+                Desc="word 7 [hex]"
+                ShortId="word_7"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 8 [hex]"
+                Desc="word 8 [hex]"
+                ShortId="word_8"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        Id="Sink Peer Writeable"
+        ShortId="sink_peer_writeable"
+        Node="Basic">
+        <ConfigItem
+            Id="Master Device Trim Gain [dB/60]"
+            ShortId="device_trim_master"
+            Desc="Initial TWS Master device trim gain level, in 1/60th dB"
+            Type="int"
+            Range="Min=-720,Max=720"
+            DefaultValue="0"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']/[@ShortId='device_trim']"/>
+        <ConfigItem
+            Id="Slave Device Trim Gain [dB/60]"
+            ShortId="device_trim_slave"
+            Desc="Initial TWS Slave device trim gain level, in 1/60th dB"
+            Type="int"
+            Range="Min=-720,Max=720"
+            DefaultValue="0"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']/[@ShortId='device_trim']"/>
+        <ConfigItem
+            Id="Device Trim Gain Step Change [dB/60]"
+            ShortId="device_trim_change"
+            Desc="The increment/decrement applied to a device trim to change the current gain level, in 1/60th dB"
+            Type="int"
+            Range="Min=0,Max=720"
+            DefaultValue="60"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']/[@ShortId='device_trim']"/>
+        <ConfigItem
+            Id="Minimum Device Trim Gain [dB/60]"
+            ShortId="device_trim_min"
+            Desc="dB value at minimum volume level, in 1/60th dB"
+            Type="int"
+            Range="Min=-720,Max=720"
+            DefaultValue="-720"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']/[@ShortId='device_trim']"/>
+        <ConfigItem
+            Id="Maximum Device Trim Gain [dB/60]"
+            ShortId="device_trim_max"
+            Desc="dB value at maximum trim level, in 1/60th dB"
+            Type="int"
+            Range="Min=-720,Max=720"
+            DefaultValue="720"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']/[@ShortId='device_trim']"/>
+        <ConfigItem
+            Id="Reserve Peer Link"
+            ShortId="PeerLinkReserved"
+            Desc="Reserves one link normally available for Multipoint for exclusive use by a TWS peer device."
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']"/>
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="Sink Peer Readonly"
+        ShortId="sink_peer_readonly"
+        Node="Basic">
+        <ConfigGroup
+            Id="Custom Peer Device Service UUID"
+            ShortId="custom_peer_device_service_uuid"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='peer_device_support']">
+            <ConfigPatternArray
+                Id="Peer Device UUID"
+                ShortId="service_record"
+                Pattern="peer_device_uuid"
+                MaxNumPatterns="1">
+                <PatternArrayRow
+                    Id="Custom Peer Device Service UUID1"
+                    ShortId="custom_uuid"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="word_1"
+                        DefaultValue="0x0000" />
+                    <PatternArrayConfigItem
+                        ShortId="word_2"
+                        DefaultValue="0x0000" />
+                    <PatternArrayConfigItem
+                        ShortId="word_3"
+                        DefaultValue="0x0000" />
+                    <PatternArrayConfigItem
+                        ShortId="word_4"
+                        DefaultValue="0x0000" />
+                    <PatternArrayConfigItem
+                        ShortId="word_5"
+                        DefaultValue="0x0000" />
+                    <PatternArrayConfigItem
+                        ShortId="word_6"
+                        DefaultValue="0x0000" />
+                    <PatternArrayConfigItem
+                        ShortId="word_7"
+                        DefaultValue="0x0000" />
+                    <PatternArrayConfigItem
+                        ShortId="word_8"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+
+        <ConfigItem
+            Id="ShareMe Source"
+            ShortId="ShareMeSource"
+            Desc="This configuration item specifies that the device supports relay of audio to another ShareMe device.&#10;&#10;Warning: This configuration item must be checked if the corresponding configuration item 'Peer Device Support > ShareMe > Audio Sink' is checked."
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='shareme']"/>
+        <ConfigItem
+            Id="ShareMe Sink"
+            ShortId="ShareMeSink"
+            Desc="This configuration item specifies that the device supports relay of audio to another ShareMe device.&#10;&#10;Warning: This configuration item must be checked if the corresponding configuration item 'Peer Device Support > ShareMe > Audio Source' is checked."
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='shareme']"/>
+        <ConfigItem
+            Id="TWS Source"
+            ShortId="TwsSource"
+            Desc="Device supports relay of audio to another TWS device."
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']"/>
+        <ConfigItem
+            Id="TWS Sink"
+            ShortId="TwsSink"
+            Desc="Device supports receiving of audio relayed from another TWS device."
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']"/>
+        <ConfigItem
+            Id="Use Limited Inquiry Access Code"
+            ShortId="PeerUseLiac"
+            Desc="Determines if the LIAC or GIAC is used when pairing Peer devices."
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']"/>
+        <ConfigItem
+            Id="Use Device ID"
+            ShortId="PeerUseDeviceId"
+            Desc="Peer devices will use the Device Id record to filter suitable devices."
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']"/>
+        <ConfigItem
+            Id="Use QTIL Peer Device Service UUID"
+            ShortId="PeerUseQtilUuid"
+            Desc="Use a fixed QTIL defined 128-bit SDP service UUID to identify Peer device support.&#10;&#10;Warning: In order to use a Custom UUID, 'Use QTIL Peer Device Service UUID' should be disabled and the 'Custom Peer Device Service UUID' in 'Configuration Set > Peer Device Support > Custom Peer Device Service UUID' should be updated to contain a non-zero value."
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']"/>
+        <ConfigItem
+            Id="ShareMe Pairing Mode"
+            ShortId="ShareMePairingMode"
+            Desc="Determines how pairing information is retained for ShareMe devices."
+            Type="enum"
+            DefaultValue="Temporary"
+            Size="2"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='shareme']">
+            <enum key="Temporary"
+                  value="0"/>
+            <enum key="Standard"
+                  value="1"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="TWS Pairing Mode"
+            ShortId="TwsPairingMode"
+            Desc="Determines how pairing information is retained for TWS devices."
+            Type="enum"
+            DefaultValue="Permanent"
+            Size="2"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']">
+            <enum key="Temporary"
+                  value="0"/>
+            <enum key="Standard"
+                  value="1"/>
+            <enum key="Permanent"
+                  value="2"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Single Device Operation"
+            ShortId="TwsSingleDeviceOperation"
+            Desc="Determines how devices connected in a TWS session behave when issuing AVRCP commands."
+            Type="enum"
+            DefaultValue="Single Device with Power Off forwarding"
+            Size="2"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']">
+            <enum key="Disabled"
+                  value="0"/>
+            <enum key="Single Device with Power Off forwarding"
+                  value="1"/>
+            <enum key="Single Device"
+                  value="2"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Remote Peer Controls AV Source"
+            ShortId="ShareMePeerControlsSource"
+            Desc="A connected remote ShareMe device can issue AVRCP commands to an AG connected to the local ShareMe device."
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='shareme']"/>
+        <ConfigItem
+            Id="Available Audio Sources To Peer"
+            ShortId="audioSourcesAvailableToPeer"
+            Desc="Enable or disable the required audio source for streaming to Peer in TWS mode. NOTE: Required audio sources MUST be also enabled in the 'Audio' tab."
+            Type="bitfield"
+            Size="7"
+            DefaultValue="FM | Analogue | USB | A2DP1 | A2DP2"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']">
+            <bitfield key="FM"
+                      value="0"/>
+            <bitfield key="Analogue"
+                      value="1"/>
+            <bitfield key="S/PDIF"
+                      value="2"/>
+            <bitfield key="I2S"
+                      value="3"/>
+            <bitfield key="USB"
+                      value="4"/>
+            <bitfield key="A2DP1"
+                      value="5"/>
+            <bitfield key="A2DP2"
+                      value="6"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Always page lost device during link loss"
+            ShortId="PeerLinkRecoveryWhileStreaming"
+            Desc="Always actively page for a peer or audio source if the link is lost. This may impair the quality of the currently playing audio stream."
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']"/>
+       <ConfigItem
+            Id="Reconnect AG When Peer Connects"
+            ShortId="ReconnectAgOnPeerConnection"
+            Desc="Disconnect and re-connect the BT source when a peer device connects."
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']"/>
+        <ConfigItem
+            Id="Permitted Routing Modes"
+            ShortId="PeerPermittedRouting"
+            Desc="Routing modes which may be selected by the Change TWS Audio Routing event. Note: For Single Channel Rendering mode changing the routing mode has no effect"
+            Type="bitfield"
+            DefaultValue=""
+            Size="4"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']/[@ShortId='audio_routing']">
+            <bitfield key="Master Stereo, Slave Stereo"
+                      value="0"/>
+            <bitfield key="Master Left, Slave Right"
+                      value="1"/>
+            <bitfield key="Master Right, Slave Left"
+                      value="2"/>
+            <bitfield key="Master Downmix, Slave Downmix"
+                      value="3"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Fixed audio routing for this device"
+            ShortId="FixedRoutingMode"
+            Desc="Audio routing mode for this device. This needs to be configured on both TWS devices according to their final roles as it is not changeable in runtime."
+            Type="enum"
+            DefaultValue="No fixed routing"
+            Size="2"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']/[@ShortId='audio_routing']">
+            <enum key="No fixed routing"
+                  value="0"/>
+            <enum key="Left"
+                  value="1"/>
+            <enum key="Right"
+                  value="2"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Unlock Peer State Machine"
+            ShortId="UnlockPeerStateMachine"
+            Desc="Allow peer to try establishing a connection."
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+             ConfigGroupPath="./[@ShortId='peer_device_support']"/>
+        <ConfigItem
+            Id="TWS Qualification Enable Peer Open"
+            ShortId="tws_qual_enable_peer_open"
+            Desc="Flag to indicate App to trigger opening of Peer media channel."
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']"/>
+        <ConfigItem
+            Id="TWS Qualification"
+            ShortId="TwsQualificationEnable"
+            Desc="If enabled then TWS qualification for mandatory(standard) feature shall be enabled."
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']"/>
+        <ConfigItem
+            Id="PTS qualification source audio streaming delay[ms]"
+            ShortId="TwsQualificationSourceStreamDelay"
+            Desc="Delays the audio streaming from source to the sink. In order to use this delay, user must select TWS Qualification Enable Peer open flag. Recommended value is 1000 millisecond.."
+            Type="uint"
+            DefaultValue="0"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='peer_device_support']/[@ShortId='true_wireless_stereo']"/>
+        <ConfigItem
+            Id="Peer Connection PIO"
+            ShortId="PeerConnectionPio"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"
+            Desc="Configures a PIO to drive when a peer device is connected."
+            Type="enum"
+            DefaultValue="N/A"
+            Size="8">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="TWS Force Downmix PIO"
+            ShortId="PeerTwsForceDownmixPio"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='input_pios']"
+            Desc="PIO to force downmix on TWS session. When a valid PIO is configured here, downmix will not be selectable through Change TWS Audio Routing event, regardless of whether it is enabled or not on the list of permitted routing modes."
+            Type="enum"
+            DefaultValue="N/A"
+            Size="8">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+        </ConfigItem>
+    </ConfigGroup>
+</ModuleData>

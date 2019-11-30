@@ -1,0 +1,5 @@
+VARIANTS := debug_msg_flow debug
+
+CFLAGS_debug := -DSPORT_HEALTH_DRIVER_DEBUG_LIB
+
+CFLAGS_debug_msg_flow := -DDEBUG_MSG_FLOW

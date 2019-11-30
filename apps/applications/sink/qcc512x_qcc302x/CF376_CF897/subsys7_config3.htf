@@ -1,0 +1,4 @@
+file=app3
+I2CPios = [3C 3D]
+
+UsbTypeCCCSource = [46]

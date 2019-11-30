@@ -1,0 +1,58 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2014 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Common definitions for Kalimba CVC component libs
+# Security lib is temporarily added here to pull it together with the rest, until all gets properly
+# built as obfuscated lib.
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+../lib_private/cvc_modules
+../lib_private/cvc_modules/AdapEq
+../lib_private/cvc_modules/adf200
+../lib_private/cvc_modules/aec510
+../lib_private/cvc_modules/agc400
+../lib_private/cvc_modules/asf100
+../lib_private/cvc_modules/cvclib
+../lib_private/cvc_modules/dms100
+../lib_private/cvc_modules/dmss
+../lib_private/cvc_modules/filter_bank
+../lib_private/cvc_modules/mgdc100
+../lib_private/cvc_modules/nc100
+../lib_private/cvc_modules/ndvc100
+../lib_private/cvc_modules/sola100
+../lib_private/cvc_modules/ssr
+../lib_private/cvc_modules/vad400
+../lib_private/cvc_processing
+
+# List of global include paths
+%list ALL_INCDIRS
+../lib_private/cvc_modules
+../lib_private/cvc_modules/AdapEq
+../lib_private/cvc_modules/adf200
+../lib_private/cvc_modules/aec510
+../lib_private/cvc_modules/agc400
+../lib_private/cvc_modules/asf100
+../lib_private/cvc_modules/cvclib
+../lib_private/cvc_modules/dms100
+../lib_private/cvc_modules/dmss
+../lib_private/cvc_modules/filter_bank
+../lib_private/cvc_modules/mgdc100
+../lib_private/cvc_modules/nc100
+../lib_private/cvc_modules/ndvc100
+../lib_private/cvc_modules/sola100
+../lib_private/cvc_modules/ssr
+../lib_private/cvc_modules/vad400
+../lib_private/cvc_processing
+
+# List of libraries to build
+%list CFG_LIBS
+../lib_private/cvc_modules/cvc_modules
+../lib_private/cvc_processing/cvc_processing
+
+%list MAXIM_LIBS
+../lib_private/cvc_modules/cvc_modules
+../lib_private/cvc_processing/cvc_processing

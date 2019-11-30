@@ -1,0 +1,1193 @@
+<ModuleData Name="Sink_pio">
+    <ConfigGroup
+        ShortId="pio_writeable"
+        Id="PIO Writeable"
+        Node="Expert">
+        <ConfigItem
+            Id="User PIO State"
+            ShortId="user_pio_state"
+            Desc="Logic state of user-configurable PIO"
+            Type="bool"
+            Size="1"
+            DefaultValue="false" />
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="pio_readonly"
+        Id="PIO"
+        Node="Basic">
+        <ConfigItem
+            Id="Invert PIO 0-15"
+            ShortId="pio_invert_0_15"
+            Type="bitfield"
+            Size="16"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_invert_mask_bitfields']"
+            Desc="It is possible to invert the logic of one or many PIO inputs using a 16 bit bitmask corresponding to PIOs 0 to 15, this allows use with different hardware/button configurations.">
+            <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA"
+                          SwVariant="All"
+                          Value="PIO 3 | PIO 4" />
+            <bitfield key="PIO 0"
+                      value="0"/>
+            <bitfield key="PIO 1"
+                      value="1"/>
+            <bitfield key="PIO 2"
+                      value="2"/>
+            <bitfield key="PIO 3"
+                      value="3"/>
+            <bitfield key="PIO 4"
+                      value="4"/>
+            <bitfield key="PIO 5"
+                      value="5"/>
+            <bitfield key="PIO 6"
+                      value="6"/>
+            <bitfield key="PIO 7"
+                      value="7"/>
+            <bitfield key="PIO 8"
+                      value="8"/>
+            <bitfield key="PIO 9"
+                      value="9"/>
+            <bitfield key="PIO 10"
+                      value="10"/>
+            <bitfield key="PIO 11"
+                      value="11"/>
+            <bitfield key="PIO 12"
+                      value="12"/>
+            <bitfield key="PIO 13"
+                      value="13"/>
+            <bitfield key="PIO 14"
+                      value="14"/>
+            <bitfield key="PIO 15"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Invert PIO 16-31"
+            ShortId="pio_invert_16_31"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_invert_mask_bitfields']"
+            Size="16"
+            Desc="It is possible to invert the logic of one or many PIO inputs using a 16 bit bitmask corresponding to PIOs 16 to 31, this allows use with different hardware/button configurations.">
+            <bitfield key="PIO 16"
+                      value="0"/>
+            <bitfield key="PIO 17"
+                      value="1"/>
+            <bitfield key="PIO 18"
+                      value="2"/>
+            <bitfield key="PIO 19"
+                      value="3"/>
+            <bitfield key="PIO 20"
+                      value="4"/>
+            <bitfield key="PIO 21"
+                      value="5"/>
+            <bitfield key="PIO 22"
+                      value="6"/>
+            <bitfield key="PIO 23"
+                      value="7"/>
+            <bitfield key="PIO 24"
+                      value="8"/>
+            <bitfield key="PIO 25"
+                      value="9"/>
+            <bitfield key="PIO 26"
+                      value="10"/>
+            <bitfield key="PIO 27"
+                      value="11"/>
+            <bitfield key="PIO 28"
+                      value="12"/>
+            <bitfield key="PIO 29"
+                      value="13"/>
+            <bitfield key="PIO 30"
+                      value="14"/>
+            <bitfield key="PIO 31"
+                      value="15"/>
+        </ConfigItem>
+            <ConfigItem
+                Id="Invert PIO 32-47"
+                ShortId="pio_invert_32_47"
+                Type="bitfield"
+                DefaultValue=""
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_invert_mask_bitfields_ext']"
+                Size="16"
+                Desc="It is possible to invert the logic of one or many PIO inputs using a 16 bit bitmask corresponding to PIOs 32 to 47, this allows use with different hardware/button configurations.">
+            <BuildVariant HwVariant="H13672v2"
+                          SwVariant="All"
+                          Value="PIO 46"/>
+                <bitfield key="PIO 32"
+                          value="0"/>
+                <bitfield key="PIO 33"
+                          value="1"/>
+                <bitfield key="PIO 34"
+                          value="2"/>
+                <bitfield key="PIO 35"
+                          value="3"/>
+                <bitfield key="PIO 36"
+                          value="4"/>
+                <bitfield key="PIO 37"
+                          value="5"/>
+                <bitfield key="PIO 38"
+                          value="6"/>
+                <bitfield key="PIO 39"
+                          value="7"/>
+                <bitfield key="PIO 40"
+                          value="8"/>
+                <bitfield key="PIO 41"
+                          value="9"/>
+                <bitfield key="PIO 42"
+                          value="10"/>
+                <bitfield key="PIO 43"
+                          value="11"/>
+                <bitfield key="PIO 44"
+                          value="12"/>
+                <bitfield key="PIO 45"
+                          value="13"/>
+                <bitfield key="PIO 46"
+                          value="14"/>
+                <bitfield key="PIO 47"
+                          value="15"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Invert PIO 48-63"
+                ShortId="pio_invert_48_63"
+                Type="bitfield"
+                DefaultValue=""
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_invert_mask_bitfields_ext']"
+                Size="16"
+                Desc="It is possible to invert the logic of one or many PIO inputs using a 16 bit bitmask corresponding to PIOs 48 to 71, this allows use with different hardware/button configurations.">
+                <bitfield key="PIO 48"
+                          value="0"/>
+                <bitfield key="PIO 49"
+                          value="1"/>
+                <bitfield key="PIO 50"
+                          value="2"/>
+                <bitfield key="PIO 51"
+                          value="3"/>
+                <bitfield key="PIO 52"
+                          value="4"/>
+                <bitfield key="PIO 53"
+                          value="5"/>
+                <bitfield key="PIO 54"
+                          value="6"/>
+                <bitfield key="PIO 55"
+                          value="7"/>
+                <bitfield key="PIO 56"
+                          value="8"/>
+                <bitfield key="PIO 57"
+                          value="9"/>
+                <bitfield key="PIO 58"
+                          value="10"/>
+                <bitfield key="PIO 59"
+                          value="11"/>
+                <bitfield key="PIO 60"
+                          value="12"/>
+                <bitfield key="PIO 61"
+                          value="13"/>
+                <bitfield key="PIO 62"
+                          value="14"/>
+                <bitfield key="PIO 63"
+                          value="15"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Invert PIO 64-79"
+                ShortId="pio_invert_64_79"
+                Type="bitfield"
+                DefaultValue=""
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_invert_mask_bitfields_ext']"
+                Size="16"
+                Desc="It is possible to invert the logic of one or many PIO inputs using a 16 bit bitmask corresponding to PIOs 64 to 79, this allows use with different hardware/button configurations.">
+                <bitfield key="PIO 64"
+                          value="0"/>
+                <bitfield key="PIO 65"
+                          value="1"/>
+                <bitfield key="PIO 66"
+                          value="2"/>
+                <bitfield key="PIO 67"
+                          value="3"/>
+                <bitfield key="PIO 68"
+                          value="4"/>
+                <bitfield key="PIO 69"
+                          value="5"/>
+                <bitfield key="PIO 70"
+                          value="6"/>
+                <bitfield key="PIO 71"
+                          value="7"/>
+                <bitfield key="PIO 72"
+                          value="8"/>
+                <bitfield key="PIO 73"
+                          value="9"/>
+                <bitfield key="PIO 74"
+                          value="10"/>
+                <bitfield key="PIO 75"
+                          value="11"/>
+                <bitfield key="PIO 76"
+                          value="12"/>
+                <bitfield key="PIO 77"
+                          value="13"/>
+                <bitfield key="PIO 78"
+                          value="14"/>
+                <bitfield key="PIO 79"
+                          value="15"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Invert PIO 80-95"
+                ShortId="pio_invert_80_95"
+                Type="bitfield"
+                DefaultValue=""
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_invert_mask_bitfields_ext']"
+                Size="16"
+                Desc="It is possible to invert the logic of one or many PIO inputs using a 16 bit bitmask corresponding to PIOs 80 to 95, this allows use with different hardware/button configurations.">
+                <bitfield key="PIO 80"
+                          value="0"/>
+                <bitfield key="PIO 81"
+                          value="1"/>
+                <bitfield key="PIO 82"
+                          value="2"/>
+                <bitfield key="PIO 83"
+                          value="3"/>
+                <bitfield key="PIO 84"
+                          value="4"/>
+                <bitfield key="PIO 85"
+                          value="5"/>
+                <bitfield key="PIO 86"
+                          value="6"/>
+                <bitfield key="PIO 87"
+                          value="7"/>
+                <bitfield key="PIO 88"
+                          value="8"/>
+                <bitfield key="PIO 89"
+                          value="9"/>
+                <bitfield key="PIO 90"
+                          value="10"/>
+                <bitfield key="PIO 91"
+                          value="11"/>
+                <bitfield key="PIO 92"
+                          value="12"/>
+                <bitfield key="PIO 93"
+                          value="13"/>
+                <bitfield key="PIO 94"
+                          value="14"/>
+                <bitfield key="PIO 95"
+                          value="15"/>
+            </ConfigItem>
+        <ConfigItem
+            Id="Mapping PIO 0-15"
+            ShortId="pio_mapping_0_15"
+            Type="bitfield"
+            Size="16"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_mapping_assignments']"
+            Desc="Mapping assignments for PIO 0 to 15. To use certain PIOs that are shared with other hardware it is necessary to set the map pin bit for that PIO, if not set the PIO is not available for general input/output use. PIO 0 to PIO 12 are automatically mapped for general input/output access, it is not necessary to set the map pins for PIO 0 to PIO 12. Note for mapping PIO physical signals to logical input signals (for e.g. to cause User Events), see User Interface > Buttons > Translation.">
+            <BuildVariant HwVariant="QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 5" />
+                        
+            <bitfield key="PIO 0"
+                      value="0"/>
+            <bitfield key="PIO 1"
+                      value="1"/>
+            <bitfield key="PIO 2"
+                      value="2"/>
+            <bitfield key="PIO 3"
+                      value="3"/>
+            <bitfield key="PIO 4"
+                      value="4"/>
+            <bitfield key="PIO 5"
+                      value="5"/>
+            <bitfield key="PIO 6"
+                      value="6"/>
+            <bitfield key="PIO 7"
+                      value="7"/>
+            <bitfield key="PIO 8"
+                      value="8"/>
+            <bitfield key="PIO 9"
+                      value="9"/>
+            <bitfield key="PIO 10"
+                      value="10"/>
+            <bitfield key="PIO 11"
+                      value="11"/>
+            <bitfield key="PIO 12"
+                      value="12"/>
+            <bitfield key="PIO 13"
+                      value="13"/>
+            <bitfield key="PIO 14"
+                      value="14"/>
+            <bitfield key="PIO 15"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Mapping PIO 16-31"
+            ShortId="pio_mapping_16_31"
+            Type="bitfield"
+            Size="16"
+            DefaultValue="PIO 16"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_mapping_assignments']"
+            Desc="Mapping assignments for PIO 16 to 31. To use certain PIOs that are shared with other hardware it is necessary to set the map pin bit for that PIO, if not set the PIO is not available for general input/output use. Note for mapping PIO physical signals to logical input signals (for e.g. to cause User Events), see User Interface > Buttons > Translation. Some platforms support mapping LED0-LED2 as general purpose PIOs PIO29-31. Any LED pin mapped as PIO will not be available for use as a LED.">
+            <BuildVariant HwVariant="CNS11012v2"
+                          SwVariant="All"
+                          Value=""/>
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05"
+                          SwVariant="All"
+                          Value="PIO 24 | PIO 25 |PIO 26"/>
+            <BuildVariant HwVariant="CF376_CE692 CF376_CE692H3 CF376_H13732"
+                          SwVariant="All"
+                          Value="PIO 21 | PIO 24 | PIO 25 |PIO 26"/>
+            <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CG724 CF376_CF212 CF376_CF429 CF376_CF440 QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="" />
+            <BuildVariant HwVariant="CF376_CE826"
+                          SwVariant="All"
+                          Value="PIO 24 | PIO 28" />
+            <BuildVariant HwVariant="20-CE751-H1 20-CE752-H1 20-CE690-H1"
+                          SwVariant="All"
+                          Value=""/>
+            <BuildVariant HwVariant="CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 21" />
+			<BuildVariant HwVariant="CF819"
+                          SwVariant="All"
+                          Value="" />
+            <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA"
+                          SwVariant="All"
+                          Value="PIO 18 | PIO 19" />
+            <BuildVariant HwVariant="QCC5126-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 20 | PIO 21" />
+            <bitfield key="PIO 16"
+                      value="0"/>
+            <bitfield key="PIO 17"
+                      value="1"/>
+            <bitfield key="PIO 18"
+                      value="2"/>
+            <bitfield key="PIO 19"
+                      value="3"/>
+            <bitfield key="PIO 20"
+                      value="4"/>
+            <bitfield key="PIO 21"
+                      value="5"/>
+            <bitfield key="PIO 22"
+                      value="6"/>
+            <bitfield key="PIO 23"
+                      value="7"/>
+            <bitfield key="PIO 24"
+                      value="8"/>
+            <bitfield key="PIO 25"
+                      value="9"/>
+            <bitfield key="PIO 26"
+                      value="10"/>
+            <bitfield key="PIO 27"
+                      value="11"/>
+            <bitfield key="PIO 28"
+                      value="12"/>
+            <bitfield key="PIO 29/LED 2"
+                      value="13"/>
+            <bitfield key="PIO 30/LED 0"
+                      value="14"/>
+            <bitfield key="PIO 31/LED 1"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Mapping PIO 32-47"
+            ShortId="pio_mapping_32_47"
+            Type="bitfield"
+            Size="16"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_mapping_assignments_ext']"
+            Desc="Mapping assignments for PIO 32 to 47. To use certain PIOs that are shared with other hardware it is necessary to set the map pin bit for that PIO, if not set the PIO is not available for general input/output use. Note for mapping PIO physical signals to logical input signals (for e.g. to cause User Events), see User Interface > Buttons > Translation.">
+            <BuildVariant HwVariant="H13672v2"
+                          SwVariant="All"
+                          Value="PIO 46"/>
+            <BuildVariant HwVariant="CF376_CE826"
+                          SwVariant="All"
+                          Value="PIO 32" />
+            <BuildVariant HwVariant="CF376_CF212"
+                          SwVariant="All"
+                          Value="PIO 32 | PIO 42 | PIO 43 | PIO 45" />
+            <BuildVariant HwVariant="CF819"
+                          SwVariant="Headset-Gaming"
+                          Value="PIO 32 | PIO 42 | PIO 43" />
+            <BuildVariant HwVariant="QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 40 | PIO 41 | PIO 44 | PIO 45" />
+            <bitfield key="PIO 32"
+                      value="0"/>
+            <bitfield key="PIO 33"
+                      value="1"/>
+            <bitfield key="PIO 34"
+                      value="2"/>
+            <bitfield key="PIO 35"
+                      value="3"/>
+            <bitfield key="PIO 36"
+                      value="4"/>
+            <bitfield key="PIO 37"
+                      value="5"/>
+            <bitfield key="PIO 38"
+                      value="6"/>
+            <bitfield key="PIO 39"
+                      value="7"/>
+            <bitfield key="PIO 40"
+                      value="8"/>
+            <bitfield key="PIO 41"
+                      value="9"/>
+            <bitfield key="PIO 42"
+                      value="10"/>
+            <bitfield key="PIO 43"
+                      value="11"/>
+            <bitfield key="PIO 44"
+                      value="12"/>
+            <bitfield key="PIO 45"
+                      value="13"/>
+            <bitfield key="PIO 46"
+                      value="14"/>
+            <bitfield key="PIO 47"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Mapping PIO 48-63"
+            ShortId="pio_mapping_48_63"
+            Type="bitfield"
+            Size="16"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_mapping_assignments_ext']"
+            Desc="Mapping assignments for PIO 48 to 63. To use certain PIOs that are shared with other hardware it is necessary to set the map pin bit for that PIO, if not set the PIO is not available for general input/output use. Note for mapping PIO physical signals to logical input signals (for e.g. to cause User Events), see User Interface > Buttons > Translation.">
+           <BuildVariant HwVariant="CF376_CE826"
+                         SwVariant="All"
+                         Value="PIO 60 | PIO 61" />
+           <BuildVariant HwVariant="CF819 CF376_CF212"
+                         SwVariant="All"
+                          Value="PIO 48 | PIO 49" />
+           <BuildVariant HwVariant="CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA"
+                         SwVariant="All"
+                         Value="PIO 52 | PIO 53 | PIO 54 | PIO 60 | PIO 61" />
+            <BuildVariant HwVariant="QCC5120-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 52 | PIO 53 | PIO 54 | PIO 56 | PIO 57"/>
+            <BuildVariant HwVariant="QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 52 | PIO 53 | PIO 54 | PIO 55 | PIO 56 | PIO 57" />
+            <BuildVariant HwVariant="QCC5126-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 52 | PIO 53 | PIO 54 | PIO 61"/>
+            <BuildVariant HwVariant="CF376_CG724"
+                          SwVariant="All"
+                          Value="PIO 52 | PIO 53 | PIO 54 | PIO 55| PIO 56 | PIO 57 | PIO 58"/>
+            <bitfield key="PIO 48"
+                      value="0"/>
+            <bitfield key="PIO 49"
+                      value="1"/>
+            <bitfield key="PIO 50"
+                      value="2"/>
+            <bitfield key="PIO 51"
+                      value="3"/>
+            <bitfield key="PIO 52"
+                      value="4"/>
+            <bitfield key="PIO 53"
+                      value="5"/>
+            <bitfield key="PIO 54"
+                      value="6"/>
+            <bitfield key="PIO 55"
+                      value="7"/>
+            <bitfield key="PIO 56"
+                      value="8"/>
+            <bitfield key="PIO 57"
+                      value="9"/>
+            <bitfield key="PIO 58"
+                      value="10"/>
+            <bitfield key="PIO 59"
+                      value="11"/>
+            <bitfield key="PIO 60"
+                      value="12"/>
+            <bitfield key="PIO 61"
+                      value="13"/>
+            <bitfield key="PIO 62"
+                      value="14"/>
+            <bitfield key="PIO 63"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Mapping PIO 64-79"
+            ShortId="pio_mapping_64_79"
+            Type="bitfield"
+            Size="16"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_mapping_assignments_ext']"
+            Desc="Mapping assignments for PIO 64 to 79. To use certain PIOs that are shared with other hardware it is necessary to set the map pin bit for that PIO, if not set the PIO is not available for general input/output use. Note for mapping PIO physical signals to logical input signals (for e.g. to cause User Events), see User Interface > Buttons > Translation.">
+            <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05"
+                          SwVariant="All"
+                          Value="PIO 74|PIO 75|PIO 76|PIO 77|PIO 78|PIO 79"/>
+            <BuildVariant HwVariant="CE446_CE692"
+                          SwVariant="All"
+                          Value="PIO 64|PIO 76|PIO 78|PIO 79"/>
+            <BuildVariant HwVariant="CF376_CE826 CF376_CF212"
+                          SwVariant="All"
+                          Value="PIO 70" />
+            <BuildVariant HwVariant="CF376_CE692 CF376_CE692H3 CF376_H13732"
+                          SwVariant="All"
+                          Value="PIO 64 | PIO 72 | PIO 76 | PIO 77 | PIO 78 | PIO 79" />
+			<BuildVariant HwVariant="CF819"
+                          SwVariant="All"
+                          Value="PIO 71" />
+            <bitfield key="PIO 64"
+                      value="0"/>
+            <bitfield key="PIO 65"
+                      value="1"/>
+            <bitfield key="PIO 66"
+                      value="2"/>
+            <bitfield key="PIO 67"
+                      value="3"/>
+            <bitfield key="PIO 68"
+                      value="4"/>
+            <bitfield key="PIO 69"
+                      value="5"/>
+            <bitfield key="PIO 70"
+                      value="6"/>
+            <bitfield key="PIO 71"
+                      value="7"/>
+            <bitfield key="PIO 72"
+                      value="8"/>
+            <bitfield key="PIO 73"
+                      value="9"/>
+            <bitfield key="PIO 74"
+                      value="10"/>
+            <bitfield key="PIO 75"
+                      value="11"/>
+            <bitfield key="PIO 76"
+                      value="12"/>
+            <bitfield key="PIO 77"
+                      value="13"/>
+            <bitfield key="PIO 78"
+                      value="14"/>
+            <bitfield key="PIO 79"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Mapping PIO 80-95"
+            ShortId="pio_mapping_80_95"
+            Type="bitfield"
+            Size="16"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_mapping_assignments_ext']"
+            Desc="Mapping assignments for PIO 80 to 95. To use certain PIOs that are shared with other hardware it is necessary to set the map pin bit for that PIO, if not set the PIO is not available for general input/output use. Note for mapping PIO physical signals to logical input signals (for e.g. to cause User Events), see User Interface > Buttons > Translation.">
+            <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05"
+                          SwVariant="All"
+                          Value="PIO 80|PIO 81"/>
+            <BuildVariant HwVariant="CE446_CE692 CF376_CE692 CF376_CE692H3 CF376_H13732"
+                          SwVariant="All"
+                          Value="PIO 80|PIO 81|PIO 84|PIO 85"/>
+            <bitfield key="PIO 80"
+                      value="0"/>
+            <bitfield key="PIO 81"
+                      value="1"/>
+            <bitfield key="PIO 82"
+                      value="2"/>
+            <bitfield key="PIO 83"
+                      value="3"/>
+            <bitfield key="PIO 84"
+                      value="4"/>
+            <bitfield key="PIO 85"
+                      value="5"/>
+            <bitfield key="PIO 86"
+                      value="6"/>
+            <bitfield key="PIO 87"
+                      value="7"/>
+            <bitfield key="PIO 88"
+                      value="8"/>
+            <bitfield key="PIO 89"
+                      value="9"/>
+            <bitfield key="PIO 90"
+                      value="10"/>
+            <bitfield key="PIO 91"
+                      value="11"/>
+            <bitfield key="PIO 92"
+                      value="12"/>
+            <bitfield key="PIO 93"
+                      value="13"/>
+            <bitfield key="PIO 94"
+                      value="14"/>
+            <bitfield key="PIO 95"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Use Button Mappings"
+            ShortId="pio_debounce_group_0_enable_button_mappings"
+            Desc="Use button debounce assignments. Group 0 configuration will be disabled."
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_0']"
+            Type="bool"
+            Size="1"
+            DefaultValue="true">
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 0 Num Checks"
+            ShortId="pio_debounce_group_0_num_checks"
+            Desc="The number of PIO reads performed."
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_0']/[@ShortId='pio_group_0_debounce_configuration']"
+            Type="uint"
+            Size="8"
+            DefaultValue="1"
+            Range="Min=1,Max=255">
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 0 Time Between Checks"
+            ShortId="pio_debounce_group_0_time_between_checks"
+            Desc="The interval between each PIO read in ms."
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_0']/[@ShortId='pio_group_0_debounce_configuration']"
+            Type="uint"
+            Size="8"
+            DefaultValue="0"
+            Range="Min=0,Max=255">
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 0 debounce PIO0-15"
+            ShortId="pio_debounce_group_0_0_15"
+            Type="bitfield"
+            Size="16"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_0']/[@ShortId='pio_group_0_debounce_assignments']"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 0"
+                      value="0"/>
+            <bitfield key="PIO 1"
+                      value="1"/>
+            <bitfield key="PIO 2"
+                      value="2"/>
+            <bitfield key="PIO 3"
+                      value="3"/>
+            <bitfield key="PIO 4"
+                      value="4"/>
+            <bitfield key="PIO 5"
+                      value="5"/>
+            <bitfield key="PIO 6"
+                      value="6"/>
+            <bitfield key="PIO 7"
+                      value="7"/>
+            <bitfield key="PIO 8"
+                      value="8"/>
+            <bitfield key="PIO 9"
+                      value="9"/>
+            <bitfield key="PIO 10"
+                      value="10"/>
+            <bitfield key="PIO 11"
+                      value="11"/>
+            <bitfield key="PIO 12"
+                      value="12"/>
+            <bitfield key="PIO 13"
+                      value="13"/>
+            <bitfield key="PIO 14"
+                      value="14"/>
+            <bitfield key="PIO 15"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 0 debounce PIO16-31"
+            ShortId="pio_debounce_group_0_16_31"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_0']/[@ShortId='pio_group_0_debounce_assignments']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 16"
+                      value="0"/>
+            <bitfield key="PIO 17"
+                      value="1"/>
+            <bitfield key="PIO 18"
+                      value="2"/>
+            <bitfield key="PIO 19"
+                      value="3"/>
+            <bitfield key="PIO 20"
+                      value="4"/>
+            <bitfield key="PIO 21"
+                      value="5"/>
+            <bitfield key="PIO 22"
+                      value="6"/>
+            <bitfield key="PIO 23"
+                      value="7"/>
+            <bitfield key="PIO 24"
+                      value="8"/>
+            <bitfield key="PIO 25"
+                      value="9"/>
+            <bitfield key="PIO 26"
+                      value="10"/>
+            <bitfield key="PIO 27"
+                      value="11"/>
+            <bitfield key="PIO 28"
+                      value="12"/>
+            <bitfield key="PIO 29"
+                      value="13"/>
+            <bitfield key="PIO 30"
+                      value="14"/>
+            <bitfield key="PIO 31"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 0 debounce PIO32-47"
+            ShortId="pio_debounce_group_0_32_47"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_0']/[@ShortId='pio_group_0_debounce_assignments_ext']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 32"
+                      value="0"/>
+            <bitfield key="PIO 33"
+                      value="1"/>
+            <bitfield key="PIO 34"
+                      value="2"/>
+            <bitfield key="PIO 35"
+                      value="3"/>
+            <bitfield key="PIO 36"
+                      value="4"/>
+            <bitfield key="PIO 37"
+                      value="5"/>
+            <bitfield key="PIO 38"
+                      value="6"/>
+            <bitfield key="PIO 39"
+                      value="7"/>
+            <bitfield key="PIO 40"
+                      value="8"/>
+            <bitfield key="PIO 41"
+                      value="9"/>
+            <bitfield key="PIO 42"
+                      value="10"/>
+            <bitfield key="PIO 43"
+                      value="11"/>
+            <bitfield key="PIO 44"
+                      value="12"/>
+            <bitfield key="PIO 45"
+                      value="13"/>
+            <bitfield key="PIO 46"
+                      value="14"/>
+            <bitfield key="PIO 47"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 0 debounce PIO48-63"
+            ShortId="pio_debounce_group_0_48_63"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_0']/[@ShortId='pio_group_0_debounce_assignments_ext']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 48"
+                      value="0"/>
+            <bitfield key="PIO 49"
+                      value="1"/>
+            <bitfield key="PIO 50"
+                      value="2"/>
+            <bitfield key="PIO 51"
+                      value="3"/>
+            <bitfield key="PIO 52"
+                      value="4"/>
+            <bitfield key="PIO 53"
+                      value="5"/>
+            <bitfield key="PIO 54"
+                      value="6"/>
+            <bitfield key="PIO 55"
+                      value="7"/>
+            <bitfield key="PIO 56"
+                      value="8"/>
+            <bitfield key="PIO 57"
+                      value="9"/>
+            <bitfield key="PIO 58"
+                      value="10"/>
+            <bitfield key="PIO 59"
+                      value="11"/>
+            <bitfield key="PIO 60"
+                      value="12"/>
+            <bitfield key="PIO 61"
+                      value="13"/>
+            <bitfield key="PIO 62"
+                      value="14"/>
+            <bitfield key="PIO 63"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 0 debounce PIO64-79"
+            ShortId="pio_debounce_group_0_64_79"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_0']/[@ShortId='pio_group_0_debounce_assignments_ext']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 64"
+                      value="0"/>
+            <bitfield key="PIO 65"
+                      value="1"/>
+            <bitfield key="PIO 66"
+                      value="2"/>
+            <bitfield key="PIO 67"
+                      value="3"/>
+            <bitfield key="PIO 68"
+                      value="4"/>
+            <bitfield key="PIO 69"
+                      value="5"/>
+            <bitfield key="PIO 70"
+                      value="6"/>
+            <bitfield key="PIO 71"
+                      value="7"/>
+            <bitfield key="PIO 72"
+                      value="8"/>
+            <bitfield key="PIO 73"
+                      value="9"/>
+            <bitfield key="PIO 74"
+                      value="10"/>
+            <bitfield key="PIO 75"
+                      value="11"/>
+            <bitfield key="PIO 76"
+                      value="12"/>
+            <bitfield key="PIO 77"
+                      value="13"/>
+            <bitfield key="PIO 78"
+                      value="14"/>
+            <bitfield key="PIO 79"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 0 debounce PIO80-95"
+            ShortId="pio_debounce_group_0_80_95"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_0']/[@ShortId='pio_group_0_debounce_assignments_ext']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 80"
+                      value="0"/>
+            <bitfield key="PIO 81"
+                      value="1"/>
+            <bitfield key="PIO 82"
+                      value="2"/>
+            <bitfield key="PIO 83"
+                      value="3"/>
+            <bitfield key="PIO 84"
+                      value="4"/>
+            <bitfield key="PIO 85"
+                      value="5"/>
+            <bitfield key="PIO 86"
+                      value="6"/>
+            <bitfield key="PIO 87"
+                      value="7"/>
+            <bitfield key="PIO 88"
+                      value="8"/>
+            <bitfield key="PIO 89"
+                      value="9"/>
+            <bitfield key="PIO 90"
+                      value="10"/>
+            <bitfield key="PIO 91"
+                      value="11"/>
+            <bitfield key="PIO 92"
+                      value="12"/>
+            <bitfield key="PIO 93"
+                      value="13"/>
+            <bitfield key="PIO 94"
+                      value="14"/>
+            <bitfield key="PIO 95"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 1 Num Checks"
+            ShortId="pio_debounce_group_1_num_checks"
+            Desc="The number of PIO reads performed."
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_1']/[@ShortId='pio_group_1_debounce_configuration']"
+            Type="uint"
+            Size="8"
+            DefaultValue="1"
+            Range="Min=1,Max=255">
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 1 Time Between Checks"
+            ShortId="pio_debounce_group_1_time_between_checks"
+            Desc="The interval between each PIO read in ms."
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_1']/[@ShortId='pio_group_1_debounce_configuration']"
+            Type="uint"
+            Size="8"
+            DefaultValue="0"
+            Range="Min=0,Max=255">
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 1 debounce PIO0-15"
+            ShortId="pio_debounce_group_1_0_15"
+            Type="bitfield"
+            Size="16"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_1']/[@ShortId='pio_group_1_debounce_assignments']"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 0"
+                      value="0"/>
+            <bitfield key="PIO 1"
+                      value="1"/>
+            <bitfield key="PIO 2"
+                      value="2"/>
+            <bitfield key="PIO 3"
+                      value="3"/>
+            <bitfield key="PIO 4"
+                      value="4"/>
+            <bitfield key="PIO 5"
+                      value="5"/>
+            <bitfield key="PIO 6"
+                      value="6"/>
+            <bitfield key="PIO 7"
+                      value="7"/>
+            <bitfield key="PIO 8"
+                      value="8"/>
+            <bitfield key="PIO 9"
+                      value="9"/>
+            <bitfield key="PIO 10"
+                      value="10"/>
+            <bitfield key="PIO 11"
+                      value="11"/>
+            <bitfield key="PIO 12"
+                      value="12"/>
+            <bitfield key="PIO 13"
+                      value="13"/>
+            <bitfield key="PIO 14"
+                      value="14"/>
+            <bitfield key="PIO 15"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 1 debounce PIO16-31"
+            ShortId="pio_debounce_group_1_16_31"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_1']/[@ShortId='pio_group_1_debounce_assignments']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 16"
+                      value="0"/>
+            <bitfield key="PIO 17"
+                      value="1"/>
+            <bitfield key="PIO 18"
+                      value="2"/>
+            <bitfield key="PIO 19"
+                      value="3"/>
+            <bitfield key="PIO 20"
+                      value="4"/>
+            <bitfield key="PIO 21"
+                      value="5"/>
+            <bitfield key="PIO 22"
+                      value="6"/>
+            <bitfield key="PIO 23"
+                      value="7"/>
+            <bitfield key="PIO 24"
+                      value="8"/>
+            <bitfield key="PIO 25"
+                      value="9"/>
+            <bitfield key="PIO 26"
+                      value="10"/>
+            <bitfield key="PIO 27"
+                      value="11"/>
+            <bitfield key="PIO 28"
+                      value="12"/>
+            <bitfield key="PIO 29"
+                      value="13"/>
+            <bitfield key="PIO 30"
+                      value="14"/>
+            <bitfield key="PIO 31"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 1 debounce PIO32-47"
+            ShortId="pio_debounce_group_1_32_47"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_1']/[@ShortId='pio_group_1_debounce_assignments_ext']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 32"
+                      value="0"/>
+            <bitfield key="PIO 33"
+                      value="1"/>
+            <bitfield key="PIO 34"
+                      value="2"/>
+            <bitfield key="PIO 35"
+                      value="3"/>
+            <bitfield key="PIO 36"
+                      value="4"/>
+            <bitfield key="PIO 37"
+                      value="5"/>
+            <bitfield key="PIO 38"
+                      value="6"/>
+            <bitfield key="PIO 39"
+                      value="7"/>
+            <bitfield key="PIO 40"
+                      value="8"/>
+            <bitfield key="PIO 41"
+                      value="9"/>
+            <bitfield key="PIO 42"
+                      value="10"/>
+            <bitfield key="PIO 43"
+                      value="11"/>
+            <bitfield key="PIO 44"
+                      value="12"/>
+            <bitfield key="PIO 45"
+                      value="13"/>
+            <bitfield key="PIO 46"
+                      value="14"/>
+            <bitfield key="PIO 47"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 1 debounce PIO48-63"
+            ShortId="pio_debounce_group_1_48_63"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_1']/[@ShortId='pio_group_1_debounce_assignments_ext']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 48"
+                      value="0"/>
+            <bitfield key="PIO 49"
+                      value="1"/>
+            <bitfield key="PIO 50"
+                      value="2"/>
+            <bitfield key="PIO 51"
+                      value="3"/>
+            <bitfield key="PIO 52"
+                      value="4"/>
+            <bitfield key="PIO 53"
+                      value="5"/>
+            <bitfield key="PIO 54"
+                      value="6"/>
+            <bitfield key="PIO 55"
+                      value="7"/>
+            <bitfield key="PIO 56"
+                      value="8"/>
+            <bitfield key="PIO 57"
+                      value="9"/>
+            <bitfield key="PIO 58"
+                      value="10"/>
+            <bitfield key="PIO 59"
+                      value="11"/>
+            <bitfield key="PIO 60"
+                      value="12"/>
+            <bitfield key="PIO 61"
+                      value="13"/>
+            <bitfield key="PIO 62"
+                      value="14"/>
+            <bitfield key="PIO 63"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 1 debounce PIO64-79"
+            ShortId="pio_debounce_group_1_64_79"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_1']/[@ShortId='pio_group_1_debounce_assignments_ext']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 64"
+                      value="0"/>
+            <bitfield key="PIO 65"
+                      value="1"/>
+            <bitfield key="PIO 66"
+                      value="2"/>
+            <bitfield key="PIO 67"
+                      value="3"/>
+            <bitfield key="PIO 68"
+                      value="4"/>
+            <bitfield key="PIO 69"
+                      value="5"/>
+            <bitfield key="PIO 70"
+                      value="6"/>
+            <bitfield key="PIO 71"
+                      value="7"/>
+            <bitfield key="PIO 72"
+                      value="8"/>
+            <bitfield key="PIO 73"
+                      value="9"/>
+            <bitfield key="PIO 74"
+                      value="10"/>
+            <bitfield key="PIO 75"
+                      value="11"/>
+            <bitfield key="PIO 76"
+                      value="12"/>
+            <bitfield key="PIO 77"
+                      value="13"/>
+            <bitfield key="PIO 78"
+                      value="14"/>
+            <bitfield key="PIO 79"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Group 1 debounce PIO80-95"
+            ShortId="pio_debounce_group_1_80_95"
+            Type="bitfield"
+            DefaultValue=""
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='pio_debounce_groups']/[@ShortId='pio_debounce_group_1']/[@ShortId='pio_group_1_debounce_assignments_ext']"
+            Size="16"
+            Desc="Select a PIO to add it into this group.">
+            <bitfield key="PIO 80"
+                      value="0"/>
+            <bitfield key="PIO 81"
+                      value="1"/>
+            <bitfield key="PIO 82"
+                      value="2"/>
+            <bitfield key="PIO 83"
+                      value="3"/>
+            <bitfield key="PIO 84"
+                      value="4"/>
+            <bitfield key="PIO 85"
+                      value="5"/>
+            <bitfield key="PIO 86"
+                      value="6"/>
+            <bitfield key="PIO 87"
+                      value="7"/>
+            <bitfield key="PIO 88"
+                      value="8"/>
+            <bitfield key="PIO 89"
+                      value="9"/>
+            <bitfield key="PIO 90"
+                      value="10"/>
+            <bitfield key="PIO 91"
+                      value="11"/>
+            <bitfield key="PIO 92"
+                      value="12"/>
+            <bitfield key="PIO 93"
+                      value="13"/>
+            <bitfield key="PIO 94"
+                      value="14"/>
+            <bitfield key="PIO 95"
+                      value="15"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="User Event PIO"
+            ShortId="user_pio"
+                Desc="Configures the PIO that is controlled by User PIO events."
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"
+                Type="enum"
+                Size="8"
+                DefaultValue="N/A">
+                <List use="pio_7_bit"/>
+                <List use="pio_not_sel"/>
+        </ConfigItem>
+    </ConfigGroup>
+
+    <ConfigGroup Id="PIO Function Configuration" ShortId="configure_pio_function" Node="Array"
+               ConfigGroupPath="./[@ShortId='input_output']">
+        <ConfigPatternArray Id="Configure PIO function array"
+                            ShortId="pio_function_array"
+                            Pattern="pio_function_pattern"
+                            MaxNumPatterns="16">
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 CF376_CE692 CF376_CE692H3 CF376_H13732" SwVariant="All">
+                <PatternArrayRow Id="CSRA6810x Thermistor sense" ShortId="CSRA6810x_therm_sense" Node="Basic">
+                    <PatternArrayConfigItem ShortId="pio_num" DefaultValue="PIO 75" />
+                    <PatternArrayConfigItem ShortId="pio_function" DefaultValue="ANALOGUE" />
+                </PatternArrayRow>
+            </BuildVariant>
+        </ConfigPatternArray>
+    </ConfigGroup>
+
+    <DefineGroup>
+        <DefinePattern  PatternName="PIO Function pattern" ShortId="pio_function_pattern" >
+            <ConfigItem Id="PIO"
+                        ShortId="pio_num"
+                        Desc="Chose the PIO to configure"
+                        Type="enum" Size="8" >
+                        <List use="pio_7_bit"/>
+            </ConfigItem>
+            <ConfigItem Id="Function"
+                        ShortId="pio_function"
+                        Desc="Chose PIO function. Refer to chip datasheet for available functions on each PIO. If a function configured on a PIO is not supported by the chip the app will panic during init."
+                        Type="enum" Size="8" >
+                        <List use="pio_functions"/>
+            </ConfigItem>
+        </DefinePattern>
+    </DefineGroup>
+</ModuleData>

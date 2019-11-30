@@ -1,0 +1,66 @@
+// -----------------------------------------------------------------------------
+// Copyright (c) 2017                  Qualcomm Technologies International, Ltd.
+//
+#ifndef __BASIC_PASSTHROUGH_GEN_C_H__
+#define __BASIC_PASSTHROUGH_GEN_C_H__
+
+#ifndef ParamType
+typedef unsigned ParamType;
+#endif
+
+// CodeBase IDs
+#define BASIC_PASSTHROUGH_BPT_CAP_ID	0x0001
+#define BASIC_PASSTHROUGH_BPT_ALT_CAP_ID_0	0x4002
+#define BASIC_PASSTHROUGH_BPT_SAMPLE_RATE	0
+#define BASIC_PASSTHROUGH_BPT_VERSION_MAJOR	1
+
+#define BASIC_PASSTHROUGH_TTP_CAP_ID	0x003C
+#define BASIC_PASSTHROUGH_TTP_ALT_CAP_ID_0	0x4067
+#define BASIC_PASSTHROUGH_TTP_SAMPLE_RATE	0
+#define BASIC_PASSTHROUGH_TTP_VERSION_MAJOR	1
+
+// Constant Definitions
+
+
+// Runtime Config Parameter Bitfields
+#define BASIC_PASSTHROUGH_CONFIG_PM_BYPASS		0x00000001
+
+
+// System Mode
+#define BASIC_PASSTHROUGH_SYSMODE_STATIC 		0
+#define BASIC_PASSTHROUGH_SYSMODE_STANDBY		1
+#define BASIC_PASSTHROUGH_SYSMODE_MONITOR		2
+#define BASIC_PASSTHROUGH_SYSMODE_MAX_MODES		3
+
+// System Control
+#define BASIC_PASSTHROUGH_CONTROL_MODE_OVERRIDE		0x2000
+
+// Statistics Block
+typedef struct _tag_BASIC_PASSTHROUGH_STATISTICS
+{
+	ParamType OFFSET_CUR_MODE_OFFSET;
+	ParamType OFFSET_PEAK_LEVEL_1;
+	ParamType OFFSET_PEAK_LEVEL_2;
+	ParamType OFFSET_PEAK_LEVEL_3;
+	ParamType OFFSET_PEAK_LEVEL_4;
+	ParamType OFFSET_PEAK_LEVEL_5;
+	ParamType OFFSET_PEAK_LEVEL_6;
+	ParamType OFFSET_PEAK_LEVEL_7;
+	ParamType OFFSET_PEAK_LEVEL_8;
+	ParamType OFFSET_OVR_CONTROL;
+}BASIC_PASSTHROUGH_STATISTICS;
+
+typedef BASIC_PASSTHROUGH_STATISTICS* LP_BASIC_PASSTHROUGH_STATISTICS;
+
+// Parameters Block
+typedef struct _tag_BASIC_PASSTHROUGH_PARAMETERS
+{
+	ParamType OFFSET_CONFIG;
+	ParamType OFFSET_GAIN;
+}BASIC_PASSTHROUGH_PARAMETERS;
+
+typedef BASIC_PASSTHROUGH_PARAMETERS* LP_BASIC_PASSTHROUGH_PARAMETERS;
+
+unsigned *BASIC_PASSTHROUGH_GetDefaults(unsigned capid);
+
+#endif // __BASIC_PASSTHROUGH_GEN_C_H__

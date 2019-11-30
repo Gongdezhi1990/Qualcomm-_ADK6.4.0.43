@@ -1,0 +1,231 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# TODO decide what is framework and what is amber (a number of switches have been commented out)
+
+# Common definitions for all builds
+
+%cpp
+KALIMBA_BUILD
+KYMERA
+# I think we can assume all chips will have these
+# kalimba asm specific
+BASE_REGISTER_MODE
+DEBUG_STACK_OVERFLOW
+# this identifies the compiler, needed by some software builds on multiple compilers, like QVA
+KCC
+__KALIMBA__
+
+# We use the "Oxygen" preemptive scheduler
+OS_OXYGOS
+SCHED_NO_EXTERNAL_MSG_SUPPORT
+SCHEDULER_WITHOUT_RUNLEVELS
+
+# The bigint module provides support for 64 bit integers.
+# Intrinsic means it uses type long long else uses a structure of 2 int32s
+BIGINT_64BIT_INTRINSIC
+
+# Let bigint know endianness for efficient access into 64 bit integers.
+BIGINT_64BIT_LITTLE_ENDIAN
+
+# We define 64-bit types in types.h, so stop bigint trying to do it as well
+BIGINT_64BIT_EXTERNALLY_DEFINED
+
+# list of development TODOs - sort them out and delete them
+TODO_CONSIDER_DELETE
+TODO_IMPLEMENT_SHUNT
+TODO_FILE_MSG_VM
+TODO_BUFFER_ONE_OCTET
+TODO_CBUFF_OUT_OF_PLATFORM
+TODO_USE_C_ASM_STRUCT_SHARING
+
+# Flag for nonsecure processing without licence checks.
+#NONSECURE_PROCESSING
+
+# Flag to turn off periodic licence checks, which are not used if one-off checking is to be done 
+# (e.g. remote licence manager and/or licence key cannot deal with expiry period). 
+# No effect is NONSECURE_PROCESSING is defined.
+NONPERIODIC_LICENCE_CHECKS
+
+
+# The following two definitions are used to determine the required stack size
+# (and so are only relevant for target builds)
+
+# This is the number of different task priorities we actually use
+NUM_USED_TASK_PRIORITIES=1
+# This is the number of different interrupt levels we might actually use
+# (although nothing currently uses mid priority)
+NUM_USED_INTERRUPT_LEVELS=3
+
+PRESERVE_BLOCK_WORDS=9
+PRESERVED_MODULE_PRESENT
+
+# Remove any code which relies on the old Previn messaging library
+#HYDRA_REMOVE_XAP_MESSAGING
+
+# ConfigCmd has a problem with the filename formatting in config files
+# Until it is fixed, ignore the filename check in mib_loader
+#MIB_IGNORE_CFG_FILENAME_CHECK
+
+# build debug version of kalimba libs (and other asm code)
+#DEBUG_ON
+
+# Enable debug features in CBOPS library (additional to the above)
+CBOPS_DEBUG
+
+# Enable extra debug logging in CBOPS, primarily for discard and underrun operators
+#CBOPS_DEBUG_LOGGING
+
+# Enable kick time debug.
+DEBUG_KICK_TIMERS
+
+# Enable profiler
+PROFILER_ON
+INTERRUPT_PROFILER_ON
+# This increases memory usage slightly and MIPS somewhat.
+DETAILED_PROFILER_ON
+
+# Enable extra kick processing time debug
+#DEBUG_KICK_PROC_TIME
+
+# Heap debug. For now always build with the debug stats enabled
+HEAP_DEBUG
+
+# Cbuffer read / write pointer validation
+# If enabled, check that addresses passed to $cbuffer.set_write_address /
+# $cbuffer.set_read_address are within the range of the buffer
+#CBUFFER_RW_ADDR_DEBUG
+
+# Enable stream_connect diagnostic debug word.
+# (A fault code is written to memory when a stream_connect command fails.)
+STREAM_CONNECT_FAULT_CODE
+
+# Enable slower adaptation to detect blockiness of data arriving to audio sinks
+SLOW_BLOCK_SIZE_DETECTION
+
+# Sync'ed sources keep copied data amounts in unison. If their output buffer available space is
+# to also limit the copied amount (and not just the available input data across the sync group),
+# then enable the following flag.
+SYNCED_SOURCES_CHECK_SPACE
+
+# Allow PCM loopback to override the use of the PCM port.
+# This is to support SB-1485
+#ALLOW_LOOPBACK_TO_STEAL_ENDPOINTS
+
+# Use the middle quality rate adjustment filter coefficients
+SRA_HIGH_QUALITY_COEFFS
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+components/adaptor
+components/audio_log
+components/boot
+components/buffer
+components/cbops_mgr
+components/common
+components/common/test
+components/fault
+components/frame_proc
+components/hal
+components/hydra_modules/hydra
+components/hydra_modules/hydra_adaption
+components/id
+components/mem_utils
+components/opmgr
+components/panic
+components/patch
+components/platform
+components/preserved
+components/ps
+components/ps_msg
+components/slt
+components/rate
+components/stream
+components/sys_events
+components/volume
+../lib/audio_proc
+../lib/cbops
+../lib/cbops/log_linear_cbops
+../lib/cbops/operators
+../lib/math
+../lib_private/security
+
+# List of global include paths
+%list ALL_INCDIRS
+common/hydra/interface/slt
+common/interface/
+common/interface/gen/k32
+components
+components/adaptor
+components/common/interface
+components/buffer
+components/common/test
+components/hal
+components/hydra_modules
+components/hydra_modules/hydra
+components/hydra_modules/hydra_adaption
+components/platform
+components/ps_msg
+components/slt
+components/sys_events
+kalimba_lib/architecture
+../lib
+../lib/audio_proc
+../lib/math
+../lib/portability
+../lib_private/security
+../lib/patch
+
+# List of libraries to build
+%list CFG_LIBS
+../lib/audio_proc/audio_proc
+../lib/cbops/cbops
+../lib/math/math
+components/adaptor/adaptor
+components/audio_log/audio_log
+components/boot/boot
+components/buffer/buffer
+components/cbops_mgr/cbops_mgr
+components/fault/fault
+components/frame_proc/frame_proc
+components/hal/hal
+components/id/id
+components/mem_utils/mem_utils
+components/opmgr/opmgr
+components/panic/panic
+components/platform/platform
+components/pl_timers/pl_timers
+components/pmalloc/pmalloc
+components/ps/ps
+components/ps_msg/ps_msg
+components/sched_oxygen/sched_oxygen
+components/preserved/preserved
+components/slt/slt
+components/sys_events/sys_events
+components/rate/rate
+components/stream/stream
+components/volume/volume
+../lib_private/security/security
+
+%list MAXIM_LIBS
+../lib/cbops/cbops
+../lib/audio_proc/audio_proc
+../lib/math/math
+../lib_private/security/security
+
+%list PRIVATE_LIBS
+# Everything in lib_private/ should always be built as 'private' --
+# that is, some attempt is made to hide symbols and debug info and
+# prevent disassembly of the object code.
+# (Note, this doesn't by itself have any effect; the config must also
+# be built as RELEASE_BUILD or REL_EXT_BUILD.)
+# Specific configs may add to this list.
+../lib_private
+
+%build
+EXTRA_KMAPPER_FLAGS=memusage
+# Enable generation of xIDE project files (very slow on Windows builds)
+PROJFILES=true

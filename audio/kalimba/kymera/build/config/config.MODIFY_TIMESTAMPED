@@ -1,0 +1,14 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions for timestamped endpoint
+
+%cpp
+INSTALL_TIMESTAMPED_ENDPOINT
+
+%build
+BUILD_TIMESTAMPED=$(if $(TEST_BUILD),$(TEST_BUILD_TIMESTAMPED),true)
+

@@ -1,0 +1,19 @@
+##############################################################################
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+##############################################################################
+
+#Include a patch system
+%cpp
+INCLUDE_PATCHES
+
+%list ALL_SRCDIRS
+components/patch
+
+%list ALL_INCDIRS
+components/patch
+
+%list CFG_LIBS
+components/patch/patch
+
+%build
+BUILD_PATCH=true

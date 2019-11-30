@@ -1,0 +1,19 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# common defintions for Platforms that allow dual core
+
+%cpp
+# Chip that allows dual core, should have shared memory. This means that
+# its memory is split between P0 and P1, so its linkscript has defined:
+# initc_p0 & zeroinit_p0
+# By adding this define we make sure that libs use DM_P0 memory instead of DM,
+# this means that variables are stored in shared memory instead of in Private
+# which is scarce.
+USE_SHARE_MEM
+
+
+

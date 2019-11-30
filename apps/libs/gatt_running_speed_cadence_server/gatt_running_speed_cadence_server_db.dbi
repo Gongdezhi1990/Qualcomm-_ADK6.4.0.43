@@ -1,0 +1,70 @@
+/******************************************************************************
+ *  Copyright (c) 2017 Qualcomm Technologies International, Ltd.
+ *  %%version
+ *  %%appversion
+ *
+ *  FILE
+ *      gatt_running_speed_cadence_server_db.dbi
+ *
+ *  DESCRIPTION
+ *      This file defines the Running Speed and Cadence Service in JSON format, 
+ *      which is fairly human readable.  This file is included in the main 
+ *      application data base file which is used to produce ATT flat data 
+ *      base. 
+ *
+ *****************************************************************************/
+#ifndef __GATT_RUNNING_SPEED_CADENCE_SERVER_DB_DBI__
+#define __GATT_RUNNING_SPEED_CADENCE_SERVER_DB_DBI__
+
+#include "gatt_running_speed_cadence_server_uuids.h"
+ 
+/* Primary service declaration of Running Speed and Cadence service */
+primary_service {
+    uuid : UUID_RUNNING_SPEED_AND_CADENCE_SERVICE,
+    name : "RUNNING_SPEED_AND_CADENCE_SERVICE",
+
+        /* Running Speed and Cadence Measurement characteristic */
+
+        characteristic {
+            uuid        : UUID_RSC_MEASUREMENT,
+            name        : "RUNNING_SPEED_AND_CADENCE_MEASUREMENT",
+            flags       : [ FLAG_IRQ, FLAG_DYNLEN ],
+            properties  : [ notify ],
+            value       : 0x000,
+            
+            client_config 
+            {
+                name    : "RUNNING_SPEED_AND_CADENCE_CLIENT_CONFIG",
+                flags   : FLAG_IRQ
+            }
+        },
+
+        /* Running Speed and Cadence Extension characteristic */
+        characteristic {
+            uuid                : UUID_RSC_EXTENSION,
+            name                : "RUNNING_SPEED_AND_CADENCE_EXTENSION",
+            flags               : [ FLAG_IRQ, FLAG_DYNLEN ],
+            properties          : [ notify ],
+            value               : 0x000,
+
+            client_config
+            {
+                name    : "RUNNING_SPEED_AND_CADENCE_EXTENSION_CLIENT_CONFIG",
+                flags   : FLAG_IRQ
+            }
+        },
+
+        /* Running Speed and Cadence Feature characteristic */
+
+        characteristic {
+            uuid                : UUID_RSC_FEATURE,
+            name                : "RSC_FEATURE",
+            properties          : [ read ],
+            //flags               : FLAG_IRQ,
+            size_value          : 0x02,
+            value               : 0x0007
+            }
+
+    }
+
+#endif /* __GATT_RUNNING_SPEED_CADENCE_SERVER_DB_DBI__ */

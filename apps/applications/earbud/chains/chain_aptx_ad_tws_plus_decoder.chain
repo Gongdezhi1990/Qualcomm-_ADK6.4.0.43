@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright (c) 2018 Qualcomm Technologies International, Ltd.-->
+
+<chain name="CHAIN_APTX_AD_TWS_PLUS_DECODER" id="1" generate_endpoint_roles_enum="False" generate_operator_roles_enum="False">
+
+    <include_header name="../av_headset_chain_roles.h"/>
+
+    <operator name="OPR_LATENCY_BUFFER" id="EB_CAP_ID_SWITCHED_PASSTHROUGH">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_APTX_ADAPTIVE_TWS_PLUS_DECODER" id="EB_CAP_ID_APTX_ADAPTIVE_DECODE">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <input sink="OPR_LATENCY_BUFFER.IN" role="EPR_SINK_MEDIA"/>
+    <connection source="OPR_LATENCY_BUFFER.OUT" sink="OPR_APTX_ADAPTIVE_TWS_PLUS_DECODER.IN"/>
+    <output source="OPR_APTX_ADAPTIVE_TWS_PLUS_DECODER.OUT" role="EPR_SOURCE_DECODED_PCM"/>
+
+</chain>
+

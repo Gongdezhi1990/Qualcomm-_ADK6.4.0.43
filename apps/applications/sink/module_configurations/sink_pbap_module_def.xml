@@ -1,0 +1,17 @@
+<ModuleData Name="Sink_pbap">
+    <ConfigGroup
+        ShortId="pbap_read_only"
+        Id="PBAP_readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="Enable PBAP"
+            ShortId="pbap_enabled"
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            Desc="When set enables Phone Book Application Profile (PBAP) functionality."
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='pbap']">
+            <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="false" />
+        </ConfigItem>
+    </ConfigGroup> 
+</ModuleData>

@@ -1,0 +1,347 @@
+<ModuleData Name="Sink_inputmanager">
+
+    <!--Definitions for sink input manager module-->
+    <DefineGroup>
+        <DefinePattern
+            PatternName="Input Manager States and Events"
+            ShortId="eventLookupTable">
+
+            <ConfigItem
+                Id="Virtual Button ID(s) Assigned"
+                ShortId="mask"
+                Desc="The 'Virtual Button' IDs allow you to map one or more IR or BLE inputs onto a User Event."
+                Type="bitfield"
+                PresentHex="false"
+                Size="16">
+                <bitfield key="vb0"
+                          value="0"/>
+                <bitfield key="vb1"
+                          value="1"/>
+                <bitfield key="vb2"
+                          value="2"/>
+                <bitfield key="vb3"
+                          value="3"/>
+                <bitfield key="vb4"
+                          value="4"/>
+                <bitfield key="vb5"
+                          value="5"/>
+                <bitfield key="vb6"
+                          value="6"/>
+                <bitfield key="vb7"
+                          value="7"/>
+                <bitfield key="vb8"
+                          value="8"/>
+                <bitfield key="vb9"
+                          value="9"/>
+                <bitfield key="vb10"
+                          value="10"/>
+                <bitfield key="vb11"
+                          value="11"/>
+                <bitfield key="vb12"
+                          value="12"/>
+                <bitfield key="vb13"
+                          value="13"/>
+                <bitfield key="vb14"
+                          value="14"/>
+                <bitfield key="vb15"
+                          value="15"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Input Active State Mask [hex]"
+                ShortId="state_mask"
+                Desc="The application state(s) for which the event *user_event* will be valid"
+                Type="bitfield"
+                PresentHex="true"
+                Size="16">
+                <List use="g_states"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Virtual Button Event"
+                ShortId="input_event"
+                Desc="Which 'Virtual Button' event is required to cause the User event to trigger"
+                Type="enum"
+                Size="4">
+                <enum key="VirtualButtonDown"
+                      value="0"/>
+                <enum key="VirtualButtonVShortRelease"
+                      value="1"/>
+                <enum key="VirtualButtonShortTimer"
+                      value="2"/>
+                <enum key="VirtualButtonShortRelease"
+                      value="3"/>
+                <enum key="VirtualButtonLongTimer"
+                      value="4"/>
+                <enum key="VirtualButtonLongRelease"
+                      value="5"/>
+                <enum key="VirtualButtonVLongTimer"
+                      value="6"/>
+                <enum key="VirtualButtonVLongRelease"
+                      value="7"/>
+                <enum key="VirtualButtonVVLongTimer"
+                      value="8"/>
+                <enum key="VirtualButtonVVLongRelease"
+                      value="9"/>
+                <enum key="VirtualButtonRepeatTimer"
+                      value="10"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Triggered User Event"
+                ShortId="user_event"
+                Desc="The Application User Event that will be triggered when the Virtual Button event meets the required conditions (this is offset from EVENTS_USR_MESSAGE_BASE, (i.e. for EventUsrPowerOn, this value will be set to 1)"
+                Size="10"
+                Type="enum"
+                ShowOrdered="true">
+                <List use="g_user_event"/>
+            </ConfigItem>
+        </DefinePattern>
+
+        <DefineStruct Id= "Input Monitor Timers" ShortId="timerConfig">
+            <ConfigItem
+                Id="Multiple Detect Timer [ms]"
+                ShortId="multipleDetectTimer"
+                Desc="Timer that is armed immediately  after the first input is pressed, once this timer fires, no further multiple buttons will be included in the pattern [ms]"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Short Press Timer [ms]"
+                ShortId="shortTimer"
+                Desc="After a short duration, this timer will fire, input manager can assign events when short timer fires [ms]"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Long Press Timer [ms]"
+                ShortId="longTimer"
+                Desc="After a long duration, this timer will fire, input manager can assign events when the timer fires [ms]"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Very Long Press Timer [ms]"
+                ShortId="vLongTimer"
+                Desc="After a very long duration, this timer will fire, input manager can assign events when the timer fires [ms]"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Very Very Long Press Timer [ms]"
+                ShortId="vvLongTimer"
+                Desc="After a very very long duration, this timer will fire, input manager can assign events when the timer fires [ms]"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Repeat Timer [ms]"
+                ShortId="repeatTimer"
+                Desc="Every repeatTimer duration, this timer will fire, input manager can assign events on short timer firing, such as repeated volume events [ms]"
+                Type="uint"
+                Size="16"/>
+        </DefineStruct>
+    </DefineGroup>
+
+    <ConfigGroup Id="Input Managet Look-up Table" ShortId="sink_inputManager_readonly" Node="Basic">
+        <ConfigGroup Id="Input Manager Look-up Table Array" ShortId="input_lookup_table" Node="Array"
+            ConfigGroupPath="./[@ShortId='remote_control']">
+
+            <ConfigPatternArray Id="Look Up Table Array Input Manager"
+                ShortId="lookuptable"
+                Pattern="eventLookupTable"
+                MaxNumPatterns="255">
+                <PatternArrayRow Id="LookUpTableRaw1" ShortId="look_up_table_raw_1" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb0" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Powering On" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonShortTimer" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Power On" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw2" ShortId="look_up_table_raw_2" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb0" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonShortTimer" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Power Off" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw3" ShortId="look_up_table_raw_3" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb2" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonDown" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Main Output Volume Up" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw4" ShortId="look_up_table_raw_4" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb2" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonRepeatTimer" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Main Output Volume Up" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw5" ShortId="look_up_table_raw_5" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb1" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonDown" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Main Output Volume Down" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw6" ShortId="look_up_table_raw_6" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb1" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonRepeatTimer" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Main Output Volume Down" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw7" ShortId="look_up_table_raw_7" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb1 | vb2" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Powering On | Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonDown" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Volume Orientation Toggle" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw8" ShortId="look_up_table_raw_8" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb0" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonVVLongTimer" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Enter Pairing" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw9" ShortId="look_up_table_raw_9" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb0" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonShortRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Establish SLC" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw10" ShortId="look_up_table_raw_10" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb3" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonDown" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Play Pause" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw11" ShortId="look_up_table_raw_11" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb4" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonVShortRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Skip Forward" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw12" ShortId="look_up_table_raw_12" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb4" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonShortRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Skip Forward" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw13" ShortId="look_up_table_raw_13" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb4" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonLongTimer" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Fast Forward Press" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw14" ShortId="look_up_table_raw_14" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb4" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonLongRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Fast Forward Release" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw15" ShortId="look_up_table_raw_15" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb4" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonVLongRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Fast Forward Release" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw16" ShortId="look_up_table_raw_16" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb4" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonVVLongRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Fast Forward Release" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw17" ShortId="look_up_table_raw_17" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb5" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonVShortRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Skip Backward" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw18" ShortId="look_up_table_raw_18" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb5" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonShortRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Skip Backward" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw19" ShortId="look_up_table_raw_19" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb5" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonLongTimer" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Rewind Press" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw20" ShortId="look_up_table_raw_20" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb5" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonLongRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Rewind Release" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw21" ShortId="look_up_table_raw_21" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb5" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonVLongRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Rewind Release" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw22" ShortId="look_up_table_raw_22" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb5" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonVVLongRelease" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="AVRCP Rewind Release" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw23" ShortId="look_up_table_raw_23" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb6" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonDown" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Select Audio Source Analogue" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw24" ShortId="look_up_table_raw_24" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb7" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonDown" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Select Audio Source A2DP1" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw25" ShortId="look_up_table_raw_25" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb8" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonDown" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Select Audio Source FM" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="LookUpTableRaw26" ShortId="look_up_table_raw_26" Node="Basic">
+                    <PatternArrayConfigItem ShortId="mask" DefaultValue="vb9" />
+                    <PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connectable | Connectable/Discoverable | Connected | Outgoing Call | Incoming Call | Ongoing Call with SCO | Test Mode | TWC Call Waiting | TWC Call On Hold | TWC Multi Party Call | TWC Incoming Call On Hold | Ongoing Call without SCO | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="input_event" DefaultValue="VirtualButtonDown" />
+                    <PatternArrayConfigItem ShortId="user_event" DefaultValue="Select Audio Source USB" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+
+        <ConfigStruct
+            Id="Sink Input Monitor Config"
+            ShortId="input_timers"
+            Desc="Sink Input Monitor Configuration"
+            Type="struct"
+            Struct="timerConfig"
+            ConfigGroupPath="./[@ShortId='remote_control']">
+            <StructElementConfigItem
+                Id="Multiple Detect Timer [ms]"
+                ShortId="multipleDetectTimer"
+                Desc="Timer that is armed immediately  after the first input is pressed, once this timer fires, no further multiple buttons will be included in the pattern [ms]"
+                DefaultValue="30" />
+            <StructElementConfigItem
+                Id="Short Press Timer [ms]"
+                ShortId="shortTimer"
+                Desc="After a short duration, this timer will fire, input manager can assign events when short timer fires [ms]"
+                DefaultValue="300" />
+            <StructElementConfigItem
+                Id="Long Press Timer [ms]"
+                ShortId="longTimer"
+                Desc="After a long duration, this timer will fire, input manager can assign events when the timer fires [ms]"
+                DefaultValue="1000" />
+            <StructElementConfigItem
+                Id="Very Long Press Timer [ms]"
+                ShortId="vLongTimer"
+                Desc="After a very long duration, this timer will fire, input manager can assign events when the timer fires [ms]"
+                DefaultValue="2000" />
+            <StructElementConfigItem
+                Id="Very Very Long Press Timer [ms]"
+                ShortId="vvLongTimer"
+                Desc="After a very very long duration, this timer will fire, input manager can assign events when the timer fires [ms]"
+                DefaultValue="5000" />
+            <StructElementConfigItem
+                Id="Repeat Timer [ms]"
+                ShortId="repeatTimer"
+                Desc="Every repeatTimer duration, this timer will fire, input manager can assign events on short timer firing, such as repeated volume events [ms]"
+                DefaultValue="500" />
+        </ConfigStruct>
+    </ConfigGroup>
+</ModuleData>

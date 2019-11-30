@@ -1,0 +1,20 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# common defintions for hydra subsystems builds running on Kalsim
+
+%include config.MODIFY_HYDRA_KALSIM
+
+%cpp
+FIRMWARE_TALKING_TO_KALCMD
+# Enable profiler at startup
+PROFILE_ENABLED_AT_STARTUP
+METADATA_DEBUG_TRANSPORT=2
+METADATA_DEBUG_TRANSPORT_FAULT
+
+%cpp
+# Enable shallow sleep as it is supported in D01
+-DISABLE_SHALLOW_SLEEP

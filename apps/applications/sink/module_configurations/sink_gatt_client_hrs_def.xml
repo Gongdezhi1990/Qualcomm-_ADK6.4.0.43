@@ -1,0 +1,23 @@
+<ModuleData Name="Sink_gatt_client_hrs">
+    <ConfigGroup
+        ShortId="sink_gatt_client_hrs"
+        Id="Heart Rate_readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="Heart Rate Min Threshold Value"
+            ShortId="HeartRateMinThresholdValue"
+            Desc="The heart rate minimum threshold value below which to alert the user"
+            Type="uint"
+            DefaultValue="60"
+            Size="16" 
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']/[@ShortId='heart_rate']"/>
+        <ConfigItem
+            Id="Heart Rate Max Threshold Value"
+            ShortId="HeartRateMaxThresholdValue"
+            Desc="The heart rate maximum threshold value above which to alert the user"
+            Type="uint"
+            DefaultValue="120"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']/[@ShortId='heart_rate']"/>
+    </ConfigGroup>    
+</ModuleData>

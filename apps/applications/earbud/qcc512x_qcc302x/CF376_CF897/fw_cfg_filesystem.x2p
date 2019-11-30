@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project path="">
+    <file path="../common/subsys1_config1.htf" />
+    <file path="../common/subsys3_config1.htf" />
+    <file path="../common/subsys7_config1.hcf" />
+    <file path="../common/subsys7_config2.htf" />
+    <configurations>
+        <configuration name="filesystem" options="build|deploy">
+            <devkitConfiguration>filesystem</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <deployProject>deploy</deployProject>
+            <property name="FS_ROOT" />
+            <property name="OUTPUT" />
+            <property name="TYPE">firmware_config</property>
+            <property name="system_label">QCC512X_CONFIG</property>
+        </configuration>
+    </configurations>
+</project>

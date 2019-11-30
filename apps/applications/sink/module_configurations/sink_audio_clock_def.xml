@@ -1,0 +1,258 @@
+<ModuleData Name="sink_audio_clock">
+    <DefineGroup>
+        <DefineList Id="Audio Input Use Case" ShortId="audio_input_use_case">
+            <enum key="Input A2DP (Standard Codec)"     value="0"/>             <!--audio_ucid_input_a2dp-->
+            <enum key="Input A2DP (HQ Codec)"           value="1"/>             <!--audio_ucid_input_a2dp_hq_codec-->
+            <enum key="Input Broadcast"                 value="2"/>             <!--audio_ucid_input_broadcast-->
+            <enum key="Input Analogue"                  value="3"/>             <!--audio_ucid_input_analogue-->
+            <enum key="Input Digital"                   value="4"/>             <!--audio_ucid_input_digital-->
+        </DefineList>
+        <DefineList Id="Audio Voice Use Case" ShortId="audio_voice_use_case">
+            <enum key="Voice (cVc Disabled)"            value="0"/>             <!--audio_ucid_hfp-->
+            <enum key="Voice (cVc Headset)"             value="1"/>             <!--audio_ucid_hfp_cvc_headset-->
+            <enum key="Voice (cVc Speaker)"             value="2"/>             <!--audio_ucid_hfp_cvc_speaker-->
+            <enum key="Voice (cVc Handsfree)"           value="3"/>             <!--audio_ucid_hfp_cvc_handsfree-->
+        </DefineList>
+        <DefineList Id="Audio Prompt Use Case" ShortId="audio_prompt_use_case">
+            <enum key="Input Prompt (Tone)"             value="0"/>             <!--audio_ucid_input_tone-->
+            <enum key="Input Prompt (Encoded)"          value="1"/>             <!--audio_ucid_input_voice_prompts_decoder-->
+            <enum key="Input Prompt (PCM)"              value="2"/>             <!--audio_ucid_input_voice_prompts_pcm-->
+        </DefineList>
+        <DefineList Id="Audio Feature Use Case" ShortId="audio_feature_use_case">
+            <enum key="HD Audio"                        value="0"/>             <!--audio_ucid_hd_audio-->
+            <enum key="Always On Voice"                 value="1"/>             <!--audio_ucid_aov-->
+        </DefineList>
+        <DefineList Id="Audio Mixer Use Case" ShortId="audio_mixer_use_case">
+            <enum key="Mixer"                           value="0"/>             <!--audio_ucid_mixer_core-->
+            <enum key="Mixer (Voice Only)"              value="1"/>             <!--audio_ucid_mixer_core_voice-->
+            <enum key="Mixer (Low Power)"               value="2"/>             <!--audio_ucid_mixer_core_low_power-->
+            <enum key="Resampler (Voice)"               value="3"/>             <!--audio_ucid_mixer_voice_resampler-->
+            <enum key="Resampler (Music)"               value="4"/>             <!--audio_ucid_mixer_music_resampler-->
+            <enum key="Resampler (Prompt)"              value="5"/>             <!--audio_ucid_mixer_prompt_resampler-->
+            <enum key="Processing (Voice)"              value="6"/>             <!--audio_ucid_mixer_processing_mono_voice-->
+            <enum key="Processing (Prompt)"             value="7"/>             <!--audio_ucid_mixer_processing_prompt-->
+            <enum key="Processing (Music)"              value="8"/>             <!--audio_ucid_mixer_processing_stereo_music-->
+            <enum key="Speaker (Mono)"                  value="9"/>             <!--audio_ucid_mixer_speaker_mono-->
+            <enum key="Speaker (Stereo)"                value="10"/>            <!--audio_ucid_mixer_speaker_stereo-->
+            <enum key="Speaker (Stereo + Bass)"         value="11"/>            <!--audio_ucid_mixer_speaker_stereo_bass-->
+            <enum key="Speaker (Full Crossover)"        value="12"/>            <!--audio_ucid_mixer_speaker_stereo_xover-->
+            <enum key="Speaker (Voice Only)"            value="13"/>            <!--audio_ucid_mixer_speaker_voice_only-->
+        </DefineList>
+        <DefineList Id="Audio Output Use Case" ShortId="audio_output_use_case">
+            <enum key="Output Forwarding (Broadcast)"   value="0"/>             <!--audio_ucid_output_broadcast-->
+            <enum key="Output Forwarding (TWS)"         value="1"/>             <!--audio_ucid_output_tws-->
+            <enum key="Output Digital"                  value="2"/>             <!--audio_ucid_output_digital-->
+        </DefineList>
+        <DefineList Id="Audio AEC Use Case" ShortId="audio_aec_use_case">
+            <enum key="AEC Reference"                   value="0"/>             <!--audio_ucid_hardware_aec-->
+        </DefineList>
+        <DefineList Id="Audio Clock Rate" ShortId="audio_clock_rate">
+            <enum key="Unset"                           value="0"/>             <!--audio_processor_clock_rate_not_set-->
+            <enum key="Low Rate"                        value="1"/>             <!--audio_processor_clock_rate_slow-->
+            <enum key="Medium Rate"                     value="2"/>             <!--audio_processor_clock_rate_medium-->
+            <enum key="High Rate"                       value="3"/>             <!--audio_processor_clock_rate_high-->
+        </DefineList>
+        
+        <DefinePattern  PatternName="Audio Clock Pattern" ShortId="audio_clock_pattern">
+            <ConfigItem
+                Id="Input Use Case"
+                ShortId="input_use_case"
+                Desc="Input Use Case"
+                Type="bitfield"
+                Size="16"
+                PresentHex="true">
+                <List use="audio_input_use_case"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Voice Use Case"
+                ShortId="voice_use_case"
+                Desc="Voice Use Case"
+                Type="bitfield"
+                Size="16"
+                PresentHex="true">
+                <List use="audio_voice_use_case"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Prompt Use Case"
+                ShortId="prompt_use_case"
+                Desc="Prompt Use Case"
+                Type="bitfield"
+                Size="16"
+                PresentHex="true">
+                <List use="audio_prompt_use_case"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Feature Use Case"
+                ShortId="feature_use_case"
+                Desc="Feature Use Case"
+                Type="bitfield"
+                Size="16"
+                PresentHex="true">
+                <List use="audio_feature_use_case"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Mixer Use Case"
+                ShortId="mixer_use_case"
+                Desc="Mixer Use Case"
+                Type="bitfield"
+                Size="16"
+                PresentHex="true">
+                <List use="audio_mixer_use_case"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Output Use Case"
+                ShortId="output_use_case"
+                Desc="Output Use Case"
+                Type="bitfield"
+                Size="16"
+                PresentHex="true">
+                <List use="audio_output_use_case"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="AEC Use Case"
+                ShortId="aec_use_case"
+                Desc="AEC Use Case"
+                Type="bitfield"
+                Size="16"
+                PresentHex="true">
+                <List use="audio_aec_use_case"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Clock Rate"
+                ShortId="clock_rate"
+                Desc="Clock Rate"
+                Type="enum"
+                Size="16">
+                <List use="audio_clock_rate"/>
+            </ConfigItem>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup 
+        Id="Settings"
+        ShortId="sink_audio_clock"
+        Node="Basic">
+        <ConfigItem
+            Id="Default Rate"
+            ShortId="default_rate"
+            Desc="If the active use case matches exactly with an entry in the Use Case Table then the clock rate from that entry will be used. If the active use case does not match any table entry, the Default Rate will be used."
+            Type="enum"
+            Size="16"
+            DefaultValue="High Rate"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='clock']">
+            <List use="audio_clock_rate"/>
+        </ConfigItem>
+    </ConfigGroup>
+    <ConfigGroup
+        Id="Use Case Table"
+        ShortId="sink_audio_clock_table"
+        Node="Array"
+        ConfigGroupPath="./[@ShortId='audio']/[@ShortId='clock']">
+        <ConfigPatternArray
+                Id="Audio Clock Array"
+                ShortId="audio_clock_array"
+                Pattern="audio_clock_pattern"
+                MaxNumPatterns="10">
+
+            <PatternArrayRow Id="Audio Clock Row Low Power Voice" ShortId="audio_clock_row_low_power_voice" Node="Basic">
+                <PatternArrayConfigItem ShortId="input_use_case"    DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="voice_use_case"    DefaultValue="Voice (cVc Disabled)"/>
+                <PatternArrayConfigItem ShortId="prompt_use_case"   DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="feature_use_case"  DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="mixer_use_case"    DefaultValue="Mixer (Voice Only) | Speaker (Voice Only)"/>
+                <PatternArrayConfigItem ShortId="output_use_case"   DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="aec_use_case"      DefaultValue="AEC Reference"/>
+                <PatternArrayConfigItem ShortId="clock_rate"        DefaultValue="Low Rate" />
+            </PatternArrayRow>
+
+            <PatternArrayRow Id="Audio Clock Row Low Power Analogue" ShortId="audio_clock_row_low_power_analogue" Node="Basic">
+                <PatternArrayConfigItem ShortId="input_use_case"    DefaultValue="Input Analogue"/>
+                <PatternArrayConfigItem ShortId="voice_use_case"    DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="prompt_use_case"   DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="feature_use_case"  DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="mixer_use_case"    DefaultValue="Mixer (Low Power) | Processing (Music) | Speaker (Stereo)"/>
+                <PatternArrayConfigItem ShortId="output_use_case"   DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="aec_use_case"      DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="clock_rate"        DefaultValue="Low Rate" />
+            </PatternArrayRow>
+
+            <PatternArrayRow Id="Audio Clock Row Low Power A2DP" ShortId="audio_clock_row_low_power_a2dp" Node="Basic">
+                <PatternArrayConfigItem ShortId="input_use_case"    DefaultValue="Input A2DP (Standard Codec)"/>
+                <PatternArrayConfigItem ShortId="voice_use_case"    DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="prompt_use_case"   DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="feature_use_case"  DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="mixer_use_case"    DefaultValue="Mixer (Low Power) | Processing (Music) | Speaker (Stereo)"/>
+                <PatternArrayConfigItem ShortId="output_use_case"   DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="aec_use_case"      DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="clock_rate"        DefaultValue="Low Rate" />
+            </PatternArrayRow>
+
+            <PatternArrayRow Id="Audio Clock Row Low Power A2DP HQ Codec" ShortId="audio_clock_row_low_power_a2dp_hq_codec" Node="Basic">
+                <PatternArrayConfigItem ShortId="input_use_case"    DefaultValue="Input A2DP (HQ Codec)"/>
+                <PatternArrayConfigItem ShortId="voice_use_case"    DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="prompt_use_case"   DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="feature_use_case"  DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="mixer_use_case"    DefaultValue="Mixer (Low Power) | Processing (Music) | Speaker (Stereo)"/>
+                <PatternArrayConfigItem ShortId="output_use_case"   DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="aec_use_case"      DefaultValue=""/>
+                <PatternArrayConfigItem ShortId="clock_rate"        DefaultValue="Medium Rate" />
+            </PatternArrayRow>
+
+            <PatternArrayRow Id="Audio Clock Row Low Power Analogue With AoV" ShortId="audio_clock_row_low_power_analogue_with_aov" Node="Basic">
+                <PatternArrayConfigItem ShortId="input_use_case"    DefaultValue="Input Analogue" />
+                <PatternArrayConfigItem ShortId="voice_use_case"    DefaultValue="" />
+                <PatternArrayConfigItem ShortId="prompt_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="feature_use_case"  DefaultValue="Always On Voice" />
+                <PatternArrayConfigItem ShortId="mixer_use_case"    DefaultValue="Mixer (Low Power) | Processing (Music) | Speaker (Stereo)" />
+                <PatternArrayConfigItem ShortId="output_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="aec_use_case"      DefaultValue="" />
+                <PatternArrayConfigItem ShortId="clock_rate"        DefaultValue="Medium Rate" />
+            </PatternArrayRow>
+
+            <PatternArrayRow Id="Audio Clock Row Low Power A2DP With AoV" ShortId="audio_clock_row_low_power_a2dp_with_aov" Node="Basic">
+                <PatternArrayConfigItem ShortId="input_use_case"    DefaultValue="Input A2DP (Standard Codec)" />
+                <PatternArrayConfigItem ShortId="voice_use_case"    DefaultValue="" />
+                <PatternArrayConfigItem ShortId="prompt_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="feature_use_case"  DefaultValue="Always On Voice" />
+                <PatternArrayConfigItem ShortId="mixer_use_case"    DefaultValue="Mixer (Low Power) | Processing (Music) | Speaker (Stereo)" />
+                <PatternArrayConfigItem ShortId="output_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="aec_use_case"      DefaultValue="" />
+                <PatternArrayConfigItem ShortId="clock_rate"        DefaultValue="Medium Rate" />
+            </PatternArrayRow>
+
+            <PatternArrayRow Id="Audio Clock Row Low Power A2DP HQ Codec With AoV" ShortId="audio_clock_row_low_power_a2dp_hq_codec_with_aov" Node="Basic">
+                <PatternArrayConfigItem ShortId="input_use_case"    DefaultValue="Input A2DP (HQ Codec)" />
+                <PatternArrayConfigItem ShortId="voice_use_case"    DefaultValue="" />
+                <PatternArrayConfigItem ShortId="prompt_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="feature_use_case"  DefaultValue="Always On Voice" />
+                <PatternArrayConfigItem ShortId="mixer_use_case"    DefaultValue="Mixer (Low Power) | Processing (Music) | Speaker (Stereo)" />
+                <PatternArrayConfigItem ShortId="output_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="aec_use_case"      DefaultValue="" />
+                <PatternArrayConfigItem ShortId="clock_rate"        DefaultValue="High Rate" />
+            </PatternArrayRow>
+
+            <PatternArrayRow Id="Audio Clock Row AoV" ShortId="audio_clock_row_aov" Node="Basic">
+                <PatternArrayConfigItem ShortId="input_use_case"    DefaultValue="" />
+                <PatternArrayConfigItem ShortId="voice_use_case"    DefaultValue="" />
+                <PatternArrayConfigItem ShortId="prompt_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="feature_use_case"  DefaultValue="Always On Voice" />
+                <PatternArrayConfigItem ShortId="mixer_use_case"    DefaultValue="" />
+                <PatternArrayConfigItem ShortId="output_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="aec_use_case"      DefaultValue="" />
+                <PatternArrayConfigItem ShortId="clock_rate"        DefaultValue="Low Rate" />
+            </PatternArrayRow>
+
+            <PatternArrayRow Id="Audio Clock Row Undefined Use Case" ShortId="audio_clock_row_undefined" Node="Basic">
+                <PatternArrayConfigItem ShortId="input_use_case"    DefaultValue="" />
+                <PatternArrayConfigItem ShortId="voice_use_case"    DefaultValue="" />
+                <PatternArrayConfigItem ShortId="prompt_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="feature_use_case"  DefaultValue="" />
+                <PatternArrayConfigItem ShortId="mixer_use_case"    DefaultValue="" />
+                <PatternArrayConfigItem ShortId="output_use_case"   DefaultValue="" />
+                <PatternArrayConfigItem ShortId="aec_use_case"      DefaultValue="" />
+                <PatternArrayConfigItem ShortId="clock_rate"        DefaultValue="Low Rate" />
+            </PatternArrayRow>
+
+        </ConfigPatternArray>
+    </ConfigGroup>
+</ModuleData>

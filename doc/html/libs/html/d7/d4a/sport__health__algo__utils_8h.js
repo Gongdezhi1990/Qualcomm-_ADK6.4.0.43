@@ -1,0 +1,25 @@
+var sport__health__algo__utils_8h =
+[
+    [ "imu_rate_decision_info_t", "d6/d85/structimu__rate__decision__info__t.html", "d6/d85/structimu__rate__decision__info__t" ],
+    [ "imu_rate_change_info_t", "d7/dbb/structimu__rate__change__info__t.html", "d7/dbb/structimu__rate__change__info__t" ],
+    [ "imu_rate_change_status_t", "d9/de5/structimu__rate__change__status__t.html", "d9/de5/structimu__rate__change__status__t" ],
+    [ "BPM_VARIATION_FOR_POWER_SAVE", "d7/d4a/sport__health__algo__utils_8h.html#a788be8fdce456e3ad7592f54978fefaa", null ],
+    [ "HR_POWER_SAVE_ACTIVE_PERIOD", "d7/d4a/sport__health__algo__utils_8h.html#ab31d3264d5a999021f4570f47dd68651", null ],
+    [ "HR_POWER_SAVE_DUTY_PERIOD", "d7/d4a/sport__health__algo__utils_8h.html#abc07520e0c1b1bffcc162721c900fe0a", null ],
+    [ "MIN_HR_HISTORY", "d7/d4a/sport__health__algo__utils_8h.html#a06bc284d342f7a003e3a25ea78e0bdf7", null ],
+    [ "MIN_NUM_DATA_INTERVALS", "d7/d4a/sport__health__algo__utils_8h.html#a9fb933ad0b66410a4cf2600d7d7e8ab6", null ],
+    [ "NEW_STEP_STATUS_DWELL_TIME_MS", "d7/d4a/sport__health__algo__utils_8h.html#aff95ee0423f27612b1ef7a567405b74d", null ],
+    [ "sh_deal_with_potential_data_rate_changes", "d7/d4a/sport__health__algo__utils_8h.html#a1575510e82ce49ec9b9f5b806de3cf40", null ],
+    [ "sh_fill_data_gap", "d7/d4a/sport__health__algo__utils_8h.html#ac673d7b0c6643af5687eb83b14069d7f", null ],
+    [ "sh_get_desired_data_rate_has_changed", "d7/d4a/sport__health__algo__utils_8h.html#ae8f5b5b894129983293c9140634c7169", null ],
+    [ "sh_get_imu_rate", "d7/d4a/sport__health__algo__utils_8h.html#ae24936b63a2fb1a83b19013cd5166db0", null ],
+    [ "sh_get_imu_rate_change_status", "d7/d4a/sport__health__algo__utils_8h.html#a3f6a294271524eff78f9cb2ce0a46d2c", null ],
+    [ "sh_get_updated_sensor_config", "d7/d4a/sport__health__algo__utils_8h.html#a58208df0b0eeacfcdbbe5077ab7e04aa", null ],
+    [ "sh_initialise_rate_change_data", "d7/d4a/sport__health__algo__utils_8h.html#ac1e75004de3ae157a858e1af97523ec7", null ],
+    [ "sh_set_check_data_gap", "d7/d4a/sport__health__algo__utils_8h.html#a962c02476c96dd81d6f9c25e2bce89f2", null ],
+    [ "sh_set_data_rate", "d7/d4a/sport__health__algo__utils_8h.html#a458e9bf0e33ec9ba1d475d7893ee18b3", null ],
+    [ "sh_set_imu_data_buff_length", "d7/d4a/sport__health__algo__utils_8h.html#ad627b133f7e489ea81ee35ec0180b063", null ],
+    [ "sh_set_imu_rate_has_changed", "d7/d4a/sport__health__algo__utils_8h.html#a9a25737bc5935556017cc9db217f985e", null ],
+    [ "sh_update_imu_rate_change_decision_info", "d7/d4a/sport__health__algo__utils_8h.html#a1e61d6223ad9fa4139604c98017585f3", null ],
+    [ "update_ppg_duty_cycle", "d7/d4a/sport__health__algo__utils_8h.html#abc7d053ec99a725fd1608afd66793327", null ]
+];

@@ -1,0 +1,32 @@
+chip QCC302x_audio;
+
+start $reset;
+
+region DM1     0x00000000   0x00037FFF DATA;
+region DM2     0xFFF38000   0xFFF3FFFF DATA;
+region PM      0x04000000   0x04013FFF CODE;
+
+/* Generate a checksum of code and data and put it in this region */
+CHECKSUM_REGION DM1;
+
+
+/*
+ *      Section spec    Options             Priority    Regions
+ */
+segment dm1circ         circular            20          DM1;
+segment dm1                                 20          DM1;
+segment dm2                                 20          DM2;
+
+segment dmconst                             20          DM1;
+
+segment dmzi                                20          DM1;
+
+segment dm              balanced            30          DM1;
+segment dmcirc          balanced,circular   30          DM1;
+
+segment crt0data                            1           DM1;
+segment crt0stack                           40          DM1;
+segment PM_RST                              10          PM;
+segment pm                                  20          PM;
+segment pm1                                 30          PM;
+

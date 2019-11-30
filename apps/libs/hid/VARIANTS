@@ -1,0 +1,6 @@
+
+VARIANTS := device device_debug
+
+CFLAGS_device := -DHID_DEVICE							# flags for device build of HID lib
+CFLAGS_device_debug := -DHID_DEBUG_LIB -DHID_DEVICE		# flags for debug version of HID lib
+

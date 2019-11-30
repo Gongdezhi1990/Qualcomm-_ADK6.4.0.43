@@ -1,0 +1,50 @@
+
+/******************************************************************************
+ *  Copyright (c) 2017 Qualcomm Technologies International, Ltd.
+ *  %%version
+ *  %%appversion
+ *
+ *  FILE
+ *      gatt_transport_discovery_server_db.dbi
+ *
+ *  DESCRIPTION
+ *      This file defines the Transport Discovery Service in JSON format,  
+ *      which is fairly human readable.  This file is included in the main 
+ *      application data base file which is used to produce ATT flat data 
+ *      base. 
+ *
+ *****************************************************************************/
+#ifndef __GATT_TRANSPORT_DISCOVERY_SERVER_DB_DBI__
+#define __GATT_TRANSPORT_DISCOVERY_SERVER_DB_DBI__
+
+/* For service details, refer https://www.bluetooth.com/specifications/gatt/
+ * viewer?attributeXmlFile=org.bluetooth.service.transport_discovery.xml
+ */
+
+ #include "gatt_transport_discovery_server_uuids.h"
+ 
+/* Primary service declaration of TDS service */
+primary_service {
+    uuid : UUID_TRANSPORT_DISCOVERY_SERVICE,
+    name : "TRANSPORT_DISCOVERY_SERVICE",
+
+        /* TDS characteristic */
+
+        characteristic {
+            uuid        : UUID_TRANSPORT_DISCOVERY_CONTROL_POINT,
+            name        : "TRANSPORT_DISCOVERY_CONTROL_POINT",
+            flags       : [ FLAG_IRQ, FLAG_DYNLEN ],
+            properties  : [ write, indicate ],
+            
+            value       : [0x01, 0x01, 0x110A],
+            
+            client_config {
+                name : "TRANSPORT_DISCOVERY_SERVICE_CLIENT_CONFIG",
+                flags : [ FLAG_IRQ ]
+                }
+            
+        }
+
+    }
+
+#endif /* __GATT_TRANSPORT_DISCOVERY_SERVER_DB_DBI__ */

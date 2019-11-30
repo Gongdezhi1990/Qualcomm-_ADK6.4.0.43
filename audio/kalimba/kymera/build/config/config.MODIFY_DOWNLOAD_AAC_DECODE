@@ -1,0 +1,17 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+%list CFG_CAPABILITIES
+AAC_DECODE
+
+# List of global include paths
+%list ALL_INCDIRS
+capabilities/a2dp_decode
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/aac_decode/aac_decode
+capabilities/a2dp_decode/a2dp_decode

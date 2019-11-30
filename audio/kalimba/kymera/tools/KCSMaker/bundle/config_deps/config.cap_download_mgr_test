@@ -1,0 +1,4 @@
+# This file contains missing bits from libraries used in the capability download manager test harness
+# DO NOT ADD CFG_LIBS here. Only new capability code is supported, if the download capabilities require
+# a function or variable from a library that already exists in the ELF a new library has to be written, 
+# compiled and linked from scratch for the download capability.   

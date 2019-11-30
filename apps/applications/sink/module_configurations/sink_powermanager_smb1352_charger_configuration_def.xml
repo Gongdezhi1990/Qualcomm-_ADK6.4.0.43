@@ -1,0 +1,238 @@
+<ModuleData Name="sink_powermanager_smb1352_charger_configuration_v1" HeaderName="sink_power_manager_charger_configuration">
+
+    <DefineGroup>
+
+        <DefineList Id="Standby-Fast Hysteresis" ShortId="standby_fast_hysteresis">
+            <enum key="100mV" value="0" />
+            <enum key="150mV" value="1" />
+            <enum key="200mV" value="2" />
+            <enum key="250mV" value="3" />
+        </DefineList>
+
+        <DefineList Id="Pre-Fast Threshold" ShortId="pre_fast_threshold">
+            <enum key="2.9V" value="0" />
+            <enum key="3.0V" value="1" />
+            <enum key="3.1V" value="2" />
+            <enum key="2.5V" value="3" />
+        </DefineList>
+
+        <DefineList Id="Iterm Control Percentage" ShortId="iterm_ctrl_percentage">
+            <enum key="10%" value="0" />
+            <enum key="20%" value="1" />
+            <enum key="30%" value="2" />
+            <enum key="40%" value="3" />
+        </DefineList>
+
+        <DefineList Id="State Change Debounce" ShortId="state_change_debounce">
+            <enum key="Off" value="0" />
+            <enum key="4ms" value="1" />
+            <enum key="32ms" value="2" />
+            <enum key="128ms" value="3" />
+        </DefineList>
+
+        <DefineStruct Id="Charger Currents Configuration Structure" ShortId="charger_mode_currents_structure">
+            <ConfigItem Id="Trickle Charge Current [mA]" ShortId="trickle_charge_current"
+                Desc="The trickle charge current."
+                Type="uint" Size="16" Range="Min=0,Max=50" />
+            <ConfigItem Id="Pre-charge Current [mA]" ShortId="precharge_current"
+                Desc="The pre-charge current."
+                Type="uint" Size="16" Range="Min=0,Max=200" />
+        </DefineStruct>
+
+        <DefineStruct Id="Charger Safety Configuration Structure" ShortId="charger_safety_structure">
+            <ConfigItem Id="Trickle Charge Timeout [m]" ShortId="trickle_charge_timeout"
+                Desc="The trickle charge timeout in minutes. 0 minutes to disable this timeout."
+                Type="uint" Size="16" Range="Min=0,Max=720" />
+            <ConfigItem Id="Pre-charge Timeout [m]" ShortId="precharge_timeout"
+                Desc="The pre-charge timeout in minutes. 0 minutes to disable this timeout."
+                Type="uint" Size="16" Range="Min=0,Max=720" />
+            <ConfigItem Id="Fast charge Timeout [m]" ShortId="fast_charge_timeout"
+                Desc="The fast charge timeout in minutes. 0 minutes to disable this timeout."
+                Type="uint" Size="16" Range="Min=0,Max=720" />
+        </DefineStruct>
+
+        <DefineStruct Id="External Charger Structure" ShortId="external_charger_structure">
+            <ConfigItem Id="External Charger Fitted"
+                ShortId="ext_fast"
+                Desc="If external charger hardware is fitted then currents higher than 200mA can be used for fast charging the battery."
+                Size="1" Type="bool" />
+            <ConfigItem Id="External Resistor Value [mOhm]"
+                ShortId="ext_resistor_value"
+                Desc="The value of the series resistor used for the external charger."
+                Size="10" Type="uint" />
+        </DefineStruct>
+
+        <DefineStruct Id="Charger Progress Structure" ShortId="charger_progress_structure">
+            <ConfigItem Id="Vfloat" ShortId="default_vfloat"
+                Desc="This is the default charger termination voltage (Vfloat)."
+                Type="enum" Size="4" ShowOrdered="true">
+                <List use="vfloat" />
+            </ConfigItem>
+            <ConfigItem Id="Current taken by external devices directly from charger [mA]"
+                ShortId="current_external_devices"
+                Desc="The current taken directly from the charger for external devices such as the backlight, when supplied by the charger. If external devices are supplied from the battery this setting should be 0mA. This value will be subtracted from the requested charger current before it is applied. This is done to ensure that the current drawn does not exceed the requested charge current. This is primarily used to ensure USB current limitations are met."
+                Type="uint" Size="8" />
+            <ConfigItem Id="Standby-Fast Charge Voltage Hysteresis"
+                ShortId="standby_fast_hysteresis"
+                Desc="The charger switches from standby to fast charge when Vbat drops below (Vfloat - Vhyst)."
+                Size="2" Type="enum" ShowOrdered="true">
+                <List use="standby_fast_hysteresis" />
+            </ConfigItem>
+            <ConfigItem Id="Pre-Fast Voltage Threshold"
+                ShortId="pre_fast_threshold"
+                Desc="The charger switches from pre-charge to fast charge when Vbat rises above this threshold."
+                Size="2" Type="enum" ShowOrdered="true">
+                <List use="pre_fast_threshold" />
+            </ConfigItem>
+            <ConfigItem Id="Termination Current Control"
+                ShortId="iterm_ctrl"
+                Desc="The customer termination current as a percentage of fast charge current"
+                Size="2" Type="enum" ShowOrdered="true">
+                <List use="iterm_ctrl_percentage" />
+            </ConfigItem>
+            <ConfigItem Id="State Change Debounce Timer"
+                ShortId="debounce_time"
+                Desc="The charger state change (pre/fast/standby) debounce timer"
+                Size="2" Type="enum" ShowOrdered="true">
+                <List use="state_change_debounce" />
+            </ConfigItem>
+            <ConfigItem Id="Charger Progress Monitor Period" ShortId="period_charger_progress"
+                Desc="This configures the time interval between charger progress monitor updates in seconds while charging, 0 to disable."
+                Type="uint" Size="8" />
+        </DefineStruct>
+
+        <DefineStruct Id="Voltage Selectors Structure" ShortId="voltage_selectors_structure">
+            <ConfigItem Id="Vsel Fast Charge" ShortId="vsel_fast_charge"
+                Desc="Set this to BAT to force the device to run from battery. If this is set to CHG then the device will run from charger unless overridden by the USB Power or Temperature Regions voltage source selectors."
+                Size="1" Type="enum">
+                <enum key="CHG" value="0" />
+                <enum key="BAT" value="1" />
+            </ConfigItem>
+        </DefineStruct>
+
+    </DefineGroup>
+
+    <ConfigGroup ShortId="external_charger" Id="External Charger"
+        ConfigGroupPath="./[@ShortId='advanced_settings']"
+        Node="Basic">
+        <ConfigStruct Id="Instance of a external_charger_structure"
+            ShortId="ext_charger_struct" Desc="." Type="struct" Struct="external_charger_structure">
+            <StructElementConfigItem Id="External Charger Fitted"
+                ShortId="ext_fast"
+                Desc="If external charger hardware is fitted then currents higher than 200mA can be used for fast charging the battery."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="false">
+            </StructElementConfigItem>
+            <StructElementConfigItem Id="External Mode Sense-Resistor Value [mOhm]"
+                ShortId="ext_resistor_value"
+                Desc="The value of the sense-resistor used for external charge mode."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="0">
+            </StructElementConfigItem>
+        </ConfigStruct>
+    </ConfigGroup>
+
+    <ConfigGroup ShortId="charger_progress" Id="Charger Progress"
+        ConfigGroupPath="./[@ShortId='advanced_settings']"
+        Node="Basic">
+        <ConfigStruct Id="Instance of a charger_progress_structure"
+            ShortId="chg_progress_struct" Desc="." Type="struct" Struct="charger_progress_structure">
+            <StructElementConfigItem Id="Vchg Termination Voltage (Vfloat) [V]"
+                ShortId="default_vfloat"
+                Desc="Sets the default charger termination voltage threshold (USB VBUS). This is the charger termination voltage except when overridden by the battery temperature regions table. The charge current can be limited if Vchg voltages drops below this level."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="4.20V" />
+            <StructElementConfigItem
+                Id="Current taken by external devices directly from charger [mA]" ShortId="current_external_devices"
+                Desc="The current taken directly from the charger for external devices such as the backlight, when supplied by the charger. If external devices are supplied from the battery this setting should be 0mA. This value will be subtracted from the requested charger current before it is applied. This is done to ensure that the current drawn does not exceed the requested charge current. This is primarily used to ensure USB current limitations are met."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="0" />
+            <StructElementConfigItem
+                Id="Standby-Fast Charge Voltage Hysteresis (Vhyst)" ShortId="standby_fast_hysteresis"
+                Desc="The charger switches from standby to fast charge when Vbat drops below Vfloat - Vhyst."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="250mV" />
+            <StructElementConfigItem Id="Pre-Fast Voltage Threshold"
+                ShortId="pre_fast_threshold"
+                Desc="The charger switches from pre-charge to fast charge when Vbat rises above this threshold."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="2.9V" />
+            <StructElementConfigItem Id="Termination Current Control"
+                ShortId="iterm_ctrl"
+                Desc="The termination current as a percentage of fast charge current. The charger goes into standby when the charge current reaches this level."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="10%">
+            </StructElementConfigItem>
+            <StructElementConfigItem Id="State Change Debounce Timer"
+                ShortId="debounce_time"
+                Desc="The charger state change (pre/fast/standby) debounce timer"
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="128ms" />
+            <StructElementConfigItem
+                Id="Charger Progress Monitor Read Period When Charging [s]"
+                ShortId="Charger_Progress_Monitor_Read_Period_Charging"
+                Desc="The time interval between charger progress updates in seconds while charging, 0 to disable."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="0x00"/>
+        </ConfigStruct>
+    </ConfigGroup>
+
+    <ConfigGroup ShortId="charger_currents" Id="Charger Currents"
+        ConfigGroupPath="./[@ShortId='advanced_settings']"
+        Node="Basic">
+        <ConfigGroup ShortId="charger_mode_currents" Id="Mode Currents"
+            ConfigGroupPath="./[@ShortId='advanced_settings']"
+            Node="Basic">
+            <ConfigStruct Id="Instance of a charger_mode_currents_structure"
+                ShortId="mode_currents" Desc="." Type="struct" Struct="charger_mode_currents_structure">
+                <StructElementConfigItem Id="Trickle Charge Current [mA]"
+                    ShortId="trickle_charge_current"
+                    Desc="The trickle charge current."
+                    ConfigGroupPath="./[@ShortId='advanced_settings']"
+                    DefaultValue="0" />
+                <StructElementConfigItem Id="Pre-charge Current [mA]"
+                    ShortId="precharge_current"
+                    Desc="The pre-charge current."
+                    ConfigGroupPath="./[@ShortId='advanced_settings']"
+                    DefaultValue="0" />
+            </ConfigStruct>
+        </ConfigGroup>
+    </ConfigGroup>
+    
+    <ConfigGroup ShortId="charger_safety" Id="Charger Safety"
+        ConfigGroupPath="./[@ShortId='advanced_settings']"
+        Node="Basic">
+        <ConfigStruct Id="Instance of a charger_safety_configuration_structure"
+            ShortId="chg_safety" Desc="." Type="struct" Struct="charger_safety_structure">
+            <StructElementConfigItem Id="Trickle Charge Timeout [m]"
+                ShortId="trickle_charge_timeout"
+                Desc="The charger shall be disabled if trickle charging for longer than this timeout. Use 0 minutes to disable this timeout."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="0" />
+            <StructElementConfigItem Id="Pre-charge Timeout [m]"
+                ShortId="precharge_timeout"
+                Desc="The charger shall be disabled if pre-charging for longer than this timeout. Use 0 minutes to disable this timeout. This value should be derived from the battery capacity, pre-fast voltage threshold, pre-charge ratio and lowest fast charge current."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="0" />
+            <StructElementConfigItem Id="Fast Charge Timeout [m]"
+                ShortId="fast_charge_timeout"
+                Desc="The charger shall be disabled if fast charging for longer than this timeout. Use 0 minutes to disable this timeout. This value should be derived from the battery capacity, pre-fast voltage threshold, termination current control and lowest fast charge current."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="0" >
+            </StructElementConfigItem>    
+        </ConfigStruct>
+    </ConfigGroup>
+
+    <ConfigGroup ShortId="voltage_select" Id="Voltage Selector"
+        ConfigGroupPath="./[@ShortId='advanced_settings']"
+        Node="Basic">
+        <ConfigStruct Id="Instance of a voltage_selectors_structure"
+            ShortId="voltage_selectors" Desc="." Type="struct" Struct="voltage_selectors_structure">
+            <StructElementConfigItem Id="Fast Charge Voltage Select" ShortId="vsel_fast_charge"
+                Desc="Set this to BAT to force the device to run from battery in fast charge mode. If this is set to CHG then the device will run from charger unless overridden by the USB Power or Temperature Regions voltage source selectors."
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                DefaultValue="CHG"/>
+        </ConfigStruct>
+    </ConfigGroup>
+
+</ModuleData>

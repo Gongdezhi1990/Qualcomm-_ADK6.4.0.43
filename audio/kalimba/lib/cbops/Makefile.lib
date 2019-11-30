@@ -1,0 +1,90 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2010 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+asm_files = cbops.asm \
+av_copy.asm \
+operators/cbops_compress_copy_op.asm \
+operators/cbops_copy_op.asm \
+operators/cbops_cross_mix.asm \
+operators/cbops_dc_remove.asm \
+operators/cbops_dither_and_shift.asm \
+operators/cbops_eq.asm \
+operators/cbops_fixed_amount.asm \
+operators/cbops_limited_copy.asm \
+operators/cbops_mix.asm \
+operators/cbops_mono_to_stereo.asm \
+operators/cbops_noise_gate.asm \
+operators/cbops_one_to_two_chan_copy.asm \
+operators/cbops_rate_adjustment_and_shift.asm \
+operators/cbops_scale.asm \
+operators/cbops_shift.asm \
+operators/cbops_sidetone_mix.asm \
+operators/cbops_silence_clip_detect.asm \
+operators/cbops_status_check_gain.asm \
+operators/cbops_stereo_3d_enhance_op.asm \
+operators/cbops_s_to_m_op.asm \
+operators/cbops_two_to_one_chan_copy.asm \
+operators/cbops_univ_mix_op.asm \
+operators/cbops_upsample_mix.asm \
+operators/cbops_user_filter.asm \
+operators/cbops_volume.asm \
+operators/cbops_volume_basic.asm \
+operators/cbops_warp_and_shift.asm \
+operators/cbops_interleave.asm \
+operators/cbops_deinterleave.asm \
+operators/cbops_iir_resamplev2_operator.asm
+
+
+header_files = cbops.h \
+cbops_library.h \
+cbops_vector_table.h \
+operators/cbops_compress_copy_op.h \
+operators/cbops_copy_op.h \
+operators/cbops_cross_mix.h \
+operators/cbops_dc_remove.h \
+operators/cbops_dither_and_shift.h \
+operators/cbops_eq.h \
+operators/cbops_fixed_amount.h \
+operators/cbops_limited_copy.h \
+operators/cbops_mix.h \
+operators/cbops_mono_to_stereo.h \
+operators/cbops_noise_gate.h \
+operators/cbops_one_to_two_chan_copy.h \
+operators/cbops_rate_adjustment_and_shift.h \
+operators/cbops_scale.h \
+operators/cbops_shift.h \
+operators/cbops_sidetone_mix.h \
+operators/cbops_silence_clip_detect.h \
+operators/cbops_status_check_gain.h \
+operators/cbops_stereo_3d_enhance_op.h \
+operators/cbops_s_to_m_op.h \
+operators/cbops_two_to_one_chan_copy.h \
+operators/cbops_univ_mix_op.h \
+operators/cbops_upsample_mix.h \
+operators/cbops_user_filter.h \
+operators/cbops_volume.h \
+operators/cbops_volume_basic.h \
+operators/cbops_warp_and_shift.h \
+operators/cbops_interleave.h \
+operators/cbops_iir_resamplerv2_op_asm_defs.h
+
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# simple debug variant
+$(eval $(call rules_variant,debug,$(FL_DEBUG),$(asm_files)))
+
+# base register variants
+$(foreach hw,$(KAL_BASE_REG_CORES), \
+  $(eval $(call rules_variant_core,base_regs,                  $(FL_BASE_REG),$(asm_files),$(hw))) \
+  $(eval $(call rules_variant_core,base_regs_debug,$(FL_DEBUG) $(FL_BASE_REG),$(asm_files),$(hw))) \
+)
+
+#ifdef DALE_ON_GORDON
+$(eval $(call rules_variant_core,base_regs_dale_on_gordon, -DDALE_ON_GORDON $(FL_BASE_REG),$(asm_files),gordon))
+#endif

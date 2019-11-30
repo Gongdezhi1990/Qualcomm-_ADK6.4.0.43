@@ -1,0 +1,5 @@
+file=curator2
+# Take UART off the PIOs we need for the LCD display
+UartPinsConfig = [ 80 80 80 80 ]
+
+PioSubsystemAllocationElements = [04 01 05 01 06 01 07 01 08 01 09 01 0a 01 0b 01 0c 01 0d 01]

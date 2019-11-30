@@ -1,0 +1,41 @@
+<ModuleData Name="sink_gatt_client_ancs">
+    <ConfigGroup
+        ShortId="sink_gatt_ancs_readonly"
+        Id="ANCS_readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="ANCS Notification Enable Mask"
+            ShortId="ANCSNotificationEnableMask"
+            Desc="This bitmask specifies the notification categories to be enabled on the ANCS Server (Apple Device)"
+            Type="bitfield"
+            DefaultValue="Email"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']/[@ShortId='ancs']">
+
+            <bitfield key="Other"
+                      value="0"/>
+            <bitfield key="Incoming Call"
+                      value="1"/>
+            <bitfield key="Missed Call"
+                      value="2"/>
+            <bitfield key="Voice Mail"
+                      value="3"/>
+            <bitfield key="Social"
+                      value="4"/>
+            <bitfield key="Schedule"
+                      value="5"/>
+            <bitfield key="Email"
+                      value="6"/>
+            <bitfield key="News"
+                      value="7"/>
+            <bitfield key="Health And Fitness"
+                      value="8"/>
+            <bitfield key="Business And Finance"
+                      value="9"/>
+            <bitfield key="Location"
+                      value="10"/>
+            <bitfield key="Entertainment"
+                      value="11"/>
+        </ConfigItem>
+    </ConfigGroup>    
+</ModuleData>

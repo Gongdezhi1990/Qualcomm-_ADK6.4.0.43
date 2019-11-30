@@ -1,0 +1,8 @@
+// *****************************************************************************
+// Copyright (c) 2014 - 2017 Qualcomm Technologies International, Ltd.
+// %%version
+// *****************************************************************************
+
+#define CVC_SEND_MAJOR_CONFIG    1          // Speaker configuration of cvc send
+#define CVC_DYN_NUM_MICS         4
+#include "cvc_send_data.dyn"

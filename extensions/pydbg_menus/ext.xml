@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <ext_id>
+        <uuid>{736764b1-d6b8-4500-bd6b-fb6347ab6e64}</uuid>
+        <devkit>{3d5da188-f161-441c-a5e5-cda018a35030}</devkit>
+        <checksum>1de8154ec1a4288a311c1a3ed3597ac2</checksum>
+        <version>6.4.0</version>
+        <build>43</build>
+        <target>x86</target>
+    </ext_id>
+    <ext_info>
+        <name>Extensions to menus</name>
+        <description>Adds menu options</description>
+        <build>43</build>
+    </ext_info>
+    <plugins type="move">
+       <project type="move">
+            <menu type="move">
+                <!-- Name should be unique for each menu item so a different prefix is recommended in different .xml files -->
+                <item name="menu_ext#0">
+                    <name>Tools/Config tool</name>
+                    <command>config_tool</command>
+                    <description>Run the config tool</description>
+                </item>
+                <item name="menu_ext#1">
+                    <name>Tools/Obtain coredump</name>
+                    <command>coredump</command>
+                    <description>Coredump all sub-systems</description>
+                </item>
+                <item name="menu_ext#2">
+                    <name>Tools/Obtain coredump with apps SQIF included</name>
+                    <command>coredumpWithAppsSqif</command>
+                    <description>Coredump all sub-systems including apps sqif</description>
+                </item>
+                <item name="menu_ext#3">
+                    <name>Tools/Load coredump into pydbg</name>
+                    <command>pydbgCoredump</command>
+                    <description>Run pydbg on a coredump</description>
+                </item>
+                <item name="menu_ext#4">
+                    <name>Tools/Erase the QSPI device</name>
+                    <command>eraseApps</command>
+                    <description>Run pydbg to erase the apps area</description>
+                    <prompt>
+                        <icon>question</icon>
+                        <title>QSPI Device Erase</title>
+                        <text>About to &lt;b&gt;erase&lt;/b&gt; QSPI device.&lt;br/&gt;Do you want to proceed?</text>
+                    </prompt>
+                </item>
+                <item name="menu_ext#5">
+                    <name>Tools/Setup DFU security</name>
+                    <command>dfu_setup</command>
+                    <description>Generate and/or use DFU security files</description>
+                </item>
+                <item name="menu_ext#6">
+                    <name>Tools/Scramble ASPK</name>
+                    <command>scramble_aspk</command>
+                    <description>Scramble plain text ASPK</description>
+                </item>
+                <item name="menu_ext#7">
+                    <name>Tools/Build DFU file</name>
+                    <command>buildDFU</command>
+                    <description>Collect or build input files and create DFU file</description>
+                </item>	
+                <item name="menu_ext#8">
+                    <name>Tools/Build single flash image file</name>
+                    <command>buildFlashImage</command>
+                    <description>Generate a single flash image file</description>
+                </item>
+                <item name="menu_ext#11">
+                    <name>Tools/Set Memory Type to Support</name>
+                    <description>Set what Memory Option you wish to Support</description>
+                    <command>setMemoryOption</command>
+                </item>
+                <item name="menu_ext#9">
+                    <name>Tools/Private libraries/Import</name>
+                    <command>privateLibImport</command>
+                    <option>--import</option>
+                </item>
+                <item name="menu_ext#10">
+                    <name>Tools/Private libraries/Export</name>
+                    <command>privateLibExport</command>
+                    <option>--export</option>
+                </item>
+            </menu>
+        </project>
+    </plugins>
+
+    <commands type="move">
+        <command name="config_tool">
+            <run>./tools/bin/ADKConfigTool.exe</run>
+            <description>Run the config tool</description>
+        </command>
+
+        <command name="scramble_aspk">
+            <run>./tools/python27/python.exe</run>
+            <description>Scramble ASPK</description>
+            <options>
+                <option name="scramble_aspk">-u</option>
+                <option name="scramble_aspk">./extensions/pydbg_menus/py/scramble_aspk.py</option>
+            </options>
+        </command>
+
+        <command name="dfu_setup">
+            <run>./tools/python27/python.exe</run>
+            <description>Setup DFU security</description>
+            <options>
+                <option name="dfu_setup">./extensions/pydbg_menus/py/dfu_setup.py</option>
+                <option name="kit">-k %1</option>
+                <option name="workspace">-w %1</option>
+            </options>
+        </command>
+
+        <command name="buildFlashImage">
+            <run>./tools/python27/python.exe</run>
+            <description>Generate a single flash image file</description>
+            <options>
+                <option name="buildFlashImage">./extensions/pydbg_menus/py/buildFlashImage.py</option>
+                <option name="kit">-k %1</option>
+                <option name="workspace">-w %1</option>
+                <option name="device">-d %1</option>
+            </options>
+        </command>
+
+        <command name="coredumpWithAppsSqif">
+            <run>./tools/python27/python.exe</run>
+            <description>Coredump all sub-systems including apps sqif</description>
+            <options>
+              <option name="coredump">./tools/coredump.py</option>
+              <option name="kit">-k %1</option>
+              <option name="workspace">-w %1</option>
+              <option name="extra">-e dump_sqif</option>
+              <option name="device">-d %1</option>
+            </options>
+        </command>
+
+        <command name="coredump">
+            <run>./tools/python27/python.exe</run>
+            <description>Coredump all sub-systems</description>
+            <options>
+              <option name="coredump">./tools/coredump.py</option>
+              <option name="kit">-k %1</option>
+              <option name="workspace">-w %1</option>
+              <option name="device">-d %1</option>
+            </options>
+        </command>
+
+        <command name="pydbgCoredump">
+            <run>./tools/python27/python.exe</run>
+            <description>Run pydbg on a coredump</description>
+            <options>
+                <option name="pydbgCoredump">./tools/pydbgCoredump.py</option>
+                <option name="kit">-k %1</option>
+                <option name="workspace">-w %1</option>
+            </options>
+        </command>
+
+        <command name="eraseApps">
+            <run>./tools/python27/python.exe</run>
+            <description>Run pydbg to erase the apps area</description>
+            <options>
+                <option name="eraseApps">./extensions/pydbg_menus/py/eraseApps.py</option>
+                <option name="kit">-t %1/tools/bin</option>
+                <option name="device">-d %1</option>
+            </options>
+        </command>
+
+        <command name="buildDFU">
+          <run>./tools/python27/python.exe</run>
+          <description>Collect or build input files and create DFU file</description>
+          <options>
+            <option name="buildDFU">./tools/buildDFU.py</option>
+            <option name="kit">-k %1</option>
+            <option name="workspace">-w %1</option>
+            </options>
+        </command>
+
+        <command name="privateLibImport">
+            <run>./tools/python27/python.exe</run>
+            <description>Import a private private library into a project</description>
+            <options>
+                <option name="privateLibImportExport">./extensions/pydbg_menus/py/private_lib_import_export.py</option>
+                <option name="kit">-k %1</option>
+                <option name="project">-p %1</option>
+                <option name="project">--action=import</option>
+            </options>
+        </command>
+
+        <command name="privateLibExport">
+            <run>./tools/python27/python.exe</run>
+            <description>Import a private private library into a project</description>
+            <options>
+                <option name="privateLibImportExport">./extensions/pydbg_menus/py/private_lib_import_export.py</option>
+                <option name="kit">-k %1</option>
+                <option name="project">-p %1</option>
+                <option name="project">--action=export</option>
+            </options>
+        </command>
+
+        <command name="setMemoryOption">
+            <run>./tools/python27/python.exe</run>
+            <description>Setup Memory Module Type to support</description>
+            <options>
+                <option name="memorytype_setup">./extensions/pydbg_menus/py/memorytype_setup.py</option>
+                <option name="kit">-k %1</option>
+                <option name="workspace">-w %1</option>
+            </options>
+        </command>
+    </commands>
+
+</root>

@@ -1,0 +1,390 @@
+<ModuleData Name="sink_powermanager_onchip_vthm_v1" HeaderName="sink_power_manager_vthm">
+
+    <DefineGroup>
+        <DefinePattern PatternName="Charger Configuration Settings"
+            ShortId="charger_configuration_settings">
+            <ConfigItem Id="Charger Vthm Region" ShortId="charger_vthm_region"
+                Desc="Vthm Limit Thresholds are set in Vthm Thermistor Configuration."
+                Type="enum" Size="4">
+                <enum key="Hottest region - Vthm up to Limit Threshold 1"
+                    value="0" />
+                <enum key="Limit Threshold 1 to 2"
+                    value="1" />
+                <enum key="Limit Threshold 2 to 3"
+                    value="2" />
+                <enum key="Limit Threshold 3 to 4"
+                    value="3" />
+                <enum key="Limit Threshold 4 to 5"
+                    value="4" />
+                <enum key="Limit Threshold 5 to 6"
+                    value="5" />
+                <enum key="Limit Threshold 6 to 7"
+                    value="6" />
+                <enum key="Coldest region - Vthm over Limit Threshold 7"
+                    value="7" />
+            </ConfigItem>
+            <ConfigItem Id="Charge" ShortId="charge"
+                Desc="Set to use this entry to control the charger"
+                Size="1" Type="bool" />
+            <ConfigItem Id="Boost" ShortId="boost"
+                Desc="Boost charging can be disabled or set to internal or externally controlled boost if the device and firmware revision supports it."
+                Size="2" Type="enum">
+                <enum key="Disabled" value="0" />
+                <enum key="Int Enabled" value="1" />
+                <enum key="Ext Enabled" value="2" />
+            </ConfigItem>
+            <ConfigItem Id="Vsel" ShortId="vsel"
+                Desc="Set this to BAT to force the device to run from battery. If this is set to CHG then the device will run from charger unless overridden by the USB Power or Voltage Source Selector voltage source selectors."
+                Size="1" Type="enum">
+                <enum key="CHG" value="0" />
+                <enum key="BAT" value="1" />
+            </ConfigItem>
+            <ConfigItem Id="Power Off" ShortId="power_off"
+                Desc="When checked the application will reduce to the minimum power consumption possible. Useful for powering off the device at certain temperatures."
+                Size="1" Type="bool" />
+            <ConfigItem Id="Disable Leds" ShortId="disable_leds"
+                Desc="When set the LEDs are disabled while charging."
+                Size="1" Type="bool" />
+            <ConfigItem Id="Max Current [mA]" ShortId="current"
+                Desc="Charge current specified in mA." Size="8" Type="uint" />
+            <ConfigItem Id="Termination Type" ShortId="termination_type"
+                Desc="Use the device default (Vfloat) or a custom voltage limit to terminate charging."
+                Size="4" Type="enum">
+                <enum key="Vfloat" value="0" />
+                <enum key="Voltage" value="1" />
+                <enum key="N/a" value="2" />
+            </ConfigItem>
+            <ConfigItem Id="Termination Voltage [mV]"
+                ShortId="termination_voltage"
+                Desc="Termination voltage in mV. Only used if Termination Type is Voltage."
+                Size="8" Type="uint" Multiplier="20" />
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        ShortId="sink_power_settings_vthm"
+        Id="Sink Power Readonly Vthm"
+        Node="Basic">
+        <ConfigStruct
+            Id="Instance of a structure power_config_vthm"
+            ShortId="config_p_vthm"
+            Desc="."
+            Type="struct"
+            Struct="sink_power_config_vthm">
+            <StructElementConfigItem
+                Id="power_config_vthm"
+                ShortId="power_config_vthm"
+                Desc=".">
+                <StructElementConfigItem
+                    Id="Vthm Thermistor Config"
+                    ShortId="Vthm_Struct"
+                    Desc="."
+                    ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_temperature_vthm']">
+                    <StructElementConfigItem
+                        Id="power_adc3_vthm"
+                        ShortId="power_adc3_vthm"
+                        Desc=".">
+                        <StructElementConfigItem
+                            Id="Vthm ADC Source"
+                            ShortId="Vthm_ADC_Source"
+                            Desc="The Vthm input can be configured to use any of the available input sources given below."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_temperature_vthm']/[@ShortId='thermistor_adc_configuration']"
+                            DefaultValue="AIO 1">
+                            <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="AIO 0"/>
+                        </StructElementConfigItem>
+                        <StructElementConfigItem
+                            Id="Vthm Read Period When Charging [s]"
+                            ShortId="Vthm_Read_Period_Charging"
+                            Desc="This configures the time interval between Vthm updates in seconds while charging, 0 to disable."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_temperature_vthm']/[@ShortId='thermistor_adc_configuration']"
+                            DefaultValue="0x14"/>
+                        <StructElementConfigItem
+                            Id="Vthm Read Period When Not Charging [s]"
+                            ShortId="Vthm_Read_Period_Not_Charging"
+                            Desc="This configures the timer interval between Vthm updates in seconds while not charging, 0 to disable."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_temperature_vthm']/[@ShortId='thermistor_adc_configuration']"
+                            DefaultValue="0x0014"/>
+                    </StructElementConfigItem>
+                    <StructElementConfigItem
+                        Id="Drive Thermistor Output PIO"
+                        ShortId="Drive_Thermistor_PIO"
+                        Desc="This parameter sets the required PIO to be driven when a thermistor reading is taken."
+                        ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_temperature_vthm']/[@ShortId='thermistor_adc_configuration']"
+                        DefaultValue="PIO 15">
+                        <BuildVariant HwVariant="CNS11012v2 H13503v2" SwVariant="All" Value="PIO 7"/>
+                        <BuildVariant HwVariant="20-CE690-H1" SwVariant="All" Value="PIO 0"/>
+                        <BuildVariant HwVariant="20-CE752-H1 20-CE751-H1" SwVariant="All" Value="N/A"/>
+                        <BuildVariant HwVariant="20-CE889-H1 20-CE890-H1 20-CE742-H1 20-CE729-H1" SwVariant="All" Value="PIO 20"/>
+                        <BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="N/A"/>
+                    </StructElementConfigItem>
+                    <StructElementConfigItem
+                        Id="Drive Thermistor Output ICS"
+                        ShortId="Drive_Thermistor_ICS"
+                        Desc="This parameter sets the required internal current source to be driven when a thermistor reading is taken."
+                        ConfigGroupPath="./[@ShortId='advanced_settings']"
+                        DefaultValue="N/A">
+                    </StructElementConfigItem>					
+                    <StructElementConfigItem
+                        Id="Thermistor Drive Delay [ms]"
+                        ShortId="Thermistor_Drive_Delay"
+                        Desc="Delay in milliseconds between activating the thermistor drive output and taking the ADC reading. This allows the voltage level to settle before the data is sampled."
+                        ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_temperature_vthm']/[@ShortId='thermistor_adc_configuration']"
+                        DefaultValue="0"/>
+                    <StructElementConfigItem
+                        Id="Use Raw Limits"
+                        ShortId="Use_Raw_Limits"
+                        Desc="When set, the limit thresholds need to be entered as raw ADC counts. When clear they need to be in mV."
+                        ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_temperature_vthm']/[@ShortId='thermistor_thresholds']"
+                        DefaultValue="false">
+                        <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="true"/>
+                    </StructElementConfigItem>
+                    <StructElementConfigItem
+                        Id="Limit Thresholds"
+                        ShortId="limits"
+                        ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_temperature_vthm']/[@ShortId='thermistor_thresholds']"
+                        Desc=".">
+                        <ArrayElementConfigItem
+                            Id="Limit Threshold 1"
+                            ShortId="lim1"
+                            Desc="For NTC thermistors this is the threshold of the hottest temperature region. The values are in units of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)."
+                            DefaultValue="0x013D">
+                            <BuildVariant HwVariant="H13179v2_H13478v2" SwVariant="All" Value="0x022E"/>
+                            <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="317"/>
+                        </ArrayElementConfigItem>
+                        <ArrayElementConfigItem
+                            Id="Limit Threshold 2"
+                            ShortId="lim2"
+                            Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)."
+                            DefaultValue="0x02D9">
+                            <BuildVariant HwVariant="H13179v2_H13478v2" SwVariant="All" Value="0x0504"/>
+                            <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="729"/>
+                        </ArrayElementConfigItem>
+                        <ArrayElementConfigItem
+                            Id="Limit Threshold 3"
+                            ShortId="lim3"
+                            Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)."
+                            DefaultValue="0xffff">
+                            <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="65535"/>
+                        </ArrayElementConfigItem>
+                        <ArrayElementConfigItem
+                            Id="Limit Threshold 4"
+                            ShortId="lim4"
+                            Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)."
+                            DefaultValue="0x0000">
+                            <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="0"/>
+                        </ArrayElementConfigItem>
+                        <ArrayElementConfigItem
+                            Id="Limit Threshold 5"
+                            ShortId="lim5"
+                            Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)."
+                            DefaultValue="0x0000">
+                            <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="0"/>
+                        </ArrayElementConfigItem>
+                        <ArrayElementConfigItem
+                            Id="Limit Threshold 6"
+                            ShortId="lim6"
+                            Desc="For NTC thermistors this is the threshold of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)."
+                            DefaultValue="0x0000">
+                            <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="0"/>
+                        </ArrayElementConfigItem>
+                        <ArrayElementConfigItem
+                            Id="Limit Threshold 7"
+                            ShortId="lim7"
+                            Desc="For NTC thermistors this is the upper limit of the next cooler temperature region. The list is ordered in ascending order of ADC counts or millivolts depending on the setting of vthm.raw_limits. If fewer than seven limits are specified, the terminating value is 65535 (-1)."
+                            DefaultValue="0x0000">
+                            <BuildVariant HwVariant="20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1 20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="0"/>
+                        </ArrayElementConfigItem>
+                    </StructElementConfigItem>
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+        </ConfigStruct>
+    </ConfigGroup>
+
+    <ConfigGroup ShortId="charger_control" Id="Charger Vthm Control"
+        Node="Basic">
+        <ConfigGroup Id="Temperature Regions" ShortId="temperature_regions_table"
+            Node="Array" ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_temperature_vthm']">
+            <ConfigPatternArray Id="Temperature Regions Table" ShortId="temperature_regions"
+                Pattern="charger_configuration_settings" Presentation="ReadOnlyHeader"
+                FixedNumPatterns="8">
+                <PatternArrayRow Id="charge_1" ShortId="charge_1"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="charger_vthm_region"
+                        DefaultValue="Hottest region - Vthm up to Limit Threshold 1" />
+                    <PatternArrayConfigItem
+                        ShortId="charge" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="boost" DefaultValue="Disabled" />
+                    <PatternArrayConfigItem
+                        ShortId="vsel" DefaultValue="CHG" />
+                    <PatternArrayConfigItem
+                        ShortId="off" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="disable_leds" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="current" DefaultValue="0x00" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_type" DefaultValue="N/a" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_voltage" DefaultValue="0x0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="charge_2" ShortId="charge_2"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="charger_vthm_region" 
+                        DefaultValue="Limit Threshold 1 to 2" />
+                    <PatternArrayConfigItem
+                        ShortId="charge" DefaultValue="true" />
+                    <PatternArrayConfigItem
+                        ShortId="boost" DefaultValue="Disabled" />
+                    <PatternArrayConfigItem
+                        ShortId="vsel" DefaultValue="CHG" />
+                    <PatternArrayConfigItem
+                        ShortId="off" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="disable_leds" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="current" DefaultValue="0x96" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_type" DefaultValue="Vfloat" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_voltage" DefaultValue="0x0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="charge_3" ShortId="charge_3"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="charger_vthm_region" 
+                        DefaultValue="Limit Threshold 2 to 3" />
+                    <PatternArrayConfigItem
+                        ShortId="charge" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="boost" DefaultValue="Disabled" />
+                    <PatternArrayConfigItem
+                        ShortId="vsel" DefaultValue="CHG" />
+                    <PatternArrayConfigItem
+                        ShortId="off" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="disable_leds" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="current" DefaultValue="0x00" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_type" DefaultValue="N/a" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_voltage" DefaultValue="0x0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="charge_4" ShortId="charge_4"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="charger_vthm_region" 
+                        DefaultValue="Limit Threshold 3 to 4" />
+                    <PatternArrayConfigItem
+                        ShortId="charge" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="boost" DefaultValue="Disabled" />
+                    <PatternArrayConfigItem
+                        ShortId="vsel" DefaultValue="CHG" />
+                    <PatternArrayConfigItem
+                        ShortId="off" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="disable_leds" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="current" DefaultValue="0x00" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_type" DefaultValue="N/a" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_voltage" DefaultValue="0x0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="charge_5" ShortId="charge_5"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="charger_vthm_region" 
+                        DefaultValue="Limit Threshold 4 to 5" />
+                    <PatternArrayConfigItem
+                        ShortId="charge" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="boost" DefaultValue="Disabled" />
+                    <PatternArrayConfigItem
+                        ShortId="vsel" DefaultValue="CHG" />
+                    <PatternArrayConfigItem
+                        ShortId="off" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="disable_leds" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="current" DefaultValue="0x00" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_type" DefaultValue="N/a" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_voltage" DefaultValue="0x0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="charge_6" ShortId="charge_6"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="charger_vthm_region" 
+                        DefaultValue="Limit Threshold 5 to 6" />
+                    <PatternArrayConfigItem
+                        ShortId="charge" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="boost" DefaultValue="Disabled" />
+                    <PatternArrayConfigItem
+                        ShortId="vsel" DefaultValue="CHG" />
+                    <PatternArrayConfigItem
+                        ShortId="off" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="disable_leds" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="current" DefaultValue="0x00" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_type" DefaultValue="N/a" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_voltage" DefaultValue="0x0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="charge_7" ShortId="charge_7"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="charger_vthm_region" 
+                        DefaultValue="Limit Threshold 6 to 7" />
+                    <PatternArrayConfigItem
+                        ShortId="charge" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="boost" DefaultValue="Disabled" />
+                    <PatternArrayConfigItem
+                        ShortId="vsel" DefaultValue="CHG" />
+                    <PatternArrayConfigItem
+                        ShortId="off" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="disable_leds" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="current" DefaultValue="0x00" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_type" DefaultValue="N/a" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_voltage" DefaultValue="0x0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="charge_8" ShortId="charge_8"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="charger_vthm_region" 
+                        DefaultValue="Coldest region - Vthm over Limit Threshold 7" />
+                    <PatternArrayConfigItem
+                        ShortId="charge" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="boost" DefaultValue="Disabled" />
+                    <PatternArrayConfigItem
+                        ShortId="vsel" DefaultValue="CHG" />
+                    <PatternArrayConfigItem
+                        ShortId="off" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="disable_leds" DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="current" DefaultValue="0x00" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_type" DefaultValue="N/a" />
+                    <PatternArrayConfigItem
+                        ShortId="termination_voltage" DefaultValue="0x0" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+
+</ModuleData>

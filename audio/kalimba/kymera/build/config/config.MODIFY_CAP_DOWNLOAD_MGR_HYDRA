@@ -1,0 +1,11 @@
+############################################################################
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+
+%list CFG_LIBS
+components/hydra_modules/cap_download_interface/cap_download_interface
+
+%list ALL_INCDIRS
+components/hydra_modules/cap_download_interface

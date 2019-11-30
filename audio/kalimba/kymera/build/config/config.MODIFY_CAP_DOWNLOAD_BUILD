@@ -1,0 +1,20 @@
+%build
+CAPABILITY_DOWNLOAD_BUILD=true
+START_GROUP=
+SPECIAL_C_FLAGS=-preinclude $(call ospath,$(BUILD_ROOT)/no_base_binding.c)
+MIBFILES=false
+PROJFILES=false
+REL_EXT_BUILD=FALSE
+-BUILD_CAPABILITY_CONSTANT_EXPORT
+
+%cpp
+CAPABILITY_DOWNLOAD_BUILD
+-PATCH_LIBS
+-INCLUDE_PATCHES
+
+%list CFG_LIBS
+support_lib/cbops/cbops
+support_lib/op_data_access/op_data_access
+support_lib/stream/stream
+support_lib/audio_pios/audio_pios
+

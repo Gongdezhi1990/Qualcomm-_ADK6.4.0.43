@@ -1,0 +1,612 @@
+<ModuleData Name="sink_multi_channel">
+    <DefineGroup>
+
+        <DefinePattern
+            PatternName="Audio Output Channel Routing"
+            ShortId="audio_output_routing">
+            <ConfigItem
+                Id="Audio Channel"
+                ShortId="audio_output_channel_label"
+                Desc="The audio channel that will be mapped"
+                Type="enum"
+                Size="3">
+                <enum key="Main Group: Primary Left"
+                      value="0"/>
+                <enum key="Main Group: Primary Right"
+                      value="1"/>
+                <enum key="Main Group: Secondary Left"
+                      value="2"/>
+                <enum key="Main Group: Secondary Right"
+                      value="3"/>
+                <enum key="Main Group: Subwoofer"
+                      value="4"/>
+                <enum key="Aux Group: Auxillary Left"
+                      value="5"/>
+                <enum key="Aux Group: Auxillary Right"
+                      value="6"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Endpoint Hardware Type"
+                ShortId="audio_output_hw_type"
+                Desc="Select the audio output hardware type"
+                Type="enum_disabler"
+                Size="3">
+                <enum key="None"
+                      value="0"
+                      disable="Endpoint Hardware Instance,Endpoint Channel,Volume Trim [dB/60]"/>
+                <enum key="DAC"
+                      value="1"
+                      disable=""/>
+                <enum key="I2S"
+                      value="2"
+                      disable=""/>
+                <enum key="BT Subwoofer"
+                      value="3"
+                      disable=""/>
+                <enum key="S/PDIF"
+                      value="4"
+                      disable=""/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Endpoint Hardware Instance"
+                ShortId="audio_output_hw_instance"
+                Desc="Select the hardware instance that should be used for this audio output."
+                Type="enum"
+                Size="2">
+                <enum key="Instance 0"
+                      value="0"/>
+                <enum key="Instance 1"
+                      value="1"/>
+                <enum key="Instance 2"
+                      value="2"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Endpoint Channel"
+                ShortId="audio_output_channel"
+                Desc="Select the channel that this audio should be mapped to."
+                Type="enum"
+                Size="1">
+                <enum key="Left/Mono"
+                      value="0"/>
+                <enum key="Right"
+                      value="1"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Volume Trim [dB/60]"
+                ShortId="audio_output_channel_volume_trim"
+                Desc="The volume trim to apply to the channel, expressed in units of 1/60th of a dB."
+                Type="int"
+                Size="16"/>
+
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup Id="SinkMultiChannel" ShortId="sink_audio_output_readonly" Node="Basic">
+
+        <ConfigGroup
+            Id="Channel Allocation"
+            ShortId="sink_multichannel"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='output']"
+            Node="Array">
+            <ConfigPatternArray
+                Id="Audio Output Routing"
+                ShortId="route"
+                Pattern="audio_output_routing"
+                Presentation="ReadOnlyHeader"
+                FixedNumPatterns="7">
+
+                <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF376_CE692 CF376_CE692H3 CF376_H13732" SwVariant="All">
+                    <PatternArrayRow
+                        Id="Main Group: Primary Left"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Primary Left"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="DAC" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 1" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Primary Right"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Primary Right"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="DAC" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 1" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Right" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Secondary Left"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Secondary Left"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Secondary Right"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Secondary Right"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Right" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Subwoofer"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Subwoofer"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Aux Group: Auxillary Left"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Aux Group: Auxillary Left"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Aux Group: Auxillary Right"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Aux Group: Auxillary Right"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Right" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+                </BuildVariant>
+
+                <BuildVariant HwVariant="CF376_CF440 QCC3020-AA_DEV-BRD-R2-AA" SwVariant="All">
+                    <PatternArrayRow
+                        Id="Main Group: Primary Left"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Primary Left"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="DAC" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Primary Right"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Primary Right"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Right" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Secondary Left"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Secondary Left"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Secondary Right"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Secondary Right"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Right" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Subwoofer"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Subwoofer"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Aux Group: Auxillary Left"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Aux Group: Auxillary Left"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Aux Group: Auxillary Right"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Aux Group: Auxillary Right"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Right" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+                </BuildVariant>
+
+                <BuildVariant HwVariant="All -H13672v2 -CE446_CE692 -R13568v4 -R13568v4_A05 -CF376_CE692 -CF376_CE692H3 -CF376_H13732 -CF376_CF440 -QCC3020-AA_DEV-BRD-R2-AA" SwVariant="All">
+                    <PatternArrayRow
+                        Id="Main Group: Primary Left"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Primary Left"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="DAC" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Primary Right"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Primary Right"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="DAC" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Right" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Secondary Left"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Secondary Left"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Secondary Right"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Secondary Right"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Right" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Main Group: Subwoofer"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Main Group: Subwoofer"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Aux Group: Auxillary Left"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Aux Group: Auxillary Left"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Left/Mono" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow
+                        Id="Aux Group: Auxillary Right"
+                        ShortId="i_disc"
+                        Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_label"
+                            DefaultValue="Aux Group: Auxillary Right"/>
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_type"
+                            DefaultValue="None" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_hw_instance"
+                            DefaultValue="Instance 0" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel"
+                            DefaultValue="Right" />
+                        <PatternArrayConfigItem
+                            ShortId="audio_output_channel_volume_trim"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+                </BuildVariant>
+
+            </ConfigPatternArray>
+
+        </ConfigGroup>
+
+            <ConfigItem
+                Id="Aux Volume Scaling Method"
+                ShortId="volume_scaling_method_aux"
+                Desc="Sets the method of volume adjustment used across audio output groups.&#10;&#10;Hardware: volume scaling is applied at the DAC in the case of analogue output, or in external hardware controlled by I2c.&#10;DSP: volume scaling is applied in the digital domain by the DSP.&#10;Hybrid: A combination of DSP and hardware scaling is employed in order to maximise the S/N ratio of the audio output."
+                Type="enum"
+                Size="2"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='output']"
+                DefaultValue="Hardware">
+                <enum key="Hardware"
+                      value="0"/>
+                <enum key="DSP"
+                      value="1"/>
+                <enum key="Hybrid"
+                      value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Primary/Secondary/Subwoofer Volume Scaling Method"
+                ShortId="volume_scaling_method_main"
+                Desc=" "
+                Type="enum"
+                Size="2"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='output']"
+                DefaultValue="DSP">
+                <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05" SwVariant="All" Value="Hardware"/>
+                <enum key="Hardware"
+                      value="0"/>
+                <enum key="DSP"
+                      value="1"/>
+                <enum key="Hybrid"
+                      value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Fixed Hardware Gain"
+                ShortId="fixed_hardware_gain"
+                Desc="Sets a fixed gain applied to hardware in units of dB/60, only used when the volume scaling method is set to DSP"
+                Range="Min=-7200,Max=0"
+                Type="int"
+                Size="16"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='output']"
+                    DefaultValue="0" />
+        <ConfigItem
+            Id="Audio Output Resolution"
+            ShortId="enable_24_bit_resolution"
+            Desc="This configuration item specifies the output audio bit resolution. Note this is applicable only for CSR8675 and not CSR8670. Also setting audio output resolution as 24bit is not applicable for cVc when audio routing is either I2S, SPDIF or analog."
+            Type="enum"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='output']"
+            DefaultValue="16 Bit audio">
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="24 Bit audio"/>
+            <enum key="16 Bit audio"
+                  value="0"/>
+            <enum key="24 Bit audio"
+                  value="1"/>
+            <BuildVariant
+                HwVariant="CF819 QCC5124-BA_FORMFACTOR-AA"
+                SwVariant="All"
+                Value="24 Bit audio" />
+        </ConfigItem>
+    </ConfigGroup>
+</ModuleData>

@@ -1,0 +1,120 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2013 - 2017 Qualcomm Technologies International, Ltd.
+#
+#########################################################################
+# Pull in common definitions
+#########################################################################
+include $(BUILD_ROOT)/makerules_common.mkf
+
+#########################################################################
+#Python Defs
+#########################################################################
+
+CREATE_TEMP = $(BUILD_ROOT)/struct_share/create_temp_c.py
+CREATE_HEADER = $(BUILD_ROOT)/struct_share/struct_share.py
+
+########################################################################
+# Paths - default paths to use when searching for source files
+#########################################################################
+include $(OUTPUT_ROOT)/$(CONFIG).mkf
+
+COMPILE_EXTRA_DEFS += $(addprefix -DINSTALL_OPERATOR_,$(CFG_CAPABILITIES))
+
+C_PATH += .
+S_PATH += .
+H_PATH += $(ALL_INCDIRS:%=$(KYMERA_ROOT)/%)
+H_PATH += $(AUTOGEN_ROOT)/interface
+H_PATH += $(IO_ROOT)/$(CHIP_NAME)/$(CHIP_VER)
+H_PATH += $(HAL_ROOT)/$(CHIP_NAME)/$(CHIP_VER)
+H_PATH += .
+H_PATH += $(COMPILER_H_PATH)
+H_PATH += $(EXTRA_INCDIRS)
+
+OBJ_EXT = o
+DEPEND_EXT= d
+
+vpath %.c $(strip $(subst |, ,$(C_PATH)))
+vpath %.h $(strip $(subst |, ,$(H_PATH)))
+
+# There are many repetitions in H_PATH, "sort" removes the duplicates making the 
+# arguments string shorter
+SRC_INC_DIRS=	$(patsubst %,-I %,$(subst |, ,$(sort $(H_PATH)))) #H-PATH, with -I prefixed to each path
+TEMP_INC_HDRS=	$(patsubst %,-H%,$(GEN_ASM_HDRS)) #Gen_asm_hdrs with -H prefixed to each header
+COMPILE_DEFS+=		$(COMPILE_EXTRA_DEFS)
+DEBUG_COMPILE_DEFS+=	$(DEBUG_COMPILE_EXTRA_DEFS)
+
+
+PREINCLUDE_DEFS_FILE=$(LIB_SS_TEMP_DIR)/preinclude_defs.h
+
+$(shell $(PYTHON) $(PREINCLUDE_DEFS_GEN) +i $(DEBUG_COMPILE_DEFS) $(COMPILE_DEFS) +o $(PREINCLUDE_DEFS_FILE))
+
+ALWAYS_MAKE:	;
+
+#########################################################################
+# Generate target lists from source list
+#########################################################################
+
+OUT_ASM_HDRS+=	$(GEN_ASM_HDRS:%.h=$(LIB_SS_HDR_DIR)/%_asm_defs.h)
+
+OUT_OBJECTS += $(GEN_ASM_HDRS:%.h=$(LIB_OBJ_DIR)/%.$(OBJ_EXT))
+OUT_TEMP += $(GEN_ASM_HDRS:%.h=$(LIB_SS_TEMP_DIR)/%_temp.c)
+OUT_DEPENDS += $(GEN_ASM_HDRS:%.h=$(LIB_OBJ_DIR)/%_temp.$(DEPEND_EXT))
+
+-include $(OUT_DEPENDS)
+
+#########################################################################
+# Dependency rules
+#########################################################################
+# Dependency files are generated as part of the compile process, rather
+# than as a separate stage.
+# They are added as a pre-requisite for the objects, so if a .d file is
+# missing the compile stage is triggered.
+# An explicit rule for .d files ensures make does not try to build them
+# separately.
+# .PRECIOUS is used to make sure they are never tidied by make
+
+DEPEND_FLAGS = -MD -MT $@ -MF$(@D)/$(patsubst %.o,%_temp.$(DEPEND_EXT),$(@F))
+
+$(LIB_OBJ_DIR)/%.$(OBJ_EXT): $(LIB_SS_TEMP_DIR)/%_temp.c
+
+$(LIB_OBJ_DIR)/%.$(DEPEND_EXT) : ;
+.PRECIOUS: $(LIB_OBJ_DIR)/%.$(DEPEND_EXT)
+
+
+##########################################################################
+# Make the shared headers
+##########################################################################
+
+ifeq (true, $(strip $(PRINT_DEFINES)))
+DEBUG_COMPILE_INFO_STRING = using defines: "$(DEBUG_COMPILE_DEFS) $(COMPILE_DEFS)"
+else
+DEBUG_COMPILE_INFO_STRING =
+endif
+
+$(LIB_SS_TEMP_DIR)/%_temp.c: %.h $(CREATE_TEMP) $(MAKE_DEPS)
+	$(info Creating temporary source file $@)
+	$(PYTHON) $(CREATE_TEMP) $(call ospath,$@) -H$(call ospath,$<)
+
+$(LIB_OBJ_DIR)/%.$(OBJ_EXT) : $(LIB_SS_TEMP_DIR)/%_temp.c $(LIB_OBJ_DIR)/%_temp.$(DEPEND_EXT) $(MAKE_DEPS)
+#compile temporary intermediate file
+	$(info Debug compiling $< $(DEBUG_COMPILE_INFO_STRING) to $@)
+	$(COMPILE) $(call ospath,$<) -k$(CHIP_NAME_KCC) $(DEPEND_FLAGS) $(call ospath,$(SRC_INC_DIRS)) -Xc -noprune -c -g -o $(call ospath,$@) -preinclude $(PREINCLUDE_DEFS_FILE)
+	$(SED) -i.bak 's/\S*\(preinclude_defs_asm.h\|preinclude_defs.h\)\S*//g' $(@D)/$(patsubst %.o,%_temp.$(DEPEND_EXT),$(@F))
+	$(RM_F) $(call ospath,$(@D)/$(patsubst %.o,%_temp.$(DEPEND_EXT),$(@F)).bak)
+	$(call utouch,$(call ospath,$@))
+
+$(OUT_ASM_HDRS): $(LIB_SS_HDR_DIR)/%_asm_defs.h : $(LIB_OBJ_DIR)/%.$(OBJ_EXT) $(MAKE_DEPS) $(CREATE_HEADER)
+	$(info Creating shared header $@.)
+	$(PYTHON) $(CREATE_HEADER) $@ $(LIB_OBJ_DIR)/$*.$(OBJ_EXT) $(GEN_ASM_DEFS)
+
+# Dummy rule for broken dependencies
+# Should never happen unless a .h is removed. Note that wildcard rules 
+# are not checked in a guaranteed order, so having this last has
+# no effect.
+
+%.h:
+	$(info $@ seems to be missing, but continuing anyway...)
+
+headergen: $(OUT_ASM_HDRS) $(OUT_TEMP) ALWAYS_MAKE

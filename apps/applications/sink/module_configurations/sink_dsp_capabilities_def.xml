@@ -1,0 +1,27 @@
+<ModuleData Name="sink_dsp_capabilities">
+
+    <ConfigGroup
+        Id="DSP Capabilities"
+        ShortId="dsp_caps"
+        Node="Basic">
+        <ConfigGroup
+            Id="Offloading Capabilities"
+            ShortId="offloading_capabilities"
+            Node="Basic">
+            <ConfigItem
+                Id="Offload aptX Decoder Processing"
+                ShortId="OffloadAptxDecoder"
+                Desc="Enables aptX offloading/processing on the secondary audio processor. Note that offloading requires enabling via AudioThreadOffload (audio subsystem MIB key)."
+                Type="bool"
+                Size="1"
+                DefaultValue="false"/>
+            <ConfigItem
+                Id="Offload Celt Encoder Processing"
+                ShortId="OffloadCeltEncoder"
+                Desc="Enables aptX offloading/processing on the secondary audio processor."
+                Type="bool"
+                Size="1"
+                DefaultValue="false"/>
+        </ConfigGroup>
+    </ConfigGroup>
+</ModuleData>

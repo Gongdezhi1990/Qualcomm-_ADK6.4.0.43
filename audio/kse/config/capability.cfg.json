@@ -1,0 +1,1539 @@
+{
+    "BASIC_PASS_THROUGH": {
+        "id": 1,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "SET_DATA_STREAM_BASED": 8207,
+            "CHANGE_INPUT_DATA_TYPE": 10,
+            "CHANGE_OUTPUT_DATA_TYPE": 11,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "OPMSG_PEQ_ID_LOAD_CONFIG": 2,
+            "SET_BUFFER_SIZE": 8204,
+            "SET_SAMPLE_RATE": 8206
+        }
+    },
+    "SCO_SEND": {
+        "id": 3,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193
+        }
+    },
+    "SCO_RECEIVE": {
+        "id": 4,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "WIDEBAND_SPEECH_ENCODE": {
+        "id": 5,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193
+        }
+    },
+    "WIDEBAND_SPEECH_DECODE": {
+        "id": 6,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "RESAMPLER": {
+        "id": 9,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONVERSION_RATE": 2,
+            "SET_CUSTOM_RATE": 3,
+            "FILTER_COEFFICIENTS": 4,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "MIXER": {
+        "id": 10,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_GAINS": 1,
+            "SET_STREAM_CHANNELS": 2,
+            "SET_RAMP_NUM_SAMPLER": 3,
+            "SET_PRIMARY_STREAM": 4,
+            "SET_CHANNEL_GAINS": 5,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_METADATA_DELAY": 8212,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "SPLITTER": {
+        "id": 19,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_BUFFER_SIZE": 8204,
+            "SET_RUNNING_STREAMS": 1,
+            "SET_DATA_FORMAT": 10
+        }
+    },
+    "SBC_DECODER": {
+        "id": 22,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "ENABLE_CONTENT_PROTECTION": 1,
+            "OPMSG_SET_CTRL": 254,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "SBC_ENCODER": {
+        "id": 20,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_ENCODING_PARAMS": 1,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "AAC_DECODER": {
+        "id": 24,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "SET_FRAME_TYPE": 2,
+            "SET_RM_ENACTING": 8209,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "APTX_CLASSIC_DECODER": {
+        "id": 25,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "AEC_REFERENCE_1_MIC": {
+        "id": 64,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATES": 254,
+            "GET_CONFIGURATION": 8202,
+            "CONFIGURE": 8201,
+            "GET_CLOCK_ID": 8203
+        }
+    },
+    "AEC_REFERENCE_2_MIC": {
+        "id": 65,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATES": 254,
+            "GET_CONFIGURATION": 8202,
+            "CONFIGURE": 8201,
+            "GET_CLOCK_ID": 8203
+        }
+    },
+    "AEC_REFERENCE_3_MIC": {
+        "id": 66,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATES": 254,
+            "GET_CONFIGURATION": 8202,
+            "CONFIGURE": 8201,
+            "GET_CLOCK_ID": 8203
+        }
+    },
+    "AEC_REFERENCE_4_MIC": {
+        "id": 67,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATES": 254,
+            "GET_CONFIGURATION": 8202,
+            "CONFIGURE": 8201,
+            "GET_CLOCK_ID": 8203
+        }
+    },
+    "CVC_RCV_NB": {
+        "id": 29,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVC_RCV_WB": {
+        "id": 31,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVC_RCV_FE": {
+        "id": 27,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHF1MIC_SEND_NB": {
+        "id": 28,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHF1MIC_SEND_WB": {
+        "id": 30,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHF2MIC_SEND_NB": {
+        "id": 32,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHF2MIC_SEND_WB": {
+        "id": 33,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHS1MIC_SEND_NB": {
+        "id": 35,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHS1MIC_SEND_WB": {
+        "id": 36,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHS2MIC_90DEG_SEND_NB": {
+        "id": 37,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHS2MIC_90DEG_SEND_WB": {
+        "id": 38,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHS2MIC_0DEG_SEND_NB": {
+        "id": 39,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCHS2MIC_0DEG_SEND_WB": {
+        "id": 40,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCSPKR1MIC_SEND_NB": {
+        "id": 41,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCSPKR1MIC_SEND_WB": {
+        "id": 42,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCSPKR2MIC_0DEG_SEND_NB": {
+        "id": 45,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCSPKR2MIC_0DEG_SEND_WB": {
+        "id": 46,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "BASS_ENHANCE": {
+        "id": 47,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_METADATA_DELAY": 8212
+        }
+    },
+    "CROSSOVER_2BAND": {
+        "id": 51,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CROSSOVER_3BAND": {
+        "id": 52,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DELAY": {
+        "id": 53,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_EXTERNAL_MEMORY": 1,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_DATA_STREAM_BASED": 8207
+        }
+    },
+    "S_PDIF_DECODE": {
+        "id": 54,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_SUPPORTED_DATA_TYPES": 2,
+            "SET_OUTPUT_RATE": 3,
+            "SET_DECODER_DATA_TYPE": 4,
+            "NEW_CHSTS_FROM_EP": 254
+        }
+    },
+    "RINGTONE": {
+        "id": 55,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_SAMPLE_RATE": 8206,
+            "OPMSG_RINGTONE_ID_TONE_SEQ": 1
+        }
+    },
+    "APTX_LOW_LATENCY_DECODER": {
+        "id": 61,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "CVCSPKR3MIC_0DEG_SEND_NB": {
+        "id": 68,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCSPKR3MIC_0DEG_SEND_WB": {
+        "id": 69,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCSPKR4MIC_0DEG_SEND_NB": {
+        "id": 70,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CVCSPKR4MIC_0DEG_SEND_WB": {
+        "id": 71,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "VOLUME_CONTROL": {
+        "id": 72,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207
+        }
+    },
+    "PEQ": {
+        "id": 73,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "OPMSG_PEQ_OVERRIDE_COEFFS": 1,
+            "LOAD_CONFIG": 2,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_METADATA_DELAY": 8212
+        }
+    },
+    "VSE": {
+        "id": 74,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_METADATA_DELAY": 8212
+        }
+    },
+    "BASS_ENHANCE_FULLBAND_IN_OUT": {
+        "id": 144,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_METADATA_DELAY": 8212
+        }
+    },
+    "BASS_ENHANCE_FULLBAND_IN": {
+        "id": 145,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_METADATA_DELAY": 8212
+        }
+    },
+    "IIR_RE_SAMPLER": {
+        "id": 148,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_SAMPLE_RATES": 1,
+            "SET_CONVERSION_RATE": 2,
+            "SET_CONFIG": 3,
+            "SET_METADATA_DELAY": 8212,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "VAD": {
+        "id": 149,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "CHANNEL_MIXER": {
+        "id": 151,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CH_MIXER_PARAMETERS": 1,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "RTP_DECODER": {
+        "id": 152,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "OPMSG_RTP_DECODE_ID_SET_WORKING_MODE": 1,
+            "OPMSG_RTP_DECODE_ID_SET_RTP_CODEC_TYPE": 2,
+            "OPMSG_RTP_DECODE_ID_SET_RTP_CONTENT_PROTECTION": 3,
+            "OPMSG_RTP_DECODE_ID_SET_AAC_DECODER": 4,
+            "OPMSG_RTP_DECODE_ID_SET_MAX_PACKET_LENGTH": 5,
+            "OPMSG_RTP_DECODE_ID_SET_AAC_UTILITY": 6,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_TTP_LATENCY": 8210,
+            "SET_TTP_PARAMS": 8211,
+            "SET_BUFFER_SIZE": 8204
+        }
+    },
+    "SOURCE_SYNCHRONIZATION": {
+        "id": 153,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "CONFIGURE": 8201,
+            "GET_CONFIGURATION": 8202,
+            "GET_CLOCK_ID": 8203,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_BUFFER_SIZE": 8204,
+            "SET_ROUTES": 1,
+            "GET_ROUTES": 2,
+            "SET_SINK_GROUPS": 3,
+            "SET_SOURCE_GROUPS": 4,
+            "SET_TRACE_ENABLE": 16
+        }
+    },
+    "USB_AUDIO_RX": {
+        "id": 154,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONNECTION_CONFIG": 2,
+            "SET_BUFFER_SIZE": 8204,
+            "SET_TTP_LATENCY": 8210,
+            "SET_LATENCY_LIMITS": 8213,
+            "SET_TTP_PARAMS": 8211,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "USB_AUDIO_TX": {
+        "id": 155,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONNECTION_CONFIG": 2,
+            "SET_BUFFER_SIZE": 8204,
+            "SET_TTP_LATENCY": 8210,
+            "SET_LATENCY_LIMITS": 8213,
+            "SET_TTP_PARAMS": 8211,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "CELT_ENCODER": {
+        "id": 156,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_ENCODING_PARAMS": 1
+        }
+    },
+    "CELT_DECODER": {
+        "id": 157,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_ENCODING_PARAMS": 1
+        }
+    },
+    "APTX_HD_DECODER": {
+        "id": 158,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "TTP_PASS": {
+        "id": 60,
+        "messages": {
+            "CHANGE_INPUT_DATA_TYPE": 10,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_TTP_LATENCY": 8210,
+            "SET_TTP_PARAMS": 8211,
+            "SET_BUFFER_SIZE": 8204
+        }
+    },
+    "COMPANDER": {
+        "id": 146,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207
+        }
+    },
+    "APTX_CLASSIC_ENCODER": {
+        "id": 165,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTX_LOW_LATENCY_ENCODER": {
+        "id": 166,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTXHD_ENCODER": {
+        "id": 167,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTX_CLASSIC_MONO_DECODER": {
+        "id": 169,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTXHD_MONO_DECODER": {
+        "id": 170,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTX_CLASSIC_MONO_DECODER_NO_AUTOSYNC": {
+        "id": 171,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTXHD_MONO_DECODER_NO_AUTOSYNC": {
+        "id": 172,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTX_CLASSIC_MONO_ENCODER": {
+        "id": 173,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTX_CLASSIC_MONO_ENCODER_NO_AUTOSYNC": {
+        "id": 174,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTXHD_MONO_ENCODER": {
+        "id": 175,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTXHD_MONO_ENCODER_NO_AUTOSYNC": {
+        "id": 176,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTX_CLASSIC_DEMUX": {
+        "id": 177,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTX_ADAPTIVE_DEMUX": {
+        "id": 183,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "APTX_ADAPTIVE_DECODER": {
+        "id": 184,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "RATE_ADJUST": {
+        "id": 179,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_SAMPLE_RATE": 8206
+        }
+    },
+    "TEST_CONSUMER": {
+        "id": 16373,
+        "messages": {
+            "GET_CAPABILITY_VERSION": 4096,
+            "CHANGE_INPUT_DATA_TYPE": 10
+        }
+    },
+    "TEST_STALL_DROP": {
+        "id": 16375,
+        "messages": {
+            "STALL_DROP_CONFIGURE": 1,
+            "STALL_DROP_SET_TIMING_OUTPUT": 2,
+            "STALL_DROP_SET_DELAY_PARAMS": 3
+        }
+    },
+    "DOWNLOAD_SELF_TEST": {
+        "id": 16385,
+        "messages": {
+            "START_SELF_TEST": 1
+        }
+    },
+    "DOWNLOAD_PASSTHROUGH": {
+        "id": 16386,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "SET_DATA_STREAM_BASED": 8207,
+            "CHANGE_INPUT_DATA_TYPE": 10,
+            "CHANGE_OUTPUT_DATA_TYPE": 11,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "OPMSG_PEQ_ID_LOAD_CONFIG": 2,
+            "SET_BUFFER_SIZE": 8204,
+            "SET_SAMPLE_RATE": 8206
+        }
+    },
+    "DOWNLOAD_CVCSPKR1MIC_SEND_WB": {
+        "id": 16387,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_AEC_REFERENCE": {
+        "id": 16391,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATES": 254,
+            "GET_CONFIGURATION": 8202,
+            "CONFIGURE": 8201,
+            "GET_CLOCK_ID": 8203
+        }
+    },
+    "DOWNLOAD_CVC_RECEIVE_NB": {
+        "id": 16392,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVC_RECEIVE_WB": {
+        "id": 16393,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVC_RECEIVE_FE": {
+        "id": 16394,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVCHS1MIC_SEND_NB": {
+        "id": 16402,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVCHS1MIC_SEND_WB": {
+        "id": 16403,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVCHS2MIC_MONO_SEND_NB": {
+        "id": 16404,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVCHS2MIC_MONO_SEND_WB": {
+        "id": 16405,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVCHS2MIC_BINAURAL_SEND_NB": {
+        "id": 16406,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVCHS2MIC_BINAURAL_SEND_WB": {
+        "id": 16407,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVCSPKR1MIC_SEND_NB": {
+        "id": 16408,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVCSPKR2MIC_SEND_NB": {
+        "id": 16409,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_CVCSPKR2MIC_SEND_WB": {
+        "id": 16410,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_DBE": {
+        "id": 16472,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_METADATA_DELAY": 8212
+        }
+    },
+    "DOWNLOAD_DBE_FULLBAND": {
+        "id": 16473,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_METADATA_DELAY": 8212
+        }
+    },
+    "DOWNLOAD_DBE_FULLBAND_BASSOUT": {
+        "id": 16474,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_METADATA_DELAY": 8212
+        }
+    },
+    "DOWNLOAD_IIR_RESAMPLER": {
+        "id": 16467,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_SAMPLE_RATES": 1,
+            "SET_CONVERSION_RATE": 2,
+            "SET_CONFIG": 3,
+            "SET_METADATA_DELAY": 8212,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "DOWNLOAD_MIXER": {
+        "id": 16475,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_GAINS": 1,
+            "SET_STREAM_CHANNELS": 2,
+            "SET_RAMP_NUM_SAMPLER": 3,
+            "SET_PRIMARY_STREAM": 4,
+            "SET_CHANNEL_GAINS": 5,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_METADATA_DELAY": 8212,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "DOWNLOAD_AAC_DECODER": {
+        "id": 16463,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "SET_FRAME_TYPE": 2,
+            "SET_RM_ENACTING": 8209,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "DOWNLOAD_APTX_CLASSIC_DECODER": {
+        "id": 16465,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "DOWNLOAD_APTX_LOW_LATENCY_DECODER": {
+        "id": 16466,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "OPMSG_SET_CTRL": 254,
+            "CONTENT_PROTECTION_ENABLE": 1
+        }
+    },
+    "DOWNLOAD_COMPANDER": {
+        "id": 16471,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207
+        }
+    },
+    "DOWNLOAD_PEQ": {
+        "id": 16476,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207
+        }
+    },
+    "DOWNLOAD_RTP_DECODER": {
+        "id": 16478,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "OPMSG_RTP_DECODE_ID_SET_WORKING_MODE": 1,
+            "OPMSG_RTP_DECODE_ID_SET_RTP_CODEC_TYPE": 2,
+            "OPMSG_RTP_DECODE_ID_SET_RTP_CONTENT_PROTECTION": 3,
+            "OPMSG_RTP_DECODE_ID_SET_AAC_DECODER": 4,
+            "OPMSG_RTP_DECODE_ID_SET_MAX_PACKET_LENGTH": 5,
+            "OPMSG_RTP_DECODE_ID_SET_AAC_UTILITY": 6,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_TTP_LATENCY": 8210,
+            "SET_TTP_PARAMS": 8211,
+            "SET_BUFFER_SIZE": 8204
+        }
+    },
+    "DOWNLOAD_SBC_DECODER": {
+        "id": 16479,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "ENABLE_CONTENT_PROTECTION": 1,
+            "OPMSG_SET_CTRL": 254,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "DOWNLOAD_SBC_ENCODER": {
+        "id": 16480,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_ENCODING_PARAMS": 1,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "DOWNLOAD_SCO_SEND": {
+        "id": 16481,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193
+        }
+    },
+    "DOWNLOAD_SCO_RECEIVE": {
+        "id": 16482,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "DOWNLOAD_WBS_ENCODER": {
+        "id": 16483,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193
+        }
+    },
+    "DOWNLOAD_WBS_DECODER": {
+        "id": 16484,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "ENABLE_FADE_OUT": 8192,
+            "DISABLE_FADE_OUT": 8193,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "DOWNLOAD_SPLITTER": {
+        "id": 16486,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_BUFFER_SIZE": 8204,
+            "SET_RUNNING_STREAMS": 1,
+            "SET_DATA_FORMAT": 10
+        }
+    },
+    "DOWNLOAD_USB_AUDIO_RX": {
+        "id": 16488,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONNECTION_CONFIG": 2,
+            "SET_BUFFER_SIZE": 8204,
+            "SET_TTP_LATENCY": 8210,
+            "SET_LATENCY_LIMITS": 8213,
+            "SET_TTP_PARAMS": 8211,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "DOWNLOAD_USB_AUDIO_TX": {
+        "id": 16489,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONNECTION_CONFIG": 2,
+            "SET_BUFFER_SIZE": 8204,
+            "SET_TTP_LATENCY": 8210,
+            "SET_LATENCY_LIMITS": 8213,
+            "SET_TTP_PARAMS": 8211,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198
+        }
+    },
+    "DOWNLOAD_VOLUME_CONTROL": {
+        "id": 16468,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207
+        }
+    },
+    "DOWNLOAD_CELT_ENCODER": {
+        "id": 16469,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_ENCODING_PARAMS": 1
+        }
+    },
+    "DOWNLOAD_CELT_DECODER": {
+        "id": 16470,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_ENCODING_PARAMS": 1
+        }
+    },
+    "DOWNLOAD_RINGTONE": {
+        "id": 16477,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_SAMPLE_RATE": 8206,
+            "OPMSG_RINGTONE_ID_TONE_SEQ": 1
+        }
+    },
+    "DOWNLOAD_VSE": {
+        "id": 16490,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200,
+            "SET_SAMPLE_RATE": 8206,
+            "SET_DATA_STREAM_BASED": 8207,
+            "SET_METADATA_DELAY": 8212
+        }
+    },
+    "DOWNLOAD_CROSSOVER_2BAND": {
+        "id": 16491,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "SET_CONTROL": 8194,
+            "GET_PARAMS": 8195,
+            "GET_DEFAULTS": 8196,
+            "SET_PARAMS": 8197,
+            "GET_STATUS": 8198,
+            "SET_UCID": 8199,
+            "GET_LOGICAL_PS_ID": 8200
+        }
+    },
+    "DOWNLOAD_PSKEY_TEST": {
+        "id": 16517,
+        "messages": {
+            "CAPABILITY_VERSION_REQUEST": 4096,
+            "PS_ENTRY_READ": 1,
+            "PS_ENTRY_WRITE": 2,
+            "PS_ENTRY_DELETE": 3,
+            "PS_DELETE": 4,
+            "PS_EXECUTE": 5
+        }
+    }
+}

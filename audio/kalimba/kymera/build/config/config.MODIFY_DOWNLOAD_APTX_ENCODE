@@ -1,0 +1,41 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the downloadable aptx classic encode
+
+%cpp
+-ALWAYS_ENOUGH_INPUT_DATA
+
+# Extended Aptx 'licence' functionality (B-250914)
+APTX_LICENCE_EXTENSIONS
+
+%list CFG_CAPABILITIES
+APTX_CLASSIC_ENCODE
+
+%list ALL_INCDIRS
+capabilities/aptx_encode
+../lib/codec
+../lib_private/aptx
+
+# rebuild cap_id_prim_asm_defs.h and licencing_prim_asm_defs.h (only for stre_rom_v02)
+%list AUTOGEN_CFG_LIBS
+capabilities/database/database
+../lib_private/security/security
+
+%list CFG_LIBS
+capabilities/aptx_encode/aptx_encode
+
+# Libraries needed by aptx capabilities
+../lib_private/aptx/aptx
+../lib_private/aptx_processing/aptx_processing
+capabilities/encoder/encoder
+
+%list MAXIM_LIBS
+../lib_private/aptx/aptx
+../lib_private/aptx_processing/aptx_processing
+
+%list PRIVATE_LIBS
+../lib_private

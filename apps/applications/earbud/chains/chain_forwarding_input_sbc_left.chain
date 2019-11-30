@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright (c) 2018 Qualcomm Technologies International, Ltd.-->
+
+<chain name="CHAIN_FORWARDING_INPUT_SBC_LEFT" id="0" generate_endpoint_roles_enum="False" generate_operator_roles_enum="False">
+
+    <include_header name="../av_headset_chain_roles.h"/>
+
+    <operator name="OPR_RTP_DECODER" id="CAP_ID_RTP_DECODE">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_SWITCHED_PASSTHROUGH_CONSUMER" id="EB_CAP_ID_SWITCHED_PASSTHROUGH">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_SBC_DECODER" id="CAP_ID_SBC_DECODER">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT_0" terminal="0"/>
+        <source name="OUT_1" terminal="1"/>
+    </operator>
+
+    <operator name="OPR_SBC_ENCODER" id="CAP_ID_SBC_ENCODER">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <input sink="OPR_RTP_DECODER.IN" role="EPR_SINK_MEDIA"/>
+    <connection source="OPR_RTP_DECODER.OUT" sink="OPR_SBC_DECODER.IN"/>
+    <connection source="OPR_SBC_DECODER.OUT_1" sink="OPR_SBC_ENCODER.IN"/>
+    <connection source="OPR_SBC_ENCODER.OUT" sink="OPR_SWITCHED_PASSTHROUGH_CONSUMER.IN"/>
+    <output source="OPR_SWITCHED_PASSTHROUGH_CONSUMER.OUT" role="EPR_SOURCE_FORWARDING_MEDIA"/>
+    <output source="OPR_SBC_DECODER.OUT_0" role="EPR_SOURCE_DECODED_PCM"/>
+
+</chain>
+

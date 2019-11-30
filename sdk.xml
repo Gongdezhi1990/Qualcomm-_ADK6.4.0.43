@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Defines the contents of a devkit
+    Copyright (c) 2016 - 2019 Qualcomm Technologies International, Ltd 
+    
+    Includes plugins and platforms
+    A development kit only targets a single platform and a single device
+    This is dependent on the components needed to manage the platform and the device
+-->
+<root>
+    <!--Defines which sections of XML cannot be modified outside of the devkit.
+        This mechanism allows other components (such as CAA) to add to the XML model,
+        but without allowing critical services to be tampered with by the user.
+    -->
+    <locks>
+       <lock name="id">kit://id</lock>
+       <lock name="debug_system">kit://plugins/debug/system</lock>
+    </locks>
+
+    <!--Defines unique elements of a devkit
+        Due to their important nature, they cannot be changed
+            without regenerating a checksum of their values
+    -->
+    <id>
+        <!--uuid identifies a devkit within project files and the device database
+                Allows different versions to be installed as used without conflict
+                Typically changed version to version to allow concurrency between devkits
+        -->
+        <uuid>{3d5da188-f161-441c-a5e5-cda018a35030}</uuid>
+
+        <!--group identifier, defines all devkits of a specific type (e.g. ADK for Atlas)
+            Enables a project to be mapped to a devkit regardless of its version.
+            When a new devkit of the same type is released its uuid changes.
+            The group identifier only changes if a devkit would break the build
+            of a project.
+        -->
+        <devkit_group>{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkit_group>
+
+        <!--sequence number unambiguously indicates which Devkit is more recent
+            Prevents projects from being migrated to earlier builds of a devkit that might
+            not support required features.
+            Contains build time in seconds since the epoch
+        -->
+        <build_time>1565343010</build_time>
+
+        <!-- checksum is the product of uuid and fsprefix.  Used for protection -->
+        <checksum>2a91bccab37aa139b4cfdc339f441a82</checksum>
+
+        <!-- version number of the devkit -->
+        <version>6.4.0</version>
+
+        <!-- build number (perforce revision)-->
+        <build>43</build>
+
+        <!-- host platform used by the devkit - filters out devkits not compatible with the IDE -->
+        <target>x86</target>
+
+    </id>
+
+    <!-- Devkit description block for the user  - not used for internal processing -->
+    <info>
+        <name>ADK QCC512X QCC302X WIN 6.4.0.43</name>
+        <description>Qualcomm Software Development Kit</description>
+        <build>6.4.0</build>
+    </info>
+
+    <plugins>
+        <extensions>
+            <path>./extensions</path>
+            <path>./configurations</path>
+
+            <!-- Chipcode Repository Root -->
+            <path>root://extensions</path>
+        </extensions>
+        <templates>
+           <path>./templates</path>
+        </templates>
+    </plugins>
+</root>
+

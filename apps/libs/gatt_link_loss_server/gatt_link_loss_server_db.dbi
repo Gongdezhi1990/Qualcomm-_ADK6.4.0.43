@@ -1,0 +1,37 @@
+/******************************************************************************
+Copyright (c) 2014 - 2015 Qualcomm Technologies International, Ltd.
+ *  %%version
+ *  %%appversion
+ *
+ *  FILE
+ *      gatt_link_loss_server_db.dbi
+ *
+ *  DESCRIPTION
+ *      This file defines the Link Loss Server Service in JSON format, which is 
+ *      fairly human readable.  This file is included in the main 
+ *      application data base file which is used to produce ATT flat data 
+ *      base.
+ *
+ *****************************************************************************/
+#ifndef __GATT_LINK_LOSS_SERVER_DB_DBI__
+#define __GATT_LINK_LOSS_SERVER_DB_DBI__
+
+#include "gatt_link_loss_server_uuids.h"
+
+/* Primary service declaration of Link Loss service */
+primary_service {
+    uuid : UUID_LINK_LOSS_SERVICE,
+    name : "LINK_LOSS_SERVICE",
+	
+	/* Link Loss level characteristic */
+
+    characteristic {
+        uuid        : UUID_LINK_LOSS_LEVEL,
+        name 		: "LINK_LOSS_ALERT_LEVEL",
+        properties  : [read, write],
+        flags 		: [FLAG_IRQ, FLAG_ENCR_R, FLAG_ENCR_W],
+        value 		: 0x0
+    }
+},
+#endif /* __GATT_LINK_LOSS_SERVER_DB_DBI__ */
+

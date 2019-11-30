@@ -1,0 +1,53 @@
+<ModuleData Name="sink_powermanager_onchip_vchg_v1" HeaderName="sink_power_manager_vchg">
+
+    <DefineGroup>
+        <!-- Empty define section required. -->
+    </DefineGroup>
+    <ConfigGroup
+        ShortId="sink_power_settings_vchg"
+        Id="Sink Power Readonly Vchg"
+        Node="Basic">
+        <ConfigStruct
+            Id="Instance of a structure power_config_vchg"
+            ShortId="config_p_vchg"
+            Desc="."
+            Type="struct"
+            Struct="sink_power_config_vchg">
+            <StructElementConfigItem
+                Id="power_config_vchg"
+                ShortId="power_config_vchg"
+                Desc=".">
+                <StructElementConfigItem
+                    Id="Vchg Charger Configuration Module"
+                    ShortId="Vchg_Struct"
+                    Desc="."
+                    ConfigGroupPath="./[@ShortId='battery']/[@ShortId='charger_voltage_vchg']">
+                    <StructElementConfigItem
+                        Id="power_adc4"
+                        ShortId="power_adc4"
+                        Desc=".">
+                        <StructElementConfigItem
+                            Id="Vchg ADC Source"
+                            ShortId="Vchg_ADC_Source"
+                            Desc="."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='charger_voltage_vchg']/[@ShortId='charger_adc_configuration']"
+                            DefaultValue="VCHG"/>
+                        <StructElementConfigItem
+                            Id="Vchg Read Period When Charging [s]"
+                            ShortId="Vchg_Read_Period_Charging"
+                            Desc="This configures the time interval between Vchg updates in seconds while charging, 0 to disable."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='charger_voltage_vchg']/[@ShortId='charger_adc_configuration']"
+                            DefaultValue="0x14"/>
+                        <StructElementConfigItem
+                            Id="Vchg Read Period When Not Charging [s]"
+                            ShortId="Vchg_Read_Period_Not_Charging"
+                            Desc="This configures the timer interval between Vchg updates in seconds while not charging, 0 to disable."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='charger_voltage_vchg']/[@ShortId='charger_adc_configuration']"
+                            DefaultValue="0x0014"/>
+                    </StructElementConfigItem>
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+        </ConfigStruct>
+    </ConfigGroup>
+
+</ModuleData>

@@ -1,0 +1,74 @@
+
+#ifndef __GATT_DEVICE_INFO_SERVER_DB_DBI__
+#define __GATT_DEVICE_INFO_SERVER_DB_DBI__
+
+primary_service {
+    uuid : 0x180A,
+    name : "DEVICE_INFORMATION_SERVICE",
+    sdp  : true,
+    characteristic {
+        uuid        : 0x2A29,
+        name        : "MANUFACTURER_NAME",
+        flags       : [ FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read ],
+        value       : 0x0
+    },
+    characteristic {
+        uuid        : 0x2A24,
+        name        : "MODEL_NUMBER",
+        flags       : [FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read ],
+        value       : 0x0
+    },
+    characteristic {
+        uuid        : 0x2A25,
+        name        : "SERIAL_NUMBER",
+        flags       : [FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read ],
+        value       : 0x0
+    },
+    characteristic {
+        uuid        : 0x2A27,
+        name        : "HARDWARE_REVISION",
+        flags       : [FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read ],
+        value       : 0x0
+        },
+    characteristic {
+        uuid        : 0x2A26,
+        name        : "FIRMWARE_REVISION",
+        flags       : [FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read ],
+        value       : 0x0
+    },
+    characteristic {
+        uuid        : 0x2A28,
+        name        : "SOFTWARE_REVISION",
+        flags       : [FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read ],
+        value       : 0x0
+    },
+    characteristic {
+        uuid        : 0x2A23,
+        name        : "SYSTEM_ID",
+        flags       : [FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read ],
+        value       : 0x0
+    },
+    characteristic {
+        uuid        : 0x2A2A,
+        name        : "IEEE_DATA",
+        flags       : [FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read ],
+        value       : 0x0
+    },
+    characteristic {
+        uuid        : 0x2A50,
+        name        : "PNP_ID",
+        flags       : [FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ read ],
+        value       : 0x0
+    }
+}
+
+#endif /* __GATT_DEVICE_INFO_SERVER_DB_DBI__ */

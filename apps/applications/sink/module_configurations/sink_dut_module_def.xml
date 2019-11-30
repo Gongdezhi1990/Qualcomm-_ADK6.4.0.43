@@ -1,0 +1,18 @@
+<ModuleData Name="Sink_dut">
+    <ConfigGroup
+        ShortId="sink_dut_readonly"
+        Id="sink dut readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="DUT mode PIO"
+            ShortId="dut_pio"
+            Type="enum"
+            DefaultValue="N/A"
+            Size="8"
+            Desc="This configures a PIO to enable the device to switch into DUT mode on power on."
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='input_pios']">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+        </ConfigItem>
+    </ConfigGroup> 
+</ModuleData>

@@ -1,0 +1,184 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2010 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+asm_files = aac_ff_rew.asm \
+aacdec_api.asm \
+adts_read_frame.asm \
+apply_scalefactors_and_dequantize.asm \
+audio_mux_element.asm \
+audio_specific_config.asm \
+byte_align.asm \
+calc_sfb_and_wingroup.asm \
+corruption.asm \
+decode_cpe.asm \
+decode_fil.asm \
+decode_sce.asm \
+decoder_state.asm \
+discard_dse.asm \
+er_low_delay_sbr_block.asm \
+filterbank.asm \
+filterbank_analysis_ltp.asm \
+frame_decode.asm \
+ga_specific_config.asm \
+getbits.asm \
+global_variables.asm \
+huffman_decode.asm \
+huffman_unpack.asm \
+ics_info.asm \
+imdct.asm \
+individual_channel_stream.asm \
+init_decoder.asm \
+initialise_ps_decorrelation_for_hybrid_freq_bins_flash.asm \
+initialise_ps_decorrelation_for_qmf_freq_bins_flash.asm \
+initialise_ps_stereo_mixing_for_hybrid_freq_bins_flash.asm \
+initialise_ps_stereo_mixing_for_qmf_freq_bins_flash.asm \
+initialise_ps_transient_detection_for_hybrid_freq_bins_flash.asm \
+initialise_ps_transient_detection_for_qmf_freq_bins_flash.asm \
+is_decode.asm \
+latm_get_value.asm \
+latm_read_frame.asm \
+ld_sbr_header.asm \
+low_delay_sbr_data.asm \
+ltp_data.asm \
+ltp_decode.asm \
+ltp_reconstruction.asm \
+mdct.asm \
+mem_alloc.asm \
+mp4_discard_atom_data.asm \
+mp4_ff_rew.asm \
+mp4_moov_routine.asm \
+mp4_read_atom_header.asm \
+mp4_read_frame.asm \
+mp4_sequence.asm \
+ms_decode.asm \
+overlap_add.asm \
+payload_length_info.asm \
+payload_mux.asm \
+pns_decode.asm \
+program_element_config.asm \
+ps_data.asm \
+ps_data_decode.asm \
+ps_decorrelate.asm \
+ps_delta_decode.asm \
+ps_extension.asm \
+ps_global_variables.asm \
+ps_huff_dec.asm \
+ps_hybrid_analysis.asm \
+ps_hybrid_synthesis.asm \
+ps_hybrid_type_a_fir_filter.asm \
+ps_hybrid_type_b_fir_filter.asm \
+ps_inverse_8point_fft.asm \
+ps_map_34_parameters_to_20.asm \
+ps_stereo_mixing.asm \
+ps_transient_detection.asm \
+pulse_data.asm \
+pulse_decode.asm \
+raw_data_block.asm \
+reconstruct_channels.asm \
+reorder_spec.asm \
+reset_decoder.asm \
+eld_specific_config.asm \
+decode_cpe_eld.asm \
+decode_sce_eld.asm \
+er_raw_data_block_eld.asm \
+individual_channel_stream_eld.asm \
+sbr_allocate_and_unpack_from_flash.asm \
+sbr_analysis_dct_kernel.asm \
+sbr_analysis_filterbank.asm \
+sbr_auto_correlation_opt.asm \
+sbr_bubble_sort.asm \
+sbr_calc_chirp_factors.asm \
+sbr_calc_tables.asm \
+sbr_calculate_gain.asm \
+sbr_calculate_limiter_band_boost_coefficients.asm \
+sbr_channel_pair_element.asm \
+sbr_construct_x_matrix.asm \
+sbr_dtdf.asm \
+sbr_envelope.asm \
+sbr_envelope_noise_border_vector.asm \
+sbr_envelope_noise_dequantisation.asm \
+sbr_envelope_noise_dequantisation_coupling_mode.asm \
+sbr_envelope_time_border_vector.asm \
+sbr_estimate_current_envelope.asm \
+sbr_extension_data.asm \
+sbr_extract_envelope_data.asm \
+sbr_extract_noise_floor_data.asm \
+sbr_fband_tables.asm \
+sbr_fmaster_table_calc_fscale_eq_zero.asm \
+sbr_fmaster_table_calc_fscale_gt_zero.asm \
+sbr_fp_mult_frac.asm \
+sbr_get_s_mapped.asm \
+sbr_global_variables.asm \
+sbr_grid.asm \
+sbr_header.asm \
+sbr_hf_adjustment.asm \
+sbr_hf_assembly.asm \
+sbr_hf_assembly_calc_gain_filters_smoothing_mode.asm \
+sbr_hf_assembly_initialise_outer_loop_iteration.asm \
+sbr_hf_assembly_initialise_signal_gain_and_component_loop.asm \
+sbr_hf_assembly_save_persistent_gain_signal_envelopes.asm \
+sbr_hf_generation.asm \
+sbr_huff_dec.asm \
+sbr_invf.asm \
+sbr_ld_grid.asm \
+sbr_limiter_frequency_table.asm \
+sbr_middle_border.asm \
+sbr_noise.asm \
+sbr_patch_construction.asm \
+sbr_prediction_coeff.asm \
+sbr_read_one_word_from_flash.asm \
+sbr_read_qdiv_tables.asm \
+sbr_reset.asm \
+sbr_save_prev_data.asm \
+sbr_single_channel_element.asm \
+sbr_swap_channels.asm \
+sbr_synthesis_construct_v.asm \
+sbr_synthesis_downsampled_construct_v.asm \
+sbr_synthesis_filterbank_combined.asm \
+sbr_wrap_last_thfgen_envelopes.asm \
+scalefactor_data.asm \
+section_data.asm \
+silence_decoder.asm \
+spectral_data.asm \
+stream_mux_config.asm \
+tns_data.asm \
+tns_encdec.asm \
+windowing.asm \
+windowing_eld.asm \
+overlap_add_eld.asm \
+imdct480.asm \
+init_static_decoder.asm \
+init_tables.asm
+
+
+
+header_files = aac.h \
+aac_mem.h \
+aac_consts.h \
+aac_library.h \
+aac_library_c_stubs.h \
+aac_plusv1_library.h \
+aac_plusv2_library.h \
+ps_consts.h \
+sbr_consts.h \
+eld_consts.h 
+
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# one line per variant...
+$(eval $(call rules_variant,debug,$(FL_DEBUG),$(asm_files)))
+
+$(eval $(call rules_variant,lowram,-DAAC_LOWRAM,$(asm_files)))
+
+$(eval $(call rules_variant,plusv1,                  -DAACDEC_SBR_ADDITIONS                                                       ,$(asm_files)))
+$(eval $(call rules_variant,plusv1_debug,$(FL_DEBUG) -DAACDEC_SBR_ADDITIONS                                                       ,$(asm_files)))
+$(eval $(call rules_variant,plusv2,                  -DAACDEC_SBR_ADDITIONS -DAACDEC_PARAMETRIC_STEREO_ADDITIONS                  ,$(asm_files)))
+$(eval $(call rules_variant,eld,                     -DAACDEC_SBR_ADDITIONS -DAACDEC_ELD_ADDITIONS -DLOAS_AUDIO_SYNC_STREAM       ,$(asm_files)))
+
+

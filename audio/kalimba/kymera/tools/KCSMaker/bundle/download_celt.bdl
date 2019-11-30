@@ -1,0 +1,8 @@
+import imp
+import os
+cap_list = imp.load_source("mod", os.path.abspath(os.path.join(os.path.curdir,"bundle/config/capabilities.cfg")))
+
+# List of capabilites to be bundled up in KDCs
+# Bundles up both the CELT encoder and decoder
+KDCs = {}
+KDCs["download_celt"] = [dnld_celt_decode, dnld_celt_encode]

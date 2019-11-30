@@ -1,0 +1,122 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  Autogen make rules
+#               The only targets we are allowed to make with are
+#               the ones for autogeneration. 'clean' is handled by
+#               makerules_src.
+#               NB this is not a standalone makefile. It assumes something 
+#               has already set BUILD_ROOT and included roots.mkf.
+############################################################################
+
+.PHONY: autogen autogen_src autogen_hdr autogen_asmhdr
+
+#########################################################################
+# Pull in common definitions
+#########################################################################
+include $(BUILD_ROOT)/makerules_common.mkf
+
+########################################################################
+# Paths - default paths to use when searching for source files
+#########################################################################
+include $(OUTPUT_ROOT)/$(CONFIG).mkf
+
+COMPILE_EXTRA_DEFS += $(addprefix -DINSTALL_OPERATOR_,$(CFG_CAPABILITIES))
+
+C_PATH += .
+S_PATH += .
+H_PATH += $(ALL_INCDIRS:%=$(KYMERA_ROOT)/%)
+H_PATH += $(AUTOGEN_ROOT)
+H_PATH += $(AUTOGEN_ROOT)/interface
+H_PATH += $(IO_ROOT)/$(CHIP_NAME)/$(CHIP_VER)
+H_PATH += $(HAL_ROOT)/$(CHIP_NAME)/$(CHIP_VER) 
+H_PATH += . 
+H_PATH += $(COMPILER_H_PATH)
+H_PATH += $(EXTRA_INCDIRS)
+
+SRC_INC_DIRS01=	$(subst |, ,$(H_PATH)) 
+
+SRC_INC_DIRS02=	$(subst / , ,$(SRC_INC_DIRS01))
+
+SRC_INC_DIRS=	$(patsubst %,-I%,$(SRC_INC_DIRS02))
+
+COMPILE_DEFS+=		$(COMPILE_EXTRA_DEFS)
+DEBUG_COMPILE_DEFS+=	$(DEBUG_COMPILE_EXTRA_DEFS)
+
+#########################################################################
+# Define autogen targets.
+#########################################################################
+AUTOGEN_PID=
+ifneq ($(strip $(GEN_PIDS)),)
+AUTOGEN_PID=autogen_pid
+endif
+
+autogen: autogen_src autogen_hdr autogen_asmhdr $(AUTOGEN_PID)
+
+autogen_asmhdr: autogen_src autogen_hdr
+
+# These stamp files aren't necessary for autogeneration. They just make
+# it possible to tell whether we actually did anything this time.
+ifneq ($(strip $(TARGET_LIB_ROOT)),)
+NAME_ROOT = $(TARGET_LIB_ROOT)
+else
+NAME_ROOT = $(TARGET_EXE_ROOT)
+endif
+
+STAMP_HDR = $(AUTOGEN_ROOT)/stamp.autogen_$(NAME_ROOT)_hdr
+STAMP_SRC = $(AUTOGEN_ROOT)/stamp.autogen_$(NAME_ROOT)_src
+STAMP_GEN = $(AUTOGEN_ROOT)/stamp.autogen_$(NAME_ROOT)_gen
+STAMP_PID = $(AUTOGEN_ROOT)/stamp.autogen_$(NAME_ROOT)_pid
+
+###
+
+ifneq ($(strip $(GEN_HDRS)),)
+autogen_hdr:	$(STAMP_HDR)
+# dummy rule
+	@$(TRUE)
+
+$(GEN_HDRS): $(MAKE_DEPS)
+
+$(STAMP_HDR):	$(GEN_HDRS)
+	@echo $(STAMP_HDR) > $@
+	$(info Autogen for $(GEN_HDRS) finished.)
+endif
+
+ifneq ($(strip $(GEN_SRCS)),)
+autogen_src:	$(STAMP_SRC)
+	@$(TRUE)
+
+$(GEN_SRCS): $(MAKE_DEPS)
+
+$(STAMP_SRC):	$(GEN_SRCS)
+	@echo $(STAMP_SRC) > $@
+	$(info Autogen for $(GEN_SRCS) finished.)
+endif
+
+ifneq ($(strip $(GEN_PIDS)),)
+autogen_pid:	$(STAMP_PID)
+	@$(TRUE)
+
+# Patch header autogen for asm patch IDs
+# This always does the same thing, so we can just do it here
+# Component makefiles just need to define input & output files
+$(GEN_PIDS) : $(PATCH_SRC) $(PATCH_GEN_SCRIPT) $(MAKE_DEPS)
+	$(PYTHON) $(PATCH_GEN_SCRIPT) -o $(call ospath,$(GEN_PIDS)) $(PATCH_SRC)
+
+$(STAMP_PID):	$(GEN_PIDS)
+	@echo $(STAMP_PID) > $@
+	$(info Autogen for $(GEN_PIDS) finished.)
+endif
+
+ifneq (gcc, $(strip $(TARGET_COMPILER)))
+#Generate headers using kalelfreader 
+ifneq ($(strip $(GEN_ASM_HDRS)),)
+autogen_asmhdr:
+	${MAKE} -C $(@D) -f $(BUILD_ROOT)/makefile_exe headergen INIT_C_PATH='${C_PATH}' INIT_H_PATH='${H_PATH}' INIT_S_PATH='$(S_PATH)' INIT_C_SRC='${C_SRC}'   BUILD_ROOT='$(BUILD_ROOT)' CONFIG='${CONFIG}' COMPILE_EXTRA_DEFS='${COMPILE_EXTRA_DEFS}' PRINT_DEFINES='${PRINT_DEFINES}' TARGET_MAKEFILE='${TARGET_MAKEFILE}' INIT_ASM_HDRS='${GEN_ASM_HDRS}' INIT_ASM_DEFS='${GEN_ASM_DEFS}' MAKE_DEPS=makefile TGT_LIB='${TARGET_LIB_ROOT}'
+endif
+endif

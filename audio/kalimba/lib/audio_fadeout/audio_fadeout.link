@@ -1,0 +1,13 @@
+/*****************************************************************************
+* CONFIDENTIAL
+*
+* Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+*
+*****************************************************************************/
+/* Linkscript for the AUDIO_FADEOUT library */
+
+#ifdef KEEP_PM
+segment AUDIO_FADEOUT_PM         keep        40          PM_REGION;
+#else
+segment AUDIO_FADEOUT_PM                     40          PM_REGION;
+#endif

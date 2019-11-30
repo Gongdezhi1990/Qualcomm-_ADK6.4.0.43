@@ -1,0 +1,7 @@
+file=bt1
+
+# LC enable watchdog fault
+PSKEY_LC_ENABLE_WATCHDOG_FAULT = TRUE
+
+# Time to keep connection handles alive for host after disconnect (in microseconds)
+PSKEY_HCI_HANDLE_FREEZE_PERIOD = 1000000

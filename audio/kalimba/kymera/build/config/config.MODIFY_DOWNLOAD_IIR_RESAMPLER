@@ -1,0 +1,28 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the DOWNLOAD_IIR_RESAMPLER
+
+
+#
+# Capabilities to include in the build
+#
+%list CFG_CAPABILITIES
+IIR_RESAMPLER
+
+%list ALL_SRCDIRS
+../lib/audio_proc
+../lib/cbops
+capabilities/iir_resampler
+
+# List of global include paths
+%list ALL_INCDIRS
+../lib/audio_proc
+../lib/cbops
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/iir_resampler/iir_resampler

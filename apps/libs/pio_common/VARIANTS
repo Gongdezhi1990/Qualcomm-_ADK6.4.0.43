@@ -1,0 +1,4 @@
+VARIANTS := debug
+
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+

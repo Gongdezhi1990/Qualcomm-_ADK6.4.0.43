@@ -1,0 +1,5 @@
+file=bt2
+
+pskey_bdaddr={0x061b82,0x5b,0x2}
+pskey_device_name="QCC5124-AVSHS"
+

@@ -1,0 +1,20 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+
+%cpp
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+SBC_ENCODE
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/sbc_encode/sbc_encode
+capabilities/encoder/encoder

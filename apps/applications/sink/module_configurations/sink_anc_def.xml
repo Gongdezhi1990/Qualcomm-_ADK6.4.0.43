@@ -1,0 +1,304 @@
+<ModuleData Name="sink_anc">
+    <DefineGroup>
+        <DefineList Id="ANC State" ShortId="anc_initial_state">
+            <enum key="Disabled"
+                  value="0"/>
+            <enum key="Enabled"
+                  value="1"/>
+        </DefineList>
+        <DefineList Id="ANC Mode" ShortId="anc_initial_mode">
+           <enum key="Mode 1"
+                 value="0"/>
+            <enum key="Mode 2"
+                  value="1"/>
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+            <enum key="Mode 3"
+                  value="2"/>
+            <enum key="Mode 4"
+                  value="3"/>
+            <enum key="Mode 5"
+                  value="4"/>
+            <enum key="Mode 6"
+                 value="5"/>
+            <enum key="Mode 7"
+                  value="6"/>
+            <enum key="Mode 8"
+                  value="7"/>
+            <enum key="Mode 9"
+                  value="8"/>
+            <enum key="Mode 10"
+                  value="9"/>
+            </BuildVariant>
+        </DefineList>
+        <DefineList
+            Id="ANC User Events"
+            ShortId="g_user_event">
+            <enum key="ANC On"
+                  value="0xE4"/>
+            <enum key="ANC Off"
+                  value="0xE5"/>
+            <enum key="ANC Toggle On/Off"
+                  value="0xE6"/>
+            <enum key="ANC Set Mode 1"
+                  value="0xE7"/>
+            <enum key="ANC Set Mode 2"
+                  value="0xE8"/>
+            <enum key="ANC Set Next Mode"
+                  value="0xE9"/>
+            <enum key="ANC Volume Down"
+                  value="0xEA"/>
+            <enum key="ANC Volume Up"
+                  value="0xEB"/>
+            <enum key="ANC Cycle Digital gain"
+                  value="0xEC"/>
+             <enum key="ANC Set Mode 3"
+                  value="0x101"/>
+            <enum key="ANC Set Mode 4"
+                  value="0x102"/>
+             <enum key="ANC Set Mode 5"
+                  value="0x103"/>
+            <enum key="ANC Set Mode 6"
+                  value="0x104"/>
+             <enum key="ANC Set Mode 7"
+                  value="0x105"/>
+            <enum key="ANC Set Mode 8"
+                  value="0x106"/>
+             <enum key="ANC Set Mode 9"
+                  value="0x107"/>
+            <enum key="ANC Set Mode 10"
+                  value="0x108"/>
+        </DefineList>
+        <DefineList
+            Id="ANC System Events"
+            ShortId="g_system_event">
+            <enum key="ANC Disabled"
+                  value="0x4796"/>
+            <enum key="ANC In Mode 1"
+                  value="0x4797"/>
+            <enum key="ANC In Mode 2"
+                  value="0x4798"/>
+            <enum key="ANC Volume Max"
+                  value="0x4799"/>
+            <enum key="ANC Volume Min"
+                  value="0x479A"/>
+            <enum key="ANC In Mode 3"
+                  value="0x47F6"/>
+            <enum key="ANC In Mode 4"
+                  value="0x47F7"/>
+            <enum key="ANC In Mode 5"
+                  value="0x47F8"/>
+            <enum key="ANC In Mode 6"
+                  value="0x47F9"/>
+            <enum key="ANC In Mode 7"
+                  value="0x47FA"/>
+            <enum key="ANC In Mode 8"
+                  value="0x47FB"/>
+            <enum key="ANC In Mode 9"
+                  value="0x47FC"/>
+            <enum key="ANC In Mode 10"
+                  value="0x47FD"/>
+        </DefineList>
+        <DefineList Id="ANC Feed Forward Map Options" ShortId="anc_ff_map_options">
+            <enum key="Disabled"
+                  value="0"/>
+            <enum key="Microphone 1"
+                  value="1"/>
+            <enum key="Microphone 2"
+                  value="2"/>
+            <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+            <enum key="Microphone 3"
+                  value="3"/>
+            <enum key="Microphone 4"
+                  value="4"/>
+            <enum key="Microphone 5"
+                  value="5"/>
+            <enum key="Microphone 6"
+                  value="6"/>
+            </BuildVariant>
+        </DefineList>
+        <DefineList Id="ANC Feed Back Map Options" ShortId="anc_fb_map_options">
+            <enum key="Disabled"
+                  value="0"/>
+            <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+            <enum key="Microphone 1"
+                  value="1"/>
+            <enum key="Microphone 2"
+                  value="2"/>
+            <enum key="Microphone 3"
+                  value="3"/>
+            <enum key="Microphone 4"
+                  value="4"/>
+            <enum key="Microphone 5"
+                  value="5"/>
+            <enum key="Microphone 6"
+                  value="6"/>
+            </BuildVariant>
+        </DefineList>
+        <DefineStruct Id="ANC Mic Params" ShortId="anc_mic_params_r_config" >
+          <ConfigItem
+                Id="Assign Feed Forward Left Mic"
+                ShortId="feed_forward_left_mic"
+                Desc="Assign microphone for feed forward left"
+                Type="enum"
+                Size="4">
+                <List use="anc_ff_map_options"/>
+          </ConfigItem>
+          <ConfigItem
+                Id="Assign Feed Forward Right Mic"
+                ShortId="feed_forward_right_mic"
+                Desc="Assign microphone for feed forward right"
+                Type="enum"
+                Size="4">
+                <List use="anc_ff_map_options"/>
+          </ConfigItem>
+          <ConfigItem
+                Id="Assign Feed Back Left Mic"
+                ShortId="feed_back_left_mic"
+                Desc="Assign microphone for feed back left"
+                Type="enum"
+                Size="4">
+                <List use="anc_fb_map_options"/>
+          </ConfigItem>
+          <ConfigItem
+                Id="Assign Feed Back Right Mic"
+                ShortId="feed_back_right_mic"
+                Desc="Assign microphone for feed back right"
+                Type="enum"
+                Size="4">
+                <List use="anc_fb_map_options"/>
+          </ConfigItem>
+          <ConfigItem
+                Id="ANC ADC Digital Gain fine mode step"
+                ShortId="mic_gain_step_size"
+                Desc="The ANC ADC Digital gain fine mode step to use for fine tuning. Note: This step size is used to cycle through Digital gain in fine mode in 3 steps i.e. Default_gain - step, Default_gain, Default_gain + step, Default_gain - step..."
+                Type="uint"
+                Size="16" />
+        </DefineStruct>
+    </DefineGroup>
+    <ConfigGroup
+        Id="sink anc"
+        ShortId="sink_anc_readonly"
+        Node="Basic" >
+        <ConfigStruct
+            Id="Anc Mic Params"
+            ShortId="anc_mic_params_r_config"
+            Desc="Anc Mic Params"
+            Type="struct"
+            Struct="anc_mic_params_r_config">
+            <StructElementConfigItem
+                Id="Assign Feed Forward Left Mic"
+                ShortId="feed_forward_left_mic"
+                Desc="Assign microphone for feed forward left"
+                DefaultValue="Microphone 1"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']">
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Assign Feed Forward Right Mic"
+                ShortId="feed_forward_right_mic"
+                Desc="Assign microphone for feed forward right"
+                DefaultValue="Microphone 2"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']">
+                <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Microphone 3" />
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Assign Feed Back Left Mic"
+                ShortId="feed_back_left_mic"
+                Desc="Assign microphone for feed back left"
+                DefaultValue="Disabled"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']">
+                <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Microphone 2" />
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Assign Feed Back Right Mic"
+                ShortId="feed_back_right_mic"
+                Desc="Assign microphone for feed back right"
+                DefaultValue="Disabled"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']">
+                <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" Value="Microphone 4" />
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="ANC ADC Digital Gain fine mode step"
+                ShortId="mic_gain_step_size"
+                Desc="The ANC ADC Digital gain fine mode step to use for fine tuning. Note: This step size is used to cycle through Digital gain in fine mode in 3 steps i.e. Default_gain - step, Default_gain, Default_gain + step, Default_gain - step..."
+                DefaultValue="5"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']">
+            </StructElementConfigItem>
+        </ConfigStruct>
+        <ConfigItem
+            Id="Number of ANC Modes Set"
+            ShortId="num_anc_modes"
+            Desc="This setting specifies the number of ANC modes that can be configured"
+            Type="uint"
+            Range="Min=1,Max=10"
+            Size="8"
+            DefaultValue="2"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']">
+            <!-- For Aura variant maximum modes set to a default value of 10  -->
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="10"/>
+        </ConfigItem>   
+    </ConfigGroup>
+<!-- ***************************************** Writeable config data ***************************************************** -->
+    <ConfigGroup
+        ShortId="sink_anc_writeable"
+        Id="sink anc writeable"
+        Node="Basic">
+        <ConfigItem
+            Id="Initial ANC State"
+            ShortId="initial_anc_state"
+            Type="enum"
+            DefaultValue="Disabled"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']"
+            Desc="The initial ANC State to use when the device is powered on.">
+            <List use="anc_initial_state"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Persist ANC State on Power Off"
+            ShortId="persist_initial_state"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']"          
+            Desc="If this option is set then the current ANC State when the device is powered off will be persisted and become the Initial ANC State when the device is powered on again.">
+        </ConfigItem>       
+        <ConfigItem
+            Id="Initial ANC Mode"
+            ShortId="initial_anc_mode"
+            Type="enum"
+            DefaultValue="Mode 1"
+            Size="4"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']"
+            Desc="The initial ANC Mode to use based on number of modes available when ANC is enabled.">
+            <List use="anc_initial_mode"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Persist ANC Mode on Power Off"
+            ShortId="persist_initial_mode"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']"          
+            Desc="If this option is set then the current ANC Mode when the device is powered off will be persisted and become the Initial ANC Mode when the device is powered on again.">
+        </ConfigItem>       
+        <ConfigItem
+            Id="Initial ANC Sidetone Gain"
+            ShortId="initial_anc_gain"
+            Type="uint"     
+            DefaultValue="0x00"
+            Size="8"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']"          
+            Desc="The initial ANC Sidetone Gain to set when ANC is enabled.">
+        </ConfigItem>
+        <ConfigItem
+            Id="Persist ANC Sidetone Gain"
+            ShortId="persist_anc_gain"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='active_noise_cancellation']"          
+            Desc="If this option is set then the current ANC Sidetone Gain when the device is powered off will be persisted and become the Initial ANC Sidetone Gain when the device is powered on again.">
+        </ConfigItem>
+    </ConfigGroup>
+</ModuleData>

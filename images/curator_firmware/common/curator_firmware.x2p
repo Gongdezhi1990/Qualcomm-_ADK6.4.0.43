@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project><configurations><configuration name="prebuilt_image" options="default"><property name="SUBSYSTEM_NAME">curator</property><devkitConfiguration>prebuilt_image</devkitConfiguration><devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup><deployProject>deploy</deployProject></configuration></configurations><file path="config\subsys0_config1.hcf" /><file path="patches\subsys0_patch0_fw00000503.hcf" /><file path="patches\subsys6_patch0_fw00000503.hcf" /></project>

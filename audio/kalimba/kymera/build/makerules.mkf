@@ -1,0 +1,26 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  generic make rules
+#
+############################################################################
+
+# This file is a shim; we need each module to include different rules 
+# depending on whether we are building autogen targets or actual build targets.
+# We could just copy/paste this block into every module's makefile, but
+# let's keep the complexity within the build framework as much as possible.
+
+ifeq ($(findstring autogen, $(MAKECMDGOALS)), autogen)
+include $(BUILD_ROOT)/makerules_gen.mkf
+else
+ifeq ($(findstring headergen, $(MAKECMDGOALS)), headergen)
+include $(BUILD_ROOT)/makerules_headergen.mkf
+else
+include $(BUILD_ROOT)/makerules_src.mkf
+endif
+endif

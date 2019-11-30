@@ -1,0 +1,26 @@
+var anc__config__data_8h =
+[
+    [ "iir_config_t", "db/d20/structiir__config__t.html", "db/d20/structiir__config__t" ],
+    [ "lpf_config_t", "d1/d0d/structlpf__config__t.html", "d1/d0d/structlpf__config__t" ],
+    [ "filter_path_config_t", "d4/daa/structfilter__path__config__t.html", "d4/daa/structfilter__path__config__t" ],
+    [ "dc_filter_config_t", "dc/d82/structdc__filter__config__t.html", "dc/d82/structdc__filter__config__t" ],
+    [ "dmic_x2_config_t", "dd/d2b/structdmic__x2__config__t.html", "dd/d2b/structdmic__x2__config__t" ],
+    [ "gain_config_t", "dd/dfe/structgain__config__t.html", "dd/dfe/structgain__config__t" ],
+    [ "feed_forward_path_config_t", "d7/d84/structfeed__forward__path__config__t.html", "d7/d84/structfeed__forward__path__config__t" ],
+    [ "feed_back_path_config_t", "da/d93/structfeed__back__path__config__t.html", "da/d93/structfeed__back__path__config__t" ],
+    [ "small_lpf_path_config_t", "d3/d7a/structsmall__lpf__path__config__t.html", "d3/d7a/structsmall__lpf__path__config__t" ],
+    [ "anc_instance_config_t", "dd/da6/structanc__instance__config__t.html", "dd/da6/structanc__instance__config__t" ],
+    [ "hardware_gains_t", "da/dad/structhardware__gains__t.html", "da/dad/structhardware__gains__t" ],
+    [ "anc_mode_config_t", "d6/d85/structanc__mode__config__t.html", "d6/d85/structanc__mode__config__t" ],
+    [ "anc_config_t", "d2/d68/structanc__config__t.html", "d2/d68/structanc__config__t" ],
+    [ "NUMBER_OF_ANC_INSTANCES", "dc/da1/anc__config__data_8h.html#a945dc1c8fca21d8638b97e59dd8b1bcb", null ],
+    [ "NUMBER_OF_IIR_COEFFICIENTS", "dc/da1/anc__config__data_8h.html#a71b7ae48b73173bd5b424b35d954d2c2", null ],
+    [ "small_lpf_config_t", "dc/da1/anc__config__data_8h.html#ab869938941f2de51e87d86dddc9e45d3", null ],
+    [ "ANC_INSTANCE_0_INDEX", "dc/da1/anc__config__data_8h.html#a6b7b47dd702d9e331586d485013fd1eaa3c625fa29cb544bb54297ae5f102e65a", null ],
+    [ "ANC_INSTANCE_1_INDEX", "dc/da1/anc__config__data_8h.html#a6b7b47dd702d9e331586d485013fd1eaa9376ce6423d6fb01386af91226ca6f46", null ],
+    [ "ANC_INSTANCE_MAX_INDEX", "dc/da1/anc__config__data_8h.html#a6b7b47dd702d9e331586d485013fd1eaa56e02488e58d80b879f510649e0ea6ea", null ],
+    [ "ancConfigDataUpdateOnModeChange", "dc/da1/anc__config__data_8h.html#accf3892ad5e75d6238c0b2d28dd09cb7", null ],
+    [ "ancConfigDataUpdateOnStateChange", "dc/da1/anc__config__data_8h.html#ad136f29788ecfc568ffff1c5c634c104", null ],
+    [ "ancDataGetSidetoneGain", "dc/da1/anc__config__data_8h.html#ab88388ca125a87ab0fc2186fe9bec04a", null ],
+    [ "ancDataSetSidetoneGain", "dc/da1/anc__config__data_8h.html#ad3e754d39b2e3e0122914e1ec7d87713", null ]
+];

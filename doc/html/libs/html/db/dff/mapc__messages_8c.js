@@ -1,0 +1,27 @@
+var mapc__messages_8c =
+[
+    [ "mapcConnectCfm", "db/dff/mapc__messages_8c.html#a7562e7f4577d63f36c955be804d6d595", null ],
+    [ "mapcDisconnectInd", "db/dff/mapc__messages_8c.html#a997fcb9a74185b2aaecf2862d2bcdf51", null ],
+    [ "mapcMasGetMessageCfm", "db/dff/mapc__messages_8c.html#a1a4d8b1eec19fe2078a17f44f40d266a", null ],
+    [ "mapcMasListingCfm", "db/dff/mapc__messages_8c.html#a21d64a746e3254875872cc2eb64a4bf7", null ],
+    [ "mapcMasPutMessageCfm", "db/dff/mapc__messages_8c.html#a9ed2cac440afac4fab9a076e45c47b58", null ],
+    [ "mapcMnsConnectInd", "db/dff/mapc__messages_8c.html#a1b1dfbffc67fecf0d876bd8ea451bf07", null ],
+    [ "mapcMnsSendEventInd", "db/dff/mapc__messages_8c.html#accee3775030f9b04b2f9746701b8e566", null ],
+    [ "mapcMnsShutdownCfm", "db/dff/mapc__messages_8c.html#acaddc80d97999b35e4dd8fdf113d5827", null ],
+    [ "mapcMnsStartCfm", "db/dff/mapc__messages_8c.html#a962d029a8e9ecb421fe9a006cccf582d", null ],
+    [ "mapcPostConnectReq", "db/dff/mapc__messages_8c.html#a1368b3a322d4f1968d0d0afe34c94a40", null ],
+    [ "mapcPostConnectResp", "db/dff/mapc__messages_8c.html#a5d27d3f452eadda15a2583983debe0b1", null ],
+    [ "mapcPostMasContinue", "db/dff/mapc__messages_8c.html#ab1f2b9da3e487016a775cd6f20d27d3c", null ],
+    [ "mapcPostMasGetFolderListing", "db/dff/mapc__messages_8c.html#a7f4a87770cc0465dc0741e39514427f6", null ],
+    [ "mapcPostMasGetMessage", "db/dff/mapc__messages_8c.html#abb12d73ba47623b27b971206e197b3f1", null ],
+    [ "mapcPostMasGetMessagesListing", "db/dff/mapc__messages_8c.html#a34d5e772ff104532f252b738cee34593", null ],
+    [ "mapcPostMasPutContinue", "db/dff/mapc__messages_8c.html#a5ae1f4ed9cbf6e406656f864d82a8f19", null ],
+    [ "mapcPostMasPutMessage", "db/dff/mapc__messages_8c.html#a2cff8a98aa743dd01ccdffda5511146b", null ],
+    [ "mapcPostMasSetFolder", "db/dff/mapc__messages_8c.html#a2082af9183da2cffadc544069a192c7f", null ],
+    [ "mapcPostMasSetMessageStatus", "db/dff/mapc__messages_8c.html#a3eeefc06a190129030ede5dc89e65742", null ],
+    [ "mapcPostMasUpdateInbox", "db/dff/mapc__messages_8c.html#a996cc120064c176ce5b4a8f2eb325f45", null ],
+    [ "mapcPostMnsSendEventResp", "db/dff/mapc__messages_8c.html#a16b8733e17cfa105ccada73b0974f79e", null ],
+    [ "mapcPostRegisterNotification", "db/dff/mapc__messages_8c.html#a7f51b50d8d14482010b742cf720e6da5", null ],
+    [ "mapcPostTaskDelete", "db/dff/mapc__messages_8c.html#af355183ac591a75b8f1a29f889260985", null ],
+    [ "mapcStatusCfm", "db/dff/mapc__messages_8c.html#acc294071929f758135c16aab41c7713b", null ]
+];

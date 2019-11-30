@@ -1,0 +1,18 @@
+Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+All Rights Reserved.
+Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+MIB keys are required to support EON/ESMT parts on QCC512x devices. There are
+no EON/ESMT QSPI parts with ROM support on QCC512x.
+
+Although MIB keys are supplied for EN25S16B(2S) and EN25S80B(2S), they should not
+be used because they require a resume to suspend delay of 5ms (according to 
+their datasheets). Revised parts expected Q2/Q3 2019.
+
+EON/ESMT flash parts use alternative suspend/resume commands. The Application
+filesystem (fw_cfg_filesystem) on QCC512x devices equipped with ESMT flash 
+parts must contain the following entry:
+
+SiflashSuspendResumeCommands = 0xb030b030

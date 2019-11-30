@@ -1,0 +1,23 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the Persistent Store support for ACCMD
+
+# List of global include paths
+%list ALL_INCDIRS
+components/ps_sar
+components/ps_router
+
+# List of libraries to build
+%list CFG_LIBS
+components/ps_sar/ps_sar
+components/ps_router/ps_router
+
+%cpp
+INSTALL_PS_FOR_ACCMD
+
+%build
+BUILD_PS_FOR_ACCMD=true

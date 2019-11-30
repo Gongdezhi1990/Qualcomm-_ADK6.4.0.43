@@ -1,0 +1,74 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  generic make rules
+#
+#               This file defines some top-level variables which should be
+#               set for any build. Note that it is not a standalone makefile.
+############################################################################
+
+#########################################################################
+# Define helper targets. Help first, so make with no arguments prints help
+#########################################################################
+help:
+	@echo
+	@echo "Make system for Kymera SW"
+	@echo
+	@echo "Use like: \"make target options\" "
+	@echo
+	@echo "TARGETS AVAILABLE:"
+	@echo "make       ---------------- Build debug executable and all required libraries"
+	@echo "make debug ---------------- As above (for backwards compatibility)"
+	@echo "make verbose -------------- As above, but displays information, commands and options inferred from elsewhere"
+	@echo "make all ------------------ Same as make verbose"
+	@echo "make clean ---------------- Delete all files that would be created by this build"
+	@echo "make dox ------------------ Build doxygen documentation"
+	@echo "Additionally, any derived file can be given explicitly as the target"
+	@echo
+	@echo "The most important parameter is the name of the build config we wish to make."
+	@echo "This is specified by the option CONFIG="configName"."
+	@echo
+	@echo "OTHER COMMAND LINE OPTIONS AVAILABLE:"
+	@echo "1 BUILD_EXTRA_DEFS="-DExtraDefine" will pass extra define (to both compiler and assembler)."
+	@echo "2 PRINT_DEFINES=true - set this to enable detailed logging of which defines are passed to the assembler."
+	@echo "3 PP_ONLY=true - set this to generate C preprocessor output only, without attempting further build steps."
+
+include $(BUILD_ROOT)/make_globals.mkf
+
+PATCH_GEN_SCRIPT = $(BUILD_ROOT)/make_patch_defs.py
+
+#########################################################################
+# Decide the target system we're building for,  create the necessary 
+# directories, and include target specific rules
+#########################################################################
+ifneq ($(MAKECMDGOALS), help) # This won't get built for make help
+-include $(OUTPUT_ROOT)/builddefs.mkf
+endif
+include $(BUILD_ROOT)/target_check.mkf
+include $(BUILD_ROOT)/dirs.mkf
+include $(BUILD_ROOT)/compiler/$(TARGET_COMPILER).mkf # last as this is where trailing -o get set
+include $(BUILD_ROOT)/kalsim.mkf
+
+#########################################################################
+# Set generic dependencies - MAKE_DEPS are dependencies for whole system
+#########################################################################
+
+CURRENT_MAKEFILE = $(word 1, $(MAKEFILE_LIST))
+
+MAKE_DEPS+=	$(BUILD_ROOT)/makerules.mkf			\
+		$(BUILD_ROOT)/makerules_src.mkf			\
+		$(BUILD_ROOT)/makerules_gen.mkf			\
+		$(BUILD_ROOT)/makerules_headergen.mkf		\
+		$(BUILD_ROOT)/makerules_common.mkf		\
+		$(BUILD_ROOT)/compiler/$(TARGET_COMPILER).mkf	\
+		$(TARGET_MAKEFILE)				\
+		$(CURRENT_MAKEFILE)
+
+MAKE_DEPS += $(OUTPUT_ROOT)/builddefs.mkf
+
+PREINCLUDE_DEFS_GEN=$(BUILD_ROOT)/preinclude_defs_gen.py

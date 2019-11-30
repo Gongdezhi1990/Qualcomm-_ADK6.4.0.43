@@ -1,0 +1,43 @@
+<ModuleData Name="Sink_ama">
+    <ConfigGroup
+        ShortId="sink_ama"
+        Id="Voice Assistant"
+        Node="Basic">
+        <ConfigItem
+            Id="Device Type"
+            ShortId="device_type"
+            Desc="Unique device type assigned by AMA."
+            Type="AsciiString"
+            DefaultValue="A32E8VQVU960EJ"
+            MaxStrLenBytes="16">
+        </ConfigItem>
+        <ConfigItem
+            Id="Enable Voice Trigger"
+            ShortId="enable_voice_trigger"
+            Type="bool"
+            DefaultValue="false"
+            Desc="Enable voice triggered activation"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='voice_assistant']">
+        </ConfigItem>
+        <ConfigItem
+            Id="Audio Pre-Roll Duration [us]"
+            ShortId="pre_roll_duration"
+            Desc="Audio pre roll duration in microseconds."
+            Type="ulong"
+            DefaultValue="500000"
+            Range="Min=0,Max=2000000"
+            Size="32"
+            ConfigGroupPath="./[@ShortId='voice_assistant']">
+        </ConfigItem>
+        <ConfigItem
+            Id="Phrase Index"
+            ShortId="phrase_index"
+            Type="uint"
+            DefaultValue="0"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='voice_assistant']"
+            Desc="The index of the phrase file to use after initialisation">
+        </ConfigItem>
+    </ConfigGroup>
+</ModuleData>

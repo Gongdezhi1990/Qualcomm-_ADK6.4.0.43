@@ -1,0 +1,20 @@
+#########################################################################
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#########################################################################
+
+%cpp
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+components/aov/aov_interface
+
+# List of global include paths
+%list ALL_INCDIRS
+components/aov
+components/aov/aov_interface
+
+# List of libraries to build
+%list CFG_LIBS
+components/aov/aov_interface/aov_interface

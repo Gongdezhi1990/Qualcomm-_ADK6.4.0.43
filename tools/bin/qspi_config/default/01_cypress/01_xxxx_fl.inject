@@ -1,0 +1,23 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# QEEnable, QEDisable and QECheck are siflash inject vectors used to configure the QE bit.
+# QEMask is the value used to mask the response of QECheck to find the QE bit.
+# QEValue is used to compare against the masked response of QECheck to determine whether
+# or not the QEEnable/QEDisable vectors should be sent.
+# See ../../readme.txt for more information
+
+# This file is required because S25xxxFL and S25xxxFS parts give the same response to the 9Fh
+# identification command but have some differences in command set. This file is for use with
+# the S25xxxFL parts. In order to set the QE bit on these parts, add 'qspi_config/01_xxxx_fl.inject'
+# as a command line argument to nvscmd.exe like so:
+#     nvscmd identify -trb 1 -deviceid 4 0 qspi_config\cypress\01_xxxx_fl.inject
+
+QEEnable =  [00 04 02 01 06 03 01 00 02]
+QEDisable = [00 04 02 01 06 03 01 00 00]
+QECheck = [01 02 01 01 35]
+QEMask = [02]
+QEValue = [02]

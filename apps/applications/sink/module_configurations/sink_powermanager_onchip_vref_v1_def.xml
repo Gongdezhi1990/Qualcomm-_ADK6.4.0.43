@@ -1,0 +1,54 @@
+<ModuleData Name="sink_powermanager_onchip_vref_v1" HeaderName="sink_power_manager_vref">
+
+    <DefineGroup>
+        <!-- Empty define section required. -->
+    </DefineGroup>
+
+    <ConfigGroup
+        ShortId="sink_power_settings_vref"
+        Id="Sink Power Readonly Vref"
+        Node="Basic">
+        <ConfigStruct
+            Id="Instance of a structure power_config_vref"
+            ShortId="config_p_vref"
+            Desc="."
+            Type="struct"
+            Struct="sink_power_config_vref">
+            <StructElementConfigItem
+                Id="power_config_vref"
+                ShortId="power_config_vref"
+                Desc=".">
+                <StructElementConfigItem
+                    Id="Reference Voltage Configuration Struct Vref"
+                    ShortId="Vref_Struct"
+                    Desc="."
+                    ConfigGroupPath="./[@ShortId='battery']/[@ShortId='reference_voltage_vref']">
+                    <StructElementConfigItem
+                        Id="power_adc1_vref"
+                        ShortId="power_adc1_vref"
+                        Desc=".">
+                        <StructElementConfigItem
+                            Id="Vref ADC Source"
+                            ShortId="Vref_ADC_Source"
+                            Desc="The Vref input can be configured to use any of the available input sources given below."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='reference_voltage_vref']/[@ShortId='reference_adc_configuration']"
+                            DefaultValue="VREF"/>
+                        <StructElementConfigItem
+                            Id="Vref Read Period When Charging [s]"
+                            ShortId="Vref_Read_Period_Charging"
+                            Desc="This configures the time interval between Vref updates in seconds while charging, 0 to disable."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='reference_voltage_vref']/[@ShortId='reference_adc_configuration']"
+                            DefaultValue="0x14"/>
+                        <StructElementConfigItem
+                            Id="Vref Read Period When Not Charging [s]"
+                            ShortId="Vref_Read_Period_Not_Charging"
+                            Desc="This configures the timer interval between Vref updates in seconds while not charging, 0 to disable."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='reference_voltage_vref']/[@ShortId='reference_adc_configuration']"
+                            DefaultValue="0x0014"/>
+                    </StructElementConfigItem>
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+        </ConfigStruct>
+    </ConfigGroup>
+
+</ModuleData>

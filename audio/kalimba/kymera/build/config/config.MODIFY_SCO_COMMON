@@ -1,0 +1,62 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2013 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# definitions for sco builds
+
+%cpp
+#
+# Which components do we want to include on this chip?
+#
+INSTALL_SCO
+INSTALL_PLC100
+
+#
+# Flags used by modules used by SCO
+#
+WBS_DECOUPLED
+
+# SCO-specific extra debug information (e.g. counters)
+SCO_DEBUG
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+SCO_SEND
+SCO_RCV
+WBS_ENC
+WBS_DEC
+
+%build
+# We base this on another variable for unit tests so that sco can be turned on
+# at the top level unit test makefile
+BUILD_SCO=$(if $(TEST_BUILD),$(TEST_BUILD_SCO),true)
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+components/sco_data_mgr
+
+# List of global include paths
+%list ALL_INCDIRS
+components/sco_data_mgr
+../lib/codec
+../lib/sbc
+../lib_private/plc100
+
+# List of libraries to build
+%list CFG_LIBS
+components/sco_data_mgr/sco_data_mgr
+capabilities/sco_fw/sco_fw
+capabilities/sco_nb/sco_nb
+capabilities/wbs/wbs
+# Libraries needed by sco capabilities
+../lib_private/plc100/plc100
+../lib/codec/codec
+../lib/sbc/sbc
+%list MAXIM_LIBS
+../lib/sbc/sbc
+../lib_private/plc100/plc100

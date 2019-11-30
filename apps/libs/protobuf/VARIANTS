@@ -1,0 +1,5 @@
+
+VARIANTS := debug 
+
+CFLAGS_debug := -DPROTOBUF_DEBUG
+

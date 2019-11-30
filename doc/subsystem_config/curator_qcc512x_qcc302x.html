@@ -1,0 +1,4209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Config Key List</title>
+<style type="text/css">
+<!--
+body, h1, h2, th, td, p, li {font-family:Arial, helvetica, sans-serif;}
+
+h1                  {font-size:12pt;}
+h2                  {font-size:10pt;}
+h3                  {font-size:10pt;}
+body, th, td, p, li {font-size: 9pt;}
+
+table  {border-collapse: collapse; }
+th, td {border: solid; border: 1px solid black;}
+table.unboxed td, table.unboxed th {border: none; padding-right: 2em;}
+-->
+</style>
+</head>
+<body>
+<h1>Configuration List for curator  version 1607 </h1>
+<ul>
+  <li><a href="#Configuration_elements_Listed_Alphabetically">Alphabetical</a></li>
+  <li><a href="#Configuration_elements_Listed_Numerically">Numerical</a></li>
+  <li><a href="#permuted_index">Permuted</a></li>
+</ul>
+<h2><a name="Configuration_elements_Listed_Alphabetically">Configuration elements Listed Alphabetically</a></h2>
+<table class="unboxed" border="0">
+ <tr><td>0x004d</td><td><a href="#AppsProcsClkRate">AppsProcsClkRate</a></td></tr>
+ <tr><td>0x004e</td><td><a href="#AudioProcsClkRate">AudioProcsClkRate</a></td></tr>
+ <tr><td>0x0064</td><td><a href="#BypassLdoForce3v3">BypassLdoForce3v3</a></td></tr>
+ <tr><td>0x006c</td><td><a href="#ChargerInsertionDebounceTime">ChargerInsertionDebounceTime</a></td></tr>
+ <tr><td>0x004f</td><td><a href="#ChargerIsUSB">ChargerIsUSB</a></td></tr>
+ <tr><td>0x006d</td><td><a href="#ChargerRemovalDebounceTime">ChargerRemovalDebounceTime</a></td></tr>
+ <tr><td>0x041e</td><td><a href="#ChipInactiveWatchdogIntervals">ChipInactiveWatchdogIntervals</a></td></tr>
+ <tr><td>0x0013</td><td><a href="#ChipWatchdogIntervals">ChipWatchdogIntervals</a></td></tr>
+ <tr><td>0x03eb</td><td><a href="#CuratorDeepSleepConfig">CuratorDeepSleepConfig</a></td></tr>
+ <tr><td>0x0049</td><td><a href="#DCDTimeout">DCDTimeout</a></td></tr>
+ <tr><td>0x0047</td><td><a href="#DeepSleepBypassLDOHP">DeepSleepBypassLDOHP</a></td></tr>
+ <tr><td>0x0024</td><td><a href="#DeepSleepPioInvert">DeepSleepPioInvert</a></td></tr>
+ <tr><td>0x0023</td><td><a href="#DeepSleepPioWake">DeepSleepPioWake</a></td></tr>
+ <tr><td>0x0404</td><td><a href="#DeepSleepVoltageReduction">DeepSleepVoltageReduction</a></td></tr>
+ <tr><td>0x043d</td><td><a href="#DormantBypassLDOHP">DormantBypassLDOHP</a></td></tr>
+ <tr><td>0x043b</td><td><a href="#DormantModeEnable">DormantModeEnable</a></td></tr>
+ <tr><td>0x043e</td><td><a href="#DormantVHVLDOHP">DormantVHVLDOHP</a></td></tr>
+ <tr><td>0x0438</td><td><a href="#DSULPTimeConversionFactor">DSULPTimeConversionFactor</a></td></tr>
+ <tr><td>0x005f</td><td><a href="#EnableAudioSqif">EnableAudioSqif</a></td></tr>
+ <tr><td>0x03f4</td><td><a href="#ExternalChargerTrimAdjustment">ExternalChargerTrimAdjustment</a></td></tr>
+ <tr><td>0x0417</td><td><a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystemsOnPanic</a></td></tr>
+ <tr><td>0x0452</td><td><a href="#LpxxLpxBiasTrimSettings">LpxxLpxBiasTrimSettings</a></td></tr>
+ <tr><td>0x0061</td><td><a href="#MclkPLLAlphaVcoConfig">MclkPLLAlphaVcoConfig</a></td></tr>
+ <tr><td>0x0062</td><td><a href="#MclkPLLCoarseDacConfig">MclkPLLCoarseDacConfig</a></td></tr>
+ <tr><td>0x043c</td><td><a href="#OffModeEnable">OffModeEnable</a></td></tr>
+ <tr><td>0x03e8</td><td><a href="#PanicOnFault">PanicOnFault</a></td></tr>
+ <tr><td>0x03e9</td><td><a href="#PanicOnFaultExceptions">PanicOnFaultExceptions</a></td></tr>
+ <tr><td>0x0408</td><td><a href="#PioDirectionElements">PioDirectionElements</a></td></tr>
+ <tr><td>0x0409</td><td><a href="#PioDriveElements">PioDriveElements</a></td></tr>
+ <tr><td>0x0448</td><td><a href="#PioPadControlElements">PioPadControlElements</a></td></tr>
+ <tr><td>0x000c</td><td><a href="#PioProtectMask">PioProtectMask</a></td></tr>
+ <tr><td>0x0008</td><td><a href="#PioStatus">PioStatus</a></td></tr>
+ <tr><td>0x040b</td><td><a href="#PioSubsystemAllocationElements">PioSubsystemAllocationElements</a></td></tr>
+ <tr><td>0x0442</td><td><a href="#PMUForcePWM">PMUForcePWM</a></td></tr>
+ <tr><td>0x044c</td><td><a href="#PMUSMPS32MWaveForm">PMUSMPS32MWaveForm</a></td></tr>
+ <tr><td>0x0443</td><td><a href="#PMUSMPS80MWaveForm">PMUSMPS80MWaveForm</a></td></tr>
+ <tr><td>0x0068</td><td><a href="#QSPICalOverrides">QSPICalOverrides</a></td></tr>
+ <tr><td>0x0050</td><td><a href="#QSPIFRAMLUTBaseParams">QSPIFRAMLUTBaseParams</a></td></tr>
+ <tr><td>0x0059</td><td><a href="#QSPIFRAMLUTDPDCmds">QSPIFRAMLUTDPDCmds</a></td></tr>
+ <tr><td>0x0056</td><td><a href="#QSPIFRAMLUTEraseCmds">QSPIFRAMLUTEraseCmds</a></td></tr>
+ <tr><td>0x0054</td><td><a href="#QSPIFRAMLUTFastConfVector">QSPIFRAMLUTFastConfVector</a></td></tr>
+ <tr><td>0x0053</td><td><a href="#QSPIFRAMLUTFastReadParams">QSPIFRAMLUTFastReadParams</a></td></tr>
+ <tr><td>0x005a</td><td><a href="#QSPIFRAMLUTResetVector">QSPIFRAMLUTResetVector</a></td></tr>
+ <tr><td>0x03f2</td><td><a href="#QSPIFRAMLUTSectorEraseOverride">QSPIFRAMLUTSectorEraseOverride</a></td></tr>
+ <tr><td>0x0052</td><td><a href="#QSPIFRAMLUTSPIConfVector">QSPIFRAMLUTSPIConfVector</a></td></tr>
+ <tr><td>0x0051</td><td><a href="#QSPIFRAMLUTSPIReadParams">QSPIFRAMLUTSPIReadParams</a></td></tr>
+ <tr><td>0x0057</td><td><a href="#QSPIFRAMLUTStatusReadParams">QSPIFRAMLUTStatusReadParams</a></td></tr>
+ <tr><td>0x0058</td><td><a href="#QSPIFRAMLUTStatusReadVector">QSPIFRAMLUTStatusReadVector</a></td></tr>
+ <tr><td>0x0055</td><td><a href="#QSPIFRAMLUTWriteCmds">QSPIFRAMLUTWriteCmds</a></td></tr>
+ <tr><td>0x006f</td><td><a href="#QSPIFWIPWaitTimeout">QSPIFWIPWaitTimeout</a></td></tr>
+ <tr><td>0x0048</td><td><a href="#QSPIModeOverrides">QSPIModeOverrides</a></td></tr>
+ <tr><td>0x03f3</td><td><a href="#QSPIRAMPIOControl">QSPIRAMPIOControl</a></td></tr>
+ <tr><td>0x03f1</td><td><a href="#QSPIRAMSettings">QSPIRAMSettings</a></td></tr>
+ <tr><td>0x005b</td><td><a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanicOrWatchdog</a></td></tr>
+ <tr><td>0x0012</td><td><a href="#ResourceDependencies">ResourceDependencies</a></td></tr>
+ <tr><td>0x0076</td><td><a href="#SmpsPwmClockSourceControl">SmpsPwmClockSourceControl</a></td></tr>
+ <tr><td>0x0043</td><td><a href="#SqifAudioMaskROM">SqifAudioMaskROM</a></td></tr>
+ <tr><td>0x0072</td><td><a href="#SqifClockControl">SqifClockControl</a></td></tr>
+ <tr><td>0x005e</td><td><a href="#SqifEnableChipSelect1">SqifEnableChipSelect1</a></td></tr>
+ <tr><td>0x0401</td><td><a href="#SystemResourceNonDependencies">SystemResourceNonDependencies</a></td></tr>
+ <tr><td>0x0403</td><td><a href="#UartPinsConfig">UartPinsConfig</a></td></tr>
+ <tr><td>0x0073</td><td><a href="#USBChargerDetectDCDThreshold">USBChargerDetectDCDThreshold</a></td></tr>
+ <tr><td>0x0074</td><td><a href="#USBChargerDetectProprietaryThreshold">USBChargerDetectProprietaryThreshold</a></td></tr>
+ <tr><td>0x043a</td><td><a href="#USBDebugger">USBDebugger</a></td></tr>
+ <tr><td>0x0039</td><td><a href="#USBHubConfigString">USBHubConfigString</a></td></tr>
+ <tr><td>0x0070</td><td><a href="#USBHubDeviceRemovable">USBHubDeviceRemovable</a></td></tr>
+ <tr><td>0x003b</td><td><a href="#USBHubMaxPower">USBHubMaxPower</a></td></tr>
+ <tr><td>0x003a</td><td><a href="#USBHubProductID">USBHubProductID</a></td></tr>
+ <tr><td>0x0037</td><td><a href="#USBHubProductString">USBHubProductString</a></td></tr>
+ <tr><td>0x0038</td><td><a href="#USBHubSerialNumberString">USBHubSerialNumberString</a></td></tr>
+ <tr><td>0x002b</td><td><a href="#USBManufString">USBManufString</a></td></tr>
+ <tr><td>0x003d</td><td><a href="#USBSelfPowered">USBSelfPowered</a></td></tr>
+ <tr><td>0x0030</td><td><a href="#USBVendorID">USBVendorID</a></td></tr>
+ <tr><td>0x0449</td><td><a href="#UseAccurateSOSC">UseAccurateSOSC</a></td></tr>
+ <tr><td>0x044e</td><td><a href="#XtalCalibrationParameters">XtalCalibrationParameters</a></td></tr>
+ <tr><td>0x0439</td><td><a href="#XtalDutyCycle">XtalDutyCycle</a></td></tr>
+ <tr><td>0x0407</td><td><a href="#XtalFreqTrim">XtalFreqTrim</a></td></tr>
+ <tr><td>0x0406</td><td><a href="#XtalLoadCapacitance">XtalLoadCapacitance</a></td></tr>
+ <tr><td>0x0451</td><td><a href="#XtalPowerModeStateSettings">XtalPowerModeStateSettings</a></td></tr>
+</table><br>
+<h2><a name="Configuration_elements_Listed_Numerically">Configuration elements Listed Numerically</a></h2>
+<table class="unboxed" border="0">
+ <tr><td>0x0008</td><td><a href="#PioStatus">PioStatus</a></td></tr>
+ <tr><td>0x000c</td><td><a href="#PioProtectMask">PioProtectMask</a></td></tr>
+ <tr><td>0x0012</td><td><a href="#ResourceDependencies">ResourceDependencies</a></td></tr>
+ <tr><td>0x0013</td><td><a href="#ChipWatchdogIntervals">ChipWatchdogIntervals</a></td></tr>
+ <tr><td>0x0023</td><td><a href="#DeepSleepPioWake">DeepSleepPioWake</a></td></tr>
+ <tr><td>0x0024</td><td><a href="#DeepSleepPioInvert">DeepSleepPioInvert</a></td></tr>
+ <tr><td>0x002b</td><td><a href="#USBManufString">USBManufString</a></td></tr>
+ <tr><td>0x0030</td><td><a href="#USBVendorID">USBVendorID</a></td></tr>
+ <tr><td>0x0037</td><td><a href="#USBHubProductString">USBHubProductString</a></td></tr>
+ <tr><td>0x0038</td><td><a href="#USBHubSerialNumberString">USBHubSerialNumberString</a></td></tr>
+ <tr><td>0x0039</td><td><a href="#USBHubConfigString">USBHubConfigString</a></td></tr>
+ <tr><td>0x003a</td><td><a href="#USBHubProductID">USBHubProductID</a></td></tr>
+ <tr><td>0x003b</td><td><a href="#USBHubMaxPower">USBHubMaxPower</a></td></tr>
+ <tr><td>0x003d</td><td><a href="#USBSelfPowered">USBSelfPowered</a></td></tr>
+ <tr><td>0x0043</td><td><a href="#SqifAudioMaskROM">SqifAudioMaskROM</a></td></tr>
+ <tr><td>0x0047</td><td><a href="#DeepSleepBypassLDOHP">DeepSleepBypassLDOHP</a></td></tr>
+ <tr><td>0x0048</td><td><a href="#QSPIModeOverrides">QSPIModeOverrides</a></td></tr>
+ <tr><td>0x0049</td><td><a href="#DCDTimeout">DCDTimeout</a></td></tr>
+ <tr><td>0x004d</td><td><a href="#AppsProcsClkRate">AppsProcsClkRate</a></td></tr>
+ <tr><td>0x004e</td><td><a href="#AudioProcsClkRate">AudioProcsClkRate</a></td></tr>
+ <tr><td>0x004f</td><td><a href="#ChargerIsUSB">ChargerIsUSB</a></td></tr>
+ <tr><td>0x0050</td><td><a href="#QSPIFRAMLUTBaseParams">QSPIFRAMLUTBaseParams</a></td></tr>
+ <tr><td>0x0051</td><td><a href="#QSPIFRAMLUTSPIReadParams">QSPIFRAMLUTSPIReadParams</a></td></tr>
+ <tr><td>0x0052</td><td><a href="#QSPIFRAMLUTSPIConfVector">QSPIFRAMLUTSPIConfVector</a></td></tr>
+ <tr><td>0x0053</td><td><a href="#QSPIFRAMLUTFastReadParams">QSPIFRAMLUTFastReadParams</a></td></tr>
+ <tr><td>0x0054</td><td><a href="#QSPIFRAMLUTFastConfVector">QSPIFRAMLUTFastConfVector</a></td></tr>
+ <tr><td>0x0055</td><td><a href="#QSPIFRAMLUTWriteCmds">QSPIFRAMLUTWriteCmds</a></td></tr>
+ <tr><td>0x0056</td><td><a href="#QSPIFRAMLUTEraseCmds">QSPIFRAMLUTEraseCmds</a></td></tr>
+ <tr><td>0x0057</td><td><a href="#QSPIFRAMLUTStatusReadParams">QSPIFRAMLUTStatusReadParams</a></td></tr>
+ <tr><td>0x0058</td><td><a href="#QSPIFRAMLUTStatusReadVector">QSPIFRAMLUTStatusReadVector</a></td></tr>
+ <tr><td>0x0059</td><td><a href="#QSPIFRAMLUTDPDCmds">QSPIFRAMLUTDPDCmds</a></td></tr>
+ <tr><td>0x005a</td><td><a href="#QSPIFRAMLUTResetVector">QSPIFRAMLUTResetVector</a></td></tr>
+ <tr><td>0x005b</td><td><a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanicOrWatchdog</a></td></tr>
+ <tr><td>0x005e</td><td><a href="#SqifEnableChipSelect1">SqifEnableChipSelect1</a></td></tr>
+ <tr><td>0x005f</td><td><a href="#EnableAudioSqif">EnableAudioSqif</a></td></tr>
+ <tr><td>0x0061</td><td><a href="#MclkPLLAlphaVcoConfig">MclkPLLAlphaVcoConfig</a></td></tr>
+ <tr><td>0x0062</td><td><a href="#MclkPLLCoarseDacConfig">MclkPLLCoarseDacConfig</a></td></tr>
+ <tr><td>0x0064</td><td><a href="#BypassLdoForce3v3">BypassLdoForce3v3</a></td></tr>
+ <tr><td>0x0068</td><td><a href="#QSPICalOverrides">QSPICalOverrides</a></td></tr>
+ <tr><td>0x006c</td><td><a href="#ChargerInsertionDebounceTime">ChargerInsertionDebounceTime</a></td></tr>
+ <tr><td>0x006d</td><td><a href="#ChargerRemovalDebounceTime">ChargerRemovalDebounceTime</a></td></tr>
+ <tr><td>0x006f</td><td><a href="#QSPIFWIPWaitTimeout">QSPIFWIPWaitTimeout</a></td></tr>
+ <tr><td>0x0070</td><td><a href="#USBHubDeviceRemovable">USBHubDeviceRemovable</a></td></tr>
+ <tr><td>0x0072</td><td><a href="#SqifClockControl">SqifClockControl</a></td></tr>
+ <tr><td>0x0073</td><td><a href="#USBChargerDetectDCDThreshold">USBChargerDetectDCDThreshold</a></td></tr>
+ <tr><td>0x0074</td><td><a href="#USBChargerDetectProprietaryThreshold">USBChargerDetectProprietaryThreshold</a></td></tr>
+ <tr><td>0x0076</td><td><a href="#SmpsPwmClockSourceControl">SmpsPwmClockSourceControl</a></td></tr>
+ <tr><td>0x03e8</td><td><a href="#PanicOnFault">PanicOnFault</a></td></tr>
+ <tr><td>0x03e9</td><td><a href="#PanicOnFaultExceptions">PanicOnFaultExceptions</a></td></tr>
+ <tr><td>0x03eb</td><td><a href="#CuratorDeepSleepConfig">CuratorDeepSleepConfig</a></td></tr>
+ <tr><td>0x03f1</td><td><a href="#QSPIRAMSettings">QSPIRAMSettings</a></td></tr>
+ <tr><td>0x03f2</td><td><a href="#QSPIFRAMLUTSectorEraseOverride">QSPIFRAMLUTSectorEraseOverride</a></td></tr>
+ <tr><td>0x03f3</td><td><a href="#QSPIRAMPIOControl">QSPIRAMPIOControl</a></td></tr>
+ <tr><td>0x03f4</td><td><a href="#ExternalChargerTrimAdjustment">ExternalChargerTrimAdjustment</a></td></tr>
+ <tr><td>0x0401</td><td><a href="#SystemResourceNonDependencies">SystemResourceNonDependencies</a></td></tr>
+ <tr><td>0x0403</td><td><a href="#UartPinsConfig">UartPinsConfig</a></td></tr>
+ <tr><td>0x0404</td><td><a href="#DeepSleepVoltageReduction">DeepSleepVoltageReduction</a></td></tr>
+ <tr><td>0x0406</td><td><a href="#XtalLoadCapacitance">XtalLoadCapacitance</a></td></tr>
+ <tr><td>0x0407</td><td><a href="#XtalFreqTrim">XtalFreqTrim</a></td></tr>
+ <tr><td>0x0408</td><td><a href="#PioDirectionElements">PioDirectionElements</a></td></tr>
+ <tr><td>0x0409</td><td><a href="#PioDriveElements">PioDriveElements</a></td></tr>
+ <tr><td>0x040b</td><td><a href="#PioSubsystemAllocationElements">PioSubsystemAllocationElements</a></td></tr>
+ <tr><td>0x0417</td><td><a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystemsOnPanic</a></td></tr>
+ <tr><td>0x041e</td><td><a href="#ChipInactiveWatchdogIntervals">ChipInactiveWatchdogIntervals</a></td></tr>
+ <tr><td>0x0438</td><td><a href="#DSULPTimeConversionFactor">DSULPTimeConversionFactor</a></td></tr>
+ <tr><td>0x0439</td><td><a href="#XtalDutyCycle">XtalDutyCycle</a></td></tr>
+ <tr><td>0x043a</td><td><a href="#USBDebugger">USBDebugger</a></td></tr>
+ <tr><td>0x043b</td><td><a href="#DormantModeEnable">DormantModeEnable</a></td></tr>
+ <tr><td>0x043c</td><td><a href="#OffModeEnable">OffModeEnable</a></td></tr>
+ <tr><td>0x043d</td><td><a href="#DormantBypassLDOHP">DormantBypassLDOHP</a></td></tr>
+ <tr><td>0x043e</td><td><a href="#DormantVHVLDOHP">DormantVHVLDOHP</a></td></tr>
+ <tr><td>0x0442</td><td><a href="#PMUForcePWM">PMUForcePWM</a></td></tr>
+ <tr><td>0x0443</td><td><a href="#PMUSMPS80MWaveForm">PMUSMPS80MWaveForm</a></td></tr>
+ <tr><td>0x0448</td><td><a href="#PioPadControlElements">PioPadControlElements</a></td></tr>
+ <tr><td>0x0449</td><td><a href="#UseAccurateSOSC">UseAccurateSOSC</a></td></tr>
+ <tr><td>0x044c</td><td><a href="#PMUSMPS32MWaveForm">PMUSMPS32MWaveForm</a></td></tr>
+ <tr><td>0x044e</td><td><a href="#XtalCalibrationParameters">XtalCalibrationParameters</a></td></tr>
+ <tr><td>0x0451</td><td><a href="#XtalPowerModeStateSettings">XtalPowerModeStateSettings</a></td></tr>
+ <tr><td>0x0452</td><td><a href="#LpxxLpxBiasTrimSettings">LpxxLpxBiasTrimSettings</a></td></tr>
+</table><br>
+<h1><a name="PioStatus"></a>PioStatus</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0008</th>
+  <td width="60%" style='width:60%' align=left>8</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>10 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>10 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Read the status of the PIO lines
+</b></p><p>This key returns the state of the chip PIO lines 0 to 71 as a bitmask.
+</p>
+<p>
+This key holds 5 16-bit bitmasks, refer to PioDirection for the
+format of mapping PIOs to these bitmasks.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="PioProtectMask"></a>PioProtectMask</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x000c</th>
+  <td width="60%" style='width:60%' align=left>12</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>10 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>10 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Read which PIOs are reserved by the on-chip firmware
+</b></p><p>This key allows the host to see which PIOs are reserved by the on-chip
+firmware.
+</p>
+<p>
+It is read-only.
+</p>
+<p>
+This key holds 5 16-bit bitmasks, refer to PioDirection for the
+format of mapping PIOs to these bitmasks.
+</p>
+<p>
+If the bit corresponding to a PIO is high, it has been reserved by the
+on-chip firmware. This is likely to be a consequence of setting
+another MIB key to specify this PIO as being used in the feature
+controlled by that MIB key.
+</p>
+<p>
+If a PIO is allocated to the chip, the host may not attempt to modify it.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="ResourceDependencies"></a>ResourceDependencies</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0012</th>
+  <td width="60%" style='width:60%' align=left>18</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>4 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Array of pairs of resource identifiers specifying dependencies
+</b></p><p>The string consists of an arbitrary number of sets of four octets.
+Each set encodes two unsigned 16-bit numbers, with the more
+significant octet first within each number. These pairs of numbers
+correspond to hardware resources (type CCP_RESOURCE_ID). Each pair
+specifies that the first resource depends on the second resource,
+i.e. whenever the first resource is requested, the second resource
+must first be acquired.
+</p>
+<p>
+Both resources must be known to the firmware, i.e. must be compiled
+into the resource database. Not all resources are necessarily known
+to all versions of the chip management subsystem firmware.
+</p>
+<p>
+This is used to specify run-time dependency information for resources.
+For example, to specify that a certain piece of hardware
+(CCP_RESOURCE_ID_WONDAWARE) depends on PIOs 3 and 4, the string would
+contain the four resource IDs:
+CCP_RESOURCE_ID_WONDAWARE CCP_RESOURCE_ID_PIO3
+CCP_RESOURCE_ID_WONDAWARE CCP_RESOURCE_ID_PIO4
+</p>
+<p>
+Failure to write this key, for example because there was not enough
+memory to store the dependency information or because one of the
+resource identifiers was not present in the firmware, causes the
+dependency information to be empty.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="ChipWatchdogIntervals"></a>ChipWatchdogIntervals</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0013</th>
+  <td width="60%" style='width:60%' align=left>19</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>ChipWatchdogIntervals = [03 e8 17 70 27 10]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>6 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>6 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Watchdog timing intervals when the chip is active
+</b></p><p>NOTE: This key, like the related <a href="#ChipInactiveWatchdogIntervals">ChipInactiveWatchdogIntervals</a>, should
+not be modified by customers in released products. Doing so may compromise
+the safety of the product. In particular they MUST NOT be modified by customers
+in any product that supports battery charging.
+</p>
+<p>
+A list of 6 octets giving three 16-bit numbers. This format is strict;
+the representation must be exactly 12 base-16 digits.
+Each 16-bit number represents a time interval in milliseconds.
+All times are in milliseconds, but the timeout register (3rd number) uses
+a clock that has a +- 50% inaccuracy. Be generous with error margins!
+Set all three numbers to zero to disable the watchdog task completely,
+ie. to [0000 0000 0000]. This may however modify deep sleep timings.
+Set the last number to zero to disable the chip hardware watchdog but
+continue running the task timer eg. [03E8 1770 0000]. This will leave
+deep sleep timings the same as when the chip watchdog is enabled.
+The defaults are min=1000(ms), max=6000(ms), timeout=10000(ms).
+The numbers are (in order):
+</p>
+<p>
+watchdog_period_min - The minimum time in ms between watchdog kicks.
+</p>
+<p>
+watchdog_period_max - The maximum time in ms between watchdog kicks.
+</p>
+<p>
+watchdog_timeout - The time in ms after which the watchdog will reset
+the processor. As the low power clock that manages the timeout may be
+inaccurate (+- 50%) generally and especially at high temperature, this
+value should be at least 1.5 times watchdog_period_max plus 1 second.
+</p>
+<p>
+The longest possible hardware watchdog timeout should also be well below
+the boot protection time of 30 seconds. This is given by watchdog_timeout * 2
+since the low power clock could be running at -50%, so watchdog_timeout should
+never be more than 14000 ms.
+</p>
+<p>
+If the chip hardware watchdog is disabled the device can become unrecoverable
+over USB debug under some circumstances.
+</p>
+<p>
+The values here apply if any of the chip's other subsystems (providing
+features such as Apps, Bluetooth and Audio) are active. If this
+is not the case the value of <a href="#ChipInactiveWatchdogIntervals">ChipInactiveWatchdogIntervals</a> is used
+which has the same defaults.
+</p>
+<p>
+The watchdog minimum and maximum periods also control the minimum and
+maximum time when the chip will perform monitoring of the chip temperature.
+</p>
+<p>
+To configure the chip for core dumping see <a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanicOrWatchdog</a> and
+<a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystemsOnPanic</a>.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="DeepSleepPioWake"></a>DeepSleepPioWake</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0023</th>
+  <td width="60%" style='width:60%' align=left>35</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>DeepSleepPioWake = [00 00 00 00 00 00 00 00 00 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>10 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>10 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Mask of PIOs that wake the chip from deep sleep
+</b></p><p>Array of five 16-bit masks of PIOs that wake the chip from deep sleep.
+</p>
+<p>
+Refer to PioDirection for the format of mapping PIOs to these bitmasks.
+</p>
+<p>
+No arrangements are made for the chip to remain awake, so this is
+only useful when combined with additional signalling.
+</p>
+<p>
+By default, the PIO is assumed to be active high. This can be
+changed with the MIB attribute <a href="#DeepSleepPioInvert">DeepSleepPioInvert</a>.
+</p></td></tr></table><br><h1><a name="DeepSleepPioInvert"></a>DeepSleepPioInvert</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0024</th>
+  <td width="60%" style='width:60%' align=left>36</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>DeepSleepPioInvert = [00 00 00 00 00 00 00 00 00 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>10 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>10 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Mask of PIOs that wake the chip from deep sleep when low
+</b></p><p>Array of five 16-bit masks of PIOs that wake the chip from deep sleep when low.
+Refer to PioDirection for the format of mapping PIOs to these bitmasks.
+</p>
+<p>
+- If the corresponding bit in <a href="#DeepSleepPioWake">DeepSleepPioWake</a> is 0, the bit is ignored.
+</p>
+<p>
+- Otherwise, if the bit is 0, the PIO causes wake from deep sleep when high.
+</p>
+<p>
+- Otherwise, if the bit is 1, the PIO causes wake from deep sleep when low.
+</p></td></tr></table><br><h1><a name="USBManufString"></a>USBManufString</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x002b</th>
+  <td width="60%" style='width:60%' align=left>43</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>unicode_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>USB Manufacturer string descriptor
+</b></p><p>Manufacturer string descriptor for the USB debugger and the Hub devices
+</p></td></tr></table><br><h1><a name="USBVendorID"></a>USBVendorID</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0030</th>
+  <td width="60%" style='width:60%' align=left>48</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBVendorID = 0x0a12
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>USB Vendor ID code
+</b></p><p>USB Vendor ID for both the hub and the USB debugger device
+</p></td></tr></table><br><h1><a name="USBHubProductString"></a>USBHubProductString</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0037</th>
+  <td width="60%" style='width:60%' align=left>55</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>unicode_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>USB product string descriptor for hub
+</b></p><p>USB hub product string descriptor
+</p></td></tr></table><br><h1><a name="USBHubSerialNumberString"></a>USBHubSerialNumberString</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0038</th>
+  <td width="60%" style='width:60%' align=left>56</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>unicode_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>USB serial number string descriptor for hub
+</b></p><p>USB hub serial number string descriptor
+</p></td></tr></table><br><h1><a name="USBHubConfigString"></a>USBHubConfigString</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0039</th>
+  <td width="60%" style='width:60%' align=left>57</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>unicode_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>USB configuration string descriptor for hub
+</b></p><p>USB hub configuration string descriptor for the hub's single configuration
+</p></td></tr></table><br><h1><a name="USBHubProductID"></a>USBHubProductID</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x003a</th>
+  <td width="60%" style='width:60%' align=left>58</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBHubProductID = 0x4010
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>USB hub product ID
+</b></p><p>Product ID of the Curator Hub device.
+</p></td></tr></table><br><h1><a name="USBHubMaxPower"></a>USBHubMaxPower</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x003b</th>
+  <td width="60%" style='width:60%' align=left>59</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBHubMaxPower = 0x0014
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Maximum power drawn by the hub when acting as a bus-powered device
+</b></p><p>Specify the maximum power drawn by the device if it is bus-powered.
+Expressed in units of 2mA.
+(See USB2.0 standard, table 9-10.)
+</p></td></tr></table><br><h1><a name="USBSelfPowered"></a>USBSelfPowered</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x003d</th>
+  <td width="60%" style='width:60%' align=left>61</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>USBSelfPowered = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Indicates whether the chip draws power from the USB or not
+</b></p><p>Set to TRUE if the chip has a separate power source.
+</p></td></tr></table><br><h1><a name="SqifAudioMaskROM"></a>SqifAudioMaskROM</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0043</th>
+  <td width="60%" style='width:60%' align=left>67</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>SqifAudioMaskROM = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Execute Audio from serial flash instead of ROM
+</b></p><p>If true, the Audio subsystem will be configured to run from
+an external serial flash. The chip will panic if no suitable
+serial flash is detected at boot-time. If False chip will ignore
+any attached serial flash and boot the subsystem from ROM.
+</p></td></tr></table><br><h1><a name="DeepSleepBypassLDOHP"></a>DeepSleepBypassLDOHP</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0047</th>
+  <td width="60%" style='width:60%' align=left>71</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>DeepSleepBypassLDOHP = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Determine whether to leave the bypass LDO in high power
+during deep sleep.
+</b></p><p>For some applications we may need the bypass LDO to provide power to
+3V3 devices such as sqifs, and in this case it will need to remain on
+during deep/sleep.
+</p></td></tr></table><br><h1><a name="QSPIModeOverrides"></a>QSPIModeOverrides</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0048</th>
+  <td width="60%" style='width:60%' align=left>72</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIModeOverrides = [01 03 02 03 03 03]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>8 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Array of (key,value) pairs indicating mode overrides for QSPI flash interfaces
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="DCDTimeout"></a>DCDTimeout</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0049</th>
+  <td width="60%" style='width:60%' align=left>73</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>DCDTimeout = 0x0258
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x03e8 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Set the number of milliseconds used for the data contact detect timeout.
+</b></p><p>When the USB cable is plugged in there is a delay between the VBUS
+line connecting and the data lines connecting. A timeout is used to state the max time
+between these two events. When the timeout occurs the firmware will assume the data lines
+have made contact.
+</p>
+<p>
+If VBUS is present on VCHG when the chip boots the boot time will be subtracted from <a href="#DCDTimeout">DCDTimeout</a>
+to ensure we still wait for the requested time. If the boot time is greater than the requested
+<a href="#DCDTimeout">DCDTimeout</a> a FAULT_BOOT_TIME_GREATER_THAN_DCD_TIMEOUT will be generated.
+</p></td></tr></table><br><h1><a name="AppsProcsClkRate"></a>AppsProcsClkRate</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x004d</th>
+  <td width="60%" style='width:60%' align=left>77</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>AppsProcsClkRate = 0x0000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Defines the clock rate of both the Apps processors.
+</b></p><p>
+Key values:
+0 : use XTAL clock (32MHz)
+1 : use PLL clock (80MHz)
+Other values reserved.
+NOTE: Not all products can select all clock rates.
+</p></td></tr></table><br><h1><a name="AudioProcsClkRate"></a>AudioProcsClkRate</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x004e</th>
+  <td width="60%" style='width:60%' align=left>78</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>AudioProcsClkRate = 0x0002
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Defines the clock rates for the Audio processors and KCodec.
+</b></p><p>
+Bits 3:0 are used for the AUDIO CPU frequency selection. Bits 7:4 are for the
+KCODEC frequency selection.
+N.B. if an AOV frequency is selected for the AUDIO CPU, this will override the
+KCODEC selection as only one AOV frequency can be generated by the hardware.
+AUDIO CPU key values:
+0 : use XTAL clock (32MHz)
+1 : use PLL clock (80MHz)
+2 : use PLL_TURBO clock (120MHz)
+3 : use AOV XTAL/2 clock (16MHz)
+4 : use AOV XTAL/4 clock (8MHz)
+5 : use AOV XTAL/8 clock (4MHz)
+6 : use AOV XTAL/16 clock (2MHz)
+Other values 7..15 reserved.
+AUDIO KCODEC key values:
+0 : use XTAL clock (32MHz)
+1 : use AOV XTAL/2 clock (16MHz)
+2 : use AOV XTAL/4 clock (8MHz)
+3 : use AOV XTAL/8 clock (4MHz)
+4 : use AOV XTAL/16 clock (2MHz)
+Other values 5..15 reserved.
+NOTE: Not all products can select all clock rates.
+</p></td></tr></table><br><h1><a name="ChargerIsUSB"></a>ChargerIsUSB</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x004f</th>
+  <td width="60%" style='width:60%' align=left>79</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>ChargerIsUSB = true
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Set whether the charger is USB or not
+</b></p><p>When true, when a charger is plugged in USB charger detection will take place to find out what type of USB charger is connected.
+When false, if a charger is plugged in Curator will assume it's a non-USB charger.
+</p></td></tr></table><br><h1><a name="QSPIFRAMLUTBaseParams"></a>QSPIFRAMLUTBaseParams</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0050</th>
+  <td width="60%" style='width:60%' align=left>80</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTBaseParams = [00 ff ff ff 00 00 00 00 00 01 ff ff ff 00 00 00 00 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>18 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The basic identifiers and parameters for the QSPIF RAM LUT entries.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTSPIReadParams"></a>QSPIFRAMLUTSPIReadParams</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0051</th>
+  <td width="60%" style='width:60%' align=left>81</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTSPIReadParams = [00 03 00 01 03 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>6 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The SPI mode read parameters for RAM LUT entries.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTSPIConfVector"></a>QSPIFRAMLUTSPIConfVector</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0052</th>
+  <td width="60%" style='width:60%' align=left>82</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTSPIConfVector = [00 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>68 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The SPI mode configuration vector for RAM LUT entries.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTFastReadParams"></a>QSPIFRAMLUTFastReadParams</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0053</th>
+  <td width="60%" style='width:60%' align=left>83</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTFastReadParams = [00 00 00 00 00 01 00 00 00 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>10 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The fast mode read parameters for RAM LUT entries.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTFastConfVector"></a>QSPIFRAMLUTFastConfVector</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0054</th>
+  <td width="60%" style='width:60%' align=left>84</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTFastConfVector = [00 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>68 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The fast mode configuration vector for RAM LUT entries.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTWriteCmds"></a>QSPIFRAMLUTWriteCmds</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0055</th>
+  <td width="60%" style='width:60%' align=left>85</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTWriteCmds = [00 02 06 01 02 06]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>6 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The write command parameters for QSPI flash RAM LUT entries.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTEraseCmds"></a>QSPIFRAMLUTEraseCmds</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0056</th>
+  <td width="60%" style='width:60%' align=left>86</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTEraseCmds = [00 d8 60 01 d8 60]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>6 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The erase commands for QSPI flash RAM LUT entries.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTStatusReadParams"></a>QSPIFRAMLUTStatusReadParams</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0057</th>
+  <td width="60%" style='width:60%' align=left>87</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTStatusReadParams = [00 02 00 01 01 01 02 00 01 01]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>10 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The status register parameters for the QSPI flash RAM LUT entries.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTStatusReadVector"></a>QSPIFRAMLUTStatusReadVector</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0058</th>
+  <td width="60%" style='width:60%' align=left>88</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTStatusReadVector = [00 03 01 01 05 01 03 01 01 05]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>20 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The command vectors to read status registers for RAM LUT QSPI flash chips.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTDPDCmds"></a>QSPIFRAMLUTDPDCmds</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0059</th>
+  <td width="60%" style='width:60%' align=left>89</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTDPDCmds = [00 b9 ab 01 b9 ab]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>6 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The Deep Power Down commands for RAM LUT QSPI flash chips.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIFRAMLUTResetVector"></a>QSPIFRAMLUTResetVector</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x005a</th>
+  <td width="60%" style='width:60%' align=left>90</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPIFRAMLUTResetVector = [00 05 02 01 66 01 99 01 05 02 01 66 01 99]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>68 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>The vector to reset RAM LUT QSPI flash chips.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="ResetOnAppPanicOrWatchdog"></a>ResetOnAppPanicOrWatchdog</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x005b</th>
+  <td width="60%" style='width:60%' align=left>91</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>ResetOnAppPanicOrWatchdog = true
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Reset the chip when any non Curator subsystem panics or has a watchdog timeout
+</b></p><p>If TRUE and the debugger is not connected, if any subsystem other
+than Curator panics or has a subsystem watchdog timeout, the chip is
+reset and will reboot.
+</p>
+<p>
+If FALSE or the debugger is connnected, the chip will not reset and
+instead the subsystem will be put into the CRASHED_WAITING state.
+This supports debugging or core dumping of the failed subsystem.
+<a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystemsOnPanic</a> = TRUE will extend this to all subsystems.
+</p>
+<p>
+To configure the chip for USB core dumping after any subsystem panic or
+watchdog timeout set:
+</p>
+<p>
+<a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanicOrWatchdog</a> = false
+<a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystemsOnPanic</a> = true
+</p>
+<p>
+To also configure the chip for TBridge core dumping after any Curator panic
+add (do NOT set this if TBridge connection is not available):
+</p>
+<p>
+<a href="#ChipWatchdogIntervals">ChipWatchdogIntervals</a> = [03E8 1770 0000]
+<a href="#ChipInactiveWatchdogIntervals">ChipInactiveWatchdogIntervals</a> = [03E8 1770 0000]
+</p></td></tr></table><br><h1><a name="SqifEnableChipSelect1"></a>SqifEnableChipSelect1</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x005e</th>
+  <td width="60%" style='width:60%' align=left>94</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>SqifEnableChipSelect1 = 0x0000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Enable the second Chip Select line on the relevant interfaces.
+</b></p><p>This key is used to configure support for QSPI RAM devices.
+</p>
+<p>
+Seek guidance from Qualcomm on which QSPI RAM devices can be used and how to use this key to configure them.
+</p></td></tr></table><br><h1><a name="EnableAudioSqif"></a>EnableAudioSqif</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x005f</th>
+  <td width="60%" style='width:60%' align=left>95</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>EnableAudioSqif = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Enable the Audio QSPI interface.
+</b></p><p>This key can be used to enable the Audio subsystem's QSPI interface for a QSPI RAM device.
+</p>
+<p>
+Seek guidance from Qualcomm on which QSPI RAM devices can be used and how to use this key to configure them.
+</p></td></tr></table><br><h1><a name="MclkPLLAlphaVcoConfig"></a>MclkPLLAlphaVcoConfig</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0061</th>
+  <td width="60%" style='width:60%' align=left>97</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>4 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>4 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>VCO configuration for MCLK PLL.
+</b></p><p>Advanced settings for VCO in the MCLK PLL.
+SET ONLY ON ADVICE FROM QUALCOMM
+</p></td></tr></table><br><h1><a name="MclkPLLCoarseDacConfig"></a>MclkPLLCoarseDacConfig</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0062</th>
+  <td width="60%" style='width:60%' align=left>98</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>MclkPLLCoarseDacConfig = 0x0000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Coarse DAC configuration for the MCLK PLL.
+</b></p><p>Advanced settings for the coarse DAC in the MCLK PLL.
+SET ONLY ON ADVICE FROM QUALCOMM
+</p></td></tr></table><br><h1><a name="BypassLdoForce3v3"></a>BypassLdoForce3v3</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0064</th>
+  <td width="60%" style='width:60%' align=left>100</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>BypassLdoForce3v3 = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Force bypass LDO output to 3v3.
+</b></p><p>When running from battery, by default, the bypass LDO output voltage is lowered to 2v9 volts.
+When this key is set the bypass LDO output is forced to 3v3 volts when running from
+battery. This can be particularly useful for the scenario where certain peripherals
+which require 3v3 volts are powered by the bypass LDO.
+</p></td></tr></table><br><h1><a name="QSPICalOverrides"></a>QSPICalOverrides</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0068</th>
+  <td width="60%" style='width:60%' align=left>104</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>QSPICalOverrides = [00 00 00 00 00 00 00 00 00 3f 3f 3f 3f 3f 3f]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>15 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>15 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Array of 15 octets representing the interval boundaries for the pad calibration overrides
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="ChargerInsertionDebounceTime"></a>ChargerInsertionDebounceTime</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x006c</th>
+  <td width="60%" style='width:60%' align=left>108</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>ChargerInsertionDebounceTime = 0x000f
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Debounce time for charger insertion in milliseconds.
+</b></p><p>This is a simple delay when VCHG goes high, it happens before USB charger detection. If
+<a href="#ChargerIsUSB">ChargerIsUSB</a> is false then this is the only debouncing, if it is true then the USB charger
+detection includes additional USB debouncing.
+</p></td></tr></table><br><h1><a name="ChargerRemovalDebounceTime"></a>ChargerRemovalDebounceTime</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x006d</th>
+  <td width="60%" style='width:60%' align=left>109</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>ChargerRemovalDebounceTime = 0x000f
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Debounce time for charger removal in milliseconds.
+</b></p><p>This is a simple delay when VCHG goes low. It provides the only debouncing on charger
+removal, regardless of the value of <a href="#ChargerIsUSB">ChargerIsUSB</a>.
+</p></td></tr></table><br><h1><a name="QSPIFWIPWaitTimeout"></a>QSPIFWIPWaitTimeout</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x006f</th>
+  <td width="60%" style='width:60%' align=left>111</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>QSPIFWIPWaitTimeout = 0x0096
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>The upper bound for QSPIF WIP polling loops.
+</b></p><p>This key is used to configure support for Flash devices not supported in the curator ROM.
+</p>
+<p>
+Seek guidance from Qualcomm on which other Flash devices can be used and how to use these keys to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="USBHubDeviceRemovable"></a>USBHubDeviceRemovable</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0070</th>
+  <td width="60%" style='width:60%' align=left>112</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBHubDeviceRemovable = 0x001e
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Value for the DeviceRemovable field of the USB hub class descriptor
+</b></p><p>USB2.0 standard, section 11.23.2.1 &quot;Hub Descriptor&quot;, offset 7 &quot;DeviceRemovable&quot;.
+Bit 0 is reserved (0), bit 1 corresponds to port 1,
+bit 2 to port 2, bit 3 to port 3 and bit 4 to port 4.
+Each bit can be either 0 - device is removable or 1 - device is non-removable.
+Default value makes all 4 internal devices non-removable.
+</p></td></tr></table><br><h1><a name="SqifClockControl"></a>SqifClockControl</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0072</th>
+  <td width="60%" style='width:60%' align=left>114</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint8</td></tr><tr><td>Default</td><td colspan=2>SqifClockControl = 0x11
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Defines the default clock source for SQIF Interface 0 and SQIF Interface 1
+</b></p><p>Bits 3:0 - define the SQIF Interface 0 clock source selection.
+Bits 7:4 - define the SQIF Interface 1 clock source selection.
+Values for the SQIF Interface x clock sources are as follows:
+0 - XTAL clock source
+1 - PLL clock source
+Others - reserved
+</p></td></tr></table><br><h1><a name="USBChargerDetectDCDThreshold"></a>USBChargerDetectDCDThreshold</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0073</th>
+  <td width="60%" style='width:60%' align=left>115</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBChargerDetectDCDThreshold = 0x0320
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Voltage threshold in mV for data contact detection
+</b></p><p>The voltage threshold in mV on D+ during data contact detection
+that we use to determine if the charger is present or not. If the D+ voltage
+is less than this threshold we deduce the charger is present.
+</p></td></tr></table><br><h1><a name="USBChargerDetectProprietaryThreshold"></a>USBChargerDetectProprietaryThreshold</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0074</th>
+  <td width="60%" style='width:60%' align=left>116</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBChargerDetectProprietaryThreshold = 0x0384
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Voltage threshold in mV for proprietary charger detection
+</b></p><p>The voltage threshold in mV on D+ during primary detection
+that we use to determine if the charger is proprietary or not. If the D+ voltage
+is greater than this threshold we deduce the charger is proprietary.
+</p></td></tr></table><br><h1><a name="SmpsPwmClockSourceControl"></a>SmpsPwmClockSourceControl</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0076</th>
+  <td width="60%" style='width:60%' align=left>118</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint8</td></tr><tr><td>Default</td><td colspan=2>SmpsPwmClockSourceControl = 0x02
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Defines the clock source of the PWM mode of the SMPSs
+</b></p><p>Controls the clock used as the source of the 2MHz or 4MHz switching of
+the Pulse Width Modulution (PWM) mode of the Switched Mode Power
+Supplies (SMPSs).
+Note both the 1v1 and 1v8 SMPSs use the same clock source.
+The default clock source is the 32MHz crystal, as this does not require
+the 80MHz PLL to be run so is the lowest power option.
+Options are:
+1 - 80 MHz PLL clock source
+2 - 32 MHz XTAL clock source
+Others - reserved
+</p>
+<p>
+Note the selection on this MIB key determines which of the two waveform
+MIB keys, <a href="#PMUSMPS80MWaveForm">PMUSMPS80MWaveForm</a> or <a href="#PMUSMPS32MWaveForm">PMUSMPS32MWaveForm</a>, gets used.
+</p></td></tr></table><br><h1><a name="PanicOnFault"></a>PanicOnFault</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x03e8</th>
+  <td width="60%" style='width:60%' align=left>1000</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>PanicOnFault = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Halt the system on any fault
+</b></p><p>When the chip's firmware detects a problem that implies that it
+cannot continue operation (for example, running out of pool memory) it
+normally calls panic(). This halts the firmware, and may reboot it.
+By contrast, when the chip's firmware encounters a problem that
+it can survive (for example, detecting a received corrupt packet) it
+normally calls fault(), which can cause a fault report
+message to be created.
+</p>
+<p>
+If this MIB entry is set to TRUE, the firmware calls panic()
+when it would normally call fault().
+</p>
+<p>
+Only set this for system debugging.
+</p>
+<p>
+See <a href="#PanicOnFaultExceptions">PanicOnFaultExceptions</a>, which sets exceptions to <a href="#PanicOnFault">PanicOnFault</a>.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="PanicOnFaultExceptions"></a>PanicOnFaultExceptions</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x03e9</th>
+  <td width="60%" style='width:60%' align=left>1001</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>8 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>8 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>List of fault ids treated the opposite to <a href="#PanicOnFault">PanicOnFault</a>
+</b></p><p>An array of eight octets giving a list of four 16-bit fault ids.
+Each 16-bit fault id will be treated the opposite to <a href="#PanicOnFault">PanicOnFault</a> (see below).
+Fault ids not required must be set to 0000 ie. FAULT_NONE or &quot;not a fault&quot;.
+If this MIB key is not set curator behaves as if it were [0000 0000 0000 0000].
+</p>
+<p>
+If <a href="#PanicOnFault">PanicOnFault</a> is true this is a whitelist ie. all faults cause a panic
+except for the fault ids in this list.
+</p>
+<p>
+If <a href="#PanicOnFault">PanicOnFault</a> is false this is a blacklist ie. only the fault ids in
+this list cause a panic.
+</p>
+<p>
+Only set this for system debugging.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="CuratorDeepSleepConfig"></a>CuratorDeepSleepConfig</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x03eb</th>
+  <td width="60%" style='width:60%' align=left>1003</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>CuratorDeepSleepConfig = 0x0001
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x0002 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Deep sleep mode choice
+</b></p><p>There are the following possible approaches to deep sleep.
+</p>
+<p>
+0: Do not do it.
+</p>
+<p>
+1: Do it whenever possible.
+</p>
+<p>
+Other values are reserved
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="QSPIRAMSettings"></a>QSPIRAMSettings</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x03f1</th>
+  <td width="60%" style='width:60%' align=left>1009</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint32</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr><td colspan=3 align=left valign=top><p><b>QSPI RAM configuration
+</b></p><p>This key is used to configure support for QSPI RAM devices.
+</p>
+<p>
+Seek guidance from Qualcomm on which QSPI RAM devices can be used and how to use this key to configure them.
+</p></td></tr></table><br><h1><a name="QSPIFRAMLUTSectorEraseOverride"></a>QSPIFRAMLUTSectorEraseOverride</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x03f2</th>
+  <td width="60%" style='width:60%' align=left>1010</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint32</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr><td colspan=3 align=left valign=top><p><b>Override the sector erase command used by ROM and RAM LUT entries
+</b></p><p>This key is used to configure the sector erase command used by QSPI Flash devices.
+</p>
+<p>
+Seek guidance from Qualcomm on how this key is to be used.
+</p></td></tr></table><br><h1><a name="QSPIRAMPIOControl"></a>QSPIRAMPIOControl</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x03f3</th>
+  <td width="60%" style='width:60%' align=left>1011</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint32</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr><td colspan=3 align=left valign=top><p><b>QSPI RAM configuration II
+</b></p><p>This key is used to configure support for QSPI RAM devices.
+</p>
+<p>
+Seek guidance from Qualcomm on which QSPI RAM devices can be used and how to use this key to configure them.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_patch</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_patch</td><td>Global function</td></tr></td></tr></table><br><h1><a name="ExternalChargerTrimAdjustment"></a>ExternalChargerTrimAdjustment</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x03f4</th>
+  <td width="60%" style='width:60%' align=left>1012</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint32</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr><td colspan=3 align=left valign=top><p><b>MIB key to adjust the external charger trim
+</b></p><p>MIB key to adjust the trim used for battery charging in &quot;external&quot; mode.
+</p>
+<p>
+SET ONLY ON ADVICE FROM QUALCOMM
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_patch</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_patch</td><td>Global function</td></tr></td></tr></table><br><h1><a name="SystemResourceNonDependencies"></a>SystemResourceNonDependencies</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0401</th>
+  <td width="60%" style='width:60%' align=left>1025</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>4 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Array of pairs of resource identifiers specifying system dependencies to be removed
+</b></p><p>This key has an identical format to <a href="#ResourceDependencies">ResourceDependencies</a>. It is
+used to specify dependencies at the system level which are compiled into
+the system, but are to be ignored at run time. In each pair of resource
+identifiers, the resource given by the first identifier no longer
+depends on the resource given by the second. No error is reported if
+the first identifier did not previously depend on the second (though
+clearly this setting is not useful). A pair of values within the array
+also overrides any corresponding dependency set in other MIB keys.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="UartPinsConfig"></a>UartPinsConfig</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0403</th>
+  <td width="60%" style='width:60%' align=left>1027</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>UartPinsConfig = [3c 3d 3a 3b]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>4 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>4 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>PIO configuration needed for UART pins
+</b></p><p>The value is an octet string consisting of four octets, each describing
+one of the four UART pins, in the order RTS, CTS, data TX, data RX. The
+format is strict. An invalid format causes the firmware to panic.
+</p>
+<p>
+Each octet can have one of the following values:
+</p>
+<p>
+0-0x7f: Use this value as the PIO for this UART pin. Note that valid
+values are constrained by packages and modules as well as chip
+hardware. The resource for the configured PIO will be acquired with
+the UART_WITH_PIOS resource and the hardware will be configured
+appropriately.
+</p>
+<p>
+0x80: Do not connect this pin. The UART hardware will be set to an unused
+PIO for this function. The PIO will not be routed to pins, however care
+needs to be taken if several pins are disabled as they will all use
+the same default unused pin and so may interact. To prevent this the
+controlling subsytem should separately set the CTS pin to be ignored
+and the RTS to drive a zero if they are not required.
+</p>
+<p>
+If the configured PIO requires additional resources, such as configuration
+of voltage level at the pad, these are handled automatically. Note that
+in such cases if a voltage level was previously configured, for example as
+a resource dependency during subsystem boot, it is assumed to be suitable.
+Otherwise, VDD_PADS is used.
+</p></td></tr></table><br><h1><a name="DeepSleepVoltageReduction"></a>DeepSleepVoltageReduction</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0404</th>
+  <td width="60%" style='width:60%' align=left>1028</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>DeepSleepVoltageReduction = 0x00fa
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x015e </td></tr><tr><td colspan=3 align=left valign=top><p><b>Voltage reduction when chip is in deep sleep
+</b></p><p>
+Adjust the voltage to be used in deep sleep
+</p>
+<p>
+SET ONLY ON ADVICE FROM QUALCOMM
+</p></td></tr></table><br><h1><a name="XtalLoadCapacitance"></a>XtalLoadCapacitance</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0406</th>
+  <td width="60%" style='width:60%' align=left>1030</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>XtalLoadCapacitance = 0x000b
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x001f </td></tr><tr><td colspan=3 align=left valign=top><p><b>The capacitance for driving a crystal providing the raw clock
+</b></p><p>If the chip's fast clock is provided by a crystal, this value is used
+to set the coarse capacitative load. It is configured for each module design
+separately. The overall load capacitance requires tuning the coarse and fine
+trim controls. Also refers to the mib <a href="#XtalFreqTrim">XtalFreqTrim</a> which
+defines the fine load capacitance.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="XtalFreqTrim"></a>XtalFreqTrim</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0407</th>
+  <td width="60%" style='width:60%' align=left>1031</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>int16</td></tr><tr><td>Default</td><td colspan=2>XtalFreqTrim = 0
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>-16 </td></tr><tr><td>Maximum</td><td colspan=2>15 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Fine frequency trim for a crystal providing the raw chip clock
+</b></p><p>If the chip's fast clock is provided by a crystal, this value is used
+as a fine trim for the crystal frequency. It may be set for each
+individual chip to compensate for process variations. The overall load capacitance
+is defined by the coarse and fine trim. Also refers to the mib
+<a href="#XtalLoadCapacitance">XtalLoadCapacitance</a> which defines the coarse load capacitance.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="PioDirectionElements"></a>PioDirectionElements</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0408</th>
+  <td width="60%" style='width:60%' align=left>1032</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>2 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Set whether individual PIOs are input or output
+</b></p><p>The chip's PIO lines can be configured as either Input IOs or Output IOs.
+This key sets the direction of individual PIOs or set of PIOs when they
+are used as the standard IOs.
+The value is an array of pairs of octets. The first octet in each pair
+is the number of a PIO, currently from 0 to 71 . The second octet
+is 0 to set the PIO to input, 1 to set it to output.
+The maximum PIOs can be configured by this mib are 64 PIOs. If there are more than 64 PIOs
+to be configured, they should be defined by two of this mib keys and
+included seperately by two different configuration files.
+</p>
+<p>
+The key cannot be read.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_pio_elements</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_pio_elements</td><td>Global function</td></tr></td></tr></table><br><h1><a name="PioDriveElements"></a>PioDriveElements</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0409</th>
+  <td width="60%" style='width:60%' align=left>1033</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>2 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Set whether individual PIOs are high or low
+</b></p><p>This key specifies the logical level of the individual PIOs or set of PIOs when
+those PIOs are configured as the output IO.
+The value is an array of pairs of octets. The first octet in each pair
+is the number of a PIO, currently from 0 to 71 . The second octet
+is 0 to set the PIO low, or 1 to set the PIO high.
+The maximum PIOs can be configured by this mib are 64 PIOs. If there are more than 64 PIOs
+to be configured, they should be defined by two of this mib keys and
+included seperately by two different configuration files.
+This key cannot be read.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_pio_elements</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_pio_elements</td><td>Global function</td></tr></td></tr></table><br><h1><a name="PioSubsystemAllocationElements"></a>PioSubsystemAllocationElements</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x040b</th>
+  <td width="60%" style='width:60%' align=left>1035</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>2 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Set the subsystem owner for individual PIOs
+</b></p><p>This key specifies the bus address of the subsystem
+that will own the PIO for individual PIOs or set of PIOs.
+The value of this key is an array of pairs of octets. The first octet in each pair
+is the number of a PIO, currently from 0 to 71 .
+The second octet is the bus address of the subsystem to which
+the PIO is to be allocated.
+</p>
+<p>
+Note this key controls the initial configuration of PIOs. But
+this configuration can be altered later via the P1 trap API or
+by the configuration of external components or interfaces.
+</p>
+<p>
+The maximum PIOs can be configured by this mib are 64 PIOs. If there are more than 64 PIOs
+to be configured, they should be defined by two of this mib keys and
+included seperately by two different configuration files.
+</p>
+<p>
+This key cannot be read.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_pio_elements</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_pio_elements</td><td>Global function</td></tr></td></tr></table><br><h1><a name="HaltAllSubsystemsOnPanic"></a>HaltAllSubsystemsOnPanic</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0417</th>
+  <td width="60%" style='width:60%' align=left>1047</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>HaltAllSubsystemsOnPanic = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Halt all non Curator subsystems if any subsystem panics or has a watchdog timeout
+</b></p><p>If TRUE and <a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanicOrWatchdog</a> is FALSE, if any subsystem other
+than Curator panics or has a subsystem watchdog timeout, all running
+subsystems will be halted promptly and put into the CRASHED_WAITING state.
+</p>
+<p>
+This supports debugging or core dumping of the state of all subsystems.
+It does not affect the state of subsystems that were not running at the
+time of the panic or subsystem watchdog timeout.
+</p>
+<p>
+To configure the chip for USB core dumping after any subsystem panic or
+watchdog timeout set:
+</p>
+<p>
+<a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanicOrWatchdog</a> = false
+<a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystemsOnPanic</a> = true
+</p>
+<p>
+To also configure the chip for TBridge core dumping after any Curator panic
+add (do NOT set this if TBridge connection is not available):
+</p>
+<p>
+<a href="#ChipWatchdogIntervals">ChipWatchdogIntervals</a> = [03E8 1770 0000]
+<a href="#ChipInactiveWatchdogIntervals">ChipInactiveWatchdogIntervals</a> = [03E8 1770 0000]
+</p></td></tr></table><br><h1><a name="ChipInactiveWatchdogIntervals"></a>ChipInactiveWatchdogIntervals</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x041e</th>
+  <td width="60%" style='width:60%' align=left>1054</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>ChipInactiveWatchdogIntervals = [03 e8 17 70 27 10]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>6 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>6 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Watchdog timing intervals when the chip is inactive
+</b></p><p>NOTE: This key, like the related <a href="#ChipWatchdogIntervals">ChipWatchdogIntervals</a>, should
+not be modified by customers in released products. Doing so may compromise
+the safety of the product. In particular they MUST NOT be modified by customers
+in any product that supports battery charging.
+</p>
+<p>
+A list of 6 octets giving three 16-bit numbers in the same format and with
+the same meanings and restrictions as <a href="#ChipWatchdogIntervals">ChipWatchdogIntervals</a>.
+</p>
+<p>
+The values in this case are applied if none of the chip's other subsystems
+(providing features such as Apps, Bluetooth and Audio) are active. If any of
+the chip's other subsystems are active, this key is ignored and
+<a href="#ChipWatchdogIntervals">ChipWatchdogIntervals</a> is used instead.
+</p>
+<p>
+To configure the chip for core dumping see <a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanicOrWatchdog</a> and
+<a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystemsOnPanic</a>.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="DSULPTimeConversionFactor"></a>DSULPTimeConversionFactor</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0438</th>
+  <td width="60%" style='width:60%' align=left>1080</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>DSULPTimeConversionFactor = 0x0072
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x00ff </td></tr><tr><td colspan=3 align=left valign=top><p><b>ULP slow cycles to microseconds correction factor
+</b></p><p>When using the crystal in Ultra Low Power mode as the deep sleep timer
+source, this key allows any consistent offset in the crystal frequency
+that occurs in this mode only to be compensated for.
+Seek advice from Qualcomm before using this key.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="XtalDutyCycle"></a>XtalDutyCycle</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0439</th>
+  <td width="60%" style='width:60%' align=left>1081</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>XtalDutyCycle = 0x0000
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x001f </td></tr><tr><td colspan=3 align=left valign=top><p><b>The crystal duty cycle setting.
+</b></p><p>If the chip's fast clock is provided by a crystal, this value is used
+to set the duty cycle. It is calibrated on the production line.
+</p>
+<p>
+The value is an unsigned integer in the range 0 .. 31 inclusive
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="USBDebugger"></a>USBDebugger</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x043a</th>
+  <td width="60%" style='width:60%' align=left>1082</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>USBDebugger = true
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>USB Debugger Enable
+</b></p><p>Set to false to disable USB debugger.
+</p></td></tr></table><br><h1><a name="DormantModeEnable"></a>DormantModeEnable</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x043b</th>
+  <td width="60%" style='width:60%' align=left>1083</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>DormantModeEnable = true
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Enable Dormant mode functionality
+</b></p><p>When set to true, allows the chip to enter the ultra-low power dormant mode
+when requested by Apps 0 . In this mode, all digital and analog supplies are
+switched off. Only the KeepAlive (KA) power domain, the VHV and BYP_LDO are active.
+The BYP_LDO and VHV can also be individually put into their respective ULP modes
+by configuring the <a href="#DormantBypassLDOHP">DormantBypassLDOHP</a> and <a href="#DormantVHVLDOHP">DormantVHVLDOHP</a> MIBs respectively.
+Wake up from dormant can occur on a timer event, LED, SYS_CTRL and/or charger
+insertion based on the wake-up config received from the Apps 0 . SYS_CTRL and VCHG wakes are
+always enabled by default during dormant. The rest can be requested by the Apps 0 .
+</p>
+<p>
+Wake ups on NFC, XIOs and some PIOs are also possible on some chips.
+</p></td></tr></table><br><h1><a name="OffModeEnable"></a>OffModeEnable</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x043c</th>
+  <td width="60%" style='width:60%' align=left>1084</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>OffModeEnable = true
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Enable Off mode functionality
+</b></p><p>When set to true, allows the chip to enter OFF state
+when requested by Apps 0 . In the OFF state, the chip is completely
+de-powered except for some analog circuitry in the PMU to assist in wake
+from OFF state. The only sources that can cause a wake up from OFF state
+are SYS_CTRL and charger insertion.
+</p></td></tr></table><br><h1><a name="DormantBypassLDOHP"></a>DormantBypassLDOHP</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x043d</th>
+  <td width="60%" style='width:60%' align=left>1085</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>DormantBypassLDOHP = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Determine whether to leave the bypass LDO in high power
+during dormant.
+</b></p><p>For some applications we may need the bypass LDO to provide power to
+external/internal 3V3 devices, in which case it will need to remain in
+high power mode during dormant.
+</p></td></tr></table><br><h1><a name="DormantVHVLDOHP"></a>DormantVHVLDOHP</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x043e</th>
+  <td width="60%" style='width:60%' align=left>1086</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>DormantVHVLDOHP = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Determine whether to leave the 1v8 VHV LDO in high power
+during dormant.
+</b></p><p>For some applications we may need the VHV LDO to provide power to
+external/internal 1v8 devices, in which case it will need to remain
+in high power mode during during dormant.
+</p></td></tr></table><br><h1><a name="PMUForcePWM"></a>PMUForcePWM</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0442</th>
+  <td width="60%" style='width:60%' align=left>1090</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>PMUForcePWM = true
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Force the PMU to use PWM at all times other than deep sleep
+</b></p><p>This allows a config file to set the system to use the PMU PWM
+at all times when active. This applies to both the PA and core SMPSs.
+</p>
+<p>
+Although the default in the ROM for this key is true, the configuration files
+supplied by Qualcomm set this to false to improve power consumption.
+</p></td></tr></table><br><h1><a name="PMUSMPS80MWaveForm"></a>PMUSMPS80MWaveForm</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0443</th>
+  <td width="60%" style='width:60%' align=left>1091</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>PMUSMPS80MWaveForm = 0x04d4
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>A value to set the SMPS mark/space ratio in PWM when using
+the 80MHz clock
+</b></p><p>Generally the default 20:20 mark/space ratio giving a 2MHz clock
+for SMPSs in PWM is sufficient. However, there is a possibility
+it could interfere with other clocks, so this MIB key allows the
+user to override the default to achieve different mark/space ratios
+</p>
+<p>
+The value is programmed into a register containing two six bit
+fields, in bits 0-5 and 6-11. These are respectively the high
+and low period, but offset by 1 (so 0 means 1 etc).
+</p>
+<p>
+The default value corresponds to low=20,high=21. This has been
+chosen to give a switching frequency slightly less than 2MHz
+(1.9512MHz) in order to avoid interference with the Audio.
+</p>
+<p>
+This setting should be use with care, as tinkering with the
+SMPSs can produce unexpected results.
+</p></td></tr></table><br><h1><a name="PioPadControlElements"></a>PioPadControlElements</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0448</th>
+  <td width="60%" style='width:60%' align=left>1096</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>PioPadControlElements = [0d 01 0a 02 09 59 0c 59 0b 59 0e 59]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>2 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Set the pad control for individual PIOs
+</b></p><p>This key sets the pad control for individual PIOs.
+The value is an array of pairs of octets. The first octet in each pair
+is the number of a PIO, currently from 0 to 71 . The second octet
+is the pad control setting, which is specific to each PIO. For example,
+for LED IOs only the Pull Enable is configurable.
+</p>
+<p>
+The bit field definition of pad control setting are:
+- bits 0-1: Drive strength
+- bit 2: UNUSED - set to 0
+- bit 3: Pull enable
+- bit 4: Pull strength
+- bit 5: Pull direction
+- bit 6: Sticky enable
+</p>
+<p>
+Note this key controls the initial configuration of PIOs. But
+this configuration can be altered later via the P1 trap API or
+by the configuration of external components or interfaces.
+</p>
+<p>
+The maximum PIOs that can be configured by this mib are 64 PIOs. If there are more than 64 PIOs
+to be configured, they should be defined by two of this mib keys and
+included seperately by two different configuration files.
+</p>
+<p>
+The key cannot be read.
+</p>
+<p>
+The pad control values for PIOs which are used for APP 0 Siflash are defined
+as the default value here.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_pio_elements</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_pio_elements</td><td>Global function</td></tr></td></tr></table><br><h1><a name="UseAccurateSOSC"></a>UseAccurateSOSC</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0449</th>
+  <td width="60%" style='width:60%' align=left>1097</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>UseAccurateSOSC = true
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Use SOSC rather than the XTAL in ULP mode for deep sleep timing
+</b></p><p>This key allows an internal Slow Oscillator (SOSC) to be used for
+deep sleep timing when 250ppm timing accuracy is required, rather than
+Ultra Low Power (ULP) mode for the crystal. Temperature correction
+mechanisms for the SOSC are used to allow it to maintain the required
+timing accuracy.
+</p>
+<p>
+This allows a lower deep sleep current at the required accuracy
+for bluetooth.
+</p>
+<p>
+True means use the SOSC, False means use the crystal.
+</p></td></tr></table><br><h1><a name="PMUSMPS32MWaveForm"></a>PMUSMPS32MWaveForm</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x044c</th>
+  <td width="60%" style='width:60%' align=left>1100</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>PMUSMPS32MWaveForm = 0x01c7
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>A value to set the SMPS mark/space ratio in PWM when using
+the 32MHz clock
+</b></p><p>Generally the default 8:8 mark/space ratio giving a 2MHz clock
+for SMPSs in PWM is sufficient. However, there is a possibility
+it could interfere with other clocks, so this MIB key allows the
+user to override the default to achieve different mark/space ratios
+</p>
+<p>
+The value is programmed into a register containing two six bit
+fields, in bits 0-5 and 6-11. These are respectively the high
+and low period, but offset by 1 (so 0 means 1 etc).
+</p>
+<p>
+The default value corresponds to low=7,high=7, which gives an
+8:8 mark/space ratio and a 2MHz switching frequency.
+</p>
+<p>
+This setting should be use with care, as tinkering with the
+SMPSs can produce unexpected results.
+</p>
+<p>
+Note this MIB key is only useful when we've selected 32MHz as
+the clock source in the <a href="#SmpsPwmClockSourceControl">SmpsPwmClockSourceControl</a> MIB. When
+80MHz is selected as the source use <a href="#PMUSMPS80MWaveForm">PMUSMPS80MWaveForm</a> instead.
+</p></td></tr></table><br><h1><a name="XtalCalibrationParameters"></a>XtalCalibrationParameters</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x044e</th>
+  <td width="60%" style='width:60%' align=left>1102</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>XtalCalibrationParameters = [0e 14 3c 0e 14 5a 0e 14 64 01]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>10 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>10 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Parameters used for XTAL calibration
+</b></p><p>An array of ten octets defined as follows:
+Octets 0-2 - ULP mode Min Bias, Max Bias and Target Threshold resp.
+Octets 3-5 - LP mode Min Bias, Max Bias and Target Threshold resp.
+Octets 6-8 - LN mode Min Bias, Max Bias and Target Threshold resp.
+Octet 9 - Bit 0 - Increment bias after below Target Threshold reached.
+Octet 9 - Bits 7:1 - Reserved.
+</p></td></tr></table><br><h1><a name="XtalPowerModeStateSettings"></a>XtalPowerModeStateSettings</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0451</th>
+  <td width="60%" style='width:60%' align=left>1105</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>XtalPowerModeStateSettings = [00 00 00 00 00 00 00 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>8 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>8 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Settings for dynamic XTAL mode switching based on device state
+</b></p><p>An array of 8 octets containing XTAL Power Modes for all 16 possible combinations of
+xPLL, AOV, Audio Analogue Clock (AAC) and BT SS states.
+XTAL Power Modes values:
+0 - Low Power (LP)
+1 - Low Power without current boost (LPX)
+2 - Low Power without current boost and LN regulator (LPXX)
+3 - Low Noise (LN)
+4-15 - Reserved
+Note that the XTAL Power Mode state values are stored in nibbles. e.g. Octet 0 thus
+holds the following information:
+Bits 3:0 - XTAL Power Mode for xPLL:disabled, AOV:disabled, AAC:disabled, BT:disabled
+Bits 7:4 - XTAL Power Mode for xPLL:disabled, AOV:disabled, AAC:disabled, BT:enabled
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibsetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="LpxxLpxBiasTrimSettings"></a>LpxxLpxBiasTrimSettings</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0452</th>
+  <td width="60%" style='width:60%' align=left>1106</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>LpxxLpxBiasTrimSettings = 0x0000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>OSC_ULP_BIAS Trim settings to use with LPX or LPXX XTAL modes
+</b></p><p>Bits 07:00 Bias setting for LPX Mode
+Bits 15:08 Bias setting for LPXX Mode
+Note that a value of zero will leave the respective setting as per the calibrated
+LP bias value.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h2><a name="permuted_index">Permuted Index</a></h2>
+<p> <a href="#permuted_index_digits">0-9</a>
+ <a href="#permuted_index_A">A</a>
+ <a href="#permuted_index_B">B</a>
+ <a href="#permuted_index_C">C</a>
+ <a href="#permuted_index_D">D</a>
+ <a href="#permuted_index_E">E</a>
+ <a href="#permuted_index_F">F</a>
+ G
+ <a href="#permuted_index_H">H</a>
+ <a href="#permuted_index_I">I</a>
+ J
+ K
+ <a href="#permuted_index_L">L</a>
+ <a href="#permuted_index_M">M</a>
+ <a href="#permuted_index_N">N</a>
+ <a href="#permuted_index_O">O</a>
+ <a href="#permuted_index_P">P</a>
+ <a href="#permuted_index_Q">Q</a>
+ <a href="#permuted_index_R">R</a>
+ <a href="#permuted_index_S">S</a>
+ <a href="#permuted_index_T">T</a>
+ <a href="#permuted_index_U">U</a>
+ <a href="#permuted_index_V">V</a>
+ <a href="#permuted_index_W">W</a>
+ <a href="#permuted_index_X">X</a>
+ Y
+ Z
+</p>
+<table class="unboxed" border="0">
+ <tr>
+  <th colspan=3>
+   <a name="permuted_index_digits">0-9</a>
+  </th>
+ </tr>
+<tr>
+ <td align=right>
+  <a href="#SqifEnableChipSelect1">SqifEnableChipSelect</a>
+ </td>
+ <td>
+  <a href="#SqifEnableChipSelect1">1</a>
+ </td>
+<td>0x005e</td>
+<tr>
+ <td align=right>
+  <a href="#BypassLdoForce3v3">BypassLdoForce3v</a>
+ </td>
+ <td>
+  <a href="#BypassLdoForce3v3">3</a>
+ </td>
+<td>0x0064</td>
+<tr>
+ <td align=right>
+  <a href="#BypassLdoForce3v3">BypassLdoForce</a>
+ </td>
+ <td>
+  <a href="#BypassLdoForce3v3">3v3</a>
+ </td>
+<td>0x0064</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_A">A</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#UseAccurateSOSC">Use</a>
+ </td>
+ <td>
+  <a href="#UseAccurateSOSC">AccurateSOSC</a>
+ </td>
+<td>0x0449</td>
+<tr>
+ <td align=right>
+  <a href="#ExternalChargerTrimAdjustment">ExternalChargerTrim</a>
+ </td>
+ <td>
+  <a href="#ExternalChargerTrimAdjustment">Adjustment</a>
+ </td>
+<td>0x03f4</td>
+<tr>
+ <td align=right>
+  <a href="#HaltAllSubsystemsOnPanic">Halt</a>
+ </td>
+ <td>
+  <a href="#HaltAllSubsystemsOnPanic">AllSubsystemsOnPanic</a>
+ </td>
+<td>0x0417</td>
+<tr>
+ <td align=right>
+  <a href="#PioSubsystemAllocationElements">PioSubsystem</a>
+ </td>
+ <td>
+  <a href="#PioSubsystemAllocationElements">AllocationElements</a>
+ </td>
+<td>0x040b</td>
+<tr>
+ <td align=right>
+  <a href="#MclkPLLAlphaVcoConfig">MclkPLL</a>
+ </td>
+ <td>
+  <a href="#MclkPLLAlphaVcoConfig">AlphaVcoConfig</a>
+ </td>
+<td>0x0061</td>
+<tr>
+ <td align=right>
+  <a href="#ResetOnAppPanicOrWatchdog">ResetOn</a>
+ </td>
+ <td>
+  <a href="#ResetOnAppPanicOrWatchdog">AppPanicOrWatchdog</a>
+ </td>
+<td>0x005b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#AppsProcsClkRate">AppsProcsClkRate</a>
+  </td>
+  <td>0x004d</td>
+<tr>
+ <td align=right>
+  <a href="#SqifAudioMaskROM">Sqif</a>
+ </td>
+ <td>
+  <a href="#SqifAudioMaskROM">AudioMaskROM</a>
+ </td>
+<td>0x0043</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#AudioProcsClkRate">AudioProcsClkRate</a>
+  </td>
+  <td>0x004e</td>
+<tr>
+ <td align=right>
+  <a href="#EnableAudioSqif">Enable</a>
+ </td>
+ <td>
+  <a href="#EnableAudioSqif">AudioSqif</a>
+ </td>
+<td>0x005f</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_B">B</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTBaseParams">QSPIFRAMLUT</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTBaseParams">BaseParams</a>
+ </td>
+<td>0x0050</td>
+<tr>
+ <td align=right>
+  <a href="#LpxxLpxBiasTrimSettings">LpxxLpx</a>
+ </td>
+ <td>
+  <a href="#LpxxLpxBiasTrimSettings">BiasTrimSettings</a>
+ </td>
+<td>0x0452</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#BypassLdoForce3v3">BypassLdoForce3v3</a>
+  </td>
+  <td>0x0064</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepBypassLDOHP">DeepSleep</a>
+ </td>
+ <td>
+  <a href="#DeepSleepBypassLDOHP">BypassLDOHP</a>
+ </td>
+<td>0x0047</td>
+<tr>
+ <td align=right>
+  <a href="#DormantBypassLDOHP">Dormant</a>
+ </td>
+ <td>
+  <a href="#DormantBypassLDOHP">BypassLDOHP</a>
+ </td>
+<td>0x043d</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_C">C</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#QSPICalOverrides">QSPI</a>
+ </td>
+ <td>
+  <a href="#QSPICalOverrides">CalOverrides</a>
+ </td>
+<td>0x0068</td>
+<tr>
+ <td align=right>
+  <a href="#XtalCalibrationParameters">Xtal</a>
+ </td>
+ <td>
+  <a href="#XtalCalibrationParameters">CalibrationParameters</a>
+ </td>
+<td>0x044e</td>
+<tr>
+ <td align=right>
+  <a href="#XtalLoadCapacitance">XtalLoad</a>
+ </td>
+ <td>
+  <a href="#XtalLoadCapacitance">Capacitance</a>
+ </td>
+<td>0x0406</td>
+<tr>
+ <td align=right>
+  <a href="#USBChargerDetectDCDThreshold">USB</a>
+ </td>
+ <td>
+  <a href="#USBChargerDetectDCDThreshold">ChargerDetectDCDThreshold</a>
+ </td>
+<td>0x0073</td>
+<tr>
+ <td align=right>
+  <a href="#USBChargerDetectProprietaryThreshold">USB</a>
+ </td>
+ <td>
+  <a href="#USBChargerDetectProprietaryThreshold">ChargerDetectProprietaryThreshold</a>
+ </td>
+<td>0x0074</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ChargerInsertionDebounceTime">ChargerInsertionDebounceTime</a>
+  </td>
+  <td>0x006c</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ChargerIsUSB">ChargerIsUSB</a>
+  </td>
+  <td>0x004f</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ChargerRemovalDebounceTime">ChargerRemovalDebounceTime</a>
+  </td>
+  <td>0x006d</td>
+<tr>
+ <td align=right>
+  <a href="#ExternalChargerTrimAdjustment">External</a>
+ </td>
+ <td>
+  <a href="#ExternalChargerTrimAdjustment">ChargerTrimAdjustment</a>
+ </td>
+<td>0x03f4</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ChipInactiveWatchdogIntervals">ChipInactiveWatchdogIntervals</a>
+  </td>
+  <td>0x041e</td>
+<tr>
+ <td align=right>
+  <a href="#SqifEnableChipSelect1">SqifEnable</a>
+ </td>
+ <td>
+  <a href="#SqifEnableChipSelect1">ChipSelect1</a>
+ </td>
+<td>0x005e</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ChipWatchdogIntervals">ChipWatchdogIntervals</a>
+  </td>
+  <td>0x0013</td>
+<tr>
+ <td align=right>
+  <a href="#AppsProcsClkRate">AppsProcs</a>
+ </td>
+ <td>
+  <a href="#AppsProcsClkRate">ClkRate</a>
+ </td>
+<td>0x004d</td>
+<tr>
+ <td align=right>
+  <a href="#AudioProcsClkRate">AudioProcs</a>
+ </td>
+ <td>
+  <a href="#AudioProcsClkRate">ClkRate</a>
+ </td>
+<td>0x004e</td>
+<tr>
+ <td align=right>
+  <a href="#SqifClockControl">Sqif</a>
+ </td>
+ <td>
+  <a href="#SqifClockControl">ClockControl</a>
+ </td>
+<td>0x0072</td>
+<tr>
+ <td align=right>
+  <a href="#SmpsPwmClockSourceControl">SmpsPwm</a>
+ </td>
+ <td>
+  <a href="#SmpsPwmClockSourceControl">ClockSourceControl</a>
+ </td>
+<td>0x0076</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTEraseCmds">QSPIFRAMLUTErase</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTEraseCmds">Cmds</a>
+ </td>
+<td>0x0056</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTWriteCmds">QSPIFRAMLUTWrite</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTWriteCmds">Cmds</a>
+ </td>
+<td>0x0055</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTDPDCmds">QSPIFRAMLUTDPD</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTDPDCmds">Cmds</a>
+ </td>
+<td>0x0059</td>
+<tr>
+ <td align=right>
+  <a href="#MclkPLLCoarseDacConfig">MclkPLL</a>
+ </td>
+ <td>
+  <a href="#MclkPLLCoarseDacConfig">CoarseDacConfig</a>
+ </td>
+<td>0x0062</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTFastConfVector">QSPIFRAMLUTFast</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTFastConfVector">ConfVector</a>
+ </td>
+<td>0x0054</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTSPIConfVector">QSPIFRAMLUTSPI</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTSPIConfVector">ConfVector</a>
+ </td>
+<td>0x0052</td>
+<tr>
+ <td align=right>
+  <a href="#CuratorDeepSleepConfig">CuratorDeepSleep</a>
+ </td>
+ <td>
+  <a href="#CuratorDeepSleepConfig">Config</a>
+ </td>
+<td>0x03eb</td>
+<tr>
+ <td align=right>
+  <a href="#MclkPLLAlphaVcoConfig">MclkPLLAlphaVco</a>
+ </td>
+ <td>
+  <a href="#MclkPLLAlphaVcoConfig">Config</a>
+ </td>
+<td>0x0061</td>
+<tr>
+ <td align=right>
+  <a href="#MclkPLLCoarseDacConfig">MclkPLLCoarseDac</a>
+ </td>
+ <td>
+  <a href="#MclkPLLCoarseDacConfig">Config</a>
+ </td>
+<td>0x0062</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubConfigString">USBHub</a>
+ </td>
+ <td>
+  <a href="#USBHubConfigString">ConfigString</a>
+ </td>
+<td>0x0039</td>
+<tr>
+ <td align=right>
+  <a href="#UartPinsConfig">UartPins</a>
+ </td>
+ <td>
+  <a href="#UartPinsConfig">Config</a>
+ </td>
+<td>0x0403</td>
+<tr>
+ <td align=right>
+  <a href="#PioPadControlElements">PioPad</a>
+ </td>
+ <td>
+  <a href="#PioPadControlElements">ControlElements</a>
+ </td>
+<td>0x0448</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIRAMPIOControl">QSPIRAMPIO</a>
+ </td>
+ <td>
+  <a href="#QSPIRAMPIOControl">Control</a>
+ </td>
+<td>0x03f3</td>
+<tr>
+ <td align=right>
+  <a href="#SmpsPwmClockSourceControl">SmpsPwmClockSource</a>
+ </td>
+ <td>
+  <a href="#SmpsPwmClockSourceControl">Control</a>
+ </td>
+<td>0x0076</td>
+<tr>
+ <td align=right>
+  <a href="#SqifClockControl">SqifClock</a>
+ </td>
+ <td>
+  <a href="#SqifClockControl">Control</a>
+ </td>
+<td>0x0072</td>
+<tr>
+ <td align=right>
+  <a href="#DSULPTimeConversionFactor">DSULPTime</a>
+ </td>
+ <td>
+  <a href="#DSULPTimeConversionFactor">ConversionFactor</a>
+ </td>
+<td>0x0438</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CuratorDeepSleepConfig">CuratorDeepSleepConfig</a>
+  </td>
+  <td>0x03eb</td>
+<tr>
+ <td align=right>
+  <a href="#XtalDutyCycle">XtalDuty</a>
+ </td>
+ <td>
+  <a href="#XtalDutyCycle">Cycle</a>
+ </td>
+<td>0x0439</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_D">D</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#MclkPLLCoarseDacConfig">MclkPLLCoarse</a>
+ </td>
+ <td>
+  <a href="#MclkPLLCoarseDacConfig">DacConfig</a>
+ </td>
+<td>0x0062</td>
+<tr>
+ <td align=right>
+  <a href="#USBChargerDetectDCDThreshold">USBChargerDetect</a>
+ </td>
+ <td>
+  <a href="#USBChargerDetectDCDThreshold">DCDThreshold</a>
+ </td>
+<td>0x0073</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#DCDTimeout">DCDTimeout</a>
+  </td>
+  <td>0x0049</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerInsertionDebounceTime">ChargerInsertion</a>
+ </td>
+ <td>
+  <a href="#ChargerInsertionDebounceTime">DebounceTime</a>
+ </td>
+<td>0x006c</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerRemovalDebounceTime">ChargerRemoval</a>
+ </td>
+ <td>
+  <a href="#ChargerRemovalDebounceTime">DebounceTime</a>
+ </td>
+<td>0x006d</td>
+<tr>
+ <td align=right>
+  <a href="#USBDebugger">USB</a>
+ </td>
+ <td>
+  <a href="#USBDebugger">Debugger</a>
+ </td>
+<td>0x043a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#DeepSleepBypassLDOHP">DeepSleepBypassLDOHP</a>
+  </td>
+  <td>0x0047</td>
+<tr>
+ <td align=right>
+  <a href="#CuratorDeepSleepConfig">Curator</a>
+ </td>
+ <td>
+  <a href="#CuratorDeepSleepConfig">DeepSleepConfig</a>
+ </td>
+<td>0x03eb</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#DeepSleepPioInvert">DeepSleepPioInvert</a>
+  </td>
+  <td>0x0024</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#DeepSleepPioWake">DeepSleepPioWake</a>
+  </td>
+  <td>0x0023</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#DeepSleepVoltageReduction">DeepSleepVoltageReduction</a>
+  </td>
+  <td>0x0404</td>
+<tr>
+ <td align=right>
+  <a href="#ResourceDependencies">Resource</a>
+ </td>
+ <td>
+  <a href="#ResourceDependencies">Dependencies</a>
+ </td>
+<td>0x0012</td>
+<tr>
+ <td align=right>
+  <a href="#SystemResourceNonDependencies">SystemResourceNon</a>
+ </td>
+ <td>
+  <a href="#SystemResourceNonDependencies">Dependencies</a>
+ </td>
+<td>0x0401</td>
+<tr>
+ <td align=right>
+  <a href="#USBChargerDetectDCDThreshold">USBCharger</a>
+ </td>
+ <td>
+  <a href="#USBChargerDetectDCDThreshold">DetectDCDThreshold</a>
+ </td>
+<td>0x0073</td>
+<tr>
+ <td align=right>
+  <a href="#USBChargerDetectProprietaryThreshold">USBCharger</a>
+ </td>
+ <td>
+  <a href="#USBChargerDetectProprietaryThreshold">DetectProprietaryThreshold</a>
+ </td>
+<td>0x0074</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubDeviceRemovable">USBHub</a>
+ </td>
+ <td>
+  <a href="#USBHubDeviceRemovable">DeviceRemovable</a>
+ </td>
+<td>0x0070</td>
+<tr>
+ <td align=right>
+  <a href="#PioDirectionElements">Pio</a>
+ </td>
+ <td>
+  <a href="#PioDirectionElements">DirectionElements</a>
+ </td>
+<td>0x0408</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#DormantBypassLDOHP">DormantBypassLDOHP</a>
+  </td>
+  <td>0x043d</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#DormantModeEnable">DormantModeEnable</a>
+  </td>
+  <td>0x043b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#DormantVHVLDOHP">DormantVHVLDOHP</a>
+  </td>
+  <td>0x043e</td>
+<tr>
+ <td align=right>
+  <a href="#PioDriveElements">Pio</a>
+ </td>
+ <td>
+  <a href="#PioDriveElements">DriveElements</a>
+ </td>
+<td>0x0409</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#DSULPTimeConversionFactor">DSULPTimeConversionFactor</a>
+  </td>
+  <td>0x0438</td>
+<tr>
+ <td align=right>
+  <a href="#XtalDutyCycle">Xtal</a>
+ </td>
+ <td>
+  <a href="#XtalDutyCycle">DutyCycle</a>
+ </td>
+<td>0x0439</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_E">E</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#PioDirectionElements">PioDirection</a>
+ </td>
+ <td>
+  <a href="#PioDirectionElements">Elements</a>
+ </td>
+<td>0x0408</td>
+<tr>
+ <td align=right>
+  <a href="#PioDriveElements">PioDrive</a>
+ </td>
+ <td>
+  <a href="#PioDriveElements">Elements</a>
+ </td>
+<td>0x0409</td>
+<tr>
+ <td align=right>
+  <a href="#PioPadControlElements">PioPadControl</a>
+ </td>
+ <td>
+  <a href="#PioPadControlElements">Elements</a>
+ </td>
+<td>0x0448</td>
+<tr>
+ <td align=right>
+  <a href="#PioSubsystemAllocationElements">PioSubsystemAllocation</a>
+ </td>
+ <td>
+  <a href="#PioSubsystemAllocationElements">Elements</a>
+ </td>
+<td>0x040b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#EnableAudioSqif">EnableAudioSqif</a>
+  </td>
+  <td>0x005f</td>
+<tr>
+ <td align=right>
+  <a href="#SqifEnableChipSelect1">Sqif</a>
+ </td>
+ <td>
+  <a href="#SqifEnableChipSelect1">EnableChipSelect1</a>
+ </td>
+<td>0x005e</td>
+<tr>
+ <td align=right>
+  <a href="#DormantModeEnable">DormantMode</a>
+ </td>
+ <td>
+  <a href="#DormantModeEnable">Enable</a>
+ </td>
+<td>0x043b</td>
+<tr>
+ <td align=right>
+  <a href="#OffModeEnable">OffMode</a>
+ </td>
+ <td>
+  <a href="#OffModeEnable">Enable</a>
+ </td>
+<td>0x043c</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTEraseCmds">QSPIFRAMLUT</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTEraseCmds">EraseCmds</a>
+ </td>
+<td>0x0056</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTSectorEraseOverride">QSPIFRAMLUTSector</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTSectorEraseOverride">EraseOverride</a>
+ </td>
+<td>0x03f2</td>
+<tr>
+ <td align=right>
+  <a href="#PanicOnFaultExceptions">PanicOnFault</a>
+ </td>
+ <td>
+  <a href="#PanicOnFaultExceptions">Exceptions</a>
+ </td>
+<td>0x03e9</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ExternalChargerTrimAdjustment">ExternalChargerTrimAdjustment</a>
+  </td>
+  <td>0x03f4</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_F">F</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#DSULPTimeConversionFactor">DSULPTimeConversion</a>
+ </td>
+ <td>
+  <a href="#DSULPTimeConversionFactor">Factor</a>
+ </td>
+<td>0x0438</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTFastConfVector">QSPIFRAMLUT</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTFastConfVector">FastConfVector</a>
+ </td>
+<td>0x0054</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTFastReadParams">QSPIFRAMLUT</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTFastReadParams">FastReadParams</a>
+ </td>
+<td>0x0053</td>
+<tr>
+ <td align=right>
+  <a href="#PanicOnFaultExceptions">PanicOn</a>
+ </td>
+ <td>
+  <a href="#PanicOnFaultExceptions">FaultExceptions</a>
+ </td>
+<td>0x03e9</td>
+<tr>
+ <td align=right>
+  <a href="#PanicOnFault">PanicOn</a>
+ </td>
+ <td>
+  <a href="#PanicOnFault">Fault</a>
+ </td>
+<td>0x03e8</td>
+<tr>
+ <td align=right>
+  <a href="#BypassLdoForce3v3">BypassLdo</a>
+ </td>
+ <td>
+  <a href="#BypassLdoForce3v3">Force3v3</a>
+ </td>
+<td>0x0064</td>
+<tr>
+ <td align=right>
+  <a href="#PMUForcePWM">PMU</a>
+ </td>
+ <td>
+  <a href="#PMUForcePWM">ForcePWM</a>
+ </td>
+<td>0x0442</td>
+<tr>
+ <td align=right>
+  <a href="#PMUSMPS32MWaveForm">PMUSMPS32MWave</a>
+ </td>
+ <td>
+  <a href="#PMUSMPS32MWaveForm">Form</a>
+ </td>
+<td>0x044c</td>
+<tr>
+ <td align=right>
+  <a href="#PMUSMPS80MWaveForm">PMUSMPS80MWave</a>
+ </td>
+ <td>
+  <a href="#PMUSMPS80MWaveForm">Form</a>
+ </td>
+<td>0x0443</td>
+<tr>
+ <td align=right>
+  <a href="#XtalFreqTrim">Xtal</a>
+ </td>
+ <td>
+  <a href="#XtalFreqTrim">FreqTrim</a>
+ </td>
+<td>0x0407</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_H">H</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystemsOnPanic</a>
+  </td>
+  <td>0x0417</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubConfigString">USB</a>
+ </td>
+ <td>
+  <a href="#USBHubConfigString">HubConfigString</a>
+ </td>
+<td>0x0039</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubDeviceRemovable">USB</a>
+ </td>
+ <td>
+  <a href="#USBHubDeviceRemovable">HubDeviceRemovable</a>
+ </td>
+<td>0x0070</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubMaxPower">USB</a>
+ </td>
+ <td>
+  <a href="#USBHubMaxPower">HubMaxPower</a>
+ </td>
+<td>0x003b</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubProductID">USB</a>
+ </td>
+ <td>
+  <a href="#USBHubProductID">HubProductID</a>
+ </td>
+<td>0x003a</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubProductString">USB</a>
+ </td>
+ <td>
+  <a href="#USBHubProductString">HubProductString</a>
+ </td>
+<td>0x0037</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubSerialNumberString">USB</a>
+ </td>
+ <td>
+  <a href="#USBHubSerialNumberString">HubSerialNumberString</a>
+ </td>
+<td>0x0038</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_I">I</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#USBHubProductID">USBHubProduct</a>
+ </td>
+ <td>
+  <a href="#USBHubProductID">ID</a>
+ </td>
+<td>0x003a</td>
+<tr>
+ <td align=right>
+  <a href="#USBVendorID">USBVendor</a>
+ </td>
+ <td>
+  <a href="#USBVendorID">ID</a>
+ </td>
+<td>0x0030</td>
+<tr>
+ <td align=right>
+  <a href="#ChipInactiveWatchdogIntervals">Chip</a>
+ </td>
+ <td>
+  <a href="#ChipInactiveWatchdogIntervals">InactiveWatchdogIntervals</a>
+ </td>
+<td>0x041e</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerInsertionDebounceTime">Charger</a>
+ </td>
+ <td>
+  <a href="#ChargerInsertionDebounceTime">InsertionDebounceTime</a>
+ </td>
+<td>0x006c</td>
+<tr>
+ <td align=right>
+  <a href="#ChipInactiveWatchdogIntervals">ChipInactiveWatchdog</a>
+ </td>
+ <td>
+  <a href="#ChipInactiveWatchdogIntervals">Intervals</a>
+ </td>
+<td>0x041e</td>
+<tr>
+ <td align=right>
+  <a href="#ChipWatchdogIntervals">ChipWatchdog</a>
+ </td>
+ <td>
+  <a href="#ChipWatchdogIntervals">Intervals</a>
+ </td>
+<td>0x0013</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepPioInvert">DeepSleepPio</a>
+ </td>
+ <td>
+  <a href="#DeepSleepPioInvert">Invert</a>
+ </td>
+<td>0x0024</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerIsUSB">Charger</a>
+ </td>
+ <td>
+  <a href="#ChargerIsUSB">IsUSB</a>
+ </td>
+<td>0x004f</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_L">L</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#BypassLdoForce3v3">Bypass</a>
+ </td>
+ <td>
+  <a href="#BypassLdoForce3v3">LdoForce3v3</a>
+ </td>
+<td>0x0064</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepBypassLDOHP">DeepSleepBypass</a>
+ </td>
+ <td>
+  <a href="#DeepSleepBypassLDOHP">LDOHP</a>
+ </td>
+<td>0x0047</td>
+<tr>
+ <td align=right>
+  <a href="#DormantBypassLDOHP">DormantBypass</a>
+ </td>
+ <td>
+  <a href="#DormantBypassLDOHP">LDOHP</a>
+ </td>
+<td>0x043d</td>
+<tr>
+ <td align=right>
+  <a href="#XtalLoadCapacitance">Xtal</a>
+ </td>
+ <td>
+  <a href="#XtalLoadCapacitance">LoadCapacitance</a>
+ </td>
+<td>0x0406</td>
+<tr>
+ <td align=right>
+  <a href="#LpxxLpxBiasTrimSettings">Lpxx</a>
+ </td>
+ <td>
+  <a href="#LpxxLpxBiasTrimSettings">LpxBiasTrimSettings</a>
+ </td>
+<td>0x0452</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#LpxxLpxBiasTrimSettings">LpxxLpxBiasTrimSettings</a>
+  </td>
+  <td>0x0452</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_M">M</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#PMUSMPS32MWaveForm">PMUSMPS32</a>
+ </td>
+ <td>
+  <a href="#PMUSMPS32MWaveForm">MWaveForm</a>
+ </td>
+<td>0x044c</td>
+<tr>
+ <td align=right>
+  <a href="#PMUSMPS80MWaveForm">PMUSMPS80</a>
+ </td>
+ <td>
+  <a href="#PMUSMPS80MWaveForm">MWaveForm</a>
+ </td>
+<td>0x0443</td>
+<tr>
+ <td align=right>
+  <a href="#USBManufString">USB</a>
+ </td>
+ <td>
+  <a href="#USBManufString">ManufString</a>
+ </td>
+<td>0x002b</td>
+<tr>
+ <td align=right>
+  <a href="#PioProtectMask">PioProtect</a>
+ </td>
+ <td>
+  <a href="#PioProtectMask">Mask</a>
+ </td>
+<td>0x000c</td>
+<tr>
+ <td align=right>
+  <a href="#SqifAudioMaskROM">SqifAudio</a>
+ </td>
+ <td>
+  <a href="#SqifAudioMaskROM">MaskROM</a>
+ </td>
+<td>0x0043</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubMaxPower">USBHub</a>
+ </td>
+ <td>
+  <a href="#USBHubMaxPower">MaxPower</a>
+ </td>
+<td>0x003b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#MclkPLLAlphaVcoConfig">MclkPLLAlphaVcoConfig</a>
+  </td>
+  <td>0x0061</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#MclkPLLCoarseDacConfig">MclkPLLCoarseDacConfig</a>
+  </td>
+  <td>0x0062</td>
+<tr>
+ <td align=right>
+  <a href="#DormantModeEnable">Dormant</a>
+ </td>
+ <td>
+  <a href="#DormantModeEnable">ModeEnable</a>
+ </td>
+<td>0x043b</td>
+<tr>
+ <td align=right>
+  <a href="#OffModeEnable">Off</a>
+ </td>
+ <td>
+  <a href="#OffModeEnable">ModeEnable</a>
+ </td>
+<td>0x043c</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIModeOverrides">QSPI</a>
+ </td>
+ <td>
+  <a href="#QSPIModeOverrides">ModeOverrides</a>
+ </td>
+<td>0x0048</td>
+<tr>
+ <td align=right>
+  <a href="#XtalPowerModeStateSettings">XtalPower</a>
+ </td>
+ <td>
+  <a href="#XtalPowerModeStateSettings">ModeStateSettings</a>
+ </td>
+<td>0x0451</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_N">N</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#SystemResourceNonDependencies">SystemResource</a>
+ </td>
+ <td>
+  <a href="#SystemResourceNonDependencies">NonDependencies</a>
+ </td>
+<td>0x0401</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubSerialNumberString">USBHubSerial</a>
+ </td>
+ <td>
+  <a href="#USBHubSerialNumberString">NumberString</a>
+ </td>
+<td>0x0038</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_O">O</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#OffModeEnable">OffModeEnable</a>
+  </td>
+  <td>0x043c</td>
+<tr>
+ <td align=right>
+  <a href="#ResetOnAppPanicOrWatchdog">Reset</a>
+ </td>
+ <td>
+  <a href="#ResetOnAppPanicOrWatchdog">OnAppPanicOrWatchdog</a>
+ </td>
+<td>0x005b</td>
+<tr>
+ <td align=right>
+  <a href="#PanicOnFaultExceptions">Panic</a>
+ </td>
+ <td>
+  <a href="#PanicOnFaultExceptions">OnFaultExceptions</a>
+ </td>
+<td>0x03e9</td>
+<tr>
+ <td align=right>
+  <a href="#PanicOnFault">Panic</a>
+ </td>
+ <td>
+  <a href="#PanicOnFault">OnFault</a>
+ </td>
+<td>0x03e8</td>
+<tr>
+ <td align=right>
+  <a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystems</a>
+ </td>
+ <td>
+  <a href="#HaltAllSubsystemsOnPanic">OnPanic</a>
+ </td>
+<td>0x0417</td>
+<tr>
+ <td align=right>
+  <a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanic</a>
+ </td>
+ <td>
+  <a href="#ResetOnAppPanicOrWatchdog">OrWatchdog</a>
+ </td>
+<td>0x005b</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTSectorEraseOverride">QSPIFRAMLUTSectorErase</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTSectorEraseOverride">Override</a>
+ </td>
+<td>0x03f2</td>
+<tr>
+ <td align=right>
+  <a href="#QSPICalOverrides">QSPICal</a>
+ </td>
+ <td>
+  <a href="#QSPICalOverrides">Overrides</a>
+ </td>
+<td>0x0068</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIModeOverrides">QSPIMode</a>
+ </td>
+ <td>
+  <a href="#QSPIModeOverrides">Overrides</a>
+ </td>
+<td>0x0048</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_P">P</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#PioPadControlElements">Pio</a>
+ </td>
+ <td>
+  <a href="#PioPadControlElements">PadControlElements</a>
+ </td>
+<td>0x0448</td>
+<tr>
+ <td align=right>
+  <a href="#HaltAllSubsystemsOnPanic">HaltAllSubsystemsOn</a>
+ </td>
+ <td>
+  <a href="#HaltAllSubsystemsOnPanic">Panic</a>
+ </td>
+<td>0x0417</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PanicOnFault">PanicOnFault</a>
+  </td>
+  <td>0x03e8</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PanicOnFaultExceptions">PanicOnFaultExceptions</a>
+  </td>
+  <td>0x03e9</td>
+<tr>
+ <td align=right>
+  <a href="#ResetOnAppPanicOrWatchdog">ResetOnApp</a>
+ </td>
+ <td>
+  <a href="#ResetOnAppPanicOrWatchdog">PanicOrWatchdog</a>
+ </td>
+<td>0x005b</td>
+<tr>
+ <td align=right>
+  <a href="#XtalCalibrationParameters">XtalCalibration</a>
+ </td>
+ <td>
+  <a href="#XtalCalibrationParameters">Parameters</a>
+ </td>
+<td>0x044e</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTBaseParams">QSPIFRAMLUTBase</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTBaseParams">Params</a>
+ </td>
+<td>0x0050</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTFastReadParams">QSPIFRAMLUTFastRead</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTFastReadParams">Params</a>
+ </td>
+<td>0x0053</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTStatusReadParams">QSPIFRAMLUTStatusRead</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTStatusReadParams">Params</a>
+ </td>
+<td>0x0057</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTSPIReadParams">QSPIFRAMLUTSPIRead</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTSPIReadParams">Params</a>
+ </td>
+<td>0x0051</td>
+<tr>
+ <td align=right>
+  <a href="#UartPinsConfig">Uart</a>
+ </td>
+ <td>
+  <a href="#UartPinsConfig">PinsConfig</a>
+ </td>
+<td>0x0403</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PioDirectionElements">PioDirectionElements</a>
+  </td>
+  <td>0x0408</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PioDriveElements">PioDriveElements</a>
+  </td>
+  <td>0x0409</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepPioInvert">DeepSleep</a>
+ </td>
+ <td>
+  <a href="#DeepSleepPioInvert">PioInvert</a>
+ </td>
+<td>0x0024</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PioPadControlElements">PioPadControlElements</a>
+  </td>
+  <td>0x0448</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PioProtectMask">PioProtectMask</a>
+  </td>
+  <td>0x000c</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PioStatus">PioStatus</a>
+  </td>
+  <td>0x0008</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PioSubsystemAllocationElements">PioSubsystemAllocationElements</a>
+  </td>
+  <td>0x040b</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepPioWake">DeepSleep</a>
+ </td>
+ <td>
+  <a href="#DeepSleepPioWake">PioWake</a>
+ </td>
+<td>0x0023</td>
+<tr>
+ <td align=right>
+  <a href="#MclkPLLAlphaVcoConfig">Mclk</a>
+ </td>
+ <td>
+  <a href="#MclkPLLAlphaVcoConfig">PLLAlphaVcoConfig</a>
+ </td>
+<td>0x0061</td>
+<tr>
+ <td align=right>
+  <a href="#MclkPLLCoarseDacConfig">Mclk</a>
+ </td>
+ <td>
+  <a href="#MclkPLLCoarseDacConfig">PLLCoarseDacConfig</a>
+ </td>
+<td>0x0062</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PMUForcePWM">PMUForcePWM</a>
+  </td>
+  <td>0x0442</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PMUSMPS32MWaveForm">PMUSMPS32MWaveForm</a>
+  </td>
+  <td>0x044c</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PMUSMPS80MWaveForm">PMUSMPS80MWaveForm</a>
+  </td>
+  <td>0x0443</td>
+<tr>
+ <td align=right>
+  <a href="#XtalPowerModeStateSettings">Xtal</a>
+ </td>
+ <td>
+  <a href="#XtalPowerModeStateSettings">PowerModeStateSettings</a>
+ </td>
+<td>0x0451</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubMaxPower">USBHubMax</a>
+ </td>
+ <td>
+  <a href="#USBHubMaxPower">Power</a>
+ </td>
+<td>0x003b</td>
+<tr>
+ <td align=right>
+  <a href="#USBSelfPowered">USBSelf</a>
+ </td>
+ <td>
+  <a href="#USBSelfPowered">Powered</a>
+ </td>
+<td>0x003d</td>
+<tr>
+ <td align=right>
+  <a href="#AppsProcsClkRate">Apps</a>
+ </td>
+ <td>
+  <a href="#AppsProcsClkRate">ProcsClkRate</a>
+ </td>
+<td>0x004d</td>
+<tr>
+ <td align=right>
+  <a href="#AudioProcsClkRate">Audio</a>
+ </td>
+ <td>
+  <a href="#AudioProcsClkRate">ProcsClkRate</a>
+ </td>
+<td>0x004e</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubProductID">USBHub</a>
+ </td>
+ <td>
+  <a href="#USBHubProductID">ProductID</a>
+ </td>
+<td>0x003a</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubProductString">USBHub</a>
+ </td>
+ <td>
+  <a href="#USBHubProductString">ProductString</a>
+ </td>
+<td>0x0037</td>
+<tr>
+ <td align=right>
+  <a href="#USBChargerDetectProprietaryThreshold">USBChargerDetect</a>
+ </td>
+ <td>
+  <a href="#USBChargerDetectProprietaryThreshold">ProprietaryThreshold</a>
+ </td>
+<td>0x0074</td>
+<tr>
+ <td align=right>
+  <a href="#PioProtectMask">Pio</a>
+ </td>
+ <td>
+  <a href="#PioProtectMask">ProtectMask</a>
+ </td>
+<td>0x000c</td>
+<tr>
+ <td align=right>
+  <a href="#SmpsPwmClockSourceControl">Smps</a>
+ </td>
+ <td>
+  <a href="#SmpsPwmClockSourceControl">PwmClockSourceControl</a>
+ </td>
+<td>0x0076</td>
+<tr>
+ <td align=right>
+  <a href="#PMUForcePWM">PMUForce</a>
+ </td>
+ <td>
+  <a href="#PMUForcePWM">PWM</a>
+ </td>
+<td>0x0442</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_Q">Q</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPICalOverrides">QSPICalOverrides</a>
+  </td>
+  <td>0x0068</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIModeOverrides">QSPIModeOverrides</a>
+  </td>
+  <td>0x0048</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTBaseParams">QSPIFRAMLUTBaseParams</a>
+  </td>
+  <td>0x0050</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTEraseCmds">QSPIFRAMLUTEraseCmds</a>
+  </td>
+  <td>0x0056</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTFastConfVector">QSPIFRAMLUTFastConfVector</a>
+  </td>
+  <td>0x0054</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTFastReadParams">QSPIFRAMLUTFastReadParams</a>
+  </td>
+  <td>0x0053</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTResetVector">QSPIFRAMLUTResetVector</a>
+  </td>
+  <td>0x005a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTSectorEraseOverride">QSPIFRAMLUTSectorEraseOverride</a>
+  </td>
+  <td>0x03f2</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTStatusReadParams">QSPIFRAMLUTStatusReadParams</a>
+  </td>
+  <td>0x0057</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTStatusReadVector">QSPIFRAMLUTStatusReadVector</a>
+  </td>
+  <td>0x0058</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTWriteCmds">QSPIFRAMLUTWriteCmds</a>
+  </td>
+  <td>0x0055</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTDPDCmds">QSPIFRAMLUTDPDCmds</a>
+  </td>
+  <td>0x0059</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTSPIConfVector">QSPIFRAMLUTSPIConfVector</a>
+  </td>
+  <td>0x0052</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFRAMLUTSPIReadParams">QSPIFRAMLUTSPIReadParams</a>
+  </td>
+  <td>0x0051</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIFWIPWaitTimeout">QSPIFWIPWaitTimeout</a>
+  </td>
+  <td>0x006f</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIRAMSettings">QSPIRAMSettings</a>
+  </td>
+  <td>0x03f1</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#QSPIRAMPIOControl">QSPIRAMPIOControl</a>
+  </td>
+  <td>0x03f3</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_R">R</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#AppsProcsClkRate">AppsProcsClk</a>
+ </td>
+ <td>
+  <a href="#AppsProcsClkRate">Rate</a>
+ </td>
+<td>0x004d</td>
+<tr>
+ <td align=right>
+  <a href="#AudioProcsClkRate">AudioProcsClk</a>
+ </td>
+ <td>
+  <a href="#AudioProcsClkRate">Rate</a>
+ </td>
+<td>0x004e</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTFastReadParams">QSPIFRAMLUTFast</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTFastReadParams">ReadParams</a>
+ </td>
+<td>0x0053</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTStatusReadParams">QSPIFRAMLUTStatus</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTStatusReadParams">ReadParams</a>
+ </td>
+<td>0x0057</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTSPIReadParams">QSPIFRAMLUTSPI</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTSPIReadParams">ReadParams</a>
+ </td>
+<td>0x0051</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTStatusReadVector">QSPIFRAMLUTStatus</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTStatusReadVector">ReadVector</a>
+ </td>
+<td>0x0058</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepVoltageReduction">DeepSleepVoltage</a>
+ </td>
+ <td>
+  <a href="#DeepSleepVoltageReduction">Reduction</a>
+ </td>
+<td>0x0404</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubDeviceRemovable">USBHubDevice</a>
+ </td>
+ <td>
+  <a href="#USBHubDeviceRemovable">Removable</a>
+ </td>
+<td>0x0070</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerRemovalDebounceTime">Charger</a>
+ </td>
+ <td>
+  <a href="#ChargerRemovalDebounceTime">RemovalDebounceTime</a>
+ </td>
+<td>0x006d</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanicOrWatchdog</a>
+  </td>
+  <td>0x005b</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTResetVector">QSPIFRAMLUT</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTResetVector">ResetVector</a>
+ </td>
+<td>0x005a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ResourceDependencies">ResourceDependencies</a>
+  </td>
+  <td>0x0012</td>
+<tr>
+ <td align=right>
+  <a href="#SystemResourceNonDependencies">System</a>
+ </td>
+ <td>
+  <a href="#SystemResourceNonDependencies">ResourceNonDependencies</a>
+ </td>
+<td>0x0401</td>
+<tr>
+ <td align=right>
+  <a href="#SqifAudioMaskROM">SqifAudioMask</a>
+ </td>
+ <td>
+  <a href="#SqifAudioMaskROM">ROM</a>
+ </td>
+<td>0x0043</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_S">S</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTSectorEraseOverride">QSPIFRAMLUT</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTSectorEraseOverride">SectorEraseOverride</a>
+ </td>
+<td>0x03f2</td>
+<tr>
+ <td align=right>
+  <a href="#SqifEnableChipSelect1">SqifEnableChip</a>
+ </td>
+ <td>
+  <a href="#SqifEnableChipSelect1">Select1</a>
+ </td>
+<td>0x005e</td>
+<tr>
+ <td align=right>
+  <a href="#USBSelfPowered">USB</a>
+ </td>
+ <td>
+  <a href="#USBSelfPowered">SelfPowered</a>
+ </td>
+<td>0x003d</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubSerialNumberString">USBHub</a>
+ </td>
+ <td>
+  <a href="#USBHubSerialNumberString">SerialNumberString</a>
+ </td>
+<td>0x0038</td>
+<tr>
+ <td align=right>
+  <a href="#LpxxLpxBiasTrimSettings">LpxxLpxBiasTrim</a>
+ </td>
+ <td>
+  <a href="#LpxxLpxBiasTrimSettings">Settings</a>
+ </td>
+<td>0x0452</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIRAMSettings">QSPIRAM</a>
+ </td>
+ <td>
+  <a href="#QSPIRAMSettings">Settings</a>
+ </td>
+<td>0x03f1</td>
+<tr>
+ <td align=right>
+  <a href="#XtalPowerModeStateSettings">XtalPowerModeState</a>
+ </td>
+ <td>
+  <a href="#XtalPowerModeStateSettings">Settings</a>
+ </td>
+<td>0x0451</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepBypassLDOHP">Deep</a>
+ </td>
+ <td>
+  <a href="#DeepSleepBypassLDOHP">SleepBypassLDOHP</a>
+ </td>
+<td>0x0047</td>
+<tr>
+ <td align=right>
+  <a href="#CuratorDeepSleepConfig">CuratorDeep</a>
+ </td>
+ <td>
+  <a href="#CuratorDeepSleepConfig">SleepConfig</a>
+ </td>
+<td>0x03eb</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepPioInvert">Deep</a>
+ </td>
+ <td>
+  <a href="#DeepSleepPioInvert">SleepPioInvert</a>
+ </td>
+<td>0x0024</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepPioWake">Deep</a>
+ </td>
+ <td>
+  <a href="#DeepSleepPioWake">SleepPioWake</a>
+ </td>
+<td>0x0023</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepVoltageReduction">Deep</a>
+ </td>
+ <td>
+  <a href="#DeepSleepVoltageReduction">SleepVoltageReduction</a>
+ </td>
+<td>0x0404</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SmpsPwmClockSourceControl">SmpsPwmClockSourceControl</a>
+  </td>
+  <td>0x0076</td>
+<tr>
+ <td align=right>
+  <a href="#UseAccurateSOSC">UseAccurate</a>
+ </td>
+ <td>
+  <a href="#UseAccurateSOSC">SOSC</a>
+ </td>
+<td>0x0449</td>
+<tr>
+ <td align=right>
+  <a href="#SmpsPwmClockSourceControl">SmpsPwmClock</a>
+ </td>
+ <td>
+  <a href="#SmpsPwmClockSourceControl">SourceControl</a>
+ </td>
+<td>0x0076</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SqifAudioMaskROM">SqifAudioMaskROM</a>
+  </td>
+  <td>0x0043</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SqifClockControl">SqifClockControl</a>
+  </td>
+  <td>0x0072</td>
+<tr>
+ <td align=right>
+  <a href="#EnableAudioSqif">EnableAudio</a>
+ </td>
+ <td>
+  <a href="#EnableAudioSqif">Sqif</a>
+ </td>
+<td>0x005f</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SqifEnableChipSelect1">SqifEnableChipSelect1</a>
+  </td>
+  <td>0x005e</td>
+<tr>
+ <td align=right>
+  <a href="#XtalPowerModeStateSettings">XtalPowerMode</a>
+ </td>
+ <td>
+  <a href="#XtalPowerModeStateSettings">StateSettings</a>
+ </td>
+<td>0x0451</td>
+<tr>
+ <td align=right>
+  <a href="#PioStatus">Pio</a>
+ </td>
+ <td>
+  <a href="#PioStatus">Status</a>
+ </td>
+<td>0x0008</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTStatusReadParams">QSPIFRAMLUT</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTStatusReadParams">StatusReadParams</a>
+ </td>
+<td>0x0057</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTStatusReadVector">QSPIFRAMLUT</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTStatusReadVector">StatusReadVector</a>
+ </td>
+<td>0x0058</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubConfigString">USBHubConfig</a>
+ </td>
+ <td>
+  <a href="#USBHubConfigString">String</a>
+ </td>
+<td>0x0039</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubProductString">USBHubProduct</a>
+ </td>
+ <td>
+  <a href="#USBHubProductString">String</a>
+ </td>
+<td>0x0037</td>
+<tr>
+ <td align=right>
+  <a href="#USBHubSerialNumberString">USBHubSerialNumber</a>
+ </td>
+ <td>
+  <a href="#USBHubSerialNumberString">String</a>
+ </td>
+<td>0x0038</td>
+<tr>
+ <td align=right>
+  <a href="#USBManufString">USBManuf</a>
+ </td>
+ <td>
+  <a href="#USBManufString">String</a>
+ </td>
+<td>0x002b</td>
+<tr>
+ <td align=right>
+  <a href="#PioSubsystemAllocationElements">Pio</a>
+ </td>
+ <td>
+  <a href="#PioSubsystemAllocationElements">SubsystemAllocationElements</a>
+ </td>
+<td>0x040b</td>
+<tr>
+ <td align=right>
+  <a href="#HaltAllSubsystemsOnPanic">HaltAll</a>
+ </td>
+ <td>
+  <a href="#HaltAllSubsystemsOnPanic">SubsystemsOnPanic</a>
+ </td>
+<td>0x0417</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SystemResourceNonDependencies">SystemResourceNonDependencies</a>
+  </td>
+  <td>0x0401</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_T">T</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#USBChargerDetectDCDThreshold">USBChargerDetectDCD</a>
+ </td>
+ <td>
+  <a href="#USBChargerDetectDCDThreshold">Threshold</a>
+ </td>
+<td>0x0073</td>
+<tr>
+ <td align=right>
+  <a href="#USBChargerDetectProprietaryThreshold">USBChargerDetectProprietary</a>
+ </td>
+ <td>
+  <a href="#USBChargerDetectProprietaryThreshold">Threshold</a>
+ </td>
+<td>0x0074</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerInsertionDebounceTime">ChargerInsertionDebounce</a>
+ </td>
+ <td>
+  <a href="#ChargerInsertionDebounceTime">Time</a>
+ </td>
+<td>0x006c</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerRemovalDebounceTime">ChargerRemovalDebounce</a>
+ </td>
+ <td>
+  <a href="#ChargerRemovalDebounceTime">Time</a>
+ </td>
+<td>0x006d</td>
+<tr>
+ <td align=right>
+  <a href="#DSULPTimeConversionFactor">DSULP</a>
+ </td>
+ <td>
+  <a href="#DSULPTimeConversionFactor">TimeConversionFactor</a>
+ </td>
+<td>0x0438</td>
+<tr>
+ <td align=right>
+  <a href="#DCDTimeout">DCD</a>
+ </td>
+ <td>
+  <a href="#DCDTimeout">Timeout</a>
+ </td>
+<td>0x0049</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFWIPWaitTimeout">QSPIFWIPWait</a>
+ </td>
+ <td>
+  <a href="#QSPIFWIPWaitTimeout">Timeout</a>
+ </td>
+<td>0x006f</td>
+<tr>
+ <td align=right>
+  <a href="#ExternalChargerTrimAdjustment">ExternalCharger</a>
+ </td>
+ <td>
+  <a href="#ExternalChargerTrimAdjustment">TrimAdjustment</a>
+ </td>
+<td>0x03f4</td>
+<tr>
+ <td align=right>
+  <a href="#LpxxLpxBiasTrimSettings">LpxxLpxBias</a>
+ </td>
+ <td>
+  <a href="#LpxxLpxBiasTrimSettings">TrimSettings</a>
+ </td>
+<td>0x0452</td>
+<tr>
+ <td align=right>
+  <a href="#XtalFreqTrim">XtalFreq</a>
+ </td>
+ <td>
+  <a href="#XtalFreqTrim">Trim</a>
+ </td>
+<td>0x0407</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_U">U</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#UartPinsConfig">UartPinsConfig</a>
+  </td>
+  <td>0x0403</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBChargerDetectDCDThreshold">USBChargerDetectDCDThreshold</a>
+  </td>
+  <td>0x0073</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBChargerDetectProprietaryThreshold">USBChargerDetectProprietaryThreshold</a>
+  </td>
+  <td>0x0074</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerIsUSB">ChargerIs</a>
+ </td>
+ <td>
+  <a href="#ChargerIsUSB">USB</a>
+ </td>
+<td>0x004f</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBDebugger">USBDebugger</a>
+  </td>
+  <td>0x043a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBHubConfigString">USBHubConfigString</a>
+  </td>
+  <td>0x0039</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBHubDeviceRemovable">USBHubDeviceRemovable</a>
+  </td>
+  <td>0x0070</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBHubMaxPower">USBHubMaxPower</a>
+  </td>
+  <td>0x003b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBHubProductID">USBHubProductID</a>
+  </td>
+  <td>0x003a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBHubProductString">USBHubProductString</a>
+  </td>
+  <td>0x0037</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBHubSerialNumberString">USBHubSerialNumberString</a>
+  </td>
+  <td>0x0038</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBManufString">USBManufString</a>
+  </td>
+  <td>0x002b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBSelfPowered">USBSelfPowered</a>
+  </td>
+  <td>0x003d</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBVendorID">USBVendorID</a>
+  </td>
+  <td>0x0030</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#UseAccurateSOSC">UseAccurateSOSC</a>
+  </td>
+  <td>0x0449</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_V">V</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#MclkPLLAlphaVcoConfig">MclkPLLAlpha</a>
+ </td>
+ <td>
+  <a href="#MclkPLLAlphaVcoConfig">VcoConfig</a>
+ </td>
+<td>0x0061</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTFastConfVector">QSPIFRAMLUTFastConf</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTFastConfVector">Vector</a>
+ </td>
+<td>0x0054</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTResetVector">QSPIFRAMLUTReset</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTResetVector">Vector</a>
+ </td>
+<td>0x005a</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTStatusReadVector">QSPIFRAMLUTStatusRead</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTStatusReadVector">Vector</a>
+ </td>
+<td>0x0058</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTSPIConfVector">QSPIFRAMLUTSPIConf</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTSPIConfVector">Vector</a>
+ </td>
+<td>0x0052</td>
+<tr>
+ <td align=right>
+  <a href="#USBVendorID">USB</a>
+ </td>
+ <td>
+  <a href="#USBVendorID">VendorID</a>
+ </td>
+<td>0x0030</td>
+<tr>
+ <td align=right>
+  <a href="#DormantVHVLDOHP">Dormant</a>
+ </td>
+ <td>
+  <a href="#DormantVHVLDOHP">VHVLDOHP</a>
+ </td>
+<td>0x043e</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepVoltageReduction">DeepSleep</a>
+ </td>
+ <td>
+  <a href="#DeepSleepVoltageReduction">VoltageReduction</a>
+ </td>
+<td>0x0404</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_W">W</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#QSPIFWIPWaitTimeout">QSPIFWIP</a>
+ </td>
+ <td>
+  <a href="#QSPIFWIPWaitTimeout">WaitTimeout</a>
+ </td>
+<td>0x006f</td>
+<tr>
+ <td align=right>
+  <a href="#DeepSleepPioWake">DeepSleepPio</a>
+ </td>
+ <td>
+  <a href="#DeepSleepPioWake">Wake</a>
+ </td>
+<td>0x0023</td>
+<tr>
+ <td align=right>
+  <a href="#ChipWatchdogIntervals">Chip</a>
+ </td>
+ <td>
+  <a href="#ChipWatchdogIntervals">WatchdogIntervals</a>
+ </td>
+<td>0x0013</td>
+<tr>
+ <td align=right>
+  <a href="#ChipInactiveWatchdogIntervals">ChipInactive</a>
+ </td>
+ <td>
+  <a href="#ChipInactiveWatchdogIntervals">WatchdogIntervals</a>
+ </td>
+<td>0x041e</td>
+<tr>
+ <td align=right>
+  <a href="#ResetOnAppPanicOrWatchdog">ResetOnAppPanicOr</a>
+ </td>
+ <td>
+  <a href="#ResetOnAppPanicOrWatchdog">Watchdog</a>
+ </td>
+<td>0x005b</td>
+<tr>
+ <td align=right>
+  <a href="#PMUSMPS32MWaveForm">PMUSMPS32M</a>
+ </td>
+ <td>
+  <a href="#PMUSMPS32MWaveForm">WaveForm</a>
+ </td>
+<td>0x044c</td>
+<tr>
+ <td align=right>
+  <a href="#PMUSMPS80MWaveForm">PMUSMPS80M</a>
+ </td>
+ <td>
+  <a href="#PMUSMPS80MWaveForm">WaveForm</a>
+ </td>
+<td>0x0443</td>
+<tr>
+ <td align=right>
+  <a href="#QSPIFRAMLUTWriteCmds">QSPIFRAMLUT</a>
+ </td>
+ <td>
+  <a href="#QSPIFRAMLUTWriteCmds">WriteCmds</a>
+ </td>
+<td>0x0055</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_X">X</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#XtalCalibrationParameters">XtalCalibrationParameters</a>
+  </td>
+  <td>0x044e</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#XtalDutyCycle">XtalDutyCycle</a>
+  </td>
+  <td>0x0439</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#XtalFreqTrim">XtalFreqTrim</a>
+  </td>
+  <td>0x0407</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#XtalLoadCapacitance">XtalLoadCapacitance</a>
+  </td>
+  <td>0x0406</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#XtalPowerModeStateSettings">XtalPowerModeStateSettings</a>
+  </td>
+  <td>0x0451</td>
+</table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+var audio__i2s__common_8c =
+[
+    [ "external_amp_state_t", "dc/dff/structexternal__amp__state__t.html", "dc/dff/structexternal__amp__state__t" ],
+    [ "CODEC_SCALE_FACTOR_DENOMINATOR", "d2/d10/audio__i2s__common_8c.html#a604c6d8ac162fd95fe067a669154179e", null ],
+    [ "CODEC_SCALE_FACTOR_NUMERATOR", "d2/d10/audio__i2s__common_8c.html#aae3ef285b8dfd1b94a87d8b2b78f02d0", null ],
+    [ "DB_SCALE_FACTOR_DENOMINATOR", "d2/d10/audio__i2s__common_8c.html#a1095d790bb8729b8877efed759bffcb4", null ],
+    [ "DB_SCALE_FACTOR_NUMERATOR", "d2/d10/audio__i2s__common_8c.html#ade61abb5fa065012ec688ca70832dfcd", null ],
+    [ "POLARITY_LEFT_WHEN_WS_HIGH", "d2/d10/audio__i2s__common_8c.html#acf5b7e7a118931e2bdfd17ad0300597e", null ],
+    [ "POLARITY_RIGHT_WHEN_WS_HIGH", "d2/d10/audio__i2s__common_8c.html#a3b0f97f206a1edd79388f0aeed12a9ba", null ],
+    [ "external_amp_state", "d2/d10/audio__i2s__common_8c.html#a778595748dd9bfb309753dabc435b2f1", [
+      [ "standby", "d2/d10/audio__i2s__common_8c.html#a778595748dd9bfb309753dabc435b2f1a20a54eed1009dd5401b880bb904a313f", null ],
+      [ "active", "d2/d10/audio__i2s__common_8c.html#a778595748dd9bfb309753dabc435b2f1a5d178ae2be9d93ea4cbf1a9f0a2d9cbe", null ],
+      [ "power_off", "d2/d10/audio__i2s__common_8c.html#a778595748dd9bfb309753dabc435b2f1a54d551eead05b0791463fc0bc0f2e8f6", null ]
+    ] ],
+    [ "AudioI2SAudioOutputSetVolume", "d2/d10/audio__i2s__common_8c.html#a48be31eba42ece3ac11bb0e55181920d", null ],
+    [ "AudioI2SConfigureSink", "d2/d10/audio__i2s__common_8c.html#a2b258b9e174d4cdd530952a8809909e4", null ],
+    [ "AudioI2SConfigureSource", "d2/d10/audio__i2s__common_8c.html#a7625fd1cc97c6c974ec532d7172f4df6", null ],
+    [ "AudioI2SGetOutputResamplingFrequencyForI2s", "d2/d10/audio__i2s__common_8c.html#a5c9b702ca1eb104582bd59a69428a049", null ],
+    [ "AudioI2SInitialise", "d2/d10/audio__i2s__common_8c.html#acc7082c08c3e1432ad5c51e897664305", null ],
+    [ "AudioI2SInitialiseDevice", "d2/d10/audio__i2s__common_8c.html#a64731a0b554ed78f0efaa58853f4f25b", null ],
+    [ "AudioI2SInitialiseDevice_PsKey", "d2/d10/audio__i2s__common_8c.html#a826fc1180a5135ed6e5a3cd36d9ade54", null ],
+    [ "AudioI2SIs24BitAudioInputEnabled", "d2/d10/audio__i2s__common_8c.html#a362029479a7a0ccebfc84ae0dff6eef6", null ],
+    [ "AudioI2SIsMasterClockRequired", "d2/d10/audio__i2s__common_8c.html#a3309a5d564f9c1d6033561ded4c765f6", null ],
+    [ "AudioI2SMasterIsEnabled", "d2/d10/audio__i2s__common_8c.html#aabd31566e841808a3aac6a7e75afcc35", null ],
+    [ "AudioI2SMusicResamplingFrequency", "d2/d10/audio__i2s__common_8c.html#a913ee2ce36f0bb47fe6366aa3aa4985e", null ],
+    [ "AudioI2SSetChannelVolume", "d2/d10/audio__i2s__common_8c.html#a5f7dd4b329129cb4bdf2b4802cf33d3f", null ],
+    [ "AudioI2SSetDeviceVolume", "d2/d10/audio__i2s__common_8c.html#acd4537363ff32512e0df169a923bf907", null ],
+    [ "AudioI2SVoiceResamplingFrequency", "d2/d10/audio__i2s__common_8c.html#ae86e338231b8b831334b3529a51f2db4", null ],
+    [ "AudioShutdownI2SDevice", "d2/d10/audio__i2s__common_8c.html#ac9dc2d5a5bbb85f94a6d2591bb14189b", null ],
+    [ "EnableI2sDevice", "d2/d10/audio__i2s__common_8c.html#aff5fd591a42b64bddcde7f479e65d005", null ],
+    [ "GetExternalAmpCurrentState", "d2/d10/audio__i2s__common_8c.html#a688c2a493b2fafbe7218e61184aeff1c", null ],
+    [ "SetExternalAmpState", "d2/d10/audio__i2s__common_8c.html#a1ba31eebc78bb6bcabb795df3a9e5f8b", null ],
+    [ "external_amp", "d2/d10/audio__i2s__common_8c.html#a76fff66350f6b75988b45ad7ea01aad5", null ],
+    [ "I2S_config", "d2/d10/audio__i2s__common_8c.html#aa03cf0f68d97a24be73a21effabddfb4", null ]
+];

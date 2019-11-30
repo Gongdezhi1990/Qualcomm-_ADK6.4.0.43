@@ -1,0 +1,11 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# Micron MT25Qxxx parts have configuration registers defined in ROM and as such, no additional
+# vectors are required to set the quad enabled bit.
+
+# XMC XM25QU64A parts have configuration registers defined via device manager configuration keys
+# and as such, no additional vectors are required to set the quad enabled bit.

@@ -1,0 +1,26 @@
+/* custom changes to default doxygen CSS file */
+
+.title {
+	font: 400 14px/28px Roboto,sans-serif;
+	font-size: 150%;
+	font-weight: bold;
+	margin: 10px 2px;
+}
+
+
+#projectname
+{
+	font: 300% Arial,sans-serif;
+	margin: 0px;
+	padding: 2px 2px 2px;
+	color: white;
+}
+
+#titlearea
+{
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	border-bottom: 1px solid #5373B4;
+        background-color: #3253DC;
+}

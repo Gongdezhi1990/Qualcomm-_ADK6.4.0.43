@@ -1,0 +1,44 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+
+# Definitions for building Capability Download Manager
+
+# Source directory list
+%list ALL_SRCDIRS
+components/cap_download_mgr
+
+# List of global include paths
+%list ALL_INCDIRS
+components/cap_download_mgr
+components/malloc_pm
+
+# List of libraries to build
+%list CFG_LIBS
+components/cap_download_mgr/cap_download_mgr
+components/malloc_pm/malloc_pm
+
+# List of libraries to keep in PM
+%list PM_KEEP_LIBS
+components/mem_utils/mem_utils
+components/volume/volume
+components/opmgr/opmgr
+components/stream/stream
+components/const_data/const_data
+capabilities/common/common
+capabilities/base_op/base_op
+components/pmalloc/pmalloc
+components/audio_log/audio_log
+
+%cpp
+
+INSTALL_CAP_DOWNLOAD_MGR
+CAP_DOWNLOAD_DEBUG_VERSION=1
+
+# Use this definition to tell build system we are building a Kymera image that will be used for download
+# i.e. do not garbage collect unused functions. This will probably increase the size of the kymera ELF!
+%build
+KYMERA_BASE_DOWNLOAD = true

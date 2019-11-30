@@ -1,0 +1,373 @@
+<ModuleData Name="Sink_USB_Charger_v1" HeaderName="Sink_USB_Charger">
+    <!--Definitions for USB using Charger v1-->
+    <DefineGroup>
+        <DefinePattern
+            PatternName="Sink Charge Current"
+            ShortId="sink_charge_current">
+            <ConfigItem
+                Id="USB Charger Configuration"
+                ShortId="charger_config"
+                Desc="Title for this row in config tool"
+                Type="enum"
+                Size="4">
+                <enum key="When USB Disconnected"
+                      value="0"/>
+                <enum key="When Suspended"
+                      value="1"/>
+                <enum key="When Suspended Dead Battery"
+                      value="2"/>
+                <enum key="When Attached Not Enum"
+                      value="3"/>
+                <enum key="When Attached Not Enum Trickle"
+                      value="4"/>
+                <enum key="When Connected To Hub"
+                      value="5"/>
+                <enum key="When Connected To Hub Trickle Charge"
+                      value="6"/>
+                <enum key="When Connected To Charging Hub"
+                      value="7"/>
+                <enum key="When Connected To Dedicated Charger"
+                      value="8"/>
+                <enum key="When Connected To Floating Data Line Charger"
+                      value="9"/>
+                <enum key="When Vbus Drops"
+                      value="10"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Charger Enable"
+                ShortId="charge"
+                Desc="Set to use this entry to control the charger"
+                Type="bool"
+                Size="1"/>
+
+            <ConfigItem
+                Id="Boost Enable"
+                ShortId="boost"
+                Desc="Boost charging can be disabled or set to internal or externally controlled boost if the device and firmware revision supports it."
+                Type="enum"
+                Size="2">
+                <enum key="Disabled"
+                      value="0"/>
+                <enum key="Internal"
+                      value="1"/>
+                <enum key="External"
+                      value="2"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Voltage Select"
+                ShortId="vsel"
+                Desc="The voltage source for the IC can be set to CHARGER or Vbat"
+                Type="enum"
+                Size="1">
+                <List use="vsel"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Power Off"
+                ShortId="power_off"
+                Desc="When checked the application will reduce to the minimum power consumption possible. Useful for powering off the device at certain temperatures."
+                Type="bool"
+                Size="1"/>
+
+            <ConfigItem
+                Id="Disable LEDs"
+                ShortId="disable_leds"
+                Desc="When set the LEDs are disabled while charging."
+                Type="bool"
+                Size="1"/>
+
+            <ConfigItem
+                Id="Current [mA]"
+                ShortId="current"
+                Desc="Charge current specified in mA."
+                Type="uint"
+                Size="8"/>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup Id="USB Power RO" ShortId="sink_usb_power_readonly" Node="Basic">
+        <ConfigGroup
+            Id="USB Power" 
+            ShortId="sink_usb_power" 
+            ConfigGroupPath="./[@ShortId='battery']"
+            Node="Array">
+            <ConfigPatternArray
+                Id="USB Charger Configuration"
+                ShortId="charge"
+                Pattern="sink_charge_current"
+                Presentation="ReadOnlyHeader"
+                FixedNumPatterns="11">
+                            
+                <PatternArrayRow Id="USB Disconnected" ShortId="i_disc" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When USB Disconnected" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="CHG" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="150" />
+                </PatternArrayRow>
+                
+                <PatternArrayRow Id="USB Suspended" ShortId="i_susp" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When Suspended" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="BAT" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="USB Suspended Dead Battery" ShortId="i_susp_db" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When Suspended Dead Battery" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="CHG" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="USB Attached Not Enum" ShortId="i_att" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When Attached Not Enum" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="BAT" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="90" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="USB Attached Not Enum Trickle" ShortId="i_att_trickle" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When Attached Not Enum Trickle" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="CHG" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="90" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="USB Attached Connected To Hub" ShortId="i_conn" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When Connected To Hub" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="CHG" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="150" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="USB Attached Connected To Hub Trickle Charge" ShortId="i_conn_trickle" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When Connected To Hub Trickle Charge" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="CHG" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="150" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="USB Attached Connected To Charging Hub" ShortId="i_chg" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When Connected To Charging Hub" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="CHG" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="150" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="USB Attached Connected To Dedicated Charger" ShortId="i_dchg" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When Connected To Dedicated Charger" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="CHG" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="150" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="USB Connected To Floating Data Line Charger" ShortId="i_fchg" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="charger_config"
+                        DefaultValue="When Connected To Floating Data Line Charger" />
+                    <PatternArrayConfigItem
+                        ShortId="charge"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem
+                        ShortId="vsel"
+                        DefaultValue="CHG" />
+                    <PatternArrayConfigItem
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="disable_leds"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem
+                        ShortId="current"
+                        DefaultValue="150" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="USB Vbus Drop" ShortId="i_lim" Node="Basic">
+                    <PatternArrayConfigItem 
+                        ShortId="charger_config"
+                        DefaultValue="When Vbus Drops" />
+                    <PatternArrayConfigItem 
+                        ShortId="charge"
+                        DefaultValue="true" />
+                    <PatternArrayConfigItem 
+                        ShortId="boost"
+                        DefaultValue="Disabled" />
+                    <PatternArrayConfigItem 
+                        ShortId="vsel"
+                        DefaultValue="CHG" />
+                    <PatternArrayConfigItem 
+                        ShortId="power_off"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="disable_leds"
+                        DefaultValue="false" />
+                    <PatternArrayConfigItem 
+                        ShortId="current"
+                        DefaultValue="150" />
+                </PatternArrayRow>
+                
+            </ConfigPatternArray>
+
+        </ConfigGroup>
+        
+    </ConfigGroup>
+
+</ModuleData>

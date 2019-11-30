@@ -1,0 +1,427 @@
+<ModuleData Name="Sink_Broadcast_audio">
+
+    <DefineGroup>
+        <!--Define Lists that can be used in both Pattern Headers and Pattern Bodies (and Generic Config Items and Groups for that matter)-->
+        <!--these are designed to remove the need for duplication of symbolic information-->
+        <!-- Desc="Modes to configre I2S Amplifier volume" -->
+        <DefineList Id="I2S Mode" ShortId="i2s_mode">
+            <enum key="Headphone"
+                  value="0"/>
+            <enum key="Speaker"
+                  value="1"/>
+        </DefineList>
+
+        <!-- Desc="Master/Broadcaster BD Address stored by BA Receiver" -->
+        <DefineStruct
+            Id="BD Address"
+            ShortId="ba_bd_address" >
+            <ConfigItem
+                Id="BD Address LAP MSB"
+                ShortId="lap_msb"
+                Type="uint"
+                Size="16"
+                Desc=" "/>
+            <ConfigItem
+                Id="BD Address LAP LSB"
+                ShortId="lap_lsb"
+                Type="uint"
+                Size="16"
+                Desc=" "/>
+            <ConfigItem
+                Id="BD Address UAP"
+                ShortId="uap"
+                Type="uint"
+                Size="8"
+                Desc=" "/>
+            <ConfigItem
+                Id="BD Address NAP"
+                ShortId="nap"
+                Type="uint"
+                Size="16"
+                Desc=" "/>
+        </DefineStruct>
+
+        <!-- Desc="BA Keys : 3 words Fixed IV, 9 words Security Key" -->
+        <DefineStruct Id="keys" ShortId="sec_key">
+            <ConfigArray
+                Id="embedded array2"
+                ShortId="fiv"
+                Desc="b"
+                Type="array"
+                ElementType="uint"
+                ArraySize="3"/>
+            <ConfigArray
+                Id="embedded array1"
+                ShortId="sec"
+                Desc="a"
+                Type="array"
+                ElementType="uint"
+                ArraySize="9"/>
+        </DefineStruct>
+        
+        <DefinePattern
+            PatternName="Broadcast volume conversion"
+            ShortId="ba_volume_conversion">
+            <ConfigItem
+                Id="BA gain [dB/60]"
+                Desc="Gain for broadcast volume step corresponding to index in this table"
+                ShortId="ba_gain"
+                Type="int"
+                Size="16"/>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        ShortId="ba"
+        Id="BA"
+        Node="Basic">
+        <ConfigItem
+            Id="BA Association Time out [s]"
+            ShortId="assoc_timeout_s"
+            Type="uint"
+            DefaultValue="0x1E"
+            Size="16"
+            Range="Min=30,Max=180"
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"
+            Desc="Specifies the amount of time in seconds after which initiated BA association procedure will be stopped">
+        </ConfigItem>
+        <ConfigItem
+            Id="Continuous Sync Train"
+            ShortId="continuous_sync_train"
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            Desc="If this is set, it enables a continuous synchronization train, which does not timeout and require restartring by the application"
+            ConfigGroupPath="./[@ShortId='broadcast_audio']">
+        </ConfigItem>
+        <ConfigItem
+            Id="Broadcaster LT Addr"
+            ShortId="broadcaster_lt_addr"
+            Desc="LT Address of the Master/Broadcaster"
+            Type="uint"
+            Size="8"
+            DefaultValue="0x02"
+            ConfigGroupPath="./[@ShortId='advanced_settings']">
+        </ConfigItem>
+    </ConfigGroup>
+    
+    <ConfigGroup Id="BA volume readonly" ShortId="ba_volume_readonly" Node="Basic">
+        <ConfigGroup
+            Id="BA volume" 
+            ShortId="ba_volume" 
+            ConfigGroupPath="./[@ShortId='broadcast_audio']"
+            Node="Array">
+            <ConfigPatternArray
+                Id="BA volume array"
+                ShortId="ba_volume_array"
+                Pattern="ba_volume_conversion"
+                FixedNumPatterns="32">
+                            
+                <PatternArrayRow Id="BA step 0" ShortId="ba_step_0" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-7200" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 1" ShortId="ba_step_1" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-6000" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 2" ShortId="ba_step_2" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-4800" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 3" ShortId="ba_step_3" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-4400" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 4" ShortId="ba_step_4" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-4000" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 5" ShortId="ba_step_5" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-3600" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 6" ShortId="ba_step_6" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-3200" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 7" ShortId="ba_step_7" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-2800" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 8" ShortId="ba_step_8" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-2400" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 9" ShortId="ba_step_9" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-2250" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 10" ShortId="ba_step_10" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-2100" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 11" ShortId="ba_step_11" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-1950" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 12" ShortId="ba_step_12" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-1800" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 13" ShortId="ba_step_13" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-1650" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 14" ShortId="ba_step_14" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-1500" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 15" ShortId="ba_step_15" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-1350" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 16" ShortId="ba_step_16" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-1200" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 17" ShortId="ba_step_17" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-1050" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 18" ShortId="ba_step_18" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-900" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 19" ShortId="ba_step_19" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-750" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 20" ShortId="ba_step_20" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-600" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 21" ShortId="ba_step_21" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-540" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 22" ShortId="ba_step_22" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-480" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 23" ShortId="ba_step_23" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-420" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 24" ShortId="ba_step_24" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-360" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 25" ShortId="ba_step_25" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-300" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 26" ShortId="ba_step_26" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-240" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 27" ShortId="ba_step_27" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-180" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 28" ShortId="ba_step_28" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-120" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 29" ShortId="ba_step_29" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-80" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 30" ShortId="ba_step_30" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="-40" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="BA step 31" ShortId="ba_step_31" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="ba_gain"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="broadcaster_writeable_keys"
+        Id="BR_writeable_keys"
+        Node="Basic">
+        <ConfigStruct
+            Id="Broadcaster Keys"
+            ShortId="broadcaster_keys"
+            Desc=" "
+            Type="struct"
+            Struct="sec_key">
+                <StructElementConfigItem
+                    Id="BR FIV"
+                    ShortId="br_fiv"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='advanced_settings']">
+                    <ArrayElementConfigItem Id="BR FIV Key Word 1" ShortId="br_fiv_key1" Desc=" " DefaultValue="0xbeef"/>
+                    <ArrayElementConfigItem Id="BR FIV Key Word 2" ShortId="br_fiv_key2" Desc=" " DefaultValue="0xeefa"/>
+                    <ArrayElementConfigItem Id="BR FIV Key Word 3" ShortId="br_fiv_key3" Desc=" " DefaultValue="0xcade"/>
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="BR SEC"
+                    ShortId="br_sec"
+                    Desc="c"
+                    ConfigGroupPath="./[@ShortId='advanced_settings']">
+                    <ArrayElementConfigItem Id="BR SEC Key Word 1" ShortId="br_sec_key1" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="BR SEC Key Word 2" ShortId="br_sec_key2" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="BR SEC Key Word 3" ShortId="br_sec_key3" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="BR SEC Key Word 4" ShortId="br_sec_key4" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="BR SEC Key Word 5" ShortId="br_sec_key5" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="BR SEC Key Word 6" ShortId="br_sec_key6" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="BR SEC Key Word 7" ShortId="br_sec_key7" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="BR SEC Key Word 8" ShortId="br_sec_key8" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="BR SEC Key Word 9" ShortId="br_sec_key9" Desc=" " DefaultValue="0x0000"/>
+                </StructElementConfigItem>
+        </ConfigStruct>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="receiver_writeable_keys"
+        Id="RE_writeable_keys"
+        Node="Basic">
+        <ConfigStruct
+            Id="Receiver Keys"
+            ShortId="receiver_keys"
+            Desc="d"
+            Type="struct"
+            Struct="sec_key">
+                <StructElementConfigItem
+                    Id="RE FIV"
+                    ShortId="re_fiv"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='advanced_settings']">
+                    <ArrayElementConfigItem Id="RE FIV Key Word 1" ShortId="re_fiv_key1" Desc=" " DefaultValue="0xbeef"/>
+                    <ArrayElementConfigItem Id="RE FIV Key Word 2" ShortId="re_fiv_key2" Desc=" " DefaultValue="0xeefa"/>
+                    <ArrayElementConfigItem Id="RE FIV Key Word 3" ShortId="re_fiv_key3" Desc=" " DefaultValue="0xcade"/>
+                </StructElementConfigItem>
+                <StructElementConfigItem
+                    Id="RE SEC"
+                    ShortId="re_sec"
+                    Desc=" "
+                    ConfigGroupPath="./[@ShortId='advanced_settings']">
+                    <ArrayElementConfigItem Id="RE SEC Key Word 1" ShortId="re_sec_key1" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="RE SEC Key Word 2" ShortId="re_sec_key2" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="RE SEC Key Word 3" ShortId="re_sec_key3" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="RE SEC Key Word 4" ShortId="re_sec_key4" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="RE SEC Key Word 5" ShortId="re_sec_key5" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="RE SEC Key Word 6" ShortId="re_sec_key6" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="RE SEC Key Word 7" ShortId="re_sec_key7" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="RE SEC Key Word 8" ShortId="re_sec_key8" Desc=" " DefaultValue="0x0000"/>
+                    <ArrayElementConfigItem Id="RE SEC Key Word 9" ShortId="re_sec_key9" Desc=" " DefaultValue="0x0000"/>
+                </StructElementConfigItem>
+        </ConfigStruct>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="receiver_master_address"
+        Id="Master BD Address of Receiver"
+        Node="Expert">
+            <ConfigStruct
+                Id="Master BD Address"
+                ShortId="broadcaster_bd_addr"
+                Desc="BD Address of the Master/Broadcaster"
+                Type="struct"
+                Struct="ba_bd_address"
+                ConfigGroupPath="./[@ShortId='advanced_settings']">
+                <StructElementConfigItem
+                    Id="Master BD Address LAP MSB"
+                    ShortId="ba_bd_address_lap_msb"
+                    Desc=" "
+                    DefaultValue="0x0000" />
+                <StructElementConfigItem
+                    Id="Master BD Address LAP LSB"
+                    ShortId="ba_bd_address_lap_lsb"
+                    Desc=" "
+                    DefaultValue="0x0000" />
+                <StructElementConfigItem
+                    Id="Master BD Address UAP"
+                    ShortId="ba_bd_address_uap"
+                    Desc=" "
+                    DefaultValue="0x00" />
+                <StructElementConfigItem
+                    Id="Master BD Address NAP"
+                    ShortId="ba_bd_address_nap"
+                    Desc=" "
+                    DefaultValue="0x0000" />
+            </ConfigStruct>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="receiver_bssr"
+        Id="Receiver BSSR"
+        Node="Expert"
+        ConfigGroupPath="./[@ShortId='advanced_settings']">
+            <ConfigArray
+                Id="Broadcaster Stream Service Records"
+                ShortId="bssr"
+                Desc="Broadcaster Stream Service Records"
+                Type="array"
+                ElementType="uint"
+                ArraySize="1">
+                <ArrayElementConfigItem
+                    Id="BSSR Data 1"
+                    ShortId="bssr_data_1"
+                    Desc=" "
+                    DefaultValue="0x0000"/>
+            </ConfigArray>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="receiver_volume"
+        Id="Receiver Volume"
+        Node="Expert"
+        ConfigGroupPath="./[@ShortId='advanced_settings']">
+            <ConfigItem
+                Id="Receiver Default Local Volume"
+                ShortId="receiver_default_local_volume"
+                Type="int"
+                DefaultValue="0x0000"
+                Size="16"
+                Desc="Default local volume of BA Receiver. Default volume can be set in the range of 0 to 15">
+            </ConfigItem>
+    </ConfigGroup>
+</ModuleData>

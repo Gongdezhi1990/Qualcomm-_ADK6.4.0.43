@@ -1,0 +1,162 @@
+#!/usr/bin/env python
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+import sys
+import getopt
+import os.path
+
+def help_and_exit():
+    print """
+    FILE
+      makeinclude.py  -  autogenerate include of headers from other subsystems
+
+    DESCRIPTION
+      Construct a header file for including header files from other subsystems.
+      This is intended to be used for collecting information that should be
+      private to each subsystem, but for build reasons needs to be brought
+      together in one place.
+
+      Usage:
+          makeinclude.py [-I<include directory>]* -S<suffix> -M<macro>
+                         -O<target header> <subsystem>*
+
+      -I<include directory>
+          Add a directory to the include file search path. This is used to
+          locate the subsystems, and hence the header files to be included.
+
+      -S<suffix>
+          The header file suffix to search for, e.g. specifying "static" would
+          add an include line as follows for each file that exists with a name
+          matching the pattern:
+              #include "<subsystem>/<subsystem>_static.h"
+
+      -M<macro>
+          The base name and parameters of a macro to define listing all of the
+          included subsystems, e.g. specifying "STATIC(m)" would define a macro
+          as follows:
+              #define STATIC_LIST(m) \
+                  <SUBSYSTEM1>_STATIC(m) \
+                  <SUBSYSTEM2>_STATIC(m)
+
+      -O<target header>
+          The name of the target header file. If this already exists then it
+          will only be overwritten if the content needs to be changed.
+
+      <subsystem>
+          The name of a subsystem to check. The order in which the subsystems
+          are listed may be important, and so is preserved.
+    """
+    sys.exit()
+
+class Arguments:
+    # Class to read and hold the arguments of the script.
+    def __init__(self, argv):
+        # Assign the command-line options
+        self.script_path  = argv[0]
+
+        try:
+            opts, args = getopt.getopt(sys.argv[1:], "i:s:m:o:h", ["help"])
+        except getopt.GetoptError, err:
+            help_and_exit()
+
+        for o, a in opts:
+            if o in ("-h", "--help"):
+                help_and_exit()
+            elif o == "-i":
+                # Add to the search path for include files
+                self.include_dir = a
+            elif o == "-s":
+                # Set the header file suffix to match
+                self.suffix = a
+            elif o == "-m":
+                # Set the macro base name and parameters
+                self.macro = a
+            elif o == "-o":
+                # Set the target filename
+                self.target_header = a
+            else:
+                # Not a recognised option
+                print( "ERROR: Unhandled option '%s'",o)
+                help_and_exit()
+                
+        # Any other parameters specify the name of a subsystem to search
+        self.subsystems = args
+        
+        # Sanity check the parameters
+        if (self.target_header ==None) or (self.suffix == None) or\
+           (len(self.subsystems)<1) or (self.macro == None):
+            help_and_exit()
+
+def search_headers_in_subsystems(subsystems, suffix):
+    # Search in the subsystem for files with the given suffix (ex: subsystem_suffix.h)
+    found = []
+    for subsystem in subsystems:
+        file_name = subsystem + "_" + suffix + ".h"
+        if (os.path.isfile(file_name)): 
+            module = subsystem.split("/")[-1]
+            found.append(module)
+    return found
+
+def read_file(file_to_read):
+    # Reads the content of a file. Returns None if the file doesn't exist.
+    if os.path.isfile(file_to_read):
+        # read the target and check if it was any changes
+        with open(file_to_read,"r") as targetfile:
+            content = targetfile.read()
+        return content
+    else:
+        return None
+        
+def write_to_file(file_to_write, content):
+    # This function writes to a file. If the files doesn't exist 
+    # it will be created.
+    with open(file_to_write,"w") as targetfile:
+        targetfile.write(content)
+    
+
+# read arguments
+arguments = Arguments(sys.argv)
+
+# search in the subsystem for the given suffix headers
+headers = search_headers_in_subsystems(arguments.subsystems,arguments.suffix)
+
+
+########### Generate the content of the target header file
+# base name is the file name without the extension/extension
+target_base = os.path.splitext(os.path.basename(arguments.target_header))[0]
+
+# Header guard name for the generated file 
+header_guard = target_base.upper() + "_H"
+
+# Add documentation and open the header guard.
+content = ("/* %s.h autogenerated by %s */\n\n"
+         + "#ifndef %s\n"
+         + "#define %s\n\n"
+         )%(target_base,os.path.basename(arguments.script_path),header_guard,header_guard)
+
+# Include headers found with the specific suffix in the subsystems.         
+for file in headers:
+    content += "#include \"" + file + "/"+ file + "_" + arguments.suffix + ".h\"\n"
+content += "\n"
+
+define = arguments.macro.upper().split("(")[0 ] +"_LIST(" + arguments.macro.split("(")[1]
+content += "#define " + define;
+for file in headers:
+    content += " \\\n    " + file.upper() + "_" +arguments. macro 
+content += "\n\n"
+    
+# Close the header guard.
+content += "#endif /* " + header_guard + " */\n"
+########### 
+
+
+# check if the file already exist with the same content to save some time.
+if content != read_file(arguments.target_header):
+    # if the content is different write the content to the file.
+    write_to_file(arguments.target_header, content)
+
+    

@@ -1,0 +1,3013 @@
+
+<GlobalData>
+        <!-- child elements: 0 or 1 of any of {<DefineGroup>, <ConfigGroup>}; -->
+    <DefineGroup>
+        <!--Define Lists that can be used in both Pattern Headers and Pattern Bodies (and Generic Config Items and Groups for that matter)-->
+        <!--these are designed to remove the need for duplication of symbolic information-->
+        <DefineList
+            Id="User Event"
+            ShortId="g_user_event">
+                <!-- Note the leading 0x40 is stripped off below, as it is implied by them all being user events, not s-->
+                <!-- attributes: Id(M) -->
+                <!-- child elements: 1 or more of {<enum>}; -->
+            <enum key="..."
+                  value="0x00"/>
+                <!-- attributes: key(M = Mandatory),value(M),disable(O = Optional),desc(O) -->
+                <!-- key and value: must be unique for the entire <DefineList>; -->
+                <!-- value: can be either C hex format - regex(0x[0-9A-Fa-f]+) - or decimal; -->
+            <enum key="Power On"
+                  value="0x01"/>
+            <enum key="Power Off"
+                  value="0x02"/>
+            <enum key="Enter Pairing"
+                  value="0x03"/>
+            <enum key="Initiate Voice Dial"
+                  value="0x04"/>
+            <enum key="Initiate Voice Dial AG2"
+                  value="0x05"/>
+            <enum key="Last Number Redial"
+                  value="0x06"/>
+            <enum key="Last Number Redial AG2"
+                  value="0x07"/>
+            <enum key="Answer"
+                  value="0x08"/>
+            <enum key="Reject"
+                  value="0x09"/>
+            <enum key="Cancel End"
+                  value="0x0A"/>
+            <enum key="Transfer Toggle"
+                  value="0x0B"/>
+            <enum key="Microphone Mute Toggle"
+                  value="0x0C"/>
+            <enum key="Main Output Volume Up"
+                  value="0x0D"/>
+            <enum key="Main Output Volume Down"
+                  value="0x0E"/>
+            <enum key="Volume Orientation Toggle"
+                  value="0x0F"/>
+            <enum key="Three Way Release All Held"
+                  value="0x10"/>
+            <enum key="Three Way Accept Waiting Release Active"
+                  value="0x11"/>
+            <enum key="Three Way Accept Waiting Hold Active"
+                  value="0x12"/>
+            <enum key="Three Way Add Held To 3 Way"
+                  value="0x13"/>
+            <enum key="Three Way Connect 2 Disconnect"
+                  value="0x14"/>
+            <enum key="LEDs On Off Toggle"
+                  value="0x15"/>
+            <enum key="LEDs On"
+                  value="0x16"/>
+            <enum key="LEDs Off"
+                  value="0x17"/>
+            <enum key="Establish SLC"
+                  value="0x18"/>
+            <enum key="Microphone Mute On"
+                  value="0x19"/>
+            <enum key="Microphone Mute Off"
+                  value="0x1A"/>
+            <enum key="Enter TX Cont Test Mode"
+                  value="0x1B"/>
+            <enum key="Enter DUT State"
+                  value="0x1C"/>
+            <enum key="Bass Enhance Enable Disable Toggle"
+                  value="0x1D"/>
+            <enum key="Place Incoming Call On Hold"
+                  value="0x1E"/>
+            <enum key="Accept Held Incoming Call"
+                  value="0x1F"/>
+            <enum key="Reject Held Incoming Call"
+                  value="0x20"/>
+            <enum key="Enter DFU Mode"
+                  value="0x21"/>
+            <enum key="Enter Driverless DFU Mode"
+                  value="0x22"/>
+            <enum key="Enter Service Mode"
+                  value="0x23"/>
+            <enum key="Audio Prompts On"
+                  value="0x24"/>
+            <enum key="Audio Prompts Off"
+                  value="0x25"/>
+            <enum key="Dial Stored Number"
+                  value="0x26"/>
+            <enum key="Update Stored Number"
+                  value="0x27"/>
+            <enum key="Restore Defaults"
+                  value="0x28"/>
+            <enum key="Confirmation Accept"
+                  value="0x29"/>
+            <enum key="Confirmation Reject"
+                  value="0x2A"/>
+            <enum key="Select Audio Prompt Language Mode"
+                  value="0x2B"/>
+            <enum key="BA Set Erasure Coding Scheme to 2.5"
+                  value="0x2C"/>
+            <enum key="Select Next User EQ Bank"
+                  value="0x2D"/>
+            <enum key="BA Start Association"
+                  value="0x2E"/>
+            <enum key="Switch Audio Mode"
+                  value="0x2F"/>
+            <enum key="Button Locking On"
+                  value="0x30"/>
+            <enum key="Button Locking Off"
+                  value="0x31"/>
+            <enum key="Button Locking Toggle"
+                  value="0x32"/>
+            <enum key="BA Set Erasure Coding Scheme to 3.9"
+                  value="0x33"/>
+            <enum key="RSSI Pair"
+                  value="0x34"/>
+            <enum key="Bass Enhance On"
+                  value="0x35"/>
+            <enum key="Bass Enhance Off"
+                  value="0x36"/>
+            <enum key="3D Enhance On"
+                  value="0x37"/>
+            <enum key="3D Enhance Off"
+                  value="0x38"/>
+            <enum key="Select Audio Source Next"
+                  value="0x39"/>
+            <enum key="Select Audio Source Analogue"
+                  value="0x3A"/>
+            <enum key="Select Audio Source USB"
+                  value="0x3B"/>
+            <enum key="Select Audio Source A2DP1"
+                  value="0x3C"/>
+            <enum key="Select Audio Source A2DP2"
+                  value="0x3D"/>
+            <enum key="Select Audio Source FM"
+                  value="0x3E"/>
+            <enum key="Select Audio Source None"
+                  value="0x3F"/>
+            <enum key="PBAP Dial Ich"
+                  value="0x40"/>
+            <enum key="PBAP Dial Mch"
+                  value="0x41"/>
+            <enum key="Intelligent Power Management On"
+                  value="0x42"/>
+            <enum key="Intelligent Power Management Off"
+                  value="0x43"/>
+            <enum key="Intelligent Power Management Toggle"
+                  value="0x44"/>
+            <enum key="AVRCP Play Pause"
+                  value="0x45"/>
+            <enum key="AVRCP Stop"
+                  value="0x46"/>
+            <enum key="AVRCP Skip Forward"
+                  value="0x47"/>
+            <enum key="AVRCP Skip Backward"
+                  value="0x48"/>
+            <enum key="AVRCP Fast Forward Press"
+                  value="0x49"/>
+            <enum key="AVRCP Fast Forward Release"
+                  value="0x4A"/>
+            <enum key="AVRCP Rewind Press"
+                  value="0x4B"/>
+            <enum key="AVRCP Rewind Release"
+                  value="0x4C"/>
+            <enum key="AVRCP Shuffle Off"
+                  value="0x4D"/>
+            <enum key="AVRCP Shuffle All Track"
+                  value="0x4E"/>
+            <enum key="AVRCP Shuffle Group"
+                  value="0x4F"/>
+            <enum key="AVRCP Repeat Off"
+                  value="0x50"/>
+            <enum key="AVRCP Repeat Single Track"
+                  value="0x51"/>
+            <enum key="AVRCP Repeat All Track"
+                  value="0x52"/>
+            <enum key="AVRCP Repeat Group"
+                  value="0x53"/>
+            <enum key="AVRCP Play"
+                  value="0x54"/>
+            <enum key="AVRCP Pause"
+                  value="0x55"/>
+            <enum key="AVRCP Toggle Active"
+                  value="0x56"/>
+            <enum key="AVRCP Next Group Press"
+                  value="0x57"/>
+            <enum key="AVRCP Previous Group Press"
+                  value="0x58"/>
+            <enum key="PBAP Set Phonebook"
+                  value="0x59"/>
+            <enum key="PBAP Browse Entry"
+                  value="0x5A"/>
+            <enum key="PBAP Browse List"
+                  value="0x5B"/>
+            <enum key="PBAP Download Phonebook"
+                  value="0x5C"/>
+            <enum key="PBAP Select Phonebook Object"
+                  value="0x5D"/>
+            <enum key="PBAP Browse Complete"
+                  value="0x5E"/>
+            <enum key="PBAP Get Phonebook Size"
+                  value="0x5F"/>
+            <enum key="USB Play Pause"
+                  value="0x60"/>
+            <enum key="USB Stop"
+                  value="0x61"/>
+            <enum key="USB Fwd"
+                  value="0x62"/>
+            <enum key="USB Back"
+                  value="0x63"/>
+            <enum key="USB Mute"
+                  value="0x64"/>
+            <enum key="USB Low Power Mode"
+                  value="0x65"/>
+            <enum key="Test Mode Audio"
+                  value="0x66"/>
+            <enum key="Test Mode Tone"
+                  value="0x67"/>
+            <enum key="Test Mode Key"
+                  value="0x68"/>
+            <enum key="Test Defrag"
+                  value="0x69"/>
+            <enum key="Debug Keys Toggle"
+                  value="0x6A"/>
+            <enum key="Speech Recognition Tuning Start"
+                  value="0x6B"/>
+            <enum key="WBS Test Set Codecs"
+                  value="0x6C"/>
+            <enum key="WBS Test Override Response"
+                  value="0x6D"/>
+            <enum key="WBS Test Set Codecs Send BAC"
+                  value="0x6E"/>
+            <enum key="Create Audio Connection"
+                  value="0x6F"/>
+            <enum key="GAIA User 1"
+                  value="0x70"/>
+            <enum key="GAIA User 2"
+                  value="0x71"/>
+            <enum key="GAIA User 3"
+                  value="0x72"/>
+            <enum key="GAIA User 4"
+                  value="0x73"/>
+            <enum key="GAIA User 5"
+                  value="0x74"/>
+            <enum key="GAIA User 6"
+                  value="0x75"/>
+            <enum key="GAIA User 7"
+                  value="0x76"/>
+            <enum key="GAIA User 8"
+                  value="0x77"/>
+            <enum key="FM Rx On"
+                  value="0x78"/>
+            <enum key="FM Rx Off"
+                  value="0x79"/>
+            <enum key="FM Rx Tune Up"
+                  value="0x7A"/>
+            <enum key="FM Rx Tune Down"
+                  value="0x7B"/>
+            <enum key="FM Rx Store"
+                  value="0x7C"/>
+            <enum key="FM Rx Tune To Store"
+                  value="0x7D"/>
+            <enum key="FM Rx Erase"
+                  value="0x7E"/>
+            <enum key="Swap A2DP Media Channel"
+                  value="0x7F"/>
+            <enum key="External Mic Connected"
+                  value="0x80"/>
+            <enum key="External Mic Disconnected"
+                  value="0x81"/>
+            <enum key="SSR On"
+                  value="0x82"/>
+            <enum key="SSR Off"
+                  value="0x83"/>
+            <enum key="NFC Tag Detected"
+                  value="0x84"/>
+            <enum key="Subwoofer Start Inquiry"
+                  value="0x85"/>
+            <enum key="Subwoofer Volume Down"
+                  value="0x86"/>
+            <enum key="Subwoofer Volume Up"
+                  value="0x87"/>
+            <enum key="Subwoofer Delete Pairing"
+                  value="0x88"/>
+            <enum key="Peer Session Inquire"
+                  value="0x89"/>
+            <enum key="Peer Session Conn Disc"
+                  value="0x8A"/>
+            <enum key="Peer Session End"
+                  value="0x8B"/>
+            <enum key="Battery Level Request"
+                  value="0x8C"/>
+            <enum key="Volume Orientation Normal"
+                  value="0x8D"/>
+            <enum key="Volume Orientation Invert"
+                  value="0x8E"/>
+            <enum key="Reset Paired Device List"
+                  value="0x8F"/>
+            <enum key="Enter Dut Mode"
+                  value="0x90"/>
+            <enum key="3D Enhance Enable Disable Toggle"
+                  value="0x91"/>
+            <enum key="Select Audio Source Next Routable"
+                  value="0x92"/>
+            <enum key="BA Switch to Normal Mode"
+                  value="0x93"/>
+            <enum key="Enter BootMode2"
+                  value="0x94"/>
+            <enum key="Charger Connected"
+                  value="0x95"/>
+            <enum key="Charger Disconnected"
+                  value="0x96"/>
+            <enum key="Subwoofer Disconnect"
+                  value="0x97"/>
+            <enum key="Analogue Audio Connected"
+                  value="0x98"/>
+            <enum key="Analogue Audio Disconnected"
+                  value="0x99"/>
+            <enum key="GAIA DFU Request"
+                  value="0x9A"/>
+            <enum key="Start IR Learning Mode"
+                  value="0x9B"/>
+            <enum key="Stop IR Learning Mode"
+                  value="0x9C"/>
+            <enum key="Clear IR Codes"
+                  value="0x9D"/>
+            <enum key="User EQ On"
+                  value="0x9E"/>
+            <enum key="User EQ Off"
+                  value="0x9F"/>
+            <enum key="User EQ On/Off Toggle"
+                  value="0xA0"/>
+            <enum key="HFP Enhanced Safety Indicator Trigger"
+                  value="0xA1"/>
+            <enum key="Test SCOM User Acceptance Yes"
+                  value="0xA2"/>
+            <enum key="Test SCOM User Acceptance No"
+                  value="0xA3"/>
+            <enum key="Qualification AVCTP Send Second Req"
+                  value="0xA4"/>
+            <enum key="Qualification (Source) Send Reconfiguration Req"
+                  value="0xA5"/>
+            <enum key="Qualification (Sink) Send Reconfiguration Req"
+                  value="0xA6"/>
+            <enum key="Qualification (Sink) Send Suspend Req"
+                  value="0xA7"/>
+            <enum key="HID Click Selfie Press"
+                  value="0xA8"/>
+            <enum key="HID Click Selfie Release"
+                  value="0xA9"/>
+            <enum key="HID Qualification Limited Discoverable"
+                  value="0xAA"/>
+            <enum key="Center Button Press"
+                  value="0xAB"/>
+            <enum key="Center Button Release"
+                  value="0xAC"/>
+            <enum key="SPDIF Audio Connected"
+                  value="0xAD"/>
+            <enum key="SPDIF Audio Disconnected"
+                  value="0xAE"/>
+            <enum key="Select Audio Source SPDIF"
+                  value="0xAF"/>
+            <enum key="Change TWS Audio Routing"
+                  value="0xB0"/>
+            <enum key="TWS Master Device Trim Volume Up"
+                  value="0xB1"/>
+            <enum key="TWS Master Device Trim Volume Down"
+                  value="0xB2"/>
+            <enum key="TWS Slave Device Trim Volume Up"
+                  value="0xB3"/>
+            <enum key="TWS Slave Device Trim Volume Down"
+                  value="0xB4"/>
+            <enum key="Establish Peer Device Connection"
+                  value="0xB5"/>
+            <enum key="Peer Session Single Button Pair"
+                  value="0xB6"/>
+            <enum key="TWS Qualification A2dp Enable Peer Open"
+                  value="0xB7"/>
+            <enum key="GAIA User 9"
+                  value="0xB8"/>
+            <enum key="GAIA User 10"
+                  value="0xB9"/>
+            <enum key="GAIA User 11"
+                  value="0xBA"/>
+            <enum key="GAIA User 12"
+                  value="0xBB"/>
+            <enum key="GAIA User 13"
+                  value="0xBC"/>
+            <enum key="GAIA User 14"
+                  value="0xBD"/>
+            <enum key="GAIA User 15"
+                  value="0xBE"/>
+            <enum key="GAIA User 16"
+                  value="0xBF"/>
+            <enum key="GAIA User 17"
+                  value="0xC0"/>
+            <enum key="GAIA User 18"
+                  value="0xC1"/>
+            <enum key="GAIA User 19"
+                  value="0xC2"/>
+            <enum key="GAIA User 20"
+                  value="0xC3"/>
+            <enum key="Quick Charge Stat Interrupt"
+                  value="0xC4"/>
+            <enum key="VA Press To Talk Start"
+                  value="0xC5"/>
+            <enum key="VA Press To Talk Stop"
+                  value="0xC6"/>
+            <enum key="SPP Qualification User Connect Disconnect Request"
+                  value="0xC7"/>
+            <enum key="Clear User PIO"
+                  value="0xC8"/>
+            <enum key="Set User PIO"
+                  value="0xC9"/>
+            <enum key="Toggle User PIO"
+                  value="0xCA"/>
+            <enum key="Determine TWS Forced Downmix mode"
+                  value="0xCB"/>
+            <enum key="VA Press To Talk Continue"
+                  value="0xCD"/>                  
+            <enum key="VA Tap To Talk Start"
+                  value="0xCE"/>
+            <enum key="VA Cancel"
+                  value="0xCF"/>
+            <enum key="BLE Start Bonding"
+                  value="0xD0"/>
+            <enum key="BA Switch to Broadcaster"
+                  value="0xD1"/>
+            <enum key="BA Switch to Receiver"
+                  value="0xD2"/>
+            <enum key="BLE Stop Immediate Alert"
+                  value="0xD3"/>
+            <enum key="BLE Stop Link Loss Alert"
+                  value="0xD4"/>
+            <enum key="BLE Find My Remote Mild Alert"
+                  value="0xD5"/>
+            <enum key="BLE Find My Remote High Alert"
+                  value="0xD6"/>
+            <enum key="BLE Find My Phone Mild Alert"
+                  value="0xD7"/>
+            <enum key="BLE Find My Phone High Alert"
+                  value="0xD8"/>
+            <enum key="BLE Find My Phone From Remote High Alert"
+                  value="0xD9"/>
+            <enum key="Party Mode On"
+                  value="0xDA"/>
+            <enum key="Party Mode Off"
+                  value="0xDB"/>
+            <enum key="Aux Output Volume Up"
+                  value="0xDC"/>
+            <enum key="Aux Output Volume Down"
+                  value="0xDD"/>
+            <enum key="Aux Output Mute Toggle"
+                  value="0xDE"/>
+            <enum key="Main Output Mute Toggle"
+                  value="0xDF"/>
+            <enum key="Aux Output Mute On"
+                  value="0xE0"/>
+            <enum key="Aux Output Mute Off"
+                  value="0xE1"/>
+            <enum key="Main Output Mute On"
+                  value="0xE2"/>
+            <enum key="Main Output Mute Off"
+                  value="0xE3"/>
+            <enum key="BLE Delete Marked Device"
+                  value="0xED"/>
+            <enum key="AVRCP Next Group Release"
+                  value="0xEE"/>
+            <enum key="AVRCP Previous Group Release"
+                  value="0xEF"/>
+            <enum key="TWS Qualification Vol Up"
+                  value="0xF0"/>
+            <enum key="TWS Qualification Vol Down"
+                  value="0xF1"/>
+            <enum key="A2DP Start Stream"
+                  value="0xF2"/>
+            <enum key="PBAP Browse List By Name"
+                  value="0xF3"/>
+            <enum key="TWS Qualification SetAbsVolume"
+                  value="0xF4"/>
+            <enum key="TWS Qualification Play Track"
+                  value="0xF5"/>
+            <enum key="HOGP Qualification Extra Config"
+                  value="0xF6"/>
+            <enum key="TWS Qualification AVRCP Configure Data Size"
+                  value="0xF7"/>
+            <enum key="Reserve Peer Link On"
+                  value="0xF8"/>
+            <enum key="Reserve Peer Link Off"
+                  value="0xF9"/>
+            <enum key="Simulate Heart Rate Notifications"
+                  value="0xFA"/>
+            <enum key="Select Audio Source I2S"
+                  value="0xFB"/>
+            <enum key="HID Qualification Connect"
+                  value="0xFC"/>
+            <enum key="Display Connected Link Key" 
+                  value="0xFD" />
+            <enum key="Cancel Pairing" 
+                  value="0xFE" />
+            <enum key="Enter ANC Tuning Mode"
+                  value="0xFF"/>
+            <enum key="User Accessory Launch App"
+                  value="0x100"/>				  
+			<enum key="Enable USB Debug"
+                  value="0x109"/>				  
+            <enum key="Compander On"
+                  value="0x10A"/>
+            <enum key="Compander Off"
+                  value="0x10B"/>
+            <enum key="Compander On/Off Toggle"
+                  value="0x10C"/>
+			<enum key="VA User Event 1"
+                  value="0x10D"/>
+            <enum key="VA User Event 2"
+                  value="0x10E"/>
+            <enum key="VA User Event 3"
+                  value="0x10F"/>
+            <enum key="VA User Event 4"
+                  value="0x110"/>
+            <enum key="VA User Event 5"
+                  value="0x111"/>
+            <enum key="VA User Event 6"
+                  value="0x112"/>  
+        </DefineList>
+
+        <DefineList
+            Id="System Event"
+            ShortId="g_system_event">
+                <!-- attributes: Id(M) -->
+                <!-- child elements: 1 or more of {<enum>}; -->
+            <enum key="...."
+                  value="0x0000"/>
+                <!-- attributes: key(M = Mandatory),value(M),disable(O = Optional),desc(O) -->
+                <!-- key and value: must be unique for the entire <DefineList>; -->
+                <!-- value: can be either C hex format - regex(0x[0-9A-Fa-f]+) - or decimal; -->
+            <enum key="Pairing Fail"
+                  value="0x4700"/>
+            <enum key="Pairing Successful"
+                  value="0x4701"/>
+            <enum key="SCO Link Open"
+                  value="0x4702"/>
+            <enum key="SCO Link Close"
+                  value="0x4703"/>
+            <enum key="Battery Low"
+                  value="0x4704"/>
+            <enum key="End Of Call"
+                  value="0x4705"/>
+            <enum key="LED Event Complete"
+                  value="0x4706"/>
+            <enum key="Auto Switch Off"
+                  value="0x4707"/>
+            <enum key="Charge Complete"
+                  value="0x4708"/>
+            <enum key="Charge In Progress"
+                  value="0x4709"/>
+            <enum key="Battery Ok"
+                  value="0x470A"/>
+            <enum key="Battery Critical"
+                  value="0x470B"/>
+            <enum key="Charge Disabled"
+                  value="0x470C"/>
+            <enum key="Gas Gauge 0"
+                  value="0x470D"/>
+            <enum key="Gas Gauge 1"
+                  value="0x470E"/>
+            <enum key="Gas Gauge 2"
+                  value="0x470F"/>
+            <enum key="Gas Gauge 3"
+                  value="0x4710"/>
+            <enum key="Charger Gas Gauge 0"
+                  value="0x4711"/>
+            <enum key="Charger Gas Gauge 1"
+                  value="0x4712"/>
+            <enum key="Charger Gas Gauge 2"
+                  value="0x4713"/>
+            <enum key="Charger Gas Gauge 3"
+                  value="0x4714"/>
+            <enum key="SLC Connected"
+                  value="0x4715"/>
+            <enum key="SLC Disconnected"
+                  value="0x4716"/>
+            <enum key="Link Loss"
+                  value="0x4717"/>
+            <enum key="Limbo Timeout"
+                  value="0x4718"/>
+            <enum key="Network Or Service Not Present"
+                  value="0x4719"/>
+            <enum key="Network Or Service Present"
+                  value="0x471A"/>
+            <enum key="Mute Reminder"
+                  value="0x471B"/>
+            <enum key="Reset Complete"
+                  value="0x471C"/>
+            <enum key="Error"
+                  value="0x471D"/>
+            <enum key="Long Timer"
+                  value="0x471E"/>
+            <enum key="VLong Timer"
+                  value="0x471F"/>
+            <enum key="Enable Power Off"
+                  value="0x4720"/>
+            <enum key="Cancel LED Indication"
+                  value="0x4721"/>
+            <enum key="Call Answered"
+                  value="0x4722"/>
+            <enum key="Enter Pairing Empty PDL"
+                  value="0x4723"/>
+            <enum key="Reconnect Failed"
+                  value="0x4724"/>
+            <enum key="Check For Audio Transfer"
+                  value="0x4725"/>
+            <enum key="Gaia Alert LEDs"
+                  value="0x4726"/>
+            <enum key="Service Mode Entered"
+                  value="0x4727"/>
+            <enum key="BA Association Start"
+                  value="0x4728"/>
+            <enum key="BA Mode Indication Start"
+                  value="0x4729"/>
+            <enum key="BA Association End"
+                  value="0x472A"/>
+            <enum key="BA Receiver Not Associated"
+                  value="0x472B"/>
+            <enum key="Continue SLC Connect Request"
+                  value="0x472C"/>
+            <enum key="SLC Connected After Power On"
+                  value="0x472D"/>
+            <enum key="Establish SLC On Panic"
+                  value="0x472E"/>
+            <enum key="Connectable Timeout"
+                  value="0x472F"/>
+            <enum key="Tone 1"
+                  value="0x4730"/>
+            <enum key="Tone 2"
+                  value="0x4731"/>
+            <enum key="Stream Establish"
+                  value="0x4732"/>
+            <enum key="Reset LED Timeout"
+                  value="0x4733"/>
+            <enum key="Start Paging In Conn State"
+                  value="0x4734"/>
+            <enum key="Stop Paging In Conn State"
+                  value="0x4735"/>
+            <enum key="Multipoint Call Waiting"
+                  value="0x4736"/>
+            <enum key="Refresh Encryption"
+                  value="0x4737"/>
+            <enum key="Button Blocked By Lock"
+                  value="0x4738"/>
+            <enum key="Speech Recognition Start"
+                  value="0x4739"/>
+            <enum key="Speech Recognition Stop"
+                  value="0x473A"/>
+            <enum key="Speech Recognition Tuning Yes"
+                  value="0x473B"/>
+            <enum key="Speech Recognition Tuning No"
+                  value="0x473C"/>
+            <enum key="RSSI Pair Reminder"
+                  value="0x473D"/>
+            <enum key="RSSI Pair Timeout"
+                  value="0x473E"/>
+            <enum key="RSSI Resume"
+                  value="0x473F"/>
+            <enum key="Check Role"
+                  value="0x4740"/>
+            <enum key="Missed Call"
+                  value="0x4741"/>
+            <enum key="A2DP Connected"
+                  value="0x4742"/>
+            <enum key="A2DP Disconnected"
+                  value="0x4743"/>
+            <enum key="Volume Max"
+                  value="0x4744"/>
+            <enum key="Volume Min"
+                  value="0x4745"/>
+            <enum key="Check Audio Routing"
+                  value="0x4746"/>
+            <enum key="Confirmation Request"
+                  value="0x4747"/>
+            <enum key="Passkey Display"
+                  value="0x4748"/>
+            <enum key="Pin Code Request"
+                  value="0x4749"/>
+            <enum key="Establish PBAP"
+                  value="0x474A"/>
+            <enum key="PBAP Dial Fail"
+                  value="0x474B"/>
+            <enum key="MAPc Msg Notification"
+                  value="0x474C"/>
+            <enum key="MAPc MNS Success"
+                  value="0x474D"/>
+            <enum key="MAPc MNS Failed"
+                  value="0x474E"/>
+            <enum key="Power On Panic"
+                  value="0x474F"/>
+            <enum key="USB Dead Battery Timeout"
+                  value="0x4750"/>
+            <enum key="Ringtone 1"
+                  value="0x4751"/>
+            <enum key="Ringtone 2"
+                  value="0x4752"/>
+            <enum key="Primary Device Connected"
+                  value="0x4753"/>
+            <enum key="Secondary Device Connected"
+                  value="0x4754"/>
+            <enum key="Update Attributes"
+                  value="0x4755"/>
+            <enum key="Reset AVRCP Mode"
+                  value="0x4756"/>
+            <enum key="Check Audio Amp Drive"
+                  value="0x4757"/>
+            <enum key="Codec SBC In Use"
+                  value="0x4758"/>
+            <enum key="Codec MP3 In Use"
+                  value="0x4759"/>
+            <enum key="Codec AAC In Use"
+                  value="0x475A"/>
+            <enum key="Codec aptX In Use"
+                  value="0x475B"/>
+            <enum key="Codec aptX Low Latency In Use"
+                  value="0x475C"/>
+            <enum key="Codec Faststream In Use"
+                  value="0x475D"/>
+            <enum key="Subwoofer Check Pairing"
+                  value="0x475E"/>
+            <enum key="Subwoofer Open LL Media"
+                  value="0x475F"/>
+            <enum key="Subwoofer Open Std Media"
+                  value="0x4760"/>
+            <enum key="Subwoofer Close Media"
+                  value="0x4761"/>
+            <enum key="Subwoofer Start Streaming"
+                  value="0x4762"/>
+            <enum key="Subwoofer Suspend Streaming"
+                  value="0x4763"/>
+            <enum key="PartyMode Timeout Device1"
+                  value="0x4764"/>
+            <enum key="PartyMode Timeout Device2"
+                  value="0x4765"/>
+            <enum key="Volume Change Timer"
+                  value="0x4766"/>
+            <enum key="Confirm Audio Prompt Language"
+                  value="0x4767"/>
+            <enum key="IR Code Learn Success"
+                  value="0x4768"/>
+            <enum key="IR Code Learn Fail"
+                  value="0x4769"/>
+            <enum key="IR Learning Mode Time-out"
+                  value="0x476A"/>
+            <enum key="IR Learning Mode Reminder"
+                  value="0x476B"/>
+            <enum key="Set Active AVRCP Connection"
+                  value="0x476C"/>
+            <enum key="Tone Digit 0"
+                  value="0x476D"/>
+            <enum key="Tone Digit 1"
+                  value="0x476E"/>
+            <enum key="Tone Digit 2"
+                  value="0x476F"/>
+            <enum key="Tone Digit 3"
+                  value="0x4770"/>
+            <enum key="Tone Digit 4"
+                  value="0x4771"/>
+            <enum key="Tone Digit 5"
+                  value="0x4772"/>
+            <enum key="Tone Digit 6"
+                  value="0x4773"/>
+            <enum key="Tone Digit 7"
+                  value="0x4774"/>
+            <enum key="Tone Digit 8"
+                  value="0x4775"/>
+            <enum key="Tone Digit 9"
+                  value="0x4776"/>
+            <enum key="Speech Recognition Failed"
+                  value="0x4777"/>
+            <enum key="HR Sensor In Contact"
+                  value="0x4778"/>
+            <enum key="HR Sensor Not In Contact"
+                  value="0x4779"/>
+            <enum key="HR Threshold Reached"
+                  value="0x477A"/>
+            <enum key="IR/BLE Remote Control Code Received"
+                  value="0x477B"/>
+            <enum key="Primary Device Disconnected"
+                  value="0x477C"/>
+            <enum key="Secondary Device Disconnected"
+                  value="0x477D"/>
+            <enum key="Subwoofer Set Volume"
+                  value="0x477E"/>
+            <enum key="Trim Volume Max"
+                  value="0x477F"/>
+            <enum key="Trim Volume Min"
+                  value="0x4780"/>
+            <enum key="Audio Amplifier Power Up"
+                  value="0x4781"/>
+            <enum key="Broadcaster Mode Active"
+                  value="0x4782"/>
+            <enum key="PS Defrag Check"
+                  value="0x4783"/>
+            <enum key="PS Defrag Action"
+                  value="0x4784"/>
+            <enum key="Audio Amplifier Power Down"
+                  value="0x4785"/>
+            <enum key="LED Indicate Current State"
+                  value="0x4786"/>
+            <enum key="BLE Connection Timeout"
+                  value="0x4787"/>
+            <enum key="BLE Mild Immediate Alert"
+                  value="0x4788"/>
+            <enum key="BLE High Immediate Alert"
+                  value="0x4789"/>
+            <enum key="BLE Immediate Alert Timeout"
+                  value="0x478A"/>
+            <enum key="BLE Mild Link Loss Alert"
+                  value="0x478B"/>
+            <enum key="BLE High Link Loss Alert"
+                  value="0x478C"/>
+            <enum key="BLE Link Loss Alert Timeout"
+                  value="0x478D"/>
+            <enum key="BLE ANCS Email Alert"
+                  value="0x478E"/>
+            <enum key="Reboot"
+                  value="0x478F"/>
+            <enum key="BLE GAP Role Timeout"
+                  value="0x4790"/>
+            <enum key="BLE Immediate Alert Error"
+                  value="0x4791"/>
+            <enum key="BLE Peripheral Mode"
+                  value="0x4792"/>
+            <enum key="BLE Bondable Timeout"
+                  value="0x4793"/>
+            <enum key="Aux Output Volume Max"
+                  value="0x4794"/>
+            <enum key="Aux Output Volume Min"
+                  value="0x4795"/>
+            <enum key="BLE Encryption Failed"
+                  value="0x479B"/>
+            <enum key="Allow USB Volume Events"
+                  value="0x479C"/>
+            <enum key="BLE ANCS Other Notifications Alert"
+                  value="0x479D"/>
+            <enum key="BLE ANCS Incoming Call Alert"
+                  value="0x479E"/>
+            <enum key="BLE ANCS Missed Call Alert"
+                  value="0x479F"/>
+            <enum key="BLE ANCS Voice Mail Alert"
+                  value="0x47A0"/>
+            <enum key="BLE ANCS Social Alert"
+                  value="0x47A1"/>
+            <enum key="BLE ANCS Schedule Alert"
+                  value="0x47A2"/>
+            <enum key="BLE ANCS News Alert"
+                  value="0x47A3"/>
+            <enum key="BLE ANCS Health and Fitness Alert"
+                  value="0x47A4"/>
+            <enum key="BLE ANCS Business and Finance Alert"
+                  value="0x47A5"/>
+            <enum key="BLE ANCS Location Alert"
+                  value="0x47A6"/>
+            <enum key="BLE ANCS Entertainment Alert"
+                  value="0x47A7"/>
+            <enum key="A2DP Peer Link Loss Timeout"
+                  value="0x47A8"/>
+            <enum key="Remove Peer Temporary Pairing"
+                  value="0x47A9"/>
+            <enum key="Suspend Timeout, Device 1"
+                  value="0x47AA"/>
+            <enum key="Suspend Timeout, Device2"
+                  value="0x47AB"/>
+            <enum key="Codec aptX HD In Use"
+                  value="0x47AC"/>
+            <enum key="TWS Audio Routing Changed"
+                  value="0x47AD"/>
+            <enum key="HFP Secure Link"
+                  value="0x47AE"/>
+            <enum key="SCO Secure Link Open"
+                  value="0x47AF"/>
+            <enum key="SCO Secure Link Close"
+                  value="0x47B0"/>
+            <enum key="LE Secure Link Open"
+                  value="0x47B1"/>
+            <enum key="Prompts/Tones Queue Check"
+                  value="0x47B2"/>
+            <enum key="Watchdog Reset"
+                  value="0x47B3"/>
+            <enum key="Pairing Reminder"
+                  value="0x47B4"/>
+            <enum key="Peer Connected"
+                  value="0x47B5"/>
+            <enum key="Peer Disconnected"
+                  value="0x47B6"/>
+            <enum key="Peer Audio Routing Stereo"
+                  value="0x47B7"/>
+            <enum key="Peer Audio Routing Left"
+                  value="0x47B8"/>
+            <enum key="Peer Audio Routing Right"
+                  value="0x47B9"/>
+            <enum key="Peer Audio Routing Downmix"
+                  value="0x47BA"/>
+            <enum key="Ag Source Connected"
+                  value="0x47BB"/>
+            <enum key="All Ag Sources Disconnected"
+                  value="0x47BC"/>
+            <enum key="Update Devices Connected Status"
+                  value="0x47BD"/>
+            <enum key="Peer Ag Source Connected"
+                  value="0x47BE"/>
+            <enum key="Peer All Ag Sources Disconnected"
+                  value="0x47BF"/>
+            <enum key="Update User EQ"
+                  value="0x47C0"/>
+            <enum key="Update Audio Enhancements"
+                  value="0x47C1"/>
+            <enum key="Updating Main Volume"
+                  value="0x47C2"/>
+            <enum key="Peer Generated Main Mute On"
+                  value="0x47C3"/>
+            <enum key="Peer Generated Main Mute Off"
+                  value="0x47C4"/>
+            <enum key="Peer Generated Power Off"
+                  value="0x47C5"/>
+            <enum key="Peer Generated Update User EQ"
+                  value="0x47C6"/>
+            <enum key="Peer Generated Update Audio Enhancements"
+                  value="0x47C7"/>
+            <enum key="Peer Self Generated Update Main Volume"
+                  value="0x47C8"/>
+            <enum key="Peer Remote Generated Update Main Volume"
+                  value="0x47C9"/>
+            <enum key="Codec SBC Disconnected"
+                  value="0x47CA"/>
+            <enum key="Codec MP3 Disconnected"
+                  value="0x47CB"/>
+            <enum key="Codec AAC Disconnected"
+                  value="0x47CC"/>
+            <enum key="Codec APTX Disconnected"
+                  value="0x47CD"/>
+            <enum key="Codec APTXHD  Disconnected"
+                  value="0x47CE"/>
+            <enum key="Codec FASTSTREAM Disconnected"
+                  value="0x47CF"/>
+            <enum key="Codec APTXLL Disconnected"
+                  value="0x47D0"/>
+            <enum key="USB speaker connected"
+                  value="0x47D1"/>
+            <enum key="USB speaker disconnected"
+                  value="0x47D2"/>
+            <enum key="PartyMode Connected"
+                  value="0x47D3"/>
+            <enum key="PartyMode Disconnected"
+                  value="0x47D4"/>
+            <enum key="MultiPoint Connected"
+                  value="0x47D5"/>
+            <enum key="MultiPoint Disconnected"
+                  value="0x47D6"/>
+            <enum key="Aptx Codec Configured"
+                  value="0x47D7"/>
+            <enum key="BA Random Bits"
+                  value="0x47D8"/>
+            <enum key="Charger Error"
+                  value="0x47D9"/>
+            <enum key="Update Main Volume Locally Only"
+                  value="0x47DA"/>
+            <enum key="Codec aptX Adaptive Disconnected"
+                  value="0x47DB"/>
+            <enum key="Codec aptX Adaptive In Use"
+                  value="0x47DC"/>
+            <enum key="BA Switching to Standalone"
+                  value="0x47DD"/>
+            <enum key="BA Power Off"
+                  value="0x47DE"/>
+            <enum key="BA Power On"
+                  value="0x47DF"/>
+            <enum key="EQ Processing On"
+                  value="0x47E0"/>
+            <enum key="EQ Processing Off"
+                  value="0x47E1"/>
+            <enum key="EQ Refresh Status"
+                  value="0x47E2"/>
+            <enum key="Analogue Audio Disconnect Timeout"
+                  value="0x47E3"/>	  
+            <enum key="Write PIO Session Data"
+                  value="0x47E4"/>
+            <enum key="Inquiry Delayed Start"
+                  value="0x47E5"/>
+            <enum key="Enable Audio Active"
+                  value="0x47E6"/>
+            <enum key="Normal Mode Active"
+                  value="0x47E7"/>
+            <enum key="BA Receiver Cancel Association Start"
+                  value="0x47E8"/>
+            <enum key="Voice Recognition Timeout"
+                  value="0x47ED"/>
+            <enum key="Voice Recognition Disabled"
+                  value="0x47EE"/>
+            <enum key="Voice Recognition Active"
+                  value="0x47EF"/>
+             <enum key="Voice Assistant Start Voice Capture"
+                  value="0x47F0"/>
+             <enum key="Voice Assistant Session Error"
+                  value="0x47F1"/>
+             <enum key="Receiver Mode Active"
+                  value="0x47F4"/>
+ 			<enum key="Fast Pair State Timeout"
+                  value="0x47F5"/>
+             <enum key="Receiver CSB Link Loss Detected"
+                  value="0x4806"/> 
+             <enum key="Receiver CSB Audio Streaming Started"
+                  value="0x4807"/>
+            <enum key="Voice Assistant Stop Voice Capture"
+                  value="0x480B"/>	
+        </DefineList>
+
+        <DefineList Id="HFP" ShortId="hfp">
+            <enum key="HFP 0"
+                  value="0"/>
+            <enum key="HFP 1"
+                  value="1"/>
+            <enum key="HFP 2"
+                  value="2"/>
+            <enum key="HFP 3"
+                  value="3"/>
+            <enum key="HFP 4"
+                  value="4"/>
+            <enum key="HFP 5"
+                  value="5"/>
+            <enum key="HFP 6"
+                  value="6"/>
+            <enum key="HFP 7"
+                  value="7"/>
+            <enum key="HFP 8"
+                  value="8"/>
+            <enum key="HFP 9"
+                  value="9"/>
+            <enum key="HFP 10"
+                  value="10"/>
+            <enum key="HFP 11"
+                  value="11"/>
+            <enum key="HFP 12"
+                  value="12"/>
+            <enum key="HFP 13"
+                  value="13"/>
+            <enum key="HFP 14"
+                  value="14"/>
+            <enum key="HFP 15"
+                  value="15"/>
+        </DefineList>
+
+        <DefineList Id="CVC Plug-ins Available"
+                    ShortId="cvc_plugins_available">
+            <enum key="CVC Headset 1-Mic"
+                value="1"/>
+            <enum key="CVC Headset 2-Mic"
+                value="3"/>
+            <!-- Plugins not supported on Bluecore -->
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CG724 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+            <enum key="CVC Headset 2-Mic Binaural"
+                value="5"/>   
+            <enum key="CVC Speaker 1-Mic"
+                value="10"/>
+            <enum key="CVC Speaker 2-Mic"
+                value="11"/>
+            </BuildVariant>
+            <!-- Plugins not supported on Crescendo -->
+            <BuildVariant HwVariant="All -R13568v4 -R13568v4_A05 -H13672v2 -CE446_CE692 -CF133 -CF133_SQIF -CG793 -CG437 -CF376_CE692 -CF376_CE692H3 -CF376_H13732  -CF376_CG724 -CF376_CE826 -CF376_CF212 -CF376_CF429 -CF376_CF440 -CF376_CF897 -QCC3024-AA_DEV-BRD-R2-AA -QCC3034-AA_DEV-BRD-R2-AA -QCC5124-AA_DEV-BRD-R2-AA -QCC3020-AA_DEV-BRD-R2-AA -QCC3021-AA_DEV-BRD-R2-AA -QCC3031-AA_DEV-BRD-R2-AA -QCC5120-AB_DEV-BRD-R2-AA -QCC5126-AB_DEV-BRD-R2-AA -QCC5127-AA_DEV-BRD-R2-AA -QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+            <enum key="No DSP"
+                value="0"/>
+            <enum key="CVC Headset 1-Mic Bandwidth Extension"
+                value="2"/>
+            <enum key="CVC Headset 2-Mic Bandwidth Extension"
+                value="4"/>
+            <enum key="CVC Handsfree 1-Mic"
+                value="6"/>
+            <enum key="CVC Handsfree 2-Mic"
+                value="8"/>
+            <enum key="CVC Handsfree 1-Mic Bandwidth Extension"
+                value="7"/>
+            <enum key="CVC Handsfree 2-Mic Bandwidth Extension"
+                value="9"/>
+            <enum key="Example 1-Mic"
+                value="12"/>
+            <enum key="Example 2-Mic"
+                value="13"/>
+            </BuildVariant>
+        </DefineList>
+        
+        <!-- Physical inputs and outputs -->
+        <DefineList Id="PIO" ShortId="pio_7_bit">
+            <enum key="PIO 0"
+                  value="0"/>
+            <enum key="PIO 1"
+                  value="1"/>
+            <enum key="PIO 2"
+                  value="2"/>
+            <enum key="PIO 3"
+                  value="3"/>
+            <enum key="PIO 4"
+                  value="4"/>
+            <enum key="PIO 5"
+                  value="5"/>
+            <enum key="PIO 6"
+                  value="6"/>
+            <enum key="PIO 7"
+                  value="7"/>
+            <enum key="PIO 8"
+                  value="8"/>
+            <enum key="PIO 9"
+                  value="9"/>
+            <enum key="PIO 10"
+                  value="10"/>
+            <enum key="PIO 11"
+                  value="11"/>
+            <enum key="PIO 12"
+                  value="12"/>
+            <enum key="PIO 13"
+                  value="13"/>
+            <enum key="PIO 14"
+                  value="14"/>
+            <enum key="PIO 15"
+                  value="15"/>
+            <enum key="PIO 16"
+                  value="16"/>
+            <enum key="PIO 17"
+                  value="17"/>
+            <enum key="PIO 18"
+                  value="18"/>
+            <enum key="PIO 19"
+                  value="19"/>
+            <enum key="PIO 20"
+                  value="20"/>
+            <enum key="PIO 21"
+                  value="21"/>
+            <enum key="PIO 22"
+                  value="22"/>
+            <enum key="PIO 23"
+                  value="23"/>
+            <enum key="PIO 24"
+                  value="24"/>
+            <enum key="PIO 25"
+                  value="25"/>
+            <enum key="PIO 26"
+                  value="26"/>
+            <enum key="PIO 27"
+                  value="27"/>
+            <enum key="PIO 28"
+                  value="28"/>
+            <enum key="PIO 29"
+                  value="29"/>
+            <enum key="PIO 30"
+                  value="30"/>
+            <enum key="PIO 31"
+                  value="31"/>
+            <BuildVariant HwVariant="CF376_CG724 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                <enum key="PIO 32"
+                      value="32"/>
+                <enum key="PIO 33"
+                      value="33"/>
+                <enum key="PIO 34"
+                      value="34"/>
+                <enum key="PIO 35"
+                      value="35"/>
+                <enum key="PIO 36"
+                      value="36"/>
+                <enum key="PIO 37"
+                      value="37"/>
+                <enum key="PIO 38"
+                      value="38"/>
+                <enum key="PIO 39"
+                      value="39"/>
+                <enum key="PIO 40"
+                      value="40"/>
+                <enum key="PIO 41"
+                      value="41"/>
+                <enum key="PIO 42"
+                      value="42"/>
+                <enum key="PIO 43"
+                      value="43"/>
+                <enum key="PIO 44"
+                      value="44"/>
+                <enum key="PIO 45"
+                      value="45"/>
+                <enum key="PIO 46"
+                      value="46"/>
+                <enum key="PIO 47"
+                      value="47"/>
+                <enum key="PIO 48"
+                      value="48"/>
+                <enum key="PIO 49"
+                      value="49"/>
+                <enum key="PIO 50"
+                      value="50"/>
+                <enum key="PIO 51"
+                      value="51"/>
+                <enum key="PIO 52"
+                      value="52"/>
+                <enum key="PIO 53"
+                      value="53"/>
+                <enum key="PIO 54"
+                      value="54"/>
+                <enum key="PIO 55"
+                      value="55"/>
+                <enum key="PIO 56"
+                      value="56"/>
+                <enum key="PIO 57"
+                      value="57"/>
+                <enum key="PIO 58"
+                      value="58"/>
+                <enum key="PIO 59"
+                      value="59"/>
+                <enum key="PIO 60"
+                      value="60"/>
+                <enum key="PIO 61"
+                      value="61"/>
+                <enum key="PIO 62"
+                      value="62"/>
+                <enum key="PIO 63"
+                      value="63"/>
+                <enum key="PIO 64"
+                      value="64"/>
+                <enum key="PIO 65"
+                      value="65"/>
+                <enum key="PIO 66"
+                      value="66"/>
+                <enum key="PIO 67"
+                      value="67"/>
+                <enum key="PIO 68"
+                      value="68"/>
+                <enum key="PIO 69"
+                      value="69"/>
+                <enum key="PIO 70"
+                      value="70"/>
+                <enum key="PIO 71"
+                      value="71"/>
+                <enum key="PIO 72"
+                      value="72"/>
+            </BuildVariant>
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732" SwVariant="All">
+                <enum key="PIO 32"
+                      value="32"/>
+                <enum key="PIO 33"
+                      value="33"/>
+                <enum key="PIO 34"
+                      value="34"/>
+                <enum key="PIO 35"
+                      value="35"/>
+                <enum key="PIO 36"
+                      value="36"/>
+                <enum key="PIO 37"
+                      value="37"/>
+                <enum key="PIO 38"
+                      value="38"/>
+                <enum key="PIO 39"
+                      value="39"/>
+                <enum key="PIO 40"
+                      value="40"/>
+                <enum key="PIO 41"
+                      value="41"/>
+                <enum key="PIO 42"
+                      value="42"/>
+                <enum key="PIO 43"
+                      value="43"/>
+                <enum key="PIO 44"
+                      value="44"/>
+                <enum key="PIO 45"
+                      value="45"/>
+                <enum key="PIO 46"
+                      value="46"/>
+                <enum key="PIO 47"
+                      value="47"/>
+                <enum key="PIO 48"
+                      value="48"/>
+                <enum key="PIO 49"
+                      value="49"/>
+                <enum key="PIO 50"
+                      value="50"/>
+                <enum key="PIO 51"
+                      value="51"/>
+                <enum key="PIO 52"
+                      value="52"/>
+                <enum key="PIO 53"
+                      value="53"/>
+                <enum key="PIO 54"
+                      value="54"/>
+                <enum key="PIO 55"
+                      value="55"/>
+                <enum key="PIO 56"
+                      value="56"/>
+                <enum key="PIO 57"
+                      value="57"/>
+                <enum key="PIO 58"
+                      value="58"/>
+                <enum key="PIO 59"
+                      value="59"/>
+                <enum key="PIO 60"
+                      value="60"/>
+                <enum key="PIO 61"
+                      value="61"/>
+                <enum key="PIO 62"
+                      value="62"/>
+                <enum key="PIO 63"
+                      value="63"/>
+                <enum key="PIO 64"
+                      value="64"/>
+                <enum key="PIO 65"
+                      value="65"/>
+                <enum key="PIO 66"
+                      value="66"/>
+                <enum key="PIO 67"
+                      value="67"/>
+                <enum key="PIO 68"
+                      value="68"/>
+                <enum key="PIO 69"
+                      value="69"/>
+                <enum key="PIO 70"
+                      value="70"/>
+                <enum key="PIO 71"
+                      value="71"/>
+                <enum key="PIO 72"
+                      value="72"/>
+                <enum key="PIO 73"
+                      value="73"/>
+                <enum key="PIO 74"
+                      value="74"/>
+                <enum key="PIO 75"
+                      value="75"/>
+                <enum key="PIO 76"
+                      value="76"/>
+                <enum key="PIO 77"
+                      value="77"/>
+                <enum key="PIO 78"
+                      value="78"/>
+                <enum key="PIO 79"
+                      value="79"/>
+                <enum key="PIO 80"
+                      value="80"/>
+                <enum key="PIO 81"
+                      value="81"/>
+                <enum key="PIO 82"
+                      value="82"/>
+                <enum key="PIO 83"
+                      value="83"/>
+                <enum key="PIO 84"
+                      value="84"/>
+                <enum key="PIO 85"
+                      value="85"/>
+                <enum key="PIO 86"
+                      value="86"/>
+                <enum key="PIO 87"
+                      value="87"/>
+                <enum key="PIO 88"
+                      value="88"/>
+                <enum key="PIO 89"
+                      value="89"/>
+                <enum key="PIO 90"
+                      value="90"/>
+                <enum key="PIO 91"
+                      value="91"/>
+                <enum key="PIO 92"
+                      value="92"/>
+                <enum key="PIO 93"
+                      value="93"/>
+                <enum key="PIO 94"
+                      value="94"/>
+                <enum key="PIO 95"
+                      value="95"/>
+            </BuildVariant>
+        </DefineList>
+        <DefineList Id="PIO_NotSelected" ShortId="pio_not_sel">
+            <enum key="N/A"
+                  value="255"/>
+        </DefineList>
+        <!-- Capacitive sensor buttons -->
+        <DefineList
+            Id="CAP"
+            ShortId="g_cap">
+            <enum key="CAP 0"
+                  value="96"/>
+            <enum key="CAP 1"
+                  value="97"/>
+            <enum key="CAP 2"
+                  value="98"/>
+            <enum key="CAP 3"
+                  value="99"/>
+            <enum key="CAP 4"
+                  value="100"/>
+            <enum key="CAP 5"
+                  value="101"/>
+            <enum key="CAP 6"
+                  value="102"/>
+            <enum key="CAP 7"
+                  value="103"/>
+            <enum key="CAP 8"
+                  value="104"/>
+            <enum key="CAP 9"
+                  value="105"/>
+        </DefineList>
+        <!-- LED Blocks : Numbering follows pio_7_bit -->
+        <DefineList
+            Id="LED Blocks"
+            ShortId="g_led">
+            <enum key="LED 0"
+                  value="96"/>
+            <enum key="LED 1"
+                  value="97"/>
+            <enum key="LED 2"
+                  value="98"/>
+            <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05 CE446_CE692 CF133 CF133_SQIF CG793 CG437 CF376_CG724 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                <enum key="LED 3"
+                      value="99"/>
+                <enum key="LED 4"
+                      value="100"/>
+                <enum key="LED 5"
+                      value="101"/>
+                <enum key="LED 6"
+                      value="102"/>
+                <enum key="LED 7"
+                      value="103"/>
+                <enum key="LED 8"
+                      value="104"/>
+                <enum key="LED 9"
+                      value="105"/>
+                <enum key="LED 10"
+                      value="106"/>
+                <enum key="LED 11"
+                      value="107"/>
+            </BuildVariant>
+        </DefineList>
+        <!-- Tri-Color LED Options : Numbering follows g_leds -->
+        <DefineList
+            Id="LED Tri-Color"
+            ShortId="g_tricolor">
+            <enum key="Tri A+B"
+                  value="108"/>
+            <enum key="Tri B+C"
+                  value="109"/>
+            <enum key="Tri A+C"
+                  value="110"/>
+        </DefineList>
+
+        <!-- Sink States -->
+        <DefineList
+            Id="States"
+            ShortId="g_states" >
+            <enum key="Powering On"
+                  value="0"/>
+            <enum key="Connectable"
+                  value="1"/>
+            <enum key="Connectable/Discoverable"
+                  value="2"/>
+            <enum key="Connected"
+                  value="3"/>
+            <enum key="Outgoing Call"
+                  value="4"/>
+            <enum key="Incoming Call"
+                  value="5"/>
+            <enum key="Ongoing Call with SCO"
+                  value="6"/>
+            <enum key="Test Mode"
+                  value="7"/>
+            <enum key="TWC Call Waiting"
+                  value="8"/>
+            <enum key="TWC Call On Hold"
+                  value="9"/>
+            <enum key="TWC Multi Party Call"
+                  value="10"/>
+            <enum key="TWC Incoming Call On Hold"
+                  value="11"/>
+            <enum key="Ongoing Call without SCO"
+                  value="12"/>
+            <enum key="Streaming A2DP"
+                  value="13"/>
+        </DefineList>
+
+        <!-- Sink Extended States -->
+        <DefineList
+            Id="Extended States"
+            ShortId="p_extended_states" >
+            <enum key="Powering On"
+                  value="0"/>
+            <enum key="Connectable"
+                  value="1"/>
+            <enum key="Connectable/Discoverable to source"
+                  value="2"/>
+            <enum key="Connectable/Discoverable to peer"
+                  value="3"/>				  
+            <enum key="Connected to Source"
+                  value="4"/>
+            <enum key="Connected to peer"
+                  value="5"/>
+            <enum key="Connected to Source and Peer"
+                  value="6"/>						  
+            <enum key="Outgoing Call"
+                  value="7"/>
+            <enum key="Incoming Call"
+                  value="8"/>
+            <enum key="Ongoing Call with SCO"
+                  value="9"/>
+            <enum key="Test Mode"
+                  value="10"/>
+            <enum key="TWC Call Waiting"
+                  value="11"/>
+            <enum key="TWC Call On Hold"
+                  value="12"/>
+            <enum key="TWC Multi Party Call"
+                  value="13"/>
+            <enum key="TWC Incoming Call On Hold"
+                  value="14"/>
+            <enum key="Ongoing Call without SCO"
+                  value="15"/>
+            <enum key="Streaming A2DP"
+                  value="16"/>
+            <enum key="Low Battery"
+                  value="17"/>
+            <enum key="Config Mode"
+                  value="18"/>
+            <enum key="Default Pattern"
+                  value="19"/>
+        </DefineList>
+
+        <DefineList Id="LED Colour"
+         ShortId="led_colour">
+            <enum key="Reserved"
+                  value="0"/>
+            <enum key="LED A"
+                  value="1"/>
+            <enum key="LED B"
+                  value="2"/>
+            <enum key="ALT"
+                  value="3"/>
+            <enum key="BOTH"
+                  value="4"/>
+        </DefineList>
+
+        <DefineList Id="Virtual Buttons"
+            ShortId="virtual_buttons">
+            <enum key="vb0"
+                  value="0"/>
+            <enum key="vb1"
+                  value="1"/>
+            <enum key="vb2"
+                  value="2"/>
+            <enum key="vb3"
+                  value="3"/>
+            <enum key="vb4"
+                  value="4"/>
+            <enum key="vb5"
+                  value="5"/>
+            <enum key="vb6"
+                  value="6"/>
+            <enum key="vb7"
+                  value="7"/>
+            <enum key="vb8"
+                  value="8"/>
+            <enum key="vb9"
+                  value="9"/>
+            <enum key="vb10"
+                  value="10"/>
+            <enum key="vb11"
+                  value="11"/>
+            <enum key="vb12"
+                  value="12"/>
+            <enum key="vb13"
+                  value="13"/>
+            <enum key="vb14"
+                  value="14"/>
+            <enum key="vb15"
+                  value="15"/>
+        </DefineList>
+
+        <DefineList
+            Id="Bias Drive"
+            ShortId="bias_config">
+            <enum key="Bias Drive Disabled"
+                  value="0"/>
+            <enum key="Mic Bias 0"
+                  value="1"/>
+            <enum key="Mic Bias 1"
+                  value="2"/>
+            <enum key="Drive PIO"
+                  value="3"/>
+        </DefineList>
+
+        <DefineList
+            Id="Audio Instance"
+            ShortId="audio_instance">
+            <enum key="Audio Instance 0"
+                  value="0"/>
+            <enum key="Audio Instance 1"
+                  value="1"/>
+            <enum key="Audio Instance 2"
+                  value="2"/>
+        </DefineList>
+
+        <DefineList
+            Id="Audio Tones"
+            ShortId="g_TonesType">
+            <enum key="No Tone"
+                  desc="No Tone Configured"
+                  value="0"/>
+            <enum key="Middle 0"
+                  desc="300ms G5"
+                  value="1"/>
+            <enum key="Short 1"
+                  desc="100ms C6"
+                  value="2"/>
+            <enum key="Short 2"
+                  desc="100ms E6"
+                  value="3"/>
+            <enum key="Short 3"
+                  desc="100ms G6"
+                  value="4"/>
+            <enum key="Short 4"
+                  desc="100ms AS6"
+                  value="5"/>
+            <enum key="Short 5"
+                  desc="100ms C7"
+                  value="6"/>
+            <enum key="Short 6"
+                  desc="100ms D7"
+                  value="7"/>
+            <enum key="Short 7"
+                  desc="100ms E7"
+                  value="8"/>
+            <enum key="Short 8"
+                  desc="100ms FS7"
+                  value="9"/>
+            <enum key="Middle 9"
+                  desc="300ms GS7"
+                  value="10"/>
+            <enum key="4 Note Rising Scale"
+                  desc="150ms GS4 DS5 GS5 C6"
+                  value="11"/>
+            <enum key="4 Note Falling Scale"
+                  desc="150ms C6 GS5 DS5 GS4"
+                  value="12"/>
+            <enum key="2 Note Rising Scale"
+                  desc="200ms E6 A6"
+                  value="13"/>
+            <enum key="2 Note Falling Scale"
+                  desc="300ms A6 E6"
+                  value="14"/>
+            <enum key="Long High Short Low"
+                  desc="400ms G7 100ms G5"
+                  value="15"/>
+            <enum key="Short Middle - GS7"
+                  desc="100ms GS7"
+                  value="16"/>
+            <enum key="Long Middle"
+                  desc="500ms GS7"
+                  value="17"/>
+            <enum key="Long Low"
+                  desc="500ms G5"
+                  value="18"/>
+            <enum key="Short High"
+                  desc="100ms G6"
+                  value="19"/>
+            <enum key="V Long High"
+                  desc="800ms G6"
+                  value="20"/>
+            <enum key="Long High"
+                  desc="500ms G6"
+                  value="21"/>
+            <enum key="Short Double Low"
+                  desc="100ms G5 G5"
+                  value="22"/>
+            <enum key="Short Double High"
+                  desc="100ms G6 G6"
+                  value="23"/>
+            <enum key="battery_low_tone"
+                  desc="125ms E6 AS6 E6 AS6 E6"
+                  value="24"/>
+            <enum key="low_500ms_tone"
+                  desc="500ms G5"
+                  value="25"/>
+            <enum key="Long Double Low"
+                  desc="500ms G5 REST G5"
+                  value="26"/>
+            <enum key="ring_twilight"
+                  desc="Ring Tone"
+                  value="27"/>
+            <enum key="ring_g_s_t_q"
+                  desc="Ring Tone"
+                  value="28"/>
+            <enum key="ring_valkyries"
+                  desc="Ring Tone"
+                  value="29"/>
+            <enum key="ring_greensleeves"
+                  desc="Ring Tone"
+                  value="30"/>
+            <enum key="ring_two_beeps"
+                  desc="Ring Tone"
+                  value="31"/>
+            <enum key="ring_fairground"
+                  desc="Ring Tone"
+                  value="32"/>
+            <enum key="ring_counterpoint"
+                  desc="Ring Tone"
+                  value="33"/>
+            <enum key="ring_major_arp"
+                  desc="Ring Tone"
+                  value="34"/>
+            <enum key="ring_major_scale"
+                  desc="Ring Tone"
+                  value="35"/>
+            <enum key="ring_minor_arp"
+                  desc="Ring Tone"
+                  value="36"/>
+            <enum key="ring_harmonic_minor_scale"
+                  desc="Ring Tone"
+                  value="37"/>
+            <enum key="ring_more_than_a_feeling"
+                  desc="Ring Tone"
+                  value="38"/>
+            <enum key="ring_eight_beeps"
+                  desc="Ring Tone"
+                  value="39"/>
+            <enum key="ring_four_beeps"
+                  desc="Ring Tone"
+                  value="40"/>
+            <enum key="ring_bumble_bee"
+                  desc="Ring Tone"
+                  value="41"/>
+            <enum key="ring_aug_scale"
+                  desc="Ring Tone"
+                  value="42"/>
+            <enum key="ring_dim_scale"
+                  desc="Ring Tone"
+                  value="43"/>
+            <enum key="Custom Ring Tone"
+                  desc="Ring Tone"
+                  value="44"/>
+            <enum key="4 Note Low to High"
+                  desc="37.5ms G5 D6 G6 B5"
+                  value="45"/>
+            <enum key="4 Note High to Low"
+                  desc="37.5ms B5 G6 D6 G5"
+                  value="46"/>
+            <enum key="Short High to Low"
+                  desc="25ms G6 G5"
+                  value="47"/>
+            <enum key="5 Rapid High Tones"
+                  desc="94ms B6 B6 B6 B6 B6"
+                  value="48"/>
+            <enum key="Long Low to High"
+                  desc="100ms DS7 G7"
+                  value="49"/>
+            <enum key="Long High to Low"
+                  desc="100ms G7 DS7"
+                  value="50"/>
+            <enum key="Short V High"
+                  desc="50ms DS8"
+                  value="51"/>
+            <enum key="12 High/Higher beeps"
+                  desc="50ms B6 G8 B6 G8 B6 G8 B6 G8 B6 G8 B6 G8"
+                  value="52"/>
+            <enum key="Short Middle - DS8"
+                  desc="50ms DS8"
+                  value="53"/>
+            <enum key="5 High Beeps"
+                  desc="50ms A6 REST A6 REST A6 REST A6 REST A6 REST"
+                  value="54"/>
+            <enum key="Medium Low to High"
+                  desc="50ms B6 REST DS8"
+                  value="55"/>
+            <enum key="Medium High to Low"
+                  desc="50ms DS8 REST B6"
+                  value="56"/>
+            <enum key="Short Middle Tone - D6"
+                  desc="100ms D6"
+                  value="57"/>
+            <enum key="4 Low to High Long at Top"
+                  desc="100ms G5 D6 G6 300ms B6"
+                  value="58"/>
+            <enum key="4 High to Low Long at Bottom"
+                  desc="100ms B6 G6 D6 300ms G5"
+                  value="59"/>
+            <enum key="3 Note Descending"
+                  desc="300ms G6 D6 G5"
+                  value="60"/>
+            <enum key="5th Down Medium-Long"
+                  desc="300ms D6 500ms G5"
+                  value="61"/>
+            <enum key="5th Down Short-Short"
+                  desc="100ms D6 G5"
+                  value="62"/>
+            <enum key="5th Up Short-Short"
+                  desc="100ms G5 D6"
+                  value="63"/>
+            <enum key="2 Half Second Low Tones"
+                  desc="500ms G5 REST G5"
+                  value="64"/>
+            <enum key="Short High Tone"
+                  desc="100ms G7"
+                  value="65"/>
+            <enum key="Long Low Tone"
+                  desc="400ms G5"
+                  value="66"/>
+            <enum key="Double Low Tones"
+                  desc="200ms G5 REST G5"
+                  value="67"/>
+            <enum key="G Major Arp Up"
+                  desc="125ms G6 B6 D7 G7"
+                  value="68"/>
+            <enum key="G Major Arp Down"
+                  desc="125ms G7 D7 B6 G6"
+                  value="69"/>
+            <enum key="Fairly Short High Tone"
+                  desc="150ms G7"
+                  value="70"/>
+            <enum key="Fairly Short Low Tone"
+                  desc="150ms G5"
+                  value="71"/>
+            <enum key="Medium Length Low Tone"
+                  desc="200ms G5"
+                  value="72"/>
+            <enum key="Short Low-High"
+                  desc="80ms G5 G7"
+                  value="73"/>
+            <enum key="Double Octave Toggle Ring Tone"
+                  desc="50ms G7 G5 G7 G5 G7 G5 Repeat after 250ms"
+                  value="74"/>
+            <enum key="Low Low High"
+                  desc="100ms G5 G5 G7"
+                  value="75"/>
+            <enum key="Double Low Tones (long)"
+                  desc="300ms G5 G5"
+                  value="76"/>
+            <enum key="Connected 3 Beep Rising Tone"
+                  desc="48ms C6 D6 A6"
+                  value="77"/>
+            <enum key="Disconnected 3 Beep Falling Tone"
+                  desc="48ms A6 D6 C6"
+                  value="78"/>
+            <enum key="Confirmation Rising Tone"
+                  desc="68ms C5 E5"
+                  value="79"/>
+            <enum key="Double Beep Error Tone"
+                  desc="68ms A5 REST A5"
+                  value="80"/>
+            <enum key="Low Batt Double Beep"
+                  desc="125s E5 F5"
+                  value="81"/>
+            <enum key="Mute Off Double Beep"
+                  desc="48ms A5 A4"
+                  value="82"/>
+            <enum key="Mute On Double Beep"
+                  desc="48ms A4 A5"
+                  value="83"/>
+            <enum key="Single Tone"
+                  desc="48ms A5"
+                  value="84"/>
+            <enum key="Shutdown Tone Double Beep"
+                  desc="408ms A5 136mS A4"
+                  value="85"/>
+            <enum key="Phone Ring"
+                  desc="48ms C6 E6 C6 E6 C6 E6 C6 E6 C6 E6 C6 REST C6 E6 C6 E6 C6 E6 C6 E6 C6 E6 C6"
+                  value="86"/>
+            <enum key="Power Up Tone"
+                  desc="83ms C5 REST 83mS E5 REST 83mS G5 REST 124mS B5 498mS REST 372mS C6"
+                  value="87"/>
+            <enum key="Vol Level 7/0"
+                  desc="68ms A5 REST A5"
+                  value="88"/>
+            <enum key="Vol Level 6"
+                  desc="68ms DS6"
+                  value="89"/>
+            <enum key="Vol Level 5"
+                  desc="68ms D6"
+                  value="90"/>
+            <enum key="Vol Level 4"
+                  desc="68ms CS6"
+                  value="91"/>
+            <enum key="Vol Level 3"
+                  desc="68ms C6"
+                  value="92"/>
+            <enum key="Vol Level 2"
+                  desc="68ms B5"
+                  value="93"/>
+            <enum key="Vol Level 1"
+                  desc="68ms AS5"
+                  value="94"/>
+        </DefineList>
+
+        <DefineList
+            Id="Action On ..."
+            ShortId="g_ActionOn">
+            <enum key="Attempt to Reconnect to the last connected AG"
+                  value="0"/>
+            <enum key="Attempt to connect to all 8 devices in the paired device list"
+                  value="1"/>
+            <enum key="Initiate RSSI Inquiry (proximity pairing) mode"
+                  value="2"/>
+        </DefineList>
+
+         <DefineStruct Id="Analogue Input Parameters" ShortId="analogue_input_params">
+             <ConfigItem
+                 Id="Analogue Input Preamplifier"
+                 ShortId="pre_amp"
+                 Desc="Enables the preamplifier when set. This bit only has an effect when the Audio plugin is used. CVC audio plugins automatically adjust the input gain of the device."
+                 Type="bool"
+                 Size="1"/>
+             <ConfigItem
+                 Id="Analogue Input Gain"
+                 ShortId="gain"
+                 Desc="Sets the gain of the analogue input path."
+                 Type="uint"
+                 Size="5"/>
+             <ConfigItem
+                 Id="Audio Instance for Analogue Input"
+                 ShortId="instance"
+                 Desc=" "
+                 Type="enum"
+                 Size="2">
+                 <List use="audio_instance"/>
+             </ConfigItem>
+             <ConfigItem
+                 Id="Audio Input Resolution"
+                 ShortId="enable_24_bit_resolution"
+                 Desc="This configuration item specifies the ADC Input audio bit resolution. Note: This configuration item is only relevant for analogue audio input and this is only applicable where the hardware supports it."
+                 Type="enum"
+                 Size="1">
+                 <enum key="16 Bit Audio"
+                     value="0"/>
+                 <enum key="24 Bit Audio"
+                     value="1"/>
+             </ConfigItem>
+         </DefineStruct>
+
+        <DefineStruct Id="Audio Mic Parameters" ShortId="audio_mic_params">
+            <ConfigItem
+                Id="Voice Microphone Bias Drive"
+                ShortId="bias_config"
+                Desc=" "
+                Type="enum"
+                Size="2">
+                <List use="bias_config"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Voice Microphone Preamplifier"
+                ShortId="pre_amp"
+                Desc="Enables the preamplifier when set. This bit only has an effect when the Audio plugin is used. CVC audio plugins automatically adjust the input gain of the device."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Voice Microphone Drive PIO"
+                ShortId="pio"
+                Desc=" "
+                Type="enum"
+                Size="7">
+                <List use="pio_7_bit"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Voice Microphone Gain"
+                ShortId="gain"
+                Desc="Sets the gain of the Microphone input path."
+                Type="uint"
+                Size="5"/>
+            <ConfigItem
+                Id="Audio Instance for Voice Microphone"
+                ShortId="instance"
+                Desc=" "
+                Type="enum"
+                Size="2">
+                <List use="audio_instance"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Voice Microphone Digital"
+                ShortId="is_digital"
+                Desc="Selects the digital microphone inputs when set."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                 Id="Audio channel for Microphone Digital"
+                 ShortId="channel"
+                 Desc="This configuration item selects the audio channel A or B."
+                 Type="enum"
+                 Size="1">
+                 <enum key="Audio Channel A"
+                     value="0"/>
+                 <enum key="Audio Channel B"
+                     value="1"/>
+            </ConfigItem>
+        </DefineStruct>
+
+        <DefineList Id="ADC Sources" ShortId="adc_sources">
+            <BuildVariant HwVariant="All -H13672v2 -R13568v4 -R13568v4_A05 -CE446_CE692 -CF133 -CF133_SQIF -CG793 -CG437 -CF376_CE692 -CF376_CE692H3 -CF376_H13732 -CF376_CG724 -CF376_CE826 -CF376_CF212 -CF376_CF429 -CF376_CF440 -CF376_CF897 -QCC3024-AA_DEV-BRD-R2-AA -QCC3034-AA_DEV-BRD-R2-AA -QCC5124-AA_DEV-BRD-R2-AA -QCC3020-AA_DEV-BRD-R2-AA -QCC3021-AA_DEV-BRD-R2-AA -QCC3031-AA_DEV-BRD-R2-AA -QCC5120-AB_DEV-BRD-R2-AA -QCC5126-AB_DEV-BRD-R2-AA -QCC5127-AA_DEV-BRD-R2-AA -QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                <enum key="AIO 0"
+                      value="0"/>
+                <enum key="AIO 1"
+                      value="1"/>
+                <enum key="AIO 2"
+                      value="2"/>
+                <enum key="AIO 3"
+                      value="3"/>
+                <enum key="VREF"
+                      value="4"/>
+                <enum key="VBAT"
+                      value="5"/>
+                <enum key="VCHG"
+                      value="6"/>
+                <enum key="VDD_SENSE"
+                      value="7"/>
+                <enum key="VREG_ENABLE"
+                      value="8"/>
+            </BuildVariant>
+            <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05 CE446_CE692 CF376_CE692 CF376_CE692H3 CF376_H13732 CF819" SwVariant="All">
+                <enum key="VBAT_SENSE"
+                      value="14"/>
+                <enum key="VCHG_SENSE"
+                      value="15"/>
+                <enum key="VREF_HQ_BUFF"
+                      value="16"/>
+                <enum key="LED 0"
+                      value="17"/>
+                <enum key="LED 1"
+                      value="18"/>
+                <enum key="LED 2"
+                      value="19"/>
+                <enum key="LED 3"
+                      value="20"/>
+                <enum key="LED 4"
+                      value="21"/>
+                <enum key="LED 5"
+                      value="22"/>
+                <enum key="LED 6"
+                      value="23"/>
+                <enum key="XIO 0"
+                      value="24"/>
+                <enum key="XIO 1"
+                      value="25"/>
+                <enum key="XIO 2"
+                      value="26"/>
+                <enum key="XIO 3"
+                      value="27"/>
+                <enum key="XIO 4"
+                      value="28"/>
+                <enum key="XIO 5"
+                      value="29"/>
+                <enum key="XIO 6"
+                      value="30"/>
+                <enum key="XIO 7"
+                      value="31"/>
+                <enum key="XIO 8"
+                      value="32"/>
+                <enum key="XIO 9"
+                      value="33"/>
+                <enum key="XIO 10"
+                      value="34"/>
+                <enum key="XIO 11"
+                      value="35"/>
+                <enum key="XIO 12"
+                      value="36"/>
+            </BuildVariant>
+            <BuildVariant HwVariant= "CF133 CF133_SQIF CG793 CG437 CF376_CG724 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                <enum key="VBAT_SENSE"
+                      value="14"/>
+                <enum key="VCHG_SENSE"
+                      value="15"/>
+                <enum key="VREF_HQ_BUFF"
+                      value="16"/>
+                <enum key="LED 0"
+                      value="17"/>
+                <enum key="LED 1"
+                      value="18"/>
+                <enum key="LED 2"
+                      value="19"/>
+                <enum key="LED 3"
+                      value="20"/>
+                <enum key="LED 4"
+                      value="21"/>
+                <enum key="LED 5"
+                      value="22"/>
+                <enum key="LED 6"
+                      value="23"/>
+            </BuildVariant>
+            <enum key="N/A"
+                  value="255"/>
+        </DefineList>
+        <DefineList Id="Internal Current Sources" ShortId="ic_sources">
+            <BuildVariant HwVariant= "CF133 CF133_SQIF CG793 CG437 CF376_CG724 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA R13568v4 R13568v4_A05 QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                <enum key="ICS Default"
+                      value="1"/>
+                <enum key="ICS LED0"
+                      value="2"/>
+                <enum key="ICS LED1"
+                      value="3"/>
+                <enum key="ICS LED2"
+                      value="4"/>
+                <enum key="ICS LED3"
+                      value="5"/>
+                <enum key="ICS LED4"
+                      value="6"/>
+                <enum key="ICS LED5"
+                      value="7"/>
+                <enum key="ICS LED6"
+                      value="8"/>
+            </BuildVariant>
+            <enum key="N/A"
+                  value="255"/>
+        </DefineList>
+
+        <DefineList Id="Termination Voltages" ShortId="vfloat">
+            <enum key="3.65V" value="0" />
+            <enum key="3.70V" value="1" />
+            <enum key="3.75V" value="2" />
+            <enum key="3.80V" value="3" />
+            <enum key="3.85V" value="4" />
+            <enum key="3.90V" value="5" />
+            <enum key="3.95V" value="6" />
+            <enum key="4.00V" value="7" />
+            <enum key="4.05V" value="8" />
+            <enum key="4.10V" value="9" />
+            <enum key="4.15V" value="10" />
+            <enum key="4.20V" value="11" />
+            <enum key="4.25V" value="12" />
+            <enum key="4.30V" value="13" />
+            <enum key="4.35V" value="14" />
+            <enum key="4.40V" value="15" />
+        </DefineList>
+
+        <DefineList Id="Termination Voltage Not Applicable" ShortId="vfloat_na">
+            <enum key="N/a"   value="31"/>
+        </DefineList>
+
+        <DefineList
+            Id="Vsel"
+            ShortId="vsel">
+            <enum key="CHG"
+                  value="0"/>
+            <enum key="BAT"
+                  value="1"/>
+        </DefineList>
+
+        <DefineList Id="Vchg Current Limit Thresholds" ShortId="vchg_current_limit_thresholds">
+            <enum key="4.45V" value="4450" />
+            <enum key="4.50V" value="4500" />
+            <enum key="4.55V" value="4550" />
+            <enum key="4.60V" value="4600" />
+            <enum key="4.65V" value="4650" />
+            <enum key="4.70V" value="4700" />
+            <enum key="4.75V" value="4750" />
+        </DefineList>
+
+        <DefineStruct Id="Charger Current Determination Structure" ShortId="current_determination_structure">
+            <ConfigItem Id="Vchg Current Limit Threshold" ShortId="current_limit_threshold"
+                Desc="The fast charge current is increased until Vchg drops to this limiting threshold."
+                Type="enum" Size="16" ShowOrdered="true">
+                <List use="vchg_current_limit_thresholds" />
+            </ConfigItem>
+            <ConfigItem Id="Vchg Current Recovery Threshold" ShortId="current_recovery_threshold"
+                Desc="If Vchg drops to the limiting threshold then the fast charge current is decreased until Vchg recovers to this higher threshold."
+                Type="enum" Size="16" ShowOrdered="true">
+                <List use="vchg_current_limit_thresholds" />
+            </ConfigItem>
+            <ConfigItem Id="Vchg Current Limit Read Period [ms]" ShortId="current_limit_read_period"
+                Desc="The period between reading Vchg when determining the charger current."
+                Type="uint" Size="16" Range="Min=0,Max=500" />
+            <ConfigItem Id="Positive current step [mA]" ShortId="positive_current_step"
+                Desc="The step size for increasing the charger current."
+                Type="uint" Size="8" Range="Min=0,Max=50" />
+            <ConfigItem Id="Negative current step [mA]" ShortId="negative_current_step"
+                Desc="The step size for decreasing the charger current."
+                Type="uint" Size="8" Range="Min=0,Max=50" />
+        </DefineStruct>
+
+        <DefineList Id="PIO Functions" ShortId="pio_functions">
+            <enum
+                  key="UART_RX"
+                  value="0" />
+            <enum
+                  key="UART_TX"
+                  value="1" />
+            <enum
+                  key="UART_RTS"
+                  value="2" />
+            <enum
+                  key="UART_CTS"
+                  value="3" />
+            <enum
+                  key="PCM_IN"
+                  value="4" />
+            <enum
+                  key="PCM_OUT"
+                  value="5" />
+            <enum
+                  key="PCM_SYNC"
+                  value="6" />
+            <enum
+                  key="PCM_CLK"
+                  value="7" />
+            <enum
+                  key="SQIF"
+                  value="8" />
+            <enum
+                  key="LED"
+                  value="9" />
+            <enum
+                  key="LCD_SEGMENT"
+                  value="10" />
+            <enum
+                  key="LCD_COMMON"
+                  value="11" />
+            <enum
+                  key="PIO"
+                  value="12" />
+            <enum
+                  key="SPDIF_RX"
+                  value="13" />
+            <enum
+                  key="SPDIF_TX"
+                  value="14" />
+            <!-- Functions not supported on Bluecore -->
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CG724 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                  <enum
+                      key="BITSERIAL_0_CLOCK_IN"
+                      value="15" />
+                  <enum
+                      key="BITSERIAL_0_CLOCK_OUT"
+                      value="16" />
+                  <enum
+                      key="BITSERIAL_0_DATA_IN"
+                      value="17" />
+                  <enum
+                      key="BITSERIAL_0_DATA_OUT"
+                      value="18" />
+                  <enum
+                      key="BITSERIAL_0_SEL_IN"
+                      value="19" />
+                  <enum
+                      key="BITSERIAL_0_SEL_OUT"
+                      value="20" />
+                  <enum
+                      key="BITSERIAL_1_CLOCK_IN"
+                      value="21" />
+                  <enum
+                      key="BITSERIAL_1_CLOCK_OUT"
+                      value="22" />
+                  <enum
+                      key="BITSERIAL_1_DATA_IN"
+                      value="23" />
+                  <enum
+                      key="BITSERIAL_1_DATA_OUT"
+                      value="24" />
+                  <enum
+                      key="BITSERIAL_1_SEL_IN"
+                      value="25" />
+                  <enum
+                      key="BITSERIAL_1_SEL_OUT"
+                      value="26" />
+                  <enum
+                      key="ANALOGUE"
+                      value="27" />
+                  <enum
+                      key="OTHER"
+                      value="28" />
+                  <enum
+                      key="INTERRUPT_ACTIVE_LOW"
+                      value="255" />
+            </BuildVariant>
+        </DefineList>
+		
+        <DefineStruct Id="Power ADC"
+                      ShortId="power_adc" >
+            <ConfigItem
+                Id="VM ADC Source Type"
+                ShortId="source"
+                Desc="The Vref input can be configured to use any of the available input sources given below."
+                Type="enum"
+                Size="8">
+                <List use="adc_sources" />
+            </ConfigItem>
+            <ConfigItem
+                Id="Period Charge"
+                ShortId="period_chg"
+                Desc="This configures the time interval between Vref updates in seconds while charging, 0 to disable."
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Period No Charge"
+                ShortId="period_no_chg"
+                Desc="This configures the timer interval between Vref updates in seconds while not charging, 0 to disable."
+                Type="uint"
+                Size="16"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Power VREF Config" ShortId="power_vref_config" >
+            <ConfigStruct
+                Id="."
+                ShortId="adc"
+                Desc="."
+                Type="struct"
+                Struct="power_adc"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Power VBAT Config" ShortId="power_vbat_config" >
+            <ConfigStruct
+                Id="."
+                ShortId="adc"
+                Desc="."
+                Type="struct"
+                Struct="power_adc"/>
+           <ConfigItem
+                Id="."
+                ShortId="ignore_increase_no_chg"
+                Desc="."
+                Type="bool"
+                Size="1" />
+        </DefineStruct>
+
+        <DefineStruct Id="Power Vthm Config"
+                      ShortId="power_vthm_config">
+            <ConfigStruct
+                Id="Instance of structure POWER ADC"
+                ShortId="adc"
+                Desc="."
+                Type="struct"
+                Struct="power_adc"/>
+            <ConfigItem
+                Id="PIO"
+                ShortId="pio"
+                Desc="Drive to use"
+                Type="enum"
+                Size="8">
+                <List use="pio_7_bit"/>
+                <List use="pio_not_sel" />
+            </ConfigItem>
+            <ConfigItem
+                Id="IC Source"
+                ShortId="ics"
+                Desc="Internal constant current source to drive the thermistor"
+                Type="enum"
+                Size="8">
+                <List use="ic_sources"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Delay"
+                ShortId="delay"
+                Desc="Delay(ms) between driving thermistor and reading ADC"
+                Type="uint"
+                Size="4"/>
+            <ConfigItem
+                Id="Raw Limits"
+                ShortId="raw_limits"
+                Desc="Set limits in ADC counts rather than voltage"
+                Type="bool"
+                Size="1"/>
+            <ConfigArray
+                Id="Limit Thresholds"
+                ShortId="limits"
+                Desc="Limits"
+                Type="array"
+                ElementType="uint"
+                ArraySize="7"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Power VCHG Config" ShortId="power_vchg_config" >
+            <ConfigStruct
+                Id="Instance of structure POWER ADC"
+                ShortId="adc"
+                Desc="."
+                Type="struct"
+                Struct="power_adc"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Sink Power Config Vref" ShortId="sink_power_config_vref" >
+            <ConfigStruct
+                Id="Instance of structure power_config_vref"
+                ShortId="p_config_vref"
+                Desc="."
+                Type="struct"
+                Struct="power_config_vref"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Power Library Configuration Vref"
+                      ShortId="power_config_vref" >
+            <ConfigStruct
+                Id="Instance of structure POWER VREF Config"
+                ShortId="vref"
+                Desc="."
+                Type="struct"
+                Struct="power_vref_config"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Sink Power Config Vbat" ShortId="sink_power_config_vbat" >
+            <ConfigStruct
+                Id="Instance of structure power_config_vbat"
+                ShortId="p_config_vbat"
+                Desc="."
+                Type="struct"
+                Struct="power_config_vbat"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Power Library Configuration Vbat"
+                      ShortId="power_config_vbat" >
+            <ConfigStruct
+                Id="Instance of structure POWER VBAT Config"
+                ShortId="vbat"
+                Desc="."
+                Type="struct"
+                Struct="power_vbat_config"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Sink Power Config Vthm" ShortId="sink_power_config_vthm" >
+            <ConfigStruct
+                Id="Instance of structure power_config_vthm"
+                ShortId="p_config_vthm"
+                Desc="."
+                Type="struct"
+                Struct="power_config_vthm"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Power Library Configuration Vthm"
+                      ShortId="power_config_vthm" >
+            <ConfigStruct
+                Id="Instance of structure POWER VTHM Config"
+                ShortId="vthm"
+                Desc="."
+                Type="struct"
+                Struct="power_vthm_config"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Sink Power Config Vchg" ShortId="sink_power_config_vchg" >
+            <ConfigStruct
+                Id="Instance of structure power_config_vchg"
+                ShortId="p_config_vchg"
+                Desc="."
+                Type="struct"
+                Struct="power_config_vchg"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Power Library Configuration Vchg"
+                      ShortId="power_config_vchg" >
+            <ConfigStruct
+                Id="Instance of structure POWER VCHG Config"
+                ShortId="vchg"
+                Desc="."
+                Type="struct"
+                Struct="power_vchg_config"/>
+        </DefineStruct>
+
+    </DefineGroup>
+
+    <ConfigGroup Id="Broadcast Audio" ShortId="broadcast_audio" Node="Basic">
+        <ConfigGroup Id="BA Broadcaster User Events"
+                     ShortId="ba_broadcaster_user_events"
+                     Node="Array">
+        </ConfigGroup>
+        <ConfigGroup Id="BA Receiver User Events"
+                     ShortId="ba_receiver_user_events"
+                     Node="Array">
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup Id="Voice" ShortId="hfp_voice" Node="Basic">
+
+        <ConfigGroup Id="HFP Volume Control"
+                     ShortId="volume_control"
+                     Node="Basic">
+        </ConfigGroup>
+
+    </ConfigGroup>
+
+    <ConfigGroup Id="Audio" ShortId="audio" Node="Basic">
+            <!-- attributes: Id(M),Node(M); -->
+            <!-- Node: can be Basic, Array or AudioPrompts; -->
+            <!-- child elements for Node is Basic: 1 or more of any of {<ConfigGroup><ConfigItem>}; -->
+            <!-- child elements for Node is Array: exactly 1 <ConfigPatternArray>; -->
+            <!-- child elements for Node is AudioPrompts: 1 <ConfigPatternArray> followed by 2 <ConfigItem> -->
+
+        <ConfigGroup Id="Input" ShortId="input" Node="Basic">
+            <ConfigGroup Id="Analogue Line In" ShortId="line_input" Node="Basic">
+                <ConfigGroup Id="Line In Drive PIO"
+                             ShortId="line_in_drive_pio"
+                                 Node="Basic"
+                             EnableControl="ValueToEnable=3,ConfigItemId=Bias Drive Line In">
+                    </ConfigGroup>
+                </ConfigGroup>
+
+            <ConfigGroup Id="Microphone" ShortId="voice_microphone" Node="Basic">
+                
+                <ConfigGroup Id="Microphone 1" ShortId="voice_microphone_1_parameters" Node="Basic">
+                    <ConfigGroup Id="Microphone 1 Drive PIO"
+                                 ShortId="voice_mic_1_drive_pio"
+                                 Node="Basic"
+                                 EnableControl="ValueToEnable=3,ConfigItemId=Bias Drive Voice Mic 1">
+                    </ConfigGroup>
+                </ConfigGroup>
+
+                <ConfigGroup Id="Microphone 2" ShortId="voice_microphone_2_parameters" Node="Basic">
+                    <ConfigGroup Id="Microphone 2 Drive PIO"
+                                 ShortId="voice_mic_2_drive_pio"
+                                 Node="Basic"
+                                EnableControl="ValueToEnable=3,ConfigItemId=Bias Drive Voice Mic 2">
+                    </ConfigGroup>
+                </ConfigGroup>
+
+                <ConfigGroup Id="Microphone 3" ShortId="voice_microphone_3_parameters" Node="Basic">
+                    <ConfigGroup Id="Microphone 3 Drive PIO"
+                                 ShortId="voice_mic_3_drive_pio"
+                                 Node="Basic"
+                                 EnableControl="ValueToEnable=3,ConfigItemId=Bias Drive Voice Mic 3">
+                    </ConfigGroup>
+                </ConfigGroup>
+
+                <ConfigGroup Id="Microphone 4" ShortId="voice_microphone_4_parameters" Node="Basic">
+                    <ConfigGroup Id="Microphone 4 Drive PIO"
+                                 ShortId="voice_mic_4_drive_pio"
+                                 Node="Basic"
+                                 EnableControl="ValueToEnable=3,ConfigItemId=Bias Drive Voice Mic 4">
+                    </ConfigGroup>
+                </ConfigGroup>
+
+                <ConfigGroup Id="Microphone 5" ShortId="voice_microphone_5_parameters" Node="Basic">
+                    <ConfigGroup Id="Microphone 5 Drive PIO"
+                                 ShortId="voice_mic_5_drive_pio"
+                                 Node="Basic"
+                                 EnableControl="ValueToEnable=3,ConfigItemId=Bias Drive Voice Mic 5">
+                    </ConfigGroup>
+                </ConfigGroup>
+
+                <ConfigGroup Id="Microphone 6" ShortId="voice_microphone_6_parameters" Node="Basic">
+                    <ConfigGroup Id="Microphone 6 Drive PIO"
+                                 ShortId="voice_mic_6_drive_pio"
+                                 Node="Basic"
+                                 EnableControl="ValueToEnable=3,ConfigItemId=Bias Drive Voice Mic 6">
+                    </ConfigGroup>
+                </ConfigGroup>
+            </ConfigGroup>
+
+            <ConfigGroup Id="SPDIF In"
+                         ShortId="spdif_configuration"
+                         Node="Basic">
+            </ConfigGroup>
+
+            <ConfigGroup Id="I2S In"
+                         ShortId="i2s_input"
+                         Node="Basic">
+            </ConfigGroup>
+
+            <ConfigGroup Id="A2DP In"
+                         ShortId="a2dp_input"
+                         Node="Basic">
+            </ConfigGroup>
+
+            <ConfigGroup Id="USB In" ShortId="usb" Node="Basic">
+            </ConfigGroup>
+
+            <ConfigGroup Id="Source Selection"
+                         ShortId="src_selection"
+                         Node="Basic">
+            </ConfigGroup>
+
+        </ConfigGroup>
+
+        <ConfigGroup Id="Output"
+                     ShortId="output"
+                     Node="Basic">
+        </ConfigGroup>
+
+        <ConfigGroup Id="I2S" ShortId="i2s" Node="Basic">
+            <ConfigGroup Id="I2C Control for External I2S Amplifier" ShortId="i2c_control_for_external_i2s_amp" Node="Basic">
+                <ConfigGroup Id="Initialisation" ShortId="initialisation" Node="Basic">
+                </ConfigGroup>
+                <ConfigGroup Id="Volume" ShortId="volume" Node="Basic">
+                </ConfigGroup>
+                <ConfigGroup Id="Shutdown" ShortId="shutdown" Node="Basic">
+                </ConfigGroup>
+            </ConfigGroup>
+        </ConfigGroup>
+
+        <ConfigGroup Id="Active Noise Cancellation (ANC)"
+                     ShortId="active_noise_cancellation"
+                     Node="Basic">
+        </ConfigGroup>
+
+        <ConfigGroup Id="Features"
+                     ShortId="audio_plugin_features"
+                     Node="Basic">
+            <ConfigGroup Id="Silence Detection"
+                     ShortId="silence_detection_features"
+                     Node="Basic">
+             </ConfigGroup>
+        </ConfigGroup>
+
+        <ConfigGroup Id="Latency"
+                         ShortId="audio_latency"
+                         Node="Basic">
+                <ConfigGroup Id="A2DP Time To Play Latency"
+                             ShortId="a2dp_latency"
+                             Node="Basic">
+                </ConfigGroup>
+                <ConfigGroup Id="TWS Time To Play Latency"
+                             ShortId="tws_latency"
+                             Node="Basic">
+                </ConfigGroup>
+                <ConfigGroup Id="Wired Time To Play Latency"
+                             ShortId="wired_latency"
+                             Node="Basic">
+                </ConfigGroup>
+        </ConfigGroup>
+        
+        <ConfigGroup Id="Clock"
+                     ShortId="clock"
+                     Node="Basic">
+        </ConfigGroup>
+
+    </ConfigGroup>
+
+    <ConfigGroup Id="Bluetooth" ShortId="bluetooth" Node="Basic">
+        <ConfigGroup Id="Link Control"
+                     ShortId="link_control"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="Qualification"
+                     ShortId="qualification"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="Connection Management"
+                     ShortId="connection_management"
+                     Node="Basic">
+            <ConfigGroup Id="at Power On"
+                         ShortId="at_power_on"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Pairing"
+                         ShortId="pairing"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Connection"
+                         ShortId="connection"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Discovery"
+                         ShortId="discovery"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Reconnection"
+                         ShortId="reconnection"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="RSSI Parameters"
+                         ShortId="rssi_parameters"
+                         Node="Basic">
+            </ConfigGroup>
+        </ConfigGroup>
+        <ConfigGroup Id="BR/EDR Profiles"
+                     ShortId="br_edr_profiles"
+                     Node="Basic">
+            <ConfigGroup Id="AVRCP"
+                         ShortId="avrcp"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="A2DP"
+                         ShortId="a2dp_g"
+                         Node="Basic">
+                <ConfigGroup Id="SBC Codec Configuration"
+                             ShortId="sbc_config"
+                             Node="Basic">
+                </ConfigGroup>
+            </ConfigGroup>
+            <ConfigGroup Id="PBAP"
+                         ShortId="pbap"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="HFP"
+                         ShortId="hfp"
+                         Node="Basic">
+                <ConfigGroup Id="Call Control"
+                             ShortId="call_control"
+                             Node="Basic">
+                </ConfigGroup>
+                <ConfigGroup Id="Supported Features"
+                             ShortId="supported_features"
+                             Node="Basic">
+                </ConfigGroup>
+                <ConfigGroup Id="QTIL Supported Features"
+                             ShortId="qtil_supported_features"
+                             Node="Basic">
+                </ConfigGroup>
+                <ConfigGroup Id="Audio Parameters"
+                             ShortId="audio_parameters"
+                             Node="Basic">
+                    <ConfigGroup Id="SCO Packet Types"
+                                 ShortId="sco_packet_types"
+                                 Node="Basic">
+                    </ConfigGroup>
+                    <ConfigGroup Id="eSCO Packet Types"
+                                 ShortId="esco_packet_types"
+                                 Node="Basic">
+                    </ConfigGroup>
+                    <ConfigGroup Id="EDR Packet Types"
+                                 ShortId="edr_packet_types"
+                                 Node="Basic">
+                    </ConfigGroup>
+                </ConfigGroup>
+            </ConfigGroup>
+        </ConfigGroup>
+            <ConfigGroup Id="BLE Profiles"
+                     ShortId="ble_profiles"
+                     Node="Basic">
+            <ConfigGroup Id="BLE Advertising Report Filters"
+                         ShortId="ble_advertising_report_filters"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Find Me"
+                         ShortId="find_me"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Proximity"
+                         ShortId="proximity"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="ANCS"
+                         ShortId="ancs"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Heart Rate"
+                         ShortId="heart_rate"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Device Information Servcie"
+                         ShortId="device_information_service"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Custom Advertising"
+                         ShortId="custom_advertising"
+                         Node="Basic">
+            </ConfigGroup>
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup Id="Battery" ShortId="battery" Node="Basic">
+        <ConfigGroup Id="Charger Configuration"
+                     ShortId="charger_configuration"
+                     Node="Basic">
+            <ConfigGroup Id="External Charger Hardware"
+                         ShortId="external_charger_hardware"
+                         Node="Basic"/>
+            <ConfigGroup Id="Charger Cycle"
+                         ShortId="charger_cycle"
+                         Node="Basic"/>
+            <ConfigGroup Id="Voltage Source Selector"
+                         ShortId="voltage_source_selector"
+                         Node="Basic"/>
+        </ConfigGroup>
+        <ConfigGroup Id="Reference Voltage (Vref)"
+                     ShortId="reference_voltage_vref"
+                     Node="Basic">
+            <ConfigGroup Id="Reference ADC Configuration (Vref)"
+                         ShortId="reference_adc_configuration"
+                         Node="Basic"/>
+        </ConfigGroup>
+        <ConfigGroup Id="Battery Voltage (Vbat)"
+                     ShortId="battery_voltage_vbat"
+                     Node="Basic">
+            <ConfigGroup Id="Battery ADC Configuration (Vbat)"
+                         ShortId="battery_adc_configuration"
+                         Node="Basic"/>
+             <ConfigGroup Id="Gas Gauge Actions"
+                          ShortId="gas_gauge_actions"
+                          Node="Basic"/>
+        </ConfigGroup>
+        <ConfigGroup Id="Battery Temperature (Vthm)"
+                     ShortId="battery_temperature_vthm"
+                     Node="Basic">
+            <ConfigGroup Id="Thermistor ADC Configuration (Vthm)"
+                         ShortId="thermistor_adc_configuration"
+                         Node="Basic"/>
+            <ConfigGroup Id="Thermistor Thresholds"
+                         ShortId="thermistor_thresholds"
+                         Node="Basic"/>
+        </ConfigGroup>
+        <ConfigGroup Id="Charger Voltage (Vchg)"
+                     ShortId="charger_voltage_vchg"
+                     Node="Basic">
+            <ConfigGroup Id="Charger ADC Configuration (Vchg)"
+                         ShortId="charger_adc_configuration"
+                         Node="Basic"/>
+            <ConfigGroup Id="Charger Thresholds"
+                         ShortId="charger_thresholds"
+                         Node="Basic"/>
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup Id="Device and Software Version"
+        ShortId="device_and_software_version"
+        Node="Basic">
+    </ConfigGroup>
+    <ConfigGroup Id="Input/Output" ShortId="input_output" Node="Basic">
+        <ConfigGroup Id="Input PIOs"
+                     ShortId="input_pios"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="Output PIOs"
+                     ShortId="output_pios"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="PIO Invert Mask Bitfields"
+                     ShortId="pio_invert_mask_bitfields"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="PIO Invert Mask Bitfields above PIO31"
+                     ShortId="pio_invert_mask_bitfields_ext"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="PIO Mapping Assignments"
+                     ShortId="pio_mapping_assignments"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="PIO Mapping Assignments above PIO31"
+                     ShortId="pio_mapping_assignments_ext"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="PIO Event (Debounce) Groups"
+                     ShortId="pio_debounce_groups"
+                     Node="Basic">
+            <ConfigGroup Id="Group 0 / Buttons"
+                         ShortId="pio_debounce_group_0"
+                         Node="Basic">
+                <ConfigGroup Id="Configuration"
+                             ShortId="pio_group_0_debounce_configuration"
+                             Node="Basic"
+                             EnableControl="ValueToEnable=0, ConfigItemId=Use Button Mappings"/>
+                <ConfigGroup Id="Assignments"
+                             ShortId="pio_group_0_debounce_assignments"
+                             Node="Basic"
+                             EnableControl="ValueToEnable=0, ConfigItemId=Use Button Mappings"/>
+                <ConfigGroup Id="Assignments above PIO31"
+                             ShortId="pio_group_0_debounce_assignments_ext"
+                             Node="Basic"
+                             EnableControl="ValueToEnable=0, ConfigItemId=Use Button Mappings"/>
+            </ConfigGroup>
+            <ConfigGroup Id="Group 1"
+                         ShortId="pio_debounce_group_1"
+                         Node="Basic">
+                <ConfigGroup Id="Configuration "
+                             ShortId="pio_group_1_debounce_configuration"
+                             Node="Basic"/>
+                <ConfigGroup Id="Assignments "
+                             ShortId="pio_group_1_debounce_assignments"
+                             Node="Basic"/>
+                <ConfigGroup Id="Assignments above PIO31 "
+                             ShortId="pio_group_1_debounce_assignments_ext"
+                             Node="Basic"/>
+            </ConfigGroup>
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup Id="Low Power Modes" ShortId="low_power" Node="Basic">
+        <ConfigGroup Id="Dormant Mode"
+                     ShortId="dormant"
+                     Node="Basic">
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup Id="Peer Device Support"
+                    ShortId="peer_device_support"
+                    Node="Basic">
+        <ConfigGroup Id="Custom Peer Device Service UUID Global"
+                     ShortId="custom_peer_device_service_uuid_g"
+                     Node="Array">
+        </ConfigGroup>
+        <ConfigGroup Id="ShareMe"
+                     ShortId="shareme"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="True Wireless Stereo"
+                     ShortId="true_wireless_stereo"
+                     Node="Basic">
+            <ConfigGroup Id="Audio Routing"
+                         ShortId="audio_routing"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Device Trim"
+                         ShortId="device_trim"
+                         Node="Basic">
+            </ConfigGroup>
+        </ConfigGroup>
+    </ConfigGroup>
+    <ConfigGroup Id="Remote Control"
+        ShortId="remote_control"
+        Node="Basic">
+        <ConfigGroup Id="Input Manager Look-up Table"
+                     ShortId="input_manager_lookup_table"
+                     Node="Array">
+        </ConfigGroup>
+        <ConfigGroup Id="IR Input Monitor"
+                     ShortId="ir_input_monitor"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="BLE Input Monitor"
+                     ShortId="ble_input_monitor"
+                     Node="Basic">
+        </ConfigGroup>
+    </ConfigGroup>
+    <ConfigGroup Id="System" ShortId="system" Node="Basic">
+        <ConfigGroup Id="Timers"
+                     ShortId="timers"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="PS Store"
+                     ShortId="ps_store"
+                     Node="Basic">
+        </ConfigGroup>
+    </ConfigGroup>
+    <ConfigGroup Id="User Interfaces" ShortId="user_interfaces" Node="Basic">
+        <ConfigGroup Id="User Events"
+                     ShortId="user_events"
+                     Node="Array">
+        </ConfigGroup>
+        <ConfigGroup Id="Tones"
+                     ShortId="tones"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="Audio Prompts"
+                     ShortId="audio_prompts"
+                     Node="Basic">
+            <ConfigGroup Id="Generate"
+                         ShortId="generate"
+                         Node="AudioPrompts">
+            </ConfigGroup>
+        </ConfigGroup>
+        <ConfigGroup Id="Buttons"
+                     ShortId="buttons"
+                     Node="Basic">
+            <ConfigGroup Id="PIO Debounce Configuration"
+                         ShortId="pio_debounce"
+                         Node="Basic"
+                         EnableControl="ValueToEnable=1, ConfigItemId=Use Button Mappings">
+            </ConfigGroup>
+            <ConfigGroup Id="Translation"
+                         ShortId="translation"
+                         Node="Array">
+            </ConfigGroup>
+            <ConfigGroup Id="Sequence Configuration"
+                         ShortId="sequence_configuration"
+                         Node="Array">
+            </ConfigGroup>
+        </ConfigGroup>
+        <ConfigGroup Id="LED"
+                     ShortId="led"
+                     Node="Basic">
+            <ConfigGroup Id="Tri Colour LED Settings"
+                         ShortId="tri_colour_led_settings"
+                         Node="Basic">
+            </ConfigGroup>
+        </ConfigGroup>
+    </ConfigGroup>
+    <ConfigGroup Id="GAIA" ShortId="gaia" Node="Basic">
+        <ConfigGroup Id="GAIA PIO Mapping"
+                     ShortId="gaia_pio_mapping"
+                     Node="Basic">
+        </ConfigGroup>
+    </ConfigGroup>
+    <ConfigGroup Id="Upgrade"
+                 ShortId="upgrade"
+                 Node="Basic">
+    </ConfigGroup>
+    <ConfigGroup Id="Voice Assistant Parameters" ShortId="voice_assistant_parameters" Node="Basic">
+        <ConfigGroup Id="VA Microphones"
+                 ShortId="va_microphones"
+                 Node="Basic">
+         </ConfigGroup>
+    </ConfigGroup>
+    <ConfigGroup Id="Advanced Settings that were an Expert Node" ShortId="advanced_settings" Node="Expert">
+        <ConfigGroup Id="Session Data"
+                     ShortId="session_data"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="BT Radio Key"
+                     ShortId="bt_radio_key"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="Simple Speech Recognition Key"
+                     ShortId="simple_speech_recognition_key"
+                     Node="Basic">
+            <ConfigGroup Id="SLC"
+                         ShortId="slc"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="SCO"
+                         ShortId="sco"
+                         Node="Basic">
+            </ConfigGroup>
+        </ConfigGroup>
+        <ConfigGroup Id="FM Radio Key"
+                     ShortId="fm_radio_key"
+                     Node="Basic">
+        </ConfigGroup>
+        <ConfigGroup Id="User Tones Key"
+                     ShortId="user_tones_key"
+                     Node="Array">
+        </ConfigGroup>
+        <ConfigGroup Id="AT Commands Key"
+                     ShortId="at_commands_key"
+                     Node="Basic">
+            <ConfigGroup Id="Event to AT Command Mapping"
+                         ShortId="event_to_at_command_mapping"
+                         Node="Basic">
+            </ConfigGroup>
+            <ConfigGroup Id="Command Data"
+                         ShortId="command_data"
+                         Node="Basic">
+            </ConfigGroup>
+        </ConfigGroup>
+    </ConfigGroup>
+</GlobalData>

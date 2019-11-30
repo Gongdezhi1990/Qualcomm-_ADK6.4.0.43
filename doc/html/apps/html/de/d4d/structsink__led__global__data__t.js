@@ -1,0 +1,27 @@
+var structsink__led__global__data__t =
+[
+    [ "gConfigMode", "de/d4d/structsink__led__global__data__t.html#a4ba0556fe69731189bd8dcd084cbcf44", null ],
+    [ "gCurrentlyIndicatingEvent", "de/d4d/structsink__led__global__data__t.html#a2503114d6dd33d3935c79d3e574d6f9a", null ],
+    [ "gErrorCode", "de/d4d/structsink__led__global__data__t.html#a0b133e55d8e0e71bb4cacfb1de36ed94", null ],
+    [ "gFollowing", "de/d4d/structsink__led__global__data__t.html#a453e2503a41f9a77d13d5499d3b30a90", null ],
+    [ "gFollowPin", "de/d4d/structsink__led__global__data__t.html#a7d471170b18ce5c79798151f671a30fe", null ],
+    [ "gLedActivity", "de/d4d/structsink__led__global__data__t.html#a8249d90d987bfe89158a9e054d6334eb", null ],
+    [ "gLedEventQueue", "de/d4d/structsink__led__global__data__t.html#abd0937e81557321e6d554782836b458f", null ],
+    [ "gLedMapping", "de/d4d/structsink__led__global__data__t.html#a71b5cda71e8c46e791d0887cfeb23dd3", null ],
+    [ "gLEDSEnabled", "de/d4d/structsink__led__global__data__t.html#a4b449e0ebb30e98e268ddb6d11d85901", null ],
+    [ "gLEDSStateTimeout", "de/d4d/structsink__led__global__data__t.html#a7e136d52a4aafd2aec9e966d6beaee5e", null ],
+    [ "gLEDSSuspend", "de/d4d/structsink__led__global__data__t.html#a7c71071389c621c1e727dbced65ad566", null ],
+    [ "gLEDState", "de/d4d/structsink__led__global__data__t.html#a19c348e7b64b3cc4211f35e4af13d0a9", null ],
+    [ "gLMNumFiltersUsed", "de/d4d/structsink__led__global__data__t.html#a232b4eab0a869c7a082b2a99aeb0cb3c", null ],
+    [ "gpPIOInfo", "de/d4d/structsink__led__global__data__t.html#aba5c1fec5df9154ea400d62e1809cde6", null ],
+    [ "gStateCanOverideDisable", "de/d4d/structsink__led__global__data__t.html#ae94eb09e57e32eacc480bbe15426ae41", null ],
+    [ "gStatePatternsAllocated", "de/d4d/structsink__led__global__data__t.html#a42ce3aa8e3cbd783e713fa71d1fcb14a", null ],
+    [ "gTheActiveFiltersH", "de/d4d/structsink__led__global__data__t.html#a67c983fce9d9dc59b81b6facdc3ec557", null ],
+    [ "gTheActiveFiltersL", "de/d4d/structsink__led__global__data__t.html#ad5327a0214dd07a01e8915a6d8412d8b", null ],
+    [ "gTriColLeds", "de/d4d/structsink__led__global__data__t.html#acc732ca27c258f5941e2ff8f26e8b89d", null ],
+    [ "pEventFilters", "de/d4d/structsink__led__global__data__t.html#a1955c1f7bfd47a22a81d78da4933bb80", null ],
+    [ "pStatePatterns", "de/d4d/structsink__led__global__data__t.html#af6900d3c581985ee6d3f2d4479110dee", null ],
+    [ "task", "de/d4d/structsink__led__global__data__t.html#a1ed196ca958d9900d2640c8751b76c97", null ],
+    [ "unused", "de/d4d/structsink__led__global__data__t.html#a225d79c243c749f002e589c89395a352", null ],
+    [ "unused1", "de/d4d/structsink__led__global__data__t.html#a5eb9c5a20fe27bfc4cf3d05ce4f7c14c", null ]
+];

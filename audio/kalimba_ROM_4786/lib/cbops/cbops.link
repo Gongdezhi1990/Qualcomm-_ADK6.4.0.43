@@ -1,0 +1,176 @@
+/*****************************************************************************
+* CONFIDENTIAL
+*
+* Copyright (c) 2009 - 2017 Qualcomm Technologies International, Ltd.
+*
+*****************************************************************************/
+/* Linkscript for the CBOPS library */
+
+#ifdef KEEP_PM
+segment CBOPS_COPY_PM                                          keep     40          PM_FAST_REGION;
+segment CBOPS_RESET_PM                                         keep     40          PM_REGION;
+segment CBOPS_COMPRESS_COPY_OP_MAIN_PM                         keep     40          PM_REGION;
+segment CBOPS_COPY_OP_MAIN_PM                                  keep     40          PM_FAST_REGION;
+segment CBOPS_CROSS_MIX_MAIN_PM                                keep     40          PM_REGION;
+segment CBOPS_DC_REMOVE_RESET_PM                               keep     40          PM_REGION;
+segment CBOPS_DC_REMOVE_MAIN_PM                                keep     40          PM_FAST_REGION;
+segment CBOPS_DITHER_AND_SHIFT_MAIN_PM                         keep     40          PM_REGION;
+segment CBOPS_EQ_RESET_PM                                      keep     40          PM_REGION;
+segment CBOPS_EQ_MAIN_PM                                       keep     40          PM_REGION;
+segment CBOPS_FIXED_AMOUNT_AMOUNT_TO_USE_PM                    keep     40          PM_REGION;
+segment CBOPS_LIMITED_COPY_AMOUNT_TO_USE_PM                    keep     40          PM_REGION;
+segment CBOPS_MIX_RESET_PM                                     keep     40          PM_REGION;
+segment CBOPS_MIX_MAIN_PM                                      keep     40          PM_REGION;
+segment CBOPS_MONO_TO_STEREO_RESET_PM                          keep     40          PM_REGION;
+segment CBOPS_MONO_TO_STEREO_MAIN_PM                           keep     40          PM_REGION;
+segment CBOPS_NOISE_GATE_RESET_PM                              keep     40          PM_REGION;
+segment CBOPS_NOISE_GATE_MAIN_PM                               keep     40          PM_REGION;
+segment CBOPS_ONE_TO_TWO_CHAN_COPY_MAIN_PM                     keep     40          PM_REGION;
+segment CBOPS_RATE_ADJUSTMENT_AND_SHIFT_AMOUNT_TO_USE_PM       keep     40          PM_FAST_REGION;
+segment CBOPS_RATE_ADJUSTMENT_AND_SHIFT_MAIN_PM                keep     40          PM_FAST_REGION;
+segment CBOPS_SCALE_MAIN_PM                                    keep     40          PM_REGION;
+segment CBOPS_SCALE_16_SAT_MAIN_PM                             keep     40          PM_REGION;
+segment CBOPS_SHIFT_MAIN_PM                                    keep     40          PM_REGION;
+segment CBOPS_SIDETONE_MIX_RESET_PM                            keep     40          PM_REGION;
+segment CBOPS_SIDETONE_MIX_MAIN_PM                             keep     40          PM_REGION;
+segment CBOPS_SILENCE_CLIP_DETECT_RESET_PM                     keep     40          PM_REGION;
+segment CBOPS_SILENCE_CLIP_DETECT_MAIN_PM                      keep     40          PM_REGION;
+segment CBOPS_SILENCE_CLIP_DETECT_INITIALISE_PM                keep     40          PM_REGION;
+segment CBOPS_SILENCE_CLIP_DETECT_MESSAGE_HANDLER_PM           keep     40          PM_REGION;
+segment CBOPS_STATUS_CHECK_GAIN_AMOUNT_TO_USE_PM               keep     40          PM_REGION;
+segment CBOPS_STATUS_CHECK_GAIN_MAIN_PM                        keep     40          PM_REGION;
+segment CBOPS_STEREO_3D_ENHANCE_RESET_PM                       keep     40          PM_REGION;
+segment CBOPS_STEREO_3D_ENHANCE_MAIN_PM                        keep     40          PM_REGION;
+segment CBOPS_S_TO_M_OP_MAIN_PM                                keep     40          PM_REGION;
+segment CBOPS_TWO_TO_ONE_CHAN_COPY_MAIN_PM                     keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_RESET_PM                             keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_AMOUNT_TO_USE_PM                     keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_CALC_OUTPUT_SAMPLES_HELPER_PM        keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_SECONDARY_SETUP_HELPER_PM            keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_MAIN_PM                              keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_MAIN_HELPER_PM                       keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_SECONDARY_CBUFFER_POINTER_UPDATE_PM  keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_INIT_UPSAMPLER_PM                    keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_RAMP_VOLUME_PM                       keep     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_UPSAMPLER_PM                         keep     40          PM_REGION;
+segment CBOPS_UPSAMPLE_MIX_RESET_PM                            keep     40          PM_REGION;
+segment CBOPS_UPSAMPLE_MIX_MAIN_PM                             keep     40          PM_REGION;
+segment CBOPS_USER_FILTER_MAIN_PM                              keep     40          PM_REGION;
+segment CBOPS_VOLUME_RESET_PM                                  keep     40          PM_REGION;
+segment CBOPS_VOLUME_MAIN_PM                                   keep     40          PM_REGION;
+segment CBOPS_VOLUME_BASIC_RESET_PM                            keep     40          PM_REGION;
+segment CBOPS_VOLUME_BASIC_MAIN_PM                             keep     40          PM_REGION;
+segment CBOPS_WARP_AND_SHIFT_RESET_PM                          keep     40          PM_REGION;
+segment CBOPS_WARP_AND_SHIFT_AMOUNT_TO_USE_PM                  keep     40          PM_REGION;
+segment CBOPS_WARP_AND_SHIFT_MAIN_PM                           keep     40          PM_REGION;
+segment CBOPS_INTERLEAVE_RESET_PM                              keep     40          PM_REGION;
+segment CBOPS_INTERLEAVE_AMOUNT_TO_USE_PM                      keep     40          PM_REGION;
+segment CBOPS_INTERLEAVE_MAIN_PM                               keep     40          PM_REGION;
+segment CBOPS_DEINTERLEAVE_RESET_PM                            keep     40          PM_REGION;
+segment CBOPS_DEINTERLEAVE_AMOUNT_TO_USE_PM                    keep     40          PM_REGION;
+segment CBOPS_DEINTERLEAVE_MAIN_PM                             keep     40          PM_REGION;
+
+segment IIR_RESAMPLEV2_CBOPS_PM                      		   keep     40          PM_REGION;
+segment IIR_RESAMPLEV2_COPY_PM                      		   keep     40          PM_REGION;
+segment IIR_RESAMPLEV2_FRAMESYNC_PM                      	   keep     40          PM_REGION;
+segment IIR_RESAMPLEV2_COMMON_PM                        	   keep     40          PM_REGION;
+
+segment CBOPS_HW_WARP_OPERATOR_PM                              keep     40          PM_REGION;
+segment CBOPS_INSERT_OPERATOR_PM                               keep     40          PM_REGION;
+segment CBOPS_MIXER_OPERATOR_PM                                keep     40          PM_REGION;
+segment CBOPS_PORT_WRAP_OPERATOR_PM                            keep     40          PM_REGION;
+segment CBOPS_SIDETONE_FILTER_OPERATOR_PM                      keep     40          PM_REGION;
+segment CBOPS_SIDETONE_MIX_OPERATOR_PM                         keep     40          PM_REGION;
+segment CBOPS_RATE_MONITOR_OPERATOR_PM                         keep     40          PM_REGION;
+segment CBOPS_IIR_RESAMPLEV2_OPERATOR_PM                       keep     40          PM_REGION;
+#else
+segment CBOPS_COPY_PM                                                   40          PM_FAST_REGION;
+segment CBOPS_RESET_PM                                                  40          PM_REGION;
+segment CBOPS_COMPRESS_COPY_OP_MAIN_PM                                  40          PM_REGION;
+segment CBOPS_COPY_OP_MAIN_PM                                           40          PM_FAST_REGION;
+segment CBOPS_CROSS_MIX_MAIN_PM                                         40          PM_REGION;
+segment CBOPS_DC_REMOVE_RESET_PM                                        40          PM_REGION;
+segment CBOPS_DC_REMOVE_MAIN_PM                                         40          PM_FAST_REGION;
+segment CBOPS_DITHER_AND_SHIFT_MAIN_PM                                  40          PM_REGION;
+segment CBOPS_EQ_RESET_PM                                               40          PM_REGION;
+segment CBOPS_EQ_MAIN_PM                                                40          PM_REGION;
+segment CBOPS_FIXED_AMOUNT_AMOUNT_TO_USE_PM                             40          PM_REGION;
+segment CBOPS_LIMITED_COPY_AMOUNT_TO_USE_PM                             40          PM_REGION;
+segment CBOPS_MIX_RESET_PM                                              40          PM_REGION;
+segment CBOPS_MIX_MAIN_PM                                               40          PM_REGION;
+segment CBOPS_MONO_TO_STEREO_RESET_PM                                   40          PM_REGION;
+segment CBOPS_MONO_TO_STEREO_MAIN_PM                                    40          PM_REGION;
+segment CBOPS_NOISE_GATE_RESET_PM                                       40          PM_REGION;
+segment CBOPS_NOISE_GATE_MAIN_PM                                        40          PM_REGION;
+segment CBOPS_ONE_TO_TWO_CHAN_COPY_MAIN_PM                              40          PM_REGION;
+segment CBOPS_RATE_ADJUSTMENT_AND_SHIFT_AMOUNT_TO_USE_PM                40          PM_FAST_REGION;
+segment CBOPS_RATE_ADJUSTMENT_AND_SHIFT_MAIN_PM                         40          PM_FAST_REGION;
+segment CBOPS_SCALE_MAIN_PM                                             40          PM_REGION;
+segment CBOPS_SCALE_16_SAT_MAIN_PM                                      40          PM_REGION;
+segment CBOPS_SHIFT_MAIN_PM                                             40          PM_REGION;
+segment CBOPS_SIDETONE_MIX_RESET_PM                                     40          PM_REGION;
+segment CBOPS_SIDETONE_MIX_MAIN_PM                                      40          PM_REGION;
+segment CBOPS_SILENCE_CLIP_DETECT_RESET_PM                              40          PM_REGION;
+segment CBOPS_SILENCE_CLIP_DETECT_MAIN_PM                               40          PM_REGION;
+segment CBOPS_SILENCE_CLIP_DETECT_INITIALISE_PM                         40          PM_REGION;
+segment CBOPS_SILENCE_CLIP_DETECT_MESSAGE_HANDLER_PM                    40          PM_REGION;
+segment CBOPS_STATUS_CHECK_GAIN_AMOUNT_TO_USE_PM                        40          PM_REGION;
+segment CBOPS_STATUS_CHECK_GAIN_MAIN_PM                                 40          PM_REGION;
+segment CBOPS_STEREO_3D_ENHANCE_RESET_PM                                40          PM_REGION;
+segment CBOPS_STEREO_3D_ENHANCE_MAIN_PM                                 40          PM_REGION;
+segment CBOPS_S_TO_M_OP_MAIN_PM                                         40          PM_REGION;
+segment CBOPS_TWO_TO_ONE_CHAN_COPY_MAIN_PM                              40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_RESET_PM                                      40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_AMOUNT_TO_USE_PM                              40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_CALC_OUTPUT_SAMPLES_HELPER_PM                 40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_SECONDARY_SETUP_HELPER_PM                     40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_MAIN_PM                                       40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_MAIN_HELPER_PM                                40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_SECONDARY_CBUFFER_POINTER_UPDATE_PM           40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_INIT_UPSAMPLER_PM                             40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_RAMP_VOLUME_PM                                40          PM_REGION;
+segment CBOPS_UNIV_MIX_OP_UPSAMPLER_PM                                  40          PM_REGION;
+segment CBOPS_UPSAMPLE_MIX_RESET_PM                                     40          PM_REGION;
+segment CBOPS_UPSAMPLE_MIX_MAIN_PM                                      40          PM_REGION;
+segment CBOPS_USER_FILTER_MAIN_PM                                       40          PM_REGION;
+segment CBOPS_VOLUME_RESET_PM                                           40          PM_REGION;
+segment CBOPS_VOLUME_MAIN_PM                                            40          PM_REGION;
+segment CBOPS_VOLUME_BASIC_RESET_PM                                     40          PM_REGION;
+segment CBOPS_VOLUME_BASIC_MAIN_PM                                      40          PM_REGION;
+segment CBOPS_WARP_AND_SHIFT_RESET_PM                                   40          PM_REGION;
+segment CBOPS_WARP_AND_SHIFT_AMOUNT_TO_USE_PM                           40          PM_REGION;
+segment CBOPS_WARP_AND_SHIFT_MAIN_PM                                    40          PM_REGION;
+segment CBOPS_INTERLEAVE_RESET_PM                                       40          PM_REGION;
+segment CBOPS_INTERLEAVE_AMOUNT_TO_USE_PM                               40          PM_REGION;
+segment CBOPS_INTERLEAVE_MAIN_PM                                        40          PM_REGION;
+segment CBOPS_DEINTERLEAVE_RESET_PM                                     40          PM_REGION;
+segment CBOPS_DEINTERLEAVE_AMOUNT_TO_USE_PM                             40          PM_REGION;
+segment CBOPS_DEINTERLEAVE_MAIN_PM                                      40          PM_REGION;
+
+segment IIR_RESAMPLEV2_CBOPS_PM                                         40          PM_REGION;
+segment IIR_RESAMPLEV2_COPY_PM                                          40          PM_REGION;
+segment IIR_RESAMPLEV2_FRAMESYNC_PM                                     40          PM_REGION;
+segment IIR_RESAMPLEV2_COMMON_PM                                        40          PM_REGION;
+
+segment CBOPS_HW_WARP_OPERATOR_PM                                       40          PM_REGION;
+segment CBOPS_INSERT_OPERATOR_PM                                        40          PM_REGION;
+segment CBOPS_MIXER_OPERATOR_PM                                         40          PM_REGION;
+segment CBOPS_PORT_WRAP_OPERATOR_PM                                     40          PM_REGION;
+segment CBOPS_SIDETONE_FILTER_OPERATOR_PM                               40          PM_REGION;
+segment CBOPS_SIDETONE_MIX_OPERATOR_PM                                  40          PM_REGION;
+segment CBOPS_RATE_MONITOR_OPERATOR_PM                                  40          PM_REGION;
+segment CBOPS_IIR_RESAMPLEV2_OPERATOR_PM                                40          PM_REGION;
+#endif
+
+segment IIR_RESAMPLEV2_COEFF_DM                                         40          DM2_REGION;
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+<ModuleData Name="sink_audio_ra">
+    <ConfigGroup
+        ShortId="audio_ra_readonly"
+        Id="Enable standalone rate adjustment Read-only Config"
+        Node="Basic">
+        <ConfigItem
+            Id="Enable Standalone rate adjustment"
+            ShortId="enable_standalone_rate_adjustment"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="Uses standalone rate adjustment for sco/usb voice send path. If this configuration is true then the default adjustment at microphone source is inactive."
+            ConfigGroupPath="./[@ShortId='hfp_voice']">				
+        </ConfigItem>
+     </ConfigGroup>
+</ModuleData>

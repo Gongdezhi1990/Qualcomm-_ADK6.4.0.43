@@ -1,0 +1,39 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# definitions for a2d9 builds
+
+%cpp
+#
+# Which components do we want to include on this chip?
+#
+
+# For now we want to test the CELT decoder with the raw buffer endpoint
+#INSTALL_RAW_BUFFER
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+CELT_DECODE
+
+# List of global include paths
+%list ALL_INCDIRS
+../lib/codec
+../lib/celt
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/celt_decode/celt_decode
+capabilities/a2dp_decode/a2dp_decode
+# Libraries needed by a2dp capabilities
+../lib/codec/codec
+../lib/celt/celt
+
+%list MAXIM_LIBS
+../lib/celt/celt
+

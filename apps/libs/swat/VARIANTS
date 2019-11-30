@@ -1,0 +1,5 @@
+
+VARIANTS := debug 
+
+CFLAGS_debug := -DSWAT_DEBUG_LIB  # flags for building debug version of SWAT lib
+

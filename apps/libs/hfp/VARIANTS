@@ -1,0 +1,8 @@
+
+VARIANTS := min_cfm debug
+
+CFLAGS_debug := -DHFP_DEBUG_LIB -DDISPLAY_AT_CMDS # flags for building debug version of HFP lib
+
+CFLAGS_min_cfm := -DHFP_MIN_CFM # Build of HFP with minimum required confirmation messages sent to the app
+
+CFLAGS_min_cfm_debug := -DHFP_MIN_CFM -DHFP_DEBUG_LIB -DDISPLAY_AT_CMDS # flags for building debug version of HFP lib + min cfm

@@ -1,0 +1,55 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2014 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions for CVC capabilities
+#
+
+%cpp
+AEC_REFERENCE_LATENCY_DEBUG
+#ENABLE_FORCE_SW_RATEMATCH
+ENABLE_FORCE_ENACTING_BY_AEC_REFERENCE
+IO_DEBUG
+CVC_LOW_RESOURCE_MODE
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+capabilities/cvc_receive
+capabilities/cvc_send
+capabilities/aec_reference
+
+# List of global include paths
+%list ALL_INCDIRS
+
+# List of libraries to build
+%list CFG_LIBS
+# Capabilities
+capabilities/cvc_receive/cvc_receive
+capabilities/cvc_send/cvc_send
+capabilities/aec_reference/aec_reference
+
+#
+# Capabilities we want to include on the chip
+# The CFG_CAPABILITIES list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+# Warning: When you want to enable another variant of cVc, also remember to go
+# into the capability XML to check if the "InstallOperator" tag is defined correctly
+# for your variant ID. If not, derivation engine will not generate default
+# parameters correctly and create operator will fail.
+
+%list CFG_CAPABILITIES
+AEC_REFERENCE
+CVC_RECEIVE
+CVC_HEADSET_1MIC
+CVC_HEADSET_2MIC_MONO
+CVC_HEADSET_BINAURAL
+CVC_SPEAKER_1MIC
+CVC_SPEAKER_2MIC
+
+%build
+BUILD_CVC_HEADSET_1MIC = true
+BUILD_CVC_HEADSET_2MIC = true
+BUILD_CVC_SPEAKER_1MIC = true
+BUILD_CVC_SPEAKER_2MIC = true
+

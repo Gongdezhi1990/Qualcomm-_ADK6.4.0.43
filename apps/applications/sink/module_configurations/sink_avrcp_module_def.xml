@@ -1,0 +1,26 @@
+<ModuleData Name="Sink_avrcp">
+    <ConfigGroup
+        ShortId="avrcp_readonly"
+        Id="AVRCP Enable and Audio Switching Mask Bitfields"
+        Node="Basic">
+        <ConfigItem
+            Id="AVRCP Enabled"
+            ShortId="avrcp_enabled"
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            Desc="When set enables AVRCP control. This feature is not supported on some ROM variants."
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='avrcp']">
+        </ConfigItem>
+       <ConfigItem
+            Id="AVRCP Audio Switching"
+            ShortId="EnableAvrcpAudioSwitching"
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            Desc="If enabled AVRCP play status is used to speed up audio source switching."
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='avrcp']">
+            <BuildVariant Value="false" SwVariant="All" HwVariant="QCC5124-BA_FORMFACTOR-AA"/>
+        </ConfigItem>
+    </ConfigGroup>
+</ModuleData>

@@ -1,0 +1,15 @@
+
+VARIANTS := debug_msg_flow enable_attitude debug_disable attitude_debug_disable ppg_debug_disable ppg
+
+CFLAGS_debug_msg_flow := -DDEBUG_MSG_FLOW
+
+CFLAGS_enable_attitude := -DENABLE_ATTITUDE
+
+CFLAGS_debug_disable := -DSPORTS_HEALTH_LOGGING_DISABLE
+
+CFLAGS_ppg := -DPPG_ONLY
+
+CFLAGS_ppg_debug_disable := -DSPORTS_HEALTH_LOGGING_DISABLE -DPPG_ONLY
+
+CFLAGS_attitude_debug_disable = -DENABLE_ATTITUDE -DSPORTS_HEALTH_LOGGING_DISABLE
+

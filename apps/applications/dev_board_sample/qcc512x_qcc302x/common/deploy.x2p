@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project>
+    <configurations>
+        <configuration name="deploy" options="deploy">
+            <devkitConfiguration>application</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+        </configuration>
+    </configurations>
+</project>

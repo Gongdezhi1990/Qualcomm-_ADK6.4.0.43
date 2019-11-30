@@ -1,0 +1,26 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the DOWNLOAD COMPANDER
+
+
+#
+# Capabilities to include in the build
+#
+%list CFG_CAPABILITIES
+COMPANDER
+
+%list ALL_SRCDIRS
+capabilities/compander
+
+# List of global include paths
+%list ALL_INCDIRS
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/compander/compander
+

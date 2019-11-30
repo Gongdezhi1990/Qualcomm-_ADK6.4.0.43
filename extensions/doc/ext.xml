@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <ext_id>
+        <uuid>{30c3bfec-f637-45f9-9225-7497ce344086}</uuid>
+        <devkit>{3d5da188-f161-441c-a5e5-cda018a35030}</devkit>
+        <checksum>abebdcba6ccb0c8a3aca248529d316f4</checksum>
+        <version>6.4.0</version>
+        <build>43</build>
+        <target>x86</target>
+    </ext_id>
+    <ext_info>
+        <name>Extensions to docs</name>
+        <description>Adds document packages</description>
+        <build>64</build>
+    </ext_info>
+    <doc type="move">
+       <folder name="help">./doc/qch/subsystem_config.qch</folder>
+       <folder name="help">./doc/qch/adk.qch</folder>
+       <folder name="help">./doc/qch/apps.qch</folder>
+       <folder name="help">./doc/qch/libs.qch</folder>
+       <folder name="help">./doc/qch/os.qch</folder>
+    </doc>
+</root>

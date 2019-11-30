@@ -1,0 +1,21 @@
+file=audio1
+
+# Select PIOs for I2S interface 0 and 1: SCK, WS, MCLK, SD_OUT, SD_IN.
+PcmPioConfig =  [ 10 11 ff 12 13 ]
+Pcm1PioConfig = [ ff ff ff 14 16 ]
+DigMic0PioConfig = [03 02]
+DigMic1PioConfig = [18 04]
+Spdif0InPioConfig = 56
+AoVDutyCycleParameters = [0A 19]
+CoreEnable = [ 00 ]
+
+DigMic0G722FilterEnable = true
+DigMic0G722FirEnable = true
+DigMic1G722FilterEnable = true
+DigMic1G722FirEnable = true
+DigMic2G722FilterEnable = true
+DigMic2G722FirEnable = true
+
+DigMic0ClockRate = 4000
+DigMic1ClockRate = 4000
+DigMic2ClockRate = 4000

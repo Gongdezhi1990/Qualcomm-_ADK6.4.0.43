@@ -1,0 +1,8 @@
+Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+All Rights Reserved.
+Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+MIB keys are required to support Adesto parts on CSRA68105 devices. There are
+no Adesto QSPI parts with ROM support on CSRA68105.

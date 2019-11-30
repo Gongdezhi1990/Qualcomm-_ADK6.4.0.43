@@ -1,0 +1,60 @@
+<ModuleData Name="Sink_ble">
+    <ConfigGroup
+        ShortId="sink_ble_readonly"
+        Id="BLE"
+        Node="Basic">
+        <ConfigItem
+            Id="BLE Advertising Filters"
+            ShortId="BleAdvertisingFilters"
+            Type="bitfield"
+            DefaultValue="HID"
+            Desc="Only advertising reports that contain the selected service UUIDs will be processed in the sink application. This increases the chances of the sink application connecting to a remote device supporting the required services. Eg. If HID and IAS advertising report filters are selected, then only received advertising reports containing HID or IAS UUIDs will be handled in the sink application."
+            Size="7"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']/[@ShortId='ble_advertising_report_filters']">
+            <bitfield key="ANCS"
+                      value="0"/>
+            <bitfield key="BATTERY"
+                      value="1"/>
+            <bitfield key="DIS"
+                      value="2"/>
+            <bitfield key="HID"
+                      value="3"/>
+            <bitfield key="IAS"
+                      value="4"/>
+            <bitfield key="SPC"
+                      value="5"/>
+            <bitfield key="HRS"
+                      value="6"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="BLE Max Peripheral Connection"
+            ShortId="BleMaxPeripheralConn"
+            Desc="This field is used to specify maximum connection allowed in Peripheral role. If the user sets more than 2 and/or if combination of this and Maximum Central Connection is more than 2, then this value is restricted to 1"
+            Type="uint"
+            DefaultValue="2"
+            Size="2"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']">
+            <BuildVariant HwVariant="All" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="1"/>
+            <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="1"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="BLE Max Central Connection"
+            ShortId="BleMaxCentralConn"
+            Desc="This field is used to specify maximum connection allowed in Central role. If the user sets more than 2 and/or if combination of this and Maximum Peripheral Connection is more than 2, then this value is restricted to 1"
+            Type="uint"
+            DefaultValue="0"
+            Size="2"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']">
+            <BuildVariant HwVariant="All" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="1"/>
+            <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="1"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="LE Authenticated Payload Timeout"
+            ShortId="LeAuthenticatedPayloadTO_s"
+            Desc="The Authenticated_Payload_Timeout configuration parameter allows the Host to configure the maximum interval between packets containing a MIC received from the remote device when AES-CCM encryption is enabled on LE link."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x0BB8"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+    </ConfigGroup>
+</ModuleData>

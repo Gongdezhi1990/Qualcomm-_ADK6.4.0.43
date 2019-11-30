@@ -1,0 +1,25 @@
+var gatt__hid__client__discovery_8c =
+[
+    [ "GATT_HID_BOOT_KEYBOARD_INPUT_SUPPORT_MASK", "d1/df3/gatt__hid__client__discovery_8c.html#ac0308e09faba9c8bde39f44e468a4fa4", null ],
+    [ "GATT_HID_BOOT_MOUSE_INPUT_SUPPORT_MASK", "d1/df3/gatt__hid__client__discovery_8c.html#a7efc7aa80d82d5167af73bbb39d84e2e", null ],
+    [ "GATT_HID_REPORT_MAP_SUPPORT_MASK", "d1/df3/gatt__hid__client__discovery_8c.html#a62d2e115555b4c6b6d06c478b73e3806", null ],
+    [ "GATT_HID_REPORT_REFERENCE_SUPPORT_MASK", "d1/df3/gatt__hid__client__discovery_8c.html#a93293c914cb222e1fce0547d2faa0c0a", null ],
+    [ "SIZE_CHAR_HANDLE", "d1/df3/gatt__hid__client__discovery_8c.html#aef567aa0ea31b9323095a0ad3d84dc05", null ],
+    [ "SIZE_HID_DISCOVERY_INSTANCE", "d1/df3/gatt__hid__client__discovery_8c.html#aab51d0f1941a04f1176ad0f4a3fe5f39", null ],
+    [ "handle_hid_client_discover_all_char_cfm", "d1/df3/gatt__hid__client__discovery_8c.html#a7e74b7caa343db5699f4319ccbe4d54c", null ],
+    [ "handle_hid_client_discover_all_char_descriptors_cfm", "d1/df3/gatt__hid__client__discovery_8c.html#a6e619f403f2c94ea707df3c428b66de7", null ],
+    [ "handle_hid_client_discover_read_char_value_cfm", "d1/df3/gatt__hid__client__discovery_8c.html#ad1f84de9a6a7c50f6018fceac670e262", null ],
+    [ "hid_client_cleanup_discovery_instance", "d1/df3/gatt__hid__client__discovery_8c.html#a1bfccb6933dbfb292a0585815fc1ea93", null ],
+    [ "hid_client_complete_discovery", "d1/df3/gatt__hid__client__discovery_8c.html#a9b8a90557caf1c7dbaddb1e727210d0f", null ],
+    [ "hid_client_discovery_in_progress", "d1/df3/gatt__hid__client__discovery_8c.html#a74f7d345ceb0096cd44fe1a984702200", null ],
+    [ "hid_client_get_char_end_handles", "d1/df3/gatt__hid__client__discovery_8c.html#acbfd7f3d569e672fc886f1ea84f1a68d", null ],
+    [ "hid_client_get_char_handles", "d1/df3/gatt__hid__client__discovery_8c.html#a60ba114dcd1ed02617434d729a6cdc57", null ],
+    [ "hid_client_init_discovery_instance", "d1/df3/gatt__hid__client__discovery_8c.html#a9daf8fafd80592ed34ad3d7abc4e27a5", null ],
+    [ "hid_client_send_discovery_cfm", "d1/df3/gatt__hid__client__discovery_8c.html#af7f499938a45b3b0b00ae6eac1e02789", null ],
+    [ "hid_client_start_discovery", "d1/df3/gatt__hid__client__discovery_8c.html#ada4cabef883cf1e81e4c68026d6bb4c7", null ],
+    [ "hid_discover_next_char_descriptor", "d1/df3/gatt__hid__client__discovery_8c.html#a813873570bc2e1c102ec3d558842a2dc", null ],
+    [ "store_hid_client_ccd_handles", "d1/df3/gatt__hid__client__discovery_8c.html#acf723e3037f73fcd7688978d996337f1", null ],
+    [ "store_hid_client_char_descriptors", "d1/df3/gatt__hid__client__discovery_8c.html#a47231527361d40380f0bc2c749dde4b8", null ],
+    [ "store_hid_client_characteristic_handles", "d1/df3/gatt__hid__client__discovery_8c.html#a467536b921bd0ddd129aa80f4349df74", null ],
+    [ "hid_discovery_instance", "d1/df3/gatt__hid__client__discovery_8c.html#afbc7faf1d3081490ab8c832d8fc5877f", null ]
+];

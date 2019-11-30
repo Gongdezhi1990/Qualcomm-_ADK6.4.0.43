@@ -1,0 +1,43 @@
+<ModuleData Name="sink_partymode">
+    <DefineGroup>
+        <DefineList
+            Id="Party Mode Operating Mode" 
+            ShortId="PartyModeOperatingMode">
+            <enum key="partymode_none"
+                  value="0x00" />
+            <enum key="partymode_barge_in"
+                  value="0x01" />
+            <enum key="partymode_avrcp_control"
+                  value="0x02" />
+        </DefineList>
+    </DefineGroup>
+
+    <ConfigGroup
+        ShortId="sink_partymode_readonly"
+        Id="sink partymode"
+        Node="Basic">
+        <ConfigItem Id="Party Mode" 
+            ShortId="PartyMode"
+            Desc="Party mode operating state" 
+            Type="enum" 
+            DefaultValue="partymode_barge_in"
+            Size="2"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']">
+            <List use="PartyModeOperatingMode" />
+        </ConfigItem>
+        <ConfigItem Id="Party Mode Music Timeout"
+            ShortId="PartyModeMusicTimeOut_s"
+            Desc="Time in seconds for a newly connected device given, to start playing a track before disconnecting it"
+            Type="uint" 
+            DefaultValue="120"
+            Size="16" 
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"/>
+        <ConfigItem Id="Party Mode Stream Resume Timeout"
+            ShortId="PartyModeStreamResumeTimeOut_s"
+            Desc="The period in seconds after which PartyMode AG will be disconnected if it does not resume Audio streaming when Sink Un-Pauses it"
+            Type="uint" 
+            DefaultValue="5"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"/>
+    </ConfigGroup>    
+</ModuleData>

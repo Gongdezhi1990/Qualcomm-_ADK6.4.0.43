@@ -1,0 +1,32 @@
+############################################################################
+#  Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+#  All Rights Reserved.
+#  Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#  Notifications and licenses are retained for attribution purposes only
+############################################################################
+# Definitions for ROM on Crescendo
+
+# As rom_test/rom_test.asm says, this is probably
+# only needed on the first ROM of a chip.
+# %include config.MODIFY_INSTALL_ROM_TEST
+
+%cpp
+INITIALISE_DM_ON_BOOT
+INSTALL_CACHE
+
+%build
+
+# These need to match how the startup code sets up the NVMEM windows
+# Use "rom" even for LPC builds; it only affects the output filename extension
+KALELF2MEM_FLAGS=-nvmem0=rom -nvmem1=rom -nvmem2=rom
+
+# For ROM / LPC builds we need to run the DM_APPEND stage after kalelf2mem,
+# to add the DM initialisation data to the image
+APPEND_DM_TO_XUV=true
+
+PM_RAM_CODE_START_ADDRESS=0x04002000
+
+LINKSCRIPT_NAME=linkscript_stre_audio.ld
+
+# Temporary hacky extra ROM content for hardware testing
+#EXTRA_XUV=platform/crescendo_rom_fence_test.xuv

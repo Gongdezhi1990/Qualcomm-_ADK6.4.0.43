@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "dev_mode": {
+      "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    }
+  },
+  "handlers": {
+    "acat.console": {
+      "class": "logging.StreamHandler",
+      "formatter": "dev_mode",
+      "stream": "ext://sys.stdout",
+      "level": "DEBUG"
+    },
+    "acat.info_file_handler": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "filename": "acat_info.log",
+      "formatter": "dev_mode",
+      "backupCount": 7,
+      "encoding": "utf8",
+      "level": "DEBUG"
+    },
+    "acat.error_file_handler": {
+      "class": "logging.handlers.TimedRotatingFileHandler",
+      "filename": "acat_error.log",
+      "formatter": "dev_mode",
+      "backupCount": 7,
+      "encoding": "utf8",
+      "level": "ERROR"
+    }
+  },
+  "root": {
+    "level": "DEBUG",
+    "handlers": ["acat.console", "acat.info_file_handler", "acat.error_file_handler"]
+  }
+}
+

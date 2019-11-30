@@ -1,0 +1,23 @@
+#########################################################################
+# Copyright (c) 2017 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#########################################################################
+
+#CLK_MGR Requires Audio Resource Manager. Failing to set INSTALL_AUDIO_RESOURCE_ROUTING
+#Will result in Codec and Digmic failures.
+
+%cpp
+INSTALL_CLK_MGR
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+components/clk_mgr
+
+# List of global include paths
+%list ALL_INCDIRS
+components/clk_mgr
+
+# List of libraries to build
+%list CFG_LIBS
+components/clk_mgr/clk_mgr

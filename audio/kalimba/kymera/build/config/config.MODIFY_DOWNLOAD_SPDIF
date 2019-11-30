@@ -1,0 +1,21 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# definitions for downloadable spdif builds
+
+%cpp
+#
+# Which components do we want to include on this chip?
+#
+INSTALL_SPDIF
+
+%list ALL_SRCDIRS
+capabilities/spdif_decode
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/spdif_decode/spdif_decode

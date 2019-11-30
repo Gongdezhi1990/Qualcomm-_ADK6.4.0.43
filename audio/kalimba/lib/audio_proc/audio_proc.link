@@ -1,0 +1,47 @@
+/*****************************************************************************
+* CONFIDENTIAL
+*
+* Copyright (c) 2010 - 2017 Qualcomm Technologies International, Ltd.
+*
+*****************************************************************************/
+/* Linkscript for the AUDIO_PROC library */
+
+#ifdef KEEP_PM
+segment AUDIO_PROC_CMP100_ANALYSIS_PM           keep        40          PM_REGION;
+segment AUDIO_PROC_CMP100_INITIALIZE_PM         keep        1000        PM_REGION, flash.code;
+segment AUDIO_PROC_CMP100_APPLYGAIN_PM          keep        40          PM_REGION;
+segment AUDIO_PROC_DELAY_INITIALIZE_PM          keep        1000        PM_REGION, flash.code;
+segment AUDIO_PROC_DELAY_PROCESS_PM             keep        40          PM_REGION;
+segment AUDIO_PROC_PEAK_MONITOR_PM              keep        40          PM_REGION;
+segment AUDIO_PROC_PEQ_INITIALIZE_PM            keep        1000        PM_REGION, flash.code;
+segment AUDIO_PROC_PEQ_PROCESS_PM               keep        40          PM_REGION;
+segment AUDIO_PROC_STREAM_GAIN_PROCESS_PM       keep        40          PM_REGION;
+segment AUDIO_PROC_STREAM_MIXER_PROCESS_PM      keep        40          PM_REGION;
+segment AUDIO_PROC_STEREO_3D_ENHANCEMENT_PM     keep        40          PM_REGION;
+segment AUDIO_PROC_MUTE_CONTROL_PROCESS_PM      keep        40          PM_REGION;
+segment AUDIO_PROC_STEREO_COPY_PROCESS_PM       keep        40          PM_REGION;
+segment AUDIO_PROC_MULTIMIC_TO_2MIC_MAPPING_PM  keep        40          PM_REGION;
+segment AUDIO_PROC_3MIC_TO_2MIC_MAPPING_PM      keep        40          PM_REGION;
+segment AUDIO_PROC_4MIC_TO_2MIC_MAPPING_PM      keep        40          PM_REGION;
+segment AUDIO_PROC_STREAM_MIXER_NXM_INITIALIZE_PM       keep       40          PM_REGION, flash.code;
+segment AUDIO_PROC_STREAM_MIXER_NXM_PROCESS_PM          keep       40          PM_REGION;
+#else
+segment AUDIO_PROC_CMP100_ANALYSIS_PM                       40          PM_REGION;
+segment AUDIO_PROC_CMP100_INITIALIZE_PM                     1000        PM_REGION, flash.code;
+segment AUDIO_PROC_CMP100_APPLYGAIN_PM                      40          PM_REGION;
+segment AUDIO_PROC_DELAY_INITIALIZE_PM                      1000        PM_REGION, flash.code;
+segment AUDIO_PROC_DELAY_PROCESS_PM                         40          PM_REGION;
+segment AUDIO_PROC_PEAK_MONITOR_PM                          40          PM_REGION;
+segment AUDIO_PROC_PEQ_INITIALIZE_PM                        1000        PM_REGION, flash.code;
+segment AUDIO_PROC_PEQ_PROCESS_PM                           40          PM_REGION;
+segment AUDIO_PROC_STREAM_GAIN_PROCESS_PM                   40          PM_REGION;
+segment AUDIO_PROC_STREAM_MIXER_PROCESS_PM                  40          PM_REGION;
+segment AUDIO_PROC_STEREO_3D_ENHANCEMENT_PM                 40          PM_REGION;
+segment AUDIO_PROC_MUTE_CONTROL_PROCESS_PM                  40          PM_REGION;
+segment AUDIO_PROC_STEREO_COPY_PROCESS_PM                   40          PM_REGION;
+segment AUDIO_PROC_MULTIMIC_TO_2MIC_MAPPING_PM              40          PM_REGION;
+segment AUDIO_PROC_3MIC_TO_2MIC_MAPPING_PM                  40          PM_REGION;
+segment AUDIO_PROC_4MIC_TO_2MIC_MAPPING_PM                  40          PM_REGION;
+segment AUDIO_PROC_STREAM_MIXER_NXM_INITIALIZE_PM       40          PM_REGION, flash.code;
+segment AUDIO_PROC_STREAM_MIXER_NXM_PROCESS_PM          40          PM_REGION;
+#endif

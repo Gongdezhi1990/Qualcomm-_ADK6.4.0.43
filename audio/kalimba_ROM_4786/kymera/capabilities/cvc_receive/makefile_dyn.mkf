@@ -1,0 +1,6 @@
+############################################################################
+# CONFIDENTIAL
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+############################################################################
+
+DYN_FILES +=    cvc_receive_data.dyn

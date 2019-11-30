@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <!--Name and Description appear in the Wizards section
+    -->
+    <name>QCC3031-AA/DEV BRD R2-AA Sink Application</name>
+    <description>This is a fully functional copy of the sink application project configured for QCC3031-AA/DEV BRD R2-AA hardware.</description>
+
+    <fields>
+        <!-- List all the fields the user is prompted for
+             Text is used as a label in the UI, name attribute is used to swap @@@markers@@@ in files
+             "project" is a special case due to how the wizard works
+        -->
+        <field name="project" default="example1"/>
+        <!--<field name="function" default="testfunction">Function Name</field>-->
+        <field name="blueAddr_lap" default="0x00ff01">Bluetooth Address (LAP)</field>
+        <field name="blueAddr_uap" default="0x5b">Bluetooth Address (UAP)</field>
+        <field name="blueAddr_nap" default="0x0002">Bluetooth Address (NAP)</field>
+        <field name="devName" default="QCC3031-AA_DEV-BRD-R2-AA_CustomerSample">Device Name</field>
+        <field name="root"/>
+    </fields>
+
+    <content>
+    <!--List all the files/folders that need processing in the project
+        Source is the original, and the content is what it should be renamed to
+        Field markers can be used to apply user labels to file names
+        No content means the src is copied into the root of the destination
+        The folder element copies that location and all subfolders
+        ./ identifies the root of the template folder
+        sdk:// identifies the root of the devkit
+        <file type="copy" ...> elements just copied and not parsed
+        <file type="text" ...> elements open automatically on IDE
+        <file ...> elements treated as project and opens on IDE
+        <files/> elements cannot be parsed
+
+        Examples:
+
+        <file src="./test.c">./@@@project@@@.c</file>
+        <file src="./test.h">./@@@project@@@.h</file>
+        <file src="./test.x2p">./@@@project@@@.x2p</file>
+
+        <file type="copy" src="//app/lib/info.lib">./app/lib/random.lib</file>
+        <files src="./files"/>
+        <files src="sdk://app/include">./include</files> -->
+
+        <file src="sdk://templates/sink_QCC3031-AA_DEV-BRD-R2-AA/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA\sink.x2w">./apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA\sink.x2w</file>
+        <file src="sdk://templates/sink_QCC3031-AA_DEV-BRD-R2-AA/qcc512x_qcc302x/common\sink.x2p">./apps/applications/sink/qcc512x_qcc302x/common\sink.x2p</file>
+        <file src="sdk://apps/applications/sink/qcc512x_qcc302x/common\sink.props">./apps/applications/sink/qcc512x_qcc302x/common\sink.props</file>
+
+        <file src="sdk://apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA\cur_cfg_filesystem.x2p">./apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA\cur_cfg_filesystem.x2p</file>
+        <file src="sdk://apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA\fw_cfg_filesystem.x2p">./apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA\fw_cfg_filesystem.x2p</file>
+        <file src="sdk://apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA\dev_cfg_filesystem.x2p">./apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA\dev_cfg_filesystem.x2p</file>
+        <file src="sdk://apps/applications/sink/qcc512x_qcc302x/common\user_ps_filesystem.x2p">./apps/applications/sink/qcc512x_qcc302x/common\user_ps_filesystem.x2p</file>
+        <file src="sdk://apps/applications/sink/qcc512x_qcc302x/common\customer_ro_filesystem.x2p">./apps/applications/sink/qcc512x_qcc302x/common\customer_ro_filesystem.x2p</file>
+        <file src="sdk://apps/applications/sink/qcc512x_qcc302x/common\deploy.x2p">./apps/applications/sink/qcc512x_qcc302x/common\deploy.x2p</file>
+
+        <!-- Make copies of the sink application source files -->
+        <files src="sdk://apps/applications/sink/">./apps/applications/sink/
+             <skip src="sdk://apps/applications/sink/qcc512x_qcc302x/"/>
+        </files>
+
+        <files src="sdk://apps/applications/sink/qcc512x_qcc302x/customer_ro_filesystem/">./apps/applications/sink/qcc512x_qcc302x/customer_ro_filesystem/</files>
+
+
+        <files src="sdk://apps/applications/sink/qcc512x_qcc302x/common/">./apps/applications/sink/qcc512x_qcc302x/common/</files>
+
+        <files src="sdk://apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA/">./apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA/</files>
+
+        <!-- Make copies of the sink application configuration files -->
+        <file src="sdk://templates/template_subsys1_config2.htf">./apps/applications/sink/qcc512x_qcc302x/common/subsys1_config2.htf</file>
+
+        <!-- Copy in a <project>.wsroot file -->
+        <file src="sdk://templates/default.wsroot">./apps/applications/sink/qcc512x_qcc302x/QCC3031-AA_DEV-BRD-R2-AA/sink.wsroot</file>
+
+        <!-- Make copies of the sink application project files -->
+        <file src="sdk://audio/kalimba/kymera/tools/KCSMaker/download_cvc_send.x2p">./audio/kalimba/kymera/tools/KCSMaker/download_cvc_send.x2p</file>
+
+
+        <!-- Make copies of the "libs" files -->
+        <files src="sdk://apps/fw/src/">./apps/fw/src/</files>
+        <files src="sdk://apps/fw/config/">./apps/fw/config/</files>
+        <files src="sdk://apps/fw/tools/make">./apps/fw/tools/make</files>
+        <files src="sdk://apps/common/">./apps/common/</files>
+        <file src="sdk://apps/fw/src/hydra_os_qcc512x_qcc302x.x2p">./apps/fw/src/hydra_os_qcc512x_qcc302x.x2p</file>
+
+        <files src="sdk://apps/libs/">./apps/libs/</files>
+        <file src="sdk://apps/libs/libs_qcc512x_qcc302x.x2p">./apps/libs/libs_qcc512x_qcc302x.x2p</file>
+
+        <!-- Make copies of the "installed_libs" files -->
+        <files type="copy" src="sdk://apps/installed_libs/">./apps/installed_libs/</files>
+
+        <!-- Make copies of the "audio" files -->
+        <files type="copy" src="sdk://audio/">./audio/</files>
+        <file src="sdk://audio/kalimba/kymera/build/kymera_audio.x2p">./audio/kalimba/kymera/build/kymera_audio.x2p</file>
+
+        <file src="sdk://images/apps0_firmware/common/apps0_firmware.x2p">./images/apps0_firmware/common/apps0_firmware.x2p</file>
+        <file src="sdk://images/curator_firmware/common/curator_firmware.x2p">./images/curator_firmware/common/curator_firmware.x2p</file>
+        <file src="sdk://images/btss_firmware/qfn80/btss_firmware.x2p">./images/btss_firmware/qfn80/btss_firmware.x2p</file>
+
+
+        <!-- Make copies of the DevKit binaries/projects -->
+        <files src="sdk://images/btss_firmware/">./images/btss_firmware/</files>
+
+        <files src="sdk://images/apps0_firmware/">./images/apps0_firmware/</files>
+
+        <files src="sdk://images/curator_firmware/">./images/curator_firmware/</files>
+
+    </content>
+</root>
+

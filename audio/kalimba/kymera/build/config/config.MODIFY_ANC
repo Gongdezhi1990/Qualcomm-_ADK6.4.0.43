@@ -1,0 +1,22 @@
+#########################################################################
+# Copyright (c) 2017 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#########################################################################
+
+%cpp
+
+# Indicate that Stre has ANC hardware (from "Tasha")
+HAVE_ANC_HARDWARE
+
+# Indicate that Stre has SIDETONE H/W
+HAVE_SIDE_TONE_HARDWARE
+
+# Allow uninterruptable ANC operation (needs HAVE_ANC_HARDWARE and HAVE_SIDE_TONE_HARDWARE)
+INSTALL_UNINTERRUPTABLE_ANC
+
+# Fake successful closure of endpoints and defer closure until ANC releases
+INSTALL_ANC_STICKY_ENDPOINTS
+
+# Enable ANC licencing
+USE_STRE_ANC_LICENCING

@@ -1,0 +1,4 @@
+var structMESSAGE__BATTERY__LEVEL__UPDATE__STATE__T =
+[
+    [ "state", "da/d3c/structMESSAGE__BATTERY__LEVEL__UPDATE__STATE__T.html#a564f786387294f0fd68d868a95937032", null ]
+];

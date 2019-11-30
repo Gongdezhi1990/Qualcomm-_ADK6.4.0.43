@@ -1,0 +1,29 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# definitions for spdif builds
+
+%cpp
+#
+# Which components do we want to include on this chip?
+#
+INSTALL_SPDIF
+
+%build
+# We base this on another variable for unit tests so that spdif can be turned on
+# at the top level unit test makefile
+BUILD_SPDIF=$(if $(TEST_BUILD),$(TEST_BUILD_SPDIF),true)
+
+%list ALL_SRCDIRS
+capabilities/spdif_decode
+
+# List of global include paths
+%list ALL_INCDIRS
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/spdif_decode/spdif_decode

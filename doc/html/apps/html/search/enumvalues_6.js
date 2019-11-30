@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['gap_5fmsg_5ffailed',['gap_msg_failed',['../d9/d5b/sink__gatt__server__gap_8h.html#ace835d9fa50d09ae98a2cac527228f61a6f5bfd8b7a00e70cd3ce0c5c152085e5',1,'sink_gatt_server_gap.h']]],
+  ['gap_5fmsg_5fread_5fname_5frequired',['gap_msg_read_name_required',['../d9/d5b/sink__gatt__server__gap_8h.html#ace835d9fa50d09ae98a2cac527228f61a9521b92b1a15b9d6d0249a51f5c954fb',1,'sink_gatt_server_gap.h']]],
+  ['gap_5fmsg_5fsuccess',['gap_msg_success',['../d9/d5b/sink__gatt__server__gap_8h.html#ace835d9fa50d09ae98a2cac527228f61a7875505a35c378d0093b556b1bf2c578',1,'sink_gatt_server_gap.h']]],
+  ['gatt_5fbattery_5fserver_5flocal_5fid',['GATT_BATTERY_SERVER_LOCAL_ID',['../d4/dbf/sink__gatt__server__battery_8h.html#a9127aa4e6dc76cae20959f6ddbfb7ed7a65b8daa7c036091914cc953592e043b0',1,'sink_gatt_server_battery.h']]],
+  ['gatt_5fbattery_5fserver_5fpeer_5fid',['GATT_BATTERY_SERVER_PEER_ID',['../d4/dbf/sink__gatt__server__battery_8h.html#a9127aa4e6dc76cae20959f6ddbfb7ed7a2d5cdefe9abdc27896db6f6c650e9c1b',1,'sink_gatt_server_battery.h']]],
+  ['gatt_5fbattery_5fserver_5fremote_5fid',['GATT_BATTERY_SERVER_REMOTE_ID',['../d4/dbf/sink__gatt__server__battery_8h.html#a9127aa4e6dc76cae20959f6ddbfb7ed7a6f0b9ac7f6331922d93096e1ebd871e0',1,'sink_gatt_server_battery.h']]],
+  ['gatt_5fhid_5frc_5fbutton_5fdown_5fmsg',['GATT_HID_RC_BUTTON_DOWN_MSG',['../da/d3f/sink__gatt__hid__remote__control_8h.html#a62e4e22a3b7c8a3dc8f51f42ba11a333ad97a278f7015d8ade1f68490f8e262f7',1,'sink_gatt_hid_remote_control.h']]],
+  ['gatt_5fhid_5frc_5fbutton_5fmsg_5ftop',['GATT_HID_RC_BUTTON_MSG_TOP',['../da/d3f/sink__gatt__hid__remote__control_8h.html#a62e4e22a3b7c8a3dc8f51f42ba11a333a0076fa91e085c431434bf439a9edbbb6',1,'sink_gatt_hid_remote_control.h']]],
+  ['gatt_5fhid_5frc_5fbutton_5frepeat_5fmsg',['GATT_HID_RC_BUTTON_REPEAT_MSG',['../da/d3f/sink__gatt__hid__remote__control_8h.html#a62e4e22a3b7c8a3dc8f51f42ba11a333a1df29054fd4c47434fb3c699c95c58fa',1,'sink_gatt_hid_remote_control.h']]],
+  ['gatt_5fhid_5frc_5fbutton_5ftimer_5fmsg',['GATT_HID_RC_BUTTON_TIMER_MSG',['../da/d3f/sink__gatt__hid__remote__control_8h.html#a62e4e22a3b7c8a3dc8f51f42ba11a333aefbd5f3b073c36fee41a2d9d33af6e2f',1,'sink_gatt_hid_remote_control.h']]],
+  ['gatt_5fhid_5frc_5fbutton_5fup_5fmsg',['GATT_HID_RC_BUTTON_UP_MSG',['../da/d3f/sink__gatt__hid__remote__control_8h.html#a62e4e22a3b7c8a3dc8f51f42ba11a333a625359c5ada9f1edbe2cca5155b674a6',1,'sink_gatt_hid_remote_control.h']]],
+  ['gatt_5fhid_5frc_5ftimer_5flong',['GATT_HID_RC_TIMER_LONG',['../da/d3f/sink__gatt__hid__remote__control_8h.html#ac19d107d558a2d11e30bb20909e5ce46ae778e7606e3fc5f3bf014f6b44ac7edc',1,'sink_gatt_hid_remote_control.h']]],
+  ['gatt_5fhid_5frc_5ftimer_5fmultiple',['GATT_HID_RC_TIMER_MULTIPLE',['../da/d3f/sink__gatt__hid__remote__control_8h.html#ac19d107d558a2d11e30bb20909e5ce46af42892c3c641def5415ae3d2a672c118',1,'sink_gatt_hid_remote_control.h']]],
+  ['gatt_5fhid_5frc_5ftimer_5fshort',['GATT_HID_RC_TIMER_SHORT',['../da/d3f/sink__gatt__hid__remote__control_8h.html#ac19d107d558a2d11e30bb20909e5ce46a808472363d7690c403c9b690b251798c',1,'sink_gatt_hid_remote_control.h']]],
+  ['gatt_5fhid_5frc_5ftimer_5fvlong',['GATT_HID_RC_TIMER_VLONG',['../da/d3f/sink__gatt__hid__remote__control_8h.html#ac19d107d558a2d11e30bb20909e5ce46aeb3a20cad4fcf9fe46dc0ef271276fdf',1,'sink_gatt_hid_remote_control.h']]],
+  ['gatt_5fhid_5frc_5ftimer_5fvvlong',['GATT_HID_RC_TIMER_VVLONG',['../da/d3f/sink__gatt__hid__remote__control_8h.html#ac19d107d558a2d11e30bb20909e5ce46ab0005e0e446b9ba21676a5a85ae6cac2',1,'sink_gatt_hid_remote_control.h']]],
+  ['goodbye_5fdormant',['GOODBYE_DORMANT',['../d0/d14/sink__statemanager_8c.html#a7328b38e086a8c68b8ffe7b0d913db02a61e5a608b93a529facc2ae0aed81a5e0',1,'sink_statemanager.c']]],
+  ['goodbye_5fpower_5foff',['GOODBYE_POWER_OFF',['../d0/d14/sink__statemanager_8c.html#a7328b38e086a8c68b8ffe7b0d913db02a86c06e4046a5d1ce422cce28a9a2c610',1,'sink_statemanager.c']]]
+];

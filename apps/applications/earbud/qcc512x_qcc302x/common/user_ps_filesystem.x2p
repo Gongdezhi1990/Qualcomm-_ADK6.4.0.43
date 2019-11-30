@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project path="../../../../../../../../;../../../../../../../../;../../../../../../../../;../../../../../../../;../../../../../../;../../../../../;../../../../;../../../;../../;../;">
+    <file path="subsys7_psflash.htf" />
+    <file path="anc_tuning_config.htf" />
+    <configurations>
+        <configuration name="filesystem" options="build|deploy|default">
+            <devkitConfiguration>filesystem</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <deployProject>deploy</deployProject>
+            <property name="BUILD_TYPE" />
+            <property name="DBG_CORE" />
+            <property name="DEFS" />
+            <property name="FS_ROOT" />
+            <property name="HW_VARIANT" />
+            <property name="INCPATHS" />
+            <property name="LIBPATHS" />
+            <property name="LIBS" />
+            <property name="OUTPUT" />
+            <property name="OUTPUT_TYPE" />
+            <property name="PRESERVED_LIBS" />
+            <property name="STRIP_SYMBOLS" />
+            <property name="SW_VARIANT" />
+            <property name="TYPE">user_ps</property>
+            <property name="system_label">QCC512X_CONFIG</property>
+        </configuration>
+    </configurations>
+</project>

@@ -1,0 +1,47 @@
+/******************************************************************************
+Copyright (c) 2014 - 2015 Qualcomm Technologies International, Ltd.
+ *  %%version
+ *  %%appversion
+ *
+ *  FILE
+ *      gatt_transmit_power_servwer_service_db.dbi
+ *
+ *  DESCRIPTION
+ *      This file defines the Tx Power Server Service in JSON format, which is 
+ *      fairly human readable.  This file is included in the main 
+ *      application data base file which is used to produce ATT flat data 
+ *      base.
+ *
+ *****************************************************************************/
+#ifndef __GATT_TRANSMIT_POWER_SERVER_DB_DBI__
+#define __GATT_TRANSMIT_POWER_SERVER_DB_DBI__
+
+#include "gatt_transmit_power_server_uuids.h"
+
+/* For service details, refer http://developer.bluetooth.org/gatt/services/
+ * Pages/ServiceViewer.aspx?u=org.bluetooth.service.tx_power.xml
+ */
+
+/* Primary service declaration of TX Power service */
+primary_service {
+    uuid : UUID_TRANSMIT_POWER_SERVICE,
+    name : "TRANSMIT_POWER_SERVER_SERVICE",
+	
+	/* TX power level characteristic */
+
+    /* Tx Power Level characteristic supports IRQ flag, thereby reads and 
+     * writes on characteristic value are handled by application. Read 
+     * access to Tx power level characteristic value requires encryption to be 
+     * enabled.
+     */
+	 
+    characteristic {
+        uuid        : UUID_TRANSMIT_POWER_LEVEL,
+        name        : "TRANSMIT_POWER_LEVEL",
+        flags       : [ FLAG_IRQ, FLAG_ENCR_R],
+        properties  : [ read ],
+        value       : 0x0
+    }
+},
+#endif /* __GATT_TRANSMIT_POWER_SERVER_DB_DBI__ */
+

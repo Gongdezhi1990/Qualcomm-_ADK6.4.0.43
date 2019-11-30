@@ -1,0 +1,11 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+%cpp
+INSTALL_FILE
+
+%build
+BUILD_FILE=true

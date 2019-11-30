@@ -1,0 +1,301 @@
+<ModuleData Name="sink_fast_pair">
+    <DefineGroup>
+        <DefinePattern
+            PatternName="Scrambled Fast Pair Private Key"
+            ShortId="scrambled_fast_pair_private_key" >
+            <ConfigItem
+                Id="word 1 [hex]"
+                Desc="word 1 [hex]"
+                ShortId="word_1"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 2 [hex]"
+                Desc="word 2 [hex]"
+                ShortId="word_2"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 3 [hex]"
+                Desc="word 3 [hex]"
+                ShortId="word_3"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 4 [hex]"
+                Desc="word 4 [hex]"
+                ShortId="word_4"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 5 [hex]"
+                Desc="word 5 [hex]"
+                ShortId="word_5"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 6 [hex]"
+                Desc="word 6 [hex]"
+                ShortId="word_6"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 7 [hex]"
+                Desc="word 7 [hex]"
+                ShortId="word_7"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 8 [hex]"
+                Desc="word 8 [hex]"
+                ShortId="word_8"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 9 [hex]"
+                Desc="word 9 [hex]"
+                ShortId="word_9"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 10 [hex]"
+                Desc="word 10 [hex]"
+                ShortId="word_10"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 11 [hex]"
+                Desc="word 11 [hex]"
+                ShortId="word_11"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 12 [hex]"
+                Desc="word 12 [hex]"
+                ShortId="word_12"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 13 [hex]"
+                Desc="word 13 [hex]"
+                ShortId="word_13"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 14 [hex]"
+                Desc="word 14 [hex]"
+                ShortId="word_14"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 15 [hex]"
+                Desc="word 15 [hex]"
+                ShortId="word_15"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+            <ConfigItem
+                Id="word 16 [hex]"
+                Desc="word 16 [hex]"
+                ShortId="word_16"
+                Type="uint"
+                PresentHex="true"
+                Size="16"/>
+        </DefinePattern>
+    </DefineGroup>
+
+	<ConfigGroup
+		Id="Fast Pair Support"	
+		ShortId="fast_pair_support"
+		Node="Basic">
+	    <ConfigItem
+            Id="Enable Fast Pair Service"
+            ShortId="EnableFastPairService"
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            Desc="Fast Pair Service is enabled by default."
+            ConfigGroupPath="./[@ShortId='fast_pair_support']"/>
+    </ConfigGroup>			
+    <ConfigGroup
+        Id="Fast Pair Model Info"
+        ShortId="fast_pair_model_info"
+        Node="Basic"
+		ConfigGroupPath="./[@ShortId='fast_pair_support']">
+        <ConfigItem
+            Id="Model ID [hex]"
+            ShortId="fast_pair_model_id"
+            Type="ulong"
+            PresentHex="true"
+            DefaultValue="0x9D893B"
+            Range="Min=0,Max=16777215"
+            Size="32"
+            ConfigGroupPath="./[@ShortId='fast_pair_support']/[@ShortId='fast_pair_model_info']"
+            Desc="24-bit Fast Pair device Model ID."/>
+        <ConfigItem
+            Id="Advertisement TX Power"
+            ShortId="fast_pair_tx_power"
+            Type="int"
+            DefaultValue="-10"
+            Range="Min=-127,Max=127"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='fast_pair_support']/[@ShortId='fast_pair_model_info']"
+            Desc="The TX power value for BLE advertising."/>
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="Readonly Private Key"
+        ShortId="fast_pair_readonly_private_key"
+        Node="Basic">
+        <ConfigGroup
+            Id="Scrambled Anti-Spoofing Private Key"
+            ShortId="anti_spoofing_private_key"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='fast_pair_support']">
+            <ConfigPatternArray
+                Id="Scrambled Fast Pair Private Key"
+                ShortId="private_key"
+                Pattern="scrambled_fast_pair_private_key"
+                MaxNumPatterns="1">
+                <PatternArrayRow
+                    Id="Private Key"
+                    ShortId="private_key"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="word_1"
+                        DefaultValue="0x55d4" />
+                    <PatternArrayConfigItem
+                        ShortId="word_2"
+                        DefaultValue="0xd417" />
+                    <PatternArrayConfigItem
+                        ShortId="word_3"
+                        DefaultValue="0x32da" />
+                    <PatternArrayConfigItem
+                        ShortId="word_4"
+                        DefaultValue="0x81bb" />
+                    <PatternArrayConfigItem
+                        ShortId="word_5"
+                        DefaultValue="0xbde7" />
+                    <PatternArrayConfigItem
+                        ShortId="word_6"
+                        DefaultValue="0xe2ee" />
+                    <PatternArrayConfigItem
+                        ShortId="word_7"
+                        DefaultValue="0x8a44" />
+                    <PatternArrayConfigItem
+                        ShortId="word_8"
+                        DefaultValue="0x6fd3" />
+                    <PatternArrayConfigItem
+                        ShortId="word_9"
+                        DefaultValue="0xa181" />
+                    <PatternArrayConfigItem
+                        ShortId="word_10"
+                        DefaultValue="0xda60" />
+                    <PatternArrayConfigItem
+                        ShortId="word_11"
+                        DefaultValue="0xb9b8" />
+                    <PatternArrayConfigItem
+                        ShortId="word_12"
+                        DefaultValue="0x7b16" />
+                    <PatternArrayConfigItem
+                        ShortId="word_13"
+                        DefaultValue="0x445b" />
+                    <PatternArrayConfigItem
+                        ShortId="word_14"
+                        DefaultValue="0x7c3c" />
+                    <PatternArrayConfigItem
+                        ShortId="word_15"
+                        DefaultValue="0xb224" />
+                    <PatternArrayConfigItem
+                        ShortId="word_16"
+                        DefaultValue="0x0c35" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+
+	<ConfigGroup
+        Id="Readonly Seed"
+        ShortId="fast_pair_readonly_seed"
+        Node="Basic">
+        <ConfigGroup
+            Id="Seed"
+            ShortId="seed_key"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='fast_pair_support']">
+            <ConfigPatternArray
+                Id="Seed value to be used for scrambling ASPK"
+                ShortId="seed"
+                Pattern="scrambled_fast_pair_private_key"
+                MaxNumPatterns="1">
+                <PatternArrayRow
+                    Id="Seed"
+                    ShortId="seed"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="word_1"
+                        DefaultValue="0x11ac" />
+                    <PatternArrayConfigItem
+                        ShortId="word_2"
+                        DefaultValue="0x5a6e" />
+                    <PatternArrayConfigItem
+                        ShortId="word_3"
+                        DefaultValue="0x0e49" />
+                    <PatternArrayConfigItem
+                        ShortId="word_4"
+                        DefaultValue="0x5aa3" />
+                    <PatternArrayConfigItem
+                        ShortId="word_5"
+                        DefaultValue="0xe3e0" />
+                    <PatternArrayConfigItem
+                        ShortId="word_6"
+                        DefaultValue="0xbb20" />
+                    <PatternArrayConfigItem
+                        ShortId="word_7"
+                        DefaultValue="0xac0e" />
+                    <PatternArrayConfigItem
+                        ShortId="word_8"
+                        DefaultValue="0xf136" />
+                    <PatternArrayConfigItem
+                        ShortId="word_9"
+                        DefaultValue="0x5dfb" />
+                    <PatternArrayConfigItem
+                        ShortId="word_10"
+                        DefaultValue="0x5282" />
+                    <PatternArrayConfigItem
+                        ShortId="word_11"
+                        DefaultValue="0x002b" />
+                    <PatternArrayConfigItem
+                        ShortId="word_12"
+                        DefaultValue="0x37f2" />
+                    <PatternArrayConfigItem
+                        ShortId="word_13"
+                        DefaultValue="0x28f1" />
+                    <PatternArrayConfigItem
+                        ShortId="word_14"
+                        DefaultValue="0xd18c" />
+                    <PatternArrayConfigItem
+                        ShortId="word_15"
+                        DefaultValue="0xa613" />
+                    <PatternArrayConfigItem
+                        ShortId="word_16"
+                        DefaultValue="0x8de2" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+</ModuleData>

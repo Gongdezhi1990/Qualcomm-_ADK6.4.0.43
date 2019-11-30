@@ -1,0 +1,27 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2018 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the DOWNLOAD VA_GRAPH_MANAGER
+
+
+#
+# Capabilities to include in the build
+#
+%list CFG_CAPABILITIES
+VA_GRAPH_MANAGER
+
+%list ALL_SRCDIRS
+capabilities/va_graph_manager
+
+# List of global include paths
+%list ALL_INCDIRS
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/va_graph_manager/va_graph_manager
+support_lib/opmgr_op_client_interface/opmgr_op_client_interface
+support_lib/aov_interface/aov_interface

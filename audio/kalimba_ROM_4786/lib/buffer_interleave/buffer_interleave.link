@@ -1,0 +1,13 @@
+/*****************************************************************************
+* CONFIDENTIAL
+*
+* Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+*
+*****************************************************************************/
+/* Linkscript for the buffer interleave library */
+
+#ifdef KEEP_PM
+segment BUFFER_INTERLEAVE_PM     keep        40          PM_REGION;
+#else
+segment BUFFER_INTERLEAVE_PM                 40          PM_REGION;
+#endif

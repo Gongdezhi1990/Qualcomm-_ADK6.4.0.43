@@ -1,0 +1,28 @@
+var structHCI__ENHANCED__SETUP__SYNC__CONN__T =
+[
+    [ "common", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#aa281b18293667e0c75f9ba53321b4277", null ],
+    [ "handle", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#ab27fc6b43fe511db26c733b0604cd9bf", null ],
+    [ "input_bdw", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a46645e370bb47ce0999d25f3b980a0ff", null ],
+    [ "input_coded_data_size", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a9c25e494262f46653c77219c026619bf", null ],
+    [ "input_coding_format", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a9f81b4f1b037d49d4c1e39ef1d2a8785", null ],
+    [ "input_data_path", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#ab5713dda213c49d29185453ee3c3fd4a", null ],
+    [ "input_pcm_data_format", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a5448aaa73e215bc5b9fd0b83d2319bed", null ],
+    [ "input_pcm_sample_payload_msb_position", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a9f3dd980286fc12bc2986f5658be7843", null ],
+    [ "input_transport_unit_size", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a8a2eda449650749ea53e4a5e097644f6", null ],
+    [ "max_latency", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#aab8990dfb62d2fcd8d7e25241c250fe9", null ],
+    [ "output_bdw", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a4a1c26baaf358f0393df70e1a1828717", null ],
+    [ "output_coded_data_size", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#af1ab15241cdf31a633b44bc97c34b09e", null ],
+    [ "output_coding_format", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a172a556b298adf060203a10f4755b0f6", null ],
+    [ "output_data_path", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a820bf76b062e94dcd0a49dc8b91d4a02", null ],
+    [ "output_pcm_data_format", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a33d92c25ae63e694404c3fccd1f42d33", null ],
+    [ "output_pcm_sample_payload_msb_position", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a533569766590f0acf0f58cc902b44902", null ],
+    [ "output_transport_unit_size", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#ab60242bdd07d6fd1e6b747ffc4786db2", null ],
+    [ "pkt_type", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#ada66720cad0f3fe2518484cfce3158a3", null ],
+    [ "retx_effort", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a4cb97c2cfbc0286e71c1a16da0f73245", null ],
+    [ "rx_bdw", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a5aadb866393a9319c1d4900d276072ce", null ],
+    [ "rx_codec_frame_size", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#aa02f3d82cc208b505ab9e3dfd08d0a1b", null ],
+    [ "rx_coding_format", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#abd60ff560c12859cf7693dafee236bff", null ],
+    [ "tx_bdw", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a003bee044dde45a1eab519e31ac2fdf4", null ],
+    [ "tx_codec_frame_size", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a7a2769a28f8ba8d7f139181adf1592b3", null ],
+    [ "tx_coding_format", "d6/dfb/structHCI__ENHANCED__SETUP__SYNC__CONN__T.html#a47051f2e94f3d281b6ffd079cf07e9cf", null ]
+];

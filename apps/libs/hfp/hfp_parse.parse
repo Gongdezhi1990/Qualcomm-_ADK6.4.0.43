@@ -1,0 +1,158 @@
+######################################################################################
+#
+# Copyright (c) 2005 - 2019 Qualcomm Technologies International, Ltd.
+# %%version
+#
+# This file contains all AT commands as specified in the Headset and Hands Free specs. 
+#
+######################################################################################
+
+# ------------------------------------------------------------------------------------
+# AT Commands
+#
+# Format specified in spec AT<cmd>=<value><cr>
+#-------------------------------------------------------------------------------------
+
+# The Hands-Free device is not sent any AT commands by the Audio Gateway
+
+
+
+# -------------------------------------------------------------------
+# AT Result Codes
+#
+# Format specified in spec <cr><lf><Result Code><cr><lf>
+# -------------------------------------------------------------------
+
+# Banners
+{ \r \n +MBAN:%*:str \r \n } : hfpHandleNull
+
+# Command processed successfully
+{ \r \n OK \r \n } : hfpHandleOk
+
+# Command not processed successfully
+{ \r \n ERROR \r \n } : hfpHandleError
+
+# Extended audio gateway error result code response.  +CME ERROR: <err>
+{ \r \n + CME ERROR = %d:err \r \n } : hfpHandleExtendedError
+
+# Incoming call indication
+{ \r \n RING \r \n } : hfpHandleRing
+
+# Connection terminated
+{ \r \n NO CARRIER \r \n } : hfpHandleNoCarrierInd
+
+# Notification of the AG's supported features
+{ \r \n + BRSF = %d:supportedfeat \r \n } : hfpHandleSupportedFeaturesInd
+
+# Response from AG to AT+QAC from HF, if QCE Mode is supported.
+{ \r \n + \%QAC = [codecs,1,10][%d:codec][ , ] \r \n } : hfpHandleQacResponse
+
+# Qualcomm Codec Selected indication from AG, if QCE mode is supported.
+{ \r \n + \%QCS = %d:codec \r \n } : hfpHandleQcsNotification
+
+# Response containing current values of indicators 
+{ \r \n + CIND = [d,2,99][%d:n][ , ] \r \n } : hfpHandleIndicatorStatus
+{ \r \n + CIND = %*:str \r \n } : hfpHandleIndicatorList
+
+# Call hold and multiparty settings
+{ \r \n + CHLD = ( [p,1,99][%d:lower - %d:upper][ , ] ) \r \n } : hfpHandleCallHoldInfoRange
+{ \r \n + CHLD = ( [p,1,99][%s:n][ , ] ) \r \n } : hfpHandleCallHoldInfo
+
+# Indicator event reporting +CIEV: <ind>, <value>
+{ \r \n + CIEV = %d:index , %d:value \r \n } : hfpHandleIndicatorStatusUpdate
+
+# HF Indicator event reporting +BIND: <assignedId>, <state>
+{ \r \n + BIND = %d:assignedId , %d:state \r \n } : hfpHandleBindIndicatorStatus
+
+# HF Indicators response from AG +BIND:(<a>,<b>,..<n>)
+{ \r \n + BIND = ([indicators,1,10][%d:indicator][ , ] )\r \n } : hfpHandleBindInfo
+
+# Notify the in band ring tone has been enabled or disabled
+{ \r \n + BSIR = %d:enable \r \n } : hfpHandleInBandRingTone
+
+# Notify that voice recognition function has been disabled (allowed value: 0)
+{ \r \n + BVRA = %d:enable \r \n } : hfpHandleVoiceRecognitionStatus
+
+# Set speaker gain indication (allowed values: 0-15)
+{ \r \n + VGS =  %d:gain \r \n } : hfpHandleSpeakerGain
+
+# Set microphone gain indication (allowed values: 0-15)
+{ \r \n + VGM =  %d:gain \r \n } : hfpHandleMicrophoneGain
+
+# Calling Line Identification result code +CLIP: <num>, <type>[, <subaddr>, <satype>[, [<alpha>][, <CLI validity>]]]
+# <num>= calling number, <type>= type of number (i.e. international). Any other args are ignored.
+{ \r \n + CLIP = %s:num , %d:type , %s:saddr , %s:satype , %s:name , %*:ignore \r \n } : hfpHandleCallerIdWithName
+{ \r \n + CLIP = %s:num , %d:type , %*:ignore \r \n } : hfpHandleCallerId
+{ \r \n + CLIP = %s:num , %*:ignore \r \n } : hfpHandleCallerIdIllegal
+
+# Response by AG to a data request from HF
+# Currently only phone number request supported so the response is a number 
+# sequence with max 32 digits
+{ \r \n + BINP = %s:num \r \n } : hfpHandleDataResponse
+{ \r \n + BINP = %s:num , %*:ignore \r \n } : hfpHandleDataResponseExtended
+
+# Call waiting notification. +CCWA= <num>, <type>, <class>,[ <alpha>][, <CLI validity>[, <subaddr>, <satype> [, <priority>]]]
+# <num>=calling phone number, <type>= type of number (i.e. international), all other args are ignored
+{ \r \n + CCWA = %s:num , %d:type , %d:class , %s:name , %*:ignore \r \n } : hfpHandleCallWaitingNotificationWithName
+{ \r \n + CCWA = %s:num , %d:type , %*:ignore \r \n } : hfpHandleCallWaitingNotification
+{ \r \n + CCWA = %s:num , %*:ignore \r \n } : hfpHandleCallWaitingNotificationIllegal
+
+# Subscriber number notification. +CNUM= [<alpha>], <number>, <type>, [<speed>], <service>
+# <alpha>=ignored, <number>=subscriber number, <type>=type of number, <speed>=ignored, <service>=service relating to number
+{ \r \n + CNUM = %s:alpha , %s:number , %d:type , %s:speed , %d:service \r \n } : hfpHandleSubscriberNumber
+
+# Response hold notification. +BTRH= <num>
+{ \r \n + BTRH = %d:state \r \n } : hfpHandleResponseHold
+
+# Current Calls notification. +CLCC= <idx>, <dir>, <status>, <mode>, <mprty>[, <number>, <type>[, [<alpha> [, <priority>] ] ]
+{ \r \n + CLCC = %d:idx , %d:dir , %d:status , %d:mode , %d:mprty , %s:number , %d:type , %*:ignore \r \n } : hfpHandleCurrentCallsWithNumber
+{ \r \n + CLCC = %d:idx , %d:dir , %d:status , %d:mode , %d:mprty , %*:ignore \r \n } : hfpHandleCurrentCalls
+{ + CLCC = %d:idx , %d:dir , %d:status , %d:mode , %d:mprty , %s:number , %d:type , %*:ignore \r \n } : hfpHandleCurrentCallsWithNumber
+{ + CLCC = %d:idx , %d:dir , %d:status , %d:mode , %d:mprty , %*:ignore \r \n } : hfpHandleCurrentCalls
+
+# Network operator mode and name notification. +COPS: <mode>[,<format>,<operator>]
+{ \r \n + COPS = %d:mode , %d:format , %s:operator \r \n } : hfpHandleNetworkOperatorModeName
+{ \r \n + COPS = %d:mode , %*:ignore \r \n } : hfpHandleNetworkOperatorMode
+
+#################################
+# CSR Extended Features
+
+# Response to a Supported Features Request
+{ \r \n + CSRSF = %d:callername , %d:rawtext , %d:sms , %d:battlevel , %d:pwrsource , %d:codecs , %d:codecbandwidths , %*:ignore \r \n } : hfpCsrFeaturesHandleBandwidthCodecRes
+{ \r \n + CSRSF = %d:callername , %d:rawtext , %d:sms , %d:battlevel , %d:pwrsource , %d:codecs , %*:ignore \r \n } : hfpCsrFeaturesHandleCodecRes
+{ \r \n + CSRSF = %d:callername , %d:rawtext , %d:sms , %d:battlevel , %d:pwrsource , %*:ignore \r \n } : hfpCsrFeaturesHandleNormalRes
+
+# Unsolicited Text
+{ \r \n + CSRTXT = %s:text \r \n } : hfpCsrFeaturesHandleTextInd
+
+# New SMS Message has arrived
+{ \r \n + CSRSMS = %d:smsIndex , %s:senderNum , %s:senderName , %*:ignore \r \n } : hfpCsrFeaturesHandleSmsInd
+
+# Contents of requested SMS message
+{ \r \n + CSRGETSMS = %s:sms \r \n } : hfpCsrFeaturesHandleGetSmsRes
+
+# AG wishes to change the supported indicators
+# format - +CSR=(ind,val),(ind,val)...(ind,val)
+{ \r \n + CSR = [p,1,99][ ( %d:ind , %d:val ) ][ , ] \r \n } : hfpCsrFeaturesHandleModifyIndicatorsInd
+{ \r \n + CSR = 0 \r \n } : hfpCsrFeaturesHandleDisableIndicatorsInd
+
+# AG is requesting a battery report
+{ \r \n + CSRBATT? \r \n } : hfpCsrFeaturesHandleBatteryLevelRequestInd
+
+###########################
+# WB-Speech At Responses
+
+# Response codec negotiate. +BCS= <num>
+{ \r \n + BCS = %d:codec \r \n } : hfpHandleResponseWbsCodec
+
+
+#############
+# dictionary.
+
+# generic
+<\r\nOK\r\n> : hfpHandleOk
+<\r\nERROR\r\n> : hfpHandleError
+<\r\nRING\r\n> : hfpHandleRing
+<\r\n+BSIR: 0\r\n> : hfpHandleInBandRingToneDisable
+<\r\n+BSIR: 1\r\n> : hfpHandleInBandRingToneEnable
+<\r\n+CHLD: (0,1,1x,2,2x,3,4)\r\n> : hfpHandleCallHoldInfoCommon

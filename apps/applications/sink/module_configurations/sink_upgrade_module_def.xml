@@ -1,0 +1,52 @@
+<ModuleData Name="sink_upgrade_default"  HeaderName="sink_upgrade">
+    <DefineGroup>
+        <DefineStruct
+            Id="Upgrade Config"
+            ShortId="upgrade_config">
+            <ConfigItem
+                Id="Enable Application Config Reset"
+                ShortId="enable_app_config_reset"
+                Desc="If this is true then the application configuration will be reset to the default values built into the upgraded application when an upgrade is committed."
+                Type="bool"
+                Size="1">
+            </ConfigItem>
+            <ConfigItem
+                Id="Protect Audio During Upgrade"
+                ShortId="protect_audio_during_upgrade"
+                Desc="If Disabled, upgrade improvements will apply and ongoing audio streaming will be suspended on an upgrade. If Enabled, ongoing audio will continue streaming, while upgrade improvements will not be applicable."
+                Type="bool"
+                Size="1">
+            </ConfigItem>
+        </DefineStruct>
+    </DefineGroup>
+
+    <ConfigGroup
+        Id="Sink Upgrade Readonly"
+        ShortId="sink_upgrade_readonly"
+        Node="Basic">
+        <ConfigStruct
+            Id="Upgrade Config"
+            ShortId="upgrade_config"
+            Desc="Configurable items related to Upgrade functionality."
+            Type="struct"
+            Struct="upgrade_config">
+            <StructElementConfigItem
+                Id="Enable Application Config Reset"
+                ShortId="enable_app_config_reset"
+                Desc="If this is true then the application configuration will be reset to the default values built into the upgraded application when an upgrade is committed."
+                DefaultValue="true"
+                ConfigGroupPath="./[@ShortId='upgrade']">
+                <BuildVariant HwVariant="H13179v2_H13478v2 H13503v2 CNS10001v4 CNS11012v2"
+                              SwVariant="All"
+                              Value="false" />
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Protect Audio During Upgrade"
+                ShortId="protect_audio_during_upgrade"
+                Desc="If Disabled, upgrade improvements will apply and ongoing audio streaming will be suspended on an upgrade. If Enabled, ongoing audio will continue streaming, while upgrade improvements will not be applicable."
+                DefaultValue="false"
+                ConfigGroupPath="./[@ShortId='upgrade']">
+            </StructElementConfigItem>
+        </ConfigStruct>
+    </ConfigGroup>
+</ModuleData>

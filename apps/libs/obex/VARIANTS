@@ -1,0 +1,8 @@
+
+VARIANTS :=
+
+# GOEP including debug print
+CFLAGS_debug := -DOBEX_DEBUG
+
+CFLAGS_v2 := -DGOEP_VERSION_2_0
+

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright (c) 2019 Qualcomm Technologies International, Ltd.-->
+<!--Chain for HFP (Wideband SCO) -->
+
+<chain name="CHAIN_SCO_SWB" id="1" generate_operator_roles_enum="False" generate_endpoint_roles_enum="False">
+
+    <include_header name="../av_headset_chain_roles.h"/>
+
+    <operator name="OPR_SCO_RECEIVE" id="CAP_ID_SWBS_DEC" priority="medium">
+        <sink name="SCO_IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_SCO_SEND" id="CAP_ID_SWBS_ENC" priority="high">
+        <sink name="IN" terminal="0"/>
+        <source name="SCO_OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_CVC_RECEIVE" id="CAP_ID_CVC_RECEIVE_SWB">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_CVC_SEND" id="CAP_ID_CVCHS1MIC_SEND_SWB">
+        <sink name="REFERENCE" terminal="0"/>
+        <sink name="IN1" terminal="1"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_SOURCE_SYNC" id="CAP_ID_SOURCE_SYNC">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_VOLUME_CONTROL" id="CAP_ID_VOL_CTRL_VOL">
+        <sink name="MAIN_IN" terminal="0"/>
+        <sink name="AUX_IN" terminal="1"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_SCO_AEC" id="EB_CAP_ID_AEC_REF">
+        <sink name="INPUT1" terminal="0"/>
+        <sink name="MIC1" terminal="2"/>
+        <source name="REFERENCE" terminal="0"/>
+        <source name="SPEAKER1" terminal="1"/>
+        <source name="OUTPUT1" terminal="3"/>
+    </operator>
+
+    <input sink="OPR_SCO_RECEIVE.SCO_IN" role="EPR_SCO_FROM_AIR"/>
+    <input sink="OPR_SCO_AEC.MIC1" role="EPR_SCO_MIC1"/>
+    <input sink="OPR_VOLUME_CONTROL.AUX_IN" role="EPR_VOLUME_AUX"/>
+    <output source="OPR_SCO_AEC.SPEAKER1" role="EPR_SCO_SPEAKER"/>
+    <output source="OPR_SCO_SEND.SCO_OUT" role="EPR_SCO_TO_AIR"/>
+
+    <connection source="OPR_SCO_RECEIVE.OUT" sink="OPR_CVC_RECEIVE.IN"/>
+    <connection source="OPR_CVC_RECEIVE.OUT" sink="OPR_SOURCE_SYNC.IN"/>
+    <connection source="OPR_SOURCE_SYNC.OUT" sink="OPR_VOLUME_CONTROL.MAIN_IN"/>
+    <connection source="OPR_VOLUME_CONTROL.OUT"  sink="OPR_SCO_AEC.INPUT1"/>
+    <connection source="OPR_SCO_AEC.OUTPUT1" sink="OPR_CVC_SEND.IN1"/>
+    <connection source="OPR_CVC_SEND.OUT" sink="OPR_SCO_SEND.IN"/>
+    <connection source="OPR_SCO_AEC.REFERENCE" sink="OPR_CVC_SEND.REFERENCE"/>
+
+</chain>
+

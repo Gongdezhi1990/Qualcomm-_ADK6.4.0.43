@@ -1,0 +1,1878 @@
+
+/home/svc-audio-dspsw/kymera_builds/builds/2019/kymera_1907221320/kalimba/kymera/tools/KCSMaker/out/4786/stre_rom_v02_release/download/debugbin/download_async_wbs.elf:     file format elf32-littlekalimba
+
+Disassembly of section .text_minim:
+
+84200000 <$_awbs_dec_opmsg_set_encoding_params>:
+
+}
+
+bool awbs_dec_opmsg_set_encoding_params(OPERATOR_DATA *op_data, void *message_data,
+        unsigned int *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+84200000:	f1 1c       	pushm <FP(=SP), r4, rLink>;
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_DEC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_DEC_OP_DATA *) op_data->extra_op_data;
+84200002:	11 99       	rMAC = M[r0 + 48];
+
+bool awbs_dec_opmsg_set_encoding_params(OPERATOR_DATA *op_data, void *message_data,
+        unsigned int *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+    ASYNC_WBS_DEC_OP_DATA *awbs_data = get_instance_data(op_data);
+    sbc_codec *codec_data = awbs_data->wbs.codec_data;
+84200004:	16 f0 29 88 	r4 = M[rMAC + 164];
+    unsigned bitpool = 0;
+
+    if (OPMGR_GET_OPMSG_LENGTH((OP_MSG_REQ *)message_data) != OPMSG_ASYNC_WBS_DEC_SET_BITPOOL_VALUE_WORD_SIZE)
+84200008:	59 88       	rMAC = M[r1 + 4];
+8420000a:	88 24       	Null = rMAC - 2;
+8420000c:	03 60       	if EQ jump (m) Lc_awbs_dec_opmsg_set_encoding_params_3;
+
+8420000e <Lc_awbs_dec_opmsg_set_encoding_params_2>:
+    {
+        return FALSE;
+8420000e:	02 00       	r0 = Null + Null;
+84200010:	11 6e       	jump (m) Lc_awbs_dec_opmsg_set_encoding_params_6;
+
+84200012 <Lc_awbs_dec_opmsg_set_encoding_params_3>:
+    }
+
+    bitpool = OPMSG_FIELD_GET(message_data, OPMSG_ASYNC_WBS_DEC_SET_BITPOOL_VALUE, BITPOOL);
+84200012:	d9 88       	rMAC = M[r1 + 12];
+84200014:	89 c6       	rMAC = rMAC AND 0xffff;
+
+    if (bitpool > ASYNC_WBS_MAX_BITPOOL_VALUE || bitpool < ASYNC_WBS_MIN_BITPOOL_VALUE)
+84200016:	88 2e       	Null = rMAC - 26;
+84200018:	f8 ff f7 ef 	if HI jump (m) Lc_awbs_dec_opmsg_set_encoding_params_2;
+
+8420001c <Lc_awbs_dec_opmsg_set_encoding_params_4>:
+8420001c:	88 26       	Null = rMAC - 10;
+8420001e:	f8 65       	if NC jump (m) Lc_awbs_dec_opmsg_set_encoding_params_2;
+
+84200020 <Lc_awbs_dec_opmsg_set_encoding_params_5>:
+    {
+        return FALSE;
+    }
+
+    /* Populate the sbc structure with the new fields */
+    codec_data->enc_setting_bitpool = bitpool;
+84200020:	71 9f       	M[r4 + 52] = rMAC;
+    codec_data->bitpool = bitpool;
+84200022:	61 f0 22 8e 	M[r4 + 136] = rMAC;
+    codec_data->cur_frame_length = awbs_encode_frame_size(codec_data);
+84200026:	32 00       	r0 = r4 + Null;
+84200028:	03 f0 3f e3 	call (m) $_awbs_encode_frame_size;
+8420002c:	62 f0 39 8e 	M[r4 + 228] = r0;
+
+    return TRUE;
+84200030:	42 20       	r0 = Null + 1;
+
+84200032 <Lc_awbs_dec_opmsg_set_encoding_params_6>:
+}
+84200032:	f1 48       	popm <FP, r4, rLink>;
+84200034:	d8 4c       	rts;
+
+84200036 <$_async_wbs_dec_create>:
+            AUDIO_DATA_FORMAT_16_BIT_WITH_METADATA, AUDIO_DATA_FORMAT_FIXP);
+}
+
+bool async_wbs_dec_create(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+84200036:	f4 1d       	pushm <FP(=SP), r4, r5, r6, r7, rLink>, SP = SP + 0x10;
+84200038:	10 09       	r6 = r0 + Null;
+8420003a:	29 09       	r7 = r3 + Null;
+    ASYNC_WBS_DEC_OP_DATA* x_data;
+    WBS_DEC_OP_DATA* wbs_dec;
+    bool new_allocation;
+
+    /* call base_op create, which also allocates and fills response message */
+    if(!base_op_create(op_data, message_data, response_id, response_data))
+8420003c:	ff fd 00 f0 	call (m) 0x8c;
+84200040:	31 e2 
+84200042:	10 04       	Null = r0 - Null;
+84200044:	03 62       	if NE jump (m) Lc_async_wbs_dec_create_3;
+
+84200046 <Lc_async_wbs_dec_create_2>:
+    {
+        return FALSE;
+84200046:	02 00       	r0 = Null + Null;
+84200048:	81 6e       	jump (m) Lc_async_wbs_dec_create_18;
+
+8420004a <Lc_async_wbs_dec_create_3>:
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_DEC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_DEC_OP_DATA *) op_data->extra_op_data;
+8420004a:	87 f0 0c 88 	r5 = M[r6 + 48];
+    {
+        return FALSE;
+    }
+
+    x_data = get_instance_data(op_data);
+    x_data->init_phase = AWBSD_NOT_INITIALIZED;
+8420004e:	70 f0 f8 8a 	MB[r5 + 248] = Null;
+    wbs_dec = &x_data->wbs;
+
+#ifdef INSTALL_PLC100
+    /* setup the PLC structure, zero initialise it so that we can detect if an
+     * allocation has happened when we unwind */
+    PLC100_STRUC* plcstruct = xzpnew(PLC100_STRUC);
+84200052:	c3 20       	r1 = Null + 3;
+84200054:	02 f0 4c 40 	r0 = Null + 76;
+84200058:	ff fd 27 f0 	call (m) 0x4f2a;
+8420005c:	33 e6 
+8420005e:	16 00       	r4 = r0 + Null;
+    if(plcstruct == NULL)
+84200060:	6f 60       	if EQ jump (m) Lc_async_wbs_dec_create_17;
+
+84200062 <Lc_async_wbs_dec_create_4>:
+        base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+        return TRUE;
+    }
+
+    /* allocate speech buffer */
+    plcstruct->speech_buf = xpnewn(SP_BUF_LEN_WB, int);
+84200062:	c3 20       	r1 = Null + 3;
+84200064:	02 f0 10 4b 	r0 = Null + 1808;
+84200068:	ff fd 26 f0 	call (m) 0x4e2e;
+8420006c:	27 ee 
+    if(plcstruct->speech_buf == NULL)
+8420006e:	72 8e       	M[r4 + 4] = r0;
+84200070:	65 60       	if EQ jump (m) Lc_async_wbs_dec_create_16;
+
+84200072 <Lc_async_wbs_dec_create_5>:
+        async_wbs_dec_free_state_data(op_data);
+        /* Change the already allocated response to command failed. No extra error info. */
+        base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+        return TRUE;
+    }
+    plcstruct->speech_buf_start = plcstruct->speech_buf;
+84200072:	32 ee       	M[r4 + Null] = r0;
+
+    /* allocate the ola buffer */
+    plcstruct->ola_buf = xpnewn(OLA_LEN_WB, int);
+84200074:	c3 20       	r1 = Null + 3;
+84200076:	02 f0 60 40 	r0 = Null + 96;
+8420007a:	ff fd 26 f0 	call (m) 0x4e2e;
+8420007e:	35 ed 
+    if(plcstruct->ola_buf == NULL)
+84200080:	b2 8e       	M[r4 + 8] = r0;
+84200082:	5c 60       	if EQ jump (m) Lc_async_wbs_dec_create_16;
+
+84200084 <Lc_async_wbs_dec_create_6>:
+        base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+        return TRUE;
+    }
+
+    /* initialise the rest of the structure */
+    plcstruct->consts = get_plc100_constants(PLC100_WB_CONSTANTS);
+84200084:	02 f0 a0 40 	r0 = Null + 160;
+84200088:	ff fd aa f2 	call (m) 0x55666;
+8420008c:	3f ee 
+8420008e:	32 8f       	M[r4 + 16] = r0;
+    if(plcstruct->consts == NULL)
+84200090:	31 89       	rMAC = M[r4 + 16];
+84200092:	54 60       	if EQ jump (m) Lc_async_wbs_dec_create_16;
+
+84200094 <Lc_async_wbs_dec_create_7>:
+        async_wbs_dec_free_state_data(op_data);
+        /* Change the already allocated response to command failed. No extra error info. */
+        base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+        return TRUE;
+    }
+    plcstruct->packet_len = WBS_DEC_DEFAULT_OUTPUT_BLOCK_SIZE;
+84200094:	01 f0 78 40 	rMAC = Null + 120;
+84200098:	f1 8f       	M[r4 + 28] = rMAC;
+
+    wbs_dec->sco_rcv_op_data.sco_rcv_parameters.plc100_struc = plcstruct;
+8420009a:	7e 9f       	M[r5 + 52] = r4;
+#endif /* INSTALL_PLC100 */
+
+    wbs_dec->md_bad_kick_attmpt_fake = 0;
+8420009c:	70 f0 2c 8e 	M[r5 + 176] = Null;
+    wbs_dec->md_bad_kick_faked = 0;
+842000a0:	70 f0 2d 8e 	M[r5 + 180] = Null;
+
+    /* Initialise some of the operator data that is common between NB and WB receive. It can only be called
+     * after the PLC structure is allocated (if PLC present in build) */
+    sco_common_rcv_initialise(&wbs_dec->sco_rcv_op_data);
+842000a4:	3a 00       	r0 = r5 + Null;
+842000a6:	ff fd 5a f1 	call (m) 0x2b51c;
+842000aa:	37 e3 
+
+    wbs_dec->sco_rcv_op_data.sco_rcv_parameters.t_esco = ASYNC_WBS_DEFAULT_TESCO;
+842000ac:	01 23       	rMAC = Null + 12;
+842000ae:	b9 8f       	M[r5 + 24] = rMAC;
+
+    /* create SBC data object */
+    if((wbs_dec->codec_data = xzpnew(sbc_codec)) == NULL)
+842000b0:	c3 20       	r1 = Null + 3;
+842000b2:	02 f0 18 41 	r0 = Null + 280;
+842000b6:	ff fd 27 f0 	call (m) 0x4f2a;
+842000ba:	35 e3 
+842000bc:	72 f0 29 8e 	M[r5 + 164] = r0;
+842000c0:	3d 60       	if EQ jump (m) Lc_async_wbs_dec_create_16;
+
+842000c2 <Lc_async_wbs_dec_create_8>:
+        return TRUE;
+    }
+
+    /* Share memory with decoders. */
+    if( !mem_table_zalloc_shared((void *)(wbs_dec->codec_data), wbs_sbc_dec_shared_malloc_table,
+            WBS_SBC_DEC_SHARED_TABLE_LENGTH, &new_allocation))
+842000c2:	85 11       	r3 = FP + 24;
+842000c4:	c4 20       	r2 = Null + 3;
+842000c6:	80 ff 23 f4 	r1 = Null + -133672044;
+842000ca:	94 63 
+842000cc:	ff fd 08 f0 	call (m) 0x121c;
+842000d0:	31 ea 
+842000d2:	10 04       	Null = r0 - Null;
+842000d4:	33 60       	if EQ jump (m) Lc_async_wbs_dec_create_16;
+
+842000d6 <Lc_async_wbs_dec_create_9>:
+        base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+        return TRUE;
+    }
+
+    if( !mem_table_zalloc_shared((void *)(wbs_dec->codec_data), wbs_sbc_shared_malloc_table,
+            WBS_SBC_SHARED_TABLE_LENGTH, &new_allocation))
+842000d6:	85 11       	r3 = FP + 24;
+842000d8:	c4 20       	r2 = Null + 3;
+842000da:	80 ff 23 f4 	r1 = Null + -133672084;
+842000de:	6c 63 
+842000e0:	72 f0 29 88 	r0 = M[r5 + 164];
+842000e4:	ff fd 08 f0 	call (m) 0x121c;
+842000e8:	39 e9 
+842000ea:	10 04       	Null = r0 - Null;
+842000ec:	27 60       	if EQ jump (m) Lc_async_wbs_dec_create_16;
+
+842000ee <Lc_async_wbs_dec_create_10>:
+        return TRUE;
+    }
+
+    /* now allocate the non-shareable memory */
+    if(!mem_table_zalloc((void *)(wbs_dec->codec_data), wbs_dec_malloc_table,
+                                                WBS_DEC_MALLOC_TABLE_LENGTH))
+842000ee:	84 20       	r2 = Null + 2;
+842000f0:	80 ff 23 f4 	r1 = Null + -133672268;
+842000f4:	b4 62 
+842000f6:	72 f0 29 88 	r0 = M[r5 + 164];
+842000fa:	ff fd 08 f0 	call (m) 0x11cc;
+842000fe:	33 e6 
+84200100:	10 04       	Null = r0 - Null;
+84200102:	1c 60       	if EQ jump (m) Lc_async_wbs_dec_create_16;
+
+84200104 <Lc_async_wbs_dec_create_11>:
+        base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+        return TRUE;
+    }
+
+    /* Now reserve the scratch memory */
+    if (scratch_register())
+84200104:	ff fd 06 f0 	call (m) 0xdba;
+84200108:	37 e5 
+8420010a:	10 04       	Null = r0 - Null;
+8420010c:	17 60       	if EQ jump (m) Lc_async_wbs_dec_create_16;
+
+8420010e <Lc_async_wbs_dec_create_12>:
+    {
+        if (mem_table_scratch_tbl_reserve(&wbs_dec_scratch_table))
+8420010e:	80 ff 22 f4 	r0 = Null + -133672256;
+84200112:	c0 62 
+84200114:	ff fd 08 f0 	call (m) 0x129c;
+84200118:	29 ec 
+8420011a:	10 04       	Null = r0 - Null;
+8420011c:	0c 60       	if EQ jump (m) Lc_async_wbs_dec_create_15;
+
+8420011e <Lc_async_wbs_dec_create_13>:
+        {
+            /* Successfully allocated everything! */
+            /* initialise some more WBS decoder-specific data  */
+            async_wbs_dec_reset_working_data(op_data);
+8420011e:	42 08       	r0 = r6 + Null;
+84200120:	b1 4e       	call (m) Lc_async_wbs_dec_reset_working_data_1;
+            wbsdec_init_dec_param(op_data);
+84200122:	42 08       	r0 = r6 + Null;
+84200124:	ff fd 77 f1 	call (m) 0x2ef94;
+84200128:	31 e3 
+            x_data->init_phase = AWBSD_RUN;
+8420012a:	81 20       	rMAC = Null + 2;
+8420012c:	71 f0 f8 8a 	MB[r5 + 248] = rMAC;
+
+84200130 <Lc_async_wbs_dec_create_14>:
+    PLC100_STRUC* plcstruct = xzpnew(PLC100_STRUC);
+    if(plcstruct == NULL)
+    {
+        /* Change the already allocated response to command failed. No extra error info. */
+        base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+        return TRUE;
+84200130:	42 20       	r0 = Null + 1;
+84200132:	0c 6e       	jump (m) Lc_async_wbs_dec_create_18;
+
+84200134 <Lc_async_wbs_dec_create_15>:
+            x_data->init_phase = AWBSD_RUN;
+
+            return TRUE;
+        }
+        /* Fail free all the scratch memory we reserved */
+        scratch_deregister();
+84200134:	ff fd 06 f0 	call (m) 0xe32;
+84200138:	3f e7 
+
+8420013a <Lc_async_wbs_dec_create_16>:
+
+    /* allocate speech buffer */
+    plcstruct->speech_buf = xpnewn(SP_BUF_LEN_WB, int);
+    if(plcstruct->speech_buf == NULL)
+    {
+        async_wbs_dec_free_state_data(op_data);
+8420013a:	42 08       	r0 = r6 + Null;
+8420013c:	b6 4e       	call (m) Lc_async_wbs_dec_free_state_data_1;
+
+8420013e <Lc_async_wbs_dec_create_17>:
+ * \param  response_data Pointer to the pointer to message that is allocated in the function.
+ * \param  new_status  A status ID that is to be sent in the message.
+ */
+inline static void base_op_change_response_status(void **response_data, STATUS_KYMERA new_status)
+{
+    (((OP_STD_RSP *)(*response_data))->status = new_status);
+8420013e:	01 f0 00 60 	rMAC = Null + 4096;
+84200142:	92 f0 00 e8 	r0 = M[r7 + Null];
+84200146:	51 8e       	M[r0 + 4] = rMAC;
+84200148:	f4 6f       	jump (m) Lc_async_wbs_dec_create_14;
+
+8420014a <Lc_async_wbs_dec_create_18>:
+    /* Clear up all the allocated memory. */
+    async_wbs_dec_free_state_data(op_data);
+   /* Change the already allocated response to command failed. No extra error info. */
+    base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+    return TRUE;
+}
+8420014a:	f4 49       	SP = SP - 0x10, popm <FP, r4, r5, r6, r7, rLink>;
+8420014c:	d8 4c       	rts;
+
+8420014e <$_async_wbs_dec_destroy>:
+
+
+bool async_wbs_dec_destroy(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+8420014e:	f1 1c       	pushm <FP(=SP), r4, rLink>;
+84200150:	16 00       	r4 = r0 + Null;
+    if(base_op_destroy(op_data, message_data, response_id, response_data))
+84200152:	ef fd ff ff 	call (m) 0xac;
+84200156:	3b ea 
+84200158:	10 04       	Null = r0 - Null;
+8420015a:	08 60       	if EQ jump (m) Lc_async_wbs_dec_destroy_3;
+
+8420015c <Lc_async_wbs_dec_destroy_2>:
+    {
+        /* Free all the scratch memory we reserved */
+        scratch_deregister();
+8420015c:	ff fd 06 f0 	call (m) 0xe32;
+84200160:	37 e6 
+        /* now destroy all the capability specific data */
+        async_wbs_dec_free_state_data(op_data);
+84200162:	32 00       	r0 = r4 + Null;
+84200164:	a2 4e       	call (m) Lc_async_wbs_dec_free_state_data_1;
+        return TRUE;
+84200166:	42 20       	r0 = Null + 1;
+84200168:	02 6e       	jump (m) Lc_async_wbs_dec_destroy_4;
+
+8420016a <Lc_async_wbs_dec_destroy_3>:
+    }
+
+    return FALSE;
+8420016a:	02 00       	r0 = Null + Null;
+
+8420016c <Lc_async_wbs_dec_destroy_4>:
+}
+8420016c:	f1 48       	popm <FP, r4, rLink>;
+8420016e:	d8 4c       	rts;
+
+84200170 <$_async_wbs_dec_reset>:
+
+
+bool async_wbs_dec_reset(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+84200170:	f1 1c       	pushm <FP(=SP), r4, rLink>;
+84200172:	16 00       	r4 = r0 + Null;
+    if(!base_op_reset(op_data, message_data, response_id, response_data))
+84200174:	ef fd ff ff 	call (m) 0x28;
+84200178:	35 e5 
+8420017a:	10 04       	Null = r0 - Null;
+8420017c:	03 62       	if NE jump (m) Lc_async_wbs_dec_reset_3;
+
+8420017e <Lc_async_wbs_dec_reset_2>:
+    {
+        return FALSE;
+8420017e:	02 00       	r0 = Null + Null;
+84200180:	08 6e       	jump (m) Lc_async_wbs_dec_reset_4;
+
+84200182 <Lc_async_wbs_dec_reset_3>:
+    }
+
+    /* now initialise specific working data */
+    async_wbs_dec_reset_working_data(op_data);
+84200182:	32 00       	r0 = r4 + Null;
+84200184:	7f 4e       	call (m) Lc_async_wbs_dec_reset_working_data_1;
+    wbsdec_init_dec_param(op_data);
+84200186:	32 00       	r0 = r4 + Null;
+84200188:	ff fd 77 f1 	call (m) 0x2ef94;
+8420018c:	2d e0 
+    return TRUE;
+8420018e:	42 20       	r0 = Null + 1;
+
+84200190 <Lc_async_wbs_dec_reset_4>:
+}
+84200190:	f1 48       	popm <FP, r4, rLink>;
+84200192:	d8 4c       	rts;
+
+84200194 <$_async_wbs_dec_get_data_format>:
+/* ********************************** API functions ************************************* */
+
+
+bool async_wbs_dec_get_data_format(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+84200194:	c8 1c       	pushm <FP(=SP), rLink>;
+    return sco_common_get_data_format(op_data, message_data, response_id, response_data,
+            AUDIO_DATA_FORMAT_16_BIT_WITH_METADATA, AUDIO_DATA_FORMAT_FIXP);
+84200196:	00 f0 51 e0 	push Null + 1;
+8420019a:	00 f0 52 e0 	push Null + 2;
+8420019e:	ff fd 5a f1 	call (m) 0x2b696;
+842001a2:	39 e7 
+842001a4:	7e 4c       	SP = SP + -8;
+
+842001a6 <Lc_async_wbs_dec_get_data_format_2>:
+}
+842001a6:	c8 48       	popm <FP, rLink>;
+842001a8:	d8 4c       	rts;
+
+842001aa <$_async_wbs_dec_process_data>:
+
+
+/* ************************************* Data processing-related functions and wrappers **********************************/
+
+void async_wbs_dec_process_data(OPERATOR_DATA *op_data, TOUCHED_TERMINALS *touched)
+{
+842001aa:	f4 1d       	pushm <FP(=SP), r4, r5, r6, r7, rLink>, SP = SP + 0x10;
+842001ac:	11 09       	r7 = r0 + Null;
+842001ae:	18 09       	r6 = r1 + Null;
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_DEC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_DEC_OP_DATA *) op_data->extra_op_data;
+842001b0:	97 f0 0c 88 	r5 = M[r7 + 48];
+    x_data = get_instance_data(op_data);
+    sco_data = &x_data->wbs.sco_rcv_op_data;
+
+    /* There is a remote chance that this can run while async_wbs_dec_create
+     * hasn't completed yet. Guard against this. */
+    if (x_data->init_phase != AWBSD_RUN)
+842001b4:	71 f0 f8 80 	rMAC = MBS[r5 + 248];
+842001b8:	88 24       	Null = rMAC - 2;
+842001ba:	04 60       	if EQ jump (m) Lc_async_wbs_dec_process_data_3;
+
+842001bc <Lc_async_wbs_dec_process_data_2>:
+    {
+        touched->sources = TOUCHED_NOTHING;
+842001bc:	80 f0 00 ee 	M[r6 + Null] = Null;
+        return;
+842001c0:	29 6e       	jump (m) Lc_async_wbs_dec_process_data_8;
+
+842001c2 <Lc_async_wbs_dec_process_data_3>:
+    }
+
+    frame_size = awbs_encode_frame_size(x_data->wbs.codec_data);
+842001c2:	72 f0 29 88 	r0 = M[r5 + 164];
+842001c6:	02 f0 21 e7 	call (m) $_awbs_encode_frame_size;
+    sco_data->sco_rcv_parameters.sco_pkt_size = frame_size;
+842001ca:	7a 8f       	M[r5 + 20] = r0;
+    sco_data->sco_rcv_parameters.exp_pkts = 1;
+842001cc:	41 20       	rMAC = Null + 1;
+842001ce:	39 9e       	M[r5 + 32] = rMAC;
+     * doesn't run between one kick and the other: It will than see only
+     * one kick and thus run only once, where there may be two packets in input.
+     * Consume all available data in input, forcing the decoder to run
+     * multiple times.
+     */
+    loopcount = 0;
+842001d0:	06 00       	r4 = Null + Null;
+
+842001d2 <Lc_async_wbs_dec_process_data_4>:
+    while (enough_data_to_run(sco_data, METADATA_HEADER_SIZE)
+            && enough_space_to_run(sco_data, WBS_DEC_DEFAULT_OUTPUT_BLOCK_SIZE)
+            && loopcount < MAX_COUNT_WBS_DEC_LOOP)
+842001d2:	43 21       	r1 = Null + 5;
+842001d4:	3a 00       	r0 = r5 + Null;
+842001d6:	ff fd 5b f1 	call (m) 0x2b8ac;
+842001da:	37 e6 
+842001dc:	10 04       	Null = r0 - Null;
+842001de:	1a 60       	if EQ jump (m) Lc_async_wbs_dec_process_data_8;
+
+842001e0 <Lc_async_wbs_dec_process_data_5>:
+842001e0:	03 f0 78 40 	r1 = Null + 120;
+842001e4:	3a 00       	r0 = r5 + Null;
+842001e6:	ff fd 5b f1 	call (m) 0x2b8e0;
+842001ea:	3b e7 
+842001ec:	10 04       	Null = r0 - Null;
+842001ee:	12 60       	if EQ jump (m) Lc_async_wbs_dec_process_data_8;
+
+842001f0 <Lc_async_wbs_dec_process_data_6>:
+842001f0:	f0 24       	Null = r4 - 3;
+842001f2:	02 f0 a1 e0 	if C jump (m) Lc_async_wbs_dec_process_data_8;
+
+842001f6 <Lc_async_wbs_dec_process_data_7>:
+    {
+        tmp_touched.sources = TOUCHED_NOTHING;
+842001f6:	30 de       	M[FP + 24] = Null;
+
+        wbs_dec_process_data(op_data, &tmp_touched);
+842001f8:	83 11       	r1 = FP + 24;
+842001fa:	4a 08       	r0 = r7 + Null;
+842001fc:	ff fd 12 f1 	call (m) 0x2274e;
+84200200:	33 ea 
+
+        /* Neither wbs_dec nor async_wbs_dec functions kick backwards.
+         * Update forward kicking with an "or" so we don't override.
+         */
+        touched->sources |= tmp_touched.sources;
+84200202:	81 f0 00 e8 	rMAC = M[r6 + Null];
+84200206:	32 d8       	r0 = M[FP + 24];
+84200208:	89 12       	rMAC = rMAC OR r0;
+8420020a:	81 f0 00 ee 	M[r6 + Null] = rMAC;
+        /* Guard this loop against any problem within the data processing and
+         * limit the time spent here.
+         */
+        loopcount ++;
+8420020e:	76 20       	r4 = r4 + 1;
+     * multiple times.
+     */
+    loopcount = 0;
+    while (enough_data_to_run(sco_data, METADATA_HEADER_SIZE)
+            && enough_space_to_run(sco_data, WBS_DEC_DEFAULT_OUTPUT_BLOCK_SIZE)
+            && loopcount < MAX_COUNT_WBS_DEC_LOOP)
+84200210:	e1 6f       	jump (m) Lc_async_wbs_dec_process_data_4;
+
+84200212 <Lc_async_wbs_dec_process_data_8>:
+         * limit the time spent here.
+         */
+        loopcount ++;
+    }
+
+}
+84200212:	f4 49       	SP = SP - 0x10, popm <FP, r4, r5, r6, r7, rLink>;
+84200214:	d8 4c       	rts;
+
+84200216 <$_async_wbs_dec_buffer_details>:
+    return TRUE;
+}
+
+bool async_wbs_dec_buffer_details(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+84200216:	f3 1c       	pushm <FP(=SP), r4, r5, r6, rLink>;
+84200218:	16 00       	r4 = r0 + Null;
+8420021a:	18 09       	r6 = r1 + Null;
+8420021c:	2f 00       	r5 = r3 + Null;
+    unsigned wbs_buff_size = 0;
+
+    if(!base_op_buffer_details(op_data, message_data, response_id, response_data))
+8420021e:	ef fd ff ff 	call (m) 0xbe;
+84200222:	21 e5 
+84200224:	10 04       	Null = r0 - Null;
+84200226:	03 62       	if NE jump (m) Lc_async_wbs_dec_buffer_details_3;
+
+84200228 <Lc_async_wbs_dec_buffer_details_2>:
+    {
+        return FALSE;
+84200228:	02 00       	r0 = Null + Null;
+8420022a:	2a 6e       	jump (m) Lc_async_wbs_dec_buffer_details_10;
+
+8420022c <Lc_async_wbs_dec_buffer_details_3>:
+    }
+
+    if (((unsigned *)message_data)[0] & TERMINAL_SINK_MASK)
+8420022c:	81 f0 00 e8 	rMAC = M[r6 + Null];
+84200230:	40 f0 11 f0 	rMAC = rMAC AND 0x800000;
+84200234:	00 00 
+84200236:	04 60       	if EQ jump (m) Lc_async_wbs_dec_buffer_details_5;
+
+84200238 <Lc_async_wbs_dec_buffer_details_4>:
+    {
+        wbs_buff_size = WBS_DEC_INPUT_BUFFER_SIZE;
+84200238:	01 f0 00 41 	rMAC = Null + 256;
+8420023c:	07 6e       	jump (m) Lc_async_wbs_dec_buffer_details_6;
+
+8420023e <Lc_async_wbs_dec_buffer_details_5>:
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_DEC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_DEC_OP_DATA *) op_data->extra_op_data;
+8420023e:	31 99       	rMAC = M[r4 + 48];
+    else
+    {
+        /* for decoder, the output size might have been configured by the user */
+        ASYNC_WBS_DEC_OP_DATA* awbs_data = get_instance_data(op_data);
+        wbs_buff_size = MAX(WBS_DEC_OUTPUT_BUFFER_SIZE,
+                            awbs_data->wbs.sco_rcv_op_data.sco_rcv_parameters.output_buffer_size);
+84200240:	89 b8       	rMAC = M[rMAC + 104];
+84200242:	10 f0 00 25 	Null = rMAC - 256;
+84200246:	f9 ff f3 ef 	if LS jump (m) Lc_async_wbs_dec_buffer_details_4;
+
+8420024a <Lc_async_wbs_dec_buffer_details_6>:
+    }
+
+    ((OP_BUF_DETAILS_RSP*)*response_data)->b.buffer_size = wbs_buff_size;
+8420024a:	3a e8       	r0 = M[r5 + Null];
+8420024c:	11 8f       	M[r0 + 16] = rMAC;
+    /* supports metadata in both side  */
+    ((OP_BUF_DETAILS_RSP*)*response_data)->metadata_buffer = 0;
+8420024e:	39 e8       	rMAC = M[r5 + Null];
+84200250:	c8 8e       	M[rMAC + 12] = Null;
+    ((OP_BUF_DETAILS_RSP*)*response_data)->supports_metadata = TRUE;
+84200252:	39 e8       	rMAC = M[r5 + Null];
+84200254:	09 22       	rMAC = rMAC + 8;
+84200256:	0a e2       	r0 = MBU[rMAC + Null];
+84200258:	22 ff ef 1f 	r0 = r0 AND 0xffffffef;
+8420025c:	d2 c9       	r0 = r0 OR 0x10;
+8420025e:	0a ea       	MB[rMAC + Null] = r0;
+
+    L4_DBG_MSG2( "wbs_buffer_details (capID=%d)  %d \n", op_data->cap_data->id, ((OP_STD_RSP*)*response_data)->resp_data.data);
+84200260:	01 f0 28 91 	rMAC = MBS[Null + 0x328];
+84200264:	08 25       	Null = rMAC - 4;
+84200266:	0b 68       	if LT jump (m) Lc_async_wbs_dec_buffer_details_9;
+
+84200268 <Lc_async_wbs_dec_buffer_details_8>:
+84200268:	39 e8       	rMAC = M[r5 + Null];
+8420026a:	8c 88       	r2 = M[rMAC + 8];
+8420026c:	71 89       	rMAC = M[r4 + 20];
+8420026e:	0b e8       	r1 = M[rMAC + Null];
+84200270:	55 f1 02 f0 	r0 = Null + 357564416;
+84200274:	00 40 
+84200276:	ff fd 03 f0 	call (m) 0x9c8;
+8420027a:	33 ea 
+
+8420027c <Lc_async_wbs_dec_buffer_details_9>:
+
+    return TRUE;
+8420027c:	42 20       	r0 = Null + 1;
+
+8420027e <Lc_async_wbs_dec_buffer_details_10>:
+}
+8420027e:	f3 48       	popm <FP, r4, r5, r6, rLink>;
+84200280:	d8 4c       	rts;
+
+84200282 <Lc_async_wbs_dec_reset_working_data_1>:
+
+/* ******************************* Helper functions ************************************ */
+
+/* initialise various working data params of the specific operator */
+static void async_wbs_dec_reset_working_data(OPERATOR_DATA *op_data)
+{
+84200282:	f2 1c       	pushm <FP(=SP), r4, r5, rLink>;
+84200284:	16 00       	r4 = r0 + Null;
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_DEC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_DEC_OP_DATA *) op_data->extra_op_data;
+84200286:	37 99       	r5 = M[r4 + 48];
+/* initialise various working data params of the specific operator */
+static void async_wbs_dec_reset_working_data(OPERATOR_DATA *op_data)
+{
+    ASYNC_WBS_DEC_OP_DATA* x_data = get_instance_data(op_data);
+
+    sco_common_rcv_reset_working_data(&x_data->wbs.sco_rcv_op_data);
+84200288:	3a 00       	r0 = r5 + Null;
+8420028a:	ff fd 59 f1 	call (m) 0x2b5a8;
+8420028e:	3f e8 
+
+    x_data->init_phase = AWBSD_NOT_INITIALIZED;
+84200290:	70 f0 f8 8a 	MB[r5 + 248] = Null;
+
+    /* clear first valid packet info */
+    x_data->wbs.received_first_valid_pkt = 0;
+84200294:	70 f0 2a 8e 	M[r5 + 168] = Null;
+#ifdef SCO_DEBUG
+    x_data->wbs.wbs_dec_dbg_stats_enable = 0;
+84200298:	70 f0 2f 8e 	M[r5 + 188] = Null;
+#endif
+
+    /* Now reset the decoder - re-using old but slightly massaged function in ASM */
+    wbs_dec_reset_sbc_data(op_data);
+8420029c:	32 00       	r0 = r4 + Null;
+8420029e:	ff fd 14 f1 	call (m) 0x22aea;
+842002a2:	2d e2 
+
+842002a4 <Lc_async_wbs_dec_reset_working_data_2>:
+}
+842002a4:	f2 48       	popm <FP, r4, r5, rLink>;
+842002a6:	d8 4c       	rts;
+
+842002a8 <Lc_async_wbs_dec_free_state_data_1>:
+
+
+/* free the memory allocated for SBC dec (shared and non-shared) */
+static void async_wbs_dec_free_state_data(OPERATOR_DATA* op_data)
+{
+842002a8:	f1 1c       	pushm <FP(=SP), r4, rLink>;
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_DEC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_DEC_OP_DATA *) op_data->extra_op_data;
+842002aa:	16 99       	r4 = M[r0 + 48];
+/* free the memory allocated for SBC dec (shared and non-shared) */
+static void async_wbs_dec_free_state_data(OPERATOR_DATA* op_data)
+{
+    ASYNC_WBS_DEC_OP_DATA* x_data = get_instance_data(op_data);
+
+    if (x_data->wbs.codec_data != NULL)
+842002ac:	62 f0 29 88 	r0 = M[r4 + 164];
+842002b0:	21 60       	if EQ jump (m) Lc_async_wbs_dec_free_state_data_3;
+
+842002b2 <Lc_async_wbs_dec_free_state_data_2>:
+    {
+        /* free the shared codec data */
+        mem_table_free_shared((void *)(x_data->wbs.codec_data),
+                            wbs_sbc_shared_malloc_table, WBS_SBC_SHARED_TABLE_LENGTH);
+842002b2:	c4 20       	r2 = Null + 3;
+842002b4:	80 ff 23 f4 	r1 = Null + -133672084;
+842002b8:	6c 63 
+842002ba:	ff fd 07 f0 	call (m) 0x122c;
+842002be:	33 eb 
+
+        /* free shared decoder data */
+        mem_table_free_shared((void *)(x_data->wbs.codec_data),
+                    wbs_sbc_dec_shared_malloc_table, WBS_SBC_DEC_SHARED_TABLE_LENGTH);
+842002c0:	c4 20       	r2 = Null + 3;
+842002c2:	80 ff 23 f4 	r1 = Null + -133672044;
+842002c6:	94 63 
+842002c8:	62 f0 29 88 	r0 = M[r4 + 164];
+842002cc:	ff fd 07 f0 	call (m) 0x122c;
+842002d0:	21 eb 
+
+        /* free non-shared memory */
+        mem_table_free((void *)(x_data->wbs.codec_data), wbs_dec_malloc_table,
+                                                WBS_DEC_MALLOC_TABLE_LENGTH);
+842002d2:	84 20       	r2 = Null + 2;
+842002d4:	80 ff 23 f4 	r1 = Null + -133672268;
+842002d8:	b4 62 
+842002da:	62 f0 29 88 	r0 = M[r4 + 164];
+842002de:	ff fd 07 f0 	call (m) 0x11da;
+842002e2:	3d e7 
+
+        /* now free the codec data object */
+        pdelete(x_data->wbs.codec_data);
+842002e4:	62 f0 29 88 	r0 = M[r4 + 164];
+842002e8:	ff fd 26 f0 	call (m) 0x4f62;
+842002ec:	3b e3 
+        x_data->wbs.codec_data = NULL;
+842002ee:	60 f0 29 8e 	M[r4 + 164] = Null;
+
+842002f2 <Lc_async_wbs_dec_free_state_data_3>:
+    }
+#ifdef INSTALL_PLC100
+    sco_common_rcv_destroy_plc_data(&(x_data->wbs.sco_rcv_op_data));
+842002f2:	32 00       	r0 = r4 + Null;
+842002f4:	ff fd 59 f1 	call (m) 0x2b568;
+842002f8:	35 e3 
+
+842002fa <Lc_async_wbs_dec_free_state_data_4>:
+#endif /* INSTALL_PLC100 */
+}
+842002fa:	f1 48       	popm <FP, r4, rLink>;
+842002fc:	d8 4c       	rts;
+
+842002fe <$_awbs_enc_opmsg_set_encoding_params>:
+842002fe:	11 99       	rMAC = M[r0 + 48];
+
+bool awbs_enc_opmsg_set_encoding_params(OPERATOR_DATA *op_data, void *message_data,
+        unsigned int *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+    ASYNC_WBS_ENC_OP_DATA *awbs_data = get_instance_data(op_data);
+    sbc_codec *codec_data = awbs_data->wbs.codec_data;
+84200300:	49 89       	rMAC = M[rMAC + 20];
+    unsigned bitpool = 0;
+
+    if (op_data->state == OP_RUNNING)
+84200302:	12 b0       	r0 = MBS[r0 + 24];
+84200304:	03 62       	if NE jump (m) Lc_awbs_enc_opmsg_set_encoding_params_3;
+
+84200306 <Lc_awbs_enc_opmsg_set_encoding_params_2>:
+    {
+        return FALSE;
+84200306:	02 00       	r0 = Null + Null;
+84200308:	0f 6e       	jump (m) Lc_awbs_enc_opmsg_set_encoding_params_7;
+
+8420030a <Lc_awbs_enc_opmsg_set_encoding_params_3>:
+    }
+
+    if (OPMGR_GET_OPMSG_LENGTH((OP_MSG_REQ *)message_data) != OPMSG_ASYNC_WBS_ENC_SET_BITPOOL_VALUE_WORD_SIZE)
+8420030a:	5a 88       	r0 = M[r1 + 4];
+8420030c:	90 24       	Null = r0 - 2;
+8420030e:	fc 63       	if NE jump (m) Lc_awbs_enc_opmsg_set_encoding_params_2;
+
+84200310 <Lc_awbs_enc_opmsg_set_encoding_params_4>:
+    {
+        return FALSE;
+    }
+
+    bitpool = OPMSG_FIELD_GET(message_data, OPMSG_ASYNC_WBS_ENC_SET_BITPOOL_VALUE, BITPOOL);
+84200310:	da 88       	r0 = M[r1 + 12];
+84200312:	92 c6       	r0 = r0 AND 0xffff;
+
+    if (bitpool > ASYNC_WBS_MAX_BITPOOL_VALUE || bitpool < ASYNC_WBS_MIN_BITPOOL_VALUE)
+84200314:	90 2e       	Null = r0 - 26;
+84200316:	f8 ff f1 ef 	if HI jump (m) Lc_awbs_enc_opmsg_set_encoding_params_2;
+
+8420031a <Lc_awbs_enc_opmsg_set_encoding_params_5>:
+8420031a:	90 26       	Null = r0 - 10;
+8420031c:	f5 65       	if NC jump (m) Lc_awbs_enc_opmsg_set_encoding_params_2;
+
+8420031e <Lc_awbs_enc_opmsg_set_encoding_params_6>:
+    {
+        return FALSE;
+    }
+
+    /* Populate the sbc structure with the new fields */
+    codec_data->enc_setting_bitpool = bitpool;
+8420031e:	4a 9f       	M[rMAC + 52] = r0;
+    codec_data->bitpool = bitpool;
+84200320:	12 f0 22 8e 	M[rMAC + 136] = r0;
+
+    return TRUE;
+84200324:	42 20       	r0 = Null + 1;
+
+84200326 <Lc_awbs_enc_opmsg_set_encoding_params_7>:
+84200326:	d8 4c       	rts;
+
+84200328 <$_async_wbs_enc_create>:
+
+/* ********************************** API functions ************************************* */
+
+bool async_wbs_enc_create(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+84200328:	f1 1c       	pushm <FP(=SP), r4, rLink>;
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_ENC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_ENC_OP_DATA *) op_data->extra_op_data;
+8420032a:	16 99       	r4 = M[r0 + 48];
+bool async_wbs_enc_create(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+    ASYNC_WBS_ENC_OP_DATA* encoder = get_instance_data(op_data);
+
+    if (! wbs_enc_create(op_data, message_data, response_id, response_data))
+8420032c:	ff fd 12 f1 	call (m) 0x22818;
+84200330:	2d e7 
+84200332:	10 04       	Null = r0 - Null;
+84200334:	03 62       	if NE jump (m) Lc_async_wbs_enc_create_3;
+
+84200336 <Lc_async_wbs_enc_create_2>:
+    {
+        return FALSE;
+84200336:	02 00       	r0 = Null + Null;
+84200338:	08 6e       	jump (m) Lc_async_wbs_enc_create_4;
+
+8420033a <Lc_async_wbs_enc_create_3>:
+    }
+
+    /* Force the sample rate for this encoder. */
+    encoder->aswbs.sample_rate = 16000;
+8420033a:	11 f0 80 7a 	rMAC = Null + 16000;
+8420033e:	31 9e       	M[r4 + 32] = rMAC;
+    encoder->aswbs.delay_samples = ASYNC_WBS_DELAY;
+84200340:	01 f0 61 40 	rMAC = Null + 97;
+84200344:	71 9f       	M[r4 + 52] = rMAC;
+    return TRUE;
+84200346:	42 20       	r0 = Null + 1;
+
+84200348 <Lc_async_wbs_enc_create_4>:
+}
+84200348:	f1 48       	popm <FP, r4, rLink>;
+8420034a:	d8 4c       	rts;
+
+8420034c <$_async_wbs_enc_start>:
+
+bool async_wbs_enc_start(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+8420034c:	f2 1c       	pushm <FP(=SP), r4, r5, rLink>;
+8420034e:	2f 00       	r5 = r3 + Null;
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_ENC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_ENC_OP_DATA *) op_data->extra_op_data;
+84200350:	16 99       	r4 = M[r0 + 48];
+bool async_wbs_enc_start(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+    ASYNC_WBS_ENC_OP_DATA *xdata = get_instance_data(op_data);
+
+    if (!base_op_start(op_data, message_data, response_id,response_data))
+84200352:	ef fd fe ff 	call (m) 0x4a;
+84200356:	39 e7 
+84200358:	10 04       	Null = r0 - Null;
+8420035a:	03 62       	if NE jump (m) Lc_async_wbs_enc_start_3;
+
+8420035c <Lc_async_wbs_enc_start_2>:
+    {
+        return FALSE;
+8420035c:	02 00       	r0 = Null + Null;
+8420035e:	0a 6e       	jump (m) Lc_async_wbs_enc_start_7;
+
+84200360 <Lc_async_wbs_enc_start_3>:
+    }
+
+    /* Sanity check for buffers being connected.
+     * We can't do much useful without */
+    if (   xdata->wbs.buffers.ip_buffer == NULL
+        || xdata->wbs.buffers.op_buffer == NULL)
+84200360:	f1 88       	rMAC = M[r4 + 12];
+84200362:	03 60       	if EQ jump (m) Lc_async_wbs_enc_start_5;
+
+84200364 <Lc_async_wbs_enc_start_4>:
+84200364:	31 89       	rMAC = M[r4 + 16];
+84200366:	05 62       	if NE jump (m) Lc_async_wbs_enc_start_6;
+
+84200368 <Lc_async_wbs_enc_start_5>:
+84200368:	01 f0 00 60 	rMAC = Null + 4096;
+8420036c:	3a e8       	r0 = M[r5 + Null];
+8420036e:	51 8e       	M[r0 + 4] = rMAC;
+
+84200370 <Lc_async_wbs_enc_start_6>:
+    {
+        base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+        return TRUE;
+84200370:	42 20       	r0 = Null + 1;
+
+84200372 <Lc_async_wbs_enc_start_7>:
+    }
+
+    return TRUE;
+}
+84200372:	f2 48       	popm <FP, r4, r5, rLink>;
+84200374:	d8 4c       	rts;
+
+84200376 <$_async_wbs_enc_connect>:
+
+bool async_wbs_enc_connect(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+84200376:	f3 1c       	pushm <FP(=SP), r4, r5, r6, rLink>;
+84200378:	10 09       	r6 = r0 + Null;
+8420037a:	1e 00       	r4 = r1 + Null;
+8420037c:	2f 00       	r5 = r3 + Null;
+    ASYNC_WBS_ENC_OP_DATA *wbs_enc;
+    unsigned terminal_id;
+
+    if (!wbs_enc_connect(op_data, message_data, response_id, response_data))
+8420037e:	ff fd 12 f1 	call (m) 0x228ec;
+84200382:	2f eb 
+84200384:	10 04       	Null = r0 - Null;
+84200386:	03 62       	if NE jump (m) Lc_async_wbs_enc_connect_3;
+
+84200388 <Lc_async_wbs_enc_connect_2>:
+    {
+        return FALSE;
+84200388:	02 00       	r0 = Null + Null;
+8420038a:	1b 6e       	jump (m) Lc_async_wbs_enc_connect_11;
+
+8420038c <Lc_async_wbs_enc_connect_3>:
+    }
+
+    if (((OP_STD_RSP *)(*response_data))->status != STATUS_OK)
+8420038c:	39 e8       	rMAC = M[r5 + Null];
+8420038e:	48 88       	Null = M[rMAC + 4];
+84200390:	fc 63       	if NE jump (m) Lc_async_wbs_enc_connect_2;
+
+84200392 <Lc_async_wbs_enc_connect_4>:
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_ENC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_ENC_OP_DATA *) op_data->extra_op_data;
+84200392:	82 f0 0c 88 	r0 = M[r6 + 48];
+
+    /* Note, encoder code uses subclass ! */
+    wbs_enc = get_instance_data(op_data);
+    terminal_id = ((unsigned *)message_data)[0];
+
+    switch (terminal_id)
+84200396:	31 e8       	rMAC = M[r4 + Null];
+84200398:	0b 60       	if EQ jump (m) Lc_async_wbs_enc_connect_8;
+
+8420039a <Lc_async_wbs_enc_connect_5>:
+8420039a:	00 f2 10 f0 	Null = rMAC - 8388608;
+8420039e:	00 24 
+842003a0:	f4 63       	if NE jump (m) Lc_async_wbs_enc_connect_2;
+
+842003a2 <Lc_async_wbs_enc_connect_6>:
+                        NR_OF_OCTETS_IN_WORD(USE_16BIT_PER_WORD));
+            }
+            break;
+
+        case LEFT_IN_TERMINAL_ID:
+            if (buff_has_metadata(wbs_enc->wbs.buffers.ip_buffer))
+842003a2:	d1 88       	rMAC = M[r0 + 12];
+ *
+ * \return TRUE if the buffer supports metadata. FALSE if it doesn't.
+ */
+static inline bool buff_has_metadata(tCbuffer *buff)
+{
+    if (BUFF_METADATA(buff))
+842003a4:	4b 89       	r1 = M[rMAC + 20];
+842003a6:	5b c6       	r1 = r1 AND 0x8000;
+842003a8:	0b 60       	if EQ jump (m) Lc_async_wbs_enc_connect_10;
+
+842003aa <Lc_async_wbs_enc_connect_7>:
+            {
+                wbs_enc->aswbs.metadata_ip_buffer = wbs_enc->wbs.buffers.ip_buffer;
+842003aa:	d1 8f       	M[r0 + 28] = rMAC;
+842003ac:	09 6e       	jump (m) Lc_async_wbs_enc_connect_10;
+
+842003ae <Lc_async_wbs_enc_connect_8>:
+    terminal_id = ((unsigned *)message_data)[0];
+
+    switch (terminal_id)
+    {
+        case OUTPUT_TERMINAL_ID:
+            if (buff_has_metadata(wbs_enc->wbs.buffers.op_buffer))
+842003ae:	12 89       	r0 = M[r0 + 16];
+842003b0:	51 89       	rMAC = M[r0 + 20];
+842003b2:	49 c6       	rMAC = rMAC AND 0x8000;
+842003b4:	05 60       	if EQ jump (m) Lc_async_wbs_enc_connect_10;
+
+842003b6 <Lc_async_wbs_enc_connect_9>:
+            {
+                buff_metadata_set_usable_octets(wbs_enc->wbs.buffers.op_buffer,
+                        NR_OF_OCTETS_IN_WORD(USE_16BIT_PER_WORD));
+842003b6:	83 20       	r1 = Null + 2;
+842003b8:	ff fd 8c f0 	call (m) 0x11c28;
+842003bc:	31 e3 
+
+842003be <Lc_async_wbs_enc_connect_10>:
+            }
+            break;
+        default:
+            return FALSE;
+    }
+    return TRUE;
+842003be:	42 20       	r0 = Null + 1;
+
+842003c0 <Lc_async_wbs_enc_connect_11>:
+}
+842003c0:	f3 48       	popm <FP, r4, r5, r6, rLink>;
+842003c2:	d8 4c       	rts;
+
+842003c4 <$_async_wbs_enc_disconnect>:
+
+bool async_wbs_enc_disconnect(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+842003c4:	f3 1c       	pushm <FP(=SP), r4, r5, r6, rLink>;
+842003c6:	16 00       	r4 = r0 + Null;
+842003c8:	2f 00       	r5 = r3 + Null;
+    ASYNC_WBS_ENC_OP_DATA *wbs_enc;
+    unsigned terminal_id = ((unsigned*)message_data)[0];
+842003ca:	38 f0 00 e8 	r6 = M[r1 + Null];
+
+    if (! wbs_enc_disconnect(op_data, message_data, response_id, response_data))
+842003ce:	ff fd 12 f1 	call (m) 0x22902;
+842003d2:	35 e9 
+842003d4:	10 04       	Null = r0 - Null;
+842003d6:	03 62       	if NE jump (m) Lc_async_wbs_enc_disconnect_3;
+
+842003d8 <Lc_async_wbs_enc_disconnect_2>:
+    {
+        return FALSE;
+842003d8:	02 00       	r0 = Null + Null;
+842003da:	0e 6e       	jump (m) Lc_async_wbs_enc_disconnect_8;
+
+842003dc <Lc_async_wbs_enc_disconnect_3>:
+    }
+
+    if (((OP_STD_RSP *)(*response_data))->status != STATUS_OK)
+842003dc:	39 e8       	rMAC = M[r5 + Null];
+842003de:	48 88       	Null = M[rMAC + 4];
+842003e0:	fc 63       	if NE jump (m) Lc_async_wbs_enc_disconnect_2;
+
+842003e2 <Lc_async_wbs_enc_disconnect_4>:
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_ENC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_ENC_OP_DATA *) op_data->extra_op_data;
+842003e2:	31 99       	rMAC = M[r4 + 48];
+    }
+
+    /* Note, encoder code uses subclass ! */
+    wbs_enc = get_instance_data(op_data);
+
+    if (terminal_id == LEFT_IN_TERMINAL_ID)
+842003e4:	00 f2 80 f0 	Null = r6 - 8388608;
+842003e8:	00 24 
+842003ea:	05 62       	if NE jump (m) Lc_async_wbs_enc_disconnect_7;
+
+842003ec <Lc_async_wbs_enc_disconnect_5>:
+    {
+        if (NULL != wbs_enc->wbs.buffers.ip_buffer)
+842003ec:	ca 88       	r0 = M[rMAC + 12];
+842003ee:	03 60       	if EQ jump (m) Lc_async_wbs_enc_disconnect_7;
+
+842003f0 <Lc_async_wbs_enc_disconnect_6>:
+        {
+            wbs_enc->wbs.buffers.ip_buffer = NULL;
+842003f0:	c8 8e       	M[rMAC + 12] = Null;
+            wbs_enc->aswbs.metadata_ip_buffer = NULL;
+842003f2:	c8 8f       	M[rMAC + 28] = Null;
+
+842003f4 <Lc_async_wbs_enc_disconnect_7>:
+        }
+    }
+    return TRUE;
+842003f4:	42 20       	r0 = Null + 1;
+
+842003f6 <Lc_async_wbs_enc_disconnect_8>:
+}
+842003f6:	f3 48       	popm <FP, r4, r5, r6, rLink>;
+842003f8:	d8 4c       	rts;
+
+842003fa <$_async_wbs_enc_process_data>:
+
+
+/* ************************************* Data processing-related functions and wrappers **********************************/
+
+void async_wbs_enc_process_data(OPERATOR_DATA *op_data, TOUCHED_TERMINALS *touched)
+{
+842003fa:	f6 1c       	pushm <FP(=SP), r4, r5, r6, r7, r8, r9, rLink>;
+842003fc:	4e 4c       	SP = SP + 56;
+842003fe:	13 09       	r9 = r0 + Null;
+84200400:	43 de       	M[FP + 32] = r1;
+/****************************************************************************
+Private Function Definitions
+*/
+static inline ASYNC_WBS_ENC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (ASYNC_WBS_ENC_OP_DATA *) op_data->extra_op_data;
+84200402:	b7 f0 0c 88 	r5 = M[r9 + 48];
+/* ************************************* Data processing-related functions and wrappers **********************************/
+
+void async_wbs_enc_process_data(OPERATOR_DATA *op_data, TOUCHED_TERMINALS *touched)
+{
+    WBS_ENC_OP_DATA* x_data = &(get_instance_data(op_data)->wbs);
+    ASYNC_WBS_ENC_SPECIFIC_DATA* aswbs_data = &(get_instance_data(op_data)->aswbs);
+84200406:	39 2b       	rMAC = r5 + 28;
+84200408:	49 de       	M[FP + 36] = rMAC;
+    unsigned b4idx, afteridx;
+    metadata_tag *mtag_ip, *mtag_ip_list;
+    metadata_tag *mtag;
+    tCbuffer *src, *dst;
+    unsigned frame_len_enc_octets;
+    unsigned new_ttp, base_ttp = 0, sample_offset = 0;
+8420040a:	50 de       	M[FP + 40] = Null;
+8420040c:	58 de       	M[FP + 44] = Null;
+    ttp_status status;
+
+    patch_fn(async_wbs_encode_process_data);
+
+    wbs_enc_output_block_size = awbs_encode_frame_size(x_data->codec_data);
+8420040e:	7a 89       	r0 = M[r5 + 20];
+84200410:	01 f0 37 e4 	call (m) $_awbs_encode_frame_size;
+84200414:	62 de       	M[FP + 48] = r0;
+84200416:	11 00       	rMAC = r0 + Null;
+    wbs_enc_output_block_size_w = CONVERT_OCTETS_TO_SAMPLES(wbs_enc_output_block_size);
+84200418:	4a 20       	r0 = rMAC + 1;
+8420041a:	7f f2 da d8 	r8 = r0 LSHIFT -1;
+
+    available_space = cbuffer_calc_amount_space_in_words(x_data->buffers.op_buffer);
+8420041e:	3a 89       	r0 = M[r5 + 16];
+84200420:	ff fd 5e f1 	call (m) 0x2c1b6;
+84200424:	37 ec 
+84200426:	11 09       	r7 = r0 + Null;
+
+    samples_to_process = cbuffer_calc_amount_data_in_words(x_data->buffers.ip_buffer);
+84200428:	fa 88       	r0 = M[r5 + 12];
+8420042a:	ff fd 5e f1 	call (m) 0x2c208;
+8420042e:	3f ee 
+84200430:	16 00       	r4 = r0 + Null;
+    if (aswbs_data->metadata_ip_buffer != NULL)
+84200432:	49 d8       	rMAC = M[FP + 36];
+84200434:	0a e8       	r0 = M[rMAC + Null];
+84200436:	0a 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_4;
+
+84200438 <Lc_async_wbs_enc_process_data_2>:
+    {
+        /* Check available data according to metadata and avoid processing more
+         * data than metadata. */
+        unsigned available_input_meta = CONVERT_OCTETS_TO_SAMPLES(
+                                buff_metadata_available_octets(aswbs_data->metadata_ip_buffer));
+84200438:	ff fd 8c f0 	call (m) 0x11d04;
+8420043c:	2d e6 
+8420043e:	52 20       	r0 = r0 + 1;
+84200440:	12 50       	r0 = r0 LSHIFT -1;
+        if (available_input_meta < samples_to_process)
+84200442:	90 05       	Null = r0 - r4;
+84200444:	02 f0 87 e0 	if C jump (m) Lc_async_wbs_enc_process_data_4;
+
+84200448 <Lc_async_wbs_enc_process_data_3>:
+        {
+            samples_to_process = available_input_meta;
+84200448:	16 00       	r4 = r0 + Null;
+
+8420044a <Lc_async_wbs_enc_process_data_4>:
+8420044a:	41 20       	rMAC = Null + 1;
+8420044c:	69 de       	M[FP + 52] = rMAC;
+        }
+    }
+
+    /* Loop until we've done all we need to.
+     */
+    count = 0;
+8420044e:	00 09       	r6 = Null + Null;
+
+84200450 <Lc_async_wbs_enc_process_data_5>:
+    while ((available_space >= wbs_enc_output_block_size_w) &&
+           (samples_to_process >= WBS_ENC_DEFAULT_INPUT_BLOCK_SIZE))
+84200450:	af f9 00 c2 	Null = r7 - r8;
+84200454:	2c 64       	if NC jump (m) Lc_async_wbs_enc_process_data_11;
+
+84200456 <Lc_async_wbs_enc_process_data_6>:
+84200456:	60 f0 78 24 	Null = r4 - 120;
+8420045a:	2d 64       	if NC jump (m) Lc_async_wbs_enc_process_data_12;
+
+8420045c <Lc_async_wbs_enc_process_data_7>:
+    {
+        /* Is fadeout enabled? if yes, do it on the current input data */
+        if(x_data->fadeout_parameters.fadeout_state != NOT_RUNNING_STATE)
+8420045c:	39 81       	rMAC = MBS[r5 + 4];
+8420045e:	10 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_10;
+
+84200460 <Lc_async_wbs_enc_process_data_8>:
+        {
+            /* the wrapper below takes output Cbuffer and fadeout params, use input block size */
+            if(mono_cbuffer_fadeout(x_data->buffers.ip_buffer, WBS_ENC_DEFAULT_INPUT_BLOCK_SIZE,
+                                     &(x_data->fadeout_parameters)))
+84200460:	03 f0 78 40 	r1 = Null + 120;
+84200464:	fa 88       	r0 = M[r5 + 12];
+84200466:	3c 00       	r2 = r5 + Null;
+84200468:	ff fd 7a f1 	call (m) 0x2fa0a;
+8420046c:	23 ed 
+8420046e:	10 04       	Null = r0 - Null;
+84200470:	07 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_10;
+
+84200472 <Lc_async_wbs_enc_process_data_9>:
+            {
+                common_send_simple_unsolicited_message(op_data, OPMSG_REPLY_ID_FADEOUT_DONE);
+84200472:	13 f0 00 40 	r1 = Null + 8192;
+84200476:	5a 08       	r0 = r9 + Null;
+84200478:	ef fd fe ff 	call (m) 0x252;
+8420047c:	3b ee 
+
+8420047e <Lc_async_wbs_enc_process_data_10>:
+            }
+        }
+
+        /* Commit any scratch memory ideally this should be done later after the
+         * decision to decode is made. */
+        mem_table_scratch_tbl_commit(x_data->codec_data, &wbs_enc_scratch_table);
+8420047e:	80 ff 23 f4 	r1 = Null + -133672104;
+84200482:	58 63 
+84200484:	7a 89       	r0 = M[r5 + 20];
+84200486:	ff fd 07 f0 	call (m) 0x13bc;
+8420048a:	37 e9 
+
+        wbsenc_process_frame(op_data);
+8420048c:	5a 08       	r0 = r9 + Null;
+8420048e:	ff fd 75 f1 	call (m) 0x2ef12;
+84200492:	25 e4 
+
+        /* Free the scratch memory used */
+        scratch_free();
+84200494:	ff fd 06 f0 	call (m) 0x1096;
+84200498:	23 e0 
+
+        available_space -= wbs_enc_output_block_size_w;
+        samples_to_process -= WBS_ENC_DEFAULT_INPUT_BLOCK_SIZE;
+
+        touched->sources =  TOUCHED_SOURCE_0;
+8420049a:	6a d8       	r0 = M[FP + 52];
+8420049c:	41 d8       	rMAC = M[FP + 32];
+8420049e:	0a ee       	M[rMAC + Null] = r0;
+        wbsenc_process_frame(op_data);
+
+        /* Free the scratch memory used */
+        scratch_free();
+
+        available_space -= wbs_enc_output_block_size_w;
+842004a0:	00 fa 39 c2 	r7 = r7 - r8;
+        samples_to_process -= WBS_ENC_DEFAULT_INPUT_BLOCK_SIZE;
+842004a4:	f6 f7 88 7f 	r4 = r4 + -120;
+
+        touched->sources =  TOUCHED_SOURCE_0;
+        count++;
+842004a8:	08 75       	r6 = r6 + 1;
+
+    /* Loop until we've done all we need to.
+     */
+    count = 0;
+    while ((available_space >= wbs_enc_output_block_size_w) &&
+           (samples_to_process >= WBS_ENC_DEFAULT_INPUT_BLOCK_SIZE))
+842004aa:	d3 6f       	jump (m) Lc_async_wbs_enc_process_data_5;
+
+842004ac <Lc_async_wbs_enc_process_data_11>:
+
+        touched->sources =  TOUCHED_SOURCE_0;
+        count++;
+    }
+
+    if (samples_to_process < WBS_ENC_DEFAULT_INPUT_BLOCK_SIZE)
+842004ac:	60 f0 78 24 	Null = r4 - 120;
+842004b0:	02 f0 8b e0 	if C jump (m) Lc_async_wbs_enc_process_data_13;
+
+842004b4 <Lc_async_wbs_enc_process_data_12>:
+    {
+        /* If there isn't enough data to process another frame kick backwards */
+        touched->sinks = TOUCHED_SINK_0;
+842004b4:	41 20       	rMAC = Null + 1;
+842004b6:	42 d8       	r0 = M[FP + 32];
+842004b8:	51 8e       	M[r0 + 4] = rMAC;
+
+842004ba <Lc_async_wbs_enc_process_data_13>:
+    }
+
+    if (count > 0)
+842004ba:	0f f8 00 c2 	Null = r6 - Null;
+842004be:	c9 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_47;
+
+842004c0 <Lc_async_wbs_enc_process_data_14>:
+    {
+        /* total data processed on the input */
+        ip_proc_data = count * WBS_ENC_DEFAULT_INPUT_BLOCK_SIZE;
+842004c0:	3c f8 96 c9 	r4 = r6 * 120 (int);
+
+        /* total data output (octets) */
+        frame_len_enc_octets = count * wbs_enc_output_block_size;
+842004c4:	61 d8       	rMAC = M[FP + 48];
+842004c6:	8f f1 89 c9 	r7 = rMAC * r6 (int);
+
+        src = aswbs_data->metadata_ip_buffer;
+842004ca:	49 d8       	rMAC = M[FP + 36];
+842004cc:	0a e8       	r0 = M[rMAC + Null];
+        dst = x_data->buffers.op_buffer;
+842004ce:	7a f0 04 88 	r8 = M[r5 + 16];
+        ip_proc_data_octets = ip_proc_data * OCTETS_PER_SAMPLE;
+842004d2:	73 54       	r1 = r4 LSHIFT 2;
+
+        /* Extract metadata tag from input */
+        mtag_ip_list = buff_metadata_remove(src, ip_proc_data_octets, &b4idx, &afteridx);
+842004d4:	c5 13       	r3 = FP + 60;
+842004d6:	84 13       	r2 = FP + 56;
+842004d8:	ff fd 8c f0 	call (m) 0x11d7a;
+842004dc:	23 e5 
+842004de:	10 09       	r6 = r0 + Null;
+        L4_DBG_MSG4("meta: %p %d b4%d after %d",mtag_ip_list,!mtag_ip_list?0:(mtag_ip_list->timestamp),b4idx,afteridx);
+842004e0:	01 f0 28 91 	rMAC = MBS[Null + 0x328];
+842004e4:	08 25       	Null = rMAC - 4;
+842004e6:	13 68       	if LT jump (m) Lc_async_wbs_enc_process_data_19;
+
+842004e8 <Lc_async_wbs_enc_process_data_15>:
+842004e8:	0f f8 00 c2 	Null = r6 - Null;
+842004ec:	03 62       	if NE jump (m) Lc_async_wbs_enc_process_data_17;
+
+842004ee <Lc_async_wbs_enc_process_data_16>:
+842004ee:	04 00       	r2 = Null + Null;
+842004f0:	03 6e       	jump (m) Lc_async_wbs_enc_process_data_18;
+
+842004f2 <Lc_async_wbs_enc_process_data_17>:
+842004f2:	84 f0 04 88 	r2 = M[r6 + 16];
+
+842004f6 <Lc_async_wbs_enc_process_data_18>:
+842004f6:	79 d8       	rMAC = M[FP + 60];
+842004f8:	09 1c       	pushm <rMAC>;
+842004fa:	75 d8       	r3 = M[FP + 56];
+842004fc:	55 f1 02 f0 	r0 = Null + 357564452;
+84200500:	24 40 
+84200502:	43 08       	r1 = r6 + Null;
+84200504:	ff fd 02 f0 	call (m) 0x9f6;
+84200508:	33 e7 
+8420050a:	7f 4c       	SP = SP + -4;
+
+8420050c <Lc_async_wbs_enc_process_data_19>:
+
+        /* Find the first timestamped tag */
+        mtag_ip = mtag_ip_list;
+8420050c:	47 08       	r5 = r6 + Null;
+
+8420050e <Lc_async_wbs_enc_process_data_20>:
+        while ((mtag_ip != NULL) && (!IS_TIMESTAMPED_TAG(mtag_ip)))
+8420050e:	38 04       	Null = r5 - Null;
+84200510:	2a 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_28;
+
+84200512 <Lc_async_wbs_enc_process_data_21>:
+84200512:	79 88       	rMAC = M[r5 + 4];
+84200514:	12 f0 30 00 	r0 = rMAC AND 0x30;
+84200518:	03 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_23;
+
+8420051a <Lc_async_wbs_enc_process_data_22>:
+8420051a:	c9 c2       	rMAC = rMAC AND 0x40;
+8420051c:	07 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_24;
+
+8420051e <Lc_async_wbs_enc_process_data_23>:
+        {
+            b4idx += mtag_ip->length;
+8420051e:	f9 88       	rMAC = M[r5 + 12];
+84200520:	72 d8       	r0 = M[FP + 56];
+84200522:	51 00       	rMAC = r0 + rMAC;
+84200524:	71 de       	M[FP + 56] = rMAC;
+            mtag_ip = mtag_ip->next;
+84200526:	3f e8       	r5 = M[r5 + Null];
+84200528:	f3 6f       	jump (m) Lc_async_wbs_enc_process_data_20;
+
+8420052a <Lc_async_wbs_enc_process_data_24>:
+        }
+
+        if ((b4idx == 0) && (mtag_ip != NULL))
+8420052a:	70 d8       	Null = M[FP + 56];
+8420052c:	1c 62       	if NE jump (m) Lc_async_wbs_enc_process_data_28;
+
+8420052e <Lc_async_wbs_enc_process_data_25>:
+        {
+            /* If the old tag is already at the start of the encoded frame,
+             * Just use its timestamp directly
+             */
+            base_ttp = mtag_ip->timestamp;
+8420052e:	39 89       	rMAC = M[r5 + 16];
+84200530:	51 de       	M[FP + 40] = rMAC;
+            sample_offset = 0;
+84200532:	58 de       	M[FP + 44] = Null;
+
+84200534 <Lc_async_wbs_enc_process_data_26>:
+        if (mtag_ip != NULL)
+        {
+            unsigned *err_offset_id;
+            unsigned length;
+            /* Save the timestamp info from the incoming metadata */
+            aswbs_data->last_tag_timestamp = mtag_ip->timestamp;
+84200534:	39 89       	rMAC = M[r5 + 16];
+84200536:	4a d8       	r0 = M[FP + 36];
+84200538:	91 8e       	M[r0 + 8] = rMAC;
+            aswbs_data->last_tag_spa = mtag_ip->sp_adjust;
+8420053a:	79 89       	rMAC = M[r5 + 20];
+8420053c:	d1 8e       	M[r0 + 12] = rMAC;
+            aswbs_data->last_tag_samples = ip_proc_data - (b4idx / OCTETS_PER_SAMPLE);
+8420053e:	72 d8       	r0 = M[FP + 56];
+84200540:	52 50       	r0 = r0 LSHIFT -2;
+84200542:	b1 04       	rMAC = r4 - r0;
+84200544:	4a d8       	r0 = M[FP + 36];
+84200546:	11 8f       	M[r0 + 16] = rMAC;
+            if (buff_metadata_find_private_data(mtag_ip, META_PRIV_KEY_TTP_OFFSET,
+                                                &length, (void **)&err_offset_id))
+84200548:	05 14       	r3 = FP + 64;
+8420054a:	44 14       	r2 = FP + 68;
+8420054c:	43 20       	r1 = Null + 1;
+8420054e:	3a 00       	r0 = r5 + Null;
+84200550:	ff fd 8a f0 	call (m) 0x11a84;
+84200554:	35 e9 
+84200556:	10 04       	Null = r0 - Null;
+84200558:	24 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_35;
+
+8420055a <Lc_async_wbs_enc_process_data_27>:
+            {
+                aswbs_data->last_tag_err_offset_id = (*err_offset_id);
+8420055a:	81 d8       	rMAC = M[FP + 64];
+8420055c:	4a d8       	r0 = M[FP + 36];
+8420055e:	09 e8       	rMAC = M[rMAC + Null];
+84200560:	51 8f       	M[r0 + 20] = rMAC;
+84200562:	10 6e       	jump (m) Lc_async_wbs_enc_process_data_33;
+
+84200564 <Lc_async_wbs_enc_process_data_28>:
+        }
+        else
+        {
+            /* Otherwise, use the previously-stashed timestamp.
+             * There had better be one ! */
+            if (aswbs_data->last_tag_samples != LAST_TAG_SAMPLES_INVALID)
+84200564:	49 d8       	rMAC = M[FP + 36];
+84200566:	09 89       	rMAC = M[rMAC + 16];
+84200568:	48 20       	Null = rMAC + 1;
+8420056a:	05 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_30;
+
+8420056c <Lc_async_wbs_enc_process_data_29>:
+            {
+                base_ttp = aswbs_data->last_tag_timestamp;
+8420056c:	4a d8       	r0 = M[FP + 36];
+8420056e:	92 88       	r0 = M[r0 + 8];
+84200570:	52 de       	M[FP + 40] = r0;
+                sample_offset = aswbs_data->last_tag_samples;
+84200572:	59 de       	M[FP + 44] = rMAC;
+
+84200574 <Lc_async_wbs_enc_process_data_30>:
+            }
+        }
+
+        if (mtag_ip != NULL)
+84200574:	38 04       	Null = r5 - Null;
+84200576:	df 63       	if NE jump (m) Lc_async_wbs_enc_process_data_26;
+
+84200578 <Lc_async_wbs_enc_process_data_31>:
+                aswbs_data->last_tag_err_offset_id = INFO_ID_INVALID;
+            }
+        }
+        else
+        {
+            if (aswbs_data->last_tag_samples != LAST_TAG_SAMPLES_INVALID)
+84200578:	48 20       	Null = rMAC + 1;
+8420057a:	04 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_33;
+
+8420057c <Lc_async_wbs_enc_process_data_32>:
+            {
+                aswbs_data->last_tag_samples += ip_proc_data;
+8420057c:	71 00       	rMAC = r4 + rMAC;
+8420057e:	4a d8       	r0 = M[FP + 36];
+84200580:	11 8f       	M[r0 + 16] = rMAC;
+
+84200582 <Lc_async_wbs_enc_process_data_33>:
+            }
+        }
+
+        status.sp_adjustment = aswbs_data->last_tag_spa;
+84200582:	49 d8       	rMAC = M[FP + 36];
+84200584:	c9 88       	rMAC = M[rMAC + 12];
+84200586:	99 de       	M[FP + 76] = rMAC;
+        status.err_offset_id = aswbs_data->last_tag_err_offset_id;
+84200588:	49 d8       	rMAC = M[FP + 36];
+8420058a:	49 89       	rMAC = M[rMAC + 20];
+8420058c:	a1 de       	M[FP + 80] = rMAC;
+        status.stream_restart = ((mtag_ip != NULL)
+                                 && (METADATA_STREAM_START(mtag_ip) != 0));
+8420058e:	38 04       	Null = r5 - Null;
+84200590:	0b 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_36;
+
+84200592 <Lc_async_wbs_enc_process_data_34>:
+84200592:	79 88       	rMAC = M[r5 + 4];
+84200594:	0a c0       	r0 = rMAC AND 0x1;
+84200596:	01 00       	rMAC = Null + Null;
+84200598:	10 04       	Null = r0 - Null;
+8420059a:	21 f0 41 ce 	if NE rMAC = Null + 1;
+8420059e:	05 6e       	jump (m) Lc_async_wbs_enc_process_data_37;
+
+842005a0 <Lc_async_wbs_enc_process_data_35>:
+            {
+                aswbs_data->last_tag_err_offset_id = (*err_offset_id);
+            }
+            else
+            {
+                aswbs_data->last_tag_err_offset_id = INFO_ID_INVALID;
+842005a0:	49 d8       	rMAC = M[FP + 36];
+842005a2:	48 8f       	M[rMAC + 20] = Null;
+842005a4:	ef 6f       	jump (m) Lc_async_wbs_enc_process_data_33;
+
+842005a6 <Lc_async_wbs_enc_process_data_36>:
+        }
+
+        status.sp_adjustment = aswbs_data->last_tag_spa;
+        status.err_offset_id = aswbs_data->last_tag_err_offset_id;
+        status.stream_restart = ((mtag_ip != NULL)
+                                 && (METADATA_STREAM_START(mtag_ip) != 0));
+842005a6:	01 00       	rMAC = Null + Null;
+
+842005a8 <Lc_async_wbs_enc_process_data_37>:
+842005a8:	a9 de       	M[FP + 84] = rMAC;
+
+        /* Create new tags for each output frame */
+        mtag = buff_metadata_new_tag();
+842005aa:	ff fd 89 f0 	call (m) 0x11862;
+842005ae:	39 e5 
+842005b0:	16 00       	r4 = r0 + Null;
+
+        if (mtag != NULL)
+842005b2:	2e 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_42;
+
+842005b4 <Lc_async_wbs_enc_process_data_38>:
+        {
+            mtag->length = frame_len_enc_octets;
+842005b4:	69 f0 03 8e 	M[r4 + 12] = r7;
+            METADATA_PACKET_START_SET(mtag);
+842005b8:	71 88       	rMAC = M[r4 + 4];
+842005ba:	c9 c8       	rMAC = rMAC OR 0x4;
+            METADATA_PACKET_END_SET(mtag);
+842005bc:	49 c9       	rMAC = rMAC OR 0x8;
+842005be:	71 8e       	M[r4 + 4] = rMAC;
+
+            if (aswbs_data->last_tag_samples != LAST_TAG_SAMPLES_INVALID)
+842005c0:	49 d8       	rMAC = M[FP + 36];
+842005c2:	09 89       	rMAC = M[rMAC + 16];
+842005c4:	48 20       	Null = rMAC + 1;
+842005c6:	19 60       	if EQ jump (m) Lc_async_wbs_enc_process_data_40;
+
+842005c8 <Lc_async_wbs_enc_process_data_39>:
+
+                /* Calculate new TTP from incoming data and sample offset */
+                new_ttp = ttp_get_next_timestamp(base_ttp,
+                                                 sample_offset,
+                                                 aswbs_data->sample_rate,
+                                                 aswbs_data->last_tag_spa);
+842005c8:	49 d8       	rMAC = M[FP + 36];
+842005ca:	5b d8       	r1 = M[FP + 44];
+842005cc:	cd 88       	r3 = M[rMAC + 12];
+842005ce:	4c 88       	r2 = M[rMAC + 4];
+842005d0:	52 d8       	r0 = M[FP + 40];
+842005d2:	ff fd b2 f0 	call (m) 0x16aa2;
+842005d6:	31 e6 
+842005d8:	17 00       	r5 = r0 + Null;
+                new_ttp = time_sub( new_ttp,
+                                    convert_samples_to_time(aswbs_data->delay_samples,
+                                                            aswbs_data->sample_rate));
+842005da:	49 d8       	rMAC = M[FP + 36];
+842005dc:	4b 88       	r1 = M[rMAC + 4];
+842005de:	8a 89       	r0 = M[rMAC + 24];
+842005e0:	ff fd a9 f0 	call (m) 0x15914;
+842005e4:	35 e9 
+842005e6:	bf 04       	r5 = r5 - r0;
+                status.ttp = new_ttp;
+842005e8:	97 de       	M[FP + 72] = r5;
+                ttp_utils_populate_tag(mtag, &status);
+842005ea:	83 14       	r1 = FP + 72;
+842005ec:	32 00       	r0 = r4 + Null;
+842005ee:	ff fd 01 f0 	call (m) 0x8d0;
+842005f2:	23 e7 
+                status.stream_restart = FALSE;
+842005f4:	a8 de       	M[FP + 84] = Null;
+842005f6:	16 6e       	jump (m) Lc_async_wbs_enc_process_data_44;
+
+842005f8 <Lc_async_wbs_enc_process_data_40>:
+            }
+            else
+            {
+                L4_DBG_MSG("WBS2Enc last tag samples invalid");
+842005f8:	01 f0 28 91 	rMAC = MBS[Null + 0x328];
+842005fc:	08 25       	Null = rMAC - 4;
+842005fe:	12 68       	if LT jump (m) Lc_async_wbs_enc_process_data_44;
+
+84200600 <Lc_async_wbs_enc_process_data_41>:
+84200600:	55 f1 02 f0 	r0 = Null + 357564478;
+84200604:	3e 40 
+84200606:	ff fd 01 f0 	call (m) 0x9a2;
+8420060a:	3d ec 
+8420060c:	0b 6e       	jump (m) Lc_async_wbs_enc_process_data_44;
+
+8420060e <Lc_async_wbs_enc_process_data_42>:
+            }
+        }
+        else
+        {
+            L4_DBG_MSG("WBS2Enc failed to allocate tag");
+8420060e:	01 f0 28 91 	rMAC = MBS[Null + 0x328];
+84200612:	08 25       	Null = rMAC - 4;
+84200614:	07 68       	if LT jump (m) Lc_async_wbs_enc_process_data_44;
+
+84200616 <Lc_async_wbs_enc_process_data_43>:
+84200616:	55 f1 02 f0 	r0 = Null + 357564511;
+8420061a:	5f 40 
+8420061c:	ff fd 01 f0 	call (m) 0x9a2;
+84200620:	27 ec 
+
+84200622 <Lc_async_wbs_enc_process_data_44>:
+        }
+
+        buff_metadata_append(dst, mtag, 0, frame_len_enc_octets);
+84200622:	04 00       	r2 = Null + Null;
+84200624:	4d 08       	r3 = r7 + Null;
+84200626:	33 00       	r1 = r4 + Null;
+84200628:	52 08       	r0 = r8 + Null;
+8420062a:	ff fd 8a f0 	call (m) 0x11adc;
+8420062e:	33 e5 
+        L4_DBG_MSG2("Meta: TTP:x%x Len:%d",mtag->timestamp,mtag->length);
+84200630:	01 f0 28 91 	rMAC = MBS[Null + 0x328];
+84200634:	08 25       	Null = rMAC - 4;
+84200636:	09 68       	if LT jump (m) Lc_async_wbs_enc_process_data_46;
+
+84200638 <Lc_async_wbs_enc_process_data_45>:
+84200638:	f4 88       	r2 = M[r4 + 12];
+8420063a:	33 89       	r1 = M[r4 + 16];
+8420063c:	55 f1 02 f0 	r0 = Null + 357564542;
+84200640:	7e 40 
+84200642:	ff fd 01 f0 	call (m) 0x9c8;
+84200646:	27 ec 
+
+84200648 <Lc_async_wbs_enc_process_data_46>:
+
+        /* Free all the incoming tags */
+        buff_metadata_tag_list_delete(mtag_ip_list);
+84200648:	42 08       	r0 = r6 + Null;
+8420064a:	ff fd 89 f0 	call (m) 0x11906;
+8420064e:	3d e5 
+
+84200650 <Lc_async_wbs_enc_process_data_47>:
+    }
+}
+84200650:	72 4c       	SP = SP + -56;
+84200652:	f6 48       	popm <FP, r4, r5, r6, r7, r8, r9, rLink>;
+84200654:	d8 4c       	rts;
+
+84200656 <$_async_wbs_enc_buffer_details>:
+    return TRUE;
+}
+
+bool async_wbs_enc_buffer_details(OPERATOR_DATA *op_data, void *message_data,
+        unsigned *response_id, void **response_data)
+{
+84200656:	f2 1c       	pushm <FP(=SP), r4, r5, rLink>;
+84200658:	16 00       	r4 = r0 + Null;
+8420065a:	2f 00       	r5 = r3 + Null;
+    unsigned wbs_buff_size = 0;
+
+    if(!base_op_buffer_details(op_data, message_data, response_id, response_data))
+8420065c:	ef fd fd ff 	call (m) 0xbe;
+84200660:	23 e3 
+84200662:	10 04       	Null = r0 - Null;
+84200664:	03 62       	if NE jump (m) Lc_async_wbs_enc_buffer_details_3;
+
+84200666 <Lc_async_wbs_enc_buffer_details_2>:
+    {
+        return FALSE;
+84200666:	02 00       	r0 = Null + Null;
+84200668:	1d 6e       	jump (m) Lc_async_wbs_enc_buffer_details_6;
+
+8420066a <Lc_async_wbs_enc_buffer_details_3>:
+    else
+    {
+        wbs_buff_size = WBS_ENC_OUTPUT_BUFFER_SIZE;
+    }
+
+    ((OP_BUF_DETAILS_RSP*)*response_data)->b.buffer_size = wbs_buff_size;
+8420066a:	01 f0 00 41 	rMAC = Null + 256;
+8420066e:	3a e8       	r0 = M[r5 + Null];
+84200670:	11 8f       	M[r0 + 16] = rMAC;
+    /* supports metadata in both side  */
+    ((OP_BUF_DETAILS_RSP*)*response_data)->metadata_buffer = 0;
+84200672:	39 e8       	rMAC = M[r5 + Null];
+84200674:	c8 8e       	M[rMAC + 12] = Null;
+    ((OP_BUF_DETAILS_RSP*)*response_data)->supports_metadata = TRUE;
+84200676:	39 e8       	rMAC = M[r5 + Null];
+84200678:	09 22       	rMAC = rMAC + 8;
+8420067a:	0a e2       	r0 = MBU[rMAC + Null];
+8420067c:	22 ff ef 1f 	r0 = r0 AND 0xffffffef;
+84200680:	d2 c9       	r0 = r0 OR 0x10;
+84200682:	0a ea       	MB[rMAC + Null] = r0;
+
+    L4_DBG_MSG2( "wbs_buffer_details (capID=%d)  %d \n", op_data->cap_data->id, ((OP_STD_RSP*)*response_data)->resp_data.data);
+84200684:	01 f0 28 91 	rMAC = MBS[Null + 0x328];
+84200688:	08 25       	Null = rMAC - 4;
+8420068a:	0b 68       	if LT jump (m) Lc_async_wbs_enc_buffer_details_5;
+
+8420068c <Lc_async_wbs_enc_buffer_details_4>:
+8420068c:	39 e8       	rMAC = M[r5 + Null];
+8420068e:	8c 88       	r2 = M[rMAC + 8];
+84200690:	71 89       	rMAC = M[r4 + 20];
+84200692:	0b e8       	r1 = M[rMAC + Null];
+84200694:	55 f1 02 f0 	r0 = Null + 357564563;
+84200698:	93 40 
+8420069a:	ff fd 01 f0 	call (m) 0x9c8;
+8420069e:	2f e9 
+
+842006a0 <Lc_async_wbs_enc_buffer_details_5>:
+
+    return TRUE;
+842006a0:	42 20       	r0 = Null + 1;
+
+842006a2 <Lc_async_wbs_enc_buffer_details_6>:
+}
+842006a2:	f2 48       	popm <FP, r4, r5, rLink>;
+842006a4:	d8 4c       	rts;
+
+842006a6 <$_awbs_encode_frame_size>:
+842006a6:	51 99       	rMAC = M[r0 + 52];
+ */
+unsigned awbs_encode_frame_size(sbc_codec *codec_data)
+{
+    unsigned out_size_octets, bitpool;
+
+    if (codec_data->enc_setting_bitpool > 0)
+842006a8:	02 60       	if EQ jump (m) Lc_awbs_encode_frame_size_3;
+
+842006aa <Lc_awbs_encode_frame_size_2>:
+    {
+        bitpool = codec_data->enc_setting_bitpool;
+842006aa:	03 6e       	jump (m) Lc_awbs_encode_frame_size_4;
+
+842006ac <Lc_awbs_encode_frame_size_3>:
+    }
+    else
+    {
+        bitpool = codec_data->bitpool;
+842006ac:	21 f0 22 88 	rMAC = M[r0 + 136];
+
+842006b0 <Lc_awbs_encode_frame_size_4>:
+     * nrof_subbands = 8;
+     * nrof_blocks = 15;
+     * frame_length = 4 + (4 * nrof_subbands * nrof_channels) / 8 +  ceil((nrof_blocks * nrof_channels * bitpool) / 8);
+     * frame_length = 4 + (4 * 8 * 1 ) / 8 + ((15 * 1 * bitpool) + 7) / 8;
+     *  */
+    out_size_octets = 8 + ((15 * bitpool) + 7) / 8;
+842006b0:	c9 43       	rMAC = rMAC * 15 (int);
+842006b2:	ca 21       	r0 = rMAC + 7;
+842006b4:	92 50       	r0 = r0 LSHIFT -3;
+842006b6:	12 22       	r0 = r0 + 8;
+
+    /* The wbs encoded packet contains a 2-byte header apart from the mSBC frame  */
+    out_size_octets += 2;
+842006b8:	92 20       	r0 = r0 + 2;
+
+    /* round up to words (16 bit) */
+    if (out_size_octets & 0x01)
+842006ba:	11 c0       	rMAC = r0 AND 0x1;
+842006bc:	02 60       	if EQ jump (m) Lc_awbs_encode_frame_size_6;
+
+842006be <Lc_awbs_encode_frame_size_5>:
+    {
+        out_size_octets ++;
+842006be:	52 20       	r0 = r0 + 1;
+
+842006c0 <Lc_awbs_encode_frame_size_6>:
+    }
+
+    return out_size_octets;
+842006c0:	d8 4c       	rts;
+
+842006c2 <$kdc_start>:
+.MODULE $M.kdc_start;
+.CODESEGMENT PM;
+.DATASEGMENT DM;
+
+$kdc_start:
+r0 = $_async_wbs_enc_cap_data;
+842006c2:	07 f0 02 f0 	r0 = Null + 7340320;
+842006c6:	20 41 
+r0 = $_async_wbs_dec_cap_data;
+842006c8:	07 f0 02 f0 	r0 = Null + 7340192;
+842006cc:	a0 40 
+    /* Force this symbol to be exported in ELF */
+    Null = $___kymera_debug_map_addr;
+842006ce:	20 f0 b0 41 	Null = Null + 16816;

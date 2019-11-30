@@ -1,0 +1,62 @@
+/* Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd. */
+/* %%version */
+#ifndef __GATT_BROADCAST_SERVER_DB_DBI__
+#define __GATT_BROADCAST_SERVER_DB_DBI__
+
+#include "gatt_broadcast_server_uuids.h"
+
+primary_service {
+    uuid : UUID_BROADCAST_SERVICE,
+    name : "BROADCAST_SERVICE",
+
+    characteristic {
+        uuid       : UUID_BROADCAST_VERSION,
+        name       : "BROADCAST_VERSION",
+        flags      : [ FLAG_IRQ ],
+        properties : [ read ],
+        value      : 0x0
+    },
+
+    characteristic {
+        uuid       : UUID_BROADCAST_ADDRESS,
+        name       : "BROADCAST_ADDRESS",
+        flags      : [ FLAG_IRQ, FLAG_DYNLEN ],
+        properties : [ read ],
+        value      : 0x0
+    },
+
+    characteristic {
+        uuid       : UUID_BROADCAST_STATUS,
+        name       : "BROADCAST_STATUS",
+        flags      : [ FLAG_IRQ, FLAG_DYNLEN ],
+        properties : [ read, write ],
+        value      : 0x0
+    },
+
+    characteristic {
+        uuid       : UUID_BROADCAST_SECKEY,
+        name       : "BROADCAST_SECURITY_KEY",
+        flags      : [ FLAG_IRQ, FLAG_ENCR_R ],
+        properties : [ read ],
+        value      : 0x0
+    },
+    
+    characteristic {
+        uuid       : UUID_BROADCAST_STREAM_SERVICE_RECORDS,
+        name       : "BROADCAST_STREAM_SERVICE_RECORDS",
+        flags      : [ FLAG_IRQ, FLAG_DYNLEN ],
+        properties : [ read ],
+        value      : 0x0
+    },
+
+    characteristic {
+        uuid       : UUID_BROADCAST_IDENTIFIER,
+        name       : "BROADCAST_IDENTIFIER",
+        flags      : [ FLAG_IRQ, FLAG_DYNLEN ],
+        properties : [ read ],
+        value      : 0x0
+    }
+},
+
+
+#endif /* __GATT_BROADCAST_SERVER_DB_DBI__ */

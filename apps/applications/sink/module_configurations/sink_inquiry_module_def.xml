@@ -1,0 +1,237 @@
+<ModuleData Name="Sink_inquiry">
+    <DefineGroup>
+        <DefineStruct Id="Sink_inquiry_rssipairing" ShortId="rssi_pairing">
+            <ConfigItem
+                Id="Inquiry Tx Power"
+                ShortId="tx_power"
+                Range="Min=-70,Max=20"
+                Desc="The inquiry transmit power used. See HCI_Write_Inquiry_Transmit_Power_Level command in the Bluetooth Specification v2.1 + EDR."
+                Type="int"
+                Size="16" />
+            <ConfigItem
+                Id="RSSI Threshold"
+                ShortId="threshold"
+                Desc="The peak RSSI value that any discovered devices RSSI value must exceed to be considered a suitable in-range device."
+                Type="int"
+                Size="16"/>
+            <ConfigItem
+                Id="RSSI Difference Threshold"
+                ShortId="diff_threshold"
+                Desc="The difference in the RSSI values returned by two discovered devices must exceed this value in order for the Sink to initiate pairing with the stronger device."
+                Type="int"
+                Size="16"/>
+            <ConfigItem
+                Id="Class Of Device Filter"
+                ShortId="cod_filter"
+                Desc="Defines the Class of device that the inquiry looks for. Class of Device Filter values are detailed in the Assigned Number document available on the Bluetooth SIG website."
+                Type="ulong"  
+                Size="32"/>
+            <ConfigItem
+                Id="Connection Threshold"
+                ShortId="conn_threshold"
+                Desc="Defines the peak RSSI value that any device's RSSI value must exceed to be connected to automatically, using the RSSI auto connection feature."
+                Type="int"
+                Size="16"/>
+            <ConfigItem
+                Id="Connection Difference"
+                ShortId="conn_diff_threshold"
+                Desc="Defines the difference in RSSI values returned by two devices before the stronger device is considered suitable for the auto connection feature."
+                Type="int"
+                Size="16"/>
+            <ConfigItem
+                Id="Maximum Responses"
+                ShortId="max_responses"
+                Desc="Specifies a limit for the number of devices found during an inquiry search, if 0 value there is no limit on the number of devices found."
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Inquiry Timeout [1.28*s]"
+                ShortId="timeout"
+                Desc="Specifies the maximum inquiry time for device searching, in units of 1.28 seconds"
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Resume Timeout [s]"
+                ShortId="resume_timeout"
+                Desc="Time to wait between inquiries, in seconds."
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Number of Results to Store"
+                ShortId="num_results"
+                Desc="Specifies the number of results from a search that are stored."
+                Type="uint"
+                Size="4"/>
+            <ConfigItem
+                Id="Connect if in PDL"
+                ShortId="connect_if_in_pdl"
+                Desc="When set this feature will prevent the connection to any device that is not currently in the Paired Device List."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Dont  Pair if in PDL"
+                ShortId="dont_pair_if_in_pdl"
+                Desc="When set, this feature prevents the Sink from trying to pair to a device that has been previously paired to the Sink and is currently in the Paired Device List."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Try All Discovered"
+                ShortId="try_all_discovered"
+                Desc="When set, this feature forces the Sink to attempt to pair/connect to the entire list of devices it found during a search."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Start RSSI Pairing on PDL Reset"
+                ShortId="pair_on_pdl_reset"
+                Desc="When set, the Sink will start RSSI pairing automatically if the paired device list is erased."
+                Type="bool"
+                Size="1"/>
+        </DefineStruct>
+
+        <DefineStruct Id="SinkPrivateData_radio_config_type" ShortId="radio_config_type">
+            <ConfigItem
+                Id="Page Scan Interval"
+                ShortId="page_scan_interval"
+                Desc="page scan interval"
+                Type="uint"
+                Size="16" />
+            <ConfigItem
+                Id="Page Scan Window"
+                ShortId="page_scan_window"
+                Desc="page scan window"
+                Type="uint"
+                Size="16" />
+            <ConfigItem
+                Id="Inquiry Scan Interval"
+                ShortId="inquiry_scan_interval"
+                Desc="inquiry scan interval"
+                Type="uint"
+                Size="16" />
+             <ConfigItem
+                Id="Inquiry Scan Window"
+                ShortId="inquiry_scan_window"
+                Desc="inquiry scan windowl"
+                Type="uint"
+                Size="16" />
+        </DefineStruct>
+    </DefineGroup>
+
+    <ConfigGroup Id="SinkInquiry" ShortId="sink_inquiry_readonly" Node="Basic">
+        <ConfigStruct 
+            Id="Sink Inquiry RSSI" 
+            ShortId="rssi"
+            Desc="Sink Inquiry RSSI Params" 
+            Type="struct" 
+            Struct="rssi_pairing"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='rssi_parameters']">
+            <StructElementConfigItem 
+                Id="Inquiry Tx Power"
+                ShortId="tx_power" 
+                Desc="The inquiry transmit power used. See HCI_Write_Inquiry_Transmit_Power_Level command in the Bluetooth Specification v2.1 + EDR."
+                DefaultValue="-70"  />
+            <StructElementConfigItem 
+                Id="RSSI Threshold"
+                ShortId="threshold" 
+                Desc="The peak RSSI value that any discovered devices RSSI value must exceed to be considered a suitable in-range device."
+                DefaultValue="-35"  />
+            <StructElementConfigItem
+                Id="RSSI Difference Threshold"
+                ShortId="diff_threshold" 
+                Desc="Defines the difference in RSSI values returned by two devices before the stronger device is considered suitable for the auto connection feature."
+                DefaultValue="5"  />
+            <StructElementConfigItem 
+                Id="Class Of Device Filter"
+                ShortId="cod_filter"
+                Desc="Defines the Class of device that the inquiry looks for. Class of Device Filter values are detailed in the Assigned Number document available on the Bluetooth SIG website."
+                DefaultValue="0"  />
+            <StructElementConfigItem 
+                Id="Connection Threshold"
+                ShortId="conn_threshold" 
+                Desc="Defines the peak RSSI value that any device's RSSI value must exceed to be connected to automatically, using the RSSI auto connection feature."
+                DefaultValue="-35"  />
+            <StructElementConfigItem
+                Id="Connection Difference"
+                ShortId="conn_diff_threshold" 
+                Desc="Defines the difference in RSSI values returned by two devices before the stronger device is considered suitable for the auto connection feature."
+                DefaultValue="5"  />
+            <StructElementConfigItem 
+                Id="Maximum Responses"
+                ShortId="max_responses" 
+                Desc="Specifies a limit for the number of devices found during an inquiry search, if 0 value there is no limit on the number of devices found."
+                DefaultValue="16" />
+            <StructElementConfigItem 
+                Id="Inquiry Timeout [1.28*s]"
+                ShortId="timeout" 
+                Desc="Specifies the maximum inquiry time for device searching, in units of 1.28 seconds"
+                DefaultValue="10" />
+            <StructElementConfigItem 
+                Id="Resume Timeout [s]"
+                ShortId="resume_timeout" 
+                Desc="Time to wait between inquiries, in seconds."
+                DefaultValue="0"  />
+            <StructElementConfigItem 
+                Id="Number of Results to Store"
+                ShortId="num_results" 
+                Desc="Specifies the number of results from a search that are stored."
+                DefaultValue="2" />
+            <StructElementConfigItem 
+                Id="Connect if in PDL"
+                ShortId="connect_if_in_pdl" 
+                Desc="When set this feature will prevent the connection to any device that is not currently in the Paired Device List."
+                DefaultValue="false" />
+            <StructElementConfigItem 
+                Id="Dont  Pair if in PDL"
+                ShortId="dont_pair_if_in_pdl" 
+                Desc="When set, this feature prevents the Sink from trying to pair to a device that has been previously paired to the Sink and is currently in the Paired Device List."
+                DefaultValue="false" />
+            <StructElementConfigItem 
+                Id="Try All Discovered"
+                ShortId="try_all_discovered" 
+                Desc="When set, this feature forces the Sink to attempt to pair/connect to the entire list of devices it found during a search."
+                DefaultValue="false" />
+            <StructElementConfigItem 
+                Id="Start RSSI Pairing on PDL Reset"
+                ShortId="pair_on_pdl_reset" 
+                Desc="When set, the Sink will start RSSI pairing automatically if the paired device list is erased."
+                DefaultValue="false" />
+        </ConfigStruct>
+
+        <ConfigStruct 
+            Id="Sink Inquiry radioconfigtype" 
+            ShortId="radio"
+            Desc="Sink Inquiry radioconfig" 
+            Type="struct"
+            Struct="radio_config_type" 
+            ConfigGroupPath="./[@ShortId='advanced_settings']">    
+            <StructElementConfigItem 
+                Id="Page Scan Interval"
+                ShortId="page_scan_interval"
+                Desc="page scan interval"
+                DefaultValue="0x800" />  <!---HCI_PAGESCAN_INTERVAL_DEFAULT -->
+            <StructElementConfigItem 
+                Id="Page Scan Window"
+                ShortId="page_scan_window" 
+                Desc="page scan window"
+                DefaultValue="0x12" /> <!---HCI_PAGESCAN_WINDOW_DEFAULT -->
+            <StructElementConfigItem 
+                Id="Inquiry Scan Interval"
+                ShortId="inquiry_scan_interval" 
+                Desc="inquiry scan interval"
+                DefaultValue="0x800" /> <!--- HCI_INQUIRYSCAN_INTERVAL_DEFAULT  -->
+            <StructElementConfigItem 
+                Id="Inquiry Scan Window"
+                ShortId="inquiry_scan_window" 
+                Desc="inquiry scan windowl"
+                DefaultValue="0x12" /> <!---HCI_INQUIRYSCAN_WINDOW_DEFAULT -->
+        </ConfigStruct>
+
+        <ConfigItem
+            Id="Inquiry Timeout Period [s]"
+            ShortId="InquiryTimeout_s"
+            Desc="This is the timeout value, in seconds, for RSSI initiated pairing."
+            Type="uint"
+            Size="16"
+            DefaultValue="120"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='rssi_parameters']"/>
+        </ConfigGroup>
+</ModuleData>

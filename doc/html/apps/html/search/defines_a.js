@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['kalimba_5fresource_5fid',['KALIMBA_RESOURCE_ID',['../d1/d6d/sink__a2dp_8h.html#a63857c7339b34c7446e90e504c753067',1,'sink_a2dp.h']]],
+  ['kbp_5fnoti_5find_5freqd',['KBP_NOTI_IND_REQD',['../de/d0c/sink__gatt__server__fps_8h.html#abe59d6e61f3e8ed152122feeb7080445',1,'sink_gatt_server_fps.h']]],
+  ['keep',['keep',['../dc/d3a/av__headset_8h.html#af00fdbe0edb384d1bea5deec647d60c7',1,'av_headset.h']]],
+  ['key_5fdistribution',['KEY_DISTRIBUTION',['../db/df9/sink__auth_8c.html#a078a1638c9df308aed5dc03037e74372',1,'sink_auth.c']]],
+  ['kick_5fperiod_5ffast',['KICK_PERIOD_FAST',['../dd/df8/av__headset__kymera__private_8h.html#a29f1af40bc8b9c490a3d9e301c0b1aff',1,'av_headset_kymera_private.h']]],
+  ['kick_5fperiod_5fmaster_5faac',['KICK_PERIOD_MASTER_AAC',['../dd/df8/av__headset__kymera__private_8h.html#a1b50da566580b2ba2d31825635b27bb9',1,'av_headset_kymera_private.h']]],
+  ['kick_5fperiod_5fmaster_5faptx',['KICK_PERIOD_MASTER_APTX',['../dd/df8/av__headset__kymera__private_8h.html#ab4c4b6bf2d7a8f0760698948e1492075',1,'av_headset_kymera_private.h']]],
+  ['kick_5fperiod_5fmaster_5fsbc',['KICK_PERIOD_MASTER_SBC',['../dd/df8/av__headset__kymera__private_8h.html#ae325c9413d71e68f3465452deccd581e',1,'av_headset_kymera_private.h']]],
+  ['kick_5fperiod_5fslave_5faac',['KICK_PERIOD_SLAVE_AAC',['../dd/df8/av__headset__kymera__private_8h.html#a737d86fad312e8a2cc7b77d7fe6dac8e',1,'av_headset_kymera_private.h']]],
+  ['kick_5fperiod_5fslave_5faptx',['KICK_PERIOD_SLAVE_APTX',['../dd/df8/av__headset__kymera__private_8h.html#afdf3abf2b01dd6eee7bef6789972eeb0',1,'av_headset_kymera_private.h']]],
+  ['kick_5fperiod_5fslave_5fsbc',['KICK_PERIOD_SLAVE_SBC',['../dd/df8/av__headset__kymera__private_8h.html#a4d01642074808bb3d990e69e3b6c10f4',1,'av_headset_kymera_private.h']]],
+  ['kick_5fperiod_5fslow',['KICK_PERIOD_SLOW',['../dd/df8/av__headset__kymera__private_8h.html#a0aa6dbf0ed2ddc1ec052caf99d1cd92e',1,'av_headset_kymera_private.h']]],
+  ['kick_5fperiod_5ftones',['KICK_PERIOD_TONES',['../dd/df8/av__headset__kymera__private_8h.html#aa01537a8fd61327f612a7c1af934c636',1,'av_headset_kymera_private.h']]],
+  ['kick_5fperiod_5fvoice',['KICK_PERIOD_VOICE',['../dd/df8/av__headset__kymera__private_8h.html#a51973fb9df917bfede7c8b32f1ef4bca',1,'av_headset_kymera_private.h']]],
+  ['kymera_5fdb_5fscale',['KYMERA_DB_SCALE',['../dd/df8/av__headset__kymera__private_8h.html#aef97d1ff92d73ec679b8b2da0b2fc81c',1,'av_headset_kymera_private.h']]],
+  ['kymera_5fmessage_5fbase',['KYMERA_MESSAGE_BASE',['../d6/d7b/av__headset__message_8h.html#a547091fb3109ad360c09d4818942965f',1,'av_headset_message.h']]],
+  ['kymera_5fop_5fmsg_5fid_5ftone_5fend',['KYMERA_OP_MSG_ID_TONE_END',['../dd/df8/av__headset__kymera__private_8h.html#a3ae18bb61c3477a034d6de6613e523ae',1,'av_headset_kymera_private.h']]],
+  ['kymera_5fop_5fmsg_5flen',['KYMERA_OP_MSG_LEN',['../dd/df8/av__headset__kymera__private_8h.html#a3161c6a8dec5555aa93b4281c3318fcc',1,'av_headset_kymera_private.h']]],
+  ['kymera_5fop_5fmsg_5fword_5fmsg_5fid',['KYMERA_OP_MSG_WORD_MSG_ID',['../dd/df8/av__headset__kymera__private_8h.html#a31ddb11adc375d421ea123a8e86e4042',1,'av_headset_kymera_private.h']]],
+  ['kymera_5fsource_5fsync_5finput_5fport',['KYMERA_SOURCE_SYNC_INPUT_PORT',['../d8/d27/av__headset__kymera__common_8c.html#ac9a9fc65845d97de77e0e2cb925ee97f',1,'av_headset_kymera_common.c']]],
+  ['kymera_5fsource_5fsync_5foutput_5fport',['KYMERA_SOURCE_SYNC_OUTPUT_PORT',['../d8/d27/av__headset__kymera__common_8c.html#a75d7ae925261add3511c7a99c7ebfbf5',1,'av_headset_kymera_common.c']]],
+  ['kymera_5ftone_5fgen_5frate',['KYMERA_TONE_GEN_RATE',['../dd/df8/av__headset__kymera__private_8h.html#aec27d188a237046256dd8a51eb8e5922',1,'av_headset_kymera_private.h']]]
+];

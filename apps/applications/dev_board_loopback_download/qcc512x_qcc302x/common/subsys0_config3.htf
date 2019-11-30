@@ -1,0 +1,14 @@
+file=curator3
+
+# Crystal trim.  Currently set to default values - modify as indicated by board
+# label.
+XtalLoadCapacitance = 11
+XtalFreqTrim = 0
+
+# Development Only Keys - DO NOT USE IN PRODUCTION
+# The following 4 keys are to be used only during development and will stop
+# a device resetting if any of the subsystems panic.
+ChipWatchdogIntervals = [03E8 1770 0000]
+ChipInactiveWatchdogIntervals = [03E8 1770 0000]
+HaltAllSubsystemsOnPanic = true
+ResetOnAppPanicOrWatchdog = false

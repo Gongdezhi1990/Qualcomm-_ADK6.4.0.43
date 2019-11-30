@@ -1,0 +1,134 @@
+<ModuleData Name="sink_activity_monitoring">
+<DefineGroup>
+    <!-- Desc="The Tap Type in the Sink to which user events can be assigned via the Sink configuration." -->
+    <DefinePattern
+            PatternName="Tap UI Configuration"
+            ShortId="tap_ui_config_type">
+			<ConfigItem
+                Id="Tap Type"
+                ShortId="tap_type"
+                Desc="Select the tap type which the user shall assert at the sequence stage"
+                Type="enum"
+                Size="2" >
+				<enum key="..." value="0"/>
+                <enum key="SINGLE" value="1"/>
+                <enum key="DOUBLE" value="2"/>
+            </ConfigItem>
+			<ConfigItem Id="State Mask" ShortId="state_mask" Desc="State mask." Type="bitfield" Size="14" PresentHex="true">
+                <List use="g_states"/>
+            </ConfigItem>
+            <ConfigItem Id="User Event" ShortId="user_event" Desc="Event." Type="enum" Size="10" ShowOrdered="true">
+                 <List use="g_user_event"/>
+            </ConfigItem>
+        </DefinePattern>
+</DefineGroup>
+
+<ConfigGroup Id="Activity Monitoring" ShortId="activity_monitoring" Node="Basic">
+    <ConfigGroup Id="Sport Health I2c Pio" ShortId="sport_health_i2c_pio" Node="Basic" >
+		<ConfigItem Id="I2c Scl Pio" ShortId="i2c_scl_pio" Type="uint" DefaultValue="0x14" Size="16" 
+			Desc="PIO corresponding to BitSerial I2C SCL.">
+			<BuildVariant HwVariant="CF376_CF429 QCC5126-AB_DEV-BRD-R2-AA" SwVariant="All" Value="0x14"/>
+            <BuildVariant HwVariant="CF376_CF212" SwVariant="All" Value="0x30"/>
+			<BuildVariant HwVariant="CF376_CF440" SwVariant="All" Value="0x14"/>
+			<BuildVariant HwVariant="CF376_CE826 CF376_CF897 QCC3020-AA_DEV-BRD-R2-AA QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA" SwVariant="All" Value="0x3C" />
+			<BuildVariant HwVariant="CF376_CG724 QCC5120-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA" SwVariant="All" Value="0x38"/>
+            <BuildVariant HwVariant="QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="0x28"/>
+		</ConfigItem>
+		<ConfigItem Id="I2c Sda Pio" ShortId="i2c_sda_pio" Type="uint" DefaultValue="0x15" Size="16" 
+			Desc="PIO corresponding to BitSerial I2C SDA.">
+			<BuildVariant HwVariant="CF376_CF429 QCC5126-AB_DEV-BRD-R2-AA" SwVariant="All" Value="0x15"/>
+            <BuildVariant HwVariant="CF376_CF212" SwVariant="All" Value="0x31"/>
+			<BuildVariant HwVariant="CF376_CF440" SwVariant="All" Value="0x15"/>
+			<BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437" SwVariant="All" Value="0x1F"/>
+		    <BuildVariant HwVariant="CF819" SwVariant="Headset-Gaming" Value="0x04" />
+			<BuildVariant HwVariant="CF376_CE826 CF376_CF897 QCC3020-AA_DEV-BRD-R2-AA QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA" SwVariant="All" Value="0x3D" />
+			<BuildVariant HwVariant="CF376_CG724 QCC5120-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA" SwVariant="All" Value="0x39"/>
+            <BuildVariant HwVariant="QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="0x29"/>
+		</ConfigItem>
+		<ConfigItem Id="Interrupt Line Pio" ShortId="interrupt_line_pio" Type="uint" DefaultValue="0x12" Size="16" 
+			Desc="PIO corresponding to the driver interrupt line.">
+			<BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437" SwVariant="All" Value="0x2"/>
+		    <BuildVariant HwVariant="CF819" SwVariant="Headset-Gaming" Value="2" />
+		</ConfigItem>
+	</ConfigGroup>       
+	<ConfigGroup Id="Sport Health I2c Addr" ShortId="sport_health_i2c_addr" Node="Basic" >
+		<ConfigItem Id="Imu I2c Addr" ShortId="imu_i2c_addr" Type="uint" DefaultValue="0x68" Size="8" 
+			Desc="I2C address for IMU sensor.">
+			<BuildVariant HwVariant="ALL" SwVariant="All" Value="0x68"/>
+		    <BuildVariant HwVariant="CF819" SwVariant="Headset-Gaming" Value="0x69" />
+		</ConfigItem>
+		<ConfigItem Id="Ppg I2c Addr" ShortId="ppg_i2c_addr" Type="uint" DefaultValue="0x57" Size="8" 
+			Desc="I2C address for PPG sensor.">
+			<BuildVariant HwVariant="ALL" SwVariant="All" Value="0x57"/>
+		</ConfigItem>
+	</ConfigGroup> 
+	<ConfigGroup Id="Tws Auto Pairing Enabled" ShortId="tws_auto_pairing_enabled" Node="Basic" >
+		<ConfigItem Id="Auto Pairing Enabled" ShortId="auto_pairing_enabled" Type="bool" DefaultValue="false" Size="1" 
+			Desc="To set whether to run the auto pairing state machine which is useful for having both TWS and Activity Monitoring enabled.">
+			<BuildVariant HwVariant="ALL" SwVariant="All" Value="false"/>
+		    <BuildVariant
+		        HwVariant="CF819"
+		        SwVariant="Headset-Gaming"
+		        Value="true" />
+		</ConfigItem>
+	</ConfigGroup> 
+<!-- CONFIG BLOCK 1 -->
+    <ConfigGroup Id="Tap UI Config" ShortId="sink_tap_ui_eventset" Node="Array">
+
+        <ConfigPatternArray
+                Id="Tap User Events"
+                ShortId="tap_user_event_set"
+                Pattern="tap_ui_config_type"
+                FixedNumPatterns="4"
+                GroupId="tap_user_event"
+                ConfigGroupPath="./[@ShortId='tap_user_interfaces']/[@ShortId='tap_user_events']">
+
+            <BuildVariant HwVariant="All" SwVariant="All">
+                <PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="tap_type" DefaultValue="..." />
+					<PatternArrayConfigItem ShortId="state_mask" DefaultValue="" />
+                    <PatternArrayConfigItem ShortId="event" DefaultValue="..." />
+                </PatternArrayRow>
+				<PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="tap_type" DefaultValue="..." />
+					<PatternArrayConfigItem ShortId="state_mask" DefaultValue="" />
+                    <PatternArrayConfigItem ShortId="event" DefaultValue="..." />
+                </PatternArrayRow>
+				<PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="tap_type" DefaultValue="..." />
+					<PatternArrayConfigItem ShortId="state_mask" DefaultValue="" />
+                    <PatternArrayConfigItem ShortId="event" DefaultValue="..." />
+                </PatternArrayRow>
+				<PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="tap_type" DefaultValue="..." />
+					<PatternArrayConfigItem ShortId="state_mask" DefaultValue="" />
+                    <PatternArrayConfigItem ShortId="event" DefaultValue="..." />
+                </PatternArrayRow>
+			</BuildVariant>
+			
+			<BuildVariant HwVariant="CF819" SwVariant="All">
+                <PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="tap_type" DefaultValue="SINGLE" />
+					<PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="event" DefaultValue="AVRCP Play Pause" />
+                </PatternArrayRow>
+				<PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="tap_type" DefaultValue="DOUBLE" />
+					<PatternArrayConfigItem ShortId="state_mask" DefaultValue="Connected | Streaming A2DP" />
+                    <PatternArrayConfigItem ShortId="event" DefaultValue="AVRCP Skip Forward" />
+                </PatternArrayRow>
+				<PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="tap_type" DefaultValue="SINGLE" />
+					<PatternArrayConfigItem ShortId="state_mask" DefaultValue="Ongoing Call with SCO | Ongoing Call without SCO" />
+                    <PatternArrayConfigItem ShortId="event" DefaultValue="Cancel End" />
+                </PatternArrayRow>
+				<PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="tap_type" DefaultValue="SINGLE" />
+					<PatternArrayConfigItem ShortId="state_mask" DefaultValue="Incoming Call" />
+                    <PatternArrayConfigItem ShortId="event" DefaultValue="Answer" />
+                </PatternArrayRow>
+			</BuildVariant>
+	    </ConfigPatternArray> 
+	</ConfigGroup>
+</ConfigGroup>
+</ModuleData>

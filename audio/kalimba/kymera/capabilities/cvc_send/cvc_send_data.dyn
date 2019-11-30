@@ -1,0 +1,2332 @@
+// *****************************************************************************
+//  Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+//  All Rights Reserved.
+//  Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+//  Notifications and licenses are retained for attribution purposes only
+// %%version
+// *****************************************************************************
+
+#include "mem_utils/dynamic_mem_macros.h"
+#include "frame_proc/frame_proc_asm.h"
+#include "audio_proc_library.h"
+#include "cvc_receive/passthr_mode.h"
+#include "cvc_send_data.h"
+#include "cvc_send_config.h"
+
+#if defined(INSTALL_OPERATOR_CVC_32K) || defined(INSTALL_OPERATOR_CVC_48K)
+   #include "frame_iir_resamplerv2_asm_defs.h"
+   #define CVC_USES_RESAMPLER
+   #define stream_sendout_intermidiate    stream_map_sndout_internal
+#else
+   #define stream_sendout_intermidiate    stream_map_sndout
+#endif
+
+#if CVC_SEND_MAJOR_CONFIG == 0
+   #define BLD_HEADSET
+#elif CVC_SEND_MAJOR_CONFIG == 1
+   #define BLD_SPEAKER
+#elif CVC_SEND_MAJOR_CONFIG == 2
+   #define BLD_AUTO
+#else
+   .error "Unknown Use Case"
+#endif
+
+#if CVC_DYN_NUM_MICS == 1
+   #define BLD_1MIC
+
+   #undef uses_NC
+   #define uses_NC 0
+
+   #undef uses_ASF
+   #define uses_ASF 0
+
+   #undef uses_MGDC
+   #define uses_MGDC  0
+#else
+   #define BLD_DMSS
+#endif
+
+#if !defined(BLD_1MIC)
+   #define BLD_AECLRM
+#endif
+
+#if !defined(BLD_1MIC) && !defined(BLD_AECLRM)
+#define BLD_AEC2
+#endif
+
+#if CVC_DYN_NUM_MICS > 2
+   #define MIC_GROUPING
+#endif
+
+#define uses_REF_VAD       (uses_AEC)
+#define uses_SND_VAD       (uses_SND_AGC)
+#define uses_IN0_OMS       (uses_MGDC || uses_NSVOLUME || uses_AEC)
+
+// Generate build error messages if necessary.
+#if !uses_NSVOLUME && uses_VCAEC
+   .error "VCAEC cannot be enabled without NDVC"
+#endif
+
+#if !uses_SND_NS
+   #if uses_AEC
+      .error "AEC cannot be enabled without SND_NS"
+   #endif
+#endif
+
+#if defined(CVC_LOW_RESOURCE_MODE)
+   #if defined(BLD_HEADSET) && defined(BLD_1MIC)
+      #undef  uses_IN0_OMS
+      #define uses_IN0_OMS    0
+   #endif
+
+   #if uses_NC
+      #undef uses_NC
+      #define uses_NC         0
+   #endif
+#endif
+
+
+#ifdef CVC_USES_RESAMPLER
+//*****extra includes and temp fixes start here*****************
+   .CONST   $IIR_RESAMPLEV2_IIR_BUFFER_SIZE      19;
+   .CONST   $IIR_RESAMPLEV2_FIR_BUFFER_SIZE      10;   
+   .CONST   $IIR_RESAMPLEV2_APPENDED_BUFFER_SIZE      ($IIR_RESAMPLEV2_IIR_BUFFER_SIZE+$IIR_RESAMPLEV2_FIR_BUFFER_SIZE);
+   .CONST   $iir_resamplev2.OBJECT_SIZE_SNGL_STAGE    $frame_iir_resamplerv2.iir_resampler_op_struct.STRUC_SIZE + $IIR_RESAMPLEV2_APPENDED_BUFFER_SIZE;
+//*****extra includes and temp fixes end here*******************
+#endif
+
+// Compile Time options
+
+// SP.  Placehold for Variables that will be resized by loader
+#define WILL_BE_RESIZED                      1
+
+// Constants for Variants
+.CONST $CVC_BASE.FFT_BUFFER_SIZE             128;
+
+.CONST $CVC_BASE.NB.SAMPLES_PER_FRAME        60;
+.CONST $CVC_BASE.NB.NUM_FREQ_BIN             65;
+.CONST $CVC_BASE.NB.NUM_FFT_WINDOW           120;
+.CONST $CVC_BASE.NB.OMS270.STATELENGTH       104;
+
+.CONST $CVC_BASE.WB.SAMPLES_PER_FRAME        120;
+.CONST $CVC_BASE.WB.NUM_FREQ_BIN             129;
+.CONST $CVC_BASE.WB.NUM_FFT_WINDOW           240;
+.CONST $CVC_BASE.WB.OMS270.STATELENGTH       124;
+
+.CONST $CVC_BASE.SWB.SAMPLES_PER_FRAME        240;
+.CONST $CVC_BASE.FB.SAMPLES_PER_FRAME         360;
+
+#if defined(BLD_HEADSET)
+   #define FFT_WIN_FACTOR                 1
+   // Powr adjustment for hanning windown filter bank
+   .CONST $cvc.POWER_ADJUST_NB_Q8_16      (0.906890595608518700/(1<<7));
+   .CONST $cvc.POWER_ADJUST_WB_Q8_16      (0.906890595608518700/(1<<7));
+#else
+   #define FFT_WIN_FACTOR                 2
+   // Powr adjustment for non-hanning windown filter bank, narrow band
+   .CONST $cvc.POWER_ADJUST_NB_Q8_16      (0.901831858058359970/(1<<7));
+   // Powr adjustment for non-hanning windown filter bank, wide band
+   .CONST $cvc.POWER_ADJUST_WB_Q8_16      (0.900704213416237740/(1<<7));
+#endif
+
+#define MAX_NUM_PEQ_STAGES             (5)
+
+// Scratch memory sharing, making sure that the actual size of the memory is enough for each module
+#define oms_scratch              $dm1_scratch
+#define dms_scratch              $dm1_scratch
+
+#define asf100_scratch_dm1       $dm1_scratch
+#define asf100_scratch_dm2       $dm2_scratch
+
+#define nlp_scratch              $dm2_scratch
+
+#define vad_scratch              $dm1_scratch
+
+#define fft_real_scratch         $dm1_scratch
+#define fft_imag_scratch         $dm2_scratch
+
+#if CVC_DYN_NUM_MICS == 1 && CVC_SEND_MAJOR_CONFIG == 0
+
+.MODULE $M.CVC_SEND_CAP.headset_data_1mic;
+
+#elif CVC_DYN_NUM_MICS == 2 && CVC_SEND_MAJOR_CONFIG == 0
+
+.MODULE $M.CVC_SEND_CAP.headset_data_2mic;
+
+#elif CVC_DYN_NUM_MICS == 1 && CVC_SEND_MAJOR_CONFIG == 1
+
+.MODULE $M.CVC_SEND_CAP.speaker_data_1mic;
+
+#elif CVC_DYN_NUM_MICS == 2 && CVC_SEND_MAJOR_CONFIG == 1
+
+.MODULE $M.CVC_SEND_CAP.speaker_data_2mic;
+
+#elif CVC_DYN_NUM_MICS == 1 && CVC_SEND_MAJOR_CONFIG == 2
+
+.MODULE $M.CVC_SEND_CAP.auto_data_1mic;
+
+#elif CVC_DYN_NUM_MICS == 2 && CVC_SEND_MAJOR_CONFIG == 2
+
+.MODULE $M.CVC_SEND_CAP.auto_data_2mic;
+
+#elif CVC_DYN_NUM_MICS == 3 && CVC_SEND_MAJOR_CONFIG == 1
+
+.MODULE $M.CVC_SEND_CAP.speaker_data_3mic;
+
+#elif CVC_DYN_NUM_MICS == 4 && CVC_SEND_MAJOR_CONFIG == 1
+
+.MODULE $M.CVC_SEND_CAP.speaker_data_4mic;
+
+#endif
+
+   .DATASEGMENT DM;
+
+   #define CONFIG_FLAGS    uses_DCBLOCK*flag_uses_DCBLOCK +  uses_SND_PEQ*flag_uses_SND_PEQ +  uses_NSVOLUME*flag_uses_NSVOLUME +  uses_SND_AGC*flag_uses_SND_AGC +  uses_SND_NS*flag_uses_SND_NS +  uses_ADF*flag_uses_ADF +  uses_NC*flag_uses_NC +  uses_AEC*flag_uses_AEC +  uses_VCAEC*flag_uses_VCAEC +  uses_MGDC*flag_uses_MGDC +  uses_ASF*flag_uses_ASF
+   #define cvc_variant     cur_mode_ptr + MK1
+   #define mic_array       snd_streams + $cvc_send.stream.adc_left
+
+   // CVC data root object
+   .VAR root[$cvc_send.data.STRUC_SIZE] =
+         CONFIG_FLAGS,           // $cvc_send.data.config_flag
+         &cur_mode_ptr,          // $cvc_send.data.cur_mode_ptr
+         &CurParams,             // $cvc_send.data.param
+         &snd_harm_obj,          // $cvc_send.data.harm_obj
+         &dms100_obj,            // $cvc_send.data.dms100_obj
+         1.0,                    // $cvc_send.data.one
+         0 ...;                  // $cvc_send.data.zero
+
+   #define OneValue        root + $cvc_send.data.one
+   #define ZeroValue       root + $cvc_send.data.zero
+   #define mic_mode        root + $cvc_send.data.mic_mode
+   #define wind_flag       root + $cvc_send.data.wind_flag
+   #define echo_flag       root + $cvc_send.data.echo_flag
+   #define vad_flag        root + $cvc_send.data.vad_flag
+   #define TP_mode         root + $cvc_send.data.TP_mode
+   #define power_adjust    root + $cvc_send.data.power_adjust
+
+   .VAR CurParams[$M.CVC_SEND.PARAMETERS.STRUCT_SIZE+1];
+
+   .VAR StatusArray[$M.CVC_SEND.STATUS.BLOCK_SIZE - ($M.CVC_SEND.STATUS.COMPILED_CONFIG >> LOG2_ADDR_PER_WORD)] =
+      &root + $cvc_send.data.config_flag,
+      &mic_in_l_pk_dtct + $M.audio_proc.peak_monitor.PEAK_LEVEL,
+
+   #if !defined(BLD_1MIC)
+	   &mic_in_r_pk_dtct + $M.audio_proc.peak_monitor.PEAK_LEVEL,
+   #else
+      &ZeroValue,
+   #endif
+
+	   &sco_out_pk_dtct  + $M.audio_proc.peak_monitor.PEAK_LEVEL,
+
+   #if uses_NSVOLUME
+      &ndvc_obj + $M.NDVC_Alg1_0_0.OFFSET_FILTSUMLPDNZ,
+      &ndvc_obj + $M.NDVC_Alg1_0_0.OFFSET_CURVOLLEVEL,
+   #else
+      &ZeroValue,
+      &ZeroValue,
+   #endif
+
+   #if uses_SND_AGC
+      &snd_agc400_dm + $M.agc400.OFFSET_INPUT_LEVEL_FIELD,
+      &snd_agc400_dm + $M.agc400.OFFSET_G_REAL_FIELD,
+   #else
+      &ZeroValue,
+      &ZeroValue,
+   #endif
+
+   #if uses_AEC
+      &aec_obj + $aec510.OFFSET_AEC_COUPLING,
+   #else
+      &ZeroValue,
+   #endif
+
+   #if uses_ASF
+      &asf_object + $asf100.wnr.MEAN_PWR_FIELD,
+      &asf_object + $asf100.wnr.MEAN_G_FIELD,
+   #else
+      &oms_wnr_obj + $M.oms270.wnr.POWER_LEVEL_FIELD,
+      &ZeroValue,
+   #endif
+      &wind_flag,             //(input - status)
+      &ZeroValue,          // M.CVC_SEND.STATUS.MUTE_FLAG (dummy)
+   #if uses_MGDC
+      &mgdc100_obj+$mgdc100.OMNI_MODE_FIELD,
+   #else
+      &ZeroValue,          // M.CVC_SEND.STATUS.OMNI_FLAG (dummy)
+   #endif   
+      
+   #if CVC_DYN_NUM_MICS > 2
+      &mic_in_3_pk_dtct + $M.audio_proc.peak_monitor.PEAK_LEVEL,
+   #else
+      &ZeroValue,
+   #endif
+   #if CVC_DYN_NUM_MICS > 3
+      &mic_in_4_pk_dtct + $M.audio_proc.peak_monitor.PEAK_LEVEL,
+   #else
+      &ZeroValue,
+   #endif
+      &aec_ref_dtct + $M.audio_proc.peak_monitor.PEAK_LEVEL,
+
+   #if defined(BLD_FBC)
+      &fbc0_obj + $aec510.fbc.L2P_PWR_DIFFERENCE_FIELD,
+   #else
+      &ZeroValue,
+   #endif
+
+   #if uses_AEC
+      &vsm_fdnlp + $aec510.nlp.OFFSET_HC_TIER_STATE;
+   #else 
+      &ZeroValue;     // RESERVED
+   #endif
+
+   // *********************************
+   // High pass filter coefficients 
+   // *********************************
+   .VAR hpf_coeffs[7] = Qfmt_(0.0446,1),Qfmt_(0.0869,1),Qfmt_(0.1197,1),Qfmt_(0.2813,1),Qfmt_(0.4582,1),Qfmt_(0.6640,1),Qfmt_(0.8832,1);
+
+//  ******************  Define Scratch/Shared Memory ************************
+
+    // Frequency Domain Shared working buffers
+    .BLOCK/SM1   FFT_DM1;
+      .VAR  X_real[WILL_BE_RESIZED];
+      .VAR  D_l_real[WILL_BE_RESIZED];
+      .VAR  D_r_real[WILL_BE_RESIZED];
+   .ENDBLOCK;
+
+   .BLOCK/SM2 FFT_DM2;
+      .VAR  X_imag[WILL_BE_RESIZED];
+      .VAR  D_l_imag[WILL_BE_RESIZED];
+      .VAR  D_r_imag[WILL_BE_RESIZED];
+   .ENDBLOCK;
+
+   .BLOCK/SM1  $dm1_scratch;
+         // real,imag interlaced
+         .VAR  W_ri[WILL_BE_RESIZED];
+         .VAR  L_adaptA[WILL_BE_RESIZED];
+         .VAR  L_adaptR[WILL_BE_RESIZED];
+         .VAR  scratch_extra_dm1[WILL_BE_RESIZED];
+   .ENDBLOCK;
+
+   .BLOCK/SM2  $dm2_scratch;
+         // real,imag interlaced
+         .VAR  Exp_Mts_adapt[WILL_BE_RESIZED];
+      #if CVC_SEND_MAJOR_CONFIG != 0
+         // Handsfree only
+         .VAR  rerdt_dtc[WILL_BE_RESIZED];      
+      #endif
+         .VAR  scratch_extra_dm2[WILL_BE_RESIZED];
+   .ENDBLOCK;
+
+   .VAR/DM2 fft_circ_scratch[$CVC_BASE.FFT_BUFFER_SIZE];
+
+   // FFT data object, common to all filter_bank cases
+   // The three buffers in this object are temporary to FFT and could be shared
+   .VAR fft_obj[$M.filter_bank.fft.STRUC_SIZE] =
+      0,
+      &fft_real_scratch,
+      &fft_imag_scratch,
+      &fft_circ_scratch,
+      fft_split, // PTR_FFTSPLIT
+      0 ...;
+
+   .VAR D0[] = 
+      &D_l_real,  // D0 real
+      &D_l_imag,  // D0 image
+      0;
+
+   .VAR D1[] = 
+      &D_r_real,  // D1 real
+      &D_r_imag,  // D1 image
+      0;
+
+  .VAR X[] =  
+      &X_real,    // X real
+      &X_imag,    // X image
+      0; 
+
+   .BLOCK/DM2 asf_freqObj_persistent;
+      .VAR ASF_TEMP0[]=
+            0,       // Should be filled by modulesd by modules
+            0,       // Should be filled by modulesd by modules
+            0;       // Should be filled by modulesd by modules
+
+      .VAR ASF_TEMP1[]=
+            0,       // Should be filled by modulesd by modules
+            0,       // Should be filled by modulesd by modules
+            0;       // Should be filled by modulesd by modules
+
+      .VAR ASF_TEMP2[]=
+            0,       // Should be filled by modulesd by modules
+            0,       // Should be filled by modulesd by modules
+            0;       // Should be filled by modulesd by modules
+
+      .VAR ASF_TEMP3[]=
+            0,       // Should be filled by modulesd by modules
+            0,       // Should be filled by modulesd by modules
+            0;       // Should be filled by modulesd by modules  
+            
+      .VAR X0_SAVED_FREQ_OBJ[]=
+            x0_saved_real,       // real
+            x0_saved_imag,       // imag
+            0;                   // exp
+
+      .VAR X1_SAVED_FREQ_OBJ[]=
+            x1_saved_real,       // real
+            x1_saved_imag,       // imag
+            0;                   // exp
+            
+      .VAR Z0_AUX_FREQ_OBJ[]=
+            z0_aux_real,         // real
+            z0_aux_imag,         // imag
+            0;                   // exp
+
+      .VAR Z1_AUX_FREQ_OBJ[]=
+            z1_aux_real,         // real  
+            z1_aux_imag,         // imag
+            0;                   // exp
+            
+.ENDBLOCK;
+
+.BLOCK/DM2 nc_freqObj_persistent;
+      .VAR NC_TEMP0[]=
+            0,       // Should be filled by modulesd by modules
+            0,       // Should be filled by modulesd by modules
+            0;       // Should be filled by modulesd by modules
+
+      .VAR NC_TEMP1[]=
+            0,       // Should be filled by modulesd by modules
+            0,       // Should be filled by modulesd by modules
+            0;       // Should be filled by modulesd by modules
+.ENDBLOCK;
+
+
+   // ***************  Common Test Mode Control Structure **************************
+
+   .VAR     ModeControl[$M.SET_MODE_GAIN.STRUC_SIZE] =
+      CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_PT_SNDGAIN_MANTISSA, 
+      0 ...;
+
+#if CVC_DYN_NUM_MICS == 2
+   .VAR/DM2     adc_mixer[$M.audio_proc.stream_mixer.STRUC_SIZE] =
+      &stream_map_left_adc,      // $M.audio_proc.stream_mixer.OFFSET_INPUT_CH1_PTR
+      &stream_map_right_adc,     // $M.audio_proc.stream_mixer.OFFSET_INPUT_CH2_PTR
+      &stream_map_sndout,        // $M.audio_proc.stream_mixer.OFFSET_OUTPUT_PTR   <set in passthrough & loopback>
+      &ModeControl + $M.SET_MODE_GAIN.MANT_LEFT,   // $M.audio_proc.stream_mixer.OFFSET_PTR_CH1_MANTISSA
+      &ModeControl + $M.SET_MODE_GAIN.MANT_RIGHT,  // $M.audio_proc.stream_mixer.OFFSET_PTR_CH2_MANTISSA
+      &ModeControl + $M.SET_MODE_GAIN.EXP;         // $M.audio_proc.stream_mixer.OFFSET_PTR_EXPONENT
+#else
+   .VAR/DM1 adc_gain_dm1[$M.audio_proc.stream_gain.STRUC_SIZE] =
+      &stream_map_left_adc,                             // OFFSET_INPUT_PTR
+      &stream_map_sndout,                               // OFFSET_OUTPUT_PTR
+      &ModeControl + $M.SET_MODE_GAIN.MANT_LEFT,        // OFFSET_PTR_MANTISSA
+      &ModeControl + $M.SET_MODE_GAIN.EXP;              // OFFSET_PTR_EXPONENT
+#endif      
+
+
+ .VAR/DM2  bufd_l_inp[WILL_BE_RESIZED];
+ .VAR/DM2  bufd_r_inp[WILL_BE_RESIZED];
+
+   // Filter Bank Analysis Left Channel
+  .VAR fba_left[$M.filter_bank.Parameters.ONE_CHNL_BLOCK_SIZE] =
+      fb_configuration,                         // OFFSET_CONFIG_OBJECT
+      &stream_map_left_adc,                     // OFFSET_PTR_FRAME
+      &bufd_l_inp,                              // OFFSET_PTR_HISTORY
+      0,                                        // OFFSET_BEXP
+      &D0,
+      0 ...;
+
+#if CVC_DYN_NUM_MICS != 1 
+   // Filter Bank Analysis Right Channel
+  .VAR fba_right[$M.filter_bank.Parameters.ONE_CHNL_BLOCK_SIZE] =
+      fb_configuration,                         // OFFSET_CONFIG_OBJECT
+      &stream_map_right_adc,                    // OFFSET_PTR_FRAME
+      &bufd_r_inp,                              // OFFSET_PTR_HISTORY
+      0,                                        // OFFSET_BEXP
+      &D1,
+      0 ...;
+#endif
+
+   
+   // Syntheseis Filter Bank Config Block
+   .VAR  bufd_outp[WILL_BE_RESIZED];
+
+   .VAR/DM2 fbs_snd[$M.filter_bank.Parameters.ONE_CHNL_BLOCK_SIZE] =
+      fb_configuration,                      // OFFSET_CONFIG_OBJECT
+      stream_sendout_intermidiate,                    // OFFSET_PTR_FRAME
+      &bufd_outp,                            // OFFSET_PTR_HISTORY
+      0,                                     // OFFSET_PTR_BEXP  (Updated in Synthesis from D0)
+      &D0,                                   // OFFSET_PTR_FFT_FREQ_OBJ
+      1,                                     // ZDN_FIELD
+      -1;                                    // SP_FIELD
+
+#if uses_MGDC
+   .VAR mgdc100_obj[$mgdc100.STRUC_SIZE] =
+      &D0,                       // X0_FIELD
+      &D1,                       // X1_FIELD
+      CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_MGDC_MAXCOMP,  // PARAM_FIELD
+      &cvc_variant,              // PTR_VARIANT_FIELD 
+      &mic_mode,                 // PTR_MICMODE_FIELD (mgdc - output)
+   #if !defined(BLD_DMS_SM)
+    #if uses_IN0_OMS == 0
+      &G_dmsZ,                   // PTR_G_OMS_FIELD 
+      &dms100_obj    + $dms100.VAD_VOICED_FIELD, // PTR_OMS_VAD_FIELD
+    #else   
+      &in0oms_G,                 // PTR_G_OMS_FIELD 
+      &oms270in0_obj + $M.oms270.VOICED_FIELD, // PTR_OMS_VAD_FIELD
+    #endif  
+   #else
+      &in0oms_G,                 // PTR_G_OMS_FIELD 
+      &oms270in0_obj + $dms100.VAD_VOICED_FIELD, // PTR_OMS_VAD_FIELD
+   #endif
+      0,                         // FRONTMICBIAS_FIELD
+      0 ...;                     // L2FBPXD_FIELD
+
+   .VAR harm_inputs[2] =
+         &fba_left,
+         &fba_right;
+#endif
+
+
+#if uses_NC
+         .VAR/DM1 nc_scratch_dm1[$nc100.DM1_SCRATCH_SIZE];
+         .VAR/DM2 nc_ctrl[WILL_BE_RESIZED];
+         .VAR nc100_dm1[$nc100.DM1_DATA_SIZE];
+         .VAR nc100_dm2[$nc100.DM2_DATA_SIZE];
+         .VAR L_alfaPx[] = -0.0052,   -0.0105,   -0.0142,   -0.0170,   -0.0192484375,   -0.0211; 
+
+         .VAR nc100_obj[$nc100.STRUCT_SIZE] = 
+               &D0,                       // X0_FIELD
+               &D1,                       // X1_FIELD
+               &CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_NC_TAP, // $nc100.PARAM_FIELD
+               &L_alfaPx,                 // $nc100.L_ALFAPX_PTR_FIELD 
+               &dms100_obj + $dms100.LRATIO_INTERPOLATED_FIELD, // $nc100.LRATIO_PTR_FIELD
+               &dms100_obj + $dms100.SNR_MN_FIELD,              // $nc100.SNR_MN_FIELD 
+               &nc100_dm1,                // DM1_DATA_FIELD
+               &nc100_dm2,                // DM2_DATA_FIELD
+               &nc_scratch_dm1,           // DM1_SCRATCH_FIELD
+               &nc_ctrl,                  // NC_CTRL_FIELD (DM2)
+               0,                         // G_OMS_FIELD
+               NC_TEMP0,                  // $nc100.OFFSET_FNLMS_E_FREQ_OBJ 
+               NC_TEMP1,                  // $nc100.OFFSET_FNLMS_D_FREQ_OBJ
+               &cvc_variant,              // $nc100.PTR_VARIANT_FIELD
+               0 ...;
+#endif
+
+#if uses_IN0_OMS
+   // <start> of memory declared per instance of oms270
+   .VAR in0oms_G[WILL_BE_RESIZED];
+   .VAR in0oms_LpXnz[WILL_BE_RESIZED];
+#if !defined(BLD_DMS_SM)
+   .VAR/DM1 in0oms_LpX_queue[$M.oms270.QUE_LENGTH];
+   .VAR     in0oms_state[WILL_BE_RESIZED];
+   .VAR oms270in0_obj[$M.oms270.STRUC_SIZE] =
+         &D0,                    // Y_FIELD
+         &D0,                    // X_FIELD
+         &cvc_variant,           // PTR_VARIANT_FIELD         
+         oms_mode_object,        // PTR_MODE_FIELD
+         0,                      // PARAM_FIELD
+         &cvclib_table,          // $M.oms270.PBP_TABLE_FIELD           
+         &in0oms_LpX_queue,      // $M.oms270.LPX_QUEUE_START_FIELD
+         &in0oms_G,              // $M.oms270.G_FIELD;
+         &in0oms_LpXnz,          // $M.oms270.LPXNZ_FIELD,
+         &in0oms_state,          // $M.oms270.PTR_STATE_FIELD
+         &oms_scratch,           // $M.oms270.PTR_SCRATCH_FIELD
+         0.45,                   // $M.oms270.HARMONICITY_THRESHOLD_FIELD
+         1,                      // $M.oms270.MIN_SEARCH_ON_FIELD
+         0,                      // $M.oms270.MMSE_LSA_ON_FIELD
+         0,                      // $M.oms270.PTR_TONE_FLAG_FIELD
+         0 ...;         
+#else   
+   .VAR/DM in0oms_LpX_queue[$dms100.pbp.QUE_LENGTH];
+   .VAR    in0oms_state[$dms100.pbp.STATE_LENGTH];
+   .VAR aec_oms_mic  = 1;
+   .VAR aec_oms_doa0 = 0;
+   
+   .VAR oms270in0_obj[$M.oms270.STRUC_SIZE] =
+         &D0,                    // Y_FIELD
+         &D0,                    // X_FIELD
+         &cvc_variant,           // PTR_VARIANT_FIELD         
+         dms_mode_object,        // PTR_MODE_FIELD
+         CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_DMS_AGGR,   // PARAM_FIELD
+         &cvclib_table,          // $M.oms270.PBP_TABLE_FIELD           
+         &in0oms_LpX_queue,      // $M.oms270.LPX_QUEUE_START_FIELD
+         &in0oms_G,              // $M.oms270.G_FIELD;
+         &in0oms_LpXnz,          // $M.oms270.LPXNZ_FIELD,
+         &in0oms_state,          // $M.oms270.PTR_STATE_FIELD
+         &oms_scratch,           // $M.oms270.PTR_SCRATCH_FIELD
+         0.45,                   // $M.oms270.HARMONICITY_THRESHOLD_FIELD
+         1,                      // $M.oms270.MIN_SEARCH_ON_FIELD
+         1,                      // $M.oms270.MMSE_LSA_ON_FIELD
+         0,                      // $M.oms270.PTR_TONE_FLAG_FIELD
+         &D1,                    // $dms100.D_FIELD
+         &aec_oms_mic ,          // PTR_MIC_MODE_FIELD
+         &power_adjust,          // PTR_POWR_ADJUST_FIELD
+         &aec_oms_doa0,          // $dms100.PTR_DOA0_FIELD 
+         0,                      // $dms100.SPP_FIELD
+         0,                      // $dms100.LRATIO_INTERPOLATED_FIELD
+         1,                      // $dms100.AUTO_AEC_OMS_FIELD
+         0 ...;
+#endif
+#endif
+
+   // SP.  setup by variant
+   .VAR harm_history[$CVC_BASE.NB.SAMPLES_PER_FRAME * 3];
+   .VAR snd_harm_obj[$harmonicity.STRUC_SIZE] =
+         &stream_map_left_adc,         // $harmonicity.INP_X_FIELD
+         &cvc_variant,                 // $harmonicity.VARIANT_FIELD
+         &harm_history,                // $harmonicity.HISTORY_FIELD
+         0 ...;
+
+#if uses_SND_NS
+   .VAR G_dmsZ[WILL_BE_RESIZED];
+   .VAR LpXnz_dms[WILL_BE_RESIZED];
+   .VAR LRatio_interpolated[WILL_BE_RESIZED];
+   .VAR spp[$dms100.DIM];
+#if defined(BLD_SPEAKER) && CVC_DYN_NUM_MICS > 1
+   .VAR/DM sndLpX_queue[$dms100.QUE_LENGTH];
+   .VAR dms_state[$dms100.STATE_LENGTH];
+#else
+   .VAR/DM sndLpX_queue[$dms100.pbp.QUE_LENGTH];
+   .VAR dms_state[$dms100.pbp.STATE_LENGTH];
+#endif
+
+   .VAR dms100_obj[$dms100.STRUC_SIZE] =
+         &D0,                    // Y_FIELD
+         &D0,                    // X_FIELD
+         &cvc_variant,           // PTR_VARIANT_FIELD         
+         dms_mode_object,        // PTR_MODE_FIELD
+         CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_DMS_AGGR,   // PARAM_FIELD
+         &cvclib_table,          // $M.oms270.PBP_TABLE_FIELD  
+         &sndLpX_queue,          // $M.oms270.LPX_QUEUE_START_FIELD
+         &G_dmsZ,                // $M.oms270.G_FIELD;
+         &LpXnz_dms,             // $M.oms270.LPXNZ_FIELD,
+         &dms_state,             // $M.oms270.PTR_STATE_FIELD
+         &dms_scratch,           // $M.oms270.PTR_SCRATCH_FIELD
+         0.45,                   // $M.oms270.HARMONICITY_THRESHOLD_FIELD
+         1,                      // $M.oms270.MIN_SEARCH_ON_FIELD
+         1,                      // $M.oms270.MMSE_LSA_ON_FIELD
+         0,                      // $M.oms270.PTR_TONE_FLAG_FIELD
+         &D1,                    // $dms100.D_FIELD
+         &mic_mode,              // PTR_MIC_MODE_FIELD (dms - input)
+         &power_adjust,          // PTR_POWR_ADJUST_FIELD
+         CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_DOA0,
+         &spp,                   // SPP_FIELD
+         &LRatio_interpolated,   // $dms100.LRATIO_INTERPOLATED_FIELD
+         0 ...;
+
+   .VAR oms_wnr_obj[$M.oms270.wnr.STRUC_SIZE] =
+         &CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_WNR_AGGR, // PTR_WNR_PARAM_FIELD   
+#if 0         
+         &echo_flag,    // PTR_RCVVAD_FLAG_FIELD (input)
+#else
+         &ZeroValue,
+#endif       
+         &vad_flag,     // PTR_SNDVAD_FLAG_FIELD (input)
+         &wind_flag,    // PTR_WIND_FLAG_FIELD (output)
+         0 ...;
+
+#endif // uses_SND_NS
+
+#if uses_REF_VAD
+   // Declare a dummy frame buffer structure, intended for linear buffer that
+   // could be used with calls to '$frmbuffer.get_buffer_with_start_address'
+   // between VAD PEQ and VAD processing modules.  $frmbuffer.FRAME_SIZE_FIELD
+   // will be set by VAD PEQ.  Because the buffer is linear the length and
+   // base address are zero.
+   .VAR vad_peq_output[$frmbuffer.STRUC_SIZE]  =
+      &vad_scratch,  // $frmbuffer.FRAME_PTR_FIELD
+      0,             // $frmbuffer.FRAME_SIZE_FIELD
+      0,             // $frmbuffer.BUFFER_SIZE_FIELD
+      0;             // $frmbuffer.BUFFER_START_ADDRESS_FIELD
+
+   // Reference VAD (with PEQ filter - NB/WB/UWB)
+   .VAR ref_vad_peq[PEQ_OBJECT_SIZE(3)] =
+      &ref_delay_stream,                        // PTR_INPUT_DATA_BUFF_FIELD
+      &vad_peq_output,                          // PTR_OUTPUT_DATA_BUFF_FIELD
+      3,                                        // MAX_STAGES_FIELD
+      vad_dc_coeffs + $M.vad400.VAD_PEQ_COEFF_OFFSET, // PARAM_PTR_FIELD
+      0 ...;
+
+   .VAR vad_default_param[] =
+      0.00249687760, 0.00249687760, 0.20893488915, 26, 0.5,
+      Qfmt_(8.0, 12), Qfmt_(-44.0, 12), Qfmt_(5.0, 12), 60;
+
+   .VAR ref_vad400[$M.vad400.OBJECT_SIZE_FIELD] =
+      &vad_peq_output,     // INPUT_PTR_FIELD
+      &vad_default_param,  // Parameter Ptr
+      0 ...;
+
+   #define vad_rcv      ref_vad400 + $M.vad400.FLAG_FIELD
+#endif
+
+#if uses_AEC
+   #define aec_param    CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_REF_DELAY
+   #define nlp_param    CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_HD_THRESH_GAIN
+
+   #if defined(BLD_AUTO)
+      #define $M.CVC.AEC_DTC_ENH_FLAG           (1)
+   #else
+      #define $M.CVC.AEC_DTC_ENH_FLAG           (0)
+   #endif
+
+   #if defined(BLD_HEADSET)
+      #define $M.CVC.AEC_HF_FLAG                (0)
+      #define $M.CVC.AEC_TAIL_LENGTH            (0.015)
+      .CONST $M.CVC.AEC_Num_Primary_Taps        ($aec510.Num_Primary_Taps);
+
+      .CONST $M.CVC_UWB.AEC_Num_Primary_Taps    ($aec510.Num_Primary_Taps);
+   #elif defined(BLD_SPEAKER_120)
+      .error "Are you sure 120ms AEC taillength is the setting you intended?"
+      #define $M.CVC.AEC_HF_FLAG                (2)
+      #define $M.CVC.AEC_TAIL_LENGTH            (0.120)
+      .CONST $M.CVC.AEC_Num_Primary_Taps        (2 * $aec510_HF.Num_Primary_Taps);
+      .CONST $M.CVC.AEC_Num_Auxillary_Taps      (2 * $aec510_HF.Num_Auxillary_Taps);
+
+      .CONST $M.CVC_UWB.AEC_Num_Primary_Taps    (2 * $aec510_HF_UWB.Num_Primary_Taps);
+      .CONST $M.CVC_UWB.AEC_Num_Auxillary_Taps  (2 * $aec510_HF_UWB.Num_Auxillary_Taps);
+   #else
+      #define $M.CVC.AEC_HF_FLAG                (1)
+      #define $M.CVC.AEC_TAIL_LENGTH            (0.060)
+      .CONST $M.CVC.AEC_Num_Primary_Taps        (1 * $aec510_HF.Num_Primary_Taps);
+      .CONST $M.CVC.AEC_Num_Auxillary_Taps      (1 * $aec510_HF.Num_Auxillary_Taps);
+
+      .CONST $M.CVC_UWB.AEC_Num_Primary_Taps    (1 * $aec510_HF_UWB.Num_Primary_Taps);
+      .CONST $M.CVC_UWB.AEC_Num_Auxillary_Taps  (1 * $aec510_HF_UWB.Num_Auxillary_Taps);
+   #endif
+
+   // AEC Reference
+   .VAR/DM1 ref_delay_buffer[4*$CVC_BASE.WB.SAMPLES_PER_FRAME]; //  + $aec510.fbc.wb.FILTER_SIZE?
+   .VAR ref_delay_stream[] = 
+      &ref_delay_buffer,         // $frmbuffer.FRAME_PTR_FIELD
+      0,                         // $frmbuffer.FRAME_SIZE_FIELD
+      LENGTH(ref_delay_buffer),  // $frmbuffer.BUFFER_SIZE_FIELD
+      &ref_delay_buffer;         // $frmbuffer.BUFFER_START_ADDRESS_FIELD
+
+   .VAR/DM2 bufd_aec_inp[WILL_BE_RESIZED];
+   .VAR/DM1 fba_ref[$M.filter_bank.Parameters.ONE_CHNL_BLOCK_SIZE] =
+      fb_configuration,                // OFFSET_CONFIG_OBJECT
+      &ref_delay_stream,               // CH1_PTR_FRAME
+      &bufd_aec_inp,                   // OFFSET_PTR_HISTORY
+      0,                               // OFFSET_BEXP
+      &X,                              // OFFSET_PTR_FFT_FREQ_OBJ
+      0 ...;
+
+   // AEC scratch
+   .VAR/SM DTC_lin[WILL_BE_RESIZED];
+   .VAR/SM1 Dt_real[$aec510.RER_dim];
+   .VAR/SM2 Dt_imag[$aec510.RER_dim];
+   .VAR/DM AEC_Dt[] =  &Dt_real,  &Dt_imag,  0;
+
+   .VAR/SM1 Et_real[$aec510.RER_dim];
+   .VAR/SM2 Et_imag[$aec510.RER_dim];
+   .VAR/DM AEC_Et[] =  &Et_real,  &Et_imag,  0;
+
+   // AEC states
+   .VAR  RatFE[$aec510.RER_dim];
+   .VAR  Gr_imag[$aec510.RER_dim];
+   .VAR  L2absGr[$aec510.RER_dim];
+   .VAR  Gr_real[$aec510.RER_dim];
+   .VAR  LPwrD[$aec510.RER_dim];
+   // Bin Reversed Ordering
+   .VAR  SqGr[$aec510.RER_dim];
+
+   .VAR  LPwrX0[WILL_BE_RESIZED];
+   .VAR  LpZ_nz[WILL_BE_RESIZED];
+   .VAR  LPwrX1[WILL_BE_RESIZED];
+   .VAR  Cng_Nz_Shape_Tab[WILL_BE_RESIZED];
+
+   
+   // data for fnmls reference bank
+   .VAR/DM1 RcvBuf_real[WILL_BE_RESIZED];
+   .VAR/DM2 RcvBuf_imag[WILL_BE_RESIZED];
+   .VAR BExp_X_buf[WILL_BE_RESIZED];
+
+   // data for 1st channel primary fnmls
+   .VAR/DM2 Ga_real[WILL_BE_RESIZED];
+   .VAR/DM1 Ga_imag[WILL_BE_RESIZED];
+   .VAR BExp_Ga[WILL_BE_RESIZED];
+
+   #if defined(BLD_AEC2)   
+      // data for 2nd channel primary fnmls
+      .VAR/DM2 GaMic1_real[WILL_BE_RESIZED];
+      .VAR/DM1 GaMic1_imag[WILL_BE_RESIZED];
+      .VAR BExp_GaMic1[WILL_BE_RESIZED];
+   #endif
+
+   // The Attenuation buffer needed to be pulled out of scratch memory,
+   // since the data needed by the CNG was being corrupted by other modules.
+   .VAR  AttenuationPersist[WILL_BE_RESIZED];
+
+   #if !defined(BLD_HEADSET)
+      // data for auxiliary fnmls
+     .VAR/DM2 Gb_real[$aec510.RER_dim * $M.CVC.AEC_Num_Auxillary_Taps];
+     .VAR/DM1 Gb_imag[$aec510.RER_dim * $M.CVC.AEC_Num_Auxillary_Taps];
+     .VAR BExp_Gb[$aec510.RER_dim];
+     .VAR L_RatSqG[$aec510.RER_dim];
+   #endif
+
+   #if defined(BLD_FBC)
+      // FBC data
+      .VAR/DM2 g_a[$aec510.fbc.wb.FILTER_SIZE];
+      .VAR/DM2 g_b[$aec510.fbc.wb.FILTER_SIZE];
+      .VAR/DM1 cbuf_x_hi[$CVC_BASE.WB.SAMPLES_PER_FRAME + $aec510.fbc.wb.FILTER_SIZE];
+      .VAR/DM1 cbuf_d_hi[$CVC_BASE.WB.SAMPLES_PER_FRAME];
+      .VAR/DM1 cbuf_x_delay[$aec510.fbc.HFP_B_SZIE];
+      .VAR/DM1 cbuf_d_delay[$aec510.fbc.HFP_B_SZIE];
+      .BLOCK/DM fbc_hpf_streams;
+         .VAR hpf.buf_d_delay[] = 
+            LENGTH(cbuf_d_delay),   // size (Linear if 0)
+            &cbuf_d_delay,          // base
+            &cbuf_d_delay;          // entry
+         .VAR hpf.buf_d_hi[] = 
+            LENGTH(cbuf_d_hi),      // size (Linear if 0)
+            &cbuf_d_hi,             // base
+            &cbuf_d_hi;             // entry
+         .VAR hpf.buf_x_delay[] = 
+            LENGTH(cbuf_x_delay),   // size (Linear if 0)
+            &cbuf_x_delay,          // base
+            &cbuf_x_delay;          // entry
+         .VAR hpf.buf_x_hi[] = 
+            LENGTH(cbuf_x_hi),      // size (Linear if 0)
+            &cbuf_x_hi,             // base
+            &cbuf_x_hi;             // entry
+      .ENDBLOCK;
+      .VAR fbc0_obj[$aec510.fbc.STRUCT_SIZE] =
+            &stream_map_left_adc,            // STREAM_D_FIELD
+            &vad_rcv,                        // PTR_VADX_FIELD
+            &g_a,                            // G_A_FIELD
+            &g_b,                            // G_B_FIELD
+            $aec510.fbc.PERD,                // PERD_FIELD
+            $aec510.fbc.NIBBLE,              // NIBBLE_FIELD
+            &fbc_hpf_streams,                // HPF_STREAM_FIELD
+            0 ...;
+
+      #if defined(BLD_AEC2) // FBC DM
+         .VAR/DM2 g_a_1[$aec510.fbc.wb.FILTER_SIZE];
+         .VAR/DM2 g_b_1[$aec510.fbc.wb.FILTER_SIZE];
+         .VAR/DM1 cbuf_x1_hi[$CVC_BASE.WB.SAMPLES_PER_FRAME + $aec510.fbc.wb.FILTER_SIZE];
+         .VAR/DM1 cbuf_d1_hi[$CVC_BASE.WB.SAMPLES_PER_FRAME];
+         .VAR/DM1 cbuf_x1_delay[$aec510.fbc.HFP_B_SZIE];
+         .VAR/DM1 cbuf_d1_delay[$aec510.fbc.HFP_B_SZIE];
+         .BLOCK/DM fbc_hpf_streams_1;
+            .VAR hpf.buf_d1_delay[] = 
+               LENGTH(cbuf_d1_delay),   // size (Linear if 0)
+               &cbuf_d1_delay,          // base
+               &cbuf_d1_delay;          // entry
+            .VAR hpf.buf_d1_hi[] = 
+               LENGTH(cbuf_d1_hi),      // size (Linear if 0)
+               &cbuf_d1_hi,             // base
+               &cbuf_d1_hi;             // entry
+            .VAR hpf.buf_x1_delay[] = 
+               LENGTH(cbuf_x1_delay),   // size (Linear if 0)
+               &cbuf_x1_delay,          // base
+               &cbuf_x1_delay;          // entry
+            .VAR hpf.buf_x1_hi[] = 
+               LENGTH(cbuf_x1_hi),      // size (Linear if 0)
+               &cbuf_x1_hi,             // base
+               &cbuf_x1_hi;             // entry
+         .ENDBLOCK;
+         .VAR fbc1_obj[$aec510.fbc.STRUCT_SIZE] =
+               &stream_map_right_adc,           // STREAM_D_FIELD
+               &vad_rcv,                        // PTR_VADX_FIELD
+               &g_a_1,                          // G_A_FIELD
+               &g_b_1,                          // G_B_FIELD
+               $aec510.fbc.PERD,                // PERD_FIELD
+               $aec510.fbc.NIBBLE,              // NIBBLE_FIELD
+               &fbc_hpf_streams_1,              // HPF_STREAM_FIELD
+               0 ...;
+      #endif
+   #else
+      .CONST fbc0_obj                     0;
+      .CONST fbc1_obj                     0;
+   #endif
+
+   // AEC DM
+   #if defined(BLD_AEC2) // AEC DM
+      .VAR aec_dm_obj[$aec510.dm.STRUCT_SIZE] =
+            &mic_mode,                          // $aec510.dm.PTR_MIC_MODE_FIELD
+            // AEC FBC (right channel)
+            &fbc1_obj,                          // $aec510.dm.PTR_FBC1_OBJ_FIELD
+            // AEC primary LMS (right channel)
+            &D1,                                // $aec510.dm.D1_FIELD
+            &GaMic1_real,                       // $aec510.dm.GA1_REAL_FIELD
+            &GaMic1_imag,                       // $aec510.dm.GA1_IMAG_FIELD
+            &BExp_GaMic1;                       // $aec510.dm.GA1_BEXP_FIELD
+   #else
+      .CONST aec_dm_obj    0;
+   #endif
+
+   // AEC main data object
+   .VAR aec_obj[$aec510.STRUCT_SIZE] =
+         // AEC configuration and control
+         &aec_mode_object,                   // $aec510.MODE_FIELD
+         &aec_param,                         // $aec510.PARAM_FIELD
+         &cvc_variant,                       // $aec510.VARIANT_FIELD 
+         $M.CVC.AEC_TAIL_LENGTH,             // MAX_FILTER_LENGTH_FIELD
+         $M.CVC.AEC_HF_FLAG,                 // HF_FLAG_FIELD
+         $M.CVC.AEC_DTC_ENH_FLAG,            // FLAG_DTC_ENH
+#if uses_IN0_OMS == 0
+         &G_dmsZ,                            // $aec510.OMS_G_FIELD
+         &LpXnz_dms,                         // $aec510.OMS_LPN_FIELD
+#else
+         &in0oms_G,                          // $aec510.OMS_G_FIELD
+         &in0oms_LpXnz,                      // $aec510.OMS_LPN_FIELD
+#endif
+         // AEC reference
+         &stream_map_refin,                  // $aec510.X_STREAM_FIELD
+         &ref_delay_stream,                  // $aec510.X_STREAM_DELAY_FIELD
+         &X,                                 // $aec510.X_FIELD
+         &RcvBuf_real,                       // $aec510.XBUF_REAL_FIELD
+         &RcvBuf_imag,                       // $aec510.XBUF_IMAG_FIELD
+         &BExp_X_buf,                        // $aec510.XBUF_BEXP_FIELD
+         // AEC FBC (left channel)
+         &fbc0_obj,                          // $aec510.PTR_FBC_OBJ_FIELD
+         // AEC primary LMS (left channel)
+         &D0,                                // $aec510.D_FIELD
+         &Ga_real,                           // $aec510.GA_REAL_FIELD
+         &Ga_imag,                           // $aec510.GA_IMAG_FIELD
+         &BExp_Ga,                           // $aec510.GA_BEXP_FIELD
+         // AEC (right channel)
+         &aec_dm_obj,                        // $aec510.DM_OBJ_FIELD
+         // Prep
+         &LPwrX0,                            // $aec510.LPWRX0_FIELD
+         &LPwrX1,                            // $aec510.LPWRX1_FIELD
+         // DTC
+         &RatFE,                             // $aec510.RATFE_FIELD
+         // RER
+         &Gr_imag,                           // $aec510.RER_GR_IMAG_FIELD
+         &Gr_real,                           // $aec510.RER_GR_REAL_FIELD
+         &SqGr,                              // $aec510.RER_SQGR_FIELD
+         &L2absGr,                           // $aec510.RER_L2ABSGR_FIELD
+         &LPwrD,                             // $aec510.RER_LPWRD_FIELD
+         // CNG
+         &LpZ_nz,                            // $aec510.CNG_LPZNZ_FIELD
+         &Cng_Nz_Shape_Tab,                  // $aec510.CNG_CUR_NZ_TABLE_FIELD
+         // Scratch Arrays
+         &L_adaptA,                          // $aec510.SCRPTR_LADAPTA_FIELD
+         &Exp_Mts_adapt,                     // $aec510.SCRPTR_EXP_MTS_ADAPT_FIELD
+         &AttenuationPersist,                // $aec510.SCRPTR_ATTENUATION_FIELD
+         &W_ri,                              // $aec510.SCRPTR_W_RI_FIELD
+         &L_adaptR,                          // $aec510.SCRPTR_LADAPTR_FIELD
+         &DTC_lin,                           // $aec510.SCRPTR_DTC_LIN_FIELD
+         &AEC_Dt,                            // $aec510.SCRPTR_T_FIELD
+         &AEC_Et,                            // $aec510.ET_FIELD
+      #if !defined(BLD_HEADSET)
+         // RERDT
+         &rerdt_dtc,                         // $aec510.SCRPTR_RERDT_DTC_FIELD
+         // AEC Auxiliary LMS
+         &Gb_real,                           // $aec510.GB_REAL_FIELD
+         &Gb_imag,                           // $aec510.GB_IMAG_FIELD
+         &BExp_Gb,                           // $aec510.GB_BEXP_FIELD
+         &L_RatSqG,                          // $aec510.L_RATSQG_FIELD
+      #endif
+         0 ...;
+
+
+   // AEC NLP data object
+   .VAR vsm_fdnlp[$aec510.nlp.STRUCT_SIZE] =
+         &aec_obj,                           // AEC_OBJ_PTR
+         &nlp_param,                         // OFFSET_PARAM_PTR
+         &ZeroValue,                         // OFFSET_CALLSTATE_PTR
+         &vad_rcv,                           // OFFSET_PTR_RCV_DETECT (input), only used for HD/HC
+         &AttenuationPersist,                // OFFSET_SCRPTR_Attenuation
+      #if defined(BLD_AUTO) || defined(BLD_SPEAKER)
+         &nlp_scratch,                       // OFFSET_SCRPTR
+         $aec510.FdnlpProcess,               // FDNLP_FUNCPTR
+         $aec510.VsmProcess,                 // VSM_FUNCPTR
+      #endif
+         0 ...;
+#endif
+
+#if uses_DCBLOCK
+   .VAR/DM2 in_l_dcblock_dm2[PEQ_OBJECT_SIZE(1)] =
+      &stream_map_left_adc,            // PTR_INPUT_DATA_BUFF_FIELD
+      &stream_map_left_adc,            // PTR_OUTPUT_DATA_BUFF_FIELD
+      1,                               // MAX_STAGES_FIELD
+      vad_dc_coeffs+$M.vad400.DCB_PEQ_COEFF_OFFSET,        // PARAM_PTR_FIELD
+      0 ...;
+
+   #if !defined(BLD_1MIC)
+      .VAR/DM2 in_r_dcblock_dm2[PEQ_OBJECT_SIZE(1)] =
+         &stream_map_right_adc,           // PTR_INPUT_DATA_BUFF_FIELD
+         &stream_map_right_adc,           // PTR_OUTPUT_DATA_BUFF_FIELD
+         1,                               // MAX_STAGES_FIELD
+         vad_dc_coeffs+$M.vad400.DCB_PEQ_COEFF_OFFSET,        // PARAM_PTR_FIELD
+         0 ...;
+   #endif
+#endif
+
+
+
+#if uses_SND_PEQ
+   // Parameteric EQ
+   .VAR/DM2 snd_peq_dm2[PEQ_OBJECT_SIZE(MAX_NUM_PEQ_STAGES)] =
+      stream_sendout_intermidiate,             // PTR_INPUT_DATA_BUFF_FIELD
+      stream_sendout_intermidiate,             // PTR_OUTPUT_DATA_BUFF_FIELD
+      MAX_NUM_PEQ_STAGES,             // MAX_STAGES_FIELD
+      CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_SND_PEQ_CONFIG,  // PARAM_PTR_FIELD
+      0 ...;
+#endif
+
+#if uses_SND_VAD
+   .VAR aed100_obj[$aed100.STRUC_SIZE] =
+         &vad_flag,  // $aed100.PTR_VAD_FLAG_FIELD (output)
+         0 ...;
+#endif
+
+   // SND AGC Pre-Gain stage
+   .VAR/DM1 out_gain_dm1[$M.audio_proc.stream_gain.STRUC_SIZE] =
+      stream_sendout_intermidiate,                               // OFFSET_INPUT_PTR
+      stream_sendout_intermidiate,                               // OFFSET_OUTPUT_PTR
+      CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_SNDGAIN_MANTISSA, // OFFSET_PTR_MANTISSA
+      CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_SNDGAIN_EXPONENT; // OFFSET_PTR_EXPONENT
+
+
+#if uses_SND_AGC
+   .VAR/DM vad_agc_obj[] =
+      0,       // offset 0: VAD_AGC
+      0,       // offset 1: AGC_Echo_hold
+      0;       // offset 2: AGC_Noise_hold
+
+   .VAR/DM snd_agc400_dm[$agc400.STRUC_SIZE] =
+      &CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_SND_AGC_G_INITIAL, // OFFSET_PARAM_PTR_FIELD
+      stream_sendout_intermidiate,  //OFFSET_PTR_INPUT_FIELD
+      stream_sendout_intermidiate,  //OFFSET_PTR_OUTPUT_FIELD
+      &vad_agc_obj,        // OFFSET_PTR_VAD_VALUE_FIELD (input)
+      $M.agc400.const.FRAME_THRESHOLD, //OFFSET_FRAME_THRESHOLD_FIELD
+      1.0,                 //OFFSET_HARD_LIMIT_FIELD
+      0,                   //OFFSET_PTR_TONE_FLAG_FIELD
+      0 ...;
+#endif
+
+
+#if uses_NSVOLUME
+   // NDVC - Noise Controled Volume
+   .VAR/DM1 ndvc_obj[$ndvc100.STRUC_SIZE + $ndvc100.MAX_STEPS] =
+      1,                   // OFFSET_BYPASS_FLAG
+      $ndvc100.MAX_STEPS,  // OFFSET_MAXSTEPS
+#if uses_IN0_OMS == 0
+      &LpXnz_dms,          // OFFSET_PTR_LPDNZ
+#else
+      &in0oms_LpXnz,       // OFFSET_PTR_LPDNZ
+#endif      
+      CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_NDVC_HYSTERESIS,  // OFFSET_PTR_PARAMS
+      0 ...;
+#endif
+
+        
+   .VAR sco_out_pk_dtct[] =
+      &stream_map_sndout,              // PTR_INPUT_BUFFER_FIELD
+      0;                               // PEAK_LEVEL_PTR
+
+   .VAR aec_ref_dtct[$M.audio_proc.peak_monitor.STRUCT_SIZE] =
+         &stream_map_refin,   // PTR_INPUT_BUFFER_FIELD
+         0;                   // PEAK_LEVEL
+
+   .VAR mic_in_l_pk_dtct[] =
+      &stream_map_left_adc,            // PTR_INPUT_BUFFER_FIELD
+      0;                               // PEAK_LEVEL_PTR
+
+#if !defined(BLD_1MIC)
+   .VAR mic_in_r_pk_dtct[] =
+      &stream_map_right_adc,           // PTR_INPUT_BUFFER_FIELD
+      0;                               // PEAK_LEVEL_PTR
+#endif
+
+#if CVC_DYN_NUM_MICS > 2
+   .VAR mic_in_3_pk_dtct[$M.audio_proc.peak_monitor.STRUCT_SIZE] =
+      &stream_map_mic3,           // PTR_INPUT_BUFFER_FIELD
+      0;                          // PEAK_LEVEL_PTR   
+   
+#endif
+
+#if CVC_DYN_NUM_MICS > 3
+   .VAR mic_in_4_pk_dtct[$M.audio_proc.peak_monitor.STRUCT_SIZE] =
+      &stream_map_mic4,           // PTR_INPUT_BUFFER_FIELD
+      0;                          // PEAK_LEVEL_PTR
+#endif
+
+#if uses_ASF
+   #if defined(BLD_AUTO)
+      .CONST $cvc.DMSS_ASF_BEAM0_MODE         1;
+      .CONST $cvc.DMSS_ASF_BEAM1_MODE         1;
+   #else
+      .CONST $cvc.DMSS_ASF_BEAM0_MODE         1;
+      .CONST $cvc.DMSS_ASF_BEAM1_MODE         0;
+   #endif
+
+   .VAR pX0[$asf100.NUM_PROC * 2];
+   .VAR pX1[$asf100.NUM_PROC * 2];
+   .VAR pXcR[$asf100.NUM_PROC * 2];
+   .VAR pXcI[$asf100.NUM_PROC * 2];
+   .VAR coh[$asf100.NUM_PROC * 2];
+   .VAR wnr_g[$asf100.NUM_PROC * 2];
+
+
+
+   .VAR beam0_cc_real[$asf100.NUM_PROC];
+   .VAR beam1_cc_real[$asf100.NUM_PROC];
+   .VAR beam0_phi_real[$asf100.NUM_PROC]; 
+   .VAR beam1_phi_real[$asf100.NUM_PROC]; 
+   .VAR beam0_w1_real[$asf100.NUM_PROC];
+   .VAR beam_w0_aux_real[$asf100.NUM_PROC];
+   .VAR beam_w1_aux_real[$asf100.NUM_PROC];
+   .VAR beam1_w0_real[$asf100.NUM_PROC];
+   .VAR beam1_w1_real[$asf100.NUM_PROC];
+   .VAR coh_real[$asf100.NUM_PROC];
+   .VAR coh_cos[$asf100.NUM_PROC];
+   .VAR x0_saved_real[2*$asf100.NUM_PROC];
+   .VAR x1_saved_real[2*$asf100.NUM_PROC];
+   .VAR z0_aux_real[2*$asf100.NUM_PROC];
+   .VAR z1_aux_real[2*$asf100.NUM_PROC];
+
+
+   .VAR beam0_cc_imag[$asf100.NUM_PROC];
+   .VAR beam1_cc_imag[$asf100.NUM_PROC];
+   .VAR beam0_phi_imag[$asf100.NUM_PROC]; 
+   .VAR beam1_phi_imag[$asf100.NUM_PROC]; 
+   .VAR beam0_w1_imag[$asf100.NUM_PROC];
+   .VAR beam_w0_aux_imag[$asf100.NUM_PROC];
+   .VAR beam_w1_aux_imag[$asf100.NUM_PROC];
+   .VAR beam1_w0_imag[$asf100.NUM_PROC];
+   .VAR beam1_w1_imag[$asf100.NUM_PROC];
+   .VAR coh_sin[$asf100.NUM_PROC];
+   .VAR x0_saved_imag[2*$asf100.NUM_PROC];
+   .VAR x1_saved_imag[2*$asf100.NUM_PROC];
+   .VAR z0_aux_imag[2*$asf100.NUM_PROC];
+   .VAR z1_aux_imag[2*$asf100.NUM_PROC];
+
+
+
+   .VAR/DM1 asf_object[$asf100.STRUC_SIZE] =
+      &D0,                          // X0_FIELD
+      &D1,                          // X1_FIELD
+      asf_mode_table,               // MODE_FIELD     
+      &cvc_variant,                 // $asf100.PTR_VARIANT_FIELD
+      CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_ASF_MIC_DISTANCE,               // PARAM_FIELD
+      CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_DMP_MODE,                       // PTR_DMP_MODE_FIELD 
+      0,                                                                        // BEAM0_SWITCHABLE_FLAG
+      0,                                                                        // BYP_BEAM0_FLAG_FIELD
+      &power_adjust,                // PTR_POWR_ADJUST_FIELD            
+      asf100_scratch_dm1,           // SCRATCH_DM1_FIELD
+      asf100_scratch_dm2,           // SCRATCH_DM2_FIELD
+      &$asf100.bf.func_adaptive_2mic_mvdr_beam,  // BEAM_FUNC_FIELD
+      $cvc.DMSS_ASF_BEAM0_MODE,     // BEAM0_MODE_FIELD
+      $cvc.DMSS_ASF_BEAM1_MODE,     // BEAM1_MODE_FIELD
+      &ASF_TEMP0,                   // X0_FREQ_OBJ
+      &ASF_TEMP1,                   // X1_FREQ_OBJ
+      &ASF_TEMP2,                   // SCRATCH_X0_TMP_BUF_FREQ_OBJ
+      &ASF_TEMP3,                   // X1_TMP_BUF_FREQ_OBJ
+      &X0_SAVED_FREQ_OBJ,           // X0_SAVED_FREQ_OBJ
+      &X1_SAVED_FREQ_OBJ,           // X1_SAVED_FREQ_OBJ
+      &Z0_AUX_FREQ_OBJ,             // Z0_AUX_FREQ_OBJ
+      &Z1_AUX_FREQ_OBJ,             // Z1_AUX_FREQ_OBJ
+      &wind_flag,                   // WIND_FLAG_PTR
+      &pX0,                         // PX0N_FIELD
+      &pX1,                         // PX1N_FIELD
+      &pXcR,                        // PXCRN_FIELD
+      &pXcI,                        // PXCIN_FIELD
+      &coh,                         // COH_FIELD 
+      &wnr_g,                       // WNR_G_FIELD 
+      &beam0_cc_real,               // BEAM0_CC_REAL_FIELD 
+      &beam0_cc_imag,               // BEAM0_CC_IMAG_FIELD
+      &beam1_cc_real,               // BEAM1_CC_REAL_FIELD 
+      &beam1_cc_imag,               // BEAM1_CC_IMAG_FIELD
+      &beam0_phi_real,              // BEAM0_PHI_REAL_FIELD 
+      &beam0_phi_imag,              // BEAM0_PHI_IMAG_FIELD 
+      &beam_w0_aux_real,            // BEAM_W0_AUX_REAL 
+      &beam_w0_aux_imag,            // BEAM_W0_AUX_IMAG 
+      &beam_w1_aux_real,            // BEAM_W1_AUX_REAL
+      &beam_w1_aux_imag,            // BEAM_W1_AUX_IMAG
+      &beam1_phi_real,              // BEAM1_PHI_REAL_FIELD 
+      &beam1_phi_imag,              // BEAM1_PHI_IMAG_FIELD 
+      &beam0_w1_real,               // BEAM0_W1_REAL 
+      &beam0_w1_imag,               // BEAM0_W1_IMAG 
+      &beam1_w0_real,               // BEAM1_W0_REAL
+      &beam1_w0_imag,               // BEAM1_W0_IMAG
+      &beam1_w1_real,               // BEAM1_W1_REAL
+      &beam1_w1_imag,               // BEAM1_W1_IMAG
+      &beam0_tr + $asf100.BIN_SKIPPED*ADDR_PER_WORD,    // BEAM0_TR_ASF_FIELD
+      &beam1_tr + $asf100.BIN_SKIPPED*ADDR_PER_WORD,    // BEAM1_TR_ASF_FIELD
+      &coh_cos,                     // COH_COS_FIELD
+      &coh_sin,                     // COH_SIN_FIELD
+      &spp + $asf100.BIN_SKIPPED*ADDR_PER_WORD,         // COH_G_FIELD
+      0 ...;                        // rest zeros
+#endif   // uses_ASF
+
+
+   .VAR/DM1 mute_cntrl_dm1[$M.MUTE_CONTROL.STRUC_SIZE] =
+      stream_sendout_intermidiate,             // OFFSET_INPUT_PTR
+      mute_control_ptr,                       // OFFSET_PTR_STATE
+      1;           // OFFSET_MUTE_VAL
+
+
+#if defined(BLD_DMSS)
+   #define dmss_param         CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_RNR_AGGR
+   #define dmss_scratch_dm1   $dm1_scratch
+   #define dmss_scratch_dm2   $dm2_scratch
+
+   .VAR/DM1 PIZ0r[WILL_BE_RESIZED];
+   .VAR/DM1 PIZ1r[WILL_BE_RESIZED];
+   .VAR/DM1 POZ0r[WILL_BE_RESIZED];
+   .VAR/DM1 POZ1r[WILL_BE_RESIZED];
+
+   .VAR/DM2 PIZ0i[WILL_BE_RESIZED];
+   .VAR/DM2 PIZ1i[WILL_BE_RESIZED];
+   .VAR/DM2 POZ0i[WILL_BE_RESIZED];
+   .VAR/DM2 POZ1i[WILL_BE_RESIZED];
+
+   .VAR PIZ0[] = &PIZ0r, &PIZ0i, 0;
+   .VAR PIZ1[] = &PIZ1r, &PIZ1i, 0;
+   .VAR POZ0[] = &POZ0r, &POZ0i, 0;
+   .VAR POZ1[] = &POZ1r, &POZ1i, 0;
+   
+
+   .VAR beam0_tr[$dmss100.NUM_PROC]; 
+   .VAR beam1_tr[$dmss100.NUM_PROC]; 
+   
+   .VAR/DM  rnr_data[$dmss.rnr.wb.STATE_SIZE];
+   .VAR/DM1 TP_data_dm1[$dmss.tp.STATE_DM1_SIZE];
+   .VAR/DM2 TP_data_dm2[$dmss.tp.STATE_DM2_SIZE];
+
+   .VAR dmss_obj[$dmss.STRUC_SIZE] =
+      &D0,                    // $dmss.X0_FIELD
+      &D1,                    // $dmss.X1_FIELD
+      &PIZ0,                  // $dmss.PIZ0_FIELD
+      &PIZ1,                  // $dmss.PIZ1_FIELD
+      &POZ0,                  // $dmss.POZ0_FIELD
+      &POZ1,                  // $dmss.POZ1_FIELD
+      &dmss_scratch_dm1,      // $dmss.SCRATCH_DM1_FIELD
+      &dmss_scratch_dm2,      // $dmss.SCRATCH_DM2_FIELD
+      &dmss_param,            // $dmss.PARAM_FIELD
+      &cvclib_table,          // $dmss.TABLE_FIELD
+      &AttenuationPersist,    // $dmss.TOTAL_ATT_FIELD
+      &rnr_data,              // $dmss.RNR_STATE_FIELD
+      &TP_mode,               // $dmss.TP_MODE_PTR_FIELD
+      &TP_data_dm1,           // $dmss.TP_STATE_DM1_FIELD
+      &TP_data_dm2,           // $dmss.TP_STATE_DM2_FIELD
+      &dms100_obj + $M.oms270.PTR_G_FIELD,       // DMS_PTR_GG_FIELD
+#if uses_IN0_OMS == 0
+      &dms100_obj + $M.oms270.PTR_G_FIELD,       // OMS_PTR_G_FIELD
+#else
+      &oms270in0_obj + $M.oms270.PTR_G_FIELD,    // OMS_PTR_G_FIELD
+#endif      
+      &beam0_tr,                                 // BEAM0_TR_FIELD
+      &beam1_tr,                                 // BEAM1_TR_FIELD
+      &cvc_variant,           // $dmss.PTR_VARIANT_FIELD
+      0 ...;
+#endif
+
+   // --------------------------------------------------------------------------
+   // Table of functions for current mode
+   // --------------------------------------------------------------------------
+   .VAR  ModeProcTableSnd[$M.CVC_SEND.SYSMODE.MAX_MODES] =
+      &copy_proc_funcsSnd,              // STATIC
+      &copy_proc_funcsSnd,              // STANDBY
+      &hfk_proc_funcsSnd,               // FULL
+      &hfk_proc_funcsSnd,               // LOWVOLUME
+      &copy_proc_funcsSnd,              // PASS_THRU_LEFT
+      &copy_proc_funcsSnd,      		// PASS_THRU_RIGHT
+      &copy_proc_funcsSnd,              // PASS_THRU_MIC3
+      &copy_proc_funcsSnd;              // PASS_THRU_MIC4
+
+
+   // --------------------------------------------------------------------------
+   // Send Process Table
+   // --------------------------------------------------------------------------
+   .VAR/DM hfk_proc_funcsSnd[] =
+      //                                        r9 -> '&root' implicitly and globally
+      // Function                               r7                   r8
+
+      $frame_proc.distribute_streams,           &snd_streams,        0,
+
+#ifdef CVC_USES_RESAMPLER
+      //EWB -> resampler
+      $cvc.snd.frame_resample_process,          &refin_downsampler_dm1,          ext_variant,
+      $cvc.snd.frame_resample_process,          &stream_mic1_downsampler_dm1,    ext_variant,
+   #if !defined(BLD_1MIC)
+      $cvc.snd.frame_resample_process,          &stream_mic2_downsampler_dm1,    ext_variant,   
+   #endif 
+   #if CVC_DYN_NUM_MICS > 2
+      $cvc.snd.frame_resample_process,          &stream_mic3_downsampler_dm1,    ext_variant,   
+    #if CVC_DYN_NUM_MICS > 3
+      $cvc.snd.frame_resample_process,          &stream_mic4_downsampler_dm1,    ext_variant,   
+    #endif
+   #endif
+      //EWB -> resampler
+#endif
+
+#if defined(MIC_GROUPING)
+      $mgdc100.stream_mixing.proc,              &mic_array,          &mgdc100_obj, 
+#endif
+
+#if uses_DCBLOCK
+      $audio_proc.peq.process,                  &in_l_dcblock_dm2,   0, // Si_L --> Si_L
+
+   #if !defined(BLD_1MIC)
+      $audio_proc.peq.process,                  &in_r_dcblock_dm2,   0, // Si_R --> Si_R
+   #endif      
+#endif
+
+      $M.audio_proc.peak_monitor.Process.func,  &mic_in_l_pk_dtct,   0,
+      $M.audio_proc.peak_monitor.Process.func,  &aec_ref_dtct,   0,
+      
+
+   #if !defined(BLD_1MIC)
+      $M.audio_proc.peak_monitor.Process.func,  &mic_in_r_pk_dtct,   0,
+   #endif
+
+   #if CVC_DYN_NUM_MICS > 2
+      $M.audio_proc.peak_monitor.Process.func,  &mic_in_3_pk_dtct,   0,
+   #endif
+
+   #if CVC_DYN_NUM_MICS > 3
+      $M.audio_proc.peak_monitor.Process.func,  &mic_in_4_pk_dtct,   0,
+   #endif
+
+
+#if uses_AEC
+      $aec510.reference.process,                $cvc.mc.ref_delay,   &aec_obj,       // [Si_ref --> ref]
+      $cvc.aec_ref.filter_bank.analysis,        &fft_obj,            &fba_ref,       // ref --> [X_real,X_imag]
+
+   #if uses_REF_VAD
+      $audio_proc.peq.process,                  &ref_vad_peq,        0,
+      $M.vad400.process.func,                   &ref_vad400,         0,
+      $cvc.event.echo_flag,                     &vsm_fdnlp,          &ref_vad400,
+   #endif
+
+   #if defined(BLD_FBC)
+      $aec510.fbc.process,                      0,                   &aec_obj,      // [Si_L -> Si_L] [Si_R -> Si_R]
+   #endif
+#endif 
+
+      $filter_bank.analysis.process,            &fft_obj,            &fba_left,     // Si_L -> D0
+      $hpf.process,                             &D0,                 &hpf_coeffs,
+
+#if CVC_DYN_NUM_MICS != 1 
+      $filter_bank.analysis.process,            &fft_obj,            &fba_right,    // Si_R -> D1
+      $hpf.process,                             &D1,                 &hpf_coeffs,
+#endif
+
+#if uses_MGDC
+      $mgdc100.process,                         $cvc.mc.mgdc100,     &mgdc100_obj,  // [D0,D1]
+      $cvc.mgdc_persist.state_upload,           &mgdc_state_ptr,     &mgdc100_obj,
+      $cvc.mgdc.harm_dynamic,                   &harm_inputs,        &snd_harm_obj,
+#endif
+
+      $harmonicity.process,                     0,                   &snd_harm_obj,
+
+#if uses_IN0_OMS
+      $dms100.process,                          $cvc.mc.oms_in,      &oms270in0_obj, // D0
+#endif
+
+#if uses_NSVOLUME
+      $ndvc100.process,                         0,                   &ndvc_obj,
+#endif
+
+#if uses_AEC
+      $aec510.process,                          $cvc.mc.aec510,      &aec_obj,      // [D0,D1]    
+#endif
+
+#if defined(BLD_DMSS)
+      $dmss.input_power_monitor,                0,                   &dmss_obj,
+#endif
+
+#if uses_ASF
+      $asf100.process,                          $cvc.mc.asf100,      &asf_object,   // [D0,D1]
+#endif
+
+#if uses_NC
+      $cvc.mc.nc100_process,                    0,                   &nc100_obj,    // D0
+#endif
+
+#if defined(BLD_DMSS)
+      $dmss.output_power_monitor,               0,                   &dmss_obj,
+      $dmss.rnr.process,                        $cvc.mc.dmss_rnr,    &dmss_obj,
+#endif
+
+#if uses_SND_NS
+      $dms100.process,                          $cvc.mc.dms100,      &dms100_obj,
+      $dms100.apply_gain,                       $cvc.mc.dms_out,     &dms100_obj,
+#endif
+
+#if defined(BLD_DMSS)
+   #if uses_ASF || uses_SND_VAD
+      $dmss.calc_TR,                            0,                   &dmss_obj,
+   #endif
+
+   #if defined(BLD_HEADSET)
+      $dmss.tp.process,                         $cvc.mc.dmss_tp,     &dmss_obj,
+   #endif
+#endif
+
+#if uses_SND_VAD
+      $aed100.process,                          $cvc.mc.aed100,      &aed100_obj,
+#endif
+
+#if uses_AEC
+#if defined(BLD_AECLRM)
+      $cvc.aec510_lrm.gain_mapping,             &PIZ0,                  &aec_obj,
+#endif      
+      $aec510.nlp.process,                      $cvc.mc.aec510_nlp,  &vsm_fdnlp,
+      $aec510.cng.process,                      $cvc.mc.aec510_cng,  &aec_obj,
+#endif
+
+#if defined(BLD_DMSS)
+      $dmss.rnr.gain_apply,                     0,                   &dmss_obj,
+#endif
+
+      $filter_bank.synthesis.process,           &fft_obj,            &fbs_snd,    // [D -> So]
+
+#if uses_SND_PEQ
+      $audio_proc.peq.process,                  &snd_peq_dm2,        0,
+#endif
+     
+      $M.audio_proc.stream_gain.Process.func,   &out_gain_dm1,       0,
+
+#if uses_SND_AGC
+      $agc400.process,                          $cvc.mc.agc400,      &snd_agc400_dm,
+#endif
+
+      $M.MUTE_CONTROL.Process.func,             &mute_cntrl_dm1,     0,
+
+#ifdef CVC_USES_RESAMPLER
+      //EWB -> resampler
+      $frame.iir_resamplev2.Process,           &sndout_upsampler_dm1,           0,
+#endif
+
+      $M.audio_proc.peak_monitor.Process.func,  &sco_out_pk_dtct,    0,
+
+      $frame_proc.update_streams,               &snd_streams,        0,
+
+      0;                                     // END OF TABLE
+
+   // --------------------------------------------------------------------------
+   // Pass Through Process Table
+   // --------------------------------------------------------------------------
+   .VAR/DM copy_proc_funcsSnd[] =
+      //                                        r9 -> '&root' implicitly and globally
+      // Function                               r7                   r8
+ 
+      $frame_proc.distribute_streams,           &snd_streams,        0,
+
+      $M.audio_proc.peak_monitor.Process.func,  &mic_in_l_pk_dtct,   0, // Si_L
+      $M.audio_proc.peak_monitor.Process.func,  &aec_ref_dtct,   0,
+
+   #if CVC_DYN_NUM_MICS == 2
+   
+      $M.audio_proc.peak_monitor.Process.func,  &mic_in_r_pk_dtct,   0, // Si_R
+      &$M.CVC_SEND.Set_PassThroughGains_2MIC,   &ModeControl,        &cur_mode_ptr,
+      $M.audio_proc.stream_mixer.Process.func,  &adc_mixer,          0, // Si_L,Si_R --> So
+      
+   #else   // CVC_DYN_NUM_MICS == 2
+   
+      #if CVC_DYN_NUM_MICS > 2
+          $M.audio_proc.peak_monitor.Process.func,  &mic_in_r_pk_dtct,   0, // Si_R
+          $M.audio_proc.peak_monitor.Process.func,  &mic_in_3_pk_dtct,   0,
+
+      #if CVC_DYN_NUM_MICS > 3
+          $M.audio_proc.peak_monitor.Process.func,  &mic_in_4_pk_dtct,   0,
+      #endif  // CVC_DYN_NUM_MICS > 3 
+
+          &$M.CVC_SEND.stream_map_select,       &snd_streams,        &adc_gain_dm1,
+      #endif  // CVC_DYN_NUM_MICS > 2
+
+      &$M.CVC_SEND.Set_PassThroughGains_1MIC,   &ModeControl,        &cur_mode_ptr,
+      $M.audio_proc.stream_gain.Process.func,   &adc_gain_dm1,       0,
+      
+   #endif
+
+      $M.audio_proc.peak_monitor.Process.func,  &sco_out_pk_dtct,    0,
+
+      $frame_proc.update_streams,               &snd_streams,        0,
+
+      0;                                     // END OF TABLE
+
+   // --------------------------------------------------------------------------
+   // Reinitialize Table
+   // --------------------------------------------------------------------------
+   .VAR/DM ReInitializeTable[] =
+      //                                  r9 -> '&root' implicitly and globally
+      // Function                         r7                      r8
+
+      $cvc.init.root,                     CVC_DYN_NUM_MICS,       CVC_SEND_MAJOR_CONFIG,
+
+#ifdef CVC_USES_RESAMPLER
+      //EWB -> resampler
+      $frame.iir_resamplev2.Initialize,      &refin_downsampler_dm1,       0,
+      $frame.iir_resamplev2.Initialize,      &stream_mic1_downsampler_dm1, 0,
+      $frame.iir_resamplev2.Initialize,      &sndout_upsampler_dm1,        0,
+   #if !defined(BLD_1MIC)
+      $frame.iir_resamplev2.Initialize,      &stream_mic2_downsampler_dm1, 0,
+   #endif
+   #if CVC_DYN_NUM_MICS > 2
+      $frame.iir_resamplev2.Initialize,      &stream_mic3_downsampler_dm1, 0,
+    #if CVC_DYN_NUM_MICS > 3
+      $frame.iir_resamplev2.Initialize,      &stream_mic4_downsampler_dm1, 0,
+    #endif
+   #endif
+      //EWB -> resampler
+#endif
+
+#if uses_DCBLOCK
+      $audio_proc.peq.initialize,         &in_l_dcblock_dm2,      0,
+
+   #if !defined(BLD_1MIC)
+      $audio_proc.peq.initialize,         &in_r_dcblock_dm2,      0,
+   #endif
+#endif
+
+#if defined(BLD_AUTO) && !defined(BLD_1MIC) // AUTO 2mic channel switch
+      $cvc.init.fb.stream_connect.left,   &snd_streams,           &fba_left,
+      $cvc.init.fb.stream_connect.right,  &snd_streams,           &fba_right,
+#endif
+
+      $filter_bank.synthesis.initialize,  0,                      &fbs_snd,
+      $filter_bank.analysis.initialize,   0,                      &fba_left,
+   #if !defined(BLD_1MIC)
+      $filter_bank.analysis.initialize,   0,                      &fba_right,
+   #endif
+
+      $harmonicity.initialize,            $cvc.init.harm,         &snd_harm_obj,
+
+#if uses_MGDC
+      $mgdc100.initialize,                0,                      &mgdc100_obj,
+      $cvc.mgdc_persist.init,             &mgdc_state_ptr,        &mgdc100_obj,
+#endif
+
+#if uses_IN0_OMS
+  #if defined(BLD_DMS_SM)
+      $dms100.initialize,                 $cvc.init.oms_in,       &oms270in0_obj,
+  #else    
+      $oms270.initialize,                 $cvc.init.oms_in,       &oms270in0_obj,
+  #endif    
+#endif
+
+#if uses_NSVOLUME
+      $ndvc100.initialize,                $cvc.init.ndvc100,      &ndvc_obj,
+#endif
+
+#if uses_AEC
+   #if uses_REF_VAD
+      $audio_proc.peq.initialize,         &ref_vad_peq,           0,
+      $M.vad400.initialize.func,          &ref_vad400,            0,
+   #endif
+
+      $filter_bank.analysis.initialize,   0,                      &fba_ref,
+      $aec510.initialize,                 $cvc.init.aec510,       &aec_obj,
+      $aec510.nlp.initialize,             $cvc.init.vsm_fdnlp,    &vsm_fdnlp,
+#if defined(BLD_AECLRM)
+      $cvc.init.aec510.lrm,               0,                      &aec_obj,
+#endif
+
+#if defined(BLD_FBC)
+      $aec510.fbc.initialize,             0,                      &aec_obj,
+#endif
+#endif
+
+#if defined(BLD_DMSS)
+      $dmss.initialize,                   0,                      &dmss_obj,
+#endif
+
+#if uses_ASF
+      $asf100.initialize,                 $cvc.init.asf100,       &asf_object,
+#endif
+
+#if uses_NC
+      $nc100.initialize,                  0,                	   &nc100_obj,
+#endif
+
+#if uses_SND_NS
+      $dms100.initialize,                 $cvc.init.dms100,       &dms100_obj,
+
+   #if defined(BLD_1MIC) // OMS WNR
+      $cvc.user.dms100.wnr.initialize,    &oms_wnr_obj,           &dms100_obj,
+   #endif
+#endif
+
+#if uses_SND_VAD
+      $aed100.initialize,                 $cvc.init.aed100,       &aed100_obj,
+#endif
+
+#if uses_SND_PEQ
+      $audio_proc.peq.initialize,         &snd_peq_dm2,           0,
+#endif
+
+#if uses_SND_AGC
+      $agc400.initialize,                 $cvc.init.agc400,       &snd_agc400_dm,
+#endif
+
+#if 0
+      // This function is integrated from 13.1 monolithic framework, which was called here
+      // This feature was introduced in 13.1 when system switch from handsfree
+      // to speaker by UFE, to initialize the stream timing.
+      //
+      // In capability based applications, there is no significant timing change by UFE,
+      // so this feature might be no longer needed.
+      // If this feature is ever needed, it might not be applied here in Kymera based system.
+      $cvc.init.stream_purge,             &snd_streams,           0,
+#endif
+
+      0;                                    // END OF TABLE
+
+
+   // --------------------------------------------------------------------------
+   // Stream Definitions
+   // --------------------------------------------------------------------------
+    // sndout stream map .
+   .VAR stream_map_sndout[$frmbuffer.EXTENDED_STRUC_SIZE] =
+      0,0,0,0,                                  // Filled in by Dirstibute Function
+      0,                                        // $frmbuffer.CBUFFER_PTR_FIELD - set by connect logic
+      ext_frame_size,                           // $frmbuffer.INITIAL_FRAME_SIZE_FIELD
+      $frame_proc.distribute_output_stream,     // $frmbuffer.DISTRIBUTE_FUNCPTR_FIELD
+      $frame_proc.update_output_stream,         // $frmbuffer.UPDATE_FUNCPTR_FIELD
+      0,                                        // $frmbuffer.THRESHOLD_FIELD - zero to disable latency cntrl
+      0,                                        // $frmbuffer.JITTER_FIELD
+      0 ...;
+    
+#ifdef CVC_USES_RESAMPLER  
+   .VAR/SM1 cbuffer_sndout_internal[$CVC_BASE.WB.SAMPLES_PER_FRAME ];
+   
+   .VAR stream_map_sndout_internal[$frmbuffer.STRUC_SIZE]  =
+         &cbuffer_sndout_internal,  // $frmbuffer.FRAME_PTR_FIELD
+         0,             // $frmbuffer.FRAME_SIZE_FIELD
+         0,             // $frmbuffer.BUFFER_SIZE_FIELD
+         0;             // $frmbuffer.BUFFER_START_ADDRESS_FIELD      
+         
+   //object for sndout up sampler
+   .VAR/DM1 sndout_upsampler_dm1[$iir_resamplev2.OBJECT_SIZE_SNGL_STAGE] =
+      stream_sendout_intermidiate,              // INPUT_PTR_FIELD
+      &stream_map_sndout,                       // OUTPUT_PTR_FIELD
+      ext_upsample_config,                      // CONVERSION_OBJECT_PTR_FIELD
+      -8,                                       // INPUT_SCALE_FIELD
+      8,                                        // OUTPUT_SCALE_FIELD
+      0,                                        // INTERMEDIATE_CBUF_PTR_FIELD
+      0,                                        // INTERMEDIATE_CBUF_LEN_FIELD
+      0 ...;
+#endif
+
+    // reference stream map
+   .VAR stream_map_refin[$frmbuffer.EXTENDED_STRUC_SIZE] =
+      0,0,0,0,                                  // Filled in by Dirstibute Function
+      0,                                        // $frmbuffer.CBUFFER_PTR_FIELD - set by connect logic
+      ext_frame_size,                           // $frmbuffer.INITIAL_FRAME_SIZE_FIELD
+      $frame_proc.distribute_input_stream,      // $frmbuffer.DISTRIBUTE_FUNCPTR_FIELD
+      $frame_proc.update_input_stream,          // $frmbuffer.UPDATE_FUNCPTR_FIELD
+      0,                                        // $frmbuffer.THRESHOLD_FIELD - zero to disable latency cntrl
+      0,                                        // $frmbuffer.JITTER_FIELD
+      0 ...;
+
+#ifdef CVC_USES_RESAMPLER
+   //object for reference down sampler
+   .VAR/DM1 refin_downsampler_dm1[$iir_resamplev2.OBJECT_SIZE_SNGL_STAGE] =
+      &stream_map_refin,                        // INPUT_PTR_FIELD, inplace buffer use
+      &stream_map_refin,                        // OUTPUT_PTR_FIELD
+      ext_downsample_config,                    // CONVERSION_OBJECT_PTR_FIELD
+      -8,                                       // INPUT_SCALE_FIELD
+      8,                                        // OUTPUT_SCALE_FIELD
+      0,                                        // INTERMEDIATE_CBUF_PTR_FIELD
+      0,                                        // INTERMEDIATE_CBUF_LEN_FIELD
+      0 ...;
+#endif
+
+    // sndin stream map
+   .VAR stream_map_left_adc[$frmbuffer.EXTENDED_STRUC_SIZE] =
+      0,0,0,0,                                  // Filled in by Dirstibute Function
+      0,                                        // $frmbuffer.CBUFFER_PTR_FIELD - set by connect logic
+      ext_frame_size,                           // $frmbuffer.INITIAL_FRAME_SIZE_FIELD
+      $frame_proc.distribute_input_stream,      // $frmbuffer.DISTRIBUTE_FUNCPTR_FIELD
+      $frame_proc.update_input_stream,          // $frmbuffer.UPDATE_FUNCPTR_FIELD
+      0,                                        // $frmbuffer.THRESHOLD_FIELD - zero to disable latency cntrl
+      0,                                        // $frmbuffer.JITTER_FIELD
+      0 ...;
+
+#ifdef CVC_USES_RESAMPLER
+   //object for stream left down sampler
+   .VAR/DM1 stream_mic1_downsampler_dm1[$iir_resamplev2.OBJECT_SIZE_SNGL_STAGE] =
+      &stream_map_left_adc,                     // INPUT_PTR_FIELD, inplace buffer use
+      &stream_map_left_adc,                     // OUTPUT_PTR_FIELD
+      ext_downsample_config,                    // CONVERSION_OBJECT_PTR_FIELD
+      -8,                                       // INPUT_SCALE_FIELD
+      8,                                        // OUTPUT_SCALE_FIELD
+      0,                                        // INTERMEDIATE_CBUF_PTR_FIELD
+      0,                                        // INTERMEDIATE_CBUF_LEN_FIELD
+      0 ...;
+#endif
+
+    // sndin right stream map
+   #if CVC_DYN_NUM_MICS > 1
+      .VAR stream_map_right_adc[$frmbuffer.EXTENDED_STRUC_SIZE] =
+         0,0,0,0,                                  // Filled in by Dirstibute Function
+         0,                                        // $frmbuffer.CBUFFER_PTR_FIELD - set by connect logic
+         ext_frame_size,                           // $frmbuffer.INITIAL_FRAME_SIZE_FIELD
+         $frame_proc.distribute_input_stream,      // $frmbuffer.DISTRIBUTE_FUNCPTR_FIELD
+         $frame_proc.update_input_stream,          // $frmbuffer.UPDATE_FUNCPTR_FIELD
+         0,                                        // $frmbuffer.THRESHOLD_FIELD - zero to disable latency cntrl
+         0,                                        // $frmbuffer.JITTER_FIELD
+         0 ...;
+         
+#ifdef CVC_USES_RESAMPLER           
+   //object for stream right down sampler
+   .VAR/DM1 stream_mic2_downsampler_dm1[$iir_resamplev2.OBJECT_SIZE_SNGL_STAGE] =
+        &stream_map_right_adc,                  // INPUT_PTR_FIELD
+        &stream_map_right_adc,                  // OUTPUT_PTR_FIELD
+        ext_downsample_config,                    // CONVERSION_OBJECT_PTR_FIELD
+        -8,                                     // INPUT_SCALE_FIELD
+        8,                                      // OUTPUT_SCALE_FIELD
+        0,                                      // INTERMEDIATE_CBUF_PTR_FIELD
+        0,                                      // INTERMEDIATE_CBUF_LEN_FIELD
+        0 ...;
+#endif
+   #endif //CVC_DYN_NUM_MICS > 1
+
+    // sndin mic3 stream map
+   #if CVC_DYN_NUM_MICS > 2
+      .VAR stream_map_mic3[$frmbuffer.EXTENDED_STRUC_SIZE] =
+         0,0,0,0,                                  // Filled in by Distribute Function
+         0,                                        // $frmbuffer.CBUFFER_PTR_FIELD - set by connect logic
+         ext_frame_size,                           // $frmbuffer.INITIAL_FRAME_SIZE_FIELD
+         $frame_proc.distribute_input_stream,      // $frmbuffer.DISTRIBUTE_FUNCPTR_FIELD
+         $frame_proc.update_input_stream,          // $frmbuffer.UPDATE_FUNCPTR_FIELD
+         0,                                        // $frmbuffer.THRESHOLD_FIELD - zero to disable latency cntrl
+         0,                                        // $frmbuffer.JITTER_FIELD
+         0 ...;
+         
+#ifdef CVC_USES_RESAMPLER            
+   //object for stream mic3 down sampler
+   .VAR/DM1 stream_mic3_downsampler_dm1[$iir_resamplev2.OBJECT_SIZE_SNGL_STAGE] =
+        &stream_map_mic3,                       // INPUT_PTR_FIELD
+        &stream_map_mic3,                       // OUTPUT_PTR_FIELD
+        ext_downsample_config,                  // CONVERSION_OBJECT_PTR_FIELD
+        -8,                                     // INPUT_SCALE_FIELD
+        8,                                      // OUTPUT_SCALE_FIELD
+        0,                                      // INTERMEDIATE_CBUF_PTR_FIELD
+        0,                                      // INTERMEDIATE_CBUF_LEN_FIELD
+        0 ...;
+#endif
+   #endif
+
+    // sndin mic4 stream map
+   #if CVC_DYN_NUM_MICS > 3
+      .VAR stream_map_mic4[$frmbuffer.EXTENDED_STRUC_SIZE] =
+         0,0,0,0,                                  // Filled in by Distribute Function
+         0,                                        // $frmbuffer.CBUFFER_PTR_FIELD - set by connect logic
+         ext_frame_size,                           // $frmbuffer.INITIAL_FRAME_SIZE_FIELD
+         $frame_proc.distribute_input_stream,      // $frmbuffer.DISTRIBUTE_FUNCPTR_FIELD
+         $frame_proc.update_input_stream,          // $frmbuffer.UPDATE_FUNCPTR_FIELD
+         0,                                        // $frmbuffer.THRESHOLD_FIELD - zero to disable latency cntrl
+         0,                                        // $frmbuffer.JITTER_FIELD
+         0 ...;
+         
+#ifdef CVC_USES_RESAMPLER         
+   //object for stream mic4 down sampler
+   .VAR/DM1 stream_mic4_downsampler_dm1[$iir_resamplev2.OBJECT_SIZE_SNGL_STAGE] =
+        &stream_map_mic4,                       // INPUT_PTR_FIELD
+        &stream_map_mic4,                       // OUTPUT_PTR_FIELD
+        ext_downsample_config,                  // CONVERSION_OBJECT_PTR_FIELD
+        -8,                                     // INPUT_SCALE_FIELD
+        8,                                      // OUTPUT_SCALE_FIELD
+        0,                                      // INTERMEDIATE_CBUF_PTR_FIELD
+        0,                                      // INTERMEDIATE_CBUF_LEN_FIELD
+        0 ...;
+#endif
+   #endif
+
+   // Stream List for Send Processing
+   .VAR/DM snd_streams[] =
+         &stream_map_sndout,
+         &stream_map_refin,
+         &stream_map_left_adc,
+      #if CVC_DYN_NUM_MICS > 1
+         &stream_map_right_adc,
+      #endif
+      #if CVC_DYN_NUM_MICS > 2
+         &stream_map_mic3,
+      #endif
+      #if CVC_DYN_NUM_MICS > 3
+         &stream_map_mic4,
+      #endif
+         0;
+
+   // --------------------------------------------------------------------------
+   // Place Holder for linker resolved symbols
+   // --------------------------------------------------------------------------
+   .VAR/CONST  DynTable_Linker[] = 0;
+
+   // --------------------------------------------------------------------------
+   // Command Data Block
+   // --------------------------------------------------------------------------
+   .VAR/CONST16  DynTable_Main[] =
+      DYN_ALLOC_EXTERNAL_FILESYSTEM()
+      // Header
+      DYN_LINKER_RESOLVE(DynTable_Linker),
+      DYN_ALLOC_ROOT($CVC_SEND_CAP.ROOT.INST_ALLOC_PTR_FIELD),
+      DYN_ALLOC_SCRATCH_ROOT($CVC_SEND_CAP.ROOT.SCRATCH_ALLOC_PTR_FIELD),
+
+      // Define Dynamic Memory Block Sizes to use 
+      DYN_BLOCK_SIZE(1032),
+
+      // Scratch blocks use 3 words for header
+      DYN_SCRATCH_BLOCK_SIZE(1032),
+
+      // Link to Root Object
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.LEFT_INPUT_STREAM_MAP_PTR_FIELD,stream_map_left_adc),
+   #if CVC_DYN_NUM_MICS != 1    
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.RIGHT_INPUT_STREAM_MAP_PTR_FIELD,stream_map_right_adc),
+   #endif
+   #if CVC_DYN_NUM_MICS > 2     
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.MIC3_INPUT_STREAM_MAP_PTR_FIELD,stream_map_mic3),
+   #endif
+   #if CVC_DYN_NUM_MICS == 4    
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.MIC4_INPUT_STREAM_MAP_PTR_FIELD,stream_map_mic4),
+   #endif
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.REF_INPUT_STREAM_MAP_PTR_FIELD,stream_map_refin),  
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.OUTPUT_STREAM_MAP_PTR_FIELD,stream_map_sndout),
+
+
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.MODE_TABLE_PTR_FIELD,ModeProcTableSnd),
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.INIT_TABLE_PTR_FIELD,ReInitializeTable),
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.CVC_DATA_ROOT_FIELD,root),
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.STATUS_TABLE_PTR_FIELD, StatusArray), 
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.PARAMS_PTR_FIELD, CurParams),
+
+   #if uses_MGDC
+      DYN_SET_ROOT($CVC_SEND_CAP.ROOT.OMNI_MODE_PTR_FIELD, mgdc100_obj+$mgdc100.OMNI_MODE_FIELD),
+   #endif
+
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.CVCLIB_TABLE, cvclib_table),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.FFTSPLIT_TABLE, fft_split),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.OMS_CONST, oms_mode_object),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.DMS100_MODE,dms_mode_object),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.ASF_MODE_TABLE, asf_mode_table),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.VAD_DC_COEFFS, vad_dc_coeffs),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.AEC_MODE, aec_mode_object),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.CUR_MODE_PTR_FIELD, cur_mode_ptr),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.MUTE_CONTROL_PTR, mute_control_ptr),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.FILTERBANK_CONFIG, fb_configuration),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.MGDC_STATE_PTR_FIELD, mgdc_state_ptr),
+
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.DOWNSAMPLE_CONFIG_FIELD, ext_downsample_config),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.UPSAMPLE_CONFIG_FIELD, ext_upsample_config),
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.DATA_VARIANT, ext_variant),   
+      DYN_RESOLVE_EXTERN($CVC_SEND_CAP.ROOT.FRAME_SIZE_FIELD, ext_frame_size), 
+
+      DYN_SET_VALUE(&root + $cvc_send.data.aec_inactive, (1-uses_AEC)),
+
+   #if defined(BLD_DMSS)
+      DYN_SET_VALUE(&root + $cvc_send.data.dmss_obj, &dmss_obj),
+   #endif
+
+   #if uses_SND_NS
+      DYN_SET_VALUE(&dms100_obj + $dms100.PTR_NS_POWER_FIELD, CurParams + $M.CVC_SEND.PARAMETERS.OFFSET_NS_POWER),
+   #endif
+
+      // -----------------------------------------------------------------------
+      // Variants - NB
+      // -----------------------------------------------------------------------
+
+      DYN_VARIANT(DATA_VARIANT_NB),
+
+      
+   #if uses_NC
+      DYN_SET_VALUE(nc100_obj + $nc100.NUM_FFT_FREQ_BIN_FIELD, $CVC_BASE.NB.NUM_FREQ_BIN),
+   #endif
+
+      
+   
+      DYN_SET_VALUE(&root + $cvc_send.data.fftwin_power, $cvc.POWER_ADJUST_NB_Q8_16),
+
+      DYN_ALLOC_RESIZE(X_real, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_real, $CVC_BASE.NB.NUM_FREQ_BIN),
+   #if CVC_DYN_NUM_MICS != 1 
+      DYN_ALLOC_RESIZE(D_r_real, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_r_imag, $CVC_BASE.NB.NUM_FREQ_BIN),
+   #else
+      DYN_ALLOC_RESIZE(D_r_real, 0),
+      DYN_ALLOC_RESIZE(D_r_imag, 0),
+   #endif    
+
+      DYN_ALLOC_RESIZE(X_imag, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_imag, $CVC_BASE.NB.NUM_FREQ_BIN),
+
+
+      DYN_ALLOC_RESIZE(DTC_lin, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(W_ri, 2*$CVC_BASE.NB.NUM_FREQ_BIN+1),
+      DYN_ALLOC_RESIZE(L_adaptA, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(L_adaptR, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm1, $asf100.SCRATCH_SIZE_DM1 - ( 4*$CVC_BASE.NB.NUM_FREQ_BIN+1 )),
+
+      DYN_ALLOC_RESIZE(Exp_Mts_adapt, 2*$CVC_BASE.NB.NUM_FREQ_BIN),
+   #if CVC_SEND_MAJOR_CONFIG != 0
+      DYN_ALLOC_RESIZE(rerdt_dtc, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 3*$CVC_BASE.NB.NUM_FREQ_BIN)),
+   #else
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 2*$CVC_BASE.NB.NUM_FREQ_BIN)),
+   #endif
+      DYN_ALLOC_RESIZE(bufd_l_inp, FFT_WIN_FACTOR*$CVC_BASE.NB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_r_inp, FFT_WIN_FACTOR*$CVC_BASE.NB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_aec_inp,  FFT_WIN_FACTOR*$CVC_BASE.NB.NUM_FFT_WINDOW), 
+      DYN_ALLOC_RESIZE(bufd_outp, FFT_WIN_FACTOR*$CVC_BASE.NB.NUM_FFT_WINDOW + $CVC_BASE.NB.SAMPLES_PER_FRAME),
+   #if uses_NC
+     DYN_ALLOC_RESIZE(nc_ctrl, $CVC_BASE.NB.NUM_FREQ_BIN),
+   #endif
+   
+#if uses_IN0_OMS != 0
+     DYN_ALLOC_RESIZE(in0oms_G, $CVC_BASE.NB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(in0oms_LpXnz, $CVC_BASE.NB.NUM_FREQ_BIN),
+#endif
+
+   #if !defined(BLD_DMS_SM) &&  (uses_IN0_OMS != 0)
+     DYN_ALLOC_RESIZE(in0oms_state, $CVC_BASE.NB.OMS270.STATELENGTH),
+   #endif  
+
+     DYN_ALLOC_RESIZE(G_dmsZ, $CVC_BASE.NB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpXnz_dms, $CVC_BASE.NB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LRatio_interpolated, $CVC_BASE.NB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(AttenuationPersist, $CVC_BASE.NB.NUM_FREQ_BIN),
+
+  #if defined(BLD_AEC2)
+     DYN_ALLOC_RESIZE(GaMic1_real, $CVC_BASE.NB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(GaMic1_imag, $CVC_BASE.NB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_GaMic1, $CVC_BASE.NB.NUM_FREQ_BIN),
+  #endif
+  
+     DYN_ALLOC_RESIZE(Ga_real, $CVC_BASE.NB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(Ga_imag, $CVC_BASE.NB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_Ga, $CVC_BASE.NB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(RcvBuf_real, $CVC_BASE.NB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(RcvBuf_imag, $CVC_BASE.NB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_X_buf, $M.CVC.AEC_Num_Primary_Taps+1),
+
+     DYN_ALLOC_RESIZE(LPwrX1, $CVC_BASE.NB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpZ_nz, $CVC_BASE.NB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(Cng_Nz_Shape_Tab, $CVC_BASE.NB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LPwrX0, $CVC_BASE.NB.NUM_FREQ_BIN),
+
+   #if defined(BLD_DMSS)
+      DYN_ALLOC_RESIZE(PIZ0r, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ0i, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1r, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1i, $CVC_BASE.NB.NUM_FREQ_BIN),
+
+      DYN_ALLOC_RESIZE(POZ0r, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ0i, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1r, $CVC_BASE.NB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1i, $CVC_BASE.NB.NUM_FREQ_BIN),
+
+      DYN_SET_VALUE(dmss_obj + $dmss.NUMBIN_FIELD, $CVC_BASE.NB.NUM_FREQ_BIN),
+   #endif
+
+
+      // -----------------------------------------------------------------------
+      // Variants - WB
+      // -----------------------------------------------------------------------
+
+      DYN_VARIANT(DATA_VARIANT_WB),
+
+   #if uses_NC
+      DYN_SET_VALUE(nc100_obj + $nc100.NUM_FFT_FREQ_BIN_FIELD, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif   
+   
+      DYN_SET_VALUE(&root + $cvc_send.data.fftwin_power, $cvc.POWER_ADJUST_WB_Q8_16),
+
+      DYN_ALLOC_RESIZE(harm_history, $CVC_BASE.WB.SAMPLES_PER_FRAME * 3),
+      DYN_ALLOC_RESIZE(X_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #if CVC_DYN_NUM_MICS != 1 
+      DYN_ALLOC_RESIZE(D_r_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_r_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #else
+      DYN_ALLOC_RESIZE(D_r_real, 0),
+      DYN_ALLOC_RESIZE(D_r_imag, 0),
+   #endif       
+      DYN_ALLOC_RESIZE(X_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_ALLOC_RESIZE(DTC_lin, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(W_ri, 2*$CVC_BASE.WB.NUM_FREQ_BIN+1),
+      DYN_ALLOC_RESIZE(L_adaptA, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(L_adaptR, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm1, $asf100.SCRATCH_SIZE_DM1 - ( 4*$CVC_BASE.WB.NUM_FREQ_BIN+1 )),
+
+      DYN_ALLOC_RESIZE(Exp_Mts_adapt, 2*$CVC_BASE.WB.NUM_FREQ_BIN),
+   #if CVC_SEND_MAJOR_CONFIG != 0
+      DYN_ALLOC_RESIZE(rerdt_dtc, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 3*$CVC_BASE.WB.NUM_FREQ_BIN)),
+   #else
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 2*$CVC_BASE.WB.NUM_FREQ_BIN)),
+   #endif
+
+      DYN_ALLOC_RESIZE(bufd_l_inp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_r_inp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_aec_inp,  FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW), 
+      DYN_ALLOC_RESIZE(bufd_outp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW + $CVC_BASE.WB.SAMPLES_PER_FRAME),
+   #if uses_NC
+     DYN_ALLOC_RESIZE(nc_ctrl, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif
+   
+#if uses_IN0_OMS != 0
+     DYN_ALLOC_RESIZE(in0oms_G, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(in0oms_LpXnz, $CVC_BASE.WB.NUM_FREQ_BIN),
+#endif
+
+   #if !defined(BLD_DMS_SM) && (uses_IN0_OMS != 0)
+     DYN_ALLOC_RESIZE(in0oms_state, $CVC_BASE.WB.OMS270.STATELENGTH),
+   #endif
+
+     DYN_ALLOC_RESIZE(G_dmsZ, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpXnz_dms, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LRatio_interpolated, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(AttenuationPersist, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+  #if defined(BLD_AEC2)
+     DYN_ALLOC_RESIZE(GaMic1_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(GaMic1_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_GaMic1, $CVC_BASE.WB.NUM_FREQ_BIN),
+  #endif
+
+     DYN_ALLOC_RESIZE(Ga_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(Ga_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_Ga, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(RcvBuf_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(RcvBuf_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_X_buf, $M.CVC.AEC_Num_Primary_Taps+1),
+
+     DYN_ALLOC_RESIZE(LPwrX1, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpZ_nz, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(Cng_Nz_Shape_Tab, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LPwrX0, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+   #if defined(BLD_DMSS)
+      DYN_ALLOC_RESIZE(PIZ0r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ0i, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1i, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_ALLOC_RESIZE(POZ0r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ0i, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1i, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_SET_VALUE(dmss_obj + $dmss.NUMBIN_FIELD, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif
+
+      // -----------------------------------------------------------------------
+      // Variants - UWB
+      // -----------------------------------------------------------------------
+#ifdef INSTALL_OPERATOR_CVC_24K
+      DYN_VARIANT(DATA_VARIANT_UWB),
+
+   #if uses_NC
+      DYN_SET_VALUE(nc100_obj + $nc100.NUM_FFT_FREQ_BIN_FIELD, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif
+
+      DYN_SET_VALUE(&root + $cvc_send.data.fftwin_power, $cvc.POWER_ADJUST_WB_Q8_16),
+
+      DYN_ALLOC_RESIZE(harm_history, $CVC_BASE.WB.SAMPLES_PER_FRAME * 4),
+      DYN_ALLOC_RESIZE(X_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #if CVC_DYN_NUM_MICS != 1 
+      DYN_ALLOC_RESIZE(D_r_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_r_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #else
+      DYN_ALLOC_RESIZE(D_r_real, 0),
+      DYN_ALLOC_RESIZE(D_r_imag, 0),
+   #endif       
+      DYN_ALLOC_RESIZE(X_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_ALLOC_RESIZE(DTC_lin, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(W_ri, 2*$CVC_BASE.WB.NUM_FREQ_BIN+1),
+      DYN_ALLOC_RESIZE(L_adaptA, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(L_adaptR, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm1, $asf100.SCRATCH_SIZE_DM1 - ( 4*$CVC_BASE.WB.NUM_FREQ_BIN+1 )),
+
+      DYN_ALLOC_RESIZE(Exp_Mts_adapt, 2*$CVC_BASE.WB.NUM_FREQ_BIN),
+   #if CVC_SEND_MAJOR_CONFIG != 0
+      DYN_ALLOC_RESIZE(rerdt_dtc, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 3*$CVC_BASE.WB.NUM_FREQ_BIN)),
+   #else
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 2*$CVC_BASE.WB.NUM_FREQ_BIN)),
+   #endif
+
+      DYN_ALLOC_RESIZE(bufd_l_inp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_r_inp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_aec_inp,  FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW), 
+      DYN_ALLOC_RESIZE(bufd_outp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW + $CVC_BASE.WB.SAMPLES_PER_FRAME),
+   #if uses_NC
+     DYN_ALLOC_RESIZE(nc_ctrl, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif
+   
+#if uses_IN0_OMS != 0 
+     DYN_ALLOC_RESIZE(in0oms_G, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(in0oms_LpXnz, $CVC_BASE.WB.NUM_FREQ_BIN),
+#endif
+
+   #if !defined(BLD_DMS_SM) && (uses_IN0_OMS != 0)
+     DYN_ALLOC_RESIZE(in0oms_state, $CVC_BASE.WB.OMS270.STATELENGTH),
+   #endif
+
+     DYN_ALLOC_RESIZE(G_dmsZ, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpXnz_dms, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LRatio_interpolated, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(AttenuationPersist, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+  #if defined(BLD_AEC2)
+     DYN_ALLOC_RESIZE(GaMic1_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC_UWB.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(GaMic1_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC_UWB.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_GaMic1, $CVC_BASE.WB.NUM_FREQ_BIN),
+  #endif
+
+     DYN_ALLOC_RESIZE(Ga_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC_UWB.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(Ga_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC_UWB.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_Ga, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(RcvBuf_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC_UWB.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(RcvBuf_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC_UWB.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_X_buf, $M.CVC_UWB.AEC_Num_Primary_Taps+1),
+
+   #if !defined(BLD_HEADSET)
+      DYN_ALLOC_RESIZE(Gb_real, $aec510.RER_dim * $M.CVC_UWB.AEC_Num_Auxillary_Taps),
+      DYN_ALLOC_RESIZE(Gb_imag, $aec510.RER_dim * $M.CVC_UWB.AEC_Num_Auxillary_Taps),
+   #endif
+
+     DYN_ALLOC_RESIZE(LPwrX1, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpZ_nz, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(Cng_Nz_Shape_Tab, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LPwrX0, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+   #if defined(BLD_DMSS)
+      DYN_ALLOC_RESIZE(PIZ0r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ0i, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1i, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_ALLOC_RESIZE(POZ0r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ0i, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1i, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_SET_VALUE(dmss_obj + $dmss.NUMBIN_FIELD, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif
+
+   #if uses_SND_AGC
+      DYN_SET_VALUE(snd_agc400_dm + $M.agc400.OFFSET_FRAME_THRESHOLD_FIELD, $M.agc400.const.UWB.FRAME_THRESHOLD),
+   #endif
+
+   #if uses_REF_VAD
+      DYN_SET_VALUE(vad_default_param + $M.vad400.Parameter.ATTACK_TC_FIELD, 0.00166527854906128870),
+      DYN_SET_VALUE(vad_default_param + $M.vad400.Parameter.DECAY_TC_FIELD, 0.00166527854906128870),
+      DYN_SET_VALUE(vad_default_param + $M.vad400.Parameter.ENVELOPE_TC_FIELD, 0.14465467269257748000),
+      DYN_SET_VALUE(vad_default_param + $M.vad400.Parameter.INIT_FRAME_THRESH_FIELD, 39),
+      DYN_SET_VALUE(vad_default_param + $M.vad400.Parameter.COUNT_THRESHOLD_FIELD, 90),
+   #endif
+#endif // INSTALL_OPERATOR_CVC_24K
+
+#ifdef INSTALL_OPERATOR_CVC_32K
+      // -----------------------------------------------------------------------
+      // Variants - SWB
+      // -----------------------------------------------------------------------
+
+      DYN_VARIANT(DATA_VARIANT_SWB),
+
+
+
+   #if uses_NC
+      DYN_SET_VALUE(nc100_obj + $nc100.NUM_FFT_FREQ_BIN_FIELD, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+   #endif
+   
+      DYN_SET_VALUE(&root + $cvc_send.data.fftwin_power, $cvc.POWER_ADJUST_WB_Q8_16),
+
+      DYN_ALLOC_RESIZE(harm_history, $CVC_BASE.WB.SAMPLES_PER_FRAME * 3),
+      DYN_ALLOC_RESIZE(X_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #if CVC_DYN_NUM_MICS != 1 
+      DYN_ALLOC_RESIZE(D_r_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_r_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #else
+      DYN_ALLOC_RESIZE(D_r_real, 0),
+      DYN_ALLOC_RESIZE(D_r_imag, 0),
+   #endif       
+      DYN_ALLOC_RESIZE(X_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_ALLOC_RESIZE(DTC_lin, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(W_ri, 2*$CVC_BASE.WB.NUM_FREQ_BIN+1),
+      DYN_ALLOC_RESIZE(L_adaptA, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(L_adaptR, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm1, $asf100.SCRATCH_SIZE_DM1 - ( 4*$CVC_BASE.WB.NUM_FREQ_BIN+1 )),
+
+      DYN_ALLOC_RESIZE(Exp_Mts_adapt, 2*$CVC_BASE.WB.NUM_FREQ_BIN),
+   #if CVC_SEND_MAJOR_CONFIG != 0
+      DYN_ALLOC_RESIZE(rerdt_dtc, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 3*$CVC_BASE.WB.NUM_FREQ_BIN)),
+   #else
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 2*$CVC_BASE.WB.NUM_FREQ_BIN)),
+   #endif
+
+      DYN_ALLOC_RESIZE(bufd_l_inp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_r_inp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_aec_inp,  FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW), 
+      DYN_ALLOC_RESIZE(bufd_outp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW + $CVC_BASE.WB.SAMPLES_PER_FRAME),
+   #if uses_NC
+     DYN_ALLOC_RESIZE(nc_ctrl, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif
+   
+#if uses_IN0_OMS != 0
+     DYN_ALLOC_RESIZE(in0oms_G, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(in0oms_LpXnz, $CVC_BASE.WB.NUM_FREQ_BIN),
+#endif
+
+   #if !defined(BLD_DMS_SM) && (uses_IN0_OMS != 0)
+     DYN_ALLOC_RESIZE(in0oms_state, $CVC_BASE.WB.OMS270.STATELENGTH),
+   #endif
+
+     DYN_ALLOC_RESIZE(G_dmsZ, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpXnz_dms, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LRatio_interpolated, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(AttenuationPersist, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+  #if defined(BLD_AEC2)
+     DYN_ALLOC_RESIZE(GaMic1_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(GaMic1_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_GaMic1, $CVC_BASE.WB.NUM_FREQ_BIN),
+  #endif
+
+     DYN_ALLOC_RESIZE(Ga_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(Ga_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_Ga, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(RcvBuf_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(RcvBuf_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_X_buf, $M.CVC.AEC_Num_Primary_Taps+1),
+
+     DYN_ALLOC_RESIZE(LPwrX1, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpZ_nz, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(Cng_Nz_Shape_Tab, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LPwrX0, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+   #if defined(BLD_DMSS)
+      DYN_ALLOC_RESIZE(PIZ0r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ0i, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1i, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_ALLOC_RESIZE(POZ0r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ0i, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1i, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_SET_VALUE(dmss_obj + $dmss.NUMBIN_FIELD, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif
+#endif
+   
+#ifdef INSTALL_OPERATOR_CVC_48K   
+      // -----------------------------------------------------------------------
+      // Variants - FB
+      // -----------------------------------------------------------------------
+
+      DYN_VARIANT(DATA_VARIANT_FB),
+
+
+   #if uses_NC
+      DYN_SET_VALUE(nc100_obj + $nc100.NUM_FFT_FREQ_BIN_FIELD, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+   #endif
+   
+      DYN_SET_VALUE(&root + $cvc_send.data.fftwin_power, $cvc.POWER_ADJUST_WB_Q8_16),
+
+      DYN_ALLOC_RESIZE(harm_history, $CVC_BASE.WB.SAMPLES_PER_FRAME * 3),
+      DYN_ALLOC_RESIZE(X_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #if CVC_DYN_NUM_MICS != 1 
+      DYN_ALLOC_RESIZE(D_r_real, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_r_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #else
+      DYN_ALLOC_RESIZE(D_r_real, 0),
+      DYN_ALLOC_RESIZE(D_r_imag, 0),
+   #endif       
+      DYN_ALLOC_RESIZE(X_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(D_l_imag, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_ALLOC_RESIZE(DTC_lin, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(W_ri, 2*$CVC_BASE.WB.NUM_FREQ_BIN+1),
+      DYN_ALLOC_RESIZE(L_adaptA, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(L_adaptR, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm1, $asf100.SCRATCH_SIZE_DM1 - ( 4*$CVC_BASE.WB.NUM_FREQ_BIN+1 )),
+
+      DYN_ALLOC_RESIZE(Exp_Mts_adapt, 2*$CVC_BASE.WB.NUM_FREQ_BIN),
+   #if CVC_SEND_MAJOR_CONFIG != 0
+      DYN_ALLOC_RESIZE(rerdt_dtc, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 3*$CVC_BASE.WB.NUM_FREQ_BIN)),
+   #else
+      DYN_ALLOC_RESIZE(scratch_extra_dm2, $asf100.SCRATCH_SIZE_DM2 - ( 2*$CVC_BASE.WB.NUM_FREQ_BIN)),
+   #endif
+
+      DYN_ALLOC_RESIZE(bufd_l_inp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_r_inp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW),
+      DYN_ALLOC_RESIZE(bufd_aec_inp,  FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW), 
+      DYN_ALLOC_RESIZE(bufd_outp, FFT_WIN_FACTOR*$CVC_BASE.WB.NUM_FFT_WINDOW + $CVC_BASE.WB.SAMPLES_PER_FRAME),
+   #if uses_NC
+     DYN_ALLOC_RESIZE(nc_ctrl, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif
+   
+#if uses_IN0_OMS != 0   
+     DYN_ALLOC_RESIZE(in0oms_G, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(in0oms_LpXnz, $CVC_BASE.WB.NUM_FREQ_BIN),
+#endif
+
+   #if !defined(BLD_DMS_SM) && (uses_IN0_OMS != 0)
+     DYN_ALLOC_RESIZE(in0oms_state, $CVC_BASE.WB.OMS270.STATELENGTH),
+   #endif
+
+     DYN_ALLOC_RESIZE(G_dmsZ, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpXnz_dms, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LRatio_interpolated, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(AttenuationPersist, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+  #if defined(BLD_AEC2)
+     DYN_ALLOC_RESIZE(GaMic1_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(GaMic1_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_GaMic1, $CVC_BASE.WB.NUM_FREQ_BIN),
+  #endif
+
+     DYN_ALLOC_RESIZE(Ga_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(Ga_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_Ga, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+     DYN_ALLOC_RESIZE(RcvBuf_real, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(RcvBuf_imag, $CVC_BASE.WB.NUM_FREQ_BIN * $M.CVC.AEC_Num_Primary_Taps),
+     DYN_ALLOC_RESIZE(BExp_X_buf, $M.CVC.AEC_Num_Primary_Taps+1),
+
+     DYN_ALLOC_RESIZE(LPwrX1, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LpZ_nz, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(Cng_Nz_Shape_Tab, $CVC_BASE.WB.NUM_FREQ_BIN),
+     DYN_ALLOC_RESIZE(LPwrX0, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+   #if defined(BLD_DMSS)
+      DYN_ALLOC_RESIZE(PIZ0r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ0i, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(PIZ1i, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_ALLOC_RESIZE(POZ0r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ0i, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1r, $CVC_BASE.WB.NUM_FREQ_BIN),
+      DYN_ALLOC_RESIZE(POZ1i, $CVC_BASE.WB.NUM_FREQ_BIN),
+
+      DYN_SET_VALUE(dmss_obj + $dmss.NUMBIN_FIELD, $CVC_BASE.WB.NUM_FREQ_BIN),
+   #endif
+#endif
+
+     DYN_END();
+
+.ENDMODULE;

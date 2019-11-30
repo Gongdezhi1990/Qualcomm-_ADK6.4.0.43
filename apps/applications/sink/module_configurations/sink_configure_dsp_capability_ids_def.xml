@@ -1,0 +1,440 @@
+<ModuleData Name="sink_configure_dsp_capability_ids">
+
+    <DefineGroup>
+        <DefineList
+            Id="DSP Capabilities List"
+            ShortId="dsp_capabilities_list">
+            <enum
+                key="Basic Passthrough"
+                value="0x0001"
+            />
+            <enum
+                key="SCO Send"
+                value="0x0003"
+            />
+            <enum
+                key="SCO Receive"
+                value="0x0004"
+            />
+            <enum
+                key="Wideband Speech Encode"
+                value="0x0005"
+            />
+            <enum
+                key="Wideband Speech Decode"
+                value="0x0006"
+            />
+            <enum
+                key="Mixer"
+                value="0x000A"
+            />
+            <enum
+                key="Splitter"
+                value="0x0013"
+            />
+            <enum
+                key="SBC Encoder"
+                value="0x0014"
+            />
+            <enum
+                key="SBC Decoder"
+                value="0x0016"
+            />
+            <enum
+                key="AAC Decoder"
+                value="0x0018"
+            />
+            <enum
+                key="aptX Classic Decoder"
+                value="0x0019"
+            />
+            <enum
+                key="CVC Receive NB"
+                value="0x001D"
+            />
+            <enum
+                key="CVC Receive WB"
+                value="0x001F"
+            />
+            <enum
+                key="CVC Send Headset 1-MIC NB"
+                value="0x0023"
+            />
+            <enum
+                key="CVC Send Headset 1-MIC WB"
+                value="0x0024"
+            />
+            <enum
+                key="CVC Send Headset 2-MIC 90-Deg NB"
+                value="0x0025"
+            />
+            <enum
+                key="CVC Send Headset 2-MIC 90-Deg WB"
+                value="0x0026"
+            />
+            <enum
+                key="CVC Send Headset 2-MIC 0-Deg NB"
+                value="0x0027"
+            />
+            <enum
+                key="CVC Send Headset 2-MIC 0-Deg WB"
+                value="0x0028"
+            />
+            <enum
+                key="CVC Send Speaker 1-MIC NB"
+                value="0x0029"
+            />
+            <enum
+                key="CVC Send Speaker 1-MIC WB"
+                value="0x002A"
+            />
+            <enum
+                key="CVC Send Speaker 2-MIC 0-Deg NB"
+                value="0x002D"
+            />
+            <enum
+                key="CVC Send Speaker 2-MIC 0-Deg WB"
+                value="0x002E"
+            />
+            <enum
+                key="Crossover 2-Band"
+                value="0x0033"
+            />
+            <enum
+                key="Crossover 3-Band"
+                value="0x0034"
+            />
+            <enum
+                key="S/PDIF Decoder"
+                value="0x0036"
+            />
+            <enum
+                key="Ringtone"
+                value="0x0037"
+            />
+            <enum
+                key="TTP Passthrough"
+                value="0x003C"
+            />
+            <enum
+                key="aptX Low Latency Decoder"
+                value="0x003D"
+            />
+            <enum
+                key="AEC 4-MIC"
+                value="0x0043"
+            />
+            <enum
+                key="Volume Control"
+                value="0x0048"
+            />
+            <enum
+                key="PEQ"
+                value="0x0049"
+            />
+            <enum
+                key="VSE"
+                value="0x004A"
+            />
+            <enum
+                key="Bass Enhance Fullband"
+                value="0x0090"
+            />
+            <enum
+                key="Compander"
+                value="0x0092"
+            />
+            <enum
+                key="IIR Re-sampler"
+                value="0x0094"
+            />
+            <enum
+                key="VAD (Voice Activity Detection)"
+                value="0x0095"
+            />
+            <enum
+                key="QVA (Qualcomm Voice Activation)"
+                value="0x0096"
+            />
+            <enum
+                key="RTP Decoder"
+                value="0x0098"
+            />
+            <enum
+                key="Source Synchronization"
+                value="0x0099"
+            />
+            <enum
+                key="USB Audio Rx"
+                value="0x009A"
+            />
+            <enum
+                key="USB Audio Tx"
+                value="0x009B"
+            />
+            <enum
+                key="CELT Encoder"
+                value="0x009C"
+            />
+            <enum
+                key="CELT Decoder"
+                value="0x009D"
+            />
+            <enum
+                key="aptX HD Decoder"
+                value="0x009E"
+            />
+            <enum
+                key="aptX Mono Decoder"
+                value="0x00A9"
+            />
+            <enum
+                key="aptX HD Mono Decoder"
+                value="0x00AA"
+            />
+            <enum
+                key="aptX Mono Decoder No Autosync"
+                value="0x00AB"
+            />
+            <enum
+                key="aptX HD Mono Decoder No Autosync"
+                value="0x00AC"
+            />
+            <enum
+                key="aptX Demux"
+                value="0x00B1"
+            />
+            <enum
+                key="Rate Adjustment"
+                value="0x00B3"
+            />
+            <enum
+                key="Switched Passthrough Consumer"
+                value="0x00B6"
+            />
+            <enum
+                key="ANC Tuning"
+                value="0x00B2"
+            />
+            <enum
+                key="aptX Adaptive Demux"
+                value="0x00B7"
+            />
+            <enum
+                key="async_wbs_encoder"
+                value="0xb4"
+            />
+            <enum
+                key="aptX Adaptive Decoder"
+                value="0x00B8"
+            />
+            <enum
+                key="Graph Manager"
+                value="0xBC"
+            />
+            <enum
+                key="User Defined Capability: 0xC000"
+                value="0xC000"
+            />
+            <enum
+                key="User Defined Capability: 0xC001"
+                value="0xC001"
+            />
+            <enum
+                key="User Defined Capability: 0xC002"
+                value="0xC002"
+            />
+        </DefineList>
+        
+        <DefinePattern
+            PatternName="DSP Capability IDs"
+            ShortId="dsp_capability_ids_entry">
+            <ConfigItem
+                Id="DSP Capability"
+                ShortId="original_cap_id"
+                Desc="The DSP capabilities defined in operators lib"
+                Type="enum"
+                Size="16">
+                <List use="dsp_capabilities_list"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Capability_ID_[Hex]"
+                ShortId="new_cap_id"
+                Desc="The capability id we want to override the existing one"
+                Type="uint"
+                PresentHex="true"
+                Size="16" >
+            </ConfigItem>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        Id="Configure DSP Capability IDs"
+        ShortId="dsp_capability_ids_table"
+        Node="Array"
+        ConfigGroupPath="./[@ShortId='dsp_caps']">
+
+        <ConfigPatternArray
+            Id="DSP Capability ID Table Entry"
+            ShortId="new_cap_id_entry"
+            Pattern="dsp_capability_ids_entry"
+            MaxNumPatterns="12">
+            
+            <BuildVariant HwVariant="All" SwVariant="All">
+            
+                <PatternArrayRow Id="dspCapIDTable Row1" ShortId="dspCapIDTable_row1" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="AAC Decoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x404F"/>
+                </PatternArrayRow>
+                 
+                <PatternArrayRow Id="dspCapIDTable Row2" ShortId="dspCapIDTable_row2" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="ANC Tuning"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4082"/>
+                </PatternArrayRow> 
+                            
+                <PatternArrayRow Id="dspCapIDTable Row3" ShortId="dspCapIDTable_row3" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="aptX Adaptive Decoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4081"/>
+                </PatternArrayRow>
+                
+                <PatternArrayRow Id="dspCapIDTable Row4" ShortId="dspCapIDTable_row4" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="aptX Adaptive Demux"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4080"/>
+                </PatternArrayRow>
+                
+                <PatternArrayRow Id="dspCapIDTable Row5" ShortId="dspCapIDTable_row5" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="aptX Demux"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x406D"/>
+                </PatternArrayRow>
+                
+                <PatternArrayRow Id="dspCapIDTable Row6" ShortId="dspCapIDTable_row6" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="CELT Decoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4056"/>
+                </PatternArrayRow>   
+                   
+                <PatternArrayRow Id="dspCapIDTable Row7" ShortId="dspCapIDTable_row7" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="CELT Encoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4055"/>
+                </PatternArrayRow>
+   
+                <PatternArrayRow Id="dspCapIDTable Row8" ShortId="dspCapIDTable_row8" Node="Basic">
+                     <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="Switched Passthrough Consumer"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x407F"/>
+                </PatternArrayRow>
+                
+            </BuildVariant>
+
+            <BuildVariant HwVariant="CF133 CF376_CE692 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CF897 QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3024-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-R2-AA" SwVariant="All">
+            
+                <PatternArrayRow Id="dspCapIDTable Row1" ShortId="dspCapIDTable_row1" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="AEC 4-MIC"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4007"/>
+                </PatternArrayRow>
+                
+                <PatternArrayRow Id="dspCapIDTable Row2" ShortId="dspCapIDTable_row2" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="ANC Tuning"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4082"/>
+                </PatternArrayRow>
+                
+                <PatternArrayRow Id="dspCapIDTable Row3" ShortId="dspCapIDTable_row3" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="aptX Adaptive Decoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4081"/>
+                </PatternArrayRow>    
+                  
+                <PatternArrayRow Id="dspCapIDTable Row4" ShortId="dspCapIDTable_row4" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="aptX Adaptive Demux"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4080"/>
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="dspCapIDTable Row5" ShortId="dspCapIDTable_row5" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="aptX Demux"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x406D"/>
+                </PatternArrayRow>
+                
+                <PatternArrayRow Id="dspCapIDTable Row6" ShortId="dspCapIDTable_row6" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="async_wbs_encoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x407D"/>
+                </PatternArrayRow>
+                
+                <PatternArrayRow Id="dspCapIDTable Row7" ShortId="dspCapIDTable_row7" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="Switched Passthrough Consumer"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x407F"/>
+                </PatternArrayRow>
+                
+				<PatternArrayRow Id="dspCapIDTable Row8" ShortId="dspCapIDTable_row8" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="aptX Classic Decoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4051"/>
+                </PatternArrayRow>
+            </BuildVariant>
+            
+            <BuildVariant HwVariant="CF133_SQIF CG793 QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                <PatternArrayRow Id="dspCapIDTable Row1" ShortId="dspCapIDTable_row1" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="USB Audio Rx"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4068"/>
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="dspCapIDTable Row2" ShortId="dspCapIDTable_row2" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="USB Audio Tx"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4069"/>
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="dspCapIDTable Row3" ShortId="dspCapIDTable_row3" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="CELT Encoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4055"/>
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="dspCapIDTable Row4" ShortId="dspCapIDTable_row4" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="CELT Decoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4056"/>
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="dspCapIDTable Row5" ShortId="dspCapIDTable_row5" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="S/PDIF Decoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4065"/>
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="dspCapIDTable Row6" ShortId="dspCapIDTable_row6" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="ANC Tuning"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4082"/>
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="dspCapIDTable Row7" ShortId="dspCapIDTable_row7" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="Graph Manager"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x408E"/>
+                </PatternArrayRow>
+				
+				<PatternArrayRow Id="dspCapIDTable Row8" ShortId="dspCapIDTable_row8" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="aptX Adaptive Decoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4081"/>
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="dspCapIDTable Row9" ShortId="dspCapIDTable_row9" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="aptX Adaptive Demux"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4080"/>
+                </PatternArrayRow>
+
+            </BuildVariant>
+
+            <BuildVariant HwVariant="CG437 CF376_CG724" SwVariant="All">
+
+                <PatternArrayRow Id="dspCapIDTable Row1" ShortId="dspCapIDTable_row1" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="CELT Decoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4056"/>
+                </PatternArrayRow>   
+
+                <PatternArrayRow Id="dspCapIDTable Row2" ShortId="dspCapIDTable_row2" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="CELT Encoder"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4055"/>
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="dspCapIDTable Row3" ShortId="dspCapIDTable_row3" Node="Basic">
+                    <PatternArrayConfigItem ShortId="previous_cap_id" DefaultValue="ANC Tuning"/>
+                    <PatternArrayConfigItem ShortId="new_cap_id" DefaultValue="0x4082"/>
+                </PatternArrayRow>
+
+            </BuildVariant>
+
+        </ConfigPatternArray>
+    </ConfigGroup>
+</ModuleData>

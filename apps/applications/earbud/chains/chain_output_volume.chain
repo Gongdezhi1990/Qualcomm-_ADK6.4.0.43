@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright (c) 2018 Qualcomm Technologies International, Ltd.-->
+
+<chain name="CHAIN_OUTPUT_VOLUME" id="0" generate_operator_roles_enum="False" generate_endpoint_roles_enum="False">
+
+    <include_header name="../av_headset_chain_roles.h"/>
+
+    <operator name="OPR_LATENCY_BUFFER" id="CAP_ID_BASIC_PASS">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_SOURCE_SYNC" id="CAP_ID_SOURCE_SYNC">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_VOLUME_CONTROL" id="CAP_ID_VOL_CTRL_VOL">
+        <sink name="MAIN_IN" terminal="0"/>
+        <sink name="AUX_IN" terminal="1"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <input sink="OPR_LATENCY_BUFFER.IN" role="EPR_SINK_MIXER_MAIN_IN"/>
+    <input sink="OPR_VOLUME_CONTROL.AUX_IN" role="EPR_VOLUME_AUX"/>
+    <connection source="OPR_LATENCY_BUFFER.OUT" sink="OPR_SOURCE_SYNC.IN"/>
+    <connection source="OPR_SOURCE_SYNC.OUT" sink="OPR_VOLUME_CONTROL.MAIN_IN"/>
+    <output source="OPR_VOLUME_CONTROL.OUT" role="EPR_SOURCE_MIXER_OUT"/>
+
+</chain>

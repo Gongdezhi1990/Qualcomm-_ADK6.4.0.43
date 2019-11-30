@@ -1,0 +1,7 @@
+VARIANTS :=  no_dsp dsp_examples
+
+#disable dsp
+CFLAGS_no_dsp :=-DNO_DSP
+
+#dsp examples
+CFLAGS_dsp_examples :=-DINCLUDE_DSP_EXAMPLES

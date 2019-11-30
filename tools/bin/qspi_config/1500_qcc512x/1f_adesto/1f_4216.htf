@@ -1,0 +1,20 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# Adesto AT25SL321
+QSPIFRAMLUTBaseParams = [00 1f 42 16 08 00 01 a5 00]
+QSPIFRAMLUTSPIReadParams = [00 03 01]
+QSPIFRAMLUTSPIConfVector =  [00 07 02 01 50 03 01 00 02]
+QSPIFRAMLUTFastConfVector =  [00 07 02 01 50 03 01 00 02]
+QSPIFRAMLUTWriteCmds =  [00 02 06]
+QSPIFRAMLUTEraseParams = [00 d8 60 00 40]
+QSPIFRAMLUTStatusReadParams = [00 01 01 02 01]
+QSPIFRAMLUTStatusReadVector = [00 03 01 01 05]
+QSPIFRAMLUTDPDCmds = [00 b9 ab]
+QSPIFRAMLUTFastReadParams = [00 03 eb 00 04]
+QSPIFRAMLUTResetVector = [00 05 02 01 66 01 99]
+QSPIFRAMLUT4BAMCmds = [00 00 00]
+QSPIFRAMLUTSuspendResumeCmds = [00 75 7A 75 7A]

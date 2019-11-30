@@ -1,0 +1,3 @@
+VARIANTS := debug
+
+CFLAGS_debug := -DBROADCAST_CMD_DEBUG_LIB

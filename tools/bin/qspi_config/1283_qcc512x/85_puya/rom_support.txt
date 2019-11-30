@@ -1,0 +1,18 @@
+Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+All Rights Reserved.
+Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+MIB keys are required to support Puya parts on QCC512x devices. There are
+no Puya QSPI parts with ROM support on QCC512x.
+
+
+The following QSPI parts cannot perform quad reads at 80MHz. On CSRA68105 devices,
+the 80 or 120MHz clock source is divided by 2. QCC512x and QCC514x devices do
+not use the clock divider and therefore the SqifClockControl MIB key must be
+configured such that these QSPI parts use the 32MHz crystal clock source.
+
+Puya P25Q80L
+Puya P25Q32L
+Puya P25Q64L

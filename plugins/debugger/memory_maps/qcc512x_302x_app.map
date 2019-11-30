@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<memory_maps chip="QCC512x_302x" subsystem="app" xmlns="urn:memorymap">
+  <memory_map processor_id="1">
+  
+    <address_space name="PM" type="pm">
+      <mem_region name="P1 Cached SQIF Flash 0" start_address="0x00000000" end_address="0x00800000" 
+                  backing_mem="flash" contents_hint="code" shared="false" read_only="true"
+      />
+    </address_space>
+    
+    <address_space name="DM" type="dm">
+      <mem_region name="P0 Data RAM (32kB)" start_address="0x00000000" end_address="0x00008000"
+                  backing_mem="ram" contents_hint="data" shared="true" read_only="false"
+      />
+      <mem_region name="P1 Data RAM (32kB)" start_address="0x00010000" end_address="0x00018000"
+                  backing_mem="ram" contents_hint="data" shared="false" read_only="false"
+      />
+      <mem_region name="Shared Data RAM (32kB)" start_address="0x10000000" end_address="0x10008000"
+                  backing_mem="ram" contents_hint="data" shared="true" read_only="false"
+      />
+      <mem_region name="TCM1 (RAM) (8kB)" start_address="0x20002000" end_address="0x20004000"
+                  backing_mem="ram" contents_hint="code" shared="true" read_only="false"
+      />
+      <mem_region name="P1 Cached SQIF Flash 0,1" start_address="0x78000000" end_address="0x78800000"
+                  backing_mem="flash" contents_hint="code" shared="true" read_only="true"
+      />
+      <mem_region name="VM Buffer space" start_address="0xA0000000" end_address="0xB0000000"
+                  shared="true" read_only="false"
+      />
+      <mem_region name="Direct SQIF Flash 0,1 Window" start_address="0xD0000000" end_address="0xF0000000"
+                  backing_mem="flash" shared="true" read_only="true"
+      />
+    </address_space>
+    
+  </memory_map>
+  
+  <checksum>4b2a46e5165840fced605385ec6dd247</checksum>
+</memory_maps>

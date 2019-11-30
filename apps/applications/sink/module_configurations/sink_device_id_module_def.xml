@@ -1,0 +1,65 @@
+<ModuleData Name="sink_device_id">
+    <ConfigGroup
+        ShortId="device_id_read_only"
+        Id="Device and Software Version Module"
+        Node="Basic">
+        <ConfigItem
+            Id="Vendor ID Source"
+            ShortId="vendor_id_source"
+            Type="enum"
+            DefaultValue="Bluetooth SIG"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='device_and_software_version']"
+            Desc="This information will be used in setting the Bluetooth Device ID profile fields. Indicates the institution that assigned the Vendor ID.">
+            <enum key="Bluetooth SIG"
+                  value="1"/>
+            <enum key="USB Implementers Forum"
+                  value="2"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Vendor ID [hex]"
+            ShortId="vendor_id"
+            Type="uint"
+            PresentHex="true"
+            DefaultValue="0x000A"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='device_and_software_version']"
+            Desc="This information will be used in setting the Bluetooth Device ID profile fields. Should be set as assigned by the Vendor ID source."/>
+        <ConfigItem
+            Id="Product ID [hex]"
+            ShortId="product_id"
+            Type="uint"
+            PresentHex="true"
+            DefaultValue="0xFFFF"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='device_and_software_version']"
+            Desc="This information will be used in setting the Bluetooth Device ID profile fields. Should be set as appropriate for the product."/>
+        <ConfigItem
+            Id="BCD Version [hex]"
+            ShortId="bcd_version"
+            Type="uint"
+            PresentHex="true"
+            DefaultValue="0xFFFF"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='device_and_software_version']"
+            Desc="This information will be used in setting the Bluetooth Device ID profile fields. Should be set as appropriate for the product version, where: 0xABCD = versionAB.C.D"/>
+        <ConfigItem
+            Id="Software Version (most significant 32 bits) [hex]"
+            ShortId="sw_version_msb"
+            Type="ulong"
+            PresentHex="true"
+            DefaultValue="0xFFFFFFFF"
+            Size="32"
+            ConfigGroupPath="./[@ShortId='device_and_software_version']"
+            Desc="This information will be used in setting the Bluetooth Device ID profile fields. Should be set as appropriate for the product version, where: 0xABCD = versionAB.C.D"/>
+        <ConfigItem
+            Id="Software Version (least significant 32 bits) [hex]"
+            ShortId="sw_version_lsb"
+            Type="ulong"
+            PresentHex="true"
+            DefaultValue="0xFFFFFFFF"
+            Size="32"
+            ConfigGroupPath="./[@ShortId='device_and_software_version']"
+            Desc="This information will be used in setting the Bluetooth Device ID profile fields. Should be set as appropriate for the product version, where: 0xABCD = versionAB.C.D"/>
+    </ConfigGroup>
+</ModuleData>

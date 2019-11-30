@@ -1,0 +1,7 @@
+
+VARIANTS := dual_core debug
+
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+
+# Include dual_core
+CFLAGS_dual_core := -DUSE_SECOND_CORE

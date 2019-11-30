@@ -1,0 +1,15 @@
+<ModuleData Name="Sink_gatt_server_dis">
+    <ConfigGroup
+        ShortId="sink_gatt_server_dis"
+        Id="Device Information Service"
+        Node="Basic">
+        <ConfigItem
+            Id="Manufacturer Name"
+            ShortId="manufacturer_name_string"
+            Desc="Specifies the name of the device manufacturer."
+            Type="AsciiString"
+            DefaultValue="QUALCOMM"
+            MaxStrLenBytes="31"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']/[@ShortId='device_information_service']"/>
+    </ConfigGroup>    
+</ModuleData>

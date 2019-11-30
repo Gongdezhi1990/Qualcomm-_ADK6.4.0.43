@@ -1,0 +1,9 @@
+############################################################################
+# Copyright (c) 2017 Qualcomm Technologies International, Ltd.
+############################################################################
+# Base configuration, do not attempt to create an image directly from it.
+
+%include config.stre_rom_kalsim
+
+%build
+CHIP_VER = v02

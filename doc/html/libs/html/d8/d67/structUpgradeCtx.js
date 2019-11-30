@@ -1,0 +1,25 @@
+var structUpgradeCtx =
+[
+    [ "clientTask", "d8/d67/structUpgradeCtx.html#a77045317309685201f1dc132b02dcd3a", null ],
+    [ "dev_variant", "d8/d67/structUpgradeCtx.html#a6c2fb85b85d2ffa447bbd1cd87d49363", null ],
+    [ "fwCtx", "d8/d67/structUpgradeCtx.html#aa2bb345818b0168d34581f952fb9c0e4", null ],
+    [ "isCsrValidDoneReqReceived", "d8/d67/structUpgradeCtx.html#aea45fe40fcc114dcc85f9ad3c55c616e", null ],
+    [ "mainTask", "d8/d67/structUpgradeCtx.html#ab1f146d6213ce025262902288ebad583", null ],
+    [ "need_data_cfm", "d8/d67/structUpgradeCtx.html#a74e7f3b9fcbaede255a805a3e660602d", null ],
+    [ "partitionData", "d8/d67/structUpgradeCtx.html#a05beec6cb82676e7ba20ee7a3b1122c1", null ],
+    [ "partitionDataBlockSize", "d8/d67/structUpgradeCtx.html#a72619faf8aff6d802710ac247e065489", null ],
+    [ "partitionValidationNextPartition", "d8/d67/structUpgradeCtx.html#a6f8d88969474792374fb4752413d9962", null ],
+    [ "perms", "d8/d67/structUpgradeCtx.html#ab30cf0ccae769104708c17a73ba2c103", null ],
+    [ "power_mode", "d8/d67/structUpgradeCtx.html#ae8bdd23855cdc0e30f481ecd34b9309a", null ],
+    [ "power_state", "d8/d67/structUpgradeCtx.html#a6f826aaaca49ffa31353d4166010eb08", null ],
+    [ "request_multiple_blocks", "d8/d67/structUpgradeCtx.html#a2102d6e2cc0d528d5c3086d345592fe9", null ],
+    [ "smState", "d8/d67/structUpgradeCtx.html#a4bc404e4c51b60cfee54c42d8722dd5d", null ],
+    [ "smTaskData", "d8/d67/structUpgradeCtx.html#a59f989870a1e7d00302b39103817ba22", null ],
+    [ "transportTask", "d8/d67/structUpgradeCtx.html#aab473cb64713e509dcc89a6267f65344", null ],
+    [ "upgrade_library_pskey", "d8/d67/structUpgradeCtx.html#a36a78797ef8b16123e994700c06e6778", null ],
+    [ "upgrade_library_pskeyoffset", "d8/d67/structUpgradeCtx.html#a98295765eb5aed06fad8ffdba42f9967", null ],
+    [ "upgradeLogicalPartitions", "d8/d67/structUpgradeCtx.html#ad47d68f040d085aad814523b2b1258db", null ],
+    [ "upgradeNumLogicalPartitions", "d8/d67/structUpgradeCtx.html#a9047f0900ae278c6e2170f6893cc0b89", null ],
+    [ "UpgradePSKeys", "d8/d67/structUpgradeCtx.html#af4ecd52947a3a9190074537f9606edda", null ],
+    [ "vctx", "d8/d67/structUpgradeCtx.html#a755b99bffea0b368e9045f8cce676c2d", null ]
+];

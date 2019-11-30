@@ -1,0 +1,3 @@
+Download Capability BUILD ID = 8008
+ELF File ID = 0x1B19296E
+Base Build ID = 7994

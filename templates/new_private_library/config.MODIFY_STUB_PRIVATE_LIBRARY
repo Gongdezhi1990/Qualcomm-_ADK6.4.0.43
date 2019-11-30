@@ -1,0 +1,32 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the @@@plib_name@@@ private library
+
+%list ALL_INCDIRS
+capabilities/@@@plib_name@@@
+
+%list CFG_LIBS
+capabilities/@@@plib_name@@@/@@@plib_name@@@
+
+%build
+# Enable kalscramble when building private libraries
+RELEASE_BUILD=TRUE
+
+# Comment out the line below %list PRIVATE_LIBS during development in order
+# to remove obfuscation and thus allow debugging.
+# IMPORTANT: Do NOT deliver the generated archive file (.a) from such a
+# build! You should uncomment it and rebuild for release.
+#
+# The files that you need to ship are:
+#
+# <PROJECT_ROOT>\audio\kalimba\kymera\tools\KCSMaker\out\stre_rom_v02_release\capabilities\@@@plib_name@@@\debugbin\lib@@@plib_name@@@.a
+# <PROJECT_ROOT>\audio\kalimba\kymera\tools\KCSMaker\out\stre_rom_v02_release\capabilities\@@@plib_name@@@\debugbin\lib@@@plib_name@@@.reloc
+#
+# They will be generated each time after a successful build.
+
+%list PRIVATE_LIBS
+capabilities/@@@plib_name@@@

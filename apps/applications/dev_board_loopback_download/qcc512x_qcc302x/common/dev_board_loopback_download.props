@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2017 - 2018 Qualcomm Technologies International, Ltd. -->
+<project>
+    <configurations>
+        <configuration>
+            <property name="hw">
+                <description>HW board type</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0"></option>
+                    <option name="1">CF376_CE826</option>
+                    <option name="2">CF376_CF212</option>
+                    <option name="3">CF376_CF429</option>
+                    <option name="4">CF376_CF440</option>
+                    <option name="5">CF133</option>
+                </options>
+            </property>
+            <property name="example_feature">
+                <description>Example on how to enable relevant compilation switch.</description>
+                <default>ENABLE_EXAMPLE_FEATURE_MODE_1</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0">ENABLE_EXAMPLE_FEATURE_MODE_1</option>
+                </options>
+            </property>
+        </configuration>
+    </configurations>
+</project>

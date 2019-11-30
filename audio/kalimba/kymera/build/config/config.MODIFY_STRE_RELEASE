@@ -1,0 +1,14 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Modifiers to make a Hydra config suitable for external release.
+# (Not suitable for Amber, but we're never going to release that.)
+
+# Do not include this in releases
+
+%list PRIVATE_LIBS
+components/aov
+

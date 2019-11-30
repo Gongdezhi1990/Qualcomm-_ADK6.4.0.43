@@ -1,0 +1,16 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# QEEnable, QEDisable and QECheck are siflash inject vectors used to configure the QE bit.
+# QEMask is the value used to mask the response of QECheck to find the QE bit.
+# QEValue is used to compare against the masked response of QECheck to determine whether
+# or not the QEEnable/QEDisable vectors should be sent.
+# See ../../readme.txt for more information
+QEEnable =  [00 04 02 01 06 03 01 00 02]
+QEDisable = [00 04 02 01 06 03 01 00 00]
+QECheck = [01 02 01 01 35]
+QEMask = [02]
+QEValue = [02]

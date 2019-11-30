@@ -1,0 +1,7 @@
+import imp
+import os
+cap_list = imp.load_source("mod", os.path.abspath(os.path.join(os.path.curdir,"bundle/config/capabilities.cfg")))
+
+# List of capabilites to be bundled up in KDCs
+KDCs = {}
+KDCs["download_sbc_encode"] = [dnld_sbc_encode]

@@ -1,0 +1,78 @@
+<ModuleData Name="sink_low_power_mode">
+    <DefineGroup>
+        <DefineList
+            Id="Wakeup Sources"
+            ShortId="wakeup_xio" >
+            <BuildVariant HwVariant="All -CF133 -CF133_SQIF -CG793 -CG437 -CF376_CE826 -CF376_CF212 -QCC5120-AB_DEV-BRD-R2-AA -QCC5126-AB_DEV-BRD-R2-AA -QCC5127-AA_DEV-BRD-R2-AA -QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                <enum key="XIO 0"
+                      value="0"/>
+                <enum key="XIO 1"
+                      value="1"/>
+                <enum key="XIO 2"
+                      value="2"/>
+                <enum key="XIO 3"
+                      value="3"/>
+                <enum key="XIO 4"
+                      value="4"/>
+                <enum key="XIO 5"
+                      value="5"/>
+                <enum key="XIO 6"
+                      value="6"/>
+                <enum key="XIO 7"
+                      value="7"/>
+                <enum key="XIO 8"
+                      value="8"/>
+                <enum key="XIO 9"
+                      value="9"/>
+                <enum key="XIO 10"
+                      value="10"/>
+                <enum key="XIO 11"
+                      value="11"/>
+                <enum key="XIO 12"
+                      value="12"/>
+            </BuildVariant>
+            <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                <enum key="None"
+                      value="0"/>
+            </BuildVariant>
+        </DefineList>
+    </DefineGroup>
+
+    <ConfigGroup
+        ShortId="sink_low_power_mode_readonly"
+        Id="sink_dormant_mode"
+        Node="Basic">
+        <ConfigItem
+            Id="XIO wake up source"
+            ShortId="dormant_xio"
+            Type="bitfield"
+            DefaultValue="XIO 7"
+            ConfigGroupPath="./[@ShortId='low_power']/[@ShortId='dormant']"
+            Size="13"
+            Desc="Configures the wake up source of Dormant Mode to be an XIO. Multiple XIO can be selected that will wake the device from Dormant.">
+            <List use="wakeup_xio"/>
+            <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="" />
+        </ConfigItem>
+        <ConfigItem
+            Id="NFC wake up source"
+            ShortId="dormant_nfc"
+            Type="bitfield"
+            DefaultValue="Field Detect"
+            ConfigGroupPath="./[@ShortId='low_power']/[@ShortId='dormant']"
+            Size="3"
+            Desc="Configures the wake up source of Dormant Mode to be NFC.">
+            <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="" />
+            <bitfield key="Field Detect"
+                      value="0"/>
+            <bitfield key="Overload"
+                      value="1"/>
+            <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA"
+                          SwVariant="All"
+                          Value="" />
+        </ConfigItem>
+    </ConfigGroup>    
+</ModuleData>

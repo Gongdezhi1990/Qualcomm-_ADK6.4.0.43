@@ -1,0 +1,4012 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Config Key List</title>
+<style type="text/css">
+<!--
+body, h1, h2, th, td, p, li {font-family:Arial, helvetica, sans-serif;}
+
+h1                  {font-size:12pt;}
+h2                  {font-size:10pt;}
+h3                  {font-size:10pt;}
+body, th, td, p, li {font-size: 9pt;}
+
+table  {border-collapse: collapse; }
+th, td {border: solid; border: 1px solid black;}
+table.unboxed td, table.unboxed th {border: none; padding-right: 2em;}
+-->
+</style>
+</head>
+<body>
+<h1>Configuration List for app  version 1749 </h1>
+<ul>
+  <li><a href="#Configuration_elements_Listed_Alphabetically">Alphabetical</a></li>
+  <li><a href="#Configuration_elements_Listed_Numerically">Numerical</a></li>
+  <li><a href="#permuted_index">Permuted</a></li>
+</ul>
+<h2><a name="Configuration_elements_Listed_Alphabetically">Configuration elements Listed Alphabetically</a></h2>
+<table class="unboxed" border="0">
+ <tr><td>0x0110</td><td><a href="#AdcReadDelay">AdcReadDelay</a></td></tr>
+ <tr><td>0x010c</td><td><a href="#AdcTemperatureAddition">AdcTemperatureAddition</a></td></tr>
+ <tr><td>0x010b</td><td><a href="#AdcTemperatureMultiplier">AdcTemperatureMultiplier</a></td></tr>
+ <tr><td>0x00fd</td><td><a href="#AppsP1InactiveTimer">AppsP1InactiveTimer</a></td></tr>
+ <tr><td>0x0113</td><td><a href="#AuthenticateROFS">AuthenticateROFS</a></td></tr>
+ <tr><td>0x0134</td><td><a href="#CcDefaultPollPeriod">CcDefaultPollPeriod</a></td></tr>
+ <tr><td>0x0135</td><td><a href="#CcFastPollPeriod">CcFastPollPeriod</a></td></tr>
+ <tr><td>0x011f</td><td><a href="#CcVoltageThresholdAt500mAMax">CcVoltageThresholdAt500mAMax</a></td></tr>
+ <tr><td>0x011e</td><td><a href="#CcVoltageThresholdAt500mAMin">CcVoltageThresholdAt500mAMin</a></td></tr>
+ <tr><td>0x0121</td><td><a href="#CcVoltageThresholdAt1500mAMax">CcVoltageThresholdAt1500mAMax</a></td></tr>
+ <tr><td>0x0120</td><td><a href="#CcVoltageThresholdAt1500mAMin">CcVoltageThresholdAt1500mAMin</a></td></tr>
+ <tr><td>0x0123</td><td><a href="#CcVoltageThresholdAt3000mAMax">CcVoltageThresholdAt3000mAMax</a></td></tr>
+ <tr><td>0x0122</td><td><a href="#CcVoltageThresholdAt3000mAMin">CcVoltageThresholdAt3000mAMin</a></td></tr>
+ <tr><td>0x0106</td><td><a href="#ChargerMaximumCurrentFast">ChargerMaximumCurrentFast</a></td></tr>
+ <tr><td>0x0105</td><td><a href="#ChargerMaximumCurrentPre">ChargerMaximumCurrentPre</a></td></tr>
+ <tr><td>0x0104</td><td><a href="#ChargerMaximumCurrentTrickle">ChargerMaximumCurrentTrickle</a></td></tr>
+ <tr><td>0x0107</td><td><a href="#ChargerMaximumVoltage">ChargerMaximumVoltage</a></td></tr>
+ <tr><td>0x0127</td><td><a href="#CustomerReadOnlyKey0">CustomerReadOnlyKey0</a></td></tr>
+ <tr><td>0x0128</td><td><a href="#CustomerReadOnlyKey1">CustomerReadOnlyKey1</a></td></tr>
+ <tr><td>0x0129</td><td><a href="#CustomerReadOnlyKey2">CustomerReadOnlyKey2</a></td></tr>
+ <tr><td>0x012a</td><td><a href="#CustomerReadOnlyKey3">CustomerReadOnlyKey3</a></td></tr>
+ <tr><td>0x012b</td><td><a href="#CustomerReadOnlyKey4">CustomerReadOnlyKey4</a></td></tr>
+ <tr><td>0x012c</td><td><a href="#CustomerReadOnlyKey5">CustomerReadOnlyKey5</a></td></tr>
+ <tr><td>0x012d</td><td><a href="#CustomerReadOnlyKey6">CustomerReadOnlyKey6</a></td></tr>
+ <tr><td>0x012e</td><td><a href="#CustomerReadOnlyKey7">CustomerReadOnlyKey7</a></td></tr>
+ <tr><td>0x012f</td><td><a href="#CustomerReadOnlyKey8">CustomerReadOnlyKey8</a></td></tr>
+ <tr><td>0x0130</td><td><a href="#CustomerReadOnlyKey9">CustomerReadOnlyKey9</a></td></tr>
+ <tr><td>0x0112</td><td><a href="#EnableTRBLog">EnableTRBLog</a></td></tr>
+ <tr><td>0x00fb</td><td><a href="#FeatureLicenseKey">FeatureLicenseKey</a></td></tr>
+ <tr><td>0x00fa</td><td><a href="#I2CPios">I2CPios</a></td></tr>
+ <tr><td>0x0111</td><td><a href="#InitialLogLevels">InitialLogLevels</a></td></tr>
+ <tr><td>0x0124</td><td><a href="#IpcLeaveRecvBufferPagesMapped">IpcLeaveRecvBufferPagesMapped</a></td></tr>
+ <tr><td>0x010a</td><td><a href="#NfcAgcControl2">NfcAgcControl2</a></td></tr>
+ <tr><td>0x0109</td><td><a href="#NfcQuantConfig">NfcQuantConfig</a></td></tr>
+ <tr><td>0x0108</td><td><a href="#NfcTxControlModulationDepth">NfcTxControlModulationDepth</a></td></tr>
+ <tr><td>0x0136</td><td><a href="#PsAesKey">PsAesKey</a></td></tr>
+ <tr><td>0x0102</td><td><a href="#RampDownTemperature">RampDownTemperature</a></td></tr>
+ <tr><td>0x0103</td><td><a href="#ReenableTemperature">ReenableTemperature</a></td></tr>
+ <tr><td>0x0140</td><td><a href="#ReserveP1TcmForData">ReserveP1TcmForData</a></td></tr>
+ <tr><td>0x011b</td><td><a href="#ResetOnChargerAttach">ResetOnChargerAttach</a></td></tr>
+ <tr><td>0x0132</td><td><a href="#SDHost1BitOnlySlot0">SDHost1BitOnlySlot0</a></td></tr>
+ <tr><td>0x0133</td><td><a href="#SDHost1BitOnlySlot1">SDHost1BitOnlySlot1</a></td></tr>
+ <tr><td>0x0014</td><td><a href="#SDHostSlot0">SDHostSlot0</a></td></tr>
+ <tr><td>0x0125</td><td><a href="#SDHostSlot0Pio">SDHostSlot0Pio</a></td></tr>
+ <tr><td>0x0015</td><td><a href="#SDHostSlot1">SDHostSlot1</a></td></tr>
+ <tr><td>0x0126</td><td><a href="#SDHostSlot1Pio">SDHostSlot1Pio</a></td></tr>
+ <tr><td>0x0101</td><td><a href="#ShutdownTemperature">ShutdownTemperature</a></td></tr>
+ <tr><td>0x0117</td><td><a href="#SiflashEraseRegion0">SiflashEraseRegion0</a></td></tr>
+ <tr><td>0x0118</td><td><a href="#SiflashEraseRegion1">SiflashEraseRegion1</a></td></tr>
+ <tr><td>0x0119</td><td><a href="#SiflashEraseRegion2">SiflashEraseRegion2</a></td></tr>
+ <tr><td>0x011a</td><td><a href="#SiflashEraseRegion3">SiflashEraseRegion3</a></td></tr>
+ <tr><td>0x0116</td><td><a href="#SiflashPageSize">SiflashPageSize</a></td></tr>
+ <tr><td>0x0114</td><td><a href="#SiflashResumeToSuspendDelay">SiflashResumeToSuspendDelay</a></td></tr>
+ <tr><td>0x0115</td><td><a href="#SiflashSuspendResumeCommands">SiflashSuspendResumeCommands</a></td></tr>
+ <tr><td>0x0131</td><td><a href="#StreamFilesystemEnable">StreamFilesystemEnable</a></td></tr>
+ <tr><td>0x0001</td><td><a href="#StubInt">StubInt</a></td></tr>
+ <tr><td>0x0002</td><td><a href="#StubStr">StubStr</a></td></tr>
+ <tr><td>0x0100</td><td><a href="#ThermalShutdownLongPeriod">ThermalShutdownLongPeriod</a></td></tr>
+ <tr><td>0x00ff</td><td><a href="#ThermalShutdownPeriod">ThermalShutdownPeriod</a></td></tr>
+ <tr><td>0x0138</td><td><a href="#UartFlowCtrlEnable">UartFlowCtrlEnable</a></td></tr>
+ <tr><td>0x000e</td><td><a href="#USBBCDDevice">USBBCDDevice</a></td></tr>
+ <tr><td>0x000a</td><td><a href="#USBConfigString">USBConfigString</a></td></tr>
+ <tr><td>0x0010</td><td><a href="#USBDeviceClassCodes">USBDeviceClassCodes</a></td></tr>
+ <tr><td>0x000f</td><td><a href="#USBLangID">USBLangID</a></td></tr>
+ <tr><td>0x0007</td><td><a href="#USBManufString">USBManufString</a></td></tr>
+ <tr><td>0x0011</td><td><a href="#USBMaxPower">USBMaxPower</a></td></tr>
+ <tr><td>0x000d</td><td><a href="#USBProductID">USBProductID</a></td></tr>
+ <tr><td>0x0008</td><td><a href="#USBProductString">USBProductString</a></td></tr>
+ <tr><td>0x0013</td><td><a href="#USBRemoteWakeDisable">USBRemoteWakeDisable</a></td></tr>
+ <tr><td>0x0009</td><td><a href="#USBSerialNumberString">USBSerialNumberString</a></td></tr>
+ <tr><td>0x011d</td><td><a href="#UsbTypeCCCSource">UsbTypeCCCSource</a></td></tr>
+ <tr><td>0x0139</td><td><a href="#UsbTypeCMaxCurrent">UsbTypeCMaxCurrent</a></td></tr>
+ <tr><td>0x000c</td><td><a href="#USBVendorID">USBVendorID</a></td></tr>
+ <tr><td>0x000b</td><td><a href="#USBVersion">USBVersion</a></td></tr>
+ <tr><td>0x010e</td><td><a href="#XtalTemperatureDACConversion">XtalTemperatureDACConversion</a></td></tr>
+ <tr><td>0x010d</td><td><a href="#XtalTemperatureLookupTable">XtalTemperatureLookupTable</a></td></tr>
+ <tr><td>0x010f</td><td><a href="#XtalTemperaturePeriod">XtalTemperaturePeriod</a></td></tr>
+</table><br>
+<h2><a name="Configuration_elements_Listed_Numerically">Configuration elements Listed Numerically</a></h2>
+<table class="unboxed" border="0">
+ <tr><td>0x0001</td><td><a href="#StubInt">StubInt</a></td></tr>
+ <tr><td>0x0002</td><td><a href="#StubStr">StubStr</a></td></tr>
+ <tr><td>0x0007</td><td><a href="#USBManufString">USBManufString</a></td></tr>
+ <tr><td>0x0008</td><td><a href="#USBProductString">USBProductString</a></td></tr>
+ <tr><td>0x0009</td><td><a href="#USBSerialNumberString">USBSerialNumberString</a></td></tr>
+ <tr><td>0x000a</td><td><a href="#USBConfigString">USBConfigString</a></td></tr>
+ <tr><td>0x000b</td><td><a href="#USBVersion">USBVersion</a></td></tr>
+ <tr><td>0x000c</td><td><a href="#USBVendorID">USBVendorID</a></td></tr>
+ <tr><td>0x000d</td><td><a href="#USBProductID">USBProductID</a></td></tr>
+ <tr><td>0x000e</td><td><a href="#USBBCDDevice">USBBCDDevice</a></td></tr>
+ <tr><td>0x000f</td><td><a href="#USBLangID">USBLangID</a></td></tr>
+ <tr><td>0x0010</td><td><a href="#USBDeviceClassCodes">USBDeviceClassCodes</a></td></tr>
+ <tr><td>0x0011</td><td><a href="#USBMaxPower">USBMaxPower</a></td></tr>
+ <tr><td>0x0013</td><td><a href="#USBRemoteWakeDisable">USBRemoteWakeDisable</a></td></tr>
+ <tr><td>0x0014</td><td><a href="#SDHostSlot0">SDHostSlot0</a></td></tr>
+ <tr><td>0x0015</td><td><a href="#SDHostSlot1">SDHostSlot1</a></td></tr>
+ <tr><td>0x00fa</td><td><a href="#I2CPios">I2CPios</a></td></tr>
+ <tr><td>0x00fb</td><td><a href="#FeatureLicenseKey">FeatureLicenseKey</a></td></tr>
+ <tr><td>0x00fd</td><td><a href="#AppsP1InactiveTimer">AppsP1InactiveTimer</a></td></tr>
+ <tr><td>0x00ff</td><td><a href="#ThermalShutdownPeriod">ThermalShutdownPeriod</a></td></tr>
+ <tr><td>0x0100</td><td><a href="#ThermalShutdownLongPeriod">ThermalShutdownLongPeriod</a></td></tr>
+ <tr><td>0x0101</td><td><a href="#ShutdownTemperature">ShutdownTemperature</a></td></tr>
+ <tr><td>0x0102</td><td><a href="#RampDownTemperature">RampDownTemperature</a></td></tr>
+ <tr><td>0x0103</td><td><a href="#ReenableTemperature">ReenableTemperature</a></td></tr>
+ <tr><td>0x0104</td><td><a href="#ChargerMaximumCurrentTrickle">ChargerMaximumCurrentTrickle</a></td></tr>
+ <tr><td>0x0105</td><td><a href="#ChargerMaximumCurrentPre">ChargerMaximumCurrentPre</a></td></tr>
+ <tr><td>0x0106</td><td><a href="#ChargerMaximumCurrentFast">ChargerMaximumCurrentFast</a></td></tr>
+ <tr><td>0x0107</td><td><a href="#ChargerMaximumVoltage">ChargerMaximumVoltage</a></td></tr>
+ <tr><td>0x0108</td><td><a href="#NfcTxControlModulationDepth">NfcTxControlModulationDepth</a></td></tr>
+ <tr><td>0x0109</td><td><a href="#NfcQuantConfig">NfcQuantConfig</a></td></tr>
+ <tr><td>0x010a</td><td><a href="#NfcAgcControl2">NfcAgcControl2</a></td></tr>
+ <tr><td>0x010b</td><td><a href="#AdcTemperatureMultiplier">AdcTemperatureMultiplier</a></td></tr>
+ <tr><td>0x010c</td><td><a href="#AdcTemperatureAddition">AdcTemperatureAddition</a></td></tr>
+ <tr><td>0x010d</td><td><a href="#XtalTemperatureLookupTable">XtalTemperatureLookupTable</a></td></tr>
+ <tr><td>0x010e</td><td><a href="#XtalTemperatureDACConversion">XtalTemperatureDACConversion</a></td></tr>
+ <tr><td>0x010f</td><td><a href="#XtalTemperaturePeriod">XtalTemperaturePeriod</a></td></tr>
+ <tr><td>0x0110</td><td><a href="#AdcReadDelay">AdcReadDelay</a></td></tr>
+ <tr><td>0x0111</td><td><a href="#InitialLogLevels">InitialLogLevels</a></td></tr>
+ <tr><td>0x0112</td><td><a href="#EnableTRBLog">EnableTRBLog</a></td></tr>
+ <tr><td>0x0113</td><td><a href="#AuthenticateROFS">AuthenticateROFS</a></td></tr>
+ <tr><td>0x0114</td><td><a href="#SiflashResumeToSuspendDelay">SiflashResumeToSuspendDelay</a></td></tr>
+ <tr><td>0x0115</td><td><a href="#SiflashSuspendResumeCommands">SiflashSuspendResumeCommands</a></td></tr>
+ <tr><td>0x0116</td><td><a href="#SiflashPageSize">SiflashPageSize</a></td></tr>
+ <tr><td>0x0117</td><td><a href="#SiflashEraseRegion0">SiflashEraseRegion0</a></td></tr>
+ <tr><td>0x0118</td><td><a href="#SiflashEraseRegion1">SiflashEraseRegion1</a></td></tr>
+ <tr><td>0x0119</td><td><a href="#SiflashEraseRegion2">SiflashEraseRegion2</a></td></tr>
+ <tr><td>0x011a</td><td><a href="#SiflashEraseRegion3">SiflashEraseRegion3</a></td></tr>
+ <tr><td>0x011b</td><td><a href="#ResetOnChargerAttach">ResetOnChargerAttach</a></td></tr>
+ <tr><td>0x011d</td><td><a href="#UsbTypeCCCSource">UsbTypeCCCSource</a></td></tr>
+ <tr><td>0x011e</td><td><a href="#CcVoltageThresholdAt500mAMin">CcVoltageThresholdAt500mAMin</a></td></tr>
+ <tr><td>0x011f</td><td><a href="#CcVoltageThresholdAt500mAMax">CcVoltageThresholdAt500mAMax</a></td></tr>
+ <tr><td>0x0120</td><td><a href="#CcVoltageThresholdAt1500mAMin">CcVoltageThresholdAt1500mAMin</a></td></tr>
+ <tr><td>0x0121</td><td><a href="#CcVoltageThresholdAt1500mAMax">CcVoltageThresholdAt1500mAMax</a></td></tr>
+ <tr><td>0x0122</td><td><a href="#CcVoltageThresholdAt3000mAMin">CcVoltageThresholdAt3000mAMin</a></td></tr>
+ <tr><td>0x0123</td><td><a href="#CcVoltageThresholdAt3000mAMax">CcVoltageThresholdAt3000mAMax</a></td></tr>
+ <tr><td>0x0124</td><td><a href="#IpcLeaveRecvBufferPagesMapped">IpcLeaveRecvBufferPagesMapped</a></td></tr>
+ <tr><td>0x0125</td><td><a href="#SDHostSlot0Pio">SDHostSlot0Pio</a></td></tr>
+ <tr><td>0x0126</td><td><a href="#SDHostSlot1Pio">SDHostSlot1Pio</a></td></tr>
+ <tr><td>0x0127</td><td><a href="#CustomerReadOnlyKey0">CustomerReadOnlyKey0</a></td></tr>
+ <tr><td>0x0128</td><td><a href="#CustomerReadOnlyKey1">CustomerReadOnlyKey1</a></td></tr>
+ <tr><td>0x0129</td><td><a href="#CustomerReadOnlyKey2">CustomerReadOnlyKey2</a></td></tr>
+ <tr><td>0x012a</td><td><a href="#CustomerReadOnlyKey3">CustomerReadOnlyKey3</a></td></tr>
+ <tr><td>0x012b</td><td><a href="#CustomerReadOnlyKey4">CustomerReadOnlyKey4</a></td></tr>
+ <tr><td>0x012c</td><td><a href="#CustomerReadOnlyKey5">CustomerReadOnlyKey5</a></td></tr>
+ <tr><td>0x012d</td><td><a href="#CustomerReadOnlyKey6">CustomerReadOnlyKey6</a></td></tr>
+ <tr><td>0x012e</td><td><a href="#CustomerReadOnlyKey7">CustomerReadOnlyKey7</a></td></tr>
+ <tr><td>0x012f</td><td><a href="#CustomerReadOnlyKey8">CustomerReadOnlyKey8</a></td></tr>
+ <tr><td>0x0130</td><td><a href="#CustomerReadOnlyKey9">CustomerReadOnlyKey9</a></td></tr>
+ <tr><td>0x0131</td><td><a href="#StreamFilesystemEnable">StreamFilesystemEnable</a></td></tr>
+ <tr><td>0x0132</td><td><a href="#SDHost1BitOnlySlot0">SDHost1BitOnlySlot0</a></td></tr>
+ <tr><td>0x0133</td><td><a href="#SDHost1BitOnlySlot1">SDHost1BitOnlySlot1</a></td></tr>
+ <tr><td>0x0134</td><td><a href="#CcDefaultPollPeriod">CcDefaultPollPeriod</a></td></tr>
+ <tr><td>0x0135</td><td><a href="#CcFastPollPeriod">CcFastPollPeriod</a></td></tr>
+ <tr><td>0x0136</td><td><a href="#PsAesKey">PsAesKey</a></td></tr>
+ <tr><td>0x0138</td><td><a href="#UartFlowCtrlEnable">UartFlowCtrlEnable</a></td></tr>
+ <tr><td>0x0139</td><td><a href="#UsbTypeCMaxCurrent">UsbTypeCMaxCurrent</a></td></tr>
+ <tr><td>0x0140</td><td><a href="#ReserveP1TcmForData">ReserveP1TcmForData</a></td></tr>
+</table><br>
+<h1><a name="StubInt"></a>StubInt</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0001</th>
+  <td width="60%" style='width:60%' align=left>1</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>int32</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr><td colspan=3 align=left valign=top><p><b>Dummy integer MIB entry
+</b></p><p>A MIB integer entry that can be harmlessly read or written, e.g.,
+for testing.
+</p></td></tr></table><br><h1><a name="StubStr"></a>StubStr</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0002</th>
+  <td width="60%" style='width:60%' align=left>2</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Dummy string MIB entry
+</b></p><p>A MIB string entry that can be harmlessly read or written, e.g.,
+for testing.
+</p></td></tr></table><br><h1><a name="USBManufString"></a>USBManufString</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0007</th>
+  <td width="60%" style='width:60%' align=left>7</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>unicode_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Manufacturer string descriptor
+</b></p><p>USB manufacturer string descriptor
+</p></td></tr></table><br><h1><a name="USBProductString"></a>USBProductString</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0008</th>
+  <td width="60%" style='width:60%' align=left>8</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>unicode_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Device product string descriptor
+</b></p><p>USB product string descriptor for the generic device
+</p></td></tr></table><br><h1><a name="USBSerialNumberString"></a>USBSerialNumberString</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0009</th>
+  <td width="60%" style='width:60%' align=left>9</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>unicode_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Device serial number string descriptor
+</b></p><p>USB serial number string descriptor for the generic device
+</p></td></tr></table><br><h1><a name="USBConfigString"></a>USBConfigString</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x000a</th>
+  <td width="60%" style='width:60%' align=left>10</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>unicode_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Device configuration string descriptor
+</b></p><p>USB configuration string descriptor for the generic device
+</p></td></tr></table><br><h1><a name="USBVersion"></a>USBVersion</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x000b</th>
+  <td width="60%" style='width:60%' align=left>11</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBVersion = 0x0200
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>USB version number
+</b></p><p>USB version number to which the devices conform, in binary-coded decimal
+</p></td></tr></table><br><h1><a name="USBVendorID"></a>USBVendorID</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x000c</th>
+  <td width="60%" style='width:60%' align=left>12</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBVendorID = 0x0a12
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>USB Vendor ID
+</b></p><p>USB Vendor ID, as assigned by the USB-IF
+</p></td></tr></table><br><h1><a name="USBProductID"></a>USBProductID</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x000d</th>
+  <td width="60%" style='width:60%' align=left>13</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBProductID = 0x4007
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>The PID of the generic device
+</b></p><p>Product ID of the generic device
+</p></td></tr></table><br><h1><a name="USBBCDDevice"></a>USBBCDDevice</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x000e</th>
+  <td width="60%" style='width:60%' align=left>14</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr><td colspan=3 align=left valign=top><p><b>Binary-coded decimal device version number
+</b></p><p>This version number can be used to select a driver. If it is not set here, the
+firmware will insert its build ID. The value supplied should be in the form
+0xIJKL where I, J, K, L are in the range [0,9].
+</p></td></tr></table><br><h1><a name="USBLangID"></a>USBLangID</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x000f</th>
+  <td width="60%" style='width:60%' align=left>15</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBLangID = 0x0409
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>The USB language ID for string descriptors
+</b></p><p>In principle a device can support an arbitrary number of languages, but our firmware
+only supports up to one. If this value is zero, string descriptors won't be returned
+even if they're set.  The values for English are the set {9 + n * 0x400 for n in [1,13]}.
+In particular, UK English is 0x0809 and US English is 0x0409. Since Microsoft
+Windows seems to ask for US English when reading serial number and product id,
+we are setting it to 0x0409 by default.
+</p></td></tr></table><br><h1><a name="USBDeviceClassCodes"></a>USBDeviceClassCodes</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0010</th>
+  <td width="60%" style='width:60%' align=left>16</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>USBDeviceClassCodes = [ff 00 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>3 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>3 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Class, subclass and protocol codes for the device
+</b></p><p>Octet 1 is the class code, octet 2 is the subclass and octet 3
+is the protocol code.
+</p>
+<p>
+Note: the hub's class codes are fixed by the standard so they are
+hard-coded in the firmware.
+</p></td></tr></table><br><h1><a name="USBMaxPower"></a>USBMaxPower</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0011</th>
+  <td width="60%" style='width:60%' align=left>17</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>USBMaxPower = 0x0000
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x00ff </td></tr><tr><td colspan=3 align=left valign=top><p><b>Maximum power drawn by a bus-powered device
+</b></p><p>Specify the maximum power drawn by the device if it is bus-powered.
+Expressed in units of 2mA.
+(See USB2.0 standard, table 9-10.)
+If set to &quot;0&quot; device reports &quot;Self-Powered&quot; in the configuration descriptor
+regardless of USBSelfPowered MIB in Curator. This is recommended for compound
+devices by USB 2.0 standard: 11.13 Hub Configuration, the entire load is
+then reported in the hubs' configuration descriptor.
+</p></td></tr></table><br><h1><a name="USBRemoteWakeDisable"></a>USBRemoteWakeDisable</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0013</th>
+  <td width="60%" style='width:60%' align=left>19</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>USBRemoteWakeDisable = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Disables support for USB remote wake
+</b></p><p>If set the device will not advertize support for remote wake capability
+in its descriptors. By default remote wake is enabled.
+</p></td></tr></table><br><h1><a name="SDHostSlot0"></a>SDHostSlot0</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0014</th>
+  <td width="60%" style='width:60%' align=left>20</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>SDHostSlot0 = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Initialise SD Host slot 0
+</b></p><p>This flag indicates if the application wishes to initialise SD Host slot 0.
+If set TRUE the application will request the PIOs for the SD slot 0 from
+the Curator. If the PIOs can't be allocated the application firmware will
+panic with the PANIC_SD_HOST_SUBRES_FAILED. The PIOs are hardcoded in the
+Curator.
+</p></td></tr></table><br><h1><a name="SDHostSlot1"></a>SDHostSlot1</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0015</th>
+  <td width="60%" style='width:60%' align=left>21</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>SDHostSlot1 = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Initialise SD Host slot 1
+</b></p><p>This flag indicates if the application wishes to initialise SD Host slot 1.
+If set TRUE the application will request the PIOs for the SD slot 1 from
+the Curator. If the PIOs can't be allocated the application firmware will
+panic with ID PANIC_SD_HOST_SUBRES_FAILED. The PIOs are hardcoded in the
+Curator.
+</p></td></tr></table><br><h1><a name="I2CPios"></a>I2CPios</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x00fa</th>
+  <td width="60%" style='width:60%' align=left>250</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>I2CPios = [18 19]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>2 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>2 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>I2C PIOs configuration
+</b></p><p>A two element octet string used to set the PIO pins used by the I2C trap
+call StreamI2cSource and I2cTransfer. The first element gives the PIO number for
+the SCL signal and the second for the SDA.
+</p></td></tr></table><br><h1><a name="FeatureLicenseKey"></a>FeatureLicenseKey</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x00fb</th>
+  <td width="60%" style='width:60%' align=left>251</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>64 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>96 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>License Key for product feature
+</b></p><p>Octet string used to selectively enable product features.
+</p></td></tr></table><br><h1><a name="AppsP1InactiveTimer"></a>AppsP1InactiveTimer</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x00fd</th>
+  <td width="60%" style='width:60%' align=left>253</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>AppsP1InactiveTimer = 0x0000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Time (in milliseconds) to confirm if the application in Apps P1 is running or not.
+</b></p><p>If this MIB key value is non-zero, then Apps P0 shall restart the chip if
+the application running in the Apps P1 does not invoke VmSoftwareWdKick()
+trap after a chip reset within the time configured in this MIB key.
+</p></td></tr></table><br><h1><a name="ThermalShutdownPeriod"></a>ThermalShutdownPeriod</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x00ff</th>
+  <td width="60%" style='width:60%' align=left>255</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>ThermalShutdownPeriod = 0x0064
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Die temperature reading frequency in milliseconds.
+</b></p><p>This MIB key specifies how often the die temperature is checked for thermal protection when charging.
+The value 0 disables the thermal protection.
+</p></td></tr></table><br><h1><a name="ThermalShutdownLongPeriod"></a>ThermalShutdownLongPeriod</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0100</th>
+  <td width="60%" style='width:60%' align=left>256</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>ThermalShutdownLongPeriod = 0x0bb8
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Die temperature slower reading frequency in milliseconds.
+</b></p><p>This MIB key specifies how often the die temperature is checked for thermal protection when not
+charging. The value 0 disables the thermal protection.
+</p></td></tr></table><br><h1><a name="ShutdownTemperature"></a>ShutdownTemperature</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0101</th>
+  <td width="60%" style='width:60%' align=left>257</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>int16</td></tr><tr><td>Default</td><td colspan=2>ShutdownTemperature = 125
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Temperature in Celsius to turn-off the chip in Celsius.
+</b></p><p>This MIB key specifies the die temperature at which to turn off the chip.
+</p></td></tr></table><br><h1><a name="RampDownTemperature"></a>RampDownTemperature</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0102</th>
+  <td width="60%" style='width:60%' align=left>258</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>int16</td></tr><tr><td>Default</td><td colspan=2>RampDownTemperature = 110
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Temperature in Celsius to ramp down charging.
+</b></p><p>This MIB key specifies the die temperature at which to ramp down battery charging to 1/4 of current.
+</p></td></tr></table><br><h1><a name="ReenableTemperature"></a>ReenableTemperature</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0103</th>
+  <td width="60%" style='width:60%' align=left>259</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>int16</td></tr><tr><td>Default</td><td colspan=2>ReenableTemperature = 85
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Temperature in Celsius to re-enable charger.
+</b></p><p>This MIB key specifies the die temperature at which to re-enable battery charging.
+</p></td></tr></table><br><h1><a name="ChargerMaximumCurrentTrickle"></a>ChargerMaximumCurrentTrickle</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0104</th>
+  <td width="60%" style='width:60%' align=left>260</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>ChargerMaximumCurrentTrickle = 0x0000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Maximum Trickle Charge Current.
+</b></p><p>This MIB key sets the maximum trickle charge current to use, which is dependent on the size and type
+of battery. The setting to use can be determined from the battery.
+The value 0 disables this limit.
+</p></td></tr></table><br><h1><a name="ChargerMaximumCurrentPre"></a>ChargerMaximumCurrentPre</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0105</th>
+  <td width="60%" style='width:60%' align=left>261</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>ChargerMaximumCurrentPre = 0x0000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Maximum Pre Charge Current.
+</b></p><p>This MIB key sets the maximum pre charge current to use, which is dependent on the size and type of
+battery. The setting to use can be determined from the battery.
+The value 0 disables this limit.
+</p></td></tr></table><br><h1><a name="ChargerMaximumCurrentFast"></a>ChargerMaximumCurrentFast</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0106</th>
+  <td width="60%" style='width:60%' align=left>262</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>ChargerMaximumCurrentFast = 0x0000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Maximum Fast Charge Current in mA.
+</b></p><p>This MIB key sets the maximum fast charge current to use, which is dependent on the size and type
+of battery. The setting to use can be determined from the battery.
+The value 0 disables this limit.
+</p></td></tr></table><br><h1><a name="ChargerMaximumVoltage"></a>ChargerMaximumVoltage</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0107</th>
+  <td width="60%" style='width:60%' align=left>263</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>ChargerMaximumVoltage = 0x1068
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Maximum charger output voltage in mV.
+</b></p><p>This MIB key controls the maximum output voltage from the charger.The charger can output
+between 3585mV and 4425mV.
+</p></td></tr></table><br><h1><a name="NfcTxControlModulationDepth"></a>NfcTxControlModulationDepth</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0108</th>
+  <td width="60%" style='width:60%' align=left>264</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>NfcTxControlModulationDepth = 0xffff
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Nfc Tx Control Modulation Depth
+</b></p><p>This MIB key sets the TX modulation depth used by NFC hardware. The range
+is from 0 to 15. The default is stored in the NFC hardware. It is set to
+the best possible value for range performance and NFC forum compliance. It
+should not be changed.
+</p>
+<p>
+WARNING: changing this value may improve the range with some NFC readers
+but it may also make the NFC subsystem uncompliant. Consequently, it is
+ONLY provided for experimentation.
+</p>
+<p>
+An out of range value (E.g 0xff) means that the default NFC hardware
+value will be used.
+</p></td></tr></table><br><h1><a name="NfcQuantConfig"></a>NfcQuantConfig</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0109</th>
+  <td width="60%" style='width:60%' align=left>265</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>NfcQuantConfig = 0xffff
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>NFC Quantizer Configuration Register
+</b></p><p>This MIB key sets the NFC quantizer configuration register which sets the
+Hysterisis for noise removal. Options are 0-63 codes.
+</p>
+<p>
+Usage:
+Too little - suffer loss of good packets as they get corrupted.
+Too much - get poor sensitivity.
+</p></td></tr></table><br><h1><a name="NfcAgcControl2"></a>NfcAgcControl2</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x010a</th>
+  <td width="60%" style='width:60%' align=left>266</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>NfcAgcControl2 = 0xffff
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>NFC AGC Control2 Register
+</b></p><p>Boosts the Tx Modulation depth.
+</p>
+<p>
+Usage:
+Boosts TX amplitude on weak RF signals, 4 pairs of 2 bits.
+Larger the value the bigger the TX modulation.
+</p></td></tr></table><br><h1><a name="AdcTemperatureMultiplier"></a>AdcTemperatureMultiplier</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x010b</th>
+  <td width="60%" style='width:60%' align=left>267</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>int32</td></tr><tr><td>Default</td><td colspan=2>AdcTemperatureMultiplier = 26083328
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Multiplicative factor for aux_adc temperature measurement.
+</b></p><p>This value is used to multiply the raw temperature reading derived
+from the hardware in the chip's AUX macro to give a value where
+differences between readings are in degrees Celsius. The value
+<a href="#AdcTemperatureAddition">AdcTemperatureAddition</a> is added to the result to convert to degrees
+Celsius.
+</p>
+<p>
+This value is a signed 32-bit integer in two's complement representation.
+It represents a fixed point number found by shifting right by 16 bits.
+Hence the top 16 bits of the number stored in the MIB represent the integer
+part of the resulting number while the lower 16 bits a fractional part.
+For example, 0x000A0000 represents the integer 10 and 0xFFFFC000
+represents -1/4.
+</p>
+<p>
+This key must be set for temperature compensation to be performed.
+</p></td></tr></table><br><h1><a name="AdcTemperatureAddition"></a>AdcTemperatureAddition</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x010c</th>
+  <td width="60%" style='width:60%' align=left>268</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>int16</td></tr><tr><td>Default</td><td colspan=2>AdcTemperatureAddition = 122
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Additive constant for the aux_adc temperature measurement.
+</b></p><p>This value is added to the result of using the MIB attribute
+<a href="#AdcTemperatureMultiplier">AdcTemperatureMultiplier</a> to give a temperature in degrees Celsius
+from the chip's AUX macro.
+</p>
+<p>
+The value is 16-bit signed integer: there is no fractional part as
+the temperature accuracy is not expected to be better than one
+degree Celsius.
+</p>
+<p>
+The default is zero: this allows a value of <a href="#AdcTemperatureMultiplier">AdcTemperatureMultiplier</a>
+to be set and a reading performed to compare the measured temperature
+with the known ambient temperature in order to set the correct value
+of <a href="#AdcTemperatureAddition">AdcTemperatureAddition</a>.
+</p>
+<p>
+This key must be set for temperature compensation to be performed.
+</p></td></tr></table><br><h1><a name="XtalTemperatureLookupTable"></a>XtalTemperatureLookupTable</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x010d</th>
+  <td width="60%" style='width:60%' align=left>269</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>XtalTemperatureLookupTable = [d3 ff ba d8 ff c9 dd ff d7 e2 ff e3 e7 ff ec f1 ff fd fb 00 04 05 00 05 0f 00 03 19 ff fd 23 ff f8 2c ff f2 36 ff f0 40 ff f4 4a ff ff 55 00 15]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>48 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Lookup table for compensating crystal for temperature
+</b></p><p>If this MIB key is set, temperature compensation may be performed
+on the crystal that supplies the system clock. The value gives
+an array of mappings from temperature to the internal units used
+for determining the capacitance fine trim applied to the crystal.
+</p>
+<p>
+Each entry consists of 3 octets supplying one 8-bit integer and one 16-bit integer.
+The first entry is a signed 8-bit integer giving absolute temperature in degrees
+Celsius. Range for it is -128 to +127.
+The second entry is a signed 16-bit integer giving delta to the original trim value.
+Range for it is -32768 to +32767.
+</p>
+<p>
+Outside the range of the minimum and maximum temperature given,
+no extrapolation is performed: the corresponding delta to original fine trim
+for the minimum temperature is used for all lower temperatures,
+and that for the maximum temperature is used for all higher temperatures.
+</p>
+<p>
+Within the range of the temperatures in the table, piecewise linear
+interpolation is performed between adjacent temperature values to
+determine the appropriate delta to original fine trim.
+</p>
+<p>
+This key must be set for temperature compensation to be performed.
+</p></td></tr></table><br><h1><a name="XtalTemperatureDACConversion"></a>XtalTemperatureDACConversion</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x010e</th>
+  <td width="60%" style='width:60%' align=left>270</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>XtalTemperatureDACConversion = 0x0010
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Number of fine steps equivalent to 1 coarse step.
+</b></p><p>For every delta within fine DAC range the coarse DAC also needs to be modified.
+This defines the number of fine DAC steps equating to 1 coarse DAC step.
+</p></td></tr></table><br><h1><a name="XtalTemperaturePeriod"></a>XtalTemperaturePeriod</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x010f</th>
+  <td width="60%" style='width:60%' align=left>271</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>XtalTemperaturePeriod = 0x0000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Period of crystal temperature compensation mechanism in milliseconds.
+</b></p><p>If the crystal temperature compensation mechanism is in use this key
+determines the period between AUX temperature measurements made.
+If used the recommended period is 10000 milliseconds
+</p>
+<p>
+The value 0 disables the crystal temperature compensation.
+</p></td></tr></table><br><h1><a name="AdcReadDelay"></a>AdcReadDelay</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0110</th>
+  <td width="60%" style='width:60%' align=left>272</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>AdcReadDelay = 0x3a98
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Delay in microseconds to be used before taking ADC reading.
+</b></p><p>Adc reading for various analogue sources require a delay before actual reading is done.
+This is to let noise due to internal switches and transients due to stray capacitance to settle down and not impact the reading.
+The default is 15000 microsecond.
+</p></td></tr></table><br><h1><a name="InitialLogLevels"></a>InitialLogLevels</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0111</th>
+  <td width="60%" style='width:60%' align=left>273</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>128 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>MIB key to set log levels during boot up
+</b></p><p>Pair of module numbers with their log level.
+Octet 1 is the module number, octet 2 is the log level and the sequence continues.
+Can hold upto 64 pairs of module numbers with their log level.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_hydra_log_init_levels</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_hydra_log_init_levels</td><td>Global function</td></tr></td></tr></table><br><h1><a name="EnableTRBLog"></a>EnableTRBLog</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0112</th>
+  <td width="60%" style='width:60%' align=left>274</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>EnableTRBLog = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>MIB to enable TRB logging
+</b></p><p>This MIB key enables/disables TRB logging.
+Usage:
+true - enables TRB logging.
+false - disables TRB logging.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_common</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_common</td><td>Global function</td></tr></td></tr></table><br><h1><a name="AuthenticateROFS"></a>AuthenticateROFS</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0113</th>
+  <td width="60%" style='width:60%' align=left>275</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>AuthenticateROFS = true
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Authenticate Apps read-only filesystem.
+</b></p><p>Controls whether authentication of the read only filesystem is required.
+If this key is set to TRUE then the hash of the filesystem will be checked
+before it is used and the device will panic with code
+PANIC_FLASH_SECTION_AUTHENTICATION_FAILED.
+</p></td></tr></table><br><h1><a name="SiflashResumeToSuspendDelay"></a>SiflashResumeToSuspendDelay</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0114</th>
+  <td width="60%" style='width:60%' align=left>276</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>SiflashResumeToSuspendDelay = 0x03e8
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x07d0 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Minimum delay in microseconds after Write/Erase Resume and before
+Write/Erase Suspend for siflash operation.
+</b></p><p>Some devices require a minimum delay after resuming suspended write/erase
+and before issuing another write/erase suspend. The default value is
+chosen conservatively to work with most devices and can be decreased if
+particular flash can tolerate smaller delay.
+</p>
+<p>
+Although the system will remain stable up to the maximum permissable value of
+2000us, longer delays will have a negative impact on performance.
+</p></td></tr></table><br><h1><a name="SiflashSuspendResumeCommands"></a>SiflashSuspendResumeCommands</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0115</th>
+  <td width="60%" style='width:60%' align=left>277</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint32</td></tr><tr><td>Default</td><td colspan=2>SiflashSuspendResumeCommands = 0x757a757a
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Command codes for write/erase suspend and resume siflash operations.
+</b></p><p>The 32-bit value provides 4 command codes encoded as follows:
+MSB 8 bit: erase suspend code;
+8 bit: erase resume code;
+8 bit: write suspend code;
+LSB 8 bit: write resume code.
+Default values were chosen to work across the wide range of different
+flash devices: erase/write suspend command code 0x75, erase/write resume
+command code 0x7a.
+</p></td></tr></table><br><h1><a name="SiflashPageSize"></a>SiflashPageSize</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0116</th>
+  <td width="60%" style='width:60%' align=left>278</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>SiflashPageSize = 0x0100
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0001 </td></tr><tr><td>Maximum</td><td colspan=2>0x0800 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Write page size for siflash operations.
+</b></p><p>Write page size for siflash page program command.
+</p></td></tr></table><br><h1><a name="SiflashEraseRegion0"></a>SiflashEraseRegion0</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0117</th>
+  <td width="60%" style='width:60%' align=left>279</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint32</td></tr><tr><td>Default</td><td colspan=2>SiflashEraseRegion0 = 0x00000000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies erase region #0 for siflash operations.
+</b></p><p>Siflash needs to know erase command code and erase block size.
+Some devices have non-uniform organization, so different commands might be
+needed for different regions of flash.
+</p>
+<p>
+The value is encoded as follows:
+MSB 8 bit: erase command code;
+8 bit: erase block size exponent (e.g. 16 means 2^16=64KB erase block size).
+LSB 16 bit: erase region size, in erase blocks, 0xffff means the region
+spans until the end of device.
+</p>
+<p>
+Erase regions #0...#3 follow one after another and should cover
+the whole device. If less than 4 erase regions are needed, when those
+at the end can be left undefined.
+</p>
+<p>
+If all erase regions undefined, erase block parameters are obtained
+from Curator, otherwise Curator settings are ignored.
+</p>
+<p>
+Example: 0xD8100100 - erase command code 0xD8, block size 10^16 = 64KB,
+region size is 256 blocks of size 64KB: 16MB.
+</p></td></tr></table><br><h1><a name="SiflashEraseRegion1"></a>SiflashEraseRegion1</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0118</th>
+  <td width="60%" style='width:60%' align=left>280</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint32</td></tr><tr><td>Default</td><td colspan=2>SiflashEraseRegion1 = 0x00000000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies erase region #1 for siflash operations.
+</b></p><p>Refer to description for <a href="#SiflashEraseRegion0">SiflashEraseRegion0</a>.
+</p></td></tr></table><br><h1><a name="SiflashEraseRegion2"></a>SiflashEraseRegion2</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0119</th>
+  <td width="60%" style='width:60%' align=left>281</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint32</td></tr><tr><td>Default</td><td colspan=2>SiflashEraseRegion2 = 0x00000000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies erase region #2 for siflash operations.
+</b></p><p>Refer to description for <a href="#SiflashEraseRegion0">SiflashEraseRegion0</a>.
+</p></td></tr></table><br><h1><a name="SiflashEraseRegion3"></a>SiflashEraseRegion3</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x011a</th>
+  <td width="60%" style='width:60%' align=left>282</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint32</td></tr><tr><td>Default</td><td colspan=2>SiflashEraseRegion3 = 0x00000000
+</td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies erase region #3 for siflash operations.
+</b></p><p>Refer to description for <a href="#SiflashEraseRegion0">SiflashEraseRegion0</a>.
+</p></td></tr></table><br><h1><a name="ResetOnChargerAttach"></a>ResetOnChargerAttach</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x011b</th>
+  <td width="60%" style='width:60%' align=left>283</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>ResetOnChargerAttach = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>MIB to enable chip reset on attaching a charger.
+</b></p><p>This key, when TRUE, resets the chip when a charger is connected.
+When FALSE, the chip doesn't reset when a charger is connected.
+</p></td></tr></table><br><h1><a name="UsbTypeCCCSource"></a>UsbTypeCCCSource</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x011d</th>
+  <td width="60%" style='width:60%' align=left>285</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>UsbTypeCCCSource = 255
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>1 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>1 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>USB Type-C CC line source.
+</b></p><p>This MIB key specifies the PIO number which is connected to CC line.
+An out of range value (e.g. 0xff) means that the USB Type-C support
+does not exist.
+</p></td></tr></table><br><h1><a name="CcVoltageThresholdAt500mAMin"></a>CcVoltageThresholdAt500mAMin</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x011e</th>
+  <td width="60%" style='width:60%' align=left>286</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>CcVoltageThresholdAt500mAMin = 0x0000
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x0294 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies the minimum threshold voltage at default current.
+</b></p><p>USB Type-C specification 1.2, table 4-27, specifies multiple source current
+advertisement. Due to external resistor, voltage range of default current
+advertisement differs. This MIB key is used to specify the minimum
+threshold voltage (mV) when source advertises default current.
+</p></td></tr></table><br><h1><a name="CcVoltageThresholdAt500mAMax"></a>CcVoltageThresholdAt500mAMax</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x011f</th>
+  <td width="60%" style='width:60%' align=left>287</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>CcVoltageThresholdAt500mAMax = 0x0154
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x0294 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies the maximum threshold voltage at default current.
+</b></p><p>USB Type-C specification 1.2, table 4-27, specifies multiple source
+current advertisement. Due to external resistor, voltage range of default
+current advertisement differs. This MIB key is used to specify the maximum
+threshold voltage (mV) when source advertises default current.
+</p>
+<p>
+The default value is set considering external resistor is 100Kohm.
+The maximum value of this MIB key can be 660 (as per USB Type-C
+specification).
+</p></td></tr></table><br><h1><a name="CcVoltageThresholdAt1500mAMin"></a>CcVoltageThresholdAt1500mAMin</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0120</th>
+  <td width="60%" style='width:60%' align=left>288</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>CcVoltageThresholdAt1500mAMin = 0x0155
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x04ce </td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies the minimum threshold voltage at 1500 mA current.
+</b></p><p>USB Type-C specification 1.2, table 4-27, specifies multiple source current
+advertisement. Due to external resistor, voltage range of 1500 mA current
+advertisement differs. This MIB key is used to specify the minimum
+threshold voltage (mV) when source advertises 1500 mA current.
+</p>
+<p>
+The default value is set considering external resistor is 100Kohm.
+</p></td></tr></table><br><h1><a name="CcVoltageThresholdAt1500mAMax"></a>CcVoltageThresholdAt1500mAMax</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0121</th>
+  <td width="60%" style='width:60%' align=left>289</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>CcVoltageThresholdAt1500mAMax = 0x0276
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x04ce </td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies the maximum threshold voltage at 1500 mA current.
+</b></p><p>USB Type-C specification 1.2, table 4-27, specifies multiple source current
+advertisement. Due to external resistor, voltage range of 1500 mA current
+advertisement differs. This MIB key is used to specify the maximum
+threshold voltage (mV) when source advertises 1500 mA current.
+</p>
+<p>
+The default is set considering external resistor is 100Kohm.
+The maximum value of this MIB key can be 1230 (as per USB Type-C
+specification).
+</p></td></tr></table><br><h1><a name="CcVoltageThresholdAt3000mAMin"></a>CcVoltageThresholdAt3000mAMin</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0122</th>
+  <td width="60%" style='width:60%' align=left>290</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>CcVoltageThresholdAt3000mAMin = 0x0277
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x07f8 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies the minimum threshold voltage at 1500 mA current.
+</b></p><p>USB Type-C specification 1.2, table 4-27, specifies multiple source current
+advertisement. Due to external resistor, voltage range of 3000 mA current
+advertisement differs. This MIB key is used to specify the minimum
+threshold voltage (mV) when source advertises 3000 mA current.
+</p>
+<p>
+The default is set considering external resistor is 100Kohm.
+</p></td></tr></table><br><h1><a name="CcVoltageThresholdAt3000mAMax"></a>CcVoltageThresholdAt3000mAMax</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0123</th>
+  <td width="60%" style='width:60%' align=left>291</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>CcVoltageThresholdAt3000mAMax = 0x0415
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0x07f8 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Specifies the maximum threshold voltage at 1500 mA current.
+</b></p><p>USB Type-C specification 1.2, table 4-27, specifies multiple source current
+advertisement. Due to external resistor, voltage range of 3000 mA current
+advertisement differs. This MIB key is used to specify the maximum
+threshold voltage (mV) when source advertises 3000 mA current.
+</p>
+<p>
+The default value is set considering external resistor is 100Kohm.
+The maximum value of this MIB key can be 2040 (as per USB Type-C
+specification).
+</p></td></tr></table><br><h1><a name="IpcLeaveRecvBufferPagesMapped"></a>IpcLeaveRecvBufferPagesMapped</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0124</th>
+  <td width="60%" style='width:60%' align=left>292</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>IpcLeaveRecvBufferPagesMapped = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Leaves IPC receive buffer pages mapped in.
+</b></p><p>When this key is set to true pages no longer in use by the IPC receive
+buffer will not be freed. This means old messages are still visible to the
+debugger after they have been processed by the IPC module, making debugging
+IPC related issues easier.
+</p></td></tr></table><br><h1><a name="SDHostSlot0Pio"></a>SDHostSlot0Pio</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0125</th>
+  <td width="60%" style='width:60%' align=left>293</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>SDHostSlot0Pio = [ff ff ff]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>3 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>3 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>PIO Config for Slot 0
+</b></p><p>The PIO numbers to use for Slot 0 configuration.
+The string is defined as the pio nr for [ Card Detect, Write Protect, Card Enable ]
+Card Detect - PIO input for card detection. A value of 0xFF will ignore hot insertion and
+treat the card state as always inserted.
+Write Protect - PIO input for write protect detect. A value of 0xFF ignores the field.
+Card Enable - PIO output driven before SD operation. A value of 0xFF ignores the field.
+If the PIOs cannot be allocated the firmware will panic with ID PANIC_SD_HOST_SUBRES_FAILED.
+<a href="#SDHostSlot0">SDHostSlot0</a> should be enabled for this to take effect.
+</p></td></tr></table><br><h1><a name="SDHostSlot1Pio"></a>SDHostSlot1Pio</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0126</th>
+  <td width="60%" style='width:60%' align=left>294</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>SDHostSlot1Pio = [ff ff ff]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>3 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>3 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>PIO Config for Slot 1
+</b></p><p>The PIO numbers to use for Slot 1 configuration. A value of 0xFF ignores the field.
+The string is defined as the pio nr for [ Card Detect, Write Protect, Card Enable ]
+Card Detect - PIO input for card detection. A value of 0xFF will ignore hot insertion and
+treat the card state as always inserted.
+Write Protect - PIO input for write protect detect. A value of 0xFF ignores the field.
+Card Enable - PIO output driven before SD operation. A value of 0xFF ignores the field.
+If the PIOs cannot be allocated the firmware will panic with ID PANIC_SD_HOST_SUBRES_FAILED.
+<a href="#SDHostSlot1">SDHostSlot1</a> should be enabled for this to take effect.
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey0"></a>CustomerReadOnlyKey0</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0127</th>
+  <td width="60%" style='width:60%' align=left>295</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 0
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY0
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey1"></a>CustomerReadOnlyKey1</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0128</th>
+  <td width="60%" style='width:60%' align=left>296</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 1
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY1
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey2"></a>CustomerReadOnlyKey2</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0129</th>
+  <td width="60%" style='width:60%' align=left>297</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 2
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY2
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey3"></a>CustomerReadOnlyKey3</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x012a</th>
+  <td width="60%" style='width:60%' align=left>298</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 3
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY3
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey4"></a>CustomerReadOnlyKey4</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x012b</th>
+  <td width="60%" style='width:60%' align=left>299</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 4
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY4
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey5"></a>CustomerReadOnlyKey5</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x012c</th>
+  <td width="60%" style='width:60%' align=left>300</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 5
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY5
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey6"></a>CustomerReadOnlyKey6</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x012d</th>
+  <td width="60%" style='width:60%' align=left>301</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 6
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY6
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey7"></a>CustomerReadOnlyKey7</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x012e</th>
+  <td width="60%" style='width:60%' align=left>302</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 7
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY7
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey8"></a>CustomerReadOnlyKey8</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x012f</th>
+  <td width="60%" style='width:60%' align=left>303</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 8
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY8
+</p></td></tr></table><br><h1><a name="CustomerReadOnlyKey9"></a>CustomerReadOnlyKey9</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0130</th>
+  <td width="60%" style='width:60%' align=left>304</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>None</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>0 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>255 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>ReadOnly Customer Key 9
+</b></p><p>This key is reserved for the Customer's use. This implements read-only
+storage which the customer application can retrieve via the PsFullRetrieve
+trap as PSKEY_READONLY9
+</p></td></tr></table><br><h1><a name="StreamFilesystemEnable"></a>StreamFilesystemEnable</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0131</th>
+  <td width="60%" style='width:60%' align=left>305</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>StreamFilesystemEnable = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Enables the StreamFilesystemSource and StreamFilesystemSink traps.
+</b></p><p>When this key is set to true the StreamFilesystemSource and StreamFilesystemSink
+traps are enabled, making it possible to update the device read only config
+filesystem whilst the application subsystem is running.
+</p>
+<p>
+Since this key allows read / write access from / to filesystems that may contain
+sensitive data the key is disabled by default and must be explicitly enabled for
+use on the production line and disabled before the product is released.
+</p></td></tr></table><br><h1><a name="SDHost1BitOnlySlot0"></a>SDHost1BitOnlySlot0</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0132</th>
+  <td width="60%" style='width:60%' align=left>306</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>SDHost1BitOnlySlot0 = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Restrict SD/MMC operation to 1-bit on Slot 0
+</b></p><p>When this is set to true, the SD Host Controller will restrict Slot 0 to
+1-bit data operation. Certain package variants do not have sufficient number of pins for
+typical 4-bit SD/MMC operation. On such packages, this mib should be
+set to true, to ensure that only CMD, CLK and D0 lines are used. D1-3 will be unavailable
+</p></td></tr></table><br><h1><a name="SDHost1BitOnlySlot1"></a>SDHost1BitOnlySlot1</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0133</th>
+  <td width="60%" style='width:60%' align=left>307</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>SDHost1BitOnlySlot1 = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Restrict SD/MMC operation to 1-bit on Slot 1
+</b></p><p>When this is set to true, the SD Host Controller will restrict Slot 1 to
+1-bit data operation. Certain package variants do not have sufficient number of pins for
+typical 4-bit SD/MMC operation. On such packages, this mib should be
+set to true, to ensure that only CMD, CLK and D0 lines are used. D1-3 will be unavailable
+</p></td></tr></table><br><h1><a name="CcDefaultPollPeriod"></a>CcDefaultPollPeriod</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0134</th>
+  <td width="60%" style='width:60%' align=left>308</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>CcDefaultPollPeriod = 0x03e8
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0xffff </td></tr><tr><td colspan=3 align=left valign=top><p><b>Polling period when drawing default current.
+</b></p><p>USB Type-C specification does not require device to start drawing
+higher current once allowed to do so by the CC-line state.
+It is up to device when to do the switch.
+</p>
+<p>
+To save power default period is chosen to be 1000ms, it can be either
+increased or decreased depending on the application.
+</p>
+<p>
+Period value is in milliseconds.
+</p></td></tr></table><br><h1><a name="CcFastPollPeriod"></a>CcFastPollPeriod</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0135</th>
+  <td width="60%" style='width:60%' align=left>309</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>CcFastPollPeriod = 0x0014
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x0000 </td></tr><tr><td>Maximum</td><td colspan=2>0xffff </td></tr><tr><td colspan=3 align=left valign=top><p><b>Polling period when drawing 1.5A/3.0A current.
+</b></p><p>USB Type-C specification Table 4-20: tSinkAdj max time is 60 msec.
+</p>
+<p>
+If device is drawing 1.5A/3.0A, it has to react within 60ms to any
+change in the state of CC-line by adjusting the current drawn from VBUS.
+</p>
+<p>
+ADC unit is used to measure voltage level on CC-line. The measurement
+can take up to 4ms and can be delayd if there is another ADC measurement
+in progress. Default value is chosen to be 20ms to leave some room for
+delays.
+</p>
+<p>
+Period value is in milliseconds.
+</p></td></tr></table><br><h1><a name="PsAesKey"></a>PsAesKey</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0136</th>
+  <td width="60%" style='width:60%' align=left>310</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>octet_string</td></tr><tr><td>Default</td><td colspan=2>PsAesKey = [00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum string length</td><td colspan=2>16 octets</td></tr><tr><td>Maximum string length</td><td colspan=2>16 octets</td></tr><tr><td colspan=3 align=left valign=top><p><b>Cryptographic key for user PS store encryption
+</b></p><p>This is the key used to encrypt Audio and Apps P1 PS keys. It is represented as
+an octet string where the first octet represents the MSB of a 128bit key.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_ps_aes_key</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_ps_aes_key</td><td>Global function</td></tr></td></tr></table><br><h1><a name="UartFlowCtrlEnable"></a>UartFlowCtrlEnable</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0138</th>
+  <td width="60%" style='width:60%' align=left>312</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>UartFlowCtrlEnable = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Enables or disables the UART RTS/CTS flow control
+</b></p><p>Set to true to enable UART RTS/CTS flow control. This requires the app to also
+set two more PIOs to UART_RTS and UART_CTS. Set to false to disable UART RTS/CTS
+flow control.
+</p><tr>
+ <th colspan=3 align=left valign=top>Access Functions</th>
+</tr>
+<tr><td>get function</td><td>mibgetfn_uart_flow_ctrl_enable</td><td>Global function</td></tr><tr><td>set function</td><td>mibsetfn_uart_flow_ctrl_enable</td><td>Global function</td></tr></td></tr></table><br><h1><a name="UsbTypeCMaxCurrent"></a>UsbTypeCMaxCurrent</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0139</th>
+  <td width="60%" style='width:60%' align=left>313</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>uint16</td></tr><tr><td>Default</td><td colspan=2>UsbTypeCMaxCurrent = 0x0708
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+<tr><td>Minimum</td><td colspan=2>0x01f4 </td></tr><tr><td>Maximum</td><td colspan=2>0x0bb8 </td></tr><tr><td colspan=3 align=left valign=top><p><b>Maximum current that device can draw from VBUS as allowed
+by USB Type-C specification.
+</b></p><p>The maximum current value in 1 mA units.
+It is used to populate dwMaxOperatingPower and dwMaxPeakPower fields in
+PD Consumer Port Capability POS Descriptor (USB PD 3.0 spec, section 9.2.3.),
+the same value is used for both fields. The value specified here is not
+used to limit the current, the current drawn from USB is configured
+in the application.
+</p></td></tr></table><br><h1><a name="ReserveP1TcmForData"></a>ReserveP1TcmForData</h1>
+<table width="100%" border="1" bordercolor="black" cellspacing="0" cellpadding="5">
+ <tr align=center valign=top>
+  <td width="20%" style='width:20%' align=left>Number (psid)</th>
+  <td width="20%" style='width:20%' align=left>0x0140</th>
+  <td width="60%" style='width:60%' align=left>320</th>
+ </tr>
+<tr><td>Type</td><td colspan=2>boolean</td></tr><tr><td>Default</td><td colspan=2>ReserveP1TcmForData = false
+</td></tr><tr>
+ <th colspan=3 align=left valign=top>Allowed Values</th>
+</tr>
+ <tr>
+  <th align=left>Defined name</th>
+  <th align=left>Value</th>
+  <th align=left>Description</th>
+ </tr>
+<tr><td align=left>false
+</td><td align=left>0
+</td><td></td></tr><tr><td align=left>true
+</td><td align=left>1
+</td><td></td></tr><tr><td colspan=3 align=left valign=top><p><b>Specify whether the TCM (Tightly Coupled Memory) on the customer processor is reserved
+for customer data or to accelerate code.
+</b></p><p>The P1 application processor includes a TCM (Tightly coupled memory)
+which reduces the time penalty for instruction fetches for the
+hydra_os library.
+Allowing P1 program code to use TCM ensures applications respond
+as quickly as possible thus keeping power consumption to a minimum.
+This MIB key allows a user to specify that P1 TCM should be used
+only for data, which may impact performance in some applications.
+</p></td></tr></table><br><h2><a name="permuted_index">Permuted Index</a></h2>
+<p> <a href="#permuted_index_digits">0-9</a>
+ <a href="#permuted_index_A">A</a>
+ <a href="#permuted_index_B">B</a>
+ <a href="#permuted_index_C">C</a>
+ <a href="#permuted_index_D">D</a>
+ <a href="#permuted_index_E">E</a>
+ <a href="#permuted_index_F">F</a>
+ G
+ <a href="#permuted_index_H">H</a>
+ <a href="#permuted_index_I">I</a>
+ J
+ <a href="#permuted_index_K">K</a>
+ <a href="#permuted_index_L">L</a>
+ <a href="#permuted_index_M">M</a>
+ <a href="#permuted_index_N">N</a>
+ <a href="#permuted_index_O">O</a>
+ <a href="#permuted_index_P">P</a>
+ <a href="#permuted_index_Q">Q</a>
+ <a href="#permuted_index_R">R</a>
+ <a href="#permuted_index_S">S</a>
+ <a href="#permuted_index_T">T</a>
+ <a href="#permuted_index_U">U</a>
+ <a href="#permuted_index_V">V</a>
+ <a href="#permuted_index_W">W</a>
+ <a href="#permuted_index_X">X</a>
+ Y
+ Z
+</p>
+<table class="unboxed" border="0">
+ <tr>
+  <th colspan=3>
+   <a name="permuted_index_digits">0-9</a>
+  </th>
+ </tr>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey0">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey0">0</a>
+ </td>
+<td>0x0127</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot0Pio">SDHostSlot</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot0Pio">0Pio</a>
+ </td>
+<td>0x0125</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot0">SDHost1BitOnlySlot</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot0">0</a>
+ </td>
+<td>0x0132</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot0">SDHostSlot</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot0">0</a>
+ </td>
+<td>0x0014</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion0">SiflashEraseRegion</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion0">0</a>
+ </td>
+<td>0x0117</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot0">SDHost</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot0">1BitOnlySlot0</a>
+ </td>
+<td>0x0132</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot1">SDHost</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot1">1BitOnlySlot1</a>
+ </td>
+<td>0x0133</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey1">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey1">1</a>
+ </td>
+<td>0x0128</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot1Pio">SDHostSlot</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot1Pio">1Pio</a>
+ </td>
+<td>0x0126</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot1">SDHost1BitOnlySlot</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot1">1</a>
+ </td>
+<td>0x0133</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot1">SDHostSlot</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot1">1</a>
+ </td>
+<td>0x0015</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion1">SiflashEraseRegion</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion1">1</a>
+ </td>
+<td>0x0118</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey2">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey2">2</a>
+ </td>
+<td>0x0129</td>
+<tr>
+ <td align=right>
+  <a href="#NfcAgcControl2">NfcAgcControl</a>
+ </td>
+ <td>
+  <a href="#NfcAgcControl2">2</a>
+ </td>
+<td>0x010a</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion2">SiflashEraseRegion</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion2">2</a>
+ </td>
+<td>0x0119</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey3">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey3">3</a>
+ </td>
+<td>0x012a</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion3">SiflashEraseRegion</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion3">3</a>
+ </td>
+<td>0x011a</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey4">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey4">4</a>
+ </td>
+<td>0x012b</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey5">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey5">5</a>
+ </td>
+<td>0x012c</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey6">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey6">6</a>
+ </td>
+<td>0x012d</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey7">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey7">7</a>
+ </td>
+<td>0x012e</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey8">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey8">8</a>
+ </td>
+<td>0x012f</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey9">CustomerReadOnlyKey</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey9">9</a>
+ </td>
+<td>0x0130</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMax">CcVoltageThresholdAt</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMax">500mAMax</a>
+ </td>
+<td>0x011f</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMin">CcVoltageThresholdAt</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMin">500mAMin</a>
+ </td>
+<td>0x011e</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMax">CcVoltageThresholdAt</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMax">1500mAMax</a>
+ </td>
+<td>0x0121</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMin">CcVoltageThresholdAt</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMin">1500mAMin</a>
+ </td>
+<td>0x0120</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMax">CcVoltageThresholdAt</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMax">3000mAMax</a>
+ </td>
+<td>0x0123</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMin">CcVoltageThresholdAt</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMin">3000mAMin</a>
+ </td>
+<td>0x0122</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_A">A</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMax">CcVoltageThresholdAt500m</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMax">AMax</a>
+ </td>
+<td>0x011f</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMax">CcVoltageThresholdAt1500m</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMax">AMax</a>
+ </td>
+<td>0x0121</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMax">CcVoltageThresholdAt3000m</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMax">AMax</a>
+ </td>
+<td>0x0123</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMin">CcVoltageThresholdAt500m</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMin">AMin</a>
+ </td>
+<td>0x011e</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMin">CcVoltageThresholdAt1500m</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMin">AMin</a>
+ </td>
+<td>0x0120</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMin">CcVoltageThresholdAt3000m</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMin">AMin</a>
+ </td>
+<td>0x0122</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#AdcReadDelay">AdcReadDelay</a>
+  </td>
+  <td>0x0110</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#AdcTemperatureAddition">AdcTemperatureAddition</a>
+  </td>
+  <td>0x010c</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#AdcTemperatureMultiplier">AdcTemperatureMultiplier</a>
+  </td>
+  <td>0x010b</td>
+<tr>
+ <td align=right>
+  <a href="#AdcTemperatureAddition">AdcTemperature</a>
+ </td>
+ <td>
+  <a href="#AdcTemperatureAddition">Addition</a>
+ </td>
+<td>0x010c</td>
+<tr>
+ <td align=right>
+  <a href="#PsAesKey">Ps</a>
+ </td>
+ <td>
+  <a href="#PsAesKey">AesKey</a>
+ </td>
+<td>0x0136</td>
+<tr>
+ <td align=right>
+  <a href="#NfcAgcControl2">Nfc</a>
+ </td>
+ <td>
+  <a href="#NfcAgcControl2">AgcControl2</a>
+ </td>
+<td>0x010a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#AppsP1InactiveTimer">AppsP1InactiveTimer</a>
+  </td>
+  <td>0x00fd</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMax">CcVoltageThreshold</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMax">At500mAMax</a>
+ </td>
+<td>0x011f</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMin">CcVoltageThreshold</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMin">At500mAMin</a>
+ </td>
+<td>0x011e</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMax">CcVoltageThreshold</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMax">At1500mAMax</a>
+ </td>
+<td>0x0121</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMin">CcVoltageThreshold</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMin">At1500mAMin</a>
+ </td>
+<td>0x0120</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMax">CcVoltageThreshold</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMax">At3000mAMax</a>
+ </td>
+<td>0x0123</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMin">CcVoltageThreshold</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMin">At3000mAMin</a>
+ </td>
+<td>0x0122</td>
+<tr>
+ <td align=right>
+  <a href="#ResetOnChargerAttach">ResetOnCharger</a>
+ </td>
+ <td>
+  <a href="#ResetOnChargerAttach">Attach</a>
+ </td>
+<td>0x011b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#AuthenticateROFS">AuthenticateROFS</a>
+  </td>
+  <td>0x0113</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_B">B</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot0">SDHost1</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot0">BitOnlySlot0</a>
+ </td>
+<td>0x0132</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot1">SDHost1</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot1">BitOnlySlot1</a>
+ </td>
+<td>0x0133</td>
+<tr>
+ <td align=right>
+  <a href="#IpcLeaveRecvBufferPagesMapped">IpcLeaveRecv</a>
+ </td>
+ <td>
+  <a href="#IpcLeaveRecvBufferPagesMapped">BufferPagesMapped</a>
+ </td>
+<td>0x0124</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_C">C</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#UsbTypeCMaxCurrent">UsbType</a>
+ </td>
+ <td>
+  <a href="#UsbTypeCMaxCurrent">CMaxCurrent</a>
+ </td>
+<td>0x0139</td>
+<tr>
+ <td align=right>
+  <a href="#I2CPios">I2</a>
+ </td>
+ <td>
+  <a href="#I2CPios">CPios</a>
+ </td>
+<td>0x00fa</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CcDefaultPollPeriod">CcDefaultPollPeriod</a>
+  </td>
+  <td>0x0134</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CcFastPollPeriod">CcFastPollPeriod</a>
+  </td>
+  <td>0x0135</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CcVoltageThresholdAt500mAMax">CcVoltageThresholdAt500mAMax</a>
+  </td>
+  <td>0x011f</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CcVoltageThresholdAt500mAMin">CcVoltageThresholdAt500mAMin</a>
+  </td>
+  <td>0x011e</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CcVoltageThresholdAt1500mAMax">CcVoltageThresholdAt1500mAMax</a>
+  </td>
+  <td>0x0121</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CcVoltageThresholdAt1500mAMin">CcVoltageThresholdAt1500mAMin</a>
+  </td>
+  <td>0x0120</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CcVoltageThresholdAt3000mAMax">CcVoltageThresholdAt3000mAMax</a>
+  </td>
+  <td>0x0123</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CcVoltageThresholdAt3000mAMin">CcVoltageThresholdAt3000mAMin</a>
+  </td>
+  <td>0x0122</td>
+<tr>
+ <td align=right>
+  <a href="#UsbTypeCCCSource">UsbType</a>
+ </td>
+ <td>
+  <a href="#UsbTypeCCCSource">CCCSource</a>
+ </td>
+<td>0x011d</td>
+<tr>
+ <td align=right>
+  <a href="#ResetOnChargerAttach">ResetOn</a>
+ </td>
+ <td>
+  <a href="#ResetOnChargerAttach">ChargerAttach</a>
+ </td>
+<td>0x011b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ChargerMaximumCurrentFast">ChargerMaximumCurrentFast</a>
+  </td>
+  <td>0x0106</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ChargerMaximumCurrentPre">ChargerMaximumCurrentPre</a>
+  </td>
+  <td>0x0105</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ChargerMaximumCurrentTrickle">ChargerMaximumCurrentTrickle</a>
+  </td>
+  <td>0x0104</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ChargerMaximumVoltage">ChargerMaximumVoltage</a>
+  </td>
+  <td>0x0107</td>
+<tr>
+ <td align=right>
+  <a href="#USBDeviceClassCodes">USBDevice</a>
+ </td>
+ <td>
+  <a href="#USBDeviceClassCodes">ClassCodes</a>
+ </td>
+<td>0x0010</td>
+<tr>
+ <td align=right>
+  <a href="#USBDeviceClassCodes">USBDeviceClass</a>
+ </td>
+ <td>
+  <a href="#USBDeviceClassCodes">Codes</a>
+ </td>
+<td>0x0010</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashSuspendResumeCommands">SiflashSuspendResume</a>
+ </td>
+ <td>
+  <a href="#SiflashSuspendResumeCommands">Commands</a>
+ </td>
+<td>0x0115</td>
+<tr>
+ <td align=right>
+  <a href="#NfcQuantConfig">NfcQuant</a>
+ </td>
+ <td>
+  <a href="#NfcQuantConfig">Config</a>
+ </td>
+<td>0x0109</td>
+<tr>
+ <td align=right>
+  <a href="#USBConfigString">USB</a>
+ </td>
+ <td>
+  <a href="#USBConfigString">ConfigString</a>
+ </td>
+<td>0x000a</td>
+<tr>
+ <td align=right>
+  <a href="#NfcAgcControl2">NfcAgc</a>
+ </td>
+ <td>
+  <a href="#NfcAgcControl2">Control2</a>
+ </td>
+<td>0x010a</td>
+<tr>
+ <td align=right>
+  <a href="#NfcTxControlModulationDepth">NfcTx</a>
+ </td>
+ <td>
+  <a href="#NfcTxControlModulationDepth">ControlModulationDepth</a>
+ </td>
+<td>0x0108</td>
+<tr>
+ <td align=right>
+  <a href="#XtalTemperatureDACConversion">XtalTemperatureDAC</a>
+ </td>
+ <td>
+  <a href="#XtalTemperatureDACConversion">Conversion</a>
+ </td>
+<td>0x010e</td>
+<tr>
+ <td align=right>
+  <a href="#UartFlowCtrlEnable">UartFlow</a>
+ </td>
+ <td>
+  <a href="#UartFlowCtrlEnable">CtrlEnable</a>
+ </td>
+<td>0x0138</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumCurrentFast">ChargerMaximum</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumCurrentFast">CurrentFast</a>
+ </td>
+<td>0x0106</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumCurrentPre">ChargerMaximum</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumCurrentPre">CurrentPre</a>
+ </td>
+<td>0x0105</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumCurrentTrickle">ChargerMaximum</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumCurrentTrickle">CurrentTrickle</a>
+ </td>
+<td>0x0104</td>
+<tr>
+ <td align=right>
+  <a href="#UsbTypeCMaxCurrent">UsbTypeCMax</a>
+ </td>
+ <td>
+  <a href="#UsbTypeCMaxCurrent">Current</a>
+ </td>
+<td>0x0139</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey0">CustomerReadOnlyKey0</a>
+  </td>
+  <td>0x0127</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey1">CustomerReadOnlyKey1</a>
+  </td>
+  <td>0x0128</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey2">CustomerReadOnlyKey2</a>
+  </td>
+  <td>0x0129</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey3">CustomerReadOnlyKey3</a>
+  </td>
+  <td>0x012a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey4">CustomerReadOnlyKey4</a>
+  </td>
+  <td>0x012b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey5">CustomerReadOnlyKey5</a>
+  </td>
+  <td>0x012c</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey6">CustomerReadOnlyKey6</a>
+  </td>
+  <td>0x012d</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey7">CustomerReadOnlyKey7</a>
+  </td>
+  <td>0x012e</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey8">CustomerReadOnlyKey8</a>
+  </td>
+  <td>0x012f</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#CustomerReadOnlyKey9">CustomerReadOnlyKey9</a>
+  </td>
+  <td>0x0130</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_D">D</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#XtalTemperatureDACConversion">XtalTemperature</a>
+ </td>
+ <td>
+  <a href="#XtalTemperatureDACConversion">DACConversion</a>
+ </td>
+<td>0x010e</td>
+<tr>
+ <td align=right>
+  <a href="#ReserveP1TcmForData">ReserveP1TcmFor</a>
+ </td>
+ <td>
+  <a href="#ReserveP1TcmForData">Data</a>
+ </td>
+<td>0x0140</td>
+<tr>
+ <td align=right>
+  <a href="#CcDefaultPollPeriod">Cc</a>
+ </td>
+ <td>
+  <a href="#CcDefaultPollPeriod">DefaultPollPeriod</a>
+ </td>
+<td>0x0134</td>
+<tr>
+ <td align=right>
+  <a href="#AdcReadDelay">AdcRead</a>
+ </td>
+ <td>
+  <a href="#AdcReadDelay">Delay</a>
+ </td>
+<td>0x0110</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashResumeToSuspendDelay">SiflashResumeToSuspend</a>
+ </td>
+ <td>
+  <a href="#SiflashResumeToSuspendDelay">Delay</a>
+ </td>
+<td>0x0114</td>
+<tr>
+ <td align=right>
+  <a href="#NfcTxControlModulationDepth">NfcTxControlModulation</a>
+ </td>
+ <td>
+  <a href="#NfcTxControlModulationDepth">Depth</a>
+ </td>
+<td>0x0108</td>
+<tr>
+ <td align=right>
+  <a href="#USBDeviceClassCodes">USB</a>
+ </td>
+ <td>
+  <a href="#USBDeviceClassCodes">DeviceClassCodes</a>
+ </td>
+<td>0x0010</td>
+<tr>
+ <td align=right>
+  <a href="#USBBCDDevice">USBBCD</a>
+ </td>
+ <td>
+  <a href="#USBBCDDevice">Device</a>
+ </td>
+<td>0x000e</td>
+<tr>
+ <td align=right>
+  <a href="#USBRemoteWakeDisable">USBRemoteWake</a>
+ </td>
+ <td>
+  <a href="#USBRemoteWakeDisable">Disable</a>
+ </td>
+<td>0x0013</td>
+<tr>
+ <td align=right>
+  <a href="#RampDownTemperature">Ramp</a>
+ </td>
+ <td>
+  <a href="#RampDownTemperature">DownTemperature</a>
+ </td>
+<td>0x0102</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_E">E</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#StreamFilesystemEnable">StreamFilesystem</a>
+ </td>
+ <td>
+  <a href="#StreamFilesystemEnable">Enable</a>
+ </td>
+<td>0x0131</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#EnableTRBLog">EnableTRBLog</a>
+  </td>
+  <td>0x0112</td>
+<tr>
+ <td align=right>
+  <a href="#UartFlowCtrlEnable">UartFlowCtrl</a>
+ </td>
+ <td>
+  <a href="#UartFlowCtrlEnable">Enable</a>
+ </td>
+<td>0x0138</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion0">Siflash</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion0">EraseRegion0</a>
+ </td>
+<td>0x0117</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion1">Siflash</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion1">EraseRegion1</a>
+ </td>
+<td>0x0118</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion2">Siflash</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion2">EraseRegion2</a>
+ </td>
+<td>0x0119</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion3">Siflash</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion3">EraseRegion3</a>
+ </td>
+<td>0x011a</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_F">F</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumCurrentFast">ChargerMaximumCurrent</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumCurrentFast">Fast</a>
+ </td>
+<td>0x0106</td>
+<tr>
+ <td align=right>
+  <a href="#CcFastPollPeriod">Cc</a>
+ </td>
+ <td>
+  <a href="#CcFastPollPeriod">FastPollPeriod</a>
+ </td>
+<td>0x0135</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#FeatureLicenseKey">FeatureLicenseKey</a>
+  </td>
+  <td>0x00fb</td>
+<tr>
+ <td align=right>
+  <a href="#StreamFilesystemEnable">Stream</a>
+ </td>
+ <td>
+  <a href="#StreamFilesystemEnable">FilesystemEnable</a>
+ </td>
+<td>0x0131</td>
+<tr>
+ <td align=right>
+  <a href="#UartFlowCtrlEnable">Uart</a>
+ </td>
+ <td>
+  <a href="#UartFlowCtrlEnable">FlowCtrlEnable</a>
+ </td>
+<td>0x0138</td>
+<tr>
+ <td align=right>
+  <a href="#ReserveP1TcmForData">ReserveP1Tcm</a>
+ </td>
+ <td>
+  <a href="#ReserveP1TcmForData">ForData</a>
+ </td>
+<td>0x0140</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_H">H</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot0">SD</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot0">Host1BitOnlySlot0</a>
+ </td>
+<td>0x0132</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot1">SD</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot1">Host1BitOnlySlot1</a>
+ </td>
+<td>0x0133</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot0Pio">SD</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot0Pio">HostSlot0Pio</a>
+ </td>
+<td>0x0125</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot0">SD</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot0">HostSlot0</a>
+ </td>
+<td>0x0014</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot1Pio">SD</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot1Pio">HostSlot1Pio</a>
+ </td>
+<td>0x0126</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot1">SD</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot1">HostSlot1</a>
+ </td>
+<td>0x0015</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_I">I</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#I2CPios">I2CPios</a>
+  </td>
+  <td>0x00fa</td>
+<tr>
+ <td align=right>
+  <a href="#USBLangID">USBLang</a>
+ </td>
+ <td>
+  <a href="#USBLangID">ID</a>
+ </td>
+<td>0x000f</td>
+<tr>
+ <td align=right>
+  <a href="#USBProductID">USBProduct</a>
+ </td>
+ <td>
+  <a href="#USBProductID">ID</a>
+ </td>
+<td>0x000d</td>
+<tr>
+ <td align=right>
+  <a href="#USBVendorID">USBVendor</a>
+ </td>
+ <td>
+  <a href="#USBVendorID">ID</a>
+ </td>
+<td>0x000c</td>
+<tr>
+ <td align=right>
+  <a href="#AppsP1InactiveTimer">AppsP1</a>
+ </td>
+ <td>
+  <a href="#AppsP1InactiveTimer">InactiveTimer</a>
+ </td>
+<td>0x00fd</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#InitialLogLevels">InitialLogLevels</a>
+  </td>
+  <td>0x0111</td>
+<tr>
+ <td align=right>
+  <a href="#StubInt">Stub</a>
+ </td>
+ <td>
+  <a href="#StubInt">Int</a>
+ </td>
+<td>0x0001</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#IpcLeaveRecvBufferPagesMapped">IpcLeaveRecvBufferPagesMapped</a>
+  </td>
+  <td>0x0124</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_K">K</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey0">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey0">Key0</a>
+ </td>
+<td>0x0127</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey1">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey1">Key1</a>
+ </td>
+<td>0x0128</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey2">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey2">Key2</a>
+ </td>
+<td>0x0129</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey3">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey3">Key3</a>
+ </td>
+<td>0x012a</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey4">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey4">Key4</a>
+ </td>
+<td>0x012b</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey5">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey5">Key5</a>
+ </td>
+<td>0x012c</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey6">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey6">Key6</a>
+ </td>
+<td>0x012d</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey7">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey7">Key7</a>
+ </td>
+<td>0x012e</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey8">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey8">Key8</a>
+ </td>
+<td>0x012f</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey9">CustomerReadOnly</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey9">Key9</a>
+ </td>
+<td>0x0130</td>
+<tr>
+ <td align=right>
+  <a href="#FeatureLicenseKey">FeatureLicense</a>
+ </td>
+ <td>
+  <a href="#FeatureLicenseKey">Key</a>
+ </td>
+<td>0x00fb</td>
+<tr>
+ <td align=right>
+  <a href="#PsAesKey">PsAes</a>
+ </td>
+ <td>
+  <a href="#PsAesKey">Key</a>
+ </td>
+<td>0x0136</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_L">L</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#USBLangID">USB</a>
+ </td>
+ <td>
+  <a href="#USBLangID">LangID</a>
+ </td>
+<td>0x000f</td>
+<tr>
+ <td align=right>
+  <a href="#IpcLeaveRecvBufferPagesMapped">Ipc</a>
+ </td>
+ <td>
+  <a href="#IpcLeaveRecvBufferPagesMapped">LeaveRecvBufferPagesMapped</a>
+ </td>
+<td>0x0124</td>
+<tr>
+ <td align=right>
+  <a href="#InitialLogLevels">InitialLog</a>
+ </td>
+ <td>
+  <a href="#InitialLogLevels">Levels</a>
+ </td>
+<td>0x0111</td>
+<tr>
+ <td align=right>
+  <a href="#FeatureLicenseKey">Feature</a>
+ </td>
+ <td>
+  <a href="#FeatureLicenseKey">LicenseKey</a>
+ </td>
+<td>0x00fb</td>
+<tr>
+ <td align=right>
+  <a href="#EnableTRBLog">EnableTRB</a>
+ </td>
+ <td>
+  <a href="#EnableTRBLog">Log</a>
+ </td>
+<td>0x0112</td>
+<tr>
+ <td align=right>
+  <a href="#InitialLogLevels">Initial</a>
+ </td>
+ <td>
+  <a href="#InitialLogLevels">LogLevels</a>
+ </td>
+<td>0x0111</td>
+<tr>
+ <td align=right>
+  <a href="#ThermalShutdownLongPeriod">ThermalShutdown</a>
+ </td>
+ <td>
+  <a href="#ThermalShutdownLongPeriod">LongPeriod</a>
+ </td>
+<td>0x0100</td>
+<tr>
+ <td align=right>
+  <a href="#XtalTemperatureLookupTable">XtalTemperature</a>
+ </td>
+ <td>
+  <a href="#XtalTemperatureLookupTable">LookupTable</a>
+ </td>
+<td>0x010d</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_M">M</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#USBManufString">USB</a>
+ </td>
+ <td>
+  <a href="#USBManufString">ManufString</a>
+ </td>
+<td>0x0007</td>
+<tr>
+ <td align=right>
+  <a href="#IpcLeaveRecvBufferPagesMapped">IpcLeaveRecvBufferPages</a>
+ </td>
+ <td>
+  <a href="#IpcLeaveRecvBufferPagesMapped">Mapped</a>
+ </td>
+<td>0x0124</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMax">CcVoltageThresholdAt500mA</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMax">Max</a>
+ </td>
+<td>0x011f</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMax">CcVoltageThresholdAt1500mA</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMax">Max</a>
+ </td>
+<td>0x0121</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMax">CcVoltageThresholdAt3000mA</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMax">Max</a>
+ </td>
+<td>0x0123</td>
+<tr>
+ <td align=right>
+  <a href="#UsbTypeCMaxCurrent">UsbTypeC</a>
+ </td>
+ <td>
+  <a href="#UsbTypeCMaxCurrent">MaxCurrent</a>
+ </td>
+<td>0x0139</td>
+<tr>
+ <td align=right>
+  <a href="#USBMaxPower">USB</a>
+ </td>
+ <td>
+  <a href="#USBMaxPower">MaxPower</a>
+ </td>
+<td>0x0011</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumCurrentFast">Charger</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumCurrentFast">MaximumCurrentFast</a>
+ </td>
+<td>0x0106</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumCurrentPre">Charger</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumCurrentPre">MaximumCurrentPre</a>
+ </td>
+<td>0x0105</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumCurrentTrickle">Charger</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumCurrentTrickle">MaximumCurrentTrickle</a>
+ </td>
+<td>0x0104</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumVoltage">Charger</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumVoltage">MaximumVoltage</a>
+ </td>
+<td>0x0107</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMin">CcVoltageThresholdAt500mA</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMin">Min</a>
+ </td>
+<td>0x011e</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMin">CcVoltageThresholdAt1500mA</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMin">Min</a>
+ </td>
+<td>0x0120</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMin">CcVoltageThresholdAt3000mA</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMin">Min</a>
+ </td>
+<td>0x0122</td>
+<tr>
+ <td align=right>
+  <a href="#NfcTxControlModulationDepth">NfcTxControl</a>
+ </td>
+ <td>
+  <a href="#NfcTxControlModulationDepth">ModulationDepth</a>
+ </td>
+<td>0x0108</td>
+<tr>
+ <td align=right>
+  <a href="#AdcTemperatureMultiplier">AdcTemperature</a>
+ </td>
+ <td>
+  <a href="#AdcTemperatureMultiplier">Multiplier</a>
+ </td>
+<td>0x010b</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_N">N</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#NfcAgcControl2">NfcAgcControl2</a>
+  </td>
+  <td>0x010a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#NfcQuantConfig">NfcQuantConfig</a>
+  </td>
+  <td>0x0109</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#NfcTxControlModulationDepth">NfcTxControlModulationDepth</a>
+  </td>
+  <td>0x0108</td>
+<tr>
+ <td align=right>
+  <a href="#USBSerialNumberString">USBSerial</a>
+ </td>
+ <td>
+  <a href="#USBSerialNumberString">NumberString</a>
+ </td>
+<td>0x0009</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_O">O</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#ResetOnChargerAttach">Reset</a>
+ </td>
+ <td>
+  <a href="#ResetOnChargerAttach">OnChargerAttach</a>
+ </td>
+<td>0x011b</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey0">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey0">OnlyKey0</a>
+ </td>
+<td>0x0127</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey1">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey1">OnlyKey1</a>
+ </td>
+<td>0x0128</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey2">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey2">OnlyKey2</a>
+ </td>
+<td>0x0129</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey3">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey3">OnlyKey3</a>
+ </td>
+<td>0x012a</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey4">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey4">OnlyKey4</a>
+ </td>
+<td>0x012b</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey5">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey5">OnlyKey5</a>
+ </td>
+<td>0x012c</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey6">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey6">OnlyKey6</a>
+ </td>
+<td>0x012d</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey7">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey7">OnlyKey7</a>
+ </td>
+<td>0x012e</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey8">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey8">OnlyKey8</a>
+ </td>
+<td>0x012f</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey9">CustomerRead</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey9">OnlyKey9</a>
+ </td>
+<td>0x0130</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot0">SDHost1Bit</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot0">OnlySlot0</a>
+ </td>
+<td>0x0132</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot1">SDHost1Bit</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot1">OnlySlot1</a>
+ </td>
+<td>0x0133</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_P">P</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#AppsP1InactiveTimer">Apps</a>
+ </td>
+ <td>
+  <a href="#AppsP1InactiveTimer">P1InactiveTimer</a>
+ </td>
+<td>0x00fd</td>
+<tr>
+ <td align=right>
+  <a href="#ReserveP1TcmForData">Reserve</a>
+ </td>
+ <td>
+  <a href="#ReserveP1TcmForData">P1TcmForData</a>
+ </td>
+<td>0x0140</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashPageSize">Siflash</a>
+ </td>
+ <td>
+  <a href="#SiflashPageSize">PageSize</a>
+ </td>
+<td>0x0116</td>
+<tr>
+ <td align=right>
+  <a href="#IpcLeaveRecvBufferPagesMapped">IpcLeaveRecvBuffer</a>
+ </td>
+ <td>
+  <a href="#IpcLeaveRecvBufferPagesMapped">PagesMapped</a>
+ </td>
+<td>0x0124</td>
+<tr>
+ <td align=right>
+  <a href="#CcDefaultPollPeriod">CcDefaultPoll</a>
+ </td>
+ <td>
+  <a href="#CcDefaultPollPeriod">Period</a>
+ </td>
+<td>0x0134</td>
+<tr>
+ <td align=right>
+  <a href="#CcFastPollPeriod">CcFastPoll</a>
+ </td>
+ <td>
+  <a href="#CcFastPollPeriod">Period</a>
+ </td>
+<td>0x0135</td>
+<tr>
+ <td align=right>
+  <a href="#ThermalShutdownPeriod">ThermalShutdown</a>
+ </td>
+ <td>
+  <a href="#ThermalShutdownPeriod">Period</a>
+ </td>
+<td>0x00ff</td>
+<tr>
+ <td align=right>
+  <a href="#ThermalShutdownLongPeriod">ThermalShutdownLong</a>
+ </td>
+ <td>
+  <a href="#ThermalShutdownLongPeriod">Period</a>
+ </td>
+<td>0x0100</td>
+<tr>
+ <td align=right>
+  <a href="#XtalTemperaturePeriod">XtalTemperature</a>
+ </td>
+ <td>
+  <a href="#XtalTemperaturePeriod">Period</a>
+ </td>
+<td>0x010f</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot0Pio">SDHostSlot0</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot0Pio">Pio</a>
+ </td>
+<td>0x0125</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot1Pio">SDHostSlot1</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot1Pio">Pio</a>
+ </td>
+<td>0x0126</td>
+<tr>
+ <td align=right>
+  <a href="#I2CPios">I2C</a>
+ </td>
+ <td>
+  <a href="#I2CPios">Pios</a>
+ </td>
+<td>0x00fa</td>
+<tr>
+ <td align=right>
+  <a href="#CcDefaultPollPeriod">CcDefault</a>
+ </td>
+ <td>
+  <a href="#CcDefaultPollPeriod">PollPeriod</a>
+ </td>
+<td>0x0134</td>
+<tr>
+ <td align=right>
+  <a href="#CcFastPollPeriod">CcFast</a>
+ </td>
+ <td>
+  <a href="#CcFastPollPeriod">PollPeriod</a>
+ </td>
+<td>0x0135</td>
+<tr>
+ <td align=right>
+  <a href="#USBMaxPower">USBMax</a>
+ </td>
+ <td>
+  <a href="#USBMaxPower">Power</a>
+ </td>
+<td>0x0011</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumCurrentPre">ChargerMaximumCurrent</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumCurrentPre">Pre</a>
+ </td>
+<td>0x0105</td>
+<tr>
+ <td align=right>
+  <a href="#USBProductID">USB</a>
+ </td>
+ <td>
+  <a href="#USBProductID">ProductID</a>
+ </td>
+<td>0x000d</td>
+<tr>
+ <td align=right>
+  <a href="#USBProductString">USB</a>
+ </td>
+ <td>
+  <a href="#USBProductString">ProductString</a>
+ </td>
+<td>0x0008</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#PsAesKey">PsAesKey</a>
+  </td>
+  <td>0x0136</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_Q">Q</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#NfcQuantConfig">Nfc</a>
+ </td>
+ <td>
+  <a href="#NfcQuantConfig">QuantConfig</a>
+ </td>
+<td>0x0109</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_R">R</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#RampDownTemperature">RampDownTemperature</a>
+  </td>
+  <td>0x0102</td>
+<tr>
+ <td align=right>
+  <a href="#AdcReadDelay">Adc</a>
+ </td>
+ <td>
+  <a href="#AdcReadDelay">ReadDelay</a>
+ </td>
+<td>0x0110</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey0">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey0">ReadOnlyKey0</a>
+ </td>
+<td>0x0127</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey1">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey1">ReadOnlyKey1</a>
+ </td>
+<td>0x0128</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey2">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey2">ReadOnlyKey2</a>
+ </td>
+<td>0x0129</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey3">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey3">ReadOnlyKey3</a>
+ </td>
+<td>0x012a</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey4">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey4">ReadOnlyKey4</a>
+ </td>
+<td>0x012b</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey5">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey5">ReadOnlyKey5</a>
+ </td>
+<td>0x012c</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey6">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey6">ReadOnlyKey6</a>
+ </td>
+<td>0x012d</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey7">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey7">ReadOnlyKey7</a>
+ </td>
+<td>0x012e</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey8">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey8">ReadOnlyKey8</a>
+ </td>
+<td>0x012f</td>
+<tr>
+ <td align=right>
+  <a href="#CustomerReadOnlyKey9">Customer</a>
+ </td>
+ <td>
+  <a href="#CustomerReadOnlyKey9">ReadOnlyKey9</a>
+ </td>
+<td>0x0130</td>
+<tr>
+ <td align=right>
+  <a href="#IpcLeaveRecvBufferPagesMapped">IpcLeave</a>
+ </td>
+ <td>
+  <a href="#IpcLeaveRecvBufferPagesMapped">RecvBufferPagesMapped</a>
+ </td>
+<td>0x0124</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ReenableTemperature">ReenableTemperature</a>
+  </td>
+  <td>0x0103</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion0">SiflashErase</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion0">Region0</a>
+ </td>
+<td>0x0117</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion1">SiflashErase</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion1">Region1</a>
+ </td>
+<td>0x0118</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion2">SiflashErase</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion2">Region2</a>
+ </td>
+<td>0x0119</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashEraseRegion3">SiflashErase</a>
+ </td>
+ <td>
+  <a href="#SiflashEraseRegion3">Region3</a>
+ </td>
+<td>0x011a</td>
+<tr>
+ <td align=right>
+  <a href="#USBRemoteWakeDisable">USB</a>
+ </td>
+ <td>
+  <a href="#USBRemoteWakeDisable">RemoteWakeDisable</a>
+ </td>
+<td>0x0013</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ReserveP1TcmForData">ReserveP1TcmForData</a>
+  </td>
+  <td>0x0140</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ResetOnChargerAttach">ResetOnChargerAttach</a>
+  </td>
+  <td>0x011b</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashSuspendResumeCommands">SiflashSuspend</a>
+ </td>
+ <td>
+  <a href="#SiflashSuspendResumeCommands">ResumeCommands</a>
+ </td>
+<td>0x0115</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashResumeToSuspendDelay">Siflash</a>
+ </td>
+ <td>
+  <a href="#SiflashResumeToSuspendDelay">ResumeToSuspendDelay</a>
+ </td>
+<td>0x0114</td>
+<tr>
+ <td align=right>
+  <a href="#AuthenticateROFS">Authenticate</a>
+ </td>
+ <td>
+  <a href="#AuthenticateROFS">ROFS</a>
+ </td>
+<td>0x0113</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_S">S</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SDHost1BitOnlySlot0">SDHost1BitOnlySlot0</a>
+  </td>
+  <td>0x0132</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SDHost1BitOnlySlot1">SDHost1BitOnlySlot1</a>
+  </td>
+  <td>0x0133</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SDHostSlot0">SDHostSlot0</a>
+  </td>
+  <td>0x0014</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SDHostSlot0Pio">SDHostSlot0Pio</a>
+  </td>
+  <td>0x0125</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SDHostSlot1">SDHostSlot1</a>
+  </td>
+  <td>0x0015</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SDHostSlot1Pio">SDHostSlot1Pio</a>
+  </td>
+  <td>0x0126</td>
+<tr>
+ <td align=right>
+  <a href="#USBSerialNumberString">USB</a>
+ </td>
+ <td>
+  <a href="#USBSerialNumberString">SerialNumberString</a>
+ </td>
+<td>0x0009</td>
+<tr>
+ <td align=right>
+  <a href="#ThermalShutdownLongPeriod">Thermal</a>
+ </td>
+ <td>
+  <a href="#ThermalShutdownLongPeriod">ShutdownLongPeriod</a>
+ </td>
+<td>0x0100</td>
+<tr>
+ <td align=right>
+  <a href="#ThermalShutdownPeriod">Thermal</a>
+ </td>
+ <td>
+  <a href="#ThermalShutdownPeriod">ShutdownPeriod</a>
+ </td>
+<td>0x00ff</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ShutdownTemperature">ShutdownTemperature</a>
+  </td>
+  <td>0x0101</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SiflashEraseRegion0">SiflashEraseRegion0</a>
+  </td>
+  <td>0x0117</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SiflashEraseRegion1">SiflashEraseRegion1</a>
+  </td>
+  <td>0x0118</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SiflashEraseRegion2">SiflashEraseRegion2</a>
+  </td>
+  <td>0x0119</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SiflashEraseRegion3">SiflashEraseRegion3</a>
+  </td>
+  <td>0x011a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SiflashPageSize">SiflashPageSize</a>
+  </td>
+  <td>0x0116</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SiflashResumeToSuspendDelay">SiflashResumeToSuspendDelay</a>
+  </td>
+  <td>0x0114</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#SiflashSuspendResumeCommands">SiflashSuspendResumeCommands</a>
+  </td>
+  <td>0x0115</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashPageSize">SiflashPage</a>
+ </td>
+ <td>
+  <a href="#SiflashPageSize">Size</a>
+ </td>
+<td>0x0116</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot0Pio">SDHost</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot0Pio">Slot0Pio</a>
+ </td>
+<td>0x0125</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot0">SDHost</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot0">Slot0</a>
+ </td>
+<td>0x0014</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot0">SDHost1BitOnly</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot0">Slot0</a>
+ </td>
+<td>0x0132</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot1Pio">SDHost</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot1Pio">Slot1Pio</a>
+ </td>
+<td>0x0126</td>
+<tr>
+ <td align=right>
+  <a href="#SDHostSlot1">SDHost</a>
+ </td>
+ <td>
+  <a href="#SDHostSlot1">Slot1</a>
+ </td>
+<td>0x0015</td>
+<tr>
+ <td align=right>
+  <a href="#SDHost1BitOnlySlot1">SDHost1BitOnly</a>
+ </td>
+ <td>
+  <a href="#SDHost1BitOnlySlot1">Slot1</a>
+ </td>
+<td>0x0133</td>
+<tr>
+ <td align=right>
+  <a href="#UsbTypeCCCSource">UsbTypeCCC</a>
+ </td>
+ <td>
+  <a href="#UsbTypeCCCSource">Source</a>
+ </td>
+<td>0x011d</td>
+<tr>
+ <td align=right>
+  <a href="#StubStr">Stub</a>
+ </td>
+ <td>
+  <a href="#StubStr">Str</a>
+ </td>
+<td>0x0002</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#StreamFilesystemEnable">StreamFilesystemEnable</a>
+  </td>
+  <td>0x0131</td>
+<tr>
+ <td align=right>
+  <a href="#USBConfigString">USBConfig</a>
+ </td>
+ <td>
+  <a href="#USBConfigString">String</a>
+ </td>
+<td>0x000a</td>
+<tr>
+ <td align=right>
+  <a href="#USBManufString">USBManuf</a>
+ </td>
+ <td>
+  <a href="#USBManufString">String</a>
+ </td>
+<td>0x0007</td>
+<tr>
+ <td align=right>
+  <a href="#USBProductString">USBProduct</a>
+ </td>
+ <td>
+  <a href="#USBProductString">String</a>
+ </td>
+<td>0x0008</td>
+<tr>
+ <td align=right>
+  <a href="#USBSerialNumberString">USBSerialNumber</a>
+ </td>
+ <td>
+  <a href="#USBSerialNumberString">String</a>
+ </td>
+<td>0x0009</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#StubInt">StubInt</a>
+  </td>
+  <td>0x0001</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#StubStr">StubStr</a>
+  </td>
+  <td>0x0002</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashResumeToSuspendDelay">SiflashResumeTo</a>
+ </td>
+ <td>
+  <a href="#SiflashResumeToSuspendDelay">SuspendDelay</a>
+ </td>
+<td>0x0114</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashSuspendResumeCommands">Siflash</a>
+ </td>
+ <td>
+  <a href="#SiflashSuspendResumeCommands">SuspendResumeCommands</a>
+ </td>
+<td>0x0115</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_T">T</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#XtalTemperatureLookupTable">XtalTemperatureLookup</a>
+ </td>
+ <td>
+  <a href="#XtalTemperatureLookupTable">Table</a>
+ </td>
+<td>0x010d</td>
+<tr>
+ <td align=right>
+  <a href="#ReserveP1TcmForData">ReserveP1</a>
+ </td>
+ <td>
+  <a href="#ReserveP1TcmForData">TcmForData</a>
+ </td>
+<td>0x0140</td>
+<tr>
+ <td align=right>
+  <a href="#AdcTemperatureAddition">Adc</a>
+ </td>
+ <td>
+  <a href="#AdcTemperatureAddition">TemperatureAddition</a>
+ </td>
+<td>0x010c</td>
+<tr>
+ <td align=right>
+  <a href="#XtalTemperatureDACConversion">Xtal</a>
+ </td>
+ <td>
+  <a href="#XtalTemperatureDACConversion">TemperatureDACConversion</a>
+ </td>
+<td>0x010e</td>
+<tr>
+ <td align=right>
+  <a href="#XtalTemperatureLookupTable">Xtal</a>
+ </td>
+ <td>
+  <a href="#XtalTemperatureLookupTable">TemperatureLookupTable</a>
+ </td>
+<td>0x010d</td>
+<tr>
+ <td align=right>
+  <a href="#AdcTemperatureMultiplier">Adc</a>
+ </td>
+ <td>
+  <a href="#AdcTemperatureMultiplier">TemperatureMultiplier</a>
+ </td>
+<td>0x010b</td>
+<tr>
+ <td align=right>
+  <a href="#XtalTemperaturePeriod">Xtal</a>
+ </td>
+ <td>
+  <a href="#XtalTemperaturePeriod">TemperaturePeriod</a>
+ </td>
+<td>0x010f</td>
+<tr>
+ <td align=right>
+  <a href="#RampDownTemperature">RampDown</a>
+ </td>
+ <td>
+  <a href="#RampDownTemperature">Temperature</a>
+ </td>
+<td>0x0102</td>
+<tr>
+ <td align=right>
+  <a href="#ReenableTemperature">Reenable</a>
+ </td>
+ <td>
+  <a href="#ReenableTemperature">Temperature</a>
+ </td>
+<td>0x0103</td>
+<tr>
+ <td align=right>
+  <a href="#ShutdownTemperature">Shutdown</a>
+ </td>
+ <td>
+  <a href="#ShutdownTemperature">Temperature</a>
+ </td>
+<td>0x0101</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ThermalShutdownLongPeriod">ThermalShutdownLongPeriod</a>
+  </td>
+  <td>0x0100</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#ThermalShutdownPeriod">ThermalShutdownPeriod</a>
+  </td>
+  <td>0x00ff</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMax">CcVoltage</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMax">ThresholdAt500mAMax</a>
+ </td>
+<td>0x011f</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMin">CcVoltage</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMin">ThresholdAt500mAMin</a>
+ </td>
+<td>0x011e</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMax">CcVoltage</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMax">ThresholdAt1500mAMax</a>
+ </td>
+<td>0x0121</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMin">CcVoltage</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMin">ThresholdAt1500mAMin</a>
+ </td>
+<td>0x0120</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMax">CcVoltage</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMax">ThresholdAt3000mAMax</a>
+ </td>
+<td>0x0123</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMin">CcVoltage</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMin">ThresholdAt3000mAMin</a>
+ </td>
+<td>0x0122</td>
+<tr>
+ <td align=right>
+  <a href="#AppsP1InactiveTimer">AppsP1Inactive</a>
+ </td>
+ <td>
+  <a href="#AppsP1InactiveTimer">Timer</a>
+ </td>
+<td>0x00fd</td>
+<tr>
+ <td align=right>
+  <a href="#SiflashResumeToSuspendDelay">SiflashResume</a>
+ </td>
+ <td>
+  <a href="#SiflashResumeToSuspendDelay">ToSuspendDelay</a>
+ </td>
+<td>0x0114</td>
+<tr>
+ <td align=right>
+  <a href="#EnableTRBLog">Enable</a>
+ </td>
+ <td>
+  <a href="#EnableTRBLog">TRBLog</a>
+ </td>
+<td>0x0112</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumCurrentTrickle">ChargerMaximumCurrent</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumCurrentTrickle">Trickle</a>
+ </td>
+<td>0x0104</td>
+<tr>
+ <td align=right>
+  <a href="#NfcTxControlModulationDepth">Nfc</a>
+ </td>
+ <td>
+  <a href="#NfcTxControlModulationDepth">TxControlModulationDepth</a>
+ </td>
+<td>0x0108</td>
+<tr>
+ <td align=right>
+  <a href="#UsbTypeCMaxCurrent">Usb</a>
+ </td>
+ <td>
+  <a href="#UsbTypeCMaxCurrent">TypeCMaxCurrent</a>
+ </td>
+<td>0x0139</td>
+<tr>
+ <td align=right>
+  <a href="#UsbTypeCCCSource">Usb</a>
+ </td>
+ <td>
+  <a href="#UsbTypeCCCSource">TypeCCCSource</a>
+ </td>
+<td>0x011d</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_U">U</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#UartFlowCtrlEnable">UartFlowCtrlEnable</a>
+  </td>
+  <td>0x0138</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBConfigString">USBConfigString</a>
+  </td>
+  <td>0x000a</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBDeviceClassCodes">USBDeviceClassCodes</a>
+  </td>
+  <td>0x0010</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBLangID">USBLangID</a>
+  </td>
+  <td>0x000f</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBManufString">USBManufString</a>
+  </td>
+  <td>0x0007</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBMaxPower">USBMaxPower</a>
+  </td>
+  <td>0x0011</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBProductID">USBProductID</a>
+  </td>
+  <td>0x000d</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBProductString">USBProductString</a>
+  </td>
+  <td>0x0008</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBRemoteWakeDisable">USBRemoteWakeDisable</a>
+  </td>
+  <td>0x0013</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBSerialNumberString">USBSerialNumberString</a>
+  </td>
+  <td>0x0009</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#UsbTypeCMaxCurrent">UsbTypeCMaxCurrent</a>
+  </td>
+  <td>0x0139</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#UsbTypeCCCSource">UsbTypeCCCSource</a>
+  </td>
+  <td>0x011d</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBVendorID">USBVendorID</a>
+  </td>
+  <td>0x000c</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBVersion">USBVersion</a>
+  </td>
+  <td>0x000b</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#USBBCDDevice">USBBCDDevice</a>
+  </td>
+  <td>0x000e</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_V">V</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#USBVendorID">USB</a>
+ </td>
+ <td>
+  <a href="#USBVendorID">VendorID</a>
+ </td>
+<td>0x000c</td>
+<tr>
+ <td align=right>
+  <a href="#USBVersion">USB</a>
+ </td>
+ <td>
+  <a href="#USBVersion">Version</a>
+ </td>
+<td>0x000b</td>
+<tr>
+ <td align=right>
+  <a href="#ChargerMaximumVoltage">ChargerMaximum</a>
+ </td>
+ <td>
+  <a href="#ChargerMaximumVoltage">Voltage</a>
+ </td>
+<td>0x0107</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMax">Cc</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMax">VoltageThresholdAt500mAMax</a>
+ </td>
+<td>0x011f</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt500mAMin">Cc</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt500mAMin">VoltageThresholdAt500mAMin</a>
+ </td>
+<td>0x011e</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMax">Cc</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMax">VoltageThresholdAt1500mAMax</a>
+ </td>
+<td>0x0121</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt1500mAMin">Cc</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt1500mAMin">VoltageThresholdAt1500mAMin</a>
+ </td>
+<td>0x0120</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMax">Cc</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMax">VoltageThresholdAt3000mAMax</a>
+ </td>
+<td>0x0123</td>
+<tr>
+ <td align=right>
+  <a href="#CcVoltageThresholdAt3000mAMin">Cc</a>
+ </td>
+ <td>
+  <a href="#CcVoltageThresholdAt3000mAMin">VoltageThresholdAt3000mAMin</a>
+ </td>
+<td>0x0122</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_W">W</a>
+ </th>
+</tr>
+<tr>
+ <td align=right>
+  <a href="#USBRemoteWakeDisable">USBRemote</a>
+ </td>
+ <td>
+  <a href="#USBRemoteWakeDisable">WakeDisable</a>
+ </td>
+<td>0x0013</td>
+<tr>
+ <th colspan=3>
+  <a name="permuted_index_X">X</a>
+ </th>
+</tr>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#XtalTemperatureDACConversion">XtalTemperatureDACConversion</a>
+  </td>
+  <td>0x010e</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#XtalTemperatureLookupTable">XtalTemperatureLookupTable</a>
+  </td>
+  <td>0x010d</td>
+ <tr>
+  <td></td>
+  <td>
+   <a href="#XtalTemperaturePeriod">XtalTemperaturePeriod</a>
+  </td>
+  <td>0x010f</td>
+</table>
+</body>
+</html>

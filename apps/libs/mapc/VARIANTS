@@ -1,0 +1,7 @@
+
+VARIANTS :=
+
+# MAPC including debug print
+CFLAGS_debug := -DMAPC_DEBUG
+
+

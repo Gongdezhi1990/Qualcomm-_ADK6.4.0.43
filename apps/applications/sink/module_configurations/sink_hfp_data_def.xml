@@ -1,0 +1,799 @@
+<ModuleData Name="Sink_hfp_data">
+
+    <DefineGroup>
+        <DefinePattern  PatternName="At Commands Map"  ShortId="at_commands_events">
+            <ConfigItem
+                Id="At Cmd Event"
+                ShortId="event"
+                Desc="User Event or System Event associated with the configuration."
+                Size="16"
+                Type="enum"
+                ShowOrdered="true">
+                <List use="g_user_event" prefix="0x40"/>
+                <List use="g_system_event"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="AT Command Index"
+                ShortId="at_cmd"
+                Desc="AT Command to send when the mapped System or User Event occurs."
+                Type="uint"
+                Size="16" />
+        </DefinePattern>
+
+        <DefinePattern  PatternName="At Command Data"  ShortId="at_command_data">
+            <ConfigItem
+                Id="AT Cmd Data"
+                ShortId="data"
+                Desc="Raw data for AT command"
+                Type="uint"
+                Size="16" />
+        </DefinePattern>
+
+        <DefineStruct Id="QTIL Supported Features" ShortId="hfp_qtil_features" >
+            <ConfigItem
+                Id="Caller Name"
+                ShortId="caller_name"
+                Desc="caller_name under QTIL supported_features."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Raw Text"
+                ShortId="raw_text"
+                Desc="raw_text under QTIL supported_features."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="SMS"
+                ShortId="sms"
+                Desc="sms under QTIL supported_features."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Battery Level Reporting"
+                ShortId="batt_level"
+                Desc="batt_level under QTIL supported_features."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Power_Source"
+                ShortId="pwr_source"
+                Desc="pwr_source under QTIL supported_features."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Supported Codecs"
+                ShortId="supported_codecs"
+                Desc="codecs under QTIL supported_features."
+                Type="bitfield"
+                Size="3">
+                <bitfield key="CVSD"
+                          value="0"/>
+                <bitfield key="ADPCM 2 bits/sample"
+                          value="1"/>
+                <bitfield key="ADPCM 4 bits/sample"
+                          value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Codec Bandwidths"
+                ShortId="codec_bandwidths"
+                Desc="codec_bandwidths under QTIL supported_features."
+                Type="bitfield"
+                Size="2">
+                <bitfield key="8 kHz"
+                      value="0"/>
+                <bitfield key="16 kHz"
+                      value="1"/>
+            </ConfigItem>
+        </DefineStruct>
+
+        <DefineStruct Id="HFP Optional Indicators" ShortId="hfp_optional_indicators" >
+            <ConfigItem
+                Id="Service Indicator"
+                ShortId="service"
+                Desc="The indicator showing service status."
+                Type="enum"
+                Size="2">
+                <enum key="Off"
+                      value="0"/>
+                <enum key="On"
+                      value="1"/>
+                <enum key="Ignore"
+                      value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Signal Strength Indicator"
+                ShortId="signal_strength"
+                Desc="The indicator showing signal strength."
+                Type="enum"
+                Size="2">
+                <enum key="Off"
+                      value="0"/>
+                <enum key="On"
+                      value="1"/>
+                <enum key="Ignore"
+                      value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Roaming Status"
+                ShortId="roaming_status"
+                Desc="The indicator showing roaming status."
+                Type="enum"
+                Size="2">
+                <enum key="Off"
+                      value="0"/>
+                <enum key="On"
+                      value="1"/>
+                <enum key="Ignore"
+                      value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Battery Charge"
+                ShortId="battery_charge"
+                Desc="The indicator showing battery charge."
+                Type="enum"
+                Size="2">
+                <enum key="Off"
+                      value="0"/>
+                <enum key="On"
+                      value="1"/>
+                <enum key="Ignore"
+                      value="2"/>
+            </ConfigItem>
+        </DefineStruct>
+
+        <DefineStruct Id="HFP Init Params" ShortId="hfp_init_params" >
+            <ConfigItem
+                Id="Supported Profile Def"
+                ShortId="supported_profile_def"
+                Desc="Supported HFP Features."
+                Type="bitfield"
+                Size="3">
+                <bitfield key="HSP"
+                          value="0"/>
+                <bitfield key="HFP1.5"
+                          value="1"/>
+                <bitfield key="HFP1.7"
+                          value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Supported Features Def"
+                ShortId="supported_features_def"
+                Desc="Supported HFP Features."
+                Type="bitfield"
+                Size="9">
+                <bitfield key="HFP_NREC_FUNCTION"
+                          value="0"/>
+                <bitfield key="HFP_THREE_WAY_CALLING"
+                          value="1"/>
+                <bitfield key="HFP_CLI_PRESENTATION"
+                          value="2"/>
+                <bitfield key="HFP_VOICE_RECOGNITION"
+                          value="3"/>
+                <bitfield key="HFP_REMOTE_VOL_CONTROL"
+                          value="4"/>
+                <bitfield key="HFP_ENHANCED_CALL_STATUS"
+                          value="5"/>
+                <bitfield key="HFP_ENHANCED_CALL_CONTROL"
+                          value="6"/>
+                <bitfield key="HFP_CODEC_NEGOTIATION"
+                          value="7"/>
+                <bitfield key="HFP_INDICATORS"
+                          value="8"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Supported HFP Codecs Def"
+                ShortId="supported_hfp_codecs_def"
+                Desc="The bitmask containing the supported HFP codecs. Regardless of this setting, the application will automatically select mandatory codecs of the selected HFP profile version."
+                Type="bitfield"
+                Size="16">
+                <bitfield key="Narrow-band/CVSD"
+                          value="0"/>
+                <bitfield key="Wide-band/Modified SBC"
+                          value="1"/>
+                <bitfield key="Not Available 1"
+                          value="2"/>
+                <bitfield key="Not Available 2"
+                          value="3"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Disable NREC Def"
+                ShortId="disable_nrec_def"
+                Desc="When set noise reduction and echo cancelling is not advertised"
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Enable Extended Errors Def"
+                ShortId="extended_errors_def"
+                Desc="When set the Sink will send extended error reports."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Link Loss Time [mins] Def"
+                ShortId="link_loss_time_def"
+                Desc="The time, in minutes, following a link loss occurrence that the Sink will attempt to reconnect to the dropped AG."
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Link Loss Interval [s] Def"
+                ShortId="link_loss_interval_def"
+                Desc="The time interval, in seconds, at which the headset will make reconnection attempts following a link loss."
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="HF Indicators Def"
+                ShortId="hf_indicators_mask_def"
+                Desc="This bitmask specifies which HF Indicators are available for use. Note: HFP_INDICATORS feature should be enabled to select the below HF indicators."
+                Type="bitfield"
+                Size="16">
+                <bitfield key="Enhanced Safety"
+                         value="0"/>
+                <bitfield key="Battery Level"
+                         value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Enable Multipoint in HFP Library Def"
+                ShortId="multipoint_def"
+                Desc="When set Multipoint will be enabled in the HFP library. In order for multipoint to be operational it also needs to be turned on in the VM Sink Application, see 'Enable Multipoint in VM App'."
+                Type="bool"
+                Size="1"/>
+            <ConfigStruct
+                Id="QTIL Supported Features Def"
+                ShortId="qtil_supported_features_def"
+                Desc="QTIL supported features"
+                Type="struct"
+                Struct="hfp_qtil_features"/>
+            <ConfigStruct
+                Id="HFP Optional Indicators Def"
+                ShortId="optional_indicators_def"
+                Desc="HFP Optional Indicators"
+                Type="struct"
+                Struct="hfp_optional_indicators"/>
+        </DefineStruct>
+
+        <DefineStruct Id="hfp audio params" ShortId="hfp_audio_params" >
+            <ConfigItem
+                Id="Bandwidth_low"
+                ShortId="bandwidth_low"
+                Desc="Bandwidth to use for enhanced HFP audio."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Bandwidth_high"
+                ShortId="bandwidth_high"
+                Desc="Bandwidth to use for enhanced HFP audio."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Maximum Latency"
+                ShortId="max_latency"
+                Desc="Specifies the maximum latency."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Voice Settings"
+                ShortId="voice_settings"
+                Desc="HFP 1.5 voice settings."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Retransmission Effort"
+                ShortId="retransmission_effort"
+                Desc="This is retransmission_effort"
+                Type="enum"
+                Size="16">
+                <enum key="sync_retx_disabled"
+                      value="0"/>
+                <enum key="sync_retx_power_usage"
+                      value="1"/>
+                <enum key="sync_retx_link_quality"
+                      value="2"/>
+                <enum key="sync_retx_dont_care"
+                      value="3"/>
+            </ConfigItem>
+        </DefineStruct>
+
+        <DefineStruct Id="HFP Features Config" ShortId="sink_hfp_features_config" >
+            <ConfigItem
+                Id="Auto Answer on Connect"
+                ShortId="AutoAnswerOnConnect"
+                Desc="This allows the Sink to send an answer (ATA) AT command if an incoming call is detected on connection."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="Enable Mic Mute Synchronisation"
+                ShortId="EnableSyncMuteMicrophones"
+                Desc="When set the mute command is sent to both AGs when using multipoint."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="LNR Cancels VoiceDial if Active"
+                ShortId="LNRCancelsVoiceDialIfActive"
+                Desc="When set cancels a voice dial if a last number redial is initiated."
+                Type="bool"
+                Size="1"/>
+            <ConfigItem
+                Id="After Disconnection With Active Audio"
+                ShortId="ActionOnCallTransfer"
+                Desc="Defines the AG that the device will try to connect to when a call that has been transferred to an AG is transferred back to the Sink (using the Sink). The Call Transfer Reconnect Action is evoked when the Sink is used to transfer a call to the AG then back to the Sink. This only applies to AGs that disconnect the Sink when it transfers a call."
+                Type="enum"
+                Size="2">
+                <List use="g_ActionOn"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="HFP Plug-in"
+                ShortId="audio_plugin"
+                Desc="This configuration item specifies which HFP plug-in is used for SCO audio connections. "
+                Type="enum"
+                Size="4">
+                <List use="cvc_plugins_available"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Force Second SCO to use EV3 S1 Settings"
+                ShortId="ForceEV3S1ForSco2"
+                Desc="Determines the behaviour of the second SCO connection in multipoint mode. When set the second SCO connection is forced to use EV3 S1 packets for better interoperability with certain AGs.
+                Note this has no effect if Secure connection is enabled and link is secure."
+                Type="bool"
+                Size="1"/>
+        </DefineStruct>
+
+        <DefineStruct Id="Hfp Features Timeouts" ShortId="sink_hfp_feature_timeouts" >
+            <ConfigItem
+                Id="Mute Reminder Interval [s]"
+                ShortId="MuteRemindTime"
+                Desc="Mute reminder value"
+                Type="uint"
+                Range="Min=0,Max=60"
+                Size="16"/>
+            <ConfigItem
+                Id="Network Service Indicator Interval [s]"
+                ShortId="NwsServiceIndicatorRepeatTime_s"
+                Desc="The time in seconds after which the network service indication is replayed if there is no network present in the connected AG."
+                Type="uint"
+                Range="Min=0,Max=3600"
+                Size="16"/>
+            <ConfigItem
+                Id="Missed Call Indicator Interval [s]"
+                ShortId="MissedCallIndicateTime_s"
+                Desc="The Sink applications include a Missed Call feature. This sends an EventMissedCall event when the Sink has seen an incoming call that did not get answered before being terminated at the remote end, this event is repeatedly sent if the MissedCallIndicateTime timer value is set to a non-zero value and repeats at the interval set by this parameter. Timer is in seconds."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Missed Call Indicator Attempts"
+                ShortId="MissedCallIndicateAttempts"
+                Desc="This parameter specifies the number of times the missed call indication will be played at the Indicator interval time."
+                Type="uint"
+                Size="16"/>
+        </DefineStruct>
+
+        <DefineStruct Id="hfp pio" ShortId="sink_hfp_pio_data" >
+            <ConfigItem
+                Id="Call Active"
+                ShortId="CallActivePIO"
+                Desc="Configures the PIO to drive when a call is active."
+                Type="enum"
+                Size="8">
+                <List use="pio_7_bit"/>
+                <List use="pio_not_sel"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Incoming"
+                ShortId="IncomingRingPIO"
+                Desc="Configures the PIO to drive when an incoming call is ringing."
+                Type="enum"
+                Size="8">
+                <List use="pio_7_bit"/>
+                <List use="pio_not_sel"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Outgoing"
+                ShortId="OutgoingRingPIO"
+                Desc="Configures the PIO to drive when an outgoing call is ringing."
+                Type="enum"
+                Size="8">
+                <List use="pio_7_bit"/>
+                <List use="pio_not_sel"/>
+            </ConfigItem>
+        </DefineStruct>
+
+        <DefineStruct Id="hfp features type" ShortId="HFP_features_type" >
+            <ConfigItem
+                Id="Enable Audio Parameters"
+                ShortId="additional_audio_params"
+                Desc="Enables HFP Audio Parameters configuration settings."
+                Type="bool"
+                Size="1"/>
+            <ConfigStruct
+                Id="Hfp Audio Params"
+                ShortId="audio_params"
+                Desc="Audio Params structure"
+                Type="struct"
+                Struct="hfp_audio_params"/>
+            <ConfigItem
+                Id="Sync Packet Types"
+                ShortId="packet_types"
+                Desc="These are bit-field values. Be aware that some of the values indicate which synchronous packet types may be used while other values indicate the reverse, e.g. which synchronous packet types may NOT be used."
+                Type="bitfield"
+                Size="10">
+                <bitfield key="HV1 Enable"
+                          value="0"/>
+                <bitfield key="HV2 Enable"
+                          value="1"/>
+                <bitfield key="HV3 Enable"
+                          value="2"/>
+                <bitfield key="EV3 Enable"
+                          value="3"/>
+                <bitfield key="EV4 Enable"
+                          value="4"/>
+                <bitfield key="EV5 Enable"
+                          value="5"/>
+                <bitfield key="2EV3 Enable"
+                          value="6"/>
+                <bitfield key="3EV3 Enable"
+                          value="7"/>
+                <bitfield key="2EV5 Enable"
+                          value="8"/>
+                <bitfield key="3EV5 Enable"
+                          value="9"/>
+            </ConfigItem>
+        </DefineStruct>
+    </DefineGroup>
+
+    <ConfigGroup Id="sink hfp data" ShortId="sink_hfp_data_readonly"  Node="Basic"  >
+        <ConfigStruct
+            Id="Hfp Features Config"
+            ShortId="hfp_features_config"
+            Desc="This contains all hfp timers paramters."
+            Type="struct"
+            Struct="sink_hfp_features_config">
+            <StructElementConfigItem
+                Id="Auto Answer on Connect"
+                Desc="This allows the Sink to send an answer (ATA) AT command if an incoming call is detected on connection."
+                ShortId="AutoAnswerOnConnect"
+                DefaultValue="true"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+            <StructElementConfigItem
+                Id="Enable Mic Mute Synchronisation"
+                Desc="When set the mute command is sent to both AGs when using multipoint."
+                ShortId="EnableSyncMuteMicrophones"
+                DefaultValue="False"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+            <StructElementConfigItem
+                Id="LNR Cancels VoiceDial if Active"
+                Desc="When set the mute command is sent to both AGs when using multipoint."
+                ShortId="LNRCancelsVoiceDialIfActive"
+                DefaultValue="False"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='call_control']"/>
+            <StructElementConfigItem
+                Id="After Disconnection With Active Audio"
+                Desc="Defines the AG that the device will try to connect to when a call that has been transferred to an AG is transferred back to the Sink (using the Sink). The Call Transfer Reconnect Action is evoked when the Sink is used to transfer a call to the AG then back to the Sink. This only applies to AGs that disconnect the Sink when it transfers a call."
+                ShortId="ActionOnCallTransfer"
+                DefaultValue="Attempt to Reconnect to the last connected AG"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='reconnection']"/>
+            <StructElementConfigItem
+                Id="HFP Plug-in"
+                Desc="This configuration item specifies the HFP plug-in in use for SCO audio connections. For Bluecore, there are two important points to note: 1] Firstly, the bit values for the Sink SDK platform will be dependent on the DSP projects that are included in the Sink project. 2] Secondly, if 'No DSP' is selected, always ensure that both: A) 'Modified SBC' is deselected in the 'Bluetooth > Profile > HFP > Supported HFP Codecs' configuration item. B) HFP_CODEC_NEGOTIATION is deselected in 'Bluetooth > Profile > HFP > Supported Features'. 
+				3] If 'Voice Quality' under 'Audio' is set to 'Low Power' then effectively CVC works as passthrough. In other-words, whatever CVC type selected is just ignored"
+                ShortId="audio_plugin"
+                DefaultValue="CVC Headset 1-Mic"
+                ConfigGroupPath="./[@ShortId='hfp_voice']" >
+                <BuildVariant HwVariant="All -R13568v4 -R13568v4_A05 -H13672v2 -CE446_CE692 -CF376_CE692 -CF376_CE692H3 -CF376_H13732 -CF376_CE826 -CF376_CF212 -CF376_CF429 -CF376_CF440 -CF133 -CF133_SQIF -CG793 -CG437 -CF376_CG724 -CF376_CF897 -QCC3024-AA_DEV-BRD-R2-AA -QCC3034-AA_DEV-BRD-R2-AA -QCC5124-AA_DEV-BRD-R2-AA -QCC3020-AA_DEV-BRD-R2-AA -QCC3021-AA_DEV-BRD-R2-AA -QCC3031-AA_DEV-BRD-R2-AA -QCC5120-AB_DEV-BRD-R2-AA -QCC5126-AB_DEV-BRD-R2-AA -QCC5127-AA_DEV-BRD-R2-AA -QCC5127-AB_DEV-BRD-R2-AA" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="CVC Handsfree 1-Mic"/>
+                <BuildVariant HwVariant="R13568v4 R13568v4_A05 H13672v2 CE446_CE692 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF133 CF133_SQIF CG793 CG437 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="CVC Speaker 1-Mic"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Force Second SCO to use EV3 S1 Settings"
+                Desc="Determines the behaviour of the second SCO connection in multipoint mode. When set the second SCO connection is forced to use EV3 S1 packets for better interoperability with certain AGs.
+                Note this has no effect if Secure connection is enabled and link is secure."
+                ShortId="ForceEV3S1ForSco2"
+                DefaultValue="False"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="Hfp Features Timeouts"
+            ShortId="hfp_feature_timeouts"
+            Desc="This contains all hfp readonly features config data related paramters."
+            Type="struct"
+            Struct="sink_hfp_feature_timeouts">
+            <StructElementConfigItem
+                Id="Mute Reminder Interval [s]"
+                Desc="Mute reminder value"
+                ShortId="MuteRemindTime"
+                DefaultValue="10"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='call_control']"/>
+            <StructElementConfigItem
+                Id="Network Service Indicator Interval [s]"
+                Desc="The time in seconds after which the network service indication is replayed if there is no network present in the connected AG."
+                ShortId="NwsIndicatorRepeatTime_s"
+                DefaultValue="10"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='call_control']"/>
+            <StructElementConfigItem
+                Id="Missed Call Indicator Interval [s]"
+                Desc="The Sink applications include a Missed Call feature. This sends an EventMissedCall event when the Sink has seen an incoming call that did not get answered before being terminated at the remote end, this event is repeatedly sent if the MissedCallIndicateTime timer value is set to a non-zero value and repeats at the interval set by this parameter. Timer is in seconds."
+                ShortId="MissedCallIndicateTime_s"
+                DefaultValue="0x05"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='call_control']"/>
+            <StructElementConfigItem
+                Id="Missed Call Indicator Attempts"
+                Desc="This parameter specifies the number of times the missed call indication will be played at the Indicator interval time."
+                ShortId="MissedCallIndicateAttemps"
+                DefaultValue="0x05"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='call_control']"/>
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="Hfp Pio Data"
+            ShortId="hfp_pio_data"
+            Desc="This contains all hfp pio data related paramters."
+            Type="struct"
+            Struct="sink_hfp_pio_data">
+            <StructElementConfigItem
+                Id="Call Active"
+                Desc="Configures the PIO to drive when a call is active."
+                ShortId="CallActivePIO"
+                DefaultValue="N/A"
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"/>
+            <StructElementConfigItem
+                Id="Incoming"
+                Desc="Configures the PIO to drive when an incoming call is ringing."
+                ShortId="IncomingRingPIO"
+                DefaultValue="N/A"
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"/>
+            <StructElementConfigItem
+                Id="Outgoing"
+                Desc="Configures the PIO to drive when an outgoing call is ringing."
+                ShortId="OutgoingRingPIO"
+                DefaultValue="N/A"
+                ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']"/>
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="HFP_features_type"
+            ShortId="hfp_supported_features"
+            Desc="This contains all hfp supported features."
+            Type="struct"
+            Struct="HFP_features_type">
+            <StructElementConfigItem
+                Id="Enable Audio Parameters"
+                Desc="Enables HFP Audio Parameters configuration settings."
+                ShortId="additional_audio_params"
+                DefaultValue="true"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+            <StructElementConfigItem
+                Id="Hfp Audio Params"
+                Desc="Audio Params structure"
+                ShortId="audio_params">
+                <StructElementConfigItem
+                    Id="Bandwidth_low"
+                    Desc="Bandwidth to use for enhanced HFP audio."
+                    ShortId="bandwidth_low"
+                    DefaultValue="0x1f40"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='audio_parameters']"/>
+                <StructElementConfigItem
+                    Id="Bandwidth_high"
+                    Desc="Bandwidth to use for enhanced HFP audio."
+                    ShortId="bandwidth_high"
+                    DefaultValue="0"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='audio_parameters']"/>
+                <StructElementConfigItem
+                    Id="Maximum Latency"
+                    Desc="Specifies the maximum latency."
+                    ShortId="max_latency"
+                    DefaultValue="0x0c"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='audio_parameters']"/>
+                <StructElementConfigItem
+                    Id="Voice Settings"
+                    Desc="HFP 1.5 voice settings."
+                    ShortId="voice_settings"
+                    DefaultValue="0x00"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='audio_parameters']"/>
+                <StructElementConfigItem
+                    Id="Retransmission Effort"
+                    Desc="This is retransmission_effort"
+                    ShortId="retransmission_effort"
+                    DefaultValue="sync_retx_link_quality"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='audio_parameters']"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Sync Packet Types"
+                ShortId="packet_types"
+                Desc="These are bit-field values. Be aware that some of the values indicate which synchronous packet types may be used while other values indicate the reverse, e.g. which synchronous packet types may NOT be used."
+                DefaultValue="HV1 Enable | HV2 Enable | HV3 Enable | EV3 Enable | EV4 Enable | EV5 Enable | 3EV3 Enable | 3EV5 Enable"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='audio_parameters']"/>
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="HFP_Init_Params"
+            ShortId="hfp_init_params"
+            Desc="This contains all hfp supported Init params."
+            Type="struct"
+            Struct="hfp_init_params">
+            <StructElementConfigItem
+                Id="Supported Profile"
+                ShortId="supported_profile"
+                Desc="Supported HFP Features."
+                DefaultValue="HSP | HFP1.7"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']">
+                <BuildVariant HwVariant="All" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="HFP1.7"/>
+		        <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value=""/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Supported HFP Features"
+                ShortId="supported_hfp_features"
+                Desc="Supported HFP Features."
+                DefaultValue="HFP_NREC_FUNCTION | HFP_THREE_WAY_CALLING | HFP_CLI_PRESENTATION | HFP_VOICE_RECOGNITION | HFP_REMOTE_VOL_CONTROL | HFP_ENHANCED_CALL_STATUS | HFP_CODEC_NEGOTIATION | HFP_INDICATORS"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@Id='Supported Features']">
+                <BuildVariant HwVariant="All" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="HFP_NREC_FUNCTION | HFP_THREE_WAY_CALLING | HFP_CLI_PRESENTATION | HFP_VOICE_RECOGNITION | HFP_REMOTE_VOL_CONTROL | HFP_ENHANCED_CALL_STATUS | HFP_CODEC_NEGOTIATION"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Supported HFP Codecs"
+                ShortId="supported_hfp_codecs"
+                Desc="The bitmask containing the supported HFP codecs. Regardless of this setting, the application will automatically select mandatory codecs of the selected HFP profile version."
+                DefaultValue="Narrow-band/CVSD | Wide-band/Modified SBC"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']">
+                </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Disable NREC"
+                ShortId="disable_nrec"
+                Desc="When set noise reduction and echo cancelling is not advertised"
+                DefaultValue="true"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+            <StructElementConfigItem
+                Id="Enable Extended Errors"
+                ShortId="extended_errors"
+                Desc="When set the Sink will send extended error reports."
+                DefaultValue="False"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+            <StructElementConfigItem
+                Id="Link Loss Time [mins]"
+                ShortId="link_loss_time"
+                Desc="The time, in minutes, following a link loss occurrence that the Sink will attempt to reconnect to the dropped AG."
+                DefaultValue="10"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+            <StructElementConfigItem
+                Id="Link Loss Interval [s]"
+                ShortId="link_loss_interval"
+                Desc="The time interval, in seconds, at which the headset will make reconnection attempts following a link loss."
+                DefaultValue="10"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+            <StructElementConfigItem
+                Id="HF Indicators"
+                ShortId="hf_indicators_mask"
+                Desc="This bitmask specifies which HF Indicators are available for use. Note: HFP_INDICATORS feature should be enabled to select the below HF indicators."
+                DefaultValue="Enhanced Safety | Battery Level"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='supported_features']">
+                <BuildVariant HwVariant="All" SwVariant="Speaker_with_TWS Speaker_with_BA" Value=""/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Enable Multipoint in HFP Library"
+                ShortId="multipoint"
+                Desc="When set Multipoint will be enabled in the HFP library. In order for multipoint to be operational it also needs to be turned on in the VM Sink Application, see 'Enable Multipoint in VM App'."
+                DefaultValue="true"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']"/>
+            <StructElementConfigItem
+                Id="QTIL Supported Features 2"
+                ShortId="qtil_supported_features2"
+                Desc="QTIL supported features">
+                <StructElementConfigItem
+                    Id="Caller Name"
+                    ShortId="caller_name"
+                    Desc="caller_name under QTIL supported_features."
+                    DefaultValue="false"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='qtil_supported_features']"/>
+                <StructElementConfigItem
+                    Id="Raw Text"
+                    ShortId="raw_text"
+                    Desc="raw_text under QTIL supported_features."
+                    DefaultValue="false"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='qtil_supported_features']"/>
+                <StructElementConfigItem
+                    Id="SMS"
+                    ShortId="sms"
+                    Desc="sms under QTIL supported_features."
+                    DefaultValue="false"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='qtil_supported_features']"/>
+                <StructElementConfigItem
+                    Id="Battery Level Reporting"
+                    ShortId="batt_level"
+                    Desc="batt_level under QTIL supported_features."
+                    DefaultValue="true"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='qtil_supported_features']"/>
+                <StructElementConfigItem
+                    Id="Power_Source"
+                    ShortId="pwr_source"
+                    Desc="pwr_source under QTIL supported_features."
+                    DefaultValue="false"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='qtil_supported_features']"/>
+                <StructElementConfigItem
+                    Id="Supported Codecs"
+                    ShortId="supported_codecs"
+                    Desc="codecs under QTIL supported_features."
+                    DefaultValue=""
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='qtil_supported_features']"/>
+                <StructElementConfigItem
+                    Id="Codec Bandwidths"
+                    ShortId="codec_bandwidths"
+                    Desc="codec_bandwidths under QTIL supported_features."
+                    DefaultValue=""
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='qtil_supported_features']"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="HFP Optional Indicators"
+                ShortId="optional_indicators"
+                Desc="HFP Optional Indicators">
+                <StructElementConfigItem
+                    Id="Service Indicator"
+                    ShortId="service"
+                    Desc="The indicator showing service status."
+                    DefaultValue="On"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+                <StructElementConfigItem
+                    Id="Signal Strength Indicator"
+                    ShortId="signal_strength"
+                    Desc="The indicator showing signal strength."
+                    DefaultValue="Off"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+                <StructElementConfigItem
+                    Id="Roaming Status"
+                    ShortId="roaming_status"
+                    Desc="The indicator showing roaming status."
+                    DefaultValue="Off"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+                <StructElementConfigItem
+                    Id="Battery Charge"
+                    ShortId="battery_charge"
+                    Desc="The indicator showing battery charge."
+                    DefaultValue="Off"
+                    ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+            </StructElementConfigItem>
+        </ConfigStruct>
+        <ConfigItem
+            Id="Default HFP Volume"
+            ShortId="hfp_default_volume"
+            Type="enum"
+            DefaultValue="HFP 10"
+            Size="4"
+            Desc="This is the HFP volume level used after initial power up. The default volume can be set in the range 0 to 15. The sixteen levels are the 'Speaker Gain' settings in the Voice pane."
+            ConfigGroupPath="./[@ShortId='hfp_voice']/[@ShortId='volume_control']">
+            <List use="hfp"/>
+        </ConfigItem>
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="HFP AT Commands Data"
+        ShortId="sink_hfp_at_commands"
+        Node="Array"
+        ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='at_commands_key']/[@ShortId='command_data']">
+        <ConfigPatternArray
+            Id="AT command raw data"
+            ShortId="at_commands"
+            Pattern="at_command_data"
+            MaxNumPatterns="60" />
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="Event to AT Commands Mapping"
+        ShortId="sink_hfp_event_at_command_table"
+        Node="Array"
+        ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='at_commands_key']/[@ShortId='event_to_at_command_mapping']" >
+        <ConfigPatternArray
+            Id="Event to AT Command Mapping Definition"
+            ShortId="event_at_commands"
+            Pattern="at_commands_events"
+            MaxNumPatterns="10" />
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="One Touch Dial Phone Number"
+        ShortId="sink_hfp_data_writeable"
+        Node="Basic"
+        ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']">
+        <ConfigItem
+            Id="One Touch Phone Number"
+            ShortId="phone_number"
+            Desc="If this configuration item is programmed with a phone number, this will be sent to the Audio Gateway when a one-touch dial call event occurs on the device."
+            ValidChars="[a-zA-Z0-9#*+]"
+            Type="AsciiString"
+            DefaultValue=""
+            MaxStrLenBytes="20"/>
+    </ConfigGroup>
+</ModuleData>

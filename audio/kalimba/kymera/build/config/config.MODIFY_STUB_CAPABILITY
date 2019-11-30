@@ -1,0 +1,23 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2014 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the stub capability
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+STUB_CAPABILITY
+
+# List of global include paths
+%list ALL_INCDIRS
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/stub_capability/stub_capability
+

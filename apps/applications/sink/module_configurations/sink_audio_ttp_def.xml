@@ -1,0 +1,133 @@
+<ModuleData Name="sink_audio_ttp">
+    <DefineGroup>
+        <DefineStruct Id="Time To Play Latency Parameters" ShortId="ttp_latency_params">
+          <ConfigItem
+              Id="Target Time To Play Latency [ms]"
+              ShortId="target_ttp_latency_ms"
+              Desc=" "
+              Type="uint"
+              Size="16"
+              Range="Min=0,Max=1000"/>
+          <ConfigItem
+              Id="Minimum Time To Play Latency [ms]"
+              ShortId="minimum_ttp_latency_ms"
+              Desc=" "
+              Type="uint"
+              Size="16"
+              Range="Min=0,Max=1000"/>
+          <ConfigItem
+              Id="Maximum Time To Play Latency [ms]"
+              ShortId="maximum_ttp_latency_ms"
+              Desc=" "
+              Type="uint"
+              Size="16"
+              Range="Min=0,Max=1000"/>
+        </DefineStruct>
+        
+        <DefineStruct Id="TTP Latency Params" ShortId="ttp_latency_selector">
+          <ConfigStruct
+              Id="A2DP Time To Play Latency Parameters"
+              ShortId="a2dp_latency"
+              Desc=" "
+              Type="struct"
+              Struct="ttp_latency_params"/>
+          <ConfigStruct
+              Id="TWS Time To Play Latency Parameters"
+              ShortId="tws_latency"
+              Desc=" "
+              Type="struct"
+              Struct="ttp_latency_params"/>
+          <ConfigStruct
+              Id="Wired Time To Play Latency Parameters"
+              ShortId="wired_latency"
+              Desc=" "
+              Type="struct"
+              Struct="ttp_latency_params"/>          
+        </DefineStruct>
+    </DefineGroup>
+        
+    <ConfigGroup
+        Id="TTP Latency Config"
+        ShortId="audio_ttp"
+        Node="Basic">
+        <ConfigStruct
+            Id="TTP Latency Parameters"
+            ShortId="ttp_latency_parameters"
+            Desc=" "
+            Type="struct"
+            Struct="ttp_latency_selector">
+            <StructElementConfigItem
+                Id="A2DP TTP Parameters"
+                ShortId="a2dp_ttp_latency"
+                Desc=" ">
+                <!-- A2DP -->
+                <StructElementConfigItem
+                    Id="A2DP Target Time To Play Latency [ms]"
+                    ShortId="a2dp_target_ttp_latency_ms"
+                    Desc="The DSP will attempt to maintain this time period between the average arrival time and playback time.   If the latency starts increasing (because data is arriving faster than expected) the output rate will be increased to compensate, and decreased for the other direction.  The default value is recommended, as altering this value may cause audio quality issues. This feature allows for the configuration of time to play parameters for A2DP usecases, excluding those that involve TWS, Wired TWS, Broadcast Audio, Wired Audio or APTX-LL"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_latency']/[@ShortId='a2dp_latency']"
+                    DefaultValue="200"/>
+                <StructElementConfigItem
+                    Id="A2DP Minimum Time To Play Latency [ms]"
+                    ShortId="a2dp_minimum_ttp_latency_ms"
+                    Desc="If due to data arriving slowly the current latency drops below the minimum limit, the DSP will insert silence to rapidly get back towards the target latency.  The default value is recommended, as altering this value may cause audio quality issues. This feature allows for the configuration of time to play parameters for A2DP usecases, excluding those that involve TWS, Wired TWS, Broadcast Audio, Wired Audio or APTX-LL"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_latency']/[@ShortId='a2dp_latency']"
+                    DefaultValue="0"/>
+                <StructElementConfigItem
+                    Id="A2DP Maximum Time To Play Latency [ms]"
+                    ShortId="a2dp_maximum_ttp_latency_ms"
+                    Desc="If due to too much data arriving such that the maximum limit is passed, data will be deleted to rapidly get back towards the target latency.  The default value is recommended, as altering this value may cause audio quality issues. This feature allows for the configuration of time to play parameters for A2DP usecases, excluding those that involve TWS, Wired TWS, Broadcast Audio, Wired Audio or APTX-LL"
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_latency']/[@ShortId='a2dp_latency']"
+                    DefaultValue="700"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="TWS TTP Parameters"
+                ShortId="tws_ttp_latency"
+                Desc=" ">
+                <!-- TWS -->
+                <StructElementConfigItem
+                    Id="TWS Target Time To Play Latency [ms]"
+                    ShortId="tws_target_ttp_latency_ms"
+                    Desc="The DSP will attempt to maintain this time period between the average arrival time and playback time.   If the latency starts increasing (because data is arriving faster than expected) the output rate will be increased to compensate, and decreased for the other direction.  The default value is recommended, as altering this value may cause audio quality issues. This feature allows for the configuration of time to play parameters for TWS usecases."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_latency']/[@ShortId='tws_latency']"
+                    DefaultValue="200"/>
+                <StructElementConfigItem
+                    Id="TWS Minimum Time To Play Latency [ms]"
+                    ShortId="tws_minimum_ttp_latency_ms"
+                    Desc="If due to data arriving slowly the current latency drops below the minimum limit, the DSP will insert silence to rapidly get back towards the target latency.  The default value is recommended, as altering this value may cause audio quality issues. This feature allows for the configuration of time to play parameters for TWS usecases."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_latency']/[@ShortId='tws_latency']"
+                    DefaultValue="100"/>
+                <StructElementConfigItem
+                    Id="TWS Maximum Time To Play Latency [ms]"
+                    ShortId="tws_maximum_ttp_latency_ms"
+                    Desc="If due to too much data arriving such that the maximum limit is passed, data will be deleted to rapidly get back towards the target latency.  The default value is recommended, as altering this value may cause audio quality issues. This feature allows for the configuration of time to play parameters for TWS usecases."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_latency']/[@ShortId='tws_latency']"
+                    DefaultValue="300"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Wired TTP Parameters"
+                ShortId="wired_ttp_latency"
+                Desc=" ">
+                <!-- Wired -->
+                <StructElementConfigItem
+                    Id="Wired Target Time To Play Latency [ms]"
+                    ShortId="wired_target_ttp_latency_ms"
+                    Desc="The DSP will attempt to maintain this time period between the average arrival time and playback time.   If the latency starts increasing (because data is arriving faster than expected) the output rate will be increased to compensate, and decreased for the other direction.  The default value is recommended, as altering this value may cause audio quality issues. This feature allows for the configuration of time to play parameters for Wired  (analogue, I2S, SPDIF, USB Rx music) usecases."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_latency']/[@ShortId='wired_latency']"
+                    DefaultValue="30"/>
+                <StructElementConfigItem
+                    Id="Wired Minimum Time To Play Latency [ms]"
+                    ShortId="wired_minimum_ttp_latency_ms"
+                    Desc="If due to data arriving slowly the current latency drops below the minimum limit, the DSP will insert silence to rapidly get back towards the target latency.  The default value is recommended, as altering this value may cause audio quality issues. This feature allows for the configuration of time to play parameters for Wired (analogue, I2S, SPDIF, USB Rx music) usecases."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_latency']/[@ShortId='wired_latency']"
+                    DefaultValue="10"/>
+                <StructElementConfigItem
+                    Id="Wired Maximum Time To Play Latency [ms]"
+                    ShortId="wired_maximum_ttp_latency_ms"
+                    Desc="If due to too much data arriving such that the maximum limit is passed, data will be deleted to rapidly get back towards the target latency.  The default value is recommended, as altering this value may cause audio quality issues. This feature allows for the configuration of time to play parameters for Wired (analogue, I2S, SPDIF, USB Rx music) usecases."
+                    ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_latency']/[@ShortId='wired_latency']"
+                    DefaultValue="40"/>
+            </StructElementConfigItem>            
+            </ConfigStruct>
+     </ConfigGroup>
+</ModuleData>

@@ -1,0 +1,36 @@
+<ModuleData Name="Sink_speech_rec">
+    <ConfigGroup
+        Id="Sink Speech Rec"
+        ShortId="speech_rec_readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="Enable Speech Recognition"
+            ShortId="speech_rec_enabled"
+            Desc="If this item is set it enables speech recognition in the sink."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='call_control']" />
+        <ConfigItem
+            Id="Speech Recognition Repeat Interval [ms]"
+            ShortId="speechRecRepeatTime_ms"
+            Desc="It is possible to tune the time, in ms, at which the speech recognition audio prompt is repeated. This may be necessary depending upon the length of audio prompt instruction chosen."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x0005"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']/[@ShortId='call_control']" />
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="Sink Speech Rec Session"
+        ShortId="speech_rec_writeable"
+        Node="Basic">
+        <ConfigItem
+            Id="SSR Enabled"
+            ShortId="ssr_enabled"
+            Desc="If simple speech recognition is enabled."
+            Type="bool"
+            Size="1"
+            DefaultValue="false" />
+    </ConfigGroup>
+</ModuleData>

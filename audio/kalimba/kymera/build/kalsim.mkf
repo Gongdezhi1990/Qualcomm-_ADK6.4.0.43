@@ -1,0 +1,19 @@
+###########################################################################
+# CONFIDENTIAL
+# Project Kymera
+# Copyright (c) 2013 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  rules for Kalsim
+#
+############################################################################
+
+
+#########################################################################
+# Set path for Kalimba simulator for unit tests
+#########################################################################
+ifdef CHIP_NAME
+KALSIMTOOLS_ROOT := $(shell $(PYTHON) $(BUILD_ROOT)/get_kalsim_version.py $(CHIP_NAME))
+endif

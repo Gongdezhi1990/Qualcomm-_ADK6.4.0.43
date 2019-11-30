@@ -1,0 +1,25 @@
+var gaia__transport__gatt_8c =
+[
+    [ "calculate_response_size", "d4/d70/gaia__transport__gatt_8c.html#ab35945cf4d65491bc2f67956d1f400fe", null ],
+    [ "GaiaConnectGatt", "d4/d70/gaia__transport__gatt_8c.html#add8f2b3e287cd3e9114682a90c586fea", null ],
+    [ "GaiaDisconnectGatt", "d4/d70/gaia__transport__gatt_8c.html#ad927d076ccbc54c606816d608ec6ad13", null ],
+    [ "gaiaHandleGattManagerAccessInd", "d4/d70/gaia__transport__gatt_8c.html#aba19248bd718b9077be5b9915940cbe7", null ],
+    [ "gaiaTransportAttStreamsSend", "d4/d70/gaia__transport__gatt_8c.html#ac3e1a90c7cbda6eb950a9bac714d2bb3", null ],
+    [ "gaiaTransportCanAccessGaia", "d4/d70/gaia__transport__gatt_8c.html#a9a52b2cfd6fc168d7ae383e42fc2e905", null ],
+    [ "gaiaTransportGattDisconnectReq", "d4/d70/gaia__transport__gatt_8c.html#ad1eb2103bfd5c800591309c8a2772492", null ],
+    [ "gaiaTransportGattDisconnectRes", "d4/d70/gaia__transport__gatt_8c.html#af1065105450d6d3c4db6c8dda959b301", null ],
+    [ "gaiaTransportGattDropState", "d4/d70/gaia__transport__gatt_8c.html#aad26ac86c8b030f1e1048af8b788cf91", null ],
+    [ "gaiaTransportGattGetSink", "d4/d70/gaia__transport__gatt_8c.html#a353e4def1b0beb9b0c086da316606ae9", null ],
+    [ "gaiaTransportGattHandleMessage", "d4/d70/gaia__transport__gatt_8c.html#aa31dc1da584e0ae86f3fdd62e76183c2", null ],
+    [ "gaiaTransportGattProcessSource", "d4/d70/gaia__transport__gatt_8c.html#a817d26eeca8b4f8acb1b888e4b91d853", null ],
+    [ "gaiaTransportGattRegisterServer", "d4/d70/gaia__transport__gatt_8c.html#a3ae0dfc36ed6b5c445a21ae3e6645593", null ],
+    [ "gaiaTransportGattRes", "d4/d70/gaia__transport__gatt_8c.html#a7c1e6bca39a1948188bca8ec1e60f3d6", null ],
+    [ "gaiaTransportGattSend", "d4/d70/gaia__transport__gatt_8c.html#ae6f6d66bc9efa3b618b38d1cfd8f8a44", null ],
+    [ "gaiaTransportGattSendPacket", "d4/d70/gaia__transport__gatt_8c.html#a214f06cb811771d24c8d4328d42e960d", null ],
+    [ "gaiaTransportIsTransportActive", "d4/d70/gaia__transport__gatt_8c.html#a36107e25792d6295e36356e7b2eeb3f9", null ],
+    [ "GaiaTransportIsTransportOverGatt", "d4/d70/gaia__transport__gatt_8c.html#a0e21d71a85c6feb4a6a35112feff3baa", null ],
+    [ "populate_response_header", "d4/d70/gaia__transport__gatt_8c.html#a1883ea0339a0fce9248a729ffe031ec8", null ],
+    [ "populate_response_payload", "d4/d70/gaia__transport__gatt_8c.html#ac11784e8bc660c58119012c963fe44fb", null ],
+    [ "process_command", "d4/d70/gaia__transport__gatt_8c.html#abd3ebb74c0bce3064df9a54c48822a32", null ],
+    [ "process_data", "d4/d70/gaia__transport__gatt_8c.html#a87b6b1fb9328720be5674718cc28cadc", null ]
+];

@@ -1,0 +1,279 @@
+/****************************************************************************
+ * Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+****************************************************************************/
+/* Link script for P0. Probably need a separate one for P1 */
+OUTPUT_ARCH(stre_audio)
+
+ENTRY($kdc_start)
+
+/*
+ * Generate a simple crc32 of the contents of all code and data sections in the final linked image.
+ * The global symbol __devtools_image_checksum is added to the symbol table with the crc32 value in
+ * section dm. For more info see https://ukbugdb/B-198383
+ */
+CHECKSUM_DATA_SECTION(.initc_dm1);
+
+/* TODO: Some of the defines are specified at build time and can be used
+ * instead of hardcoding values here */
+
+$DATA_RAM_SIZE_BYTES    = 256 * 1024;
+$STACK_SIZE_BYTES       = 3 * 1024;
+
+/* Force this address when building downloadables in order to force prefixes in opcodes */
+$PM_RAM_START_ADDRESS  = 0x04200000;
+
+/* Define start of PM RAM window in DM space. Ideally we want all the const
+ * values to be in PM RAM address and accessit via PM RAM window in DM space.
+ * But kalelf2mem does not allow us to do that yet. */
+$DATA_PM_RAM_WINDOW        = 0x00100000;
+
+/* Force this address when building downloadables in order to force prefixes in opcodes
+ * B-237818 means that addresses between 0xC00000 - 0xFFFFFF may not generate exceptions
+ * so use 0x00700000 */
+$DATA_RAM_START_ADDRESS = 0x00700000;
+$DATA_RAM_END_ADDRESS   = $DATA_RAM_START_ADDRESS + $DATA_RAM_SIZE_BYTES;
+
+/* Force this address when building downloadables in order to force prefixes in opcodes */
+$DM2_RAM_BASE_ADDRESS   = 0xFF800000;
+
+/* Preserve block is at end of RAM. The size here is sufficiently large, actual preserve
+ * block is only 24 bytes (6 words) */
+$PRESERVE_BLOCK_SIZE_BYTES = 96;
+
+/* This magic layout offset for $CODE_MAGIC$ tells the linker that this is
+ * in the program address space rather than the data address space */
+$CODE_MAGIC$            = 0x84200000;
+
+SECTIONS
+{
+
+    /* Code begins at PM RAM start address  */
+    __CODE_ram_address = $PM_RAM_START_ADDRESS;
+
+    . = ALIGN($CODE_MAGIC$, 0x4);
+    /* Reset code is usually maxim and then it changes to minim. So we need
+     * different allignment for the different sections */
+    .text_reset : AT( __CODE_ram_address )
+    {
+        $MEM_MAP_CODE_START = ABSOLUTE(.) ;
+        *(RESET_PM*)
+    }
+
+    .text_maxim ALIGN(4):
+    {
+        *.o(PM_MAXIM\?*__maxim)
+        *.o(*PM_FLASH\?*__maxim)
+        *.o(*PM*\?*__maxim)
+    }
+    .text_maxim_private ALIGN(4):
+    {
+        /* Separate code section for scrambled libraries */
+        *.po(PM_MAXIM\?*__maxim)
+        *.po(*PM_FLASH\?*__maxim)
+        *.po(*PM*\?*__maxim)
+    }
+
+    .text_minim :
+    {
+        KEEP(*.o(PM_KEEP\?*))
+        *.o(*pm*\?*__minim)
+        *.o(PM_FLASH\?*__minim)
+        *.o(*PM*\?*__minim)
+    }
+
+    .text_minim_private ALIGN(4):
+    {
+        /* Separate code section for scrambled libraries*/
+        KEEP(*.po(PM_KEEP\?*))
+        *.po(*pm*\?*__minim)
+        *.po(*PM*\?*__minim)
+        *plc100.po(*pm\?*)
+        $MEM_MAP_CODE_END = ABSOLUTE(.) ;
+    }
+
+
+    /* Next RAM address (LMA) immediately follows on from last LMA of .text */
+    __CODE_RAM_SIZE = ( $MEM_MAP_CODE_END - $MEM_MAP_CODE_START );
+    /* Next section is RAM init section, which immediately follows on from last
+     * LMA of .text. Do the DM2 first */
+    __DM2_ram_address = ALIGN(__CODE_ram_address + __CODE_RAM_SIZE , 4);
+
+    /* But the VMA is different: the init data is copied to RAM so the VMA
+     * doesn't depend on the LMA.  */
+    . = $DM2_RAM_BASE_ADDRESS;
+    $DM2_START_ADDRESS = . ;
+    .initc_dm2 : AT ( __DM2_ram_address )
+    {
+        $MEM_MAP_DM2_INITC_START = ABSOLUTE(.) ;
+        *(*DM_SPI_COMMS*)
+        *.o(*DM2\?*)
+        *.o(*dm2\?*)
+    }
+    .initc_dm2_private ALIGN(4):
+    {
+        *.po(*DM2\?*)
+        *.po(*dm2\?*)
+        $MEM_MAP_DM2_INITC_END =  ABSOLUTE(.) ;
+    }
+
+    $DM2_INIT_SIZE_BYTES = $MEM_MAP_DM2_INITC_END - $MEM_MAP_DM2_INITC_START;
+    $DM2_END_ADDRESS = . ;
+
+    /* Next section is const_data_api */
+    __const_data_api_address = ALIGN(__DM2_ram_address + $DM2_INIT_SIZE_BYTES, 4);
+    . = ALIGN(., 0x4);
+
+    .const_data_api_16 : AT ( __const_data_api_address )
+    {
+        $CONST16_START = ABSOLUTE(.) ;
+        *.o(const16\?*)
+        *.o(CONST16\?*)
+    }
+    
+    .const_data_api_16_private ALIGN(2):
+    {
+        *.po(const16\?*)
+        *.po(CONST16\?*)
+        $CONST16_END = ABSOLUTE(.) ;
+    }
+    
+    .const_data_api ALIGN(4):
+    {
+        $CONST32_START = ABSOLUTE(.) ;
+        *.o(const\?*)
+        *.o(CONST\?*)
+    }
+    
+    .const_data_api_private ALIGN(4):
+    {
+        *.po(const\?*)
+        *.po(CONST\?*)
+        $CONST32_END = ABSOLUTE(.) ;
+    }
+    
+    $CONST_DATA_API_SIZE_BYTES = $CONST32_END - $CONST16_START;
+
+    /* Next section is const */
+    __CONST_ram_address = ALIGN(__const_data_api_address + $CONST_DATA_API_SIZE_BYTES , 4);
+
+    . = ALIGN($DATA_RAM_START_ADDRESS, 0x4);
+    $DM1_START_ADDRESS = . ;
+
+    .dmconst : AT ( __CONST_ram_address )
+    {
+        $MEM_MAP_CONST_START = ABSOLUTE(.) ;
+        *.o(DMCONST*)
+        *.o(dmconst*)
+    }
+    .dmconst_private ALIGN(4):
+    {
+        *.po(DMCONST*)
+        *.po(dmconst*)
+        $MEM_MAP_CONST_END = ABSOLUTE(.) ;
+    }
+    
+    $CONST_SIZE_BYTES = $MEM_MAP_CONST_END - $MEM_MAP_CONST_START;
+    
+    /* Next section is DM1 RAM initialised section */
+    __DM1_ram_address = ALIGN(__CONST_ram_address + $CONST_SIZE_BYTES, 4);
+    . = ALIGN(., 0x4);
+
+    .initc_dm1 : AT ( __DM1_ram_address )
+    {
+        $MEM_MAP_DM1_INITC_START = ABSOLUTE(.) ;
+        *.o(*DM1\?*)
+        *.o(*dm1\?*)
+        *.o(dm\?*)
+        *.o(DM\?*)
+    }
+    
+    .initc_dm1_private ALIGN(4):
+    {
+        *.po(*DM1\?*)
+        *.po(*dm1\?*)
+        *.po(dm\?*)
+        *.po(DM\?*)
+        $MEM_MAP_DM1_INITC_END =  ABSOLUTE(.) ;
+    }
+    
+    $INITC_DM1_SIZE = $MEM_MAP_DM1_INITC_END - $MEM_MAP_DM1_INITC_START;
+    
+    /* Put all the zero init section at the end of DM1 RAM region */
+    __DATA_zero_init_address = ALIGN( __DM1_ram_address + $INITC_DM1_SIZE, 4);
+    .zeroinit (NOLOAD) : AT ( __DATA_zero_init_address )
+    {
+        $MEM_MAP_BSS_START = ABSOLUTE(.) ;
+        *.o(dmzi*)
+        *.o(DMZI*)
+        *.o(*DM1_ZI\?*)
+        *.o(*dm1_zi\?*)
+    }
+    
+    .zeroinit_private ALIGN(4) (NOLOAD) :
+    {
+        *.po(dmzi*)
+        *.po(DMZI*)
+        *.po(*DM1_ZI\?*)
+        *.po(*dm1_zi\?*)
+        $MEM_MAP_BSS_END = ABSOLUTE(.) ;
+    }
+    
+
+    /* Put the stack at the top of the data ram but before preserve block */
+    . = $DATA_RAM_END_ADDRESS - $PRESERVE_BLOCK_SIZE_BYTES - $STACK_SIZE_BYTES ;
+    .stack (NOLOAD) :
+    {
+        $MEM_MAP_STACK_START = ABSOLUTE(.) ;
+        *(STACK_DM*)
+        /* . = . + $STACK_SIZE_BYTES; */
+        $MEM_MAP_STACK_END = ABSOLUTE(.) ;
+    }
+
+    . = $DATA_RAM_END_ADDRESS - $PRESERVE_BLOCK_SIZE_BYTES;
+    .preserve (NOLOAD) :
+    {
+        $MEM_PRESERVE_START = ABSOLUTE(.) ;
+        *(DM_PRESERVE_BLOCK*)
+        $MEM_PRESERVE_END = ABSOLUTE(.) ;
+    }
+    $DM1_END_ADDRESS = . ;
+    /* Debug strings should be present in the elf file but not loaded onto the
+     * chip. Therefore where we put them in the image doesn't matter,
+     * so we choose an address out of the way of real code so that the linker
+     * doesn't complain about overlapped sections and the value is not as
+     * likely to crop up by accident. NOTE: This is different for downloadable
+     * capabilities to make easier to distinguish between downloadable and 
+     * normal logs. In the debug info (elf file) the message will still be at 
+     * 0x13500000 for unknown reasons. 
+     */
+    . = 0x15500000;
+    debug_strings (INFO) :
+    {
+        *(DEBUG_TRACE_STRINGS*)
+    }
+
+    /* Create some useful symbols for the crt code to use, (although not really useful in RAM builds) */
+    $MEM_MAP_BSS_LENGTH_DWORDS = (SIZEOF (.zeroinit) + 3) / 4 ;
+    $MEM_MAP_DM1_INITC_ROM_ADDR = $DATA_PM_RAM_WINDOW + ABSOLUTE(__DM1_ram_address - __CODE_ram_address) ;
+
+    $DM1_REGION.__Base = $DM1_START_ADDRESS;
+    $DM1_REGION.__Limit = $DM1_END_ADDRESS;
+    $DM2_REGION.__Base = $DM2_START_ADDRESS;
+    $DM2_REGION.__Limit = $DM2_END_ADDRESS;
+
+
+    $DM1_INIT_SIZE_DWORDS = (SIZEOF (.initc_dm1) + 3) / 4 ;
+    $MEM_MAP_DM2_INITC_ROM_ADDR = $DATA_PM_RAM_WINDOW + ABSOLUTE(__DM2_ram_address - __CODE_ram_address) ;
+    $DM2_INIT_SIZE_DWORDS = ($DM2_INIT_SIZE_BYTES + 3) / 4;
+
+    /* These symbols are used by KCSMaker to process constants */
+    $DM_DNLD_CONST16_REGION.__Base = $CONST16_START;
+    $DM_DNLD_CONST16_REGION.__Limit = $CONST16_END - 1;
+    $DM_DNLD_CONST32_REGION.__Base = $CONST32_START;
+    $DM_DNLD_CONST32_REGION.__Limit = $CONST32_END - 1;
+    $DMCONST_DNLD_REGION.__Base = $MEM_MAP_CONST_START;
+    $DMCONST_DNLD_REGION.__Limit = $MEM_MAP_CONST_END - 1;
+    
+    /* Export the checksum symbol so it can be referenced in C and included in the SLT */
+    $__devtools_image_checksum = __devtools_image_checksum;
+}

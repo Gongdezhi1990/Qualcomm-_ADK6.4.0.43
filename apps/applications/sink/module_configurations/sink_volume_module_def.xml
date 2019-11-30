@@ -1,0 +1,661 @@
+<ModuleData Name="Sink_volume">
+    <DefineGroup>
+        <DefineList
+            Id="VolumeProfilesID"
+            ShortId="volumeprofilesHfpGain">
+            <enum key="Volume Profile 0"
+                  value="0"/>
+            <enum key="Volume Profile 1"
+                  value="1"/>
+            <enum key="Volume Profile 2"
+                  value="2"/>
+            <enum key="Volume Profile 3"
+                  value="3"/>
+            <enum key="Volume Profile 4"
+                  value="4"/>
+            <enum key="Volume Profile 5"
+                  value="5"/>
+            <enum key="Volume Profile 6"
+                  value="6"/>
+            <enum key="Volume Profile 7"
+                  value="7"/>
+            <enum key="Volume Profile 8"
+                  value="8"/>
+            <enum key="Volume Profile 9"
+                  value="9"/>
+            <enum key="Volume Profile 10"
+                  value="10"/>
+            <enum key="Volume Profile 11"
+                  value="11"/>
+            <enum key="Volume Profile 12"
+                  value="12"/>
+            <enum key="Volume Profile 13"
+                  value="13"/>
+            <enum key="Volume Profile 14"
+                  value="14"/>
+            <enum key="Volume Profile 15"
+                  value="15"/>
+        </DefineList>
+
+        <DefineList
+            Id="ProfileID on VolumeUp"
+            ShortId="volumeprofilesIncDecVol">
+            <enum key="Vol 0"
+                  value="0"/>
+            <enum key="Vol 1"
+                  value="1"/>
+            <enum key="Vol 2"
+                  value="2"/>
+            <enum key="Vol 3"
+                  value="3"/>
+            <enum key="Vol 4"
+                  value="4"/>
+            <enum key="Vol 5"
+                  value="5"/>
+            <enum key="Vol 6"
+                  value="6"/>
+            <enum key="Vol 7"
+                  value="7"/>
+            <enum key="Vol 8"
+                  value="8"/>
+            <enum key="Vol 9"
+                  value="9"/>
+            <enum key="Vol 10"
+                  value="10"/>
+            <enum key="Vol 11"
+                  value="11"/>
+            <enum key="Vol 12"
+                  value="12"/>
+            <enum key="Vol 13"
+                  value="13"/>
+            <enum key="Vol 14"
+                  value="14"/>
+            <enum key="Vol 15"
+                  value="15"/>
+        </DefineList>
+
+        <DefineList
+            Id="SpeakerGainDbr"
+            ShortId="volumeprofilesVolGain">
+            <enum key="-45 dB"
+                  value="0"/>
+            <enum key="-41.5 dB"
+                  value="1"/>
+            <enum key="-39 dB"
+                  value="2"/>
+            <enum key="-35.5 dB"
+                  value="3"/>
+            <enum key="-33 dB"
+                  value="4"/>
+            <enum key="-29.5 dB"
+                  value="5"/>
+            <enum key="-27 dB"
+                  value="6"/>
+            <enum key="-23.5 dB"
+                  value="7"/>
+            <enum key="-21 dB"
+                  value="8"/>
+            <enum key="-18 dB"
+                  value="9"/>
+            <enum key="-15 dB"
+                  value="10"/>
+            <enum key="-12 dB"
+                  value="11"/>
+            <enum key="-9 dB"
+                  value="12"/>
+            <enum key="-6 dB"
+                  value="13"/>
+            <enum key="-3 dB"
+                  value="14"/>
+            <enum key="0 dB"
+                  value="15"/>
+            <!-- CVC in the DSP cannot apply gains greater than 0dBr - see bug B-170002
+            <enum key="+3.5"
+                  value="16"/>
+            <enum key="+6"
+                  value="17"/>
+            <enum key="+9.5"
+                  value="18"/>
+            <enum key="+12"
+                  value="19"/>
+            <enum key="+15.5"
+                  value="20"/>
+            <enum key="+18"
+                  value="21"/>
+            <enum key="+21.5"
+                  value="22"/>-->
+        </DefineList>
+
+        <DefinePattern  PatternName="volume group config" ShortId="vol_mod_gain_curve">
+            <ConfigItem
+                Id="Audio Output Group"
+                ShortId="volume_curve_label"
+                Desc="The audio outputs for which the volume curves apply."
+                Type="enum"
+                Size="1">
+                <enum key="Primary/Secondary/Sub"
+                      value="0"/>
+                <enum key="Aux"
+                      value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Number Of Volume Steps"
+                ShortId="no_of_steps"
+                Desc="Sets the number of volume steps between minimum and maximum volume."
+                Type="int"
+                Range="Min=1,Max=500"
+                Size="16"/>
+            <ConfigItem
+                Id="Minimum Gain [dB]"
+                ShortId="dB_min"
+                Desc="Sets the minimum volume level for the audio output group, in dB units."
+                Range="Min=-32768,Max=0"
+                Type="int"
+                Size="16"/>
+            <ConfigItem
+                Id="Knee Value 1: Volume Step Index"
+                ShortId="volume_knee_value_1"
+                Desc="The first index into the list of discrete volume steps at which the gradient of the dB conversion curve changes. Warning: this value must to be smaller than the Knee Value 2 Volume Step Index."
+                Type="int"
+                Range="Min=1,Max=500"
+                Size="16"/>
+            <ConfigItem
+                Id="Knee Value 1: Gain [dB]"
+                ShortId="dB_knee_value_1"
+                Desc="The value in dB at the first point at which the gradient of the dB conversion curve changes. Warning: this value should always be configured within the range set by minimum and maximum volumes."
+                Type="int"
+                Range="Min=-32768,Max=0"
+                Size="16"/>
+            <ConfigItem
+                Id="Knee Value 2: Volume Step Index"
+                ShortId="volume_knee_value_2"
+                Desc="The second index into the list of discrete volume steps at which the gradient of the dB conversion curve changes. Warning: this value needs to be greater than the Knee Value 1 Volume Step Index."
+                Type="int"
+                Range="Min=1,Max=500"
+                Size="16"/>
+            <ConfigItem
+                Id="Knee Value 2: Gain [dB]"
+                ShortId="dB_knee_value_2"
+                Desc="The value in dB at the second point at which the gradient of the dB conversion curve changes. Warning: this value should always be configured within the range set by minimum and maximum volumes."
+                Type="int"
+                Range="Min=-32768,Max=0"
+                Size="16"/>
+            <ConfigItem
+                Id="Maximum Gain [dB]"
+                ShortId="dB_max"
+                Desc="Sets the maximum volume level for the audio output group, in dB units."
+                Type="int"
+                Range="Min=-32768,Max=0"
+                Size="16"/>
+        </DefinePattern>
+
+        <DefinePattern
+            PatternName="volume Mapping config"
+            ShortId="VolMapping">
+            <ConfigItem
+                Id="Volume Profile ID"
+                ShortId="A2dpGain"
+                Desc="HFP volume profile identifier."
+                Size="8"
+                Type="enum">
+                <List use="volumeprofilesHfpGain"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Profile ID on Volume Up"
+                ShortId="IncVol"
+                Desc="The Volume Profile Id that will be selected when a Volume Up event occurs."
+                Size="4"
+                Type="enum">
+                <List use="volumeprofilesIncDecVol"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Profile ID on Volume Down"
+                ShortId="DecVol"
+                Desc="The Volume Profile Id that will be selected when a Volume Down event occurs."
+                Size="4"
+                Type="enum">
+                <List use="volumeprofilesIncDecVol"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Play Tone"
+                ShortId="Tone"
+                Desc="Specifies the Audio Tone that the Sink will play on entering this Volume Profile."
+                Size="8"
+                Type="enum">
+                <List use="g_TonesType"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Speaker Gain"
+                ShortId="VolGain"
+                Desc="Specifies the gain that will be applied in dBr for this Volume Profile."
+                Size="8"
+                Type="enum">
+                <List use="volumeprofilesVolGain"/>
+            </ConfigItem>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        Id="sink volume writeable data"
+        ShortId="sink_volume_writeable"
+        Node="Basic">
+
+        <ConfigGroup
+            Id="Group Volume"
+            ShortId="sink_volume_writeable_a"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='output']">
+            <ConfigPatternArray
+                Id="volgroup config"
+                ShortId="volgroup_config"
+                Pattern="vol_mod_gain_curve"
+                FixedNumPatterns="2"
+                Presentation="ReadOnlyHeader">
+
+                <PatternArrayRow Id="VolumeCurvePrimarySec" ShortId="VolumeCurvePrimarySec_r1" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="volume_curve_label"
+                        DefaultValue="Primary/Secondary/Sub"/>
+                    <PatternArrayConfigItem
+                        ShortId="no_of_steps"
+                        DefaultValue="16"/>
+                    <PatternArrayConfigItem
+                        ShortId="dB_min"
+                        DefaultValue="-80"/>
+                    <PatternArrayConfigItem
+                        ShortId="volume_knee_value_1"
+                        DefaultValue="4"/>
+                    <PatternArrayConfigItem
+                        ShortId="dB_knee_value_1"
+                        DefaultValue="-40"/>
+                    <PatternArrayConfigItem
+                        ShortId="volume_knee_value_2"
+                        DefaultValue="10"/>
+                    <PatternArrayConfigItem
+                        ShortId="dB_knee_value_2"
+                        DefaultValue="-10"/>
+                    <PatternArrayConfigItem
+                        ShortId="dB_max"
+                        DefaultValue="0"/>
+
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="VolumeCurveAux" ShortId="VolumeCurveAux_r2" Node="Basic" >
+                    <PatternArrayConfigItem
+                        ShortId="volume_curve_label"
+                        DefaultValue="Aux"/>
+                    <PatternArrayConfigItem
+                        ShortId="no_of_steps"
+                        DefaultValue="16"/>
+                    <PatternArrayConfigItem
+                        ShortId="dB_min"
+                        DefaultValue="-80"/>
+                    <PatternArrayConfigItem
+                        ShortId="volume_knee_value_1"
+                        DefaultValue="4"/>
+                    <PatternArrayConfigItem
+                        ShortId="dB_knee_value_1"
+                        DefaultValue="-40"/>
+                    <PatternArrayConfigItem
+                        ShortId="volume_knee_value_2"
+                        DefaultValue="10"/>
+                    <PatternArrayConfigItem
+                        ShortId="dB_knee_value_2"
+                        DefaultValue="-10"/>
+                    <PatternArrayConfigItem
+                        ShortId="dB_max"
+                        DefaultValue="0"/>
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+
+        <ConfigGroup
+            Id="Voice Volume"
+            ShortId="sink_volume_writeable_b"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='hfp_voice']/[@ShortId='volume_control']">
+            <ConfigPatternArray
+                Id="gVol Maps"
+                ShortId="gVolMaps"
+                Pattern="VolMapping"
+                FixedNumPatterns="16"
+                Presentation="ReadOnlyHeader">
+
+                <PatternArrayRow Id="Row1" ShortId="vol_mapping_r1" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 0" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 1" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 0" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="No Tone" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-45 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row2" ShortId="vol_mapping_r2" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 1" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 2" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 0" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-41.5 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row3" ShortId="vol_mapping_r3" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 2" />
+                     <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 3" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 1" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-39 dB" />
+                </PatternArrayRow>
+
+              <PatternArrayRow Id="Row4" ShortId="vol_mapping_r4" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 3" />
+                     <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 4" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 2" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-35.5 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row5" ShortId="vol_mapping_r5" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 4" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 5" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 3" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-33 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row6" ShortId="vol_mapping_r6" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 5" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 6" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 4" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-29.5 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row7" ShortId="vol_mapping_r7" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 6" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 7" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 5" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-27 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row8" ShortId="vol_mapping_r8" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 7" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 8" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 6" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-23.5 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row9" ShortId="vol_mapping_r9" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 8" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 9" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 7" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-21 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row10" ShortId="vol_mapping_r10" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 9" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 10" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 8" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-18 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row11" ShortId="vol_mapping_r11" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 10" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 11" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 9" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-15 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row12" ShortId="vol_mapping_r12" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 11" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 12" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 10" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-12 dB" />
+                </PatternArrayRow>
+
+               <PatternArrayRow Id="Row13" ShortId="vol_mapping_r13" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 12" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 13" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 11" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-9 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row14" ShortId="vol_mapping_r14" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 13" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 14" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 12" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-6 dB" />
+                </PatternArrayRow>
+
+                <PatternArrayRow Id="Row15" ShortId="vol_mapping_r15" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 14" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 15" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 13" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="Short 3" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="-3 dB" />
+                </PatternArrayRow>
+
+               <PatternArrayRow Id="Row16" ShortId="vol_mapping_r16" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="A2dpGain"
+                        DefaultValue="Volume Profile 15" />
+                    <PatternArrayConfigItem
+                        ShortId="IncVol"
+                        DefaultValue="Vol 15" />
+                    <PatternArrayConfigItem
+                        ShortId="DecVol"
+                        DefaultValue="Vol 14" />
+                    <PatternArrayConfigItem
+                        ShortId="Tone"
+                        DefaultValue="No Tone" />
+                    <PatternArrayConfigItem
+                        ShortId="VolGain"
+                        DefaultValue="0 dB" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+       </ConfigGroup>
+
+       <ConfigItem
+            Id="Volume Orientation button inverted state"
+            ShortId="gVolButtonsInverted"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="1 = Inverts the operation of the volume controls, 0 = Volume control normal orientation."
+            ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='session_data']"/>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="sink_volume_readonly"
+        Id="Sink Volume Readonly"
+        Node="Basic">
+         <ConfigItem
+            Id="Store Current Sink Volume and Audio Source Timeout [s]"
+            ShortId="StoreCurrentSinkVolSrcTimeout_s"
+            Type="uint"
+            DefaultValue="5"
+            Size="16"
+            Desc="The time in seconds elapsed after the last Volume Up/Down or Audio Source button was pressed, to store settings into PS Store."
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"/>
+        <ConfigItem
+            Id="Mute Speaker as well as Microphone"
+            ShortId="MuteSpeakerAndMic"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="If this item is set Mute mutes both the Speaker and the Microphone of the Sink. This only affects HFP, not other profiles, e.g. A2DP etc."
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='hfp']"/>
+        <ConfigItem
+            Id="Adjust Volume whilst Muted"
+            ShortId="AdjustVolumeWhilstMuted"
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            Desc="Allows the volume to be adjusted while the Sink has been muted (via the EventMuteToggle or EventMuteOn)."
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='output']"/>
+        <ConfigItem
+            Id="Volume Change Causes Unmute"
+            ShortId="VolumeChangeCausesUnMute"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="If the Sink is muted (via the EventMuteToggle or EventMuteOn) this bit determines the action to take when an EventVolumeUp/EventVolumeDown or an AG volume indication message occurs."
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='output']"/>
+    </ConfigGroup>
+</ModuleData>

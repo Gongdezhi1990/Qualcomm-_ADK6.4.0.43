@@ -1,0 +1,27 @@
+var pmalloc__private_8h =
+[
+    [ "pmalloc_align_test", "d1/d0f/structpmalloc__align__test.html", "d1/d0f/structpmalloc__align__test" ],
+    [ "pmalloc_pool", "d4/d05/structpmalloc__pool.html", "d4/d05/structpmalloc__pool" ],
+    [ "PMALLOC_ALIGN", "d6/d9d/pmalloc__private_8h.html#aa07abbb5bd72b1c714aaf954e5aa8f07", null ],
+    [ "PMALLOC_ALIGN_BOUNDARY", "d6/d9d/pmalloc__private_8h.html#af407253d4ced0c935e803f98ef4909aa", null ],
+    [ "PMALLOC_BEGIN", "d6/d9d/pmalloc__private_8h.html#acd00bf9f90650b01f9fc2cbf9b736165", null ],
+    [ "PMALLOC_BLOCK_INTERRUPTS", "d6/d9d/pmalloc__private_8h.html#ad4f907537009ac37d8a30250c047658d", null ],
+    [ "PMALLOC_END", "d6/d9d/pmalloc__private_8h.html#a3817e1d7bdc03e7250c01e308bf91a9e", null ],
+    [ "PMALLOC_MAX_BLOCK", "d6/d9d/pmalloc__private_8h.html#adfa921adbf0d1127c0297fb39cf9666e", null ],
+    [ "PMALLOC_MIN_BLOCK", "d6/d9d/pmalloc__private_8h.html#abda625daf00c1aee63e28f2fb9c49910", null ],
+    [ "PMALLOC_RESOURCE_CRITICAL", "d6/d9d/pmalloc__private_8h.html#a5c86d9b614e1895e8601dfa4b5eb88c1", null ],
+    [ "PMALLOC_RESOURCE_LOW", "d6/d9d/pmalloc__private_8h.html#a977dfe9aca09e7a344c6dbc475fcc8c9", null ],
+    [ "PMALLOC_RESOURCE_SIZE", "d6/d9d/pmalloc__private_8h.html#ada48a40a16126418504c6912968e01e5", null ],
+    [ "PMALLOC_UNBLOCK_INTERRUPTS", "d6/d9d/pmalloc__private_8h.html#a179e82675141a5d5790ddc0d627be955", null ],
+    [ "pmalloc_align_test", "d6/d9d/pmalloc__private_8h.html#a2b5518e8970621e220c91b05b5c7a8d7", null ],
+    [ "pmalloc_pool", "d6/d9d/pmalloc__private_8h.html#a7c92db4bf1b5f16cbcf40d66cdeaeb5f", null ],
+    [ "get_pmalloc_config", "d6/d9d/pmalloc__private_8h.html#ab614a28798d8c71184e2427227d89b7e", null ],
+    [ "pmalloc_configure", "d6/d9d/pmalloc__private_8h.html#a382b7447e25751cb4a5ee5d3e0e74264", null ],
+    [ "prightsize", "d6/d9d/pmalloc__private_8h.html#a65eb685727275733742b580f8743f073", null ],
+    [ "pmalloc_app_begin", "d6/d9d/pmalloc__private_8h.html#ae3f81af67faaa99ff0ffba5e50a25955", null ],
+    [ "pmalloc_app_end", "d6/d9d/pmalloc__private_8h.html#a7b64024a396f762165ceb6f703e3b524", null ],
+    [ "pmalloc_app_size", "d6/d9d/pmalloc__private_8h.html#a667d072910a1697eb6b81fb3a3297afe", null ],
+    [ "pmalloc_blocks", "d6/d9d/pmalloc__private_8h.html#a616db61c3de33e4ceac9bf01de9ec1d8", null ],
+    [ "pmalloc_num_pools", "d6/d9d/pmalloc__private_8h.html#a3a4950832f2f1c92d846c47e68a3cb22", null ],
+    [ "pmalloc_pools", "d6/d9d/pmalloc__private_8h.html#a3afa3b04f478f08b744f17d648066601", null ]
+];

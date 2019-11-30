@@ -1,0 +1,4 @@
+file=bt1
+
+# LC enable watchdog fault
+PSKEY_LC_ENABLE_WATCHDOG_FAULT = TRUE

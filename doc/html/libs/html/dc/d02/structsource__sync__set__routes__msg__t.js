@@ -1,0 +1,6 @@
+var structsource__sync__set__routes__msg__t =
+[
+    [ "id", "dc/d02/structsource__sync__set__routes__msg__t.html#af4584eaa7945e0b5932ff36bba381dd7", null ],
+    [ "number_of_routes", "dc/d02/structsource__sync__set__routes__msg__t.html#a0e89ce1226d93e6792f2b7fac70a55bd", null ],
+    [ "routes", "dc/d02/structsource__sync__set__routes__msg__t.html#a87f92860221b3caf81433bbcd7794074", null ]
+];

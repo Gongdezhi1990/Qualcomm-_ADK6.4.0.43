@@ -1,0 +1,27 @@
+var structpeerSyncTaskData =
+[
+    [ "peer_a2dp_connected", "dc/d4f/structpeerSyncTaskData.html#adf55f6001d90ee87c4fb385b74c62130", null ],
+    [ "peer_a2dp_streaming", "dc/d4f/structpeerSyncTaskData.html#aeca11328283bf384de2c5a73922bc098", null ],
+    [ "peer_advertising", "dc/d4f/structpeerSyncTaskData.html#a792c2297c875821631492c806329b075", null ],
+    [ "peer_anc_enabled", "dc/d4f/structpeerSyncTaskData.html#aefa43678a9235cbe08abe044cf809eec", null ],
+    [ "peer_avrcp_connected", "dc/d4f/structpeerSyncTaskData.html#a68fa4c0ebf35a8f1ac809df3c70f4b78", null ],
+    [ "peer_battery_level", "dc/d4f/structpeerSyncTaskData.html#a408803a198946f4bdfde1b09f49d8398", null ],
+    [ "peer_ble_connected", "dc/d4f/structpeerSyncTaskData.html#af83f7af7c7ad215e2bd000569183cf1d", null ],
+    [ "peer_dfu_in_progress", "dc/d4f/structpeerSyncTaskData.html#a0a074d8686a3d8f04778554383de07bd", null ],
+    [ "peer_handset_addr", "dc/d4f/structpeerSyncTaskData.html#a0c5b1a476288c5db3b8d37c65818bd0d", null ],
+    [ "peer_handset_tws", "dc/d4f/structpeerSyncTaskData.html#a3829ced09888bdca7d4d02d1b1945bb8", null ],
+    [ "peer_has_handset_pairing", "dc/d4f/structpeerSyncTaskData.html#a18e2f7a427aa2afaeeb42e2e61704dd8", null ],
+    [ "peer_hfp_connected", "dc/d4f/structpeerSyncTaskData.html#a1f853e9a2ec98ba6bb40f23dcc184896", null ],
+    [ "peer_in_case", "dc/d4f/structpeerSyncTaskData.html#a01a4429f124a46e4d4740a94c428b895", null ],
+    [ "peer_in_ear", "dc/d4f/structpeerSyncTaskData.html#a6dfd630c2450721f6d35427771ae82a7", null ],
+    [ "peer_is_pairing", "dc/d4f/structpeerSyncTaskData.html#a90d0551383da3168b0579d431aab4257", null ],
+    [ "peer_rules_in_progress", "dc/d4f/structpeerSyncTaskData.html#aaec7f170c8b13b29c7551a450628072c", null ],
+    [ "peer_sco_active", "dc/d4f/structpeerSyncTaskData.html#a50343b5ea0da1a5eb134a85aa70b26c8", null ],
+    [ "peer_sync_rx_seqnum", "dc/d4f/structpeerSyncTaskData.html#a082ec2f9fd3653029ba1eb1290db0a50", null ],
+    [ "peer_sync_state", "dc/d4f/structpeerSyncTaskData.html#a5ac7cb67e6ce045015a6089a6daf340d", null ],
+    [ "peer_sync_status_tasks", "dc/d4f/structpeerSyncTaskData.html#a03f7a6798df1e7419aaba3126fdbb9ce", null ],
+    [ "peer_sync_tx_seqnum", "dc/d4f/structpeerSyncTaskData.html#a9e46c4a6d364249a9d2d63a61dc89dc9", null ],
+    [ "sent_in_progress", "dc/d4f/structpeerSyncTaskData.html#a1dca5416a91e109227ab30554a903c6e", null ],
+    [ "sync_battery_level", "dc/d4f/structpeerSyncTaskData.html#a47b70babee856a18278caef3f42a61e6", null ],
+    [ "task", "dc/d4f/structpeerSyncTaskData.html#a5fef09f850780e52bedbac5ed41aa7ad", null ]
+];

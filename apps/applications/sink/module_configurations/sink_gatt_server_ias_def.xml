@@ -1,0 +1,15 @@
+<ModuleData Name="Sink_gatt_server_ias">
+    <ConfigGroup
+        ShortId="sink_gatt_server_ias_readonly"
+        Id="Find Me Server"
+        Node="Basic">
+        <ConfigItem
+            Id="Alert Tone Period [s]"
+            ShortId="ImmediateAlertTimer_s"
+            Desc="The time, in seconds, that the system waits before repeating the alert event"
+            Type="uint"
+            DefaultValue="5"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']/[@ShortId='find_me']"/>
+        </ConfigGroup>    
+</ModuleData>

@@ -1,0 +1,27 @@
+var audio__voice__usb__tasks_8c =
+[
+    [ "usb_nb_cvc_1_mic_headset_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#adf19567f0e40b523f56a0ac4c7f3d255", null ],
+    [ "usb_nb_cvc_1_mic_speaker_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a076f18b9464714dedcbdd9222cf6d429", null ],
+    [ "usb_nb_cvc_2_mic_headset_binaural_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a5ac83d0e13ab15e8307b0d1c9b1d650d", null ],
+    [ "usb_nb_cvc_2_mic_headset_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#af4abd07b7a40124fc20f9c037659c428", null ],
+    [ "usb_nb_cvc_2_mic_speaker_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a7cd71ca35cb23c52aa7697daf096d398", null ],
+    [ "usb_swb_cvc_1_mic_handsfree_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a2c0f56cd4392f57f4bbc6a010c687b40", null ],
+    [ "usb_swb_cvc_1_mic_headset_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#add17184353269af3385842b0139653c0", null ],
+    [ "usb_swb_cvc_1_mic_speaker_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a1cdff7af18ae1af1337b6c20f0bf5abb", null ],
+    [ "usb_swb_cvc_2_mic_handsfree_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a6e5c33a826e3ae283bb4ddd0b9a05c6c", null ],
+    [ "usb_swb_cvc_2_mic_headset_binaural_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a3bb4eaae71d41e45fd08e76cb95c2fd3", null ],
+    [ "usb_swb_cvc_2_mic_headset_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a99c1b9a90039761bbcdde66bb6b28997", null ],
+    [ "usb_swb_cvc_2_mic_speaker_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#aef535c4aef09ec5829b2d93eed2ee99f", null ],
+    [ "usb_uwb_cvc_1_mic_handsfree_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a407f9c641a8365e2c6d870a4ac395264", null ],
+    [ "usb_uwb_cvc_1_mic_headset_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#acec28ef2e45a3fd3d744b71cff2a90bb", null ],
+    [ "usb_uwb_cvc_1_mic_speaker_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#abf15de3d2d77afc0291eb77ae7803467", null ],
+    [ "usb_uwb_cvc_2_mic_handsfree_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#acc61b89d46f081f867512bce651ca75f", null ],
+    [ "usb_uwb_cvc_2_mic_headset_binaural_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a82cf4a7261369ee28f7dd57156773266", null ],
+    [ "usb_uwb_cvc_2_mic_headset_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#af268289db1c0f4d39635b908475f9b14", null ],
+    [ "usb_uwb_cvc_2_mic_speaker_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a335f76d2aea2d5d0e152caf156076ffc", null ],
+    [ "usb_wb_cvc_1_mic_headset_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a3ce580cc8cf57fb4e8c3efb9603f0598", null ],
+    [ "usb_wb_cvc_1_mic_speaker_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a9bbf4e2d774521e705484afe42627551", null ],
+    [ "usb_wb_cvc_2_mic_headset_binaural_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#acad9ede648be8d7dcbd614ebc3302803", null ],
+    [ "usb_wb_cvc_2_mic_headset_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#aa304a4501d3469a54257f0799e745036", null ],
+    [ "usb_wb_cvc_2_mic_speaker_plugin", "d5/db7/audio__voice__usb__tasks_8c.html#a6cb4faf2671e5a2adf214f65c87b7f0e", null ]
+];

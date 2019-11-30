@@ -1,0 +1,11 @@
+
+VARIANTS := 
+
+CFLAGS_debug := -DAGHFP_DEBUG_LIB  # flags for building debug version of AGHFP lib
+
+CFLAGS_debug_at_bcc_reject := -DDEBUG_TEST_AT_BCC_REJECTION  # Compiles in debug code to reject the AT+BCC.
+                                                                      # This allows the AT+BCC rejection handling on the HF side to be tested.
+
+CFLAGS_debug_at_bcs_reject := -DDEBUG_TEST_AT_BCS_REJECTION  # Compiles in debug code to reject the AT+BCS on an HF initiated connection.
+                                                                      # This allows the AT+BCS rejection handling on the HF side to be tested.
+

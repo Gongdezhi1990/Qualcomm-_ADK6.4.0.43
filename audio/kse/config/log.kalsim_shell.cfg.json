@@ -1,0 +1,118 @@
+{
+    "version": 1,
+    "formatters": {
+        "basic_fmt": {
+            "format": "%(asctime)s %(name)-40s %(levelname)-8s %(message)s"
+        },
+        "fw_log_fmt": {
+            "format": "%(asctime)s %(message)s"
+        }
+    },
+    "handlers": {
+        "file_handler": {
+            "class": "logging.FileHandler",
+            "filename": "log/kalsim_shell.log.txt",
+            "mode": "w",
+            "formatter": "basic_fmt",
+            "level": "ext://logging.WARNING"
+        },
+        "fw_log_file_handler": {
+            "class": "logging.FileHandler",
+            "filename": "log/kalsim_shell.fw.log.txt",
+            "mode": "w",
+            "formatter": "fw_log_fmt",
+            "level": "ext://logging.WARNING"
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.DEBUG"
+        },
+        "root": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.DEBUG",
+            "propagate": false
+        },
+        "kats": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.WARN",
+            "propagate": false
+        },
+        "kats.framework": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.DEBUG",
+            "propagate": false
+        },
+        "kats.instrument.kalcmd": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.INFO",
+            "propagate": false
+        },
+        "kats.instrument.kalsim": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.DEBUG",
+            "propagate": false
+        },
+        "kats.kalimba.hydra_service": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.DEBUG",
+            "propagate": false
+        },
+        "kats.kalimba.kymera": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.DEBUG",
+            "propagate": false
+        },
+        "kats.kalimba.ps": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.DEBUG",
+            "propagate": false
+        },
+        "kats.kalsim": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.DEBUG",
+            "propagate": false
+        },
+        "kats.script": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.DEBUG",
+            "propagate": false
+        },
+        "kalcmd2": {
+            "handlers": [
+                "file_handler"
+            ],
+            "level": "ext://logging.WARNING"
+        },
+        "fw_log": {
+            "handlers": [
+                "fw_log_file_handler"
+            ],
+            "level": "ext://logging.DEBUG",
+            "propagate": false
+        }
+    }
+}

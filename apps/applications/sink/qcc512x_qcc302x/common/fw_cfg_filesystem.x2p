@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+    <file path="subsys1_config1.htf" />
+    <file path="subsys3_config1.htf" />
+    <file path="subsys7_config1.hcf" />
+    <configurations>
+        <configuration name="filesystem" options="build|deploy">
+            <devkitConfiguration>filesystem</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <deployProject>deploy</deployProject>
+            <property name="BUILD_TYPE" />
+            <property name="DBG_CORE" />
+            <property name="DEFS" />
+            <property name="FS_ROOT" />
+            <property name="INCPATHS" />
+            <property name="LIBPATHS" />
+            <property name="LIBS" />
+            <property name="OUTPUT" />
+            <property name="OUTPUT_TYPE" />
+            <property name="PRESERVED_LIBS" />
+            <property name="STRIP_SYMBOLS" />
+            <property name="TYPE">firmware_config</property>
+            <property name="argument" />
+            <property name="default" />
+            <property name="description" />
+            <property name="permission" />
+            <property name="system_label">QCC512X_CONFIG</property>
+        </configuration>
+    </configurations>
+</project>

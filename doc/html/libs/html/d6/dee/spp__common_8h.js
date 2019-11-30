@@ -1,0 +1,55 @@
+var spp__common_8h =
+[
+    [ "SPP_MESSAGE_MORE_DATA_T", "d6/d26/structSPP__MESSAGE__MORE__DATA__T.html", "d6/d26/structSPP__MESSAGE__MORE__DATA__T" ],
+    [ "SPP_MESSAGE_MORE_SPACE_T", "d9/db9/structSPP__MESSAGE__MORE__SPACE__T.html", "d9/db9/structSPP__MESSAGE__MORE__SPACE__T" ],
+    [ "SPP_DISCONNECT_IND_T", "d8/dce/structSPP__DISCONNECT__IND__T.html", "d8/dce/structSPP__DISCONNECT__IND__T" ],
+    [ "SPP_CLIENT_CONNECT_CFM_T", "df/dba/structSPP__CLIENT__CONNECT__CFM__T.html", "df/dba/structSPP__CLIENT__CONNECT__CFM__T" ],
+    [ "SPP", "d6/dee/spp__common_8h.html#a3770cf77272cbb6479db7386fd0f25f1", null ],
+    [ "SPP_DISCONNECT_CFM_T", "d6/dee/spp__common_8h.html#a9ebada2d0e296f055ca8df4e317a5576", null ],
+    [ "SPP_SERVER_CONNECT_CFM_T", "d6/dee/spp__common_8h.html#ac1118841e660245d09b90de89fd03dcd", null ],
+    [ "spp_connect_status", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30", [
+      [ "spp_connect_success", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30adfd3c625b1775e0baa86cfd9addf1a9e", null ],
+      [ "spp_connect_pending", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30ab3c46e80938c307d09987b9f9c54e1b5", null ],
+      [ "spp_connect_failed", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30a4e2be0f4aaf333e9401e1f68848b8356", null ],
+      [ "spp_connect_channel_not_registered", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30aed40941d913c13ba98836ddb0f24e017", null ],
+      [ "spp_connect_security_not_set", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30a8d16ed2f543f41f95a6b6eb88c773590", null ],
+      [ "spp_connect_declined", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30a90b67322a7f793af32ab49e0202b64f2", null ],
+      [ "spp_connect_rejected", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30a13087f3e40a3f9b2badf459dcbe0a644", null ],
+      [ "spp_connect_channel_already_open", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30a69e78bd3990c39cfc559c596367b93a9", null ],
+      [ "spp_connect_rejected_security", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30a2c7ef4bfa35f8ce63cb5812f59b68fff", null ],
+      [ "spp_connect_res_ack_timeout", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30a377885475d65372beb27554d5b090fec", null ],
+      [ "spp_connect_l2cap_error", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30abeb893beb0daa483e96cde5e951e666f", null ],
+      [ "spp_connect_sdp_fail", "d6/dee/spp__common_8h.html#a559da4d144e975262609b87fd6c52d30a4e3c8856099d77870cfcc53ea078ba52", null ]
+    ] ],
+    [ "spp_disconnect_status", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0", [
+      [ "spp_disconnect_success", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a83dc648ef4b64d9db46130b15a44c765", null ],
+      [ "spp_disconnect_normal_disconnect", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a4c9fdff5a7db562ff9cc6aec0289bf42", null ],
+      [ "spp_disconnect_abnormal_disconnect", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a536f0070167f0f65f9dbcd577333f5b4", null ],
+      [ "spp_disconnect_remote_refusal", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0ad20e1666a2d171dbd44726edad8b89c2", null ],
+      [ "spp_disconnect_dlc_already_exists", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a11efbbc03870eabcb02219d7ce86e963", null ],
+      [ "spp_disconnect_dlc_rej_security", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a87f34170b76a8d2ea7e9e2ed3bdae6a2", null ],
+      [ "spp_disconnect_invalid_server_channel", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0ad23f48c9c74fe3a531df6d78933fbe91", null ],
+      [ "spp_disconnect_unknown_primitive", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a7b96ddf11eb4a4450f786b08e16f73d1", null ],
+      [ "spp_disconnect_max_payload_exceeded", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a0e20cbfcc1ff36edb9bd2f2abb722b72", null ],
+      [ "spp_disconnect_inconsistent_parameters", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a0487583ed39d25e88b6606a0851738c1", null ],
+      [ "spp_disconnect_credit_flow_control_protocol_violation", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0acf573fc4f40c0c1f22cd68b6014132fe", null ],
+      [ "spp_disconnect_unknown_sink", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a515a90f90b2f18fd3c126c3dc9f2156f", null ],
+      [ "spp_disconnect_l2cap_link_loss", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0ab1e9f4fadeb7e638f9cbfc234be58713", null ],
+      [ "spp_disconnect_l2cap_error", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0a647d3b3d0db1a8a152a318ae81c676a0", null ],
+      [ "spp_disconnect_unknown", "d6/dee/spp__common_8h.html#a1f92f4dc63786e56a6d40e61d3ae0ec0aa31518325f9af1bf3893947282fac73c", null ]
+    ] ],
+    [ "SppMessageId", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762dd", [
+      [ "SPP_START_SERVICE_CFM", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762ddaecc2d4439f927e4e32418da94be7fa8c", null ],
+      [ "SPP_STOP_SERVICE_CFM", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762dda227603f286a75df9a08dc792dbf718d7", null ],
+      [ "SPP_CLIENT_CONNECT_CFM", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762ddabd41f1b2d72e81725bf38c7ebc5496d4", null ],
+      [ "SPP_SERVER_CONNECT_CFM", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762dda3b2a82f2d779054e384eb81c1a1111f1", null ],
+      [ "SPP_CONNECT_IND", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762dda2ced3bfdefa3900c8e2152678321d52a", null ],
+      [ "SPP_MESSAGE_MORE_DATA", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762ddabe7a41705151ca976e1decaf37c57aab", null ],
+      [ "SPP_MESSAGE_MORE_SPACE", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762dda87bfe7ec6df7b0fc92384942ca934f75", null ],
+      [ "SPP_DISCONNECT_IND", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762dda4ee1cbe2d4479da95cd99332ccc0786c", null ],
+      [ "SPP_DISCONNECT_CFM", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762dda368823cafb96880b3e001191d4a48c66", null ],
+      [ "SPP_MESSAGE_TOP", "d6/dee/spp__common_8h.html#a7409a0347261a1a8db3e9fd7a1f762dda28d5f91b073b3034a552056f5802c879", null ]
+    ] ],
+    [ "SppDisconnectRequest", "d6/dee/spp__common_8h.html#a9849b7d053e3ec8adf381a2bbbddb1f5", null ],
+    [ "SppDisconnectResponse", "d6/dee/spp__common_8h.html#a6e52a2d3ef2cea99ca75722eb4668002", null ]
+];

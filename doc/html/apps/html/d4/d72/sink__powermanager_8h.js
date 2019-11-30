@@ -1,0 +1,65 @@
+var sink__powermanager_8h =
+[
+    [ "sink_charge_current", "dd/dab/structsink__charge__current.html", "dd/dab/structsink__charge__current" ],
+    [ "sink_battery_limits", "d4/d4d/structsink__battery__limits.html", "d4/d4d/structsink__battery__limits" ],
+    [ "sink_charge_termination", "db/dcf/structsink__charge__termination.html", "db/dcf/structsink__charge__termination" ],
+    [ "sink_charge_setting", "d0/dd1/structsink__charge__setting.html", "d0/dd1/structsink__charge__setting" ],
+    [ "sink_battery_setting", "dd/d0a/structsink__battery__setting.html", "dd/d0a/structsink__battery__setting" ],
+    [ "sink_power_settings", "d4/d35/structsink__power__settings.html", "d4/d35/structsink__power__settings" ],
+    [ "BATTERY_LEVEL_INVALID", "d4/d72/sink__powermanager_8h.html#a664dcf092079074a5a819b928b9337cf", null ],
+    [ "handlePowerMessage", "d4/d72/sink__powermanager_8h.html#aef121c41ec1514ff71911d0ca3a9d44b", null ],
+    [ "powerManagerBatteryLevelAsPercentage", "d4/d72/sink__powermanager_8h.html#a6533e32672936e38822f8f3fbdbb4fc3", null ],
+    [ "powerManagerChargerConnected", "d4/d72/sink__powermanager_8h.html#a986add870b478607c4b8deceebb5f93f", null ],
+    [ "powerManagerChargerDisconnected", "d4/d72/sink__powermanager_8h.html#a16442e1d97f7e9f2b6f5121ebb34b894", null ],
+    [ "powerManagerChargerError", "d4/d72/sink__powermanager_8h.html#abcfa067481dfc1a32ff2bc422d84a40e", null ],
+    [ "powerManagerChargerSetup", "d4/d72/sink__powermanager_8h.html#a10251112ccb670f0a277df525db2e5d9", null ],
+    [ "powerManagerDisableCharger", "d4/d72/sink__powermanager_8h.html#aa9c555f16d14901945ca86b0f8dbf52c", null ],
+    [ "powerManagerEnableLbipm", "d4/d72/sink__powermanager_8h.html#a845730ffdfe36cbbebf4a177f44498ca", null ],
+    [ "powerManagerGetBatteryLevel", "d4/d72/sink__powermanager_8h.html#a49289ba0aa61dbe4d6a8805f7596bab1", null ],
+    [ "powerManagerGetChargingDeficitAction", "d4/d72/sink__powermanager_8h.html#aa3abe27c1618aa38c14a4ff2cd882285", null ],
+    [ "powerManagerGetLBIPM", "d4/d72/sink__powermanager_8h.html#a78c3a10e91b84ec3cbadb2a8afee5e51", null ],
+    [ "powerManagerGetPeerSlaveLowBat", "d4/d72/sink__powermanager_8h.html#ae8f0cedc6b2a2ea99b07359d8ef85feb", null ],
+    [ "powerManagerGetSessionData", "d4/d72/sink__powermanager_8h.html#ae70f525e25372e5917bec3f562df13d9", null ],
+    [ "powerManagerGetVolumeLimitForChargingDeficit", "d4/d72/sink__powermanager_8h.html#ad7406e4fae6bdb1c713e0ee4f12922ee", null ],
+    [ "powerManagerGetWaitingForChargerFlag", "d4/d72/sink__powermanager_8h.html#a23ca0d2d70c46e984a34ac5716e34142", null ],
+    [ "powerManagerHandleChargerStatus", "d4/d72/sink__powermanager_8h.html#acfa3e8d972e9214cb955401380b84127", null ],
+    [ "powerManagerHandleEmergencyMode", "d4/d72/sink__powermanager_8h.html#acf733e1019eb84814623e920bf4c3c05", null ],
+    [ "powerManagerHasChargerError", "d4/d72/sink__powermanager_8h.html#ad6d0e8c05edbc7fb0591348aea4914d2", null ],
+    [ "powerManagerInit", "d4/d72/sink__powermanager_8h.html#a220246bde2dd11aef3a445729021f4c6", null ],
+    [ "powerManagerIsChargerConnected", "d4/d72/sink__powermanager_8h.html#a90956fd2f9bbc6562d62a1da59b02727", null ],
+    [ "powerManagerIsChargerFullCurrent", "d4/d72/sink__powermanager_8h.html#abab3a426df9501e8f0b2d58bbfe5f941", null ],
+    [ "powerManagerIsReadyForDormant", "d4/d72/sink__powermanager_8h.html#a93261a31a2a01bb580be59eccfdf909b", null ],
+    [ "powerManagerIsVbatCritical", "d4/d72/sink__powermanager_8h.html#a63b7222be8e418c25e4e9ec6a2fd329c", null ],
+    [ "powerManagerIsVbatLow", "d4/d72/sink__powermanager_8h.html#a5855bf252c8312c151b4a5246ecf57bd", null ],
+    [ "powerManagerIsVthmCritical", "d4/d72/sink__powermanager_8h.html#a10cd6f857ff6f93c650b965acbbffe53", null ],
+    [ "powerManagerLowGasGaugeAction", "d4/d72/sink__powermanager_8h.html#a8533b8d32c3b8b27c358fc2b8768b1eb", null ],
+    [ "powerManagerReadVbat", "d4/d72/sink__powermanager_8h.html#ab642d5e1e9f00fb0fa0b72c3f84d8ffe", null ],
+    [ "powerManagerReadVbatVoltage", "d4/d72/sink__powermanager_8h.html#a4ed762c0fe030a48d1dd5dc60865c11c", null ],
+    [ "powerManagerServiceQuickChargeStatInterrupt", "d4/d72/sink__powermanager_8h.html#a8f15410bcccd4ff4a08263257a01fd7f", null ],
+    [ "powerManagerSetPeerSlaveLowBat", "d4/d72/sink__powermanager_8h.html#a8741d9970af35dfed546554b7a036986", null ],
+    [ "powerManagerSetSessionData", "d4/d72/sink__powermanager_8h.html#abdb915cfd34cec5eb92cd626deea3a83", null ],
+    [ "powerManagerSetWaitingForChargerFlag", "d4/d72/sink__powermanager_8h.html#a2e45bca6d08bccb21f0b30bd5c6eaeaa", null ],
+    [ "powerManagerUpdateChargeCurrent", "d4/d72/sink__powermanager_8h.html#a9130434c285c4695da32c469bd8f23d9", null ],
+    [ "powerMangerIsLbipmEnabled", "d4/d72/sink__powermanager_8h.html#aebbdcf5f29ac55afd6a83df27c4210fb", null ],
+    [ "PSKEY_CHARGER_CALC_VTERM", "d4/d72/sink__powermanager_8h.html#ac71c838fef2dd14c606ae2293cfa57b2", null ],
+    [ "battery_level_source", "d4/d72/sink__powermanager_8h.html#a0168fdfeacf9863856fc5ee4ed32a2cd", [
+      [ "battery_level_automatic", "d4/d72/sink__powermanager_8h.html#a0168fdfeacf9863856fc5ee4ed32a2cda497663fc0d5f45d58e0f7bb7689c3cac", null ],
+      [ "battery_level_user", "d4/d72/sink__powermanager_8h.html#a0168fdfeacf9863856fc5ee4ed32a2cda655d560bcc2d2f85535c0c45f10fd29f", null ],
+      [ "battery_level_initial_reading", "d4/d72/sink__powermanager_8h.html#a0168fdfeacf9863856fc5ee4ed32a2cdaf9b359c0756ba3639824f383efca629c", null ]
+    ] ],
+    [ "battery_low_output_action", "d4/d72/sink__powermanager_8h.html#a675acb5758ea91aee0a820dce06c84e6", [
+      [ "battery_low_output_action_none", "d4/d72/sink__powermanager_8h.html#a675acb5758ea91aee0a820dce06c84e6a353c9d160e8c2f3f32e784f38b8d26c5", null ],
+      [ "battery_low_output_action_power_off_at_low_batt_warning", "d4/d72/sink__powermanager_8h.html#a675acb5758ea91aee0a820dce06c84e6af1643d6fef63b9f71604f9272414ee5c", null ],
+      [ "battery_low_output_action_limit_max_volume", "d4/d72/sink__powermanager_8h.html#a675acb5758ea91aee0a820dce06c84e6af2a27ad3ca704ea1e808732b2c1c2152", null ]
+    ] ],
+    [ "sink_vsel", "d4/d72/sink__powermanager_8h.html#a59b86572c22b65f476734befcc749186", [
+      [ "vsel_chg", "d4/d72/sink__powermanager_8h.html#a59b86572c22b65f476734befcc749186a9706cee67803eb183bc1feaa20587d28", null ],
+      [ "vsel_bat", "d4/d72/sink__powermanager_8h.html#a59b86572c22b65f476734befcc749186ab2bb3e4d06237150e3b17923c5b23319", null ]
+    ] ],
+    [ "sink_vterm", "d4/d72/sink__powermanager_8h.html#a362589d98c2fd70df7e19773a7ffa824", [
+      [ "vterm_default", "d4/d72/sink__powermanager_8h.html#a362589d98c2fd70df7e19773a7ffa824abdade215aca6b7ea6b77275515a6efd3", null ],
+      [ "vterm_voltage", "d4/d72/sink__powermanager_8h.html#a362589d98c2fd70df7e19773a7ffa824aae813037d5aef1657b1d443119a67b58", null ],
+      [ "vterm_trim", "d4/d72/sink__powermanager_8h.html#a362589d98c2fd70df7e19773a7ffa824a049299ca804b20bd4b35cf75bf916c85", null ]
+    ] ],
+    [ "powerManagerCheckPanic", "d4/d72/sink__powermanager_8h.html#a3ca5eec1e53b696ad22234a7bdeb4cf2", null ]
+];

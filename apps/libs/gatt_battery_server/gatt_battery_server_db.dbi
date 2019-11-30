@@ -1,0 +1,36 @@
+#ifndef __GATT_BATTERY_SERVER_DB_DBI__
+#define __GATT_BATTERY_SERVER_DB_DBI__
+
+#include "gatt_battery_server_uuids.h"
+
+#define STRINGIFY(STR) #STR
+
+#define ADD_BATTERY_SERVICE(ID) \
+primary_service { \
+    uuid : UUID_BATTERY_SERVICE, \
+    name : STRINGIFY(BATTERY_SERVICE ## ID), \
+    sdp  : true, \
+    characteristic { \
+        uuid        : UUID_BATTERY_LEVEL, \
+        name        : STRINGIFY(BATTERY_LEVEL ## ID), \
+        flags       : [ FLAG_IRQ ], \
+        properties  : [ read , notify ], \
+        value       : 0x0, \
+        presentation_format { \
+            name  : STRINGIFY(BATTERY_LEVEL_PRESENTATION ## ID), \
+            flags : [ FLAG_IRQ , FLAG_DYNLEN ] \
+        }, \
+        client_config \
+        { \
+            name  : STRINGIFY(BATTERY_LEVEL_CLIENT_CONFIG ## ID), \
+            flags : [ FLAG_IRQ , FLAG_DYNLEN ] \
+        } \
+    } \
+}, \
+
+#if defined(GATT_DBI_LIB)
+ADD_BATTERY_SERVICE()
+#endif /* GATT_DBI_LIB */
+
+#endif /* GATT_BATTERY_SERVER_DB_DBI__ */
+

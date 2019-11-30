@@ -1,0 +1,14 @@
+
+VARIANTS := 12 debug
+
+CFLAGS_12 := -DA2DP_1_2 # Define A2DP V1.2 (default V1.3)
+
+CFLAGS_single_slot := -DSINGLE_MEM_SLOT  # flag for building standard version of A2DP lib that uses a single memory slot for internal data storage
+
+CFLAGS_debug := -DA2DP_DEBUG_LIB  # flags for building debug version of A2DP lib
+
+CFLAGS_single_slot_debug := -DSINGLE_MEM_SLOT -DA2DP_DEBUG_LIB  # Single memory slot and debug
+
+CFLAGS_atrac := -DINCLUDE_ATRAC  # flags for building ATRAC version of A2DP lib
+
+CFLAGS_sbc_only := -DA2DP_SBC_ONLY  # flags for building an SBC only version of A2DP lib

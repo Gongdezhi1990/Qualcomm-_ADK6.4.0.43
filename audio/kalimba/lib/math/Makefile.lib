@@ -1,0 +1,51 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2010 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+asm_files = address_bitreverse.asm \
+atan.asm \
+cos.asm \
+div48.asm \
+fft.asm \
+iir.asm \
+inv_qdrt.asm \
+log2.asm \
+pow2.asm \
+rand.asm \
+sin.asm \
+sqrt.asm \
+median_filter.asm \
+vector_complex_multiply.asm\
+misc.asm
+
+header_files = fft.h \
+fft_twiddle.h \
+math_library.h \
+math_library_c_stubs.h
+
+fft_alloc_files = $(asm_files) \
+fft_twiddle_alloc.asm
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# one line per variant...
+$(eval $(call rules_variant,debug,$(FL_DEBUG),$(asm_files)))
+$(foreach hw,$(KAL_BASE_REG_CORES), \
+  $(eval $(call rules_variant_core,base_regs,         						$(FL_BASE_REG),               						  $(asm_files),$(hw))) \
+  $(eval $(call rules_variant_core,base_regs_lowram,  						$(FL_BASE_REG) -DFFT_LOW_RAM, 						  $(asm_files),$(hw))) \
+  $(eval $(call rules_variant_core,base_regs_lowram_fft_alloc,				$(FL_BASE_REG) -DFFT_LOW_RAM             -DFFT_ALLOC, $(fft_alloc_files),$(hw))) \
+  $(eval $(call rules_variant_core,base_regs_lowram_patch_libs,  			$(FL_BASE_REG) -DFFT_LOW_RAM $(FL_PATCH), 			  $(asm_files),$(hw))) \
+  $(eval $(call rules_variant_core,base_regs_lowram_patch_libs_fft_alloc,	$(FL_BASE_REG) -DFFT_LOW_RAM $(FL_PATCH) -DFFT_ALLOC, $(fft_alloc_files),$(hw))) \
+)
+
+$(eval $(call rules_variant,c_support,-DBUILD_WITH_C_SUPPORT,$(asm_files) \
+                                                             math_library_c_stubs.asm))
+
+$(eval $(call rules_variant,lowram,		                -DFFT_LOW_RAM,			              $(asm_files)))
+$(eval $(call rules_variant,lowram_fft_alloc,           -DFFT_LOW_RAM             -DFFT_ALLOC,$(fft_alloc_files)))
+$(eval $(call rules_variant,lowram_patch_libs_fft_alloc,-DFFT_LOW_RAM $(FL_PATCH) -DFFT_ALLOC,$(fft_alloc_files)))
+

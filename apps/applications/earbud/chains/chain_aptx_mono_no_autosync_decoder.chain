@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright (c) 2018 Qualcomm Technologies International, Ltd.-->
+
+<chain name="CHAIN_APTX_MONO_NO_AUTOSYNC_DECODER" id="1" generate_endpoint_roles_enum="False" generate_operator_roles_enum="False">
+
+    <include_header name="../av_headset_chain_roles.h"/>
+
+    <operator name="OPR_LATENCY_BUFFER" id="EB_CAP_ID_SWITCHED_PASSTHROUGH">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_APTX_CLASSIC_MONO_DECODER_NO_AUTOSYNC" id="CAP_ID_APTX_CLASSIC_MONO_DECODER_NO_AUTOSYNC">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <input sink="OPR_LATENCY_BUFFER.IN" role="EPR_SINK_MEDIA"/>
+    <connection source="OPR_LATENCY_BUFFER.OUT" sink="OPR_APTX_CLASSIC_MONO_DECODER_NO_AUTOSYNC.IN"/>
+    <output source="OPR_APTX_CLASSIC_MONO_DECODER_NO_AUTOSYNC.OUT" role="EPR_SOURCE_DECODED_PCM"/>
+
+</chain>

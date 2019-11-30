@@ -1,0 +1,129 @@
+######################################################################################
+#
+# Copyright (c) 2005 - 2019 Qualcomm Technologies International, Ltd.
+# %%version
+#
+# This file contains all AT commands as specified in the Headset and Hands Free specs. 
+#
+######################################################################################
+
+# ------------------------------------------------------------------------------------
+# AT Commands
+#
+# Format specified in spec AT<cmd>=<value><cr>
+#-------------------------------------------------------------------------------------
+
+# Keypad command
+{ AT + CKPD = %d:keycode \r } : aghfpHandleCkpdParse
+
+# Bluetooth Retrieve Supported Features Request
+{ AT + BRSF = %d:supportedFeatures \r } : aghfpHandleBrsfReqParse
+
+# Qualcomm Codecs Supported, if QCE Mode is supported.
+{ AT + \%QAC = [codecs,1,10][%d:codec][ , ] \r } : aghfpHandleQacReqParse
+
+# Qualcomm Codec Select, if QCE mode is supported.
+{ AT + \%QCS = %d:codec \r } :aghfpQceCodecSelectParse
+
+# Call indicators
+{ AT + CIND = ? \r } : aghfpHandleCindSupportReqParse
+{ AT + CIND ? \r } : aghfpHandleCindStatusReqParse
+{ AT + CMER = %d:mode , %d:keyp , %d:disp , %d:ind \r } : aghfpHandleCmerReqParse
+
+# Is call hold supported
+{ AT + CHLD = ? \r } : aghfpHandleChldSupportReqParse
+
+# 
+{ AT + CHLD = %s:cmd \r } : aghfpHandleChldParse
+
+# Answer the call
+{ ATA \r } : aghfpHandleAtaParse
+
+# Enable/disable Calling Line Identification notification
+{ AT + CLIP = %d:state \r } : aghfpHandleClipParse
+
+# Enable/disable call waiting notification
+{ AT + CCWA = %d:state \r } : aghfpHandleCcwaParse
+
+# HF reject incoming call
+{ AT + CHUP \r } : aghfpHandleChupParse
+
+# HF dial
+{ ATD %s:number; \r } : aghfpHandleDialParse
+
+# Dial from a specific slot in the AG's phonebook
+{ ATD > %s:number; \r } : aghfpHandleMemoryDialParse
+
+# Last number redial
+{ AT + BLDN \r } : aghfpHandleBldnParse
+
+# Enable/disable NR and EC in the AG
+{ AT + NREC = %d:state \r } : aghfpHandleNrecParse
+
+# Enable/disable voice recognition in the AG
+{ AT + BVRA = %d:state \r } : aghfpHandleBvraParse
+
+# Request a phone number from the AG
+{ AT + BINP = 1 \r } : aghfpHandleBinpParse
+
+# DTMF generation only one of [0-9 # * A-D] allowed
+{ AT + VTS = %s:code \r } : aghfpHandleVtsParse
+
+# Handle microphone gain instruction from HF
+{ AT + VGM = %d:gain \r } : aghfpHandleVgmParse
+
+# Handle speaker volume instruction from the HF
+{ AT + VGS = %d:volume \r } : aghfpHandleVgsParse
+
+{ AT + BTRH ? \r } : aghfpHandleBtrhStatusRequestParse
+{ AT + BTRH = %d:cmd \r } : aghfpHandleBtrhSetStatusParse
+
+{ AT + CNUM \r } : aghfpHandleCnumParse
+
+{ AT + CLCC \r } : aghfpHandleClccParse
+
+{ AT + COPS = %d:mode , %d:format \r } : aghfpHandleCopsFormatParse
+{ AT + COPS ? \r } : aghfpHandleCopsStatusParse
+
+# Too many cases to handle automagically - parse the indicators in aghfpHandleBiaParse
+{ AT + BIA = %*:indicators \r} : aghfpHandleBiaParse
+
+#################################
+# CSR Extended Features
+
+# a CSR Supported Features Request
+{ AT + CSRSF = %d:callerName , %d:rawText , %d:smsInd , %d:battLevel , %d:pwrSource , %d:codecs , %d:codecBandwidths, %*:ignore \r } : aghfpHandleReponseCSRSupportedFeaturesCodecsBw
+{ AT + CSRSF = %d:callerName , %d:rawText , %d:smsInd , %d:battLevel , %d:pwrSource , %d:codecs , %*:ignore \r } : aghfpHandleReponseCSRSupportedFeatures
+
+# HS response to codec selection
+{ AT + CSRFN = ( %d:ind , %d:val ) \r } : aghfpHandleFeatureNegotiation
+{ AT + CSRFN = ( %d:ind0 , %d:val0 ) , (%d:ind1, %d:val1) \r } : aghfpHandleFeatureNegotiationWithBandwidth
+
+################################
+
+################################################
+# WB-Speech AT Commands
+
+# Codec Negotiation from HF
+{ AT + BCS = %d:codec \r } : aghfpHandleWbsCodecNegotiation
+
+# Codec Connection from HF
+{ AT + BCC \r } : aghfpHandleWbsCodecConnection
+
+# Codec Negotiation from HF
+{ AT + BAC = [codecs,1,10][%d:codec][ , ] \r } : aghfpHandleAvailableCodecs
+
+################################################
+# HF Indicators AT Commands
+
+#HF Indicators from HF
+{ AT + BIND = [indicators,1,10][%d:indicator][ , ] \r } : aghfpHandleBindParse
+
+#Read AG supported indicators from HF
+{ AT + BIND = ? \r } : aghfpHandleBindSupportRequestParse
+
+#Read AG enabled/disabled status of indicators
+{ AT + BIND ? \r } : aghfpHandleBindStatusRequestParse
+
+#Update value of Indicator from HF
+{ AT + BIEV = %d:assignedNum , %d:value \r } : aghfpHandleBievParse

@@ -1,0 +1,92 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    ---
+# MODULE:       ---
+# DESCRIPTION:  Path make rules
+#
+############################################################################
+
+########################################################################
+# Derived paths
+# This is where objects, dependencies etc go
+#########################################################################
+
+ABS_CURDIR=	$(call myabspath,$(CURDIR))
+
+ifeq ($(findstring $(KYMERA_ROOT),$(ABS_CURDIR)), $(KYMERA_ROOT))
+BUILDDIR=	$(subst $(KYMERA_ROOT),,$(ABS_CURDIR))
+else
+BUILDDIR=	$(subst $(KALIMBA_ROOT),,$(ABS_CURDIR))
+endif
+
+TARGET_DIR=	$(OUTPUT_ROOT)$(BUILDDIR)
+
+# If this build is for test, AND we're currently building the top-level exe,
+# move the output to make it easier to find.
+ifneq ("${TEST_OUTPUT}", "")
+ifneq ("${TARGET_EXE_ROOT}", "")
+TARGET_DIR=	$(OUTPUT_ROOT)/test_output
+endif
+endif
+
+# If this build is for download, AND we're currently building the top-level exe,
+# move the output to make it easier to find.
+ifneq ("${DOWNLOAD_OUTPUT}", "")
+ifneq ("${TARGET_EXE_ROOT}", "")
+TARGET_DIR=	$(OUTPUT_ROOT)/download
+endif
+endif
+
+# As above but for patches
+# move the output to make it easier to find.
+ifneq ("${PATCH_OUTPUT}", "")
+TARGET_DIR=	$(OUTPUT_ROOT)/patches
+endif
+
+DEPEND_DIR=         $(TARGET_DIR)/depend
+DEBUG_OBJ_DIR=      $(TARGET_DIR)/debugobj
+DEBUG_BIN_DIR=      $(TARGET_DIR)/debugbin
+DEBUG_EXTCONST_DIR= $(TARGET_DIR)/debugextconst
+DOC_DIR=	$(OUTPUT_ROOT)/doxydocs
+
+ifdef TEST_OUTPUT
+P0_DEBUG_IMAGE_DIR= $(P0_OUTPUT_ROOT)/$(MERGE_DUAL_CORE_P0_CONFIG)/test_output/debugbin
+else
+P0_DEBUG_IMAGE_DIR= $(P0_OUTPUT_ROOT)/$(MERGE_DUAL_CORE_P0_CONFIG)/build/debugbin
+endif
+
+# Asm patch autogen output 
+PATCH_DIR= $(AUTOGEN_ROOT)/patches
+
+# Struct share intermediate files
+STRUCT_ROOT =		$(TARGET_DIR)/struct_share
+LIB_OBJ_DIR =		$(STRUCT_ROOT)/lib_obj
+LIB_SS_TEMP_DIR = 	$(STRUCT_ROOT)/lib_temp
+
+# Struct share header output TODO move to AUTOGEN_ROOT/... ?
+LIB_SS_HDR_DIR = 	$(OUTPUT_ROOT)/struct_share/lib_hdr
+
+ALL_DIRS=	$(TARGET_DIR) \
+		$(DEPEND_DIR) \
+		$(DEBUG_OBJ_DIR) \
+		$(DEBUG_BIN_DIR) \
+		$(DOC_DIR) \
+		$(DEBUG_EXTCONST_DIR) \
+		$(AUTOGEN_ROOT) \
+		$(AUTOGEN_ROOT)/interface \
+		$(PATCH_DIR) \
+		$(STRUCT_ROOT) \
+		$(LIB_OBJ_DIR) \
+		$(LIB_SS_HDR_DIR) \
+		$(LIB_SS_TEMP_DIR)
+
+# Create all the dirs we need during parsing
+# Only do this if we actually know what we're building
+ifneq ($(strip $(TARGET_EXE_ROOT)$(TARGET_LIB_ROOT)), )
+$(shell $(MKDIR_P) $(call ospath,$(ALL_DIRS)) $(STDERR_DEV_NULL))
+endif

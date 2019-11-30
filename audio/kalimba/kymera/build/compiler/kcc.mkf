@@ -1,0 +1,249 @@
+###########################################################################
+# CONFIDENTIAL
+# Copyright (c) 2008 - 2017 Qualcomm Technologies International, Ltd.
+# Unit 400, Cambridge Science Park,
+# Milton Road, Cambridge, CB4 0WH.  UK
+# Tel: +44 1223 692000  Fax: +44 1223 692001
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  rules for Kalimba C compiler
+#
+############################################################################
+
+
+#########################################################################
+# Set roots for tools to use for Kalimba compile/link etc
+#########################################################################
+KTOOLS_ROOT := $(firstword $(BLUELAB_KCC) $(shell $(PYTHON) $(BUILD_ROOT)/get_kcc_version.py $(OSTYPE)))
+
+# CHIP_NAME gordon (alias csr8670 inside kcc),
+#    wont work outside as tool path manipulation
+KCC_LIB_ROOT=      $(KTOOLS_ROOT)/lib/$(CHIP_NAME_KCC)
+
+MAKE_DEPS += $(BUILD_ROOT)/get_kcc_version.py
+
+#########################################################################
+# Tools to use for compilation and build
+#########################################################################
+ARCHIVE=  $(KTOOLS_ROOT)/bin/kar
+COMPILE=  $(KTOOLS_ROOT)/bin/kcc
+ASSEMBLE= $(KTOOLS_ROOT)/bin/kas
+
+DYNMEM_VER = $(BUILD_ROOT)/get_dynmem_version.py
+
+DYNMEM := $(shell $(PYTHON) $(DYNMEM_VER) $(OSTYPE))
+
+OBJDUMP=  $(KTOOLS_ROOT)/bin/kobjdump
+KMAPPER = $(KTOOLS_ROOT)/bin/kmapper
+KSTRIP = $(KTOOLS_ROOT)/bin/kstrip
+# Needed for REL_EXT_BUILD
+KOBJCOPY = $(KTOOLS_ROOT)/bin/kobjcopy
+
+ifeq (true, $(strip $(BUILD_FS_FROM_KAP)))
+# NOTE. we might want to use elf for gordon as well,
+#        in which case use kalelf2mem all round
+KALELF2X = $(KTOOLS_ROOT)/bin/elf2kap
+KALELF2X_FLAGS=$(ELF2KAP_FLAGS)
+else ifeq (true, $(strip $(BUILD_KAS_BINARIES)))
+export LD_LIBRARY_PATH=/home/devtools/kal-python-tools/linux/1.1.3/kal_python_tools_linux64_for_grid_1.1.3
+KALELF2X = $(PYTHON) $(BUILD_ROOT)/kas2bin.py
+KALELF2X_FLAGS =
+else
+# if not building .fs from kap (Amber+)
+ifeq (amber, $(strip $(CHIP_NAME)))
+# Use local version for Amber builds until B-207993 is fixed...
+KALELF2X = /home/dspsw_tools/kalelf2mem/kalelf2mem
+else
+KALELF2X = $(KTOOLS_ROOT)/bin/kalelf2mem
+endif
+KALELF2X_FLAGS=$(KALELF2MEM_FLAGS)
+DM_APPEND_SCRIPT = $(BUILD_ROOT)/dm_append.py
+DM_APPEND = $(PYTHON) $(DM_APPEND_SCRIPT)
+endif
+
+READELF=  $(KTOOLS_ROOT)/bin/kreadelf
+SCRAMBLE= $(KTOOLS_ROOT)/bin/kalscramble
+
+#########################################################################
+# Compiler/Linker definitions
+#########################################################################
+EXE_EXT = .elf
+LIB_EXT = a
+S_EXT = asm
+DYN_EXT = dyn
+
+#########################################################################
+# Flags for compiler
+#########################################################################
+
+# Compiler warning options
+#
+# Start by enabling all warnings (as errors, so we have to fix them)
+
+COMPILE_WARNING_FLAGS = -Werror -Wstrict
+
+# Then turn off the ones we don't currently care about
+#
+# PLEASE DON'T DISABLE ANY NEW WARNINGS BY ADDING EXCLUSIONS HERE
+# FIX THEM PROPERLY INSTEAD
+
+COMPILE_WARNING_FLAGS += -WnoNameTooLong
+COMPILE_WARNING_FLAGS += -WnoAsmNonPortable
+COMPILE_WARNING_FLAGS += -WnoPointerUnaligned
+COMPILE_WARNING_FLAGS += -WnoDeeper
+COMPILE_WARNING_FLAGS += -WnoConstantDoWhileCondition
+COMPILE_WARNING_FLAGS += -WnoEnumArithmetic
+COMPILE_WARNING_FLAGS += -WnoArgUnused
+COMPILE_WARNING_FLAGS += -WnoBreakUnreached
+COMPILE_WARNING_FLAGS += -WnoNonPortableBitfield
+COMPILE_WARNING_FLAGS += -WnoMaybeUnintended
+COMPILE_WARNING_FLAGS += -WnoArgSizeDiffer
+COMPILE_WARNING_FLAGS += -WnoIntValueOutOfRange
+COMPILE_WARNING_FLAGS += -WnoConstantStmt
+COMPILE_WARNING_FLAGS += -WnoEndlessLoop
+COMPILE_WARNING_FLAGS += -WnoUnsignedCompare
+COMPILE_WARNING_FLAGS += -WnoArgNumber
+COMPILE_WARNING_FLAGS += -WnoGlobUnused
+COMPILE_WARNING_FLAGS += -WnoIncompatibleQualified
+COMPILE_WARNING_FLAGS += -WnoIncludeName
+
+COMPILE_WARNING_FLAGS += $(COMPILE_EXTRA_WARNING_FLAGS)
+
+
+# Assembly code doesn't need to keep PM code in download base configs
+KALASM_EXTRA_FLAGS += -DEXT_DEFINED_PM=PM
+KEEP_PM=
+
+COMPILE_FLAGS+=	${KCC_EXTRA_FLAGS} ${COMPILE_EXTRA_FLAGS} $(COMPILE_WARNING_FLAGS) -k$(CHIP_NAME_KCC) $(MINIM_FLAGS) -c -o # Do not delete this comment
+
+DEBUG_COMPILE_FLAGS= -g -allow-inline $(COMPILE_FLAGS)
+RELEASE_COMPILE_FLAGS = -Xa --private $(COMPILE_FLAGS)
+REL_EXT_COMPILE_FLAGS = -Xa --private 
+
+COMPILER_H_PATH += $(KTOOLS_ROOT)/include/ $(KTOOLS_ROOT)/include/target$(TARGET_BITS)/
+
+PREINCLUDE_FLAGS = -preinclude $(PREINCLUDE_DEFS_FILE)
+
+#########################################################################
+# Flags for assembler
+#########################################################################
+ASSEMBLE_FLAGS := $(KALASM_EXTRA_FLAGS) -DTARGET_PLATFORM_$(TARGET_PLATFORM) -mchip=$(CHIP_NAME_KCC) $(ASSEMBLE_EXTRA_DEFS)
+PP_ONLY_FLAGS = -E
+# Let's stop ignoring warnings from the assembler
+ASSEMBLE_FLAGS += -fatal-warnings
+
+# Then turn off the ones we don't currently care about
+#
+# PLEASE DON'T DISABLE ANY NEW WARNINGS BY ADDING EXCLUSIONS HERE
+# FIX THEM PROPERLY INSTEAD
+ASSEMBLE_FLAGS += -WnoUnderflow
+
+DEBUG_ASSEMBLE_FLAGS = -g $(ASSEMBLE_FLAGS)
+RELEASE_ASSEMBLE_FLAGS = -p $(ASSEMBLE_FLAGS)
+REL_EXT_ASSEMBLE_FLAGS = -p
+
+#Extra flags used to assemble .s files produced by compiler. Dont use -g for these
+DEBUG_ASSEMBLE_C_FILE_FLAGS = $(ASSEMBLE_FLAGS) $(MINIM_FLAGS)
+
+#########################################################################
+# Flags for archiver
+#########################################################################
+PRE_ARCHIVE_FLAGS+=	-cr
+DEBUG_PRE_ARCHIVE_FLAGS=$(PRE_ARCHIVE_FLAGS)
+
+#########################################################################
+# (k)objdump flags to produce a .lst file
+#########################################################################
+OBJDUMP_FLAGS+=	-dS
+
+#########################################################################
+# kstrip flags to remove DWARF debug info (but not other symbols)
+#########################################################################
+KSTRIP_FLAGS=-g
+
+#########################################################################
+# Flags for linker
+#########################################################################
+# Form a list of library files in correct format (-lxxx for library libxxx.a)
+LIB_FILES=	$(patsubst lib%.$(LIB_EXT),-l%,$(LFILES))
+
+DEBUG_LIB_DIRS=	$(DEBUG_LDIRS:%=-L%)
+
+# Set link flags. Note --start-group and --end-group around the application
+# libraries ($xxx_LIBS) and the system libraries is to stop the linker
+# discarding symbols in a library that havent been used by any of the
+# libraries before it in the list.  Although doing this increases the link
+# time, its worth it as otherwise we have to ensure the libraries are listed
+# in the correct order, and that there are no circular references
+
+ifdef PATCH_OUTPUT
+#ifneq ($(PATCH_OUTPUT)$(DOWNLOAD_OUTPUT),)
+# Don't include standard libs if we're building patches
+override LINK_FLAGS+= $(LINK_EXTRA_FLAGS) --end-group -o # Do not delete this comment
+else
+override LINK_FLAGS+= $(LINK_EXTRA_FLAGS) $(KCC_LIB_ROOT)/libc.a $(KCC_LIB_ROOT)/libfle.a $(KCC_LIB_ROOT)/libcrt.a --end-group -o # Do not delete this comment
+endif
+
+DEBUG_LIBS=  $(join $(DEBUG_LDIRS:%=%/lib),$(notdir $(LIBS:%=%.a)))
+DEBUG_EXT_LIBS = $(subst ../,,$(DEBUG_LIBS))
+DEBUG_LINK_FLAGS = $(DEBUG_EXT_LIBS_AND_FLAGS) $(LINK_FLAGS)
+DEBUG_LINK_FLAGS_REL_EXT = $(DEBUG_EXT_LIBS_AND_FLAGS_REL_EXT) $(LINK_FLAGS)
+
+ifndef LINKSCRIPT_NAME
+LINKSCRIPT_NAME = linkscript_$(CHIP_NAME)
+endif
+
+ifndef LINKSCRIPT_PATH
+LINKSCRIPT_PATH = $(BUILD_ROOT)/platform
+endif
+
+# Use kld
+# reset.o and crt0.o must be first thing to be linked, to ensure correct placement in PM
+ifeq (KLD, $(strip $(LINKER)))
+LINK=	  $(KTOOLS_ROOT)/bin/kld -Map $(LINK_OUT) -EL
+LINK_REL_EXT=	  $(KTOOLS_ROOT)/bin/kld -Map $(LINK_OUT_REL_EXT) -EL
+# when using kld, the directive KEEP doesn't work if we don't send the whole archives
+# we need to selectively turn on and off the archives that are found in PM_KEEP_LIBS
+PM_KEEP_LIBS_NO_DIR=$(notdir $(PM_KEEP_LIBS))
+PM_KEEP_FLAG_START=--whole-archive
+PM_KEEP_FLAG_END=--no-whole-archive
+DEBUG_EXT_LIBS_AND_FLAGS=$(foreach LIB, $(DEBUG_EXT_LIBS), $(if $(filter $(notdir $(LIB)),$(PM_KEEP_LIBS_NO_DIR:%=lib%.a)),$(PM_KEEP_FLAG_START) $(LIB) $(PM_KEEP_FLAG_END),$(LIB)))
+DEBUG_EXT_LIBS_AND_FLAGS_REL_EXT=$(foreach LIB, $(DEBUG_EXT_LIBS_STRIPPED), $(if $(filter $(notdir $(LIB)),$(PM_KEEP_LIBS_NO_DIR:%=lib%.a)),$(PM_KEEP_FLAG_START) $(LIB) $(PM_KEEP_FLAG_END),$(LIB)))
+
+# Note that OVERRIDE_LINKER_SYMBOLS have to go before the LINKSCRIPT_NAME, otherwise any symbols will not be overridden
+OVERRIDE_LINKER_SYMBOLS += $(if $(DM_RAM_SIZE_KB), --defsym DM_RAM_SIZE=$(DM_RAM_SIZE_KB),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(EXT_DM_RAM_SIZE_KB), --defsym EXT_DM_RAM_SIZE=$(EXT_DM_RAM_SIZE_KB),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(PM_RAM_CODE_START_ADDRESS), --defsym PM_RAM_CODE_START_ADDRESS=$(PM_RAM_CODE_START_ADDRESS),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(PM_RAM_RANGE_P0_START_ADDRESS), --defsym PM_RAM_RANGE_P0_START_ADDRESS=$(PM_RAM_RANGE_P0_START_ADDRESS),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(PM_RAM_RANGE_P0_END_ADDRESS), --defsym PM_RAM_RANGE_P0_END_ADDRESS=$(PM_RAM_RANGE_P0_END_ADDRESS),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(PM_RAM_RANGE_P1_START_ADDRESS), --defsym PM_RAM_RANGE_P1_START_ADDRESS=$(PM_RAM_RANGE_P1_START_ADDRESS),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(PM_RAM_RANGE_P1_END_ADDRESS), --defsym PM_RAM_RANGE_P1_END_ADDRESS=$(PM_RAM_RANGE_P1_END_ADDRESS),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(P1_CODE_START_ADDRESS), --defsym P1_CODE_START_ADDRESS=$(P1_CODE_START_ADDRESS),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(FAST_RAM_START_ADDRESS), --defsym FAST_RAM_START_ADDRESS=$(FAST_RAM_START_ADDRESS),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(P1_STANDALONE), --defsym P1_STANDALONE=$(P1_STANDALONE),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(DUAL_CORE_ENABLED), --defsym DUAL_CORE_ENABLED=$(DUAL_CORE_ENABLED),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(USE_2WAYHALF_CACHE), --defsym USE_2WAYHALF_CACHE=$(USE_2WAYHALF_CACHE),)
+OVERRIDE_LINKER_SYMBOLS += $(if $(USE_2WAY_CACHE), --defsym USE_2WAY_CACHE=$(USE_2WAY_CACHE),)
+OVERRIDE_LINKER_SYMBOLS += --defsym PATCH_RESERVED_RAM=$(if $(PATCH_RESERVED_RAM),$(PATCH_RESERVED_RAM),512)
+
+# When building a download capability we won't necessarily have a reset.o or crt0_withputchar.o
+PRE_LINK_FLAGS= $(OVERRIDE_LINKER_SYMBOLS) -L $(LINKSCRIPT_PATH) -T $(LINKSCRIPT_PATH)/$(LINKSCRIPT_NAME) --fatal-warnings --relax --gc-sections --start-group $(START_GROUP)
+else
+LINK=	  $(KTOOLS_ROOT)/bin/klink -Xld -Map,$(LINK_OUT)
+PRE_LINK_FLAGS= $(KEEP_PM) -T $(LINKSCRIPT_PATH)/$(LINKSCRIPT_NAME) --relax --gc-sections --start-group #$(BUILD_ROOT)/compiler/crt0_withputchar.o
+DEBUG_EXT_LIBS_AND_FLAGS=$(DEBUG_EXT_LIBS)
+endif
+
+DEBUG_PRE_LINK_FLAGS= $(PRE_LINK_FLAGS)
+
+LINK_DEPS += $(LINKSCRIPT_PATH)/$(LINKSCRIPT_NAME)
+
+ifeq ($(strip $(CHIP_ARCH)),$(filter hydra napier, $(strip $(CHIP_ARCH))))
+ifeq (4, $(strip $(KAL_ARCH)))
+DM_APPEND_FLAGS = -kalarch 4
+else
+DM_APPEND_FLAGS = -dmsize $(DM_INIT_TOTAL_SIZE) -offset $(DM_INIT_WINDOW_OFFSET)
+endif
+endif

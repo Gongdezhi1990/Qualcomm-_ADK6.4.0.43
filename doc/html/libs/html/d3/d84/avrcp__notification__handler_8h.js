@@ -1,0 +1,28 @@
+var avrcp__notification__handler_8h =
+[
+    [ "AVRCP_BROWSED_PLAYER_ASSOCIATED_EVENTS", "d3/d84/avrcp__notification__handler_8h.html#aae6e1988f04f7d0f2ddf6a9cc6f261d5", null ],
+    [ "AVRCP_PLAYER_ID_ASSOCIATED_EVENTS", "d3/d84/avrcp__notification__handler_8h.html#a33b61e07313fd292425ecc6fa7d874d9", null ],
+    [ "clearRegisterNotification", "d3/d84/avrcp__notification__handler_8h.html#a2313c0a34f764ca0b412d85e94e88095", null ],
+    [ "GetNotificationTransaction", "d3/d84/avrcp__notification__handler_8h.html#a6796af1eae914b8dd64d6fa433351386", null ],
+    [ "isEventRegistered", "d3/d84/avrcp__notification__handler_8h.html#aae6e7fa35bca341e8613a8ea52313153", null ],
+    [ "registerEventNotification", "d3/d84/avrcp__notification__handler_8h.html#a998109a3617468722e4a8bc5a484f1aa", null ],
+    [ "SetNotificationBit", "d3/d84/avrcp__notification__handler_8h.html#a4c20f476bd5301aee5860953b9aac6df", null ],
+    [ "avrcpHandleGetPlayStatusResponse", "d3/d84/avrcp__notification__handler_8h.html#af6a4206cf5516eff7b6753b2f8421027", null ],
+    [ "avrcpHandleInternalAbsoluteVolumeEvent", "d3/d84/avrcp__notification__handler_8h.html#a4c837ef1f56fcdf6ce5f53ab532bd10b", null ],
+    [ "avrcpHandleInternalAddressPlayerChangedEvent", "d3/d84/avrcp__notification__handler_8h.html#a7c11bd5c9b692ba42d54417e1e7f65ae", null ],
+    [ "avrcpHandleInternalCommonEventResponse", "d3/d84/avrcp__notification__handler_8h.html#a20c4229e017840624689a1bb8db38947", null ],
+    [ "avrcpHandleInternalEventBattStatusChangedResponse", "d3/d84/avrcp__notification__handler_8h.html#a25303389d3e701343380821e7582d580", null ],
+    [ "avrcpHandleInternalEventPlaybackPosChangedResponse", "d3/d84/avrcp__notification__handler_8h.html#aab775a416110c76efe8aa30fe36870e1", null ],
+    [ "avrcpHandleInternalEventPlaybackStatusChangedResponse", "d3/d84/avrcp__notification__handler_8h.html#a179fe33248913e4fec6e6f8686d82884", null ],
+    [ "avrcpHandleInternalEventPlayerAppSettingChangedResponse", "d3/d84/avrcp__notification__handler_8h.html#abc79393603bbb94297b026e2c857343d", null ],
+    [ "avrcpHandleInternalEventSystemStatusChangedResponse", "d3/d84/avrcp__notification__handler_8h.html#aa732e444c05d64eefdf7de02e23f101a", null ],
+    [ "avrcpHandleInternalEventTrackChangedResponse", "d3/d84/avrcp__notification__handler_8h.html#a0daf3392a7a85df21bd2e49fff992e35", null ],
+    [ "avrcpHandleInternalEventUidsChangedEvent", "d3/d84/avrcp__notification__handler_8h.html#ae6c4d46b3b44f762d914802e535dd429", null ],
+    [ "avrcpHandleInternalGetPlayStatusResponse", "d3/d84/avrcp__notification__handler_8h.html#a603f66f6c8abf6d2cc9d578e14ffb1a5", null ],
+    [ "avrcpHandleRegisterNotificationCommand", "d3/d84/avrcp__notification__handler_8h.html#a5b09f2bf856646d621bd55f350df2105", null ],
+    [ "avrcpRejectRegisterNotifications", "d3/d84/avrcp__notification__handler_8h.html#af11eaef3628632ee270b29cf6d260059", null ],
+    [ "avrcpSendGetPlayStatusCfm", "d3/d84/avrcp__notification__handler_8h.html#aa7676d1a38afed349bb630b2ff178eab", null ],
+    [ "avrcpSendNotification", "d3/d84/avrcp__notification__handler_8h.html#af805373c3f77131f7970d72aefee388a", null ],
+    [ "avrcpSendRegisterNotificationFailCfm", "d3/d84/avrcp__notification__handler_8h.html#a347641f96095c362e846c85073347b8b", null ],
+    [ "sendRegisterNotificationResponse", "d3/d84/avrcp__notification__handler_8h.html#ab3a588795b7e1317ae1d45a623e86bbe", null ]
+];

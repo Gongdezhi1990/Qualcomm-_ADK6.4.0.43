@@ -1,0 +1,1237 @@
+<ModuleData Name="sink_wired">
+    <DefineGroup>
+        <DefineList
+            Id="PIO List for Wired Audio Detection Inputs"
+            ShortId="wired_detect_pio">
+            <enum key="Disable"
+                  value="254"/>
+            <enum key="Always On/Detected"
+                  value="255"/>
+        </DefineList>
+
+        <DefineList
+            Id="Audio Routing"
+            ShortId="audio_routing_list">
+            <enum key="Left"
+                  value="0"/>
+            <enum key="Centre"
+                  value="1"/>
+            <enum key="Right"
+                  value="2"/>
+            <enum key="Surround Left"
+                  value="3"/>
+            <enum key="Surround Right"
+                  value="4"/>
+            <enum key="LFE (Low Frequency Effect)"
+                  value="5"/>
+        </DefineList>
+
+        <DefineStruct
+            Id="I2S Configuration Block"
+            ShortId="i2s_init_config_t">
+            <ConfigItem
+                Id="Overridden"
+                ShortId="plugin_type"
+                Desc="Overridden"
+                Type="enum"
+                Size="8">
+                <enum key="Qualcomm User-defined I2C control plug-in"
+                      value="0"/>
+                <enum key="Qualcomm SSM_2518 I2S development board"
+                      value="1"/>
+                <enum key="Qualcomm CSRA_6620 (Diamond) I2S development board"
+                      value="2"/>
+                <enum key="Customer developed plug-in"
+                      value="3"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="master_operation"
+                Desc="Overridden"
+                Type="enum"
+                Size="8">
+                <enum key="Slave"
+                      value="0"/>
+                <enum key="Master"
+                      value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="left_or_right_justified"
+                Desc="Overridden"
+                Type="enum"
+                Size="4">
+                <enum key="Left Justified"
+                      value="0"/>
+                <enum key="Right Justified"
+                      value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="justified_bit_delay"
+                Desc="Overridden"
+                Type="enum"
+                Size="4">
+                <enum key="No Delay"
+                      value="0"/>
+                <enum key="1 Bit Delay"
+                      value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="bits_per_sample"
+                Desc="Overridden"
+                Type="enum"
+                Size="8">
+                <enum key="16 bits"
+                      value="16"/>
+                <enum key="24 bits"
+                      value="24"/>
+                <enum key="32 bits"
+                      value="32"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="i2s_configuration_command_pskey_length"
+                Desc="Overridden"
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="number_of_initialisation_cmds"
+                Desc="Overridden"
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="number_of_volume_cmds"
+                Desc="Overridden"
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="volume_cmds_offset"
+                Desc="Overridden"
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="number_of_shutdown_cmds"
+                Desc="Overridden"
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="shutdown_cmds_offset"
+                Desc="Overridden"
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="volume_no_of_bits"
+                Desc="Overridden"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="volume_range_max"
+                Desc="Overridden"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="volume_range_min"
+                Desc="Overridden"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="music_resampling_frequency"
+                Desc="Overridden"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="voice_resampling_frequency"
+                Desc="Overridden"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="bit_clock_scaling_factor"
+                Desc="Overridden"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="master_clock_scaling_factor"
+                Desc="Overridden"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="enable_24_bit_audio_input"
+                Desc="Overridden"
+                Type="enum"
+                Size="1">
+                <enum key="16 bit audio"
+                      value="0"/>
+                <enum key="24 bit audio"
+                      value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="enable_pio"
+                Desc="Overridden"
+                Type="enum"
+                Size="8">
+                <List use="pio_7_bit"/>
+                <List use="pio_not_sel"/>
+            </ConfigItem>
+        </DefineStruct>
+
+        <DefineStruct
+            Id="SPDIF Configuration"
+            ShortId="spdif_configuration" >
+            <ConfigItem
+                Id="Overridden"
+                ShortId="enable_24_bit_audio"
+                Desc="Overridden"
+                Type="enum"
+                Size="1">
+                <enum key="16 bit audio"
+                      value="0"/>
+                <enum key="24 bit audio"
+                      value="1"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Overridden"
+                ShortId="target_latency"
+                Desc="Overridden"
+                Type="uint"
+                Size="8"/>
+        </DefineStruct>
+
+        <DefineStruct
+            Id="Volume Information"
+            ShortId="volume_info" >
+            <ConfigItem
+                Id="Main Volume"
+                ShortId="main_volume"
+                Desc="Main Volume"
+                Type="int"
+                Size="16"/>
+            <ConfigItem
+                Id="Auxillary Volume"
+                ShortId="aux_volume"
+                Desc="Auxillary Volume"
+                Type="int"
+                Size="16"/>
+        </DefineStruct>
+
+        <DefinePattern
+            PatternName="I2S Config"
+            ShortId="i2s_config">
+            <ConfigItem
+                Id="I2C Command Data Word"
+                ShortId="word"
+                Desc="I2C Raw Command Data Word"
+                Size="16"
+                Type="uint"/>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        ShortId="sink_wired_writeable"
+        Id="Sink Wired Volume"
+        Node="Basic">
+        <ConfigStruct
+            Id="Analogue Volume"
+            ShortId="analog_volume"
+            Desc="Use of a structure volume_info"
+            Type="struct"
+            Struct="volume_info"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='line_input']">
+            <StructElementConfigItem
+                Id="Analogue Volume (Main)"
+                ShortId="analogue_vol_main"
+                Desc="Value is expressed in steps"
+                DefaultValue="0x000A" />
+            <StructElementConfigItem
+                Id="Analogue Volume (Aux)"
+                ShortId="analogue_vol_aux"
+                Desc="Value is expressed in steps"
+                DefaultValue="0x000A" />
+        </ConfigStruct>
+        <ConfigStruct
+            Id="S/PDIF Volume"
+            ShortId="spdif_volume"
+            Desc="Use of a structure volume_info"
+            Type="struct"
+            Struct="volume_info"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='spdif_configuration']">
+            <StructElementConfigItem
+                Id="S/PDIF Volume (Main)"
+                ShortId="spdif_vol_main"
+                Desc="Value is expressed in steps"
+                DefaultValue="0x000A" />
+            <StructElementConfigItem
+                Id="S/PDIF Volume (Aux)"
+                ShortId="spdif_vol_aux"
+                Desc="Value is expressed in steps"
+                DefaultValue="0x000A" />
+        </ConfigStruct>
+        <ConfigStruct
+            Id="I2S Volume"
+            ShortId="i2s_volume"
+            Desc="Use of a structure volume_info"
+            Type="struct"
+            Struct="volume_info"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='i2s_input']">
+            <StructElementConfigItem
+                Id="I2S Volume (Main)"
+                ShortId="i2s_vol_main"
+                Desc="Value is expressed in steps"
+                DefaultValue="0x000A" />
+            <StructElementConfigItem
+                Id="I2S Volume (Aux)"
+                ShortId="i2s_vol_aux"
+                Desc="Value is expressed in steps"
+                DefaultValue="0x000A" />
+        </ConfigStruct>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="sink_wired_readonly"
+        Id="Sink Wired Readonly Config Data"
+        Node="Basic">
+        <ConfigItem
+            Id="Wired Audio Connected PowerOff Timeout [s]"
+            ShortId="WiredAudioConnectedPowerOffTimeout_s"
+            Type="uint"
+            DefaultValue="0x0010"
+            Size="16"
+            Desc="The elapsed time, in seconds, before the device is powered off after a wired audio source is connected."
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']">
+        </ConfigItem>
+        <ConfigItem
+            Id="Analogue Audio Disconnection debounce [ms]"
+            ShortId="AnalogueAudioDisconnectDebounce_ms"
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"
+            Desc="Analogue audio disconnection debounce period in milliseconds. Prevents the audio stream from being destroyed and then recreated in quick succession if the analogue audio detection changes within the specified time."
+            Type="uint"
+            Size="16"
+            DefaultValue="0"/>
+        <ConfigItem
+            Id="Wired audio Input sampling rate"
+            ShortId="wired_audio_input_rate"
+            Type="enum"
+            DefaultValue="48 kHz"
+            Size="8"
+            Desc="Determines the sampling rate used for the analogue wired audio input. Note: High Resolution sample rates (88.2 and 96 kHz) are not available on CSR8670."
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_plugin_features']">
+            <enum key="None"
+                  value="0"/>
+            <enum key="44.1 kHz"
+                  value="1"/>
+            <enum key="48 kHz"
+                  value="2"/>
+            <enum key="88.2 kHz"
+                  value="3"/>
+            <enum key="96 kHz"
+                  value="4"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Wired audio maximum input sampling rate for spdif"
+            ShortId="max_sample_rate"
+            Type="enum"
+            DefaultValue="48 kHz"
+            Size="8"
+            Desc="Determines the maximum sampling rate used for the spdif wired audio input. Note: High Resolution sample rates (88.2 and 96 kHz) are not available on CSR8670."
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_plugin_features']">
+            <enum key="None"
+                  value="0"/>
+            <enum key="44.1 kHz"
+                  value="1"/>
+            <enum key="48 kHz"
+                  value="2"/>
+            <enum key="88.2 kHz"
+                  value="3"/>
+            <enum key="96 kHz"
+                  value="4"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Output sampling rate when routing wired audio sources"
+            ShortId="wired_audio_output_rate"
+            Type="enum"
+            DefaultValue="48 kHz"
+            Size="8"
+            Desc="Set the playback sample rate to use when routing analogue, I2S or SPDIF inputs. Note that if a resampling rate is explicitly set for the I2S output it will override this value. When the wireless subwoofer functionality is enabled all output playback is at a fixed rate of 48kHz which will also override this setting."
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='audio_plugin_features']">
+            <enum key="None"
+                  value="0"/>
+            <enum key="44.1 kHz"
+                  value="1"/>
+            <enum key="48 kHz"
+                  value="2"/>
+            <enum key="88.2 kHz"
+                  value="3"/>
+            <enum key="96 kHz"
+                  value="4"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="SPDIF Detect PIO"
+            ShortId="spdif_detect"
+            Type="enum"
+            DefaultValue="Disable"
+            Size="8"
+            Desc="This configures a PIO to detect when SPDIF audio is being used e.g. when a connector is plugged in.  This may also be configured to always assume this input is connected or disabled entirely."
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='input_pios']">
+            <List use="pio_7_bit"/>
+            <List use="wired_detect_pio"/>
+            <BuildVariant HwVariant="All"
+                          SwVariant="Soundbar-Subwoofer"
+                          Value="Always On/Detected"/>
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05"
+                          SwVariant="All"
+                          Value="Always On/Detected"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Audio Input PIO"
+            ShortId="analog_input"
+            Type="enum"
+            DefaultValue="PIO 10"
+            Size="8"
+            Desc="This configures a PIO to detect when analog audio input is being used, e.g. when a connector is plugged in. This may also be configured to always assume this input is connected or disabled entirely."
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='input_pios']">
+            <List use="pio_7_bit"/>
+            <List use="wired_detect_pio"/>
+            <BuildVariant HwVariant="CNS10001v4"
+                          SwVariant="All"
+                          Value="PIO 5"/>
+            <BuildVariant HwVariant="H13503v2"
+                          SwVariant="All"
+                          Value="Disable"/>
+            <BuildVariant HwVariant="CNS11012v2"
+                          SwVariant="All"
+                          Value="Disable"/>
+            <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05 CF133 CF133_SQIF CG793 CG437"
+                          SwVariant="All"
+                          Value="Disable"/>
+            <BuildVariant HwVariant="CE446_CE692 CF376_CE692 CF376_CE692H3 CF376_H13732"
+                          SwVariant="All"
+                          Value="PIO 21"/>
+            <BuildVariant HwVariant="20-CE751-H1 20-CE752-H1 20-CE690-H1"
+                          SwVariant="All"
+                          Value="Disable"/>
+			<BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE678-H1 20-CE742-H1 20-CE729-H1 20-CE889-H1 20-CE890-H1"
+                          SwVariant="All"
+                          Value="PIO 21"/>
+            <BuildVariant HwVariant="CF376_CE826"
+                          SwVariant="All"
+                          Value="PIO 25" />
+            <BuildVariant HwVariant="CF376_CF212"
+                          SwVariant="All"
+                          Value="PIO 42" />
+            <BuildVariant HwVariant="CF376_CF429 CF376_CF440 QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="Disable"/>
+            <BuildVariant HwVariant="CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 53" />
+            <BuildVariant HwVariant="QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 4" />
+        </ConfigItem>
+        <ConfigItem
+            Id="SPDIF Input PIO"
+            ShortId="spdif_input"
+            Type="enum"
+            DefaultValue="Disable"
+            Size="8"
+            Desc="This configures a PIO to be used for SPDIF input, this is required for CSR8675 and must be an odd number. This should be disabled for CSR8670 (SPDIF will still function)"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='input_pios']">
+            <List use="pio_7_bit"/>
+            <List use="wired_detect_pio"/>
+            <BuildVariant HwVariant="All"
+                          SwVariant="Soundbar-Subwoofer"
+                          Value="PIO 17"/>
+            <BuildVariant HwVariant="CF376_CG724"
+                          SwVariant="Soundbar-Subwoofer"
+                          Value="PIO 33"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="I2S Detect PIO"
+            ShortId="i2s_detect"
+            Type="enum"
+            DefaultValue="Disable"
+            Size="8"
+            Desc="This configures a PIO to detect whether the I2S audio being used. e.g. when a connector is plugged in. This may also be configured to always assume this input is connected or disabled entirely"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='input_pios']">
+            <List use="pio_7_bit"/>
+            <List use="wired_detect_pio"/>
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05"
+                          SwVariant="All"
+                          Value="Always On/Detected"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="SPDIF Output"
+            ShortId="spdif_output"
+            Type="enum"
+            DefaultValue="N/A"
+            Size="8"
+            Desc="This sets a PIO to be configured for SPDIF ouput, this should be configured for CSR8675 and must be an even number. This should be set to 'N/A' for SPDIF output on CSR8670 (SPDIF output will still function)"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+            <BuildVariant HwVariant="All"
+                          SwVariant="Soundbar-Subwoofer"
+                          Value="PIO 18"/>
+            <BuildVariant HwVariant="CF376_CG724"
+                          SwVariant="Soundbar-Subwoofer"
+                          Value="PIO 32"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Power Off after Wired Audio Connected"
+            ShortId="PowerOffOnWiredAudioConnected"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="When set the Sink is powered off after the wired audio is connected"
+            ConfigGroupPath="./[@ShortId='system']"/>
+        <ConfigItem
+            Id="Play from physical connections in limbo state"
+            ShortId="PlayUsbWiredInLimbo"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="Setting this bit will result in the Sink playing from configured USB, SPDIF and analog inputs when in limbo."
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']"/>
+        <ConfigItem
+                Id="Audio Instance for I2S input"
+                ShortId="i2s_audio_instance"
+                DefaultValue="Audio Instance 1"
+                Type="enum"
+                Size="2"
+                Desc="This configuration item specifies the audio instance for I2S Input. For QCC300x, if Audio Instance 1 is selected then PCM block 2 will be used instead of PCM block 1 for I2S input."
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']">
+                <List use="audio_instance"/>
+                <BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE678-H1 20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1"
+                              SwVariant="All"
+                              Value="Audio Instance 0"/>
+                <BuildVariant HwVariant="CF376_CE826 CF376_CF212 CF133 CF133_SQIF CG793 CG437 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA H13503v2 QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA H13179v2_H13478v2 CNS10001v4"
+                              SwVariant="All"
+                              Value="Audio Instance 0" />
+        </ConfigItem>
+        <ConfigItem
+                Id="Audio Instance for SPDIF input"
+                ShortId="spdif_audio_instance"
+                DefaultValue="Audio Instance 0"
+                Type="enum"
+                Size="2"
+                Desc="This configuration item specifies the audio instance for SPDIF Input. For QCC300x, if Audio Instance 1 is selected then PCM block 2 will be used instead of PCM block 1 for SPDIF input."
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']">
+                <List use="audio_instance"/>
+        </ConfigItem>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="spdif_settings"
+        Id="Sink Wired SPDIF Config Data"
+        Node="Basic">
+        <ConfigStruct
+            Id="SPDIF Config"
+            ShortId="SpdifConfig"
+            Desc="Use of a structure spdif_configuration"
+            Type="struct"
+            Struct="spdif_configuration"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='spdif_configuration']">
+            <StructElementConfigItem
+                Id="SPDIF Input Resolution"
+                ShortId="enable_24_bit_audio"
+                Desc="This configuration item specifies the SPDIF Input audio bit resolution. Bit depth is fixed internally at 24 bit and this configuration item is only applicable to CSR8675 and CSR8676 parts. Note that only 16 bit config is valid for CSR8670. Furthermore it is supported for PCM audio over SPDIF only and not for any other coded audio."
+                DefaultValue="24 bit audio" >
+                <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05"
+                              SwVariant="All"
+                              Value="24 bit audio"/>
+                <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA"
+                              SwVariant="All"
+                              Value="24 bit audio" />
+                <BuildVariant HwVariant="H13179v2_H13478v2"
+                              SwVariant="All"
+                              Value="24 bit audio" />
+                 <BuildVariant HwVariant="H13503v2"
+                              SwVariant="All"
+                              Value="24 bit audio" />
+                <BuildVariant HwVariant="CNS10001v4"
+                              SwVariant="All"
+                              Value="16 bit audio"/>
+                <BuildVariant HwVariant="CNS11012v2"
+                              SwVariant="All"
+                              Value="16 bit audio" />
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Target Latency [ms]"
+                ShortId="target_latency"
+                Desc="Specifies the target latency, in ms. Expected to be in the range of 0 to 150ms. Note: this configuration item is only applicable to CSR8670 and CSR8675"
+                DefaultValue="0x28" />
+        </ConfigStruct>
+    </ConfigGroup>
+
+    <ConfigGroup
+        ShortId="i2s_data"
+        Id="Sink Wired I2S Config Data"
+        Node="Basic">
+        <ConfigStruct
+            Id="Instance of a structure I2S pskey configuration"
+            ShortId="i2s_init_config"
+            Desc="Use of a structure i2s_init_config_t"
+            Type="struct"
+            Struct="i2s_init_config_t">
+            <StructElementConfigItem
+                Id="Plug-in Type"
+                ShortId="i2s_plugin"
+                Desc="This setting determines which I2S plug-in should be used. The options availlable are to use; A)The provided Qualcomm plug-in which can be configured through this tool to target a wide selection of I2S interfaced devices;B)Preconfigured settings for the Qualcomm SSM_2518 I2S Development Board; C)Preconfigured settings for Qualcomm CSRA_6620 (Diamond) I2S development board; D)A customer developed plug-in."
+                DefaultValue="Qualcomm User-defined I2C control plug-in"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']"/>
+            <StructElementConfigItem
+                Id="Master or Slave Operation"
+                ShortId="i2s_is_master"
+                Desc="Specifies Master or Slave Operation."
+                DefaultValue="Master"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']"/>
+            <StructElementConfigItem
+                Id="Left or Right Justified I2S"
+                ShortId="i2s_rl_justified"
+                Desc="Choose between left justified and right justified I2S data."
+                DefaultValue="Left Justified"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']"/>
+            <StructElementConfigItem
+                Id="Justified Data Delay by 1 bit"
+                ShortId="i2s_1bit_delay"
+                Desc="The I2S data can be delayed by 1 bit."
+                DefaultValue="1 Bit Delay"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']"/>
+            <StructElementConfigItem
+                Id="Bits per Sample"
+                ShortId="i2s_bits_per_sample"
+                Desc="Specifies the number of bits in each audio sample. Bits per sample should be less than or equal to bit depth. If 24 bit operation is defined, Bits per sample should be configured to a minimum of 24 bits."
+                DefaultValue="24 bits"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']"/>
+            <StructElementConfigItem
+                Id="I2C Raw Command Data Configuration Length"
+                ShortId="i2s_config_length"
+                Desc="Specifies the length of the I2C Raw Command Data block."
+                DefaultValue="0x3C"
+                ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='session_data']"/>
+            <StructElementConfigItem
+                Id="Number I2C Init Commands"
+                ShortId="i2s_struct_item_g"
+                Desc="Specifies how many I2C Initialisation commands are specified in the Raw Command Data"
+                DefaultValue="0x0A"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']/[@ShortId='initialisation']">
+                <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05"
+                              SwVariant="All"
+                              Value="0x00"/>
+                <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA"
+                              SwVariant="All"
+                              Value="0x00" />
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Number I2C Volume Commands"
+                ShortId="i2s_struct_item_h"
+                Desc="Specifies the number of individual I2C volume commands that will be sent to the I2S capable device every time a volume change is made."
+                DefaultValue="0x00"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']/[@ShortId='volume']"/>
+            <StructElementConfigItem
+                Id="Volume Commands Offset"
+                ShortId="i2s_struct_item_i"
+                Desc="Specifies the offset, in words, of the first I2C Volume command specified in the Raw Command Data"
+                DefaultValue="0x00"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']/[@ShortId='volume']"/>
+            <StructElementConfigItem
+                Id="Number I2C Shutdown Commands"
+                ShortId="i2s_struct_item_j"
+                Desc="Specifies the number of individual I2C commands that will be sent to the I2S capable device every time the device is shut down, i.e. on close of SCO or A2DP media stream."
+                DefaultValue="0x02"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']/[@ShortId='shutdown']">
+                <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05"
+                              SwVariant="All"
+                              Value="0x00"/>
+                <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA"
+                              SwVariant="All"
+                              Value="0x00" />
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Shutdown Commands Offset"
+                ShortId="i2s_struct_item_k"
+                Desc="Specifies the offset, in words, of the first I2C Shutdown command specified in the Raw Command Data"
+                DefaultValue="0x32"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']/[@ShortId='shutdown']"/>
+            <StructElementConfigItem
+                Id="Volume Number of Bits"
+                ShortId="i2s_struct_item_l"
+                Desc="Specifies the number of bits of the volume setting in the I2C command."
+                DefaultValue="0x0008"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']/[@ShortId='volume']"/>
+            <StructElementConfigItem
+                Id="Volume Range Max"
+                ShortId="i2s_struct_item_m"
+                Desc="Specifies the maximum volume value that will be sent to the I2S device to indicate maximum output level."
+                DefaultValue="0x0030"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']/[@ShortId='volume']"/>
+            <StructElementConfigItem
+                Id="Volume Range Min"
+                ShortId="i2s_struct_item_n"
+                Desc="Specifies the minimum volume value that will be sent to the I2S device to indicate minimum output level."
+                DefaultValue="0x00FF"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']/[@ShortId='volume']"/>
+            <StructElementConfigItem
+                Id="Audio Output Re-sample Rate [Hz]"
+                ShortId="i2s_struct_item_o"
+                Desc="Forces re-sampling of all audio outputs to a fixed sample rate when an I2S output is configured, specified in Hz. A value of 0 disables re-sampling. Note, I2S outputs do not support re-sample rates less than 44100Hz, any attempt to force a rate lower than 44100Hz will result in no audio on the I2S output."
+                DefaultValue="0x0000"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']"/>
+            <StructElementConfigItem
+                Id="Voice Re-sample Rate [Hz]"
+                ShortId="i2s_struct_item_p"
+                Desc="Specifies the voice (CVC) output sample rate when an I2S output is configured, in Hz. A value of 0 disables re-sampling. Note, I2S outputs do not support sample rates less than 44100Hz, any rate lower than this will be overridden by the application."
+                DefaultValue="0x0000"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']"/>
+            <StructElementConfigItem
+                Id="Bit Clock Scaling Factor"
+                ShortId="i2s_struct_item_q"
+                Desc="Specifies the I2S bit clock rate (BCLK) as a multiple of the sample rate, output when running in I2S Master mode."
+                DefaultValue="0x0040"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']"/>
+            <StructElementConfigItem
+                Id="Master Clock Scaling Factor"
+                ShortId="i2s_struct_item_r"
+                Desc="Specifies the I2S master clock rate (MCLK) as a multiple of the sample rate. This is used to drive the bit and word clocks when running in I2S Master mode, so must always be higher than the bit clock scaling factor. In I2S Slave mode, the MCLK of an external device may be used to drive the audio interface logic synchronously. A value of 0 disables MCLK input/output."
+                DefaultValue="0x0000"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']">
+                <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05"
+                              SwVariant="All"
+                              Value="0x0100"/>
+                <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA"
+                              SwVariant="All"
+                              Value="0x0100" />
+                <BuildVariant HwVariant="CG437 CF376_CG724"
+                              SwVariant="All"
+                              Value="0x0000" />
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Audio Input Resolution"
+                ShortId="i2s_struct_item_s"
+                Desc="This configuration item specifies the I2S Input audio bit resolution. Note: this configuration item is only relevant for I2S audio input. Furthermore it is only applicable to CSR8675 and CSR8676 parts and not for CSR8670."
+                DefaultValue="24 bit audio"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='i2s_input']">
+				<BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE678-H1 20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1"
+                              SwVariant="All"
+                              Value="16 bit audio"/>
+                <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF376_CE692 CF376_CE692H3 CF376_H13732"
+                              SwVariant="All"
+                              Value="24 bit audio"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="External I2s device Enable PIO"
+                ShortId="enable_pio"
+                Desc="Specifies the PIO to enable external I2S device."
+                DefaultValue="N/A"
+                ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']">
+            </StructElementConfigItem>
+        </ConfigStruct>
+        <ConfigGroup
+            Id="Raw Command Data"
+            ShortId="raw_command"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='i2s']/[@ShortId='i2c_control_for_external_i2s_amp']">
+            <ConfigPatternArray
+                Id="I2C Data Word"
+                ShortId="data"
+                Pattern="i2s_config"
+                MaxNumPatterns="80">
+                <PatternArrayRow
+                    Id="Row 1"
+                    ShortId="row_1"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 2"
+                    ShortId="row_2"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 3"
+                    ShortId="row_3"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0054" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 4"
+                    ShortId="row_4"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x001b" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 5"
+                    ShortId="row_5"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 6"
+                    ShortId="row_6"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 7"
+                    ShortId="row_7"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 8"
+                    ShortId="row_8"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0054" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 9"
+                    ShortId="row_9"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0004" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 10"
+                    ShortId="row_10"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0005" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 11"
+                    ShortId="row_11"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 12"
+                    ShortId="row_12"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 13"
+                    ShortId="row_13"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0054" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 14"
+                    ShortId="row_14"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x000e" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 15"
+                    ShortId="row_15"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0093" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 16"
+                    ShortId="row_16"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 17"
+                    ShortId="row_17"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 18"
+                    ShortId="row_18"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0054" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 19"
+                    ShortId="row_19"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0005" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 20"
+                    ShortId="row_20"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0018" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 21"
+                    ShortId="row_21"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 22"
+                    ShortId="row_22"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 23"
+                    ShortId="row_23"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0054" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 24"
+                    ShortId="row_24"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0007" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 25"
+                    ShortId="row_25"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0030" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 26"
+                    ShortId="row_26"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 27"
+                    ShortId="row_27"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 28"
+                    ShortId="row_28"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0056" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 29"
+                    ShortId="row_29"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x001b" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 30"
+                    ShortId="row_30"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 31"
+                    ShortId="row_31"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 32"
+                    ShortId="row_32"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 33"
+                    ShortId="row_33"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0056" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 34"
+                    ShortId="row_34"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0004" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 35"
+                    ShortId="row_35"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0005" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 36"
+                    ShortId="row_36"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 37"
+                    ShortId="row_37"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 38"
+                    ShortId="row_38"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0056" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 39"
+                    ShortId="row_39"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x000e" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 40"
+                    ShortId="row_40"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0093" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 41"
+                    ShortId="row_41"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 42"
+                    ShortId="row_42"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 43"
+                    ShortId="row_43"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0056" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 44"
+                    ShortId="row_44"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0005" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 45"
+                    ShortId="row_45"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0018" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 46"
+                    ShortId="row_46"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 47"
+                    ShortId="row_47"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 48"
+                    ShortId="row_48"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0056" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 49"
+                    ShortId="row_49"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0007" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 50"
+                    ShortId="row_50"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0030" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 51"
+                    ShortId="row_51"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 52"
+                    ShortId="row_52"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 53"
+                    ShortId="row_53"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0054" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 54"
+                    ShortId="row_54"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0005" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 55"
+                    ShortId="row_55"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0058" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 56"
+                    ShortId="row_56"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0003" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 57"
+                    ShortId="row_57"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0000" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 58"
+                    ShortId="row_58"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0056" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 59"
+                    ShortId="row_59"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0005" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Row 60"
+                    ShortId="row_60"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="i2s_data_config_word"
+                        DefaultValue="0x0058" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+</ModuleData>

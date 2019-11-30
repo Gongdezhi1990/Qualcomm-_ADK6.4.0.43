@@ -1,0 +1,28 @@
+var structpower__type =
+[
+    [ "charger_enabled", "../../libs/html/d4/de6/structpower__type.html#ac58b302a6d448df5d43270fd59c7c51e", null ],
+    [ "charger_i_actual_fast", "../../libs/html/d4/de6/structpower__type.html#ac7c42c86cd0b5572cf0d961a05231573", null ],
+    [ "charger_i_safe_fast", "../../libs/html/d4/de6/structpower__type.html#a49c0c77d916b46ebabb4b78875e89f99", null ],
+    [ "charger_i_setting", "../../libs/html/d4/de6/structpower__type.html#a88b1b7f3e2f7275d0bbff15d57d4ee70", null ],
+    [ "charger_i_target", "../../libs/html/d4/de6/structpower__type.html#aa98b52a35057de8ababb140ffd583740", null ],
+    [ "chg_boost", "../../libs/html/d4/de6/structpower__type.html#a14be796f6e48c881b442d9ea0af4d934", null ],
+    [ "chg_cycle_complete", "../../libs/html/d4/de6/structpower__type.html#aef735841c62ddaa15d0723eaf4ee18eb", null ],
+    [ "chg_prg_mon", "../../libs/html/d4/de6/structpower__type.html#a4ff8399d65c2eae10dad9b652689efdc", null ],
+    [ "chg_state", "../../libs/html/d4/de6/structpower__type.html#ab94275a46a570d34b3afa85179b071ee", null ],
+    [ "clientTask", "../../libs/html/d4/de6/structpower__type.html#a841366febb4ec7db10912436a1c83594", null ],
+    [ "config", "../../libs/html/d4/de6/structpower__type.html#a127aefc7b07e6867c8c0757d97a1e4e7", null ],
+    [ "cumulative_non_current_limit_period_chg", "../../libs/html/d4/de6/structpower__type.html#a7a7ee0170b265496dd2bb56d832cbbca", null ],
+    [ "init_mask", "../../libs/html/d4/de6/structpower__type.html#a906a4f2486e35a6df53dcea0d48a611f", null ],
+    [ "pmu_mon_config", "../../libs/html/d4/de6/structpower__type.html#aeffccf2f5a35a8630c19209e8d4f50c1", null ],
+    [ "pmu_mon_enabled", "../../libs/html/d4/de6/structpower__type.html#a2d3e31a6995800b1b12e30b17555aa98", null ],
+    [ "ps_chg_trim", "../../libs/html/d4/de6/structpower__type.html#ab526e363c844d901db3ee20b9ea71e75", null ],
+    [ "task", "../../libs/html/d4/de6/structpower__type.html#ad4e6fa10578616ecf196b251de52a6fa", null ],
+    [ "thermal", "../../libs/html/d4/de6/structpower__type.html#aebcd49a4c35feb1852f48ba3bd8e7e35", null ],
+    [ "unused", "../../libs/html/d4/de6/structpower__type.html#a02d64df193404c6cf4c1130ca2adc9f0", null ],
+    [ "vbat", "../../libs/html/d4/de6/structpower__type.html#a98ab94b0336e7d84937e26ee335f9ddc", null ],
+    [ "vbat_trend", "../../libs/html/d4/de6/structpower__type.html#a834823bb599c5c97696c1d0d0597b491", null ],
+    [ "vchg", "../../libs/html/d4/de6/structpower__type.html#a5b772178d7f15609e8bf07080037fa17", null ],
+    [ "vref", "../../libs/html/d4/de6/structpower__type.html#a794d109821f711c4e8455a874f877cc9", null ],
+    [ "vterm", "../../libs/html/d4/de6/structpower__type.html#a036b0e63a1afb9900278952f8fc0c9db", null ],
+    [ "vthm", "../../libs/html/d4/de6/structpower__type.html#a5794125abc7b0cd74ec3efc79a64d7cc", null ]
+];

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "basic": {
+      "format": "%(message)s"
+    }
+  },
+  "handlers": {
+    "acat.console": {
+      "class": "logging.StreamHandler",
+      "formatter": "basic",
+      "stream": "ext://sys.stdout",
+      "level": "INFO"
+    }
+  },
+  "root": {
+    "level": "INFO",
+    "handlers": ["acat.console"]
+  }
+}
+

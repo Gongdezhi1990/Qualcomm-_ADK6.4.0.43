@@ -1,0 +1,17 @@
+file=app2
+
+# Chip Type: QCC3021
+# LK-VAM-CVC-SPK-0020->cVc Speaker 2-MIC (endfire or broadside)
+# LK-VAM-APTX-AD->aptX Adaptive Decoder
+# LK-VAM-APTX-ADM->aptX Adaptive TWS Mono Decoder
+
+# Starting Address: 00025B00FF00
+# Ending Address: 00025B00FF0F
+# Number of Bluetooth Addresses: 16
+FeatureLicenseKey = [ 94 DF C3 65 84 BB AF CE D4 BF C3 18 03 0E 79 E8 2B 3A 29 8F 6A 9A C5 91 13 6A A4 08 AB 22 E9 82 CC 66 B3 50 E5 FC 3B A9 46 13 F3 DD A6 55 60 E7 AF FF E4 B7 33 A1 29 C6 76 C9 BB D7 FB B0 02 24 ]
+
+USBProductString = [ 51 43 43 33 30 32 31 ]
+
+USBSerialNumberString = [ 41 42 43 44 45 46 30 31 32 33 34 35 36 37 38 39 ]
+
+USBManufString = [ 51 54 49 4C ]

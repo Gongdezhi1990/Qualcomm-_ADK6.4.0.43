@@ -1,0 +1,24 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# definitions for including downloadable usb audio rx
+
+%cpp
+
+# include usb audio endpoint
+INSTALL_USB_AUDIO
+
+# include usb audio rx and tx capabilities
+%list CFG_CAPABILITIES
+USB_AUDIO
+
+%list ALL_SRCDIRS
+capabilities/usb_audio
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/usb_audio/usb_audio

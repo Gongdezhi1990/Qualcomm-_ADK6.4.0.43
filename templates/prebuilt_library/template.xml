@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <name>Capability Bundle for Kymera (Import Prebuilt Library)</name>
+    <description>Creates a new downloadable capability bundle for Kymera using a prebuilt library. Please place the file with extension .a (and .reloc for private libraries) in the folder PROJECT_ROOT\audio\kalimba\kymera\lib_release\stre_rom_v02_release\</description>
+    <fields>
+        <!-- List all the fields the user is prompted for
+             Text is used as a label in the UI, name attribute is used to swap @@@markers@@@ in files
+             "project" is a special case due to how the wizard works
+        -->
+
+        <!-- Special name -->
+        <field name="project" default="my_prebuilt_lib_proj"/>
+
+        <!-- Special name:
+             It's important to make sure any <file type="project" precedes a block
+             as this path is relative to that project file.
+
+             Consider when creating workspaces with multiple projects.  Ensure that
+             all generated <file/> items are groups under the correct project type.
+        -->
+        <field name="plib_name" default="my_prebuilt_lib">Prebuilt Library name</field>
+        <field name="root"/>
+        <section name="cap">
+           Capability #
+           <field name="cap_name" default="my_cap">Capability name</field>
+           <field name="cap_id" default="0xC000">Capability ID</field>
+           <field name="max_inputs" default="1">Max number of sinks/inputs</field>
+           <field name="max_outputs" default="1">Max number of sources/outputs</field>
+        </section>
+
+
+
+
+    </fields>
+
+    <content>
+    <!--List all the files/folders that need processing in the project
+        Source is the original, and the content is what it should be renamed to
+        Field markers can be used to apply user labels to file names
+        No content means the src is copied into the root of the destination
+        The folder element copies that location and all subfolders
+        ./ identifies the root of the template folder
+        sdk:// identifies the root of the devkit
+        <file type="copy" ...> elements just copied and not parsed
+        <file type="text" ...> elements open automatically on IDE
+        <file ...> elements treated as project and opens on IDE
+        <files/> elements cannot be parsed
+
+        Examples:
+
+        <file src="./test.c">./@@@project@@@.c</file>
+        <file src="./test.h">./@@@project@@@.h</file>
+        <file src="./test.x2p">./@@@project@@@.x2p</file>
+
+        <file type="copy" src="//app/lib/info.lib">./app/lib/random.lib</file>
+        <files src="./files"/>
+        <files src="sdk://app/include">./include</files> -->
+
+        <file type="project" src="sdk://templates/prebuilt_library/stub_capability.x2p">./audio/kalimba/kymera/tools/KCSMaker/@@@project@@@.x2p</file>
+        <file src="sdk://templates/prebuilt_library/download_stub_capability.bdl">./audio/kalimba/kymera/tools/KCSMaker/bundle/download_@@@project@@@.bdl</file>
+        <file src="sdk://templates/prebuilt_library/cap_list_stub_capability.cfg">./audio/kalimba/kymera/tools/KCSMaker/bundle/config/cap_list_@@@project@@@.cfg</file>
+        <file src="sdk://templates/prebuilt_library/download.py">./audio/kse/script/kalsim/download_@@@project@@@/download.py</file>
+
+        <file src="sdk://templates/prebuilt_library/config.MODIFY_STUB_PRIVATE_LIBRARY">./audio/kalimba/kymera/build/config/config.MODIFY_@@@plib_name^U@@@_PREBUILT</file>
+
+        <section name="cap">
+            <file type="text" src="sdk://templates/prebuilt_library/stub_capability.c">./audio/kalimba/kymera/capabilities/@@@cap_name@@@/@@@cap_name@@@.c</file>
+            <file src="sdk://templates/prebuilt_library/stub_capability_proc.asm">./audio/kalimba/kymera/capabilities/@@@cap_name@@@/@@@cap_name@@@_proc.asm</file>
+            <file src="sdk://templates/prebuilt_library/stub_capability.h">./audio/kalimba/kymera/capabilities/@@@cap_name@@@/@@@cap_name@@@.h</file>
+            <file src="sdk://templates/prebuilt_library/stub_capability_struct.h">./audio/kalimba/kymera/capabilities/@@@cap_name@@@/@@@cap_name@@@_struct.h</file>
+            <file src="sdk://templates/prebuilt_library/config.MODIFY_DOWNLOAD_STUB_CAPABILITY">./audio/kalimba/kymera/build/config/config.MODIFY_DOWNLOAD_@@@cap_name^U@@@</file>
+        </section>
+
+        <patch
+           type="project"
+           where="first|before"
+           find="<configurations"
+           reload="yes"
+           src="sdk://templates/prebuilt_library/customer_ro_filesystem.patch">
+           ./apps/applications/~customer_ro_filesystem.x2p
+        </patch>
+
+    </content>
+</root>
+

@@ -1,0 +1,78 @@
+{
+    "stream": [
+        {
+            "interface": "tester",
+            "type": "source",
+            "kwargs": {
+                "backing": "file",
+                "filename": "resource/153_Prompts_176.4_kHz_Music_Detected_48k.sbc",
+                "sample_rate": 0,
+                "sample_width": 8,
+                "frame_size": 72
+            }
+        },
+        {
+            "interface": "tester",
+            "type": "sink",
+            "kwargs": {
+                "backing": "file",
+                "filename": "tmp/pt_tester_0.sbc",
+                "sample_rate": 8000,
+                "sample_width": 8
+            }
+        }
+    ],
+    "endpoint": [
+        {
+            "interface": "tester",
+            "type": "source",
+            "kwargs": {
+                "stream": 0
+            }
+        },
+        {
+            "interface": "tester",
+            "type": "sink",
+            "kwargs": {
+                "stream": 1
+            }
+        }
+    ],
+    "operator": [
+        {
+            "interface": "BASIC_PASS_THROUGH",
+            "args": [
+                [
+                    "CHANGE_INPUT_DATA_TYPE",
+                    [
+                        0
+                    ]
+                ],
+                [
+                    "CHANGE_OUTPUT_DATA_TYPE",
+                    [
+                        0
+                    ]
+                ]
+            ]
+        }
+    ],
+    "graph": [
+        [
+            "stream0",
+            "endpoint0"
+        ],
+        [
+            "endpoint0",
+            "operator0i0"
+        ],
+        [
+            "operator0o0",
+            "endpoint1"
+        ],
+        [
+            "endpoint1",
+            "stream1"
+        ]
+    ]
+}

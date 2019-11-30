@@ -1,0 +1,5 @@
+
+VARIANTS := debug
+
+CFLAGS_debug := -DGATT_FAST_PAIR_SERVER_DEBUG_LIB  # flags for building debug version of FPS server lib
+

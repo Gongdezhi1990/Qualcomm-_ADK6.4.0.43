@@ -1,0 +1,147 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    Kymera build system
+# MODULE:       Helper files
+# DESCRIPTION:  Common make fragment to define position of other components
+#
+############################################################################
+
+#########################################################################
+# OS Detection and Path manipulation for different build platforms
+#########################################################################
+ifeq ($(origin OSTYPE),undefined)
+    $(info OSTYPE undefined.)
+    $(info Either define it on the command line or as an environment variable)
+    $(info Valid values are Windows_NT, linux)
+    $(info e.g. make CONFIG=a7da OSTYPE=Windows_NT)
+    $(error Undefined operating system type - exiting)
+endif
+
+ifneq ($(findstring Windows_NT, $(OSTYPE)), )
+    # Windows NT , so call into the Python path-converter
+    # $(info OS IS WINDOWS NT)
+else ifneq ($(findstring linux, $(OSTYPE)), )
+    # Linux, so leave the path unmangled
+    # $(info OS IS LINUX )
+else
+    $(info ERROR: Unknown operating system OSTYPE: $(OSTYPE))
+    $(info Either define it on the command line or as an environment variable)
+    $(info Valid values are Windows_NT, linux)
+    $(info e.g. make CONFIG=a7da OSTYPE=Windows_NT)
+    $(error  )
+endif
+
+#########################################################################
+# System-wide tools
+#########################################################################
+
+# Note on "ospath" usage:
+# The makefile itself (targets and prerequisites) uses Unix path syntax
+# (forward slash) regardless of the platform it's running on.
+# The recipes in rules use $(call ospath) to translate this to the host
+# OS's convention (i.e., backslash on Windows) as needed, so that the
+# commands that are run see native path separators.
+# (Some of the tools we use accept Unix path syntax even on Windows, so
+# you might not see "ospath" used in all the places you would expect.)
+
+ifeq ("$(OSTYPE)","Windows_NT")
+PYTHONPATH=
+PATH=$(WINDIR);$(WINDIR)\system32
+PYTHON = $(DEVKIT_ROOT)\tools\python27\python.exe
+CPP = $(DEVKIT_ROOT)\tools\bin\xap-local-xap-cpp.exe
+SED = $(DEVKIT_ROOT)\tools\bin\sed
+CAT = $(DEVKIT_ROOT)\tools\bin\cat
+COPY = copy
+RM = del
+RM_F = del /q /f
+RM_RF = del /s /q /f
+MKDIR = mkdir
+MKDIR_P = mkdir
+STDOUT_DEV_NULL = 1> nul
+STDERR_DEV_NULL = 2> nul
+STDOUT_STDERR_DEV_NULL = > nul 2>&1
+DEV_NULL = nul
+TRUE = $(eval TEMP_UNUSED_VAR_FOR_TRUE_=0)
+#
+define utouch
+copy /b $1 +,, $1
+endef
+#
+# calling out to python is expensive, so do inline if we can
+# not sure why we need to get rif of the trailing \, but do so.
+# Anything with an embedded .. still calls winpath.
+define ospath
+$(if $(findstring ..,$(patsubst ..%,%,$(1))),$(shell $(PYTHON) $(BUILD_ROOT)/winpath.py $(1)),$(patsubst %\,%,$(subst /,\,$(1))))
+endef
+else ifeq ("$(OSTYPE)","linux")
+PYTHON = /comm/python/2.7.8/bin/python
+CPP = cpp
+SED = sed
+CAT = cat
+COPY = cp
+RM = rm
+RM_F = rm -f
+RM_RF = rm -rf
+MKDIR = mkdir
+MKDIR_P = mkdir -p
+STDOUT_DEV_NULL = 1>/dev/null
+STDERR_DEV_NULL = 2>/dev/null
+STDOUT_STDERR_DEV_NULL = &> /dev/null
+DEV_NULL = /dev/null
+TRUE = $(eval TEMP_UNUSED_VAR_FOR_TRUE_=0)
+#
+define utouch
+touch $1
+endef
+#
+define ospath
+$1
+endef
+else
+$(error OSTYPE is unsupported !!!!)
+endif
+
+# Run once for autogen
+# Some legacy recipes followed the form $(GEN_HDRS) $(GEN_SRCS): list of dependencies
+# which had the potential to run multiple times. once for each target.
+# Breaking the dependency is (arguably) messier, so add a function.
+# Make use of the fact that recipes with multiple wildcard targets only 
+# run the recipe once. So substitute the extension separator with a % in all 
+# targets and we have a run-once rule.
+define run_recipe_once
+$(subst .,%,$1)
+endef
+
+
+# GNU Make Version detection
+# Workaround for GNU make for Win 3.81 bug in abspath (realpath is also broken)
+# For Linux builds, just use the built-in abspath
+# Usage is: $(call myabspath,<path to mangle>)
+ifneq ($(findstring 4.1, $(MAKE_VERSION)), )
+#$(info MAKE VERSION IS 4.1)
+else ifneq ($(findstring 3.81, $(MAKE_VERSION)), )
+#$(info MAKE VERSION IS 3.81)
+else
+$(info ERROR: UNTESTED MAKE VERSION: $(MAKE_VERSION))
+$(info Valid versions are 4.1 and 3.81)
+$(error  )
+endif
+
+ifeq ("$(OSTYPE)","Windows_NT")
+ifneq ($(findstring 3.81, $(MAKE_VERSION)), )
+myabspath = $(shell $(PYTHON) $(subst /,\,$(BUILD_ROOT)/myabspath.py $(1)))
+else ifneq ($(findstring 4.1, $(MAKE_VERSION)), )
+myabspath = $(subst /,\,$(abspath $(1)))
+else
+myabspath = $(abspath $(1))
+endif
+else
+myabspath = $(abspath $(1))
+endif
+
+

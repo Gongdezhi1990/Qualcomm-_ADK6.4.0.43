@@ -1,0 +1,102 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    ---
+# MODULE:       ---
+# DESCRIPTION:  Common make fragment to define position of other components
+#
+############################################################################
+
+#
+# This fragment is used to provide a single place in the system where the
+# locations of the many components may be described.
+#
+# In its first incarnation, it depends on the user having defined $(BUILD_ROOT)
+# to point to the top-level build directory RELATIVE TO ITS OWN DIRECTORY.
+#
+# Thus, when this fragment is subsequently included, the other components of
+# the system are redefined relative to the directory of the makefile that
+# included this fragment.
+#
+# Use as:
+#
+# BUILD_ROOT  = xxxxxx
+# include $(BUILD_ROOT)/roots.mkf
+#
+# All roots defined here should be simple variables
+# This means they can only depend on things already defined at this point
+# e.g $(CONFIG) and $(BUILD_ROOT) or $(BUILD_ROOT_REL)
+# and not anything only known after parsing config files
+#
+
+#########################################################################
+# Define root directories (relative so we can be installed anywhere)
+#########################################################################
+
+ifdef BUILD_ROOT
+include $(BUILD_ROOT)/make_globals.mkf
+else
+ifdef BUILD_ROOT_REL
+include $(BUILD_ROOT_REL)/make_globals.mkf
+BUILD_ROOT := $(call myabspath,$(BUILD_ROOT_REL))
+else
+$(error "Top-level makefile must define BUILD_ROOT or BUILD_ROOT_REL")
+endif
+endif
+
+ifeq ($(strip $(PATCH)), )
+ifeq ($(strip $(DOWNLOAD)), )
+    KYMERA_ROOT         := $(call myabspath,$(BUILD_ROOT)/..)
+    KALIMBA_ROOT        := $(call myabspath,$(BUILD_ROOT)/../..)
+else
+    KYMERA_ROOT         := $(call myabspath,$(DOWNLOAD_CODE_ROOT))
+    KALIMBA_ROOT        := $(call myabspath,$(DOWNLOAD_CODE_ROOT)/..)
+endif
+else
+    KYMERA_ROOT         := $(call myabspath,$(PATCH_CODE_ROOT))
+endif
+
+HYDRA_COMMON_ROOT       := $(KYMERA_ROOT)/common/hydra
+HYDRA_TOOLS_ROOT        := $(KYMERA_ROOT)/tools/hydra
+COMPONENT_ROOT          := $(KYMERA_ROOT)/components
+HAL_ROOT                := $(COMPONENT_ROOT)/hal
+IO_ROOT                 := $(COMPONENT_ROOT)/io
+
+PREBUILT_LIB_ROOT       := $(KYMERA_ROOT)/lib_release/$(CONFIG)
+
+ifdef PATCH_OUTPUT
+# Patch output path, defined to be absolute
+OUTPUT_ROOT             := $(PATCH_OUTPUT)
+else
+ifdef DOWNLOAD_OUTPUT
+# Download output path, defined to be absolute
+OUTPUT_ROOT             := $(DOWNLOAD_OUTPUT)
+else
+ifdef TEST_OUTPUT
+OUTPUT_ROOT             := $(call myabspath,$(BUILD_ROOT)/../output/$(TEST_OUTPUT)/$(CONFIG))
+P0_OUTPUT_ROOT          := $(call myabspath,$(subst p1,p0,$(BUILD_ROOT)/..)/output/$(TEST_OUTPUT))
+else
+OUTPUT_ROOT             := $(call myabspath,$(BUILD_ROOT)/../output/$(CONFIG))
+P0_OUTPUT_ROOT          := $(call myabspath,$(subst p1,p0,$(BUILD_ROOT)/..)/output)
+endif
+endif
+endif
+
+AUTOGEN_ROOT            := $(call myabspath,$(OUTPUT_ROOT)/gen)
+DEBUG_EXTCONST_ROOT     := $(call myabspath,$(OUTPUT_ROOT)/build/debugextconst)
+
+ifeq ($(strip $(PATCH)), )
+ifeq ($(strip $(DOWNLOAD)), )
+AUTOGEN_INC_ROOT        := $(AUTOGEN_ROOT)
+else
+# For download builds, we want to pick up autogen headers from the build we're creating the download for
+AUTOGEN_INC_ROOT        := $(DOWNLOAD_BUILD_DIR)/../gen
+endif
+else
+# For patch builds, we want to pick up autogen headers from the build we're patching
+AUTOGEN_INC_ROOT        := $(PATCH_BUILD_DIR)/../gen
+endif

@@ -1,0 +1,26 @@
+var sink__ahi_8c =
+[
+    [ "SINK_AHI_CONFIG_APP_MODE_DEFAULT", "d2/dac/sink__ahi_8c.html#a70326861d2d5395f540dfe778eda34dd", null ],
+    [ "SINK_AHI_CONFIG_APP_MODE_OFFSET", "d2/dac/sink__ahi_8c.html#ae2f2f4b33bcd66e337aed8428dd86b8e", null ],
+    [ "SINK_AHI_CONFIG_ITEMS", "d2/dac/sink__ahi_8c.html#ae1ae6c3c194c9454340eee57ed10ac4c", null ],
+    [ "SINK_AHI_CONFIG_PS_KEY", "d2/dac/sink__ahi_8c.html#aa79be6e35c62d82bf203a4a7ab0c4bda", null ],
+    [ "SINK_AHI_CONFIG_USB_HID_DATALINK_ENABLED_OFFSET", "d2/dac/sink__ahi_8c.html#abaa40e791a31b5ad8327b8e09cf150dc", null ],
+    [ "SINK_AHI_CONFIG_USB_HID_DATALINK_STATE_DEFAULT", "d2/dac/sink__ahi_8c.html#a1220005961315bd41390882125c86010", null ],
+    [ "checkSinkAhiConfig", "d2/dac/sink__ahi_8c.html#a68900413868a16ce9234ebdf67d1d2a8", null ],
+    [ "createDefaultSinkAhiConfig", "d2/dac/sink__ahi_8c.html#a04bd80ced0fd189863db4bc6226c2bc5", null ],
+    [ "getAppModeFromPsKey", "d2/dac/sink__ahi_8c.html#ac32aeb823da88d56edbcbfa96435ad68", null ],
+    [ "getDefaultConfigValue", "d2/dac/sink__ahi_8c.html#aecb602396a930bc4f1fe1993ffb2d66f", null ],
+    [ "initAhi", "d2/dac/sink__ahi_8c.html#aded4aa0166976c5b898c045c57450c89", null ],
+    [ "isAppModeCorrect", "d2/dac/sink__ahi_8c.html#a0682495c5c5d8580cae98909a785001c", null ],
+    [ "isUsbHidDatalinkStateCorrect", "d2/dac/sink__ahi_8c.html#a40d86c964fb08ed44ddc502802991e37", null ],
+    [ "readConfigItem", "d2/dac/sink__ahi_8c.html#a2fd92724f09bd9e352b3f03383ec9761", null ],
+    [ "sinkAhiEarlyInit", "d2/dac/sink__ahi_8c.html#aefa03ea6d607c1b277fd56e56478faf2", null ],
+    [ "sinkAhiGetAppMode", "d2/dac/sink__ahi_8c.html#a6629d42d808a0ce59aca0fa0f74bc8cb", null ],
+    [ "sinkAhiInit", "d2/dac/sink__ahi_8c.html#a4fa23b46befafa5569e8bdccd2aced00", null ],
+    [ "sinkAhiIsRebootRequired", "d2/dac/sink__ahi_8c.html#add0bab9133956b96a176fd17d95269cd", null ],
+    [ "sinkAhiIsUsbHidDataLinkEnabled", "d2/dac/sink__ahi_8c.html#a7c7cda1a7ff34f212f81d9ab40e47171", null ],
+    [ "sinkAhiSetAppMode", "d2/dac/sink__ahi_8c.html#a5f045b9423b7dc2f1cd52a315cf24933", null ],
+    [ "sinkAhiSetUsbHidDataLinkState", "d2/dac/sink__ahi_8c.html#a04325ea15ef32a08fd56b6916797820d", null ],
+    [ "writeConfigItem", "d2/dac/sink__ahi_8c.html#aa309df6d4c6d694971b88ca2a1d1fdee", null ],
+    [ "currentAppMode", "d2/dac/sink__ahi_8c.html#a5ebe789cfb3836d2f63f5205e0a92199", null ]
+];

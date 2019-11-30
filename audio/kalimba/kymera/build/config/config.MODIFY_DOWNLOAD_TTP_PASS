@@ -1,0 +1,21 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+
+%cpp
+INSTALL_TTP
+
+# Add some extra debug messages etc
+TTP_GEN_DEBUG
+
+%list CFG_CAPABILITIES
+TTP_PASS
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/basic_passthrough/basic_passthrough
+

@@ -1,0 +1,25 @@
+#########################################################################
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#########################################################################
+
+%cpp
+#file manager defines
+INSTALL_FILE_MGR
+FILE_MGR_MAX_NUMBER_OF_FILES=2
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+components/file_mgr
+components/hydra_modules/file_mgr_interface
+
+# List of global include paths
+%list ALL_INCDIRS
+components/file_mgr
+components/hydra_modules/file_mgr_interface
+
+# List of libraries to build
+%list CFG_LIBS
+components/file_mgr/file_mgr
+components/hydra_modules/file_mgr_interface/file_mgr_interface

@@ -1,0 +1,136 @@
+############################################################################
+# CONFIDENTIAL
+# Copyright (c) 2009 - 2017 Qualcomm Technologies International, Ltd.
+# Unit 400, Cambridge Science Park,
+# Milton Road, Cambridge, CB4 0WH.  UK
+# Tel: +44 1223 692000  Fax: +44 1223 692001
+#
+############################################################################
+#
+# COMPONENT:    makefile
+# MODULE:       
+# DESCRIPTION:  This file contains rules for building the final
+#               executable. It should never be invoked directly, since 
+#               we require the autogeneration phase to have finished
+#               before compiling any code.
+#
+#               Top-level makefile can be for audio CPU firmware or for
+#               test applications. All top level makefiles invoke same
+#               makefile_exe and MUST specify build root and final target/
+#               output files. Top level makefile can also optionally add 
+#               source files, source and header paths to be included in the 
+#               build.
+#               
+############################################################################
+
+#########################################################################
+# Define root directory (relative so we can be installed anywhere)
+# The build root MUST be defined by the top level makefile and passed as
+# a parameter
+#########################################################################
+
+include $(BUILD_ROOT)/roots.mkf
+
+# (CONFIG).mkf is created by the top-level makefile.
+include $(OUTPUT_ROOT)/$(CONFIG).mkf
+
+LIBS += $(addprefix $(KYMERA_ROOT)/,$(CFG_LIBS))
+AUTOGEN_ONLY_LIBS += $(addprefix $(KYMERA_ROOT)/,$(AUTOGEN_CFG_LIBS))
+
+LDIRS = $(dir $(LIBS))
+
+COMPILE_EXTRA_DEFS += $(addprefix -DINSTALL_OPERATOR_,$(CFG_CAPABILITIES))
+
+#########################################################################
+# Pick up any prebuilt libraries from PREBUILT_LIBS
+# This is typically specified via the config files.
+#
+# Anything in EXTRA_DEBUG_OBJECTS will be added to the link command line
+# without any attempt to build it.
+#########################################################################
+EXTRA_DEBUG_OBJECTS += $(addprefix $(PREBUILT_LIB_ROOT)/,$(PREBUILT_LIBS))
+
+#########################################################################
+# Enter source files and directories and header directories here.
+#
+# The C source file path, header file path and C source file list COULD be
+# initialised by the top level makefile
+# Makerules will add the standard paths
+#########################################################################
+C_PATH += ${INIT_C_PATH}
+C_PATH += $(AUTOGEN_ROOT)/platform
+
+S_PATH += $(INIT_S_PATH)
+GEN_ASM_HDRS = $(INIT_ASM_HDRS)
+GEN_ASM_DEFS = $(INIT_ASM_DEFS)
+C_SRC += ${INIT_C_SRC}
+S_SRC += ${INIT_S_SRC}  
+H_PATH += ${INIT_H_PATH}
+
+#########################################################################
+# The final target files MUST be set by the top level makefile.
+# NB should be building TGT_EXE here - this is the exe makefile!
+#########################################################################
+
+TARGET_EXE_ROOT = $(TGT_EXE)
+TARGET_LIB_ROOT = $(TGT_LIB)
+
+#########################################################################
+# Autogen rules for creating the tasks files from list of libraries
+# This will be performed as part of the autogen stage.
+#########################################################################
+GEN_HDRS = $(AUTOGEN_ROOT)/platform/sched_subsystem.h
+GEN_HDRS+= $(AUTOGEN_ROOT)/platform/bg_int_subsystem.h
+
+# The shenanegans with foo.new and check_for_update.py is an optimisation
+# to avoid rebuilding everything that (e.g.) includes sched_subsystem.h unless that 
+# file has actually changed (since it will be touched every time we build,
+# regardless).
+ifneq ($(findstring autogen_pre_exe, $(MAKECMDGOALS)), ) # Only do this when autogenerating
+.PHONY:		autogen_pre_exe
+$(GEN_HDRS) $(GEN_SRCS):	autogen_pre_exe
+
+autogen_pre_exe: $(BUILD_ROOT)/makeinclude.py
+	$(shell $(MKDIR_P) $(call ospath,$(AUTOGEN_ROOT)/sched_oxygen) $(STDERR_DEV_NULL))
+# It's not necessary to use check_for_update.py as makeinclude.py already does that for you.
+	$(PYTHON) $(BUILD_ROOT)/makeinclude.py -s sched -m "SCHED_TASK(m)" -o $(AUTOGEN_ROOT)/sched_oxygen/sched_subsystem.h ${LIBS} ${EXTRA_TASKS}
+	$(PYTHON) $(BUILD_ROOT)/makeinclude.py  -s sched -m "BG_INT(m)" -o $(call ospath,$(AUTOGEN_ROOT)/sched_oxygen/bg_int_subsystem.h) ${LIBS} ${EXTRA_TASKS}
+endif
+
+ifneq ($(findstring autogen_post_exe, $(MAKECMDGOALS)), ) # Only do this when autogenerating
+.PHONY:		autogen_post_exe
+
+autogen_post_exe: $(PATCH_GEN_SCRIPT) $(BUILD_ROOT)/check_file_exists.py $(BUILD_ROOT)/check_for_update.py
+# Stick the ASM patchpoints together
+	$(PYTHON) $(PATCH_GEN_SCRIPT) -c -o $(AUTOGEN_ROOT)/interface/patch_ids.h $(PATCH_DIR) $(TARGET_BITS)
+endif
+
+#########################################################################
+# Special funky rules for id_string.asm / id_string.c
+#########################################################################
+# This file gets assembled every single time we run make, but it's not
+# part of the id module library - so that it doesn't force a re-link if
+# nothing else in the build has changed. 
+# By adding to EXTRA_DEBUG_OBJECTS we ensure it gets linked in IFF some 
+# other change has caused us to re-link.
+# By adding it to LINK_DEPS, we ensure that if someone changes id_string.asm
+# and nothing else, the build is still re-linked.
+
+# Caveat emptor: we only pull this in in non-test builds, so if there
+# are any target test builds that try to link against the id module
+# then there's a risk they'll fail. (Host test builds shouldn't need it.)
+ifeq ($(strip $(TEST_BUILD)),)
+ifeq ($(strip $(PATCH)),)
+ifeq ($(strip $(DOWNLOAD)),)
+EXTRA_DEBUG_OBJECTS += $(OUTPUT_ROOT)/components/id/debugobj/id_string.o
+LINK_DEPS += $(COMPONENT_ROOT)/id/id_string.asm
+LINK_DEPS += $(COMPONENT_ROOT)/id/id_string.c
+endif
+endif
+endif
+
+#########################################################################
+# Include the standard definitions and rules
+#########################################################################
+
+include $(BUILD_ROOT)/makerules.mkf

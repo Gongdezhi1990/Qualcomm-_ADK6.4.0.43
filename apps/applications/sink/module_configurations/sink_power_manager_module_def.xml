@@ -1,0 +1,54 @@
+<ModuleData Name="sink_power_manager">
+    <DefineGroup>
+
+    </DefineGroup>
+
+    <ConfigGroup
+        ShortId="sink_power_manager_writeable"
+        Id="Sink Power Manager"
+        Node="Basic">
+        <ConfigItem
+            Id="LBIMP Enable"
+            ShortId="lbipmenable"
+            Desc="1 = Enable Low Battery intelligent Power Management, 0 = Disable Low Battery intelligent Power Management."
+            Type="bool"
+            DefaultValue="true"
+            ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='session_data']"
+            Size="1">
+        </ConfigItem>
+    </ConfigGroup>
+
+	<ConfigGroup
+        ShortId="sink_gas_gauge_actions"
+        Id="Sink Gas Gauge Actions"
+        Node="Basic">
+
+		<ConfigItem Id="Action to perform when streaming music and the battery level is getting low whilst charging" 
+			ShortId="action_when_battery_less_than_gas_gauge0"
+			Desc="Action to prevent audio quality from deteriorating due to operating with battery at Gas Gauge 0 or Gas Gauge Low whilst charging."
+            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_voltage_vbat']/[@ShortId='gas_gauge_actions']"
+            Type="enum" Size="3"
+			DefaultValue="0x00">
+			<BuildVariant
+		        HwVariant="CF819"
+		        SwVariant="Headset-Gaming"
+		        Value="Take no action" />
+			<enum key="Take no action" value="0" />
+			<enum key="Power off device whilst charging" value="1" />
+			<enum key="Limit maximum volume level until charger is disconnected and level is above Gas Gauge 0" value="2" />
+		</ConfigItem>
+		
+                <ConfigItem	Id="Maximum volume level limit whilst charging when the battery is getting low [%]"
+            ShortId="max_volume_limit"
+            Desc="If 'Limit maximum volume level until charger is disconnected and level is above Gas Gauge 0' then this is the maximum volume level expressed as a percentage, e.g. 50% would represent step 8 out of 16 volume steps. This limit is maintained until battery level is above Gas Gauge 0 and the charger cable is disconnected. If level is 0% then the volume limitation is disabled."
+            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_voltage_vbat']/[@ShortId='gas_gauge_actions']"
+            Type="uint"  
+			Size="16"
+			Range="Min=0,Max=100" 
+			DefaultValue="0x0000">
+			
+        </ConfigItem>
+    </ConfigGroup>
+	
+	
+</ModuleData>

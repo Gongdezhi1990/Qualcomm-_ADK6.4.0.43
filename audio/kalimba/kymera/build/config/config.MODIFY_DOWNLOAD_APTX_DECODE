@@ -1,0 +1,54 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions for A2DP in Hydra builds.
+# Kymera doesn't support shunt on Hydra, so don't include any shunt stuff.
+
+%cpp
+#
+# Which components do we want to include on this chip?
+#
+INSTALL_A2DP
+APTX_OFFLOAD
+
+#
+# for APTx library (equivalent to aptx_base_regs_no_security_external_memory variant)
+#
+APTX_USE_EXTERNAL_MEMORY
+APTX_LOW_RAM
+ALWAYS_ENOUGH_INPUT_DATA
+APTX_ENABLE_MERGED_HD
+
+#Use octet_buffer API to deal with odd octets
+A2DP_USE_OCTET_BUFFER_INTERFACE
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+APTX_CLASSIC_DECODE
+
+
+# List of global include paths
+%list ALL_INCDIRS
+../lib/codec
+capabilities/a2dp_decode
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/aptx_decode/aptx_decode
+capabilities/a2dp_decode/a2dp_decode
+support_lib/ipc/ipc
+
+# Enable the rest to recompile library.
+#../lib_private/aptx/aptx
+#%list MAXIM_LIBS
+#../lib_private/aptx/aptx
+#%list PRIVATE_LIBS
+#../lib_private
+

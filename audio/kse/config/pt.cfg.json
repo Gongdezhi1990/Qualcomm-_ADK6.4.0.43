@@ -1,0 +1,91 @@
+{
+    "stream": [
+        {
+            "interface": "pcm",
+            "type": "source",
+            "kwargs": {
+                "backing": "file",
+                "filename": "resource/153_Prompts_176.4_kHz_Music_Detected_8k.raw",
+                "sample_rate": 8000,
+                "sample_width": 16
+            }
+        },
+        {
+            "interface": "pcm",
+            "type": "sink",
+            "kwargs": {
+                "backing": "file",
+                "filename": "tmp/pt_0.wav",
+                "sample_rate": 8000,
+                "sample_width": 16
+            }
+        }
+    ],
+    "endpoint": [
+        {
+            "interface": "pcm",
+            "type": "source",
+            "kwargs": {
+                "instance": 0,
+                "channel": 0,
+                "pcm_sync_rate": 8000,
+                "pcm_sample_rising_edge": 0,
+                "pcm_master_mode": 1,
+                "pcm_slot_count": 4,
+                "pcm_sample_format": 1,
+                "pcm_master_clock_rate": 512000
+            }
+        },
+        {
+            "interface": "pcm",
+            "type": "sink",
+            "kwargs": {
+                "instance": 0,
+                "channel": 0,
+                "pcm_sync_rate": 8000,
+                "pcm_sample_rising_edge": 0,
+                "pcm_master_mode": 1,
+                "pcm_slot_count": 4,
+                "pcm_sample_format": 1,
+                "pcm_master_clock_rate": 512000
+            }
+        }
+    ],
+    "operator": [
+        {
+            "interface": "BASIC_PASS_THROUGH",
+            "args": [
+                [
+                    "CHANGE_INPUT_DATA_TYPE",
+                    [
+                        1
+                    ]
+                ],
+                [
+                    "CHANGE_OUTPUT_DATA_TYPE",
+                    [
+                        1
+                    ]
+                ]
+            ]
+        }
+    ],
+    "graph": [
+        [
+            "stream0",
+            "endpoint0"
+        ],
+        [
+            "endpoint0",
+            "operator0i0"
+        ],
+        [
+            "operator0o0",
+            "endpoint1"
+        ],
+        [
+            "endpoint1",
+            "stream1"
+        ]
+    ]
+}

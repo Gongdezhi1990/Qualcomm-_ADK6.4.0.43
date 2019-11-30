@@ -1,0 +1,27 @@
+var structappTaskData =
+[
+    [ "adv_manager", "db/da4/structappTaskData.html#a69f9c49c51bebe0179d9d18ab74fbb48", null ],
+    [ "anc_tuning", "db/da4/structappTaskData.html#afd5ebd515981ab4b7c99e3cb2af291be", null ],
+    [ "battery", "db/da4/structappTaskData.html#acc425684b7c0d53a21d6e179bc33fea0", null ],
+    [ "codec_task", "db/da4/structappTaskData.html#aa754161e7bd56b18f5f24fb4a3a6c3b9", null ],
+    [ "con_manager", "db/da4/structappTaskData.html#a90300a4f9d225267b77de67bdf3d2199", null ],
+    [ "conn_rules", "db/da4/structappTaskData.html#a1f94d657f7b36747c81b41ba44a33720", null ],
+    [ "device", "db/da4/structappTaskData.html#ae30391d5914235fdb0f380515e8a262f", null ],
+    [ "gatt", "db/da4/structappTaskData.html#a8c62aec0ba04e09992144c8453bd638e", null ],
+    [ "handset_sig", "db/da4/structappTaskData.html#a6bf2949a140f6dfbbfe68ca26a907c3b", null ],
+    [ "init", "db/da4/structappTaskData.html#a72d301a67b238f83a5b0d6f7b15a0f1e", null ],
+    [ "kymera", "db/da4/structappTaskData.html#a8e274fda0a6cb49fcbf939bf879d1855", null ],
+    [ "led", "db/da4/structappTaskData.html#adff81c289e217c4bdf59d5ae4d8ab9cb", null ],
+    [ "lp", "db/da4/structappTaskData.html#a011ddf5746e57b339f8315e436be2ac7", null ],
+    [ "pairing", "db/da4/structappTaskData.html#a46c379c2cea0a55cb1b7f2f5863c7ece", null ],
+    [ "peer_sig", "db/da4/structappTaskData.html#ae8b16c06dc13e6a3c60c0aeeae6224a6", null ],
+    [ "peer_sync", "db/da4/structappTaskData.html#a1ddf4960645da21e31cfca4163114a6a", null ],
+    [ "phy_state", "db/da4/structappTaskData.html#a9dd2e92613e0848645ee4f03b7f47006", null ],
+    [ "power", "db/da4/structappTaskData.html#a9a5892301dbd3f89c42f1218c8e86552", null ],
+    [ "scanning", "db/da4/structappTaskData.html#a54b3fd69f410a33f87af957c3d29cf79", null ],
+    [ "scoFwd", "db/da4/structappTaskData.html#a720dbcf5c85373b0113a1ad03221cd41", null ],
+    [ "sm", "db/da4/structappTaskData.html#a9a7c67bdb90feafd592ce6dce2bb4476", null ],
+    [ "systask", "db/da4/structappTaskData.html#ac644204677b5fe7e6400870c921ed0d9", null ],
+    [ "task", "db/da4/structappTaskData.html#acd5967c7fce6a558fbe48e6a8493aebe", null ],
+    [ "ui", "db/da4/structappTaskData.html#ac59a0eca8c139d5a0ce0af7bbce96633", null ]
+];

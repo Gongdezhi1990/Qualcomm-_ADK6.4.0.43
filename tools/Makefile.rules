@@ -1,0 +1,525 @@
+ifdef DEVKIT_ROOT
+  SDK=$(DEVKIT_ROOT)/tools
+else
+  ifdef BLUELAB
+    SDK=$(BLUELAB)
+  else
+    ifndef SDK
+      $(error Variable SDK has not been defined. It should be set to the location of the Devkit tools folder.)
+    endif
+  endif
+endif
+
+$(info SDK is $(SDK))
+
+MAKEFILE_RULES_DIR ?= $(SDK)
+SDK_TOOLS ?= $(SDK)
+AUDIO_ROOT:=$(SDK)/../audio
+
+#Common variables
+KCC_DIR=$(SDK_TOOLS)/kcc
+
+ifeq ($(OS),Windows_NT)
+SHELL:=CMD
+endif
+
+CC = $(KCC_DIR)/bin/kcc
+# we use KAS as the kalcc pre-processor mangles 128-bit uuids
+CC_PRE = $(KCC_DIR)/bin/kas
+AS = $(KCC_DIR)/bin/kcc
+ASM = $(KCC_DIR)/bin/kas
+RM = $(SDK_TOOLS)/bin/remove
+AR = $(KCC_DIR)/bin/kar
+KSCRM = $(KCC_DIR)/bin/kalscramble
+#lower case ar/del used in libs makefile
+ar = $(AR)
+del = $(RM)
+rename = $(subst /,\,$(SDK_TOOLS)/bin/rename)
+KMAP = $(KCC_DIR)/bin/kmapper
+ELF2KAP = $(KCC_DIR)/bin/elf2kap
+ELF2MEM = $(KCC_DIR)/bin/kalelf2mem
+LD = $(KCC_DIR)/bin/kld
+copyfile = $(SDK_TOOLS)/bin/copyfile
+genparse = $(SDK_TOOLS)/bin/genparse
+recordflags = $(SDK_TOOLS)/bin/recordflags
+mkdir = $(SDK_TOOLS)/bin/createpath
+cpre = $(call CC_PRE) --preprocess-only 
+gattdbgen = $(SDK_TOOLS)/bin/gattdbgen.exe
+cat = $(subst /,\,$(SDK_TOOLS)/bin/cat)
+sed = $(subst \,/,$(SDK_TOOLS)/bin/sed)
+python = $(subst \,/,$(SDK_TOOLS))/python27/python.exe
+CHAINGEN_DIR ?= $(SDK_TOOLS)/chaingen
+chaingen = $(CHAINGEN_DIR)/chaingen.py
+BUTTONPARSE_DIR = $(SDK_TOOLS)/buttonparsexml
+buttonparsexml = $(BUTTONPARSE_DIR)/buttonparsexml.py
+xmlSchemaFile = $(BUTTONPARSE_DIR)/buttonparsexml.xsd
+SIZE = $(KCC_DIR)/bin/ksize
+
+MINIM_OPT = -minim
+SUPPORTED_EXECUTION_MODES = native
+
+ifeq "csra68105" "$(CHIP_TYPE)"
+	CHIP_NAME = csra68100_app
+else
+	ifeq "qcc512x_qcc302x" "$(CHIP_TYPE)"
+		CHIP_NAME = QCC512x_apps
+	else
+		ifeq "qcc514x_qcc304x" "$(CHIP_TYPE)"
+			CHIP_NAME = QCC514x_apps
+		else
+		  ifeq "qcc512x_rom_v21" "$(CHIP_TYPE)"
+        # TEMP FUDGE
+			  CHIP_NAME = QCC512x_apps
+		  else
+			  $(error Unknown CHIP_TYPE $(CHIP_TYPE))
+      endif
+    endif
+	endif
+endif
+$(info BUILDING FOR $(CHIP_TYPE))
+CHIP_LD_FILE = link_script_$(CHIP_TYPE).ld
+
+CHIP_NAME_OPT = -k$(CHIP_NAME)
+
+WARNING_OPTS = -Wall -WAccuracyLoss -WnoConstantTest -WCharPointerUnaligned 
+# Following warnings are left disabled when porting by commenting out the line 
+ifneq "$(EXTRA_WARNINGS)" "TRUE"
+  WARNING_OPTS += -WnoAccuracyLoss -WnoArgSizeLarger -WnoPointerUnaligned -WnoExplicitQualifier -WnoCharPointerUnaligned -WnoUnsignedCompare
+endif
+
+PREINCLUDES = -preinclude hydra_types.h -preinclude hydra_macros.h -preinclude hydra_dev.h
+
+COMPILE_FLAGS = -g $(MINIM_OPT) $(CHIP_NAME_OPT) -Xassembler -apply-b179745-workaround $(WARNING_OPTS) $(DEFINES)
+COMPILE_FLAGS += $(PREINCLUDES) $(INCLUDE_PATHS)
+COMPILE_FLAGS += $(foreach def,$(LIB_VERSION_DEFS),-D$(def))
+
+# If the project property 'Build Type' is set to 'Optimised' use the space optimised compiler options, otherwise use debugging friendly options.
+ifeq ("$(BUILD_TYPE)","RELEASE")
+  COMPILE_FLAGS += -DRELEASE_BUILD -O2
+else
+  COMPILE_FLAGS += -DDEBUG_BUILD -O0
+endif
+
+#Disable building of the shim layer on Crescendo builds.
+DISABLE_SHIM = TRUE
+
+
+ifdef BLUELAB
+#Rules and variables specific to the vm libs makefile
+ifdef BUILDOUTPUT_PATH
+# build artefacts will be generated into this location
+lib_dir = $(BUILDOUTPUT_PATH)/../installed_libs/lib/$(2)/$(1)
+inst_dir = $(BUILDOUTPUT_PATH)/../installed_libs
+else
+lib_dir    = ../installed_libs/lib/$(2)/$(1)
+inst_dir   = ../installed_libs
+endif
+
+private_lib_dir = $(call lib_dir,private,$(1))
+firmware_inc_dir = $(inst_dir)/include/firmware_$(CHIP_TYPE)
+standard_inc_dir = $(inst_dir)/include/standard
+profiles_inc_dir = $(inst_dir)/include/profiles/$(1)
+firmware_app_inc_dir = $(inst_dir)/include/firmware_$(CHIP_TYPE)/app
+DEFINES = -D__KALIMBA__ -DHAVE_32BIT_DATA_WIDTH -DBLUELAB -DINSTALL_HYDRA_LOG -DHYDRACORE
+DEPEND_FLAGS = -MD -MF$(dir $@)depend/$(notdir $*).d
+INCLUDE_PATHS += -I$(firmware_inc_dir) -I$(standard_inc_dir) -I$(firmware_app_inc_dir) -I$(call profiles_inc_dir,$(LIBRARY_VERSION))
+INCLUDE_PATHS += $(foreach inc,$(INCPATHS),-I$(inc))
+
+ifdef BUILDOUTPUT_PATH
+# pull in private libs from default location
+profiles_old_inc_dir = ../installed_libs/include/profiles/$(1)
+INCLUDE_PATHS += -I$(call profiles_old_inc_dir,$(LIBRARY_VERSION))
+endif
+
+ifdef AUDIO_ROOT
+kymera_inc_dir:=$(AUDIO_ROOT)/kymera/common/interface/gen/k32
+INCLUDE_PATHS += -I$(kymera_inc_dir)
+endif
+
+COMPILE_AS_PRIVATE_FLAGS := -Xa -p
+
+ifeq ("$(BUILD_PRIVATE)","TRUE")
+# Mark sections as "primed for private".  Kalscramble will do the actual marking
+# as private and scrambling.
+COMPILE_FLAGS += $(COMPILE_AS_PRIVATE_FLAGS)
+endif
+
+#The VM library makefile needs compileflags to write flags.compile
+compileflags = $(COMPILE_FLAGS)
+
+# Rules for building things
+# $(1) = variant specific defines
+# $(2) = execution mode (i.e. native/assisted, already embedded in paths at this point
+define docompile
+	$(info Compiling $<)
+	-@$(mkdir) $(dir $@)depend/
+	$(call CC) -c $< -o $@ $(COMPILE_FLAGS) $(1) $(DEPEND_FLAGS)
+endef
+
+define dogattdbi
+	$(info Running gattdbgen on $^)
+	$(call filterlines, $^, linefile) > $^clean
+	$(rename) $^clean $^
+	$(gattdbgen) -i $^
+endef
+
+define filterlines
+    $(python) -c "with open('$(1)'.strip()) as F: print(''.join([L for L in F.readlines() if '$(2)'.strip() not in L]))"
+endef
+
+# Pre-process file ready for genparse. 
+# we use SED to strip the "." prefix from KAS directives added in pre-processing
+define dogattdbi_pre
+	$(info Generating $1/$*.dbi_)
+	$(cpre) $(DEFS) $(CHIP_NAME_OPT) $(DEFINES) -MD -MF $1/$*.dbi.d -MT $1/$*.dbi_ $< -o $1/$*.dbi_
+endef
+
+%.c %.h : %.parse
+	$(info Running genparse on $<)
+	$(genparse) $* $^
+
+dependencies = $(foreach o,$(1),$(dir $(o))depend/$(basename $(notdir $(o))).d)
+
+
+# If LIBRARY_VERSION is blank replace it with the default value
+LIBRARY_VERSION:=$(if $(LIBRARY_VERSION),$(LIBRARY_VERSION),default)
+
+#else defined BLUELAB
+else
+#start of rules for heracles build.
+
+
+# B-127642 Record various flags per configuration
+# Use -include to make these happen every time before anything else
+dummy.force:
+	@$(mkdir) $(BUILDOUTPUT_PATH)
+	@$(recordflags) flags.configuration $(IDE_CONFIG)
+	@$(recordflags) $(BUILDOUTPUT_PATH)/flags.preprocess $(CPPFLAGS)
+	@$(recordflags) $(BUILDOUTPUT_PATH)/flags.compile $(COMPILE_FLAGS)
+	@$(recordflags) $(BUILDOUTPUT_PATH)/flags.assemble $(ASFLAGS)
+	@$(recordflags) $(BUILDOUTPUT_PATH)/flags.link $(LDFLAGS)
+	@$(recordflags) $(BUILDOUTPUT_PATH)/flags.libs $(LIBS) $(GATT_LIB_NAME)
+	@$(recordflags) $(BUILDOUTPUT_PATH)/flags.strip $(STRIP_OPTIONS)
+-include dummy.force
+
+# Compile and link options
+DEFINES = $(foreach def,$(DEFS),-D$(def))
+
+INCLUDE_PATHS = $(foreach inc,$(INCPATHS),-I$(inc))
+INCLUDE_PATHS += -I$(BUILDOUTPUT_PATH)
+
+LIB_PATHS = $(LIBPATHS)
+
+DEPEND_FLAGS = -MD -MF ${@:%.o=%.d}
+LDFLAGS = --relax -EL
+
+ifneq "$(EXTRA_WARNINGS)" "TRUE"
+  COMPILE_FLAGS += -Werror
+endif
+COMPILE_FLAGS += $(DEPEND_FLAGS)
+
+ifeq "$(GC_SECTIONS)" "TRUE"
+  COMPILE_FLAGS += -gc-sections
+  LDFLAGS += --print-gc-sections --gc-sections
+  DEFINES += -DGC_SECTIONS
+endif
+
+# CFLAGS is expected by some of the built in macros
+# Don't make this visible to the vm lib makefile
+# as there's a name clash
+CFLAGS = $(COMPILE_FLAGS)
+
+ASFLAGS = $(CHIP_NAME_OPT) $(DEPEND_FLAGS)
+ELF2MEMFLAGS = -nvmem1=lpc
+KMAPFLAGS = datadump symlist disasm memusage
+
+LINK_SCRIPT_DIR = $(MAKEFILE_RULES_DIR)
+LINK_SCRIPT = $(MAKEFILE_RULES_DIR)/$(CHIP_LD_FILE)
+# Before the first -T command appears on the command line, a path to the directory
+# containing each INCLUDEd linkscript MUST be given using the -L option.
+# Otherwise the linker doesn’t know where to search for the included linkscript files
+LINK_SCRIPT_OPTS = -L $(LINK_SCRIPT_DIR) -T $(LINK_SCRIPT)
+
+KCC_LIB_DIR = $(SDK_TOOLS)/kcc/lib/$(CHIP_NAME)
+KCC_LIBS = $(KCC_LIB_DIR)/libc.a $(KCC_LIB_DIR)/libfle.a ${KCC_LIB_DIR}/libcrt.a
+
+# Strip debug and unnecessary symbols from output file?
+ifeq "$(STRIP_SYMBOLS)" "TRUE"
+    STRIP_OPTIONS = --strip-unneeded --strip-debug
+endif
+
+# Remove references to gatt_lib or gatt_lib_ram in LIBS
+LIBS := $(filter-out gatt_lib_ram,$(LIBS))
+LIBS := $(filter-out gatt_lib,$(LIBS))
+
+# Extract the path for the private libraries from the project settings
+PRIVATE_LIBS_DIR := $(subst native,private, $(filter %native, $(LIB_PATHS)))
+
+# Find out which libraries have been built as private
+# The linker path search only works with libraries given with the -l option
+# the -l option doesn't support .pa extensions so we must give the full path
+PRIVATE_LIBS_FILES := $(wildcard $(PRIVATE_LIBS_DIR)/*.pa)
+
+ifneq (,$(PRIVATE_LIBS_FILES))
+# Extract the names of the private libraries
+PRIVATE_LIBS := $(notdir $(basename $(PRIVATE_LIBS_FILES)))
+PRIVATE_LIBS := $(PRIVATE_LIBS:lib%=%)
+
+# Find any private libs listed in the libraries
+FOUND_PRIVATE_LIBS_IN_LIBS := $(filter $(PRIVATE_LIBS), $(LIBS))
+FOUND_PRIVATE_LIBS_IN_LIBS := $(FOUND_PRIVATE_LIBS_IN_LIBS:%=lib%)
+FOUND_PRIVATE_LIBS_IN_LIBS := $(FOUND_PRIVATE_LIBS_IN_LIBS:%=$(PRIVATE_LIBS_DIR)/%.pa)
+
+# Trim private libs files to only contain those that were found in the libraries
+PRIVATE_LIBS_FILES := $(filter $(FOUND_PRIVATE_LIBS_IN_LIBS), $(PRIVATE_LIBS_FILES))
+
+# Remove the libraries that will be private, as they need a different extension
+LIBS := $(filter-out $(PRIVATE_LIBS), $(LIBS))
+endif
+
+# And produce the library file names so that we can add dependencies
+LIB_FILES := $(addprefix lib,$(LIBS))
+LIB_FILES := $(addsuffix .a,$(LIB_FILES))
+
+# This function converts spaces into underscores
+space :=
+space +=
+sp2us = $(subst $(space),_,$(1))
+us2sp = $(subst _,$(space),$(1))
+
+# general purpose functions
+is_str_equal = $(filter $(subst $(space),_,$(1)),$(subst $(space),_,$(2)))
+str_if_equal = $(if $(call is_str_equal,$(1),$(2)),$(1),)
+get_lib_fn	= $(foreach ln,$(1),$(addsuffix .a,$(addprefix lib,$(ln))))
+# Version of realpath that copes with absolute pathnames on Windows
+myrealpath = $(join \
+             $(filter %:,$(subst :,: ,$1)),\
+             $(realpath $(filter-out %:,$(subst :,: ,$1))))
+
+# List of objects to be built
+OBJS = $(DB_OBJS) $(ASM_OBJS) $(C_OBJS) $(CHAIN_OBJS) $(BUTTON_OBJS)
+
+# Automatically generated dependencies
+DEPS = $(DB_DEPS) $(C_DEPS) $(ASM_DEPS) $(CHAIN_DEPS)
+
+# All files this makefile might generate (useful for clean)
+OUT = $(DB_OUT) $(C_OUT) $(ASM_OUT) $(CHAIN_OUT) $(BUTTON_OUT) \
+	$(addprefix $(BUILDOUTPUT_PATH)/$(OUTPUT)., kap kmap elf) \
+	$(addprefix $(BUILDOUTPUT_PATH)/, lib$(OUTPUT).a)
+
+# Remove the flags only if clean is the only target. See B-142635
+FILES_TO_CLEAN_FLAGS = $(if $(filter-out clean, $(MAKECMDGOALS)),,$(BUILDOUTPUT_PATH)/flags.preprocess $(BUILDOUTPUT_PATH)/flags.compile $(BUILDOUTPUT_PATH)/flags.assemble $(BUILDOUTPUT_PATH)/flags.8051.assemble $(BUILDOUTPUT_PATH)/flags.link $(BUILDOUTPUT_PATH)/flags.libs $(BUILDOUTPUT_PATH)/flags.strip $(BUILDOUTPUT_PATH)/flags.libs $(BUILDOUTPUT_PATH)/flags.otau flags.configuration)
+
+# Also need to clean output.elf from project folder per B-129169
+FILES_TO_CLEAN = $(OUT) $(FILES_TO_CLEAN_FLAGS) $(IDE_PROJECT).elf
+FOLDERS_TO_REMOVE := $(BUILDOUTPUT_PATH)
+
+# Make sure that make knows where we look for libraries
+vpath %.a %.pa $(LIB_PATHS) $(SDK_LIB_PATH) $(OTAU_LIB_PATH)
+
+# Compile ASM files to object code
+define asmrule
+ASM_OBJS += $(1).o
+ASM_DEPS += $(1).d
+ASM_OUT += $(1).o $(1).d
+$(1).o: $(2) $$(BUILDOUTPUT_PATH)/flags.assemble
+	$$(info Assembling $$<)
+	$$(CC) $$< -c -o $$@ $$(ASFLAGS)
+endef
+$(foreach af,$(filter %.asm, $(INPUTS)),$(eval $(call asmrule,$(BUILDOUTPUT_PATH)/$(basename $(notdir $(af))),$(af))))
+
+# default empty force_gattdb rule for builds that have no instances of dbrule
+# constructed
+force_gattdb :  
+
+# Compile C files to object code
+define crule
+ifneq (,$$(filter %build_id_str.c, $(2)))
+BUILD_ID_STR_OBJ := $(1).o
+BUILD_ID_STR_SRC := $(2)
+else
+C_OBJS += $(1).o
+endif
+C_DEPS += $(1).d
+C_OUT += $(1).o $(1).d $(1).si
+
+ifeq (,$$(strip $$(wildcard $$(C_DEPS))))
+FORCE_GATTDB := force_gattdb
+else
+FORCE_GATTDB := 
+endif
+
+$(1).o: $(2) $$(CONFIG_HEADERS) $$(BUILDOUTPUT_PATH)/flags.preprocess $$(BUILDOUTPUT_PATH)/flags.compile $$(FORCE_GATTDB)
+	$$(info Compiling $$<)
+	$$(COMPILE.c) -o $$@ $$<
+endef
+
+$(foreach cf,$(filter %.c, $(INPUTS)),$(eval $(call crule,$(BUILDOUTPUT_PATH)/$(basename $(notdir $(cf))),$(cf))))
+
+# Compile .db files to object code 
+define dbrule
+DB_OBJS += $(1).o
+DB_DEPS += $(1).d
+DB_OUT += $(1).o $(1).d $(1).si
+
+ifeq (,$$(strip $$(wildcard $$(DB_DEPS))))
+FORCE_GATTDB := force_gattdb
+else
+FORCE_GATTDB :=
+endif
+
+force_gattdb : $$(basename $2).h
+
+$(1).o: $$(basename $2).c $$(BUILDOUTPUT_PATH)/flags.preprocess $$(BUILDOUTPUT_PATH)/flags.compile $$(FORCE_GATTDB)
+	$$(info Compiling $$<)
+	$$(COMPILE.c) -o $$@ $$<
+
+# Delete Intermediate sink_gatt_db.db_ file once dependency files(sink_gatt_db.c/.h) are generated
+.INTERMEDIATE: $$(basename $2).db_
+
+# Define two magic names for intermediate files. Once make has generated a dependency tree
+# it doesn't check if the target of a rule is actually produced, and as INTERMEDIATE files
+# are not required these act just to get dependencies correct.
+.INTERMEDIATE: PHONY_$(2)
+.INTERMEDIATE: PHONY_GATTDBGEN_$(2)
+
+# For generating gatt database use the 1st intermediate non-file
+$(basename $2).c $(basename $2).h : PHONY_$(2)
+PHONY_$(2) : $(basename $2).db_
+	cd $$(dir $$<) && $$(gattdbgen) -c $$(notdir $$<)
+	cd $$(dir $$<) && $$(gattdbgen) $$(notdir $$<)
+
+# Pre-process file ready for genparse. 
+# we use SED to strip the "." prefix from KAS directives added in pre-processing
+$(basename $2).db_ depend/$(basename $2).db.d: PHONY_GATTDBGEN_$(2)
+PHONY_GATTDBGEN_$(2): $(basename $2).db $$(BUILDOUTPUT_PATH)/flags.compile
+	$$(info Generating GATT database)
+	$$(cpre) $(DEFINES) $(CHIP_NAME_OPT) $(INCLUDE_PATHS) -MT $$(basename $$<).db_ -MF $$(basename $$<).d $$< -o $$(basename $$<).db_
+	$$(sed) -r -i -e '/^\./d' $$(basename $$<).db_
+endef
+
+$(foreach dbf,$(filter %.db, $(INPUTS)),$(eval $(call dbrule,$(BUILDOUTPUT_PATH)/$(basename $(notdir $(dbf))),$(dbf))))
+
+# Generate %.[ch] files from %.chain files
+define chainrule
+CHAIN_OUT += $(basename $2).c $(basename $2).h $(1).o $(1).d
+CHAIN_H += $(basename $2).h
+CHAIN_DEPS += $(1).d
+CHAIN_OBJS += $(1).o
+
+ifeq (,$$(strip $$(wildcard $$(CHAIN_DEPS))))
+FORCE_CHAINGEN := force_chaingen
+else
+FORCE_CHAINGEN :=
+endif
+
+force_chaingen : $$(basename $2).h
+
+$(1).o: $(basename $2).c $(basename $2).h $$(BUILDOUTPUT_PATH)/flags.preprocess $$(BUILDOUTPUT_PATH)/flags.compile $$(FORCE_CHAINGEN)
+	$$(info Compiling $$<)
+	$$(COMPILE.c) -o $$@ $$<
+
+$(basename $2).c: $(2)
+	$$(info Generating $$(notdir $$@) from $$(notdir $$<))
+	cd $$(subst \,/,$$(dir $$<)) && $(python) $(chaingen) $$(notdir $$<) --source > $$(notdir $$@)
+$(basename $2).h: $(2)
+	$$(info Generating $$(notdir $$@) from $$(notdir $$<))
+	cd $$(subst \,/,$$(dir $$<)) && $(python) $(chaingen) $$(notdir $$<) --header > $$(notdir $$@)
+endef
+$(foreach chainf,$(filter %.chain, $(INPUTS)),$(eval $(call chainrule,$(BUILDOUTPUT_PATH)/$(basename $(notdir $(chainf))),$(chainf))))
+
+# Generate %.[h] and %.[c] files from %.buttonxml files
+define buttonparserule
+_button_xml = $(1)
+_button_pio_xml = $(2)
+
+_button_basename = $$(BUILDOUTPUT_PATH)/$$(basename $$(notdir $$(_button_xml)))
+BUTTON_C += $$(_button_basename).c
+BUTTON_H += $$(_button_basename).h
+BUTTON_DEPS += $$(_button_basename).d
+BUTTON_OBJS += $$(_button_basename).o
+BUTTON_OUT = $$(BUTTON_C) $$(BUTTON_H) $$(BUTTON_DEPS) $$(BUTTON_OBJS)
+
+ifeq (,$$(strip $$(wildcard $$(BUTTON_DEPS))))
+FORCE_BUTTONPARSE := force_buttonparse
+else
+FORCE_BUTTONPARSE :=
+endif
+
+force_buttonparse : $$(BUTTON_H)
+
+$$(BUTTON_OBJS): $$(BUTTON_C) $$(BUTTON_H) $$(BUILDOUTPUT_PATH)/flags.preprocess $$(BUILDOUTPUT_PATH)/flags.compile $$(FORCE_BUTTONPARSE)
+	$$(info Compiling $$<)
+	$$(COMPILE.c) -o $$@ $$<
+
+$$(BUTTON_C): $$(_button_xml) $$(_button_pio_xml)
+	$$(info Generating $$(notdir $$@) from $$(notdir $$^))
+	$(python) $(buttonparsexml) --source > $$@ --xsd $(xmlSchemaFile) --msg_xml $$< --pio_xml $$(filter-out $$<, $$^)
+$$(BUTTON_H): $$(_button_xml) $$(_button_pio_xml)
+	$$(info Generating $$(notdir $$@) from $$(notdir $$^))
+	$(python) $(buttonparsexml) --header > $$@ --xsd $(xmlSchemaFile) --msg_xml $$< --pio_xml $$(filter-out $$<, $$^)
+endef
+BUTTONXML_FILES=$(filter %.buttonxml, $(INPUTS))
+
+ifneq (,$(BUTTONXML_FILES))
+BUTTON_PIO_XML=$(filter %.pio.buttonxml, $(BUTTONXML_FILES))
+BUTTON_XML=$(filter-out $(BUTTON_PIO_XML), $(BUTTONXML_FILES))
+$(eval $(call buttonparserule,$(BUTTON_XML),$(BUTTON_PIO_XML)))
+endif
+
+# force all chain and button headers to build before all C objects
+$(C_OBJS) : | $(CHAIN_H) $(BUTTON_H)
+
+.PHONY: build clean
+
+# Make all objects depend on all config headers if they don't have dependency
+# info of their own available
+ifeq (,$(wildcard $(OBJS:.o=.d)))
+$(OBJS) : $(CONFIG_HEADERS)
+endif
+
+# Have a default for old projects that don't have the property set
+BUILD_ID ?= $(SDK_TOOLS)/ubuild/maker/buildid/examples/timestamp.py
+
+$(BUILD_ID_STR_SRC): $(BUILD_ID) $(OBJS) $(LIB_FILES) $(PRIVATE_LIBS_FILES) $(BUILDOUTPUT_PATH)/flags.link $(BUILDOUTPUT_PATH)/flags.libs
+	$(info Generating $(BUILD_ID_STR_SRC))
+	$(python) $(BUILD_ID) $@
+
+# Build the elf file.
+# The PRIVATE_LIBS_FILES need to be wrapped in: --whole-archive --no-whole-archive
+# otherwise the linker may discard the version object file in the libraries
+# before it had a chance to look at the symbols and decide it needs to keep them
+# because they're stored in the dedicated LIB_VERSIONS section which is told to keep
+$(BUILDOUTPUT_PATH)/$(OUTPUT).elf: $(BUILD_ID_STR_OBJ) $(LINK_SCRIPT)
+	$(info Linking)
+	$(LD) $(OBJS) $(BUILD_ID_STR_OBJ) $(LIB_PATHS:%=-L%) --start-group $(LIBS:%=-l%) --whole-archive $(PRIVATE_LIBS_FILES) --end-group $(PRESERVED_LIBS:%=-l%) --no-whole-archive $(DEFAULT_LIBS:%=-l%) $(KCC_LIBS) $(LDFLAGS) $(LINK_SCRIPT_OPTS) -o $@
+	$(SIZE) $@ -B -d
+
+# Generate raw memory files .pm .dm .rom .lpc
+$(BUILDOUTPUT_PATH)/$(OUTPUT).pm:  $(BUILDOUTPUT_PATH)/$(OUTPUT).elf
+	$(ELF2MEM) $(ELF2MEMFLAGS) $<
+
+# Generate .kmap image
+$(BUILDOUTPUT_PATH)/$(OUTPUT).kmap: $(BUILDOUTPUT_PATH)/$(OUTPUT).elf
+	$(info Generating kmap )
+	$(KMAP) $(KMAPFLAGS) $< > $@
+
+build:  $(BUILDOUTPUT_PATH)/$(OUTPUT).elf
+
+# Remove all temporary files except the sources generated by gattdbgen
+clean:
+	$(info ------ Deleting intermediate files and output files for $(IDE_PROJECT) [$(IDE_CONFIG)] ------)
+	$(RM) $(FILES_TO_CLEAN)
+	$(RM) ---- $(FOLDERS_TO_REMOVE)
+	@echo ----------------------------------- Clean finished -----------------------------------------
+
+
+# Load object dependencies
+# We load the dependencies here because #include expands DEPS at the line
+# where #include is first encountered - even when DEPS is defined
+# recursively. If DEPS is modified after this line then #include will not
+# see those changes.
+-include $(DEPS)
+
+#end ifdef BLUELAB
+endif

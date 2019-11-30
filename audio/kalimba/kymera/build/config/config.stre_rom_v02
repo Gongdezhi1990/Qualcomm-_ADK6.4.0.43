@@ -1,0 +1,26 @@
+############################################################################
+# Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+# Notifications and licenses are retained for attribution purposes only
+############################################################################
+# Stre ROM config for d00 silicon with dual core support.
+# This is also the de facto top-level config that most others inherit
+# from. Think carefully before making changes here. (at the moment this is 
+# inherited from crescendo_rom_d00 and thus needs to apply the D01 crescendo
+# modifications. We need to eventually make D01 the default build.
+
+%cpp
+
+%include config.stre_rom
+
+# config for Silicon
+%include config.MODIFY_STRE_D00
+
+#install ANC
+%include config.MODIFY_ANC
+
+%build
+
+CHIP_VER = v02
+

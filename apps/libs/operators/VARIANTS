@@ -1,0 +1,5 @@
+
+VARIANTS := audio_32bit_data
+
+CFLAGS_audio_32bit_data := -DAUDIO_32BIT_DATA
+

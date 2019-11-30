@@ -1,0 +1,23 @@
+file=app2
+USBProductString = [ 51 43 43 33 30 32 34 ]
+
+USBSerialNumberString = [ 41 42 43 44 45 46 30 31 32 33 34 35 36 37 38 39 ]
+
+USBManufString = [ 51 54 49 4C ]
+
+# The default value of SiflashResumeToSuspendDelay is set to 1000us that is the minimum erase/program resume to suspend
+# delay that must be respected to avoid errors for all the QSPI flashes supported.  
+# 
+# Cypress/Spansion S25FS-S QSPI flash requires minimum erase/program resume to suspend
+# delay that must be respected to avoid errors, 50us is recommended by Cypress.
+#
+# If QSPI other than Cypress/Spansion is used, this value should be amended according to
+# the flash datasheet.
+#
+# Note that this controls minimum delay and not a typical or average delay required
+# for a flash command to progress, which is often also specified in the datasheet.
+#
+# If the minimum delay required by the flash part is not stated in its datasheet
+# please contact the flash manufacturer for clarification.
+
+SiflashResumeToSuspendDelay = 1000

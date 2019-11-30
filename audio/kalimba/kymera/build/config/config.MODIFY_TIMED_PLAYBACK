@@ -1,0 +1,18 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions for enabling the timed playback mode
+
+%cpp
+# Enable the timed playback mode for audio endpoints.
+TIMED_PLAYBACK_MODE
+
+KICK_KEEP_BUFFERS_FULL
+
+# Remove the jitter buffer (Currently TIMED_PLAYBACK_MODE does both)
+
+# Enable the static debug variables to work with the python plotter tool.
+TTP_PLOTTER

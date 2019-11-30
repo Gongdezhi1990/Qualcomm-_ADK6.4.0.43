@@ -1,0 +1,38 @@
+#ifndef __GATT_SERVER_DB_DBI__
+#define __GATT_SERVER_DB_DBI__
+
+#include "gatt_server_uuids.h"
+
+primary_service {
+    uuid : UUID_GATT,
+    name : "GATT_SERVICE",
+    characteristic {
+        uuid       : UUID_SERVICE_CHANGED,
+        name       : "GATT_SERVICE_CHANGED",
+        properties  : [ indicate ],
+        client_config
+        {
+            name  : "GATT_SERVICE_CHANGED_CLIENT_CONFIG",
+            flags : [ FLAG_IRQ ]
+        }
+    },
+
+    characteristic {
+        uuid        : UUID_CLIENT_SUPPORTED_FEATURES,
+        name        : "GATT_CLIENT_SUPPORTED_FEATURES",
+        properties  : [read, write],
+        flags       : [FLAG_IRQ],
+        size_value  : 1
+#ifdef GATT_CACHING
+    },
+    
+    characteristic {
+        uuid        : UUID_DATABASE_HASH,
+        name        : "GATT_DATABASE_HASH",
+        properties  : [read],
+        size_value  : 0
+#endif
+    }
+},
+#endif /* __GATT_SERVER_DB_DBI__ */
+

@@ -1,0 +1,13 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the downloadable @@@cap_name@@@
+
+%list ALL_INCDIRS
+capabilities/@@@cap_name@@@
+
+%list CFG_LIBS
+capabilities/@@@cap_name@@@/@@@cap_name@@@

@@ -1,0 +1,58 @@
+
+/******************************************************************************
+Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+ *  Part of ADK 4.1
+ *  %%appversion
+ *
+ *  FILE
+ *      gatt_heart_rate_server_db.dbi
+ *
+ *  DESCRIPTION
+ *      This file defines the Heart Rate Service in JSON format, which is 
+ *      fairly human readable.  This file is included in the main 
+ *      application data base file which is used to produce ATT flat data 
+ *      base. 
+ *
+ *****************************************************************************/
+#ifndef __GATT_HEART_RATE_SERVER_DB_DBI__
+#define __GATT_HEART_RATE_SERVER_DB_DBI__
+
+/* For service details, refer http://developer.bluetooth.org/gatt/services/
+ * Pages/ServiceViewer.aspx?u=org.bluetooth.service.heart_rate.xml
+ */
+
+ #include "gatt_heart_rate_server_uuids.h"
+ 
+/* Primary service declaration of Heart Rate service */
+primary_service {
+    uuid : UUID_HEART_RATE_SERVICE,
+    name : "HEART_RATE_SERVICE",
+
+        /* Heart Rate Measurement characteristic */
+
+        characteristic {
+            uuid        : UUID_HEART_RATE_MEASUREMENT,
+            name        : "HEART_RATE_MEASUREMENT",
+            flags       : [ FLAG_IRQ, FLAG_DYNLEN ],
+            properties  : [ notify ],
+            value       : 0x0,
+            
+            client_config 
+            {
+                name    : "HEART_RATE_MEASUREMENT_CLIENT_CONFIG",
+                flags : FLAG_IRQ
+            }
+        },
+
+        /* Body Sensor Location characteristic */
+
+        characteristic {
+            uuid                : UUID_HEART_RATE_BODY_SENSOR_LOCATION,
+            name                : "BODY_SENSOR_LOCATION",
+            properties          : [ read ],
+            size_value          : 0x01,
+            value               : BODY_SENSOR_LOCATION_VALUE
+            }
+    }
+
+#endif /* __GATT_HEART_RATE_SERVER_DB_DBI__ */

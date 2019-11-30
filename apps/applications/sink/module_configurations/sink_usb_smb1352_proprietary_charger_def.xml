@@ -1,0 +1,147 @@
+<ModuleData Name="Sink_USB_SMB1352_Proprietary_Charger" HeaderName="Sink_USB_Proprietary_Charger">
+    <!--Definitions for USB using Charger v2-->
+    <DefineGroup>
+
+        <DefineList Id="Data Line Voltages" ShortId="data_line_voltages">
+            <enum key="0.0V" value="0" />
+            <enum key="0.1V" value="100" />
+            <enum key="0.2V" value="200" />
+            <enum key="0.3V" value="300" />
+            <enum key="0.4V" value="400" />
+            <enum key="0.5V" value="500" />
+            <enum key="0.6V" value="600" />
+            <enum key="0.7V" value="700" />
+            <enum key="0.8V" value="800" />
+            <enum key="0.9V" value="900" />
+            <enum key="1.0V" value="1000" />
+            <enum key="1.1V" value="1100" />
+            <enum key="1.2V" value="1200" />
+            <enum key="1.3V" value="1300" />
+            <enum key="1.4V" value="1400" />
+            <enum key="1.5V" value="1500" />
+            <enum key="1.6V" value="1600" />
+            <enum key="1.7V" value="1700" />
+            <enum key="1.8V" value="1800" />
+            <enum key="1.9V" value="1900" />
+            <enum key="2.0V" value="2000" />
+            <enum key="2.1V" value="2100" />
+            <enum key="2.2V" value="2200" />
+            <enum key="2.3V" value="2300" />
+            <enum key="2.4V" value="2400" />
+            <enum key="2.5V" value="2500" />
+            <enum key="2.6V" value="2600" />
+            <enum key="2.7V" value="2700" />
+            <enum key="2.8V" value="2800" />
+            <enum key="2.9V" value="2900" />
+            <enum key="3.0V" value="3000" />
+        </DefineList>
+
+        <DefineList Id="Data Line Tolerance" ShortId="data_line_tolerance">
+            <enum key="0.1V" value="100" />
+            <enum key="0.2V" value="200" />
+            <enum key="0.3V" value="300" />
+            <enum key="0.4V" value="400" />
+            <enum key="0.5V" value="500" />
+        </DefineList>
+
+        <DefinePattern
+            PatternName="Sink Proprietary Charge Current"
+            ShortId="sink_proprietary_charge_current">
+
+            <ConfigItem
+                Id="D+ [V]"
+                ShortId="dplus"
+                Desc="USB D+ voltage"
+                Size="16"
+                Type="enum"
+                ShowOrdered="true">
+                <List use="data_line_voltages" />
+            </ConfigItem>
+
+            <ConfigItem
+                Id="D- [V]"
+                ShortId="dminus"
+                Desc="USB D- voltage"
+                Size="16"
+                Type="enum"
+                ShowOrdered="true">
+                <List use="data_line_voltages" />
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Tolerance [V]"
+                ShortId="tolerance"
+                Desc="Tolerance +/- [V]"
+                Size="16"
+                Type="enum"
+                ShowOrdered="true">
+                <List use="data_line_tolerance" />
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Charger Enable"
+                ShortId="charge"
+                Desc="Set to use this entry to control the charger"
+                Type="bool"
+                Size="1"/>
+
+            <ConfigItem
+                Id="Vsel"
+                ShortId="vsel"
+                Desc="Set this to BAT to force the device to run from battery. If this is set to CHG then the device will run from charger unless overridden by the Voltage Source Selector or Temperature Regions voltage source selectors."
+                Type="enum"
+                Size="1">
+                <List use="vsel"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="Power Off"
+                ShortId="power_off"
+                Desc="When checked the application will reduce to the minimum power consumption possible. Useful for powering off the device at certain temperatures."
+                Type="bool"
+                Size="1"/>
+
+            <ConfigItem
+                Id="Disable LEDs"
+                ShortId="disable_leds"
+                Desc="When set the LEDs are disabled while charging."
+                Type="bool"
+                Size="1"/>
+
+            <!-- NB Maximum charging current for external mode on CSRA6810x is 1.8A. -->
+            <ConfigItem
+                Id="Max Current [mA]"
+                ShortId="current"
+                Desc="Charge current specified in mA."
+                Type="uint" 
+                Range="Min=0,Max=1800"
+                Size="16"/>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup Id="USB Power Proprietary RO"
+        ShortId="sink_usb_power_proprietary_readonly"
+        Node="Basic">
+        <ConfigGroup Id="USB Power Proprietary"
+            ShortId="usb_power_proprietary"
+            ConfigGroupPath="./[@ShortId='advanced_settings']"
+            Node="Basic">
+            <ConfigGroup
+                Id="Proprietary Charger" 
+                ShortId="usb_proprietary_charger" 
+                ConfigGroupPath="./[@ShortId='advanced_settings']"
+                Node="Array">
+                <ConfigPatternArray
+                    Id="Proprietary Charger Configuration"
+                    ShortId="proprietary_charge"
+                    Pattern="sink_proprietary_charge_current"
+                    MaxNumPatterns="10">
+                </ConfigPatternArray>
+    
+            </ConfigGroup>
+            
+        </ConfigGroup>
+        
+    </ConfigGroup>
+
+</ModuleData>

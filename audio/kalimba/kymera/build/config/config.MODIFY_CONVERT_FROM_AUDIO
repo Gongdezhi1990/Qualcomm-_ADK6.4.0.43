@@ -1,0 +1,27 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+
+%cpp
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+CONVERT_FROM_AUDIO
+
+# List of global include paths
+%list ALL_INCDIRS
+../lib/codec
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/convert_from_audio/convert_from_audio
+# Libraries needed by audio_convert capability
+../lib/codec/codec
+capabilities/encoder/encoder
+

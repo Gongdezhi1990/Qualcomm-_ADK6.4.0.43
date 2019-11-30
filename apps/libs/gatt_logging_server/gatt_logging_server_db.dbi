@@ -1,0 +1,64 @@
+/******************************************************************************
+ *  Copyright (c) 2017 Qualcomm Technologies International, Ltd.
+ *  %%version
+ *  %%appversion
+ *
+ *  FILE
+ *      gatt_logging_server_db.dbi
+ *
+ *  DESCRIPTION
+ *      This file defines the Logging Service in JSON format,
+ *      which is fairly human readable.  This file is included in the main 
+ *      application data base file which is used to produce ATT flat data 
+ *      base. 
+ *
+ *****************************************************************************/
+#ifndef __GATT_LOGGING_SERVER_DB_DBI__
+#define __GATT_LOGGING_SERVER_DB_DBI__
+
+#include "gatt_logging_server_uuids.h"
+ 
+/* Primary service declaration of Logging service */
+primary_service {
+    uuid : UUID_LOGGING_SERVICE,
+    name : "LOGGING_SERVICE",
+
+        /* Logging report characteristic */
+
+        characteristic {
+            uuid        : UUID_LOGGING_REPORT,
+            name        : "LOGGING_REPORT",
+            flags       : [ FLAG_IRQ, FLAG_DYNLEN ],
+            properties  : [ notify ],
+            value       : 0x0000,
+            
+            client_config 
+            {
+                name    : "LOGGING_CLIENT_CONFIG",
+                flags   : FLAG_IRQ
+            }
+        },
+
+        /* Logging control characteristic */
+
+        characteristic {
+            uuid                : UUID_LOGGING_CONTROL,
+            name                : "LOGGING_CONTROL",
+            flags 		        : [FLAG_IRQ, FLAG_ENCR_R, FLAG_ENCR_W],
+            properties          : [ read, write ],
+            value               : 0x00
+            },
+
+        /* Logging Debug configuration characteristic */
+
+        characteristic {
+            uuid                : UUID_LOGGING_DEBUG_CONFIGURATION,
+            name                : "LOGGING_DEBUG_CONFIGURATION",
+            flags               : [ FLAG_IRQ, FLAG_ENCR_R, FLAG_ENCR_W ],
+            properties          : [ read, write ],
+            size_value          : 0x04,
+            value               : 0x00000000
+            }
+    }
+
+#endif /* __GATT_LOGGING_SERVER_DB_DBI__ */

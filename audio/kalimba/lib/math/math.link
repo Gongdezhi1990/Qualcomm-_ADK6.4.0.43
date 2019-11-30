@@ -1,0 +1,93 @@
+/*****************************************************************************
+* CONFIDENTIAL
+*
+* Copyright (c) 2009 - 2017 Qualcomm Technologies International, Ltd.
+*
+*****************************************************************************/
+/* Linkscript for the MATH library */
+
+/* Real twiddle should go in DM1 for the oxygen/gemini/gordon routines and DM2 for Elvis/Priscilla*/
+segment DM_REAL_TWIDDLE                                            20          DM1_REGION;
+segment DM_IMAG_TWIDDLE                                            20          DM2_REGION;
+
+#ifdef KEEP_PM
+segment MATH_LOAD_FFT_TWIDDLE_FACTORS_PM               keep        40          PM_REGION, flash.code;
+segment MATH_FFT_PM                                    keep        40          PM_REGION;
+segment MATH_FFT_PENPENULTIMATE_STAGE_PM               keep        40          PM_REGION;
+segment MATH_FFT_PENULTIMATE_STAGE_PM                  keep        40          PM_REGION;
+segment MATH_FFT_LAST_STAGE_PM                         keep        40          PM_REGION;
+segment MATH_FFT_LAST_STAGE_NONSCALED_PM               keep        40          PM_REGION;
+segment MATH_IFFT_PM                                   keep        40          PM_REGION;
+segment MATH_SCALEABLE_FFT_PM                          keep        40          PM_REGION;
+segment MATH_SCALEABLE_FFT_PENULTIMATE_STAGE_PM        keep        40          PM_REGION;
+segment MATH_SCALEABLE_FFT_LAST_STAGE_PM               keep        40          PM_REGION;
+segment MATH_BITREVERSE_ARRAY_PM                       keep        40          PM_REGION;
+segment MATH_ADDRESS_BITREVERSE_PM                     keep        40          PM_REGION;
+segment MATH_IIR_PM                                    keep        40          PM_REGION;
+segment MATH_INV_QDRT_PM                               keep        40          PM_REGION;
+segment MATH_LOG2_TAYLOR_PM                            keep        40          PM_REGION;
+segment MATH_LOG2_TABLE_PM                             keep        40          PM_REGION;
+segment MATH_POW2_TAYLOR_PM                            keep        40          PM_REGION;
+segment MATH_POW2_TABLE_PM                             keep        40          PM_REGION;
+segment MATH_RAND_PM                                   keep        40          PM_REGION;
+segment MATH_VECTOR_RAND_PM                            keep        40          PM_REGION;
+segment MATH_SIN_PM                                    keep        40          PM_REGION;
+segment MATH_COS_PM                                    keep        40          PM_REGION;
+segment MATH_ATAN_PM                                   keep        40          PM_REGION;
+segment MATH_COS_TAYLOR6_PM                            keep        40          PM_REGION;
+segment MATH_DIV48_PM                                  keep        40          PM_REGION;
+segment MATH_SQRT_PM                                   keep        40          PM_REGION;
+segment MATH_SQRT_48_TAYLOR_PM                          keep        40          PM_REGION;
+segment MATH_VECTOR_COMPLEX_MULTIPLY_PM                keep        40          PM_REGION;
+segment MATH_MEDIAN_FILTER_INITIALISE_PM               keep        40          PM_REGION, flash.code;
+segment MATH_MEDIAN_FILTER_PROCESS_PM                  keep        40          PM_REGION, flash.code;
+
+segment MATH_MISC_LOG_ADD_PM                           keep        40          PM_REGION;
+segment MATH_MISC_POW2_TABLE_PM                        keep        40          PM_REGION;
+segment MATH_MISC_EXP_INT_TABLE_PM                     keep        40          PM_REGION;
+segment MATH_MISC_ACOS_PM                              keep        40          PM_REGION;
+segment FILTER_COEFFCALC_LIB_PM                        keep        40          PM_REGION;
+#else
+segment MATH_LOAD_FFT_TWIDDLE_FACTORS_PM                           40          PM_REGION, flash.code;
+segment MATH_FFT_PM                                                40          PM_REGION;
+segment MATH_FFT_PENPENULTIMATE_STAGE_PM                           40          PM_REGION;
+segment MATH_FFT_PENULTIMATE_STAGE_PM                              40          PM_REGION;
+segment MATH_FFT_LAST_STAGE_PM                                     40          PM_REGION;
+segment MATH_FFT_LAST_STAGE_NONSCALED_PM                           40          PM_REGION;
+segment MATH_IFFT_PM                                               40          PM_REGION;
+segment MATH_SCALEABLE_FFT_PM                                      40          PM_REGION;
+segment MATH_SCALEABLE_FFT_PENULTIMATE_STAGE_PM                    40          PM_REGION;
+segment MATH_SCALEABLE_FFT_LAST_STAGE_PM                           40          PM_REGION;
+segment MATH_BITREVERSE_ARRAY_PM                                   40          PM_REGION;
+segment MATH_ADDRESS_BITREVERSE_PM                                 40          PM_REGION;
+segment MATH_IIR_PM                                                40          PM_REGION;
+segment MATH_INV_QDRT_PM                                           40          PM_REGION;
+segment MATH_LOG2_TAYLOR_PM                                        40          PM_REGION;
+segment MATH_LOG2_TABLE_PM                                         40          PM_REGION;
+segment MATH_POW2_TAYLOR_PM                                        40          PM_REGION;
+segment MATH_POW2_TABLE_PM                                         40          PM_REGION;
+segment MATH_RAND_PM                                               40          PM_REGION;
+segment MATH_VECTOR_RAND_PM                                        40          PM_REGION;
+segment MATH_SIN_PM                                                40          PM_REGION;
+segment MATH_COS_PM                                                40          PM_REGION;
+segment MATH_ATAN_PM                                               40          PM_REGION;
+segment MATH_COS_TAYLOR6_PM                                        40          PM_REGION;
+segment MATH_DIV48_PM                                              40          PM_REGION;
+segment MATH_SQRT_PM                                               40          PM_REGION;
+segment MATH_SQRT_48_TAYLOR_PM                                      40          PM_REGION;
+segment MATH_VECTOR_COMPLEX_MULTIPLY_PM                            40          PM_REGION;
+segment MATH_MEDIAN_FILTER_INITIALISE_PM                           40          PM_REGION, flash.code;
+segment MATH_MEDIAN_FILTER_PROCESS_PM                              40          PM_REGION, flash.code;
+
+segment MATH_MISC_LOG_ADD_PM                                       40          PM_REGION;
+segment MATH_MISC_POW2_TABLE_PM                                    40          PM_REGION;
+segment MATH_MISC_EXP_INT_TABLE_PM                                 40          PM_REGION;
+segment MATH_MISC_ACOS_PM                                          40          PM_REGION;
+segment FILTER_COEFFCALC_LIB_PM                                    40          PM_REGION;
+#endif
+
+segment MATH_MISC_LOG_ADD_DM            balanced                   40          DM1_REGION, DM2_REGION;
+segment MATH_MISC_POW2_TABLE_DM         balanced                   40          DM1_REGION, DM2_REGION;
+segment MATH_MISC_EXP_INT_TABLE_DM      balanced                   40          DM1_REGION, DM2_REGION;
+segment MATH_MISC_ACOS_DM               balanced                   40          DM1_REGION, DM2_REGION;
+

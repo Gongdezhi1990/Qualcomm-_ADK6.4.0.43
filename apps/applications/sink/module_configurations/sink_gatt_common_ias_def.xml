@@ -1,0 +1,15 @@
+<ModuleData Name="Sink_gatt_common_ias">
+    <ConfigGroup
+        ShortId="sink_gatt_common_ias_readonly"
+        Id="Find Me Common"
+        Node="Basic">                                     
+        <ConfigItem
+            Id="Alert Tone Timeout [s]"
+            ShortId="ImmediateAlertStopTimeout_client_s"
+            Desc="The time, in seconds, that the system waits before stopping the alert"
+            Type="uint"
+            DefaultValue="60"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']/[@ShortId='find_me']"/>
+    </ConfigGroup>    
+</ModuleData>

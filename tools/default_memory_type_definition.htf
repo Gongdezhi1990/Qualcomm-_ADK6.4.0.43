@@ -1,0 +1,11 @@
+# Copyright (c) 2019 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#
+# This is just a default file with no specific memory manufacturer overrides
+#
+# Usually no overrides are necessary since already built within the curator code
+# but does allow the facility to support additional memory options if not pre-built within curator
+#
+# This file is overwritten with be-spoke values when you select a specific Memory type option
+# and included in the project

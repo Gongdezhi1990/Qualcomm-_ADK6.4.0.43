@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright (c) 2018 Qualcomm Technologies International, Ltd.-->
+
+<pio_map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="pio_message_map.xsd">
+
+    <!--Debounce can be set for PIO, if not specified default debounce values will be used (1-count, 0-period).-->
+    <pio_debounce>
+        <nreads>4</nreads>
+        <period>5</period>
+    </pio_debounce>
+
+    <pio>
+        <pinFriendlyName>MFB_BUTTON</pinFriendlyName>
+        <pad>0</pad>
+    </pio>
+</pio_map>

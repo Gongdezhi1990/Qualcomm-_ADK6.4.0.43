@@ -1,0 +1,216 @@
+<ModuleData Name="sink_powermanager_onchip_vbat" HeaderName="sink_power_manager_vbat">
+
+    <DefineGroup>
+        <DefinePattern PatternName="Vbat Battery Threshold Configuration"
+                       ShortId="vbat_battery_threshold_config">
+            <ConfigItem
+                Id="Vbat Battery Threshold Voltage [mV]"
+                ShortId="limit"
+                Desc="When Vbat (ie. the battery voltage level) crosses the threshold specified in this setting it will cause the mapped notification event to be raised."
+                Size="16"
+                Type="uint"/>
+            <ConfigItem
+                Id="Vbat Notify Interval [s]"
+                ShortId="notify_period"
+                Desc="0-2550 seconds in 10 second steps (rounded down)"
+                Multiplier="10"
+                Type="uint"
+                Size="8"/>
+            <ConfigItem
+                Id="Vbat Trigger Source"
+                ShortId="sources"
+                Desc="The notification events raised can be configured to be sent during any of the specified operating modes."
+                Type="bitfield"
+                PresentHex="false"
+                Size="3">
+                <bitfield key="Automatic Sending"
+                          value="0"/>
+                <bitfield key="On User Request for Battery Level"
+                          value="1"/>
+                <bitfield key="On Initial Reading for Battery Level"
+                          value="2"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Vbat User Event"
+                ShortId="event"
+                Desc="The User or System Event mapped to the Vbat threshold transition."
+                Type="enum"
+                Size="16"
+                ShowOrdered="true">
+                <List use="g_user_event" prefix="0x40"/>
+                <List use="g_system_event"/>
+            </ConfigItem>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        ShortId="sink_power_settings_vbat"
+        Id="Sink Power Readonly Vbat"
+        Node="Basic">
+        <ConfigStruct
+            Id="Instance of a structure power_config_vbat"
+            ShortId="config_p_vbat"
+            Desc="."
+            Type="struct"
+            Struct="sink_power_config_vbat">
+            <StructElementConfigItem
+                Id="power_config_vbat"
+                ShortId="power_config_vbat"
+                Desc=".">
+                <StructElementConfigItem
+                    Id="Battery Voltage Configuration Struct Vbat"
+                    ShortId="Vbat_Struct"
+                    Desc="."
+                    ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_voltage_vbat']">
+                    <StructElementConfigItem
+                        Id="power_adc2_vbat"
+                        ShortId="power_adc2_vbat"
+                        Desc=".">
+                        <StructElementConfigItem
+                            Id="Vbat ADC Source"
+                            ShortId="Vbat_ADC_Source"
+                            Desc="The Vbat input can be configured to use any of the available input sources given below."
+                            ConfigGroupPath="./[@ShortId='advanced_settings']"
+                            DefaultValue="VBAT_SENSE"/>
+                        <StructElementConfigItem
+                            Id="Vbat Read Period When Charging [s]"
+                            ShortId="Vbat_Read_Period_Charging"
+                            Desc="This configures the time interval between Vbat updates in seconds while charging, 0 to disable."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_voltage_vbat']/[@ShortId='battery_adc_configuration']"
+                            DefaultValue="0x14"/>
+                        <StructElementConfigItem
+                            Id="Vbat Read Period When Not Charging [s]"
+                            ShortId="Vbat_Read_Period_Not_Charging"
+                            Desc="This configures the timer interval between Vbat updates in seconds while not charging, 0 to disable."
+                            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_voltage_vbat']/[@ShortId='battery_adc_configuration']"
+                            DefaultValue="0x0014"/>
+                    </StructElementConfigItem>
+                    <StructElementConfigItem
+                        Id="Ignore Increasing Vbat Readings When Not Charging"
+                        ShortId="ignore_increase_no_chg"
+                        Desc="When not charging the gas gauge is not updated when new Vbat readings are higher than the lowest previous reading."
+                        ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_voltage_vbat']/[@ShortId='gas_gauge_actions']"
+                        DefaultValue="false" />
+                </StructElementConfigItem>
+            </StructElementConfigItem>
+        </ConfigStruct>
+
+        <!-- The following thresholds are based on the LP-443440-1S-3 battery which has
+        a discharge cutoff voltage of 2.75V, and nominal voltage of 3.7V. -->
+
+        <ConfigGroup
+            Id="Vbat Threshold Settings"
+            ShortId="Vbat_Threshold_Settings"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='battery']/[@ShortId='battery_voltage_vbat']">
+            <ConfigPatternArray
+                Id="Vbat Battery Voltage Monitoring Threshold Settings"
+                ShortId="bat_events"
+                Pattern="vbat_battery_threshold_config"
+                FixedNumPatterns="6">
+                <PatternArrayRow
+                    Id="Vbat_Threshold_Event_1"
+                    ShortId="Vbat_Threshold_Event_1"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Battery_Threshold_Voltage_units1mV_1"
+                        DefaultValue="3000" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Notify_Interval_secs_1"
+                        DefaultValue="0x06" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Trigger_Source_bitfield_1"
+                        DefaultValue="Automatic Sending | On User Request for Battery Level | On Initial Reading for Battery Level" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_UserEvent_raised_1"
+                        DefaultValue="Battery Critical" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Vbat Threshold Event 2"
+                    ShortId="Vbat_Threshold_Event_2"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Battery_Threshold_Voltage_units1mV_2"
+                        DefaultValue="3200" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Notify_Interval_secs_2"
+                        DefaultValue="0x05" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Trigger_Source_bitfield_2"
+                        DefaultValue="Automatic Sending | On User Request for Battery Level | On Initial Reading for Battery Level" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_UserEvent_raised_2"
+                        DefaultValue="Battery Low" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Vbat Threshold Event 3"
+                    ShortId="Vbat_Threshold_Event_3"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Battery_Threshold_Voltage_units1mV_3"
+                        DefaultValue="3600" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Notify_Interval_secs_3"
+                        DefaultValue="0x0" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Trigger_Source_bitfield_3"
+                        DefaultValue="Automatic Sending | On User Request for Battery Level" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_UserEvent_raised_3"
+                        DefaultValue="Gas Gauge 0" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Vbat Threshold Event 4"
+                    ShortId="Vbat_Threshold_Event_4"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Battery_Threshold_Voltage_units1mV_4"
+                        DefaultValue="3700" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Notify_Interval_secs_4"
+                        DefaultValue="0x0" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Trigger_Source_bitfield_4"
+                        DefaultValue="Automatic Sending | On User Request for Battery Level" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_UserEvent_raised_4"
+                        DefaultValue="Gas Gauge 1" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Vbat Threshold Event 5"
+                    ShortId="Vbat_Threshold_Event_5"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Battery_Threshold_Voltage_units1mV_5"
+                        DefaultValue="4000" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Notify_Interval_secs_5"
+                        DefaultValue="0x0" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Trigger_Source_bitfield_5"
+                        DefaultValue="Automatic Sending | On User Request for Battery Level" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_UserEvent_raised_5"
+                        DefaultValue="Gas Gauge 2" />
+                </PatternArrayRow>
+                <PatternArrayRow
+                    Id="Vbat Threshold Event 6"
+                    ShortId="Vbat_Threshold_Event_6"
+                    Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Battery_Threshold_Voltage_units1mV_6"
+                        DefaultValue="5100" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Notify_Interval_secs_6"
+                        DefaultValue="0x0" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_Trigger_Source_bitfield_6"
+                        DefaultValue="Automatic Sending | On User Request for Battery Level" />
+                    <PatternArrayConfigItem
+                        ShortId="Vbat_UserEvent_raised_6"
+                        DefaultValue="Gas Gauge 3" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+</ModuleData>

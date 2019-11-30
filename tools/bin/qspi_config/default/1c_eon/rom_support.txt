@@ -1,0 +1,18 @@
+Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+All Rights Reserved.
+Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+The following devices have ROM support and do not need MIB keys:
+
+
+**EN25S80B(2S)**
+**EN25S16B(2S)**
+EN25S32A(2S)
+EN25S64A(2SC)
+
+WARNING: Although the ROM contains support for EN25S16B(2S) and EN25S80B(2S),
+         they should not be used because they require a resume to suspend 
+         delay of 5ms (according to their datasheets). Revised parts expected
+         Q2/Q3 2019.

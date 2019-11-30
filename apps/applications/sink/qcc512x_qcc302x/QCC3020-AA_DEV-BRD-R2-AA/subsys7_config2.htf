@@ -1,0 +1,36 @@
+file=app2
+
+# Chip Type: QCC3020
+# LK-VAM-APTX-CLHD->aptX Classic + aptX-HD Decoders
+# LK-VAM-APTX-LLCLHD->aptX Low Latency Decoders + aptX  Classic + aptX-HD Decoders
+# LK-VAM-APTX-AD->aptX Adaptive Decoder
+# LK-VAM-APTX-ADM->aptX Adaptive Mono Decoder
+
+# Starting Address: 00025B00FF00
+# Ending Address: 00025B00FF0F
+# Number of Bluetooth Addresses: 16
+FeatureLicenseKey = [ 34 BC EA A8 19 33 BD 9B 95 D8 D2 B2 07 D8 DB 1A A4 E9 B7 C9 63 1D E2 FE B9 9B 76 8B 8E D1 E9 54 42 84 2D 55 10 ED EA 48 09 0C D9 90 D9 38 86 37 7A 1F C0 BE EC B4 16 15 FB 42 91 3F 4C BE ED 75 ]
+
+USBProductString = [ 51 43 43 33 30 32 30 ]
+
+USBSerialNumberString = [ 41 42 43 44 45 46 30 31 32 33 34 35 36 37 38 39 ]
+
+USBManufString = [ 51 54 49 4C ]
+
+# The default value of SiflashResumeToSuspendDelay is set to 1000us that is the minimum erase/program resume to suspend
+# delay that must be respected to avoid errors for all the QSPI flashes supported.  
+# 
+# Cypress/Spansion S25FS-S QSPI flash requires minimum erase/program resume to suspend
+# delay that must be respected to avoid errors, 50us is recommended by Cypress.
+#
+# If QSPI other than Cypress/Spansion is used, this value should be amended according to
+# the flash datasheet.
+#
+# Note that this controls minimum delay and not a typical or average delay required
+# for a flash command to progress, which is often also specified in the datasheet.
+#
+# If the minimum delay required by the flash part is not stated in its datasheet
+# please contact the flash manufacturer for clarification.
+
+SiflashResumeToSuspendDelay = 1000
+

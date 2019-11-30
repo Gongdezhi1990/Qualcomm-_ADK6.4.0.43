@@ -1,0 +1,232 @@
+<ModuleData Name="sink_ir_remote_control">
+    <DefineGroup>
+        <DefinePattern
+            PatternName="SinkIRRC_LookupTable"
+            ShortId="irLookupTableConfig">
+            <ConfigItem
+                Id="IR Virtual Button ID"
+                ShortId="input_id"
+                Desc="The 'Virtual Button' ID the IR code translates to (allows up to 16 RC buttons to be supported)"
+                Type="enum"
+                Size="4">
+                <List use="virtual_buttons"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="IR Code [hex]"
+                ShortId="ir_code"
+                Desc="The infrared code sent by the remote controller that converts to *input_id* for the input manager to process"
+                Type="uint"
+                PresentHex="true"
+                Size="8" >
+            </ConfigItem>
+            <ConfigItem
+                Id="IR Remote Address [hex]"
+                ShortId="remote_address"
+                Desc="The address of the remote control that sent the IR code (an Infrared remote may use different addresses for different buttons, so need to ensure the code was actually sent from the known RC)"
+                Type="uint"
+                PresentHex="true"
+                Size="16" >
+            </ConfigItem>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        Id="IR RC Input Monitor Read"
+        ShortId="sink_ir_rc_readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="Infrared protocol"
+            ShortId="protocol"
+            Desc="Defines which IR protocol the application supports (can only support one protocol; either NEC or RC5)"
+            Type="enum"
+            Size="16"
+            DefaultValue="RC5"
+            ConfigGroupPath="./[@ShortId='remote_control']/[@ShortId='ir_input_monitor']">
+            <enum key="Reserved"
+                  value="0"/>
+            <enum key="RC5"
+                  value="1"/>
+            <enum key="NEC"
+                  value="2"/>
+            <enum key="TC9012"
+                  value="3"/>
+        </ConfigItem>
+
+        <ConfigItem
+            Id="Maximum Number of Learning Codes"
+            ShortId="max_learning_codes"
+            Desc="The maximum number of IR codes the application can learn"
+            Type="uint"
+            Size="16"
+            DefaultValue="6"
+            ConfigGroupPath="./[@ShortId='remote_control']/[@ShortId='ir_input_monitor']"/>
+
+        <ConfigItem
+            Id="Timeout for Learning Mode [ms]"
+            ShortId="learning_mode_timeout"
+            Desc="Failsafe for turning off the IR learning mode [ms]"
+            Type="uint"
+            Size="16"
+            DefaultValue="30000"
+            ConfigGroupPath="./[@ShortId='remote_control']/[@ShortId='ir_input_monitor']"/>
+
+        <ConfigItem
+            Id="Timeout for Learning Mode Active Reminder Tone [ms]"
+            ShortId="learning_mode_reminder"
+            Desc="A reminder tone can be generated to indicate learning mode is active, this will be repeated every timeout [ms] "
+            Type="uint"
+            Size="16"
+            DefaultValue="10000"
+            ConfigGroupPath="./[@ShortId='remote_control']/[@ShortId='ir_input_monitor']"/>
+
+        <ConfigItem
+            Id="IR_PIO"
+            ShortId="ir_pio"
+            Desc="PIO interfacing the InfraRed hardware."
+            Type="enum"
+            Size="16"
+            DefaultValue="N/A"
+            ConfigGroupPath="./[@ShortId='remote_control']/[@ShortId='ir_input_monitor']">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+        </ConfigItem>
+
+        <ConfigGroup
+            Id="IR Look-up Table"
+            ShortId="ir_rc_lookup_table"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='remote_control']/[@ShortId='ir_input_monitor']">
+            <ConfigPatternArray
+                Id="Look Up Table Array IR"
+                ShortId="lookupTable"
+                Pattern="irLookupTableConfig"
+                MaxNumPatterns="255">
+                <PatternArrayRow Id="irRcLookupTable Row1" ShortId="irRcLookupTable_row1" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb0" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x0C" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="irRcLookupTable Row2" ShortId="irRcLookupTable_row2" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb1" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x21" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="irRcLookupTable Row3" ShortId="irRcLookupTable_row3" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb2" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x20" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="irRcLookupTable Row4" ShortId="irRcLookupTable_row4" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb3" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x17" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="irRcLookupTable Row5" ShortId="irRcLookupTable_row5" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb4" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x16" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="irRcLookupTable Row6" ShortId="irRcLookupTable_row6" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb5" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x15" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="irRcLookupTable Row7" ShortId="irRcLookupTable_row7" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb6" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x2B" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="irRcLookupTable Row8" ShortId="irRcLookupTable_row8" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb7" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x2C" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="irRcLookupTable Row9" ShortId="irRcLookupTable_row9" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb8" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x2D" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="irRcLookupTable Row10" ShortId="irRcLookupTable_row10" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb9" />
+                    <PatternArrayConfigItem
+                        ShortId="ir_code"
+                        DefaultValue="0x2E" />
+                    <PatternArrayConfigItem
+                        ShortId="remote_address"
+                        DefaultValue="0" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+
+    <ConfigGroup Id="IR RC Input Monitor Write" ShortId="sink_ir_rc_writeable" Node="Basic">
+        <ConfigGroup
+            Id="IR Remote Control LearntCodes"
+            ShortId="irlearnt_codes"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='advanced_settings']">
+            <ConfigPatternArray
+                Id="Learnt Codes Array 1"
+                ShortId="learnt_codes"
+                Pattern="irLookupTableConfig"
+                MaxNumPatterns="255">
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+</ModuleData>

@@ -1,0 +1,25 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# MIB keys for AP memory APSxx04M-SQQ QSPI RAM
+
+# This device must be permanently connected to the 1v8 output of the CSRA68105
+# device. Power to this device will be lost along with all of its contents when
+# the chip enters dormant mode.
+
+EnableAudioSqif = true
+SqifEnableChipSelect1 = 4
+QSPIRAMParams = [ 05 01 04 00 00 03 02 02 ]
+QSPIRAMResetVector = [ 05 02 01 66 01 99 ]
+QSPIRAMConfigVector = [ 00 ]
+
+# The default value for the PioPadControlElements MIB key sets the pad control
+# for the pads used by Apps QSPI. When this key is set in the device manager
+# filesystem, the default value is never set. Therefore the pad control values
+# for the Apps QSPI must be configured here.
+#
+#                         Apps QSPI (replaces ROM default)     Audio QSPI                          CS1
+PioPadControlElements = [ 04 01 01 02 00 59 03 59 02 59 05 59  2c 01 29 02 28 59 2b 59 2a 59 2d 59 2e 59 ]

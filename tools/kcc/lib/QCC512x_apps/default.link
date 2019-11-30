@@ -1,0 +1,54 @@
+chip QCC512x_apps;
+
+start $reset;
+
+region DM_P0      0x00000000   0x00007FFF DATA;
+region DM_P1      0x00010000   0x00017FFF DATA;
+region PM_P0      0x00800000   0x00801FFF CODE;
+region PM_P1      0x00802000   0x00803FFF CODE;
+
+/* Generate a checksum of code and data and put it in this region */
+CHECKSUM_REGION DM_P0;
+
+
+/*
+ *      Section spec    Options             Priority    Regions
+ */
+
+/* By default, a program using this linkscript assumes Processor 0 */
+segment dm1circ         circular            20          DM_P0;
+segment dm1                                 20          DM_P0;
+
+segment dmconst                             20          DM_P0;
+
+segment dmzi                                20          DM_P0;
+
+segment dm                                  30          DM_P0;
+segment dmcirc          circular            30          DM_P0;
+
+segment crt0data                            1           DM_P0;
+segment crt0stack                           40          DM_P0;
+segment PM_RST                              10          PM_P0;
+segment pm                                  20          PM_P0;
+
+
+/* Use these definitions instead for Processor 1 */
+/*
+CHECKSUM_REGION DM_P1;
+
+segment dm1circ         circular            20          DM_P1;
+segment dm1                                 20          DM_P1;
+
+segment dmconst                             20          DM_P1;
+
+segment dmzi                                20          DM_P1;
+
+segment dm                                  30          DM_P1;
+segment dmcirc          circular            30          DM_P1;
+
+segment crt0data                            1           DM_P1;
+segment crt0stack                           40          DM_P1;
+segment PM_RST                              10          DM_P1;
+segment pm                                  20          DM_P1;
+*/
+

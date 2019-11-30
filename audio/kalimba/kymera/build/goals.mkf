@@ -1,0 +1,30 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  Sanity-checking for make goals
+#
+#               This file defines some rules for validating the targets
+#               supplied on the 'make' command line.
+############################################################################
+
+# If no goal supplied on the command line, use 'debug'.
+# Need to set MAKECMDGOALS for any sub-makes, and .DEFAULT_GOAL
+# to avoid executing the 'help' goal first.
+ifeq ($(strip $(MAKECMDGOALS)),)
+MAKECMDGOALS = debug
+.DEFAULT_GOAL = debug
+endif
+
+# 'verbose' on its own implies 'verbose debug'.
+ifeq (verbose, $(strip $(MAKECMDGOALS)))
+MAKECMDGOALS = verbose debug
+endif
+
+# TODO - we could enforce that 'clean' is only
+# allowed on its own, to avoid train-wrecks of the form
+# 'make debug clean'.

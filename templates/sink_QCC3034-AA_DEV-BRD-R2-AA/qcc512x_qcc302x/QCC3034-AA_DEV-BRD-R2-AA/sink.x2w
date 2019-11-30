@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<workspace>
+    <project default="yes" path="../common/sink.x2p">
+        <dependencies>
+            <project path="../common/cur_cfg_filesystem.x2p" />
+            <project path="fw_cfg_filesystem.x2p" />
+            <project path="dev_cfg_filesystem.x2p" />
+            <project path="../common/customer_ro_filesystem.x2p" />
+            <project path="../../../../../images/apps0_firmware/common/apps0_firmware.x2p" />
+            <project path="../../../../libs/libs_qcc512x_qcc302x.x2p" />
+        </dependencies>
+    </project>
+    <project default="no" path="../common/cur_cfg_filesystem.x2p">
+        <dependencies />
+    </project>
+    <project default="no" path="fw_cfg_filesystem.x2p">
+        <dependencies>
+            <project path="../common/cur_cfg_filesystem.x2p" />
+        </dependencies>
+    </project>
+    <project default="no" path="dev_cfg_filesystem.x2p">
+        <dependencies>
+            <project path="../common/cur_cfg_filesystem.x2p" />
+        </dependencies>
+    </project>
+    <project default="no" path="../common/user_ps_filesystem.x2p">
+        <dependencies />
+    </project>
+    <project default="no" path="../common/customer_ro_filesystem.x2p">
+        <dependencies />
+    </project>
+    <project default="no" path="../../../../../apps/fw/src/hydra_os_qcc512x_qcc302x.x2p">
+        <dependencies />
+    </project>
+    <project default="no" path="../../../../../images/apps0_firmware/common/apps0_firmware.x2p">
+        <dependencies>
+            <project path="../common/cur_cfg_filesystem.x2p" />
+            <project path="fw_cfg_filesystem.x2p" />
+            <project path="dev_cfg_filesystem.x2p" />
+        </dependencies>
+    </project>
+    <project default="no" path="../../../../../audio/kalimba/kymera/build/kymera_audio.x2p">
+        <dependencies>
+            <project path="../common/cur_cfg_filesystem.x2p" />
+        </dependencies>
+    </project>
+    <project default="no" path="../../../../../images/curator_firmware/common/curator_firmware.x2p">
+        <dependencies />
+    </project>
+    <project default="no" path="../../../../libs/libs_qcc512x_qcc302x.x2p">
+        <dependencies>
+            <project path="../../../../../apps/fw/src/hydra_os_qcc512x_qcc302x.x2p" />
+        </dependencies>
+    </project>
+    <project default="no" path="../../../../../images/btss_firmware/vfbga90/btss_firmware.x2p">
+        <dependencies>
+            <project path="../common/cur_cfg_filesystem.x2p" />
+        </dependencies>
+    </project>
+    <project default="no" path="../common/deploy.x2p">
+        <dependencies />
+    </project>
+<project default="no" name="download_cvc_send" path="../../../../../audio/kalimba/kymera/tools/KCSMaker/download_cvc_send.x2p" /></workspace>

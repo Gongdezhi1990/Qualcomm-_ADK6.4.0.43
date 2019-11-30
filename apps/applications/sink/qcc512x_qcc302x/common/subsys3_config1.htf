@@ -1,0 +1,40 @@
+file=audio1
+
+# Select PIOs for I2S interface 0 and 1: SCK, WS, MCLK, SD_OUT, SD_IN.
+#PcmPioConfig =  [ 10 11 ff 12 13 ]
+#Pcm1PioConfig = [ ff ff ff 14 16 ]
+AoVDutyCycleParameters = [0A 23]
+CoreEnable = [ 00 ]
+USBSourceBufferSize = 1280
+
+DigMic0G722FilterEnable = true
+DigMic0G722FirEnable = true
+DigMic0ChanSwap = false
+DigMic0ClockRate = 4000
+DigMic0PioConfig = [ff ff]
+
+DigMic1G722FilterEnable = true
+DigMic1G722FirEnable = true
+DigMic1ChanSwap = false
+DigMic1ClockRate = 4000
+DigMic1PioConfig = [ff ff]
+
+DigMic2G722FilterEnable = true
+DigMic2G722FirEnable = true
+DigMic2ChanSwap = false
+DigMic2ClockRate = 4000
+DigMic2PioConfig = [ff ff]
+
+Codec0UseClassABAmplifier = false
+Codec0OutAmpQualityMode = false
+
+IsAncIirFilter16k = true
+
+AncEnableDelay = 300
+
+CodecOutputDisableTimeout = 28000000
+
+HeapAllocationSram = [01 00 01 00 00 00 00 00 00 00 00 00 00 00]
+
+#RelaxMallocStrictness
+477 = %2%

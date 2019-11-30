@@ -1,0 +1,369 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Common chip-specific definitions for Crescendo and its derivatives.
+
+%include config.COMMON
+%include config.COMMON_HYDRA
+
+%include config.MODIFY_AUDIO_DATA_SERVICE
+
+# Install TTP libraries. Other parts of metadata
+# support are enabled in this file further down.
+%include config.MODIFY_TTP
+
+# Install closed loop rate matching
+%include config.MODIFY_CLRM
+
+# Install spdif driver
+# (endpoint and the capability
+%include config.MODIFY_SPDIF
+
+# Install usb audio endpoint and capabilities
+%include config.MODIFY_USB_AUDIO
+
+# Install OBPM
+%include config.MODIFY_OBPM
+
+# Chip that allows dual core, should have shared memory.
+# With this include we make sure we use shared memory instead of scarce private memory.
+%include config.MODIFY_USE_SHARE_MEM
+
+# List of special include paths, additional to the list above
+# Typically used for anything not ending in /interface
+%list ALL_INCDIRS
+common/hydra/interface/gen/k32
+common/interface/gen/k32
+
+%cpp
+# enable SCO RX to generate ToA metadata
+INSTALL_SCO_RX_TOA_METADATA_GENERATE
+# enable CVC RECEIVE to support metadata
+INSTALL_CVC_RECEIVE_SUPPORT_METADATA
+
+# enable audio sources to generate ToA metadata
+# Note: config key STREAM_AUDIO_SOURCE_METADATA_ENABLE
+#       needs to be set for the endpoint to support
+#        this feature
+INSTALL_AUDIO_SOURCE_TOA_METADATA_GENERATE
+# sets STREAM_AUDIO_SOURCE_METADATA_ENABLE key by default
+# (This is temporary)
+AUDIO_SOURCE_ENABLE_TOA_METADATA_BY_DEFAULT
+
+CHIP_BASE_CRESCENDO
+CHIP_HAS_BIGENDIAN_TX_BUS=0
+
+# Placeholder for small power optimization in corner cases
+TODO_CRESCENDO_D01_CLKGEN
+# FIXME: ...and the firmware conditionalisation is currently nasty
+TODO_CRESCENDO_D01_AUDIO
+TODO_CRESCENDO
+TODO_CRESCENDO_PS_KEYS
+
+HAVE_CLOCK_STOP_WIND_DOWN_SEQUENCE
+# New stream monitor interface that was first seen on Crescendo.
+HAVE_CRESCENDO_STREAM_MONITOR
+HAVE_CACHE
+# Interrupt controller configuration
+AMBER_STYLE_INT_CTRL
+NUM_INT_SOURCES_PER_PRIORITY=32
+CHIP_HAS_SEPARATE_INTERRUPT_ENABLE_AND_PRIO_REGS=1
+CHIP_HAS_BANKED_BUS_INTERRUPTS=0
+CHIP_NUMBER_OF_BUS_INTERRUPTS=8
+CHIP_HAS_BUS_INTERRUPT_GENERATE_HW=1
+# Chips after Crescendo D01 lets us see whether the Tbus message hardware is busy (B-206598)
+CHIP_HAS_BUS_MESSAGE_STATUS_REGISTER=1
+
+# B-171290: The extended validity window is valid for all chips after Crescendo D00.
+CHIP_HAS_EXTENDED_BAC_VALIDITY_WINDOW=1
+
+# Chips after Crescendo can slow an internal clock when shallow sleeping to save
+# power (at the cost of slowing interrupt response)
+# But it may not quite work (B-235799)
+CHIP_HAS_SHALLOW_SLEEP_CLOCK_CONT_SLOWING=0
+
+# Chips after Crescendo D00 have fine control over generation of clock/sync for PCM/I2S
+CHIP_HAS_SEPARATE_PCM_I2S_CLKGEN_ENABLES=1
+# Chips after Crescendo D00 have sensible shallow sleep hardware
+CHIP_HAS_SHALLOW_SLEEP_REGISTERS=1
+# Chips after Crescendo D00 can tell us exactly where an exception occurred
+CHIP_HAS_EXCEPTION_PC=1
+# Chips after Crescendo D00 give the DSP control of its RAMs' deep sleep (DS) configuration.
+# B-181071
+CHIP_HAS_RAM_DS_CONTROLS=1
+
+# Chips after Crescendo can select the pads used by the PCM signals.
+CHIP_HAS_PCM_PIO_SEL=1
+CHIP_HAS_DDS_DIVIDER_ENABLE_WITH_BANK=1
+
+# To prevent channels go out of sync when
+# multiple input interfaces are in use
+ENABLE_FLUSH_WRITE_POINTER_FOR_SPDIF_RX
+
+# We want to be able to check the firmware's running on the correct chip,
+# but the hardware makes this tricky at the moment: B-208641.
+# (NB turning this off won't actually help at the moment, since it's also
+# conditionalised on INSTALL_LPC_SUPPORT. B-208069)
+TODO_CRESCENDO_CHIPVER_CHECKING
+
+# B-167562 merged the two fields controlling audio sample size into
+# a single field in a single register.
+CHIP_HAS_SINGLE_AUDIO_SAMPLE_FORMAT_REGISTER
+# d01 has extra gating on clock/sync to give us more control over
+# when they start.
+HAVE_PCM_DDS_GENERATED_CLK_GATED_BY_AUDIO_ENABLES
+#I2S HW can itself decide if cropping is required.
+INSTALL_I2S_AUTO_CROP
+
+# Kalimba architecture used
+KALASM3
+KAL_ARCH4
+K32
+# FIXME: reconcile with B-172064
+# BC_NUM_PORTS=12
+ADDR_PER_WORD=4
+LOG2_ADDR_PER_WORD=2
+PC_PER_INSTRUCTION=4
+LOG2_PC_PER_INSTRUCTION=2
+WORD_ADDRESS_MASK=0xFFFFFFFC
+MAXINT=0x7FFFFFFF
+MININT=0x80000000
+DAWTH=32
+DAWTH_MASK=0xFFFFFFFF
+CHIP_NUM_CORES=2
+__KALIMBA32__
+
+DM2_RAM_BASE=0xFFF00000u
+
+INSTALL_AUDIO_INTERFACE_PCM
+NUMBER_PCM_INSTANCES=4
+INSTALL_AUDIO_INTERFACE_I2S
+NUMBER_I2S_INSTANCES=4
+NUMBER_VOICE_SLOTS=16
+INSTALL_24_BIT_PCM
+INSTALL_24_BIT_I2S
+
+# Crescendo has new design for CODECs, only some of which is common with
+# previous generation chips with analog audio hardware. Kymera is only
+# expected to support Crescendo and later generation. So all other implementations
+# can go. However, use HAVE_CRESCENDO_AUDIO to comment out older implementation
+# until we are sure we can delete them. Note that this is different from
+# HAVE_CRESCENDO_AUDIO_MUX, which is specifically for the new audio mux in Crescendo
+# and required because Kymera also supports Amber, which does not have it.
+# NB, future chips after Crescendo might well turn out also to HAVE_CRESCENDO_AUDIO.
+HAVE_CRESCENDO_AUDIO
+
+INSTALL_AUDIO_INTERFACE_SPDIF
+HAVE_SPDIF_INDEPENDENT_OF_PCM_I2S
+INSTALL_SPDIF_RATE_DETECT
+INSTALL_SPDIF_HW_RATE_DETECT
+INSTALL_SPDIF_RX_CHNL_STS_SUPPORT
+INSTALL_24_BIT_SPDIF
+
+HAVE_AUDIO_MMU_POINTERS_WRITEBACK_FIX
+
+INSTALL_CODEC
+INSTALL_24_BIT_CODEC
+INSTALL_ADC
+INSTALL_ADC_96K_SAMPLING_RATE
+INSTALL_DAC
+INSTALL_DAC_192K_SAMPLING_RATE
+
+#Digital Mics
+INSTALL_DIGITAL_MIC
+INSTALL_24_BIT_DMIC
+
+#Sidetone
+HAVE_SIDE_TONE_HARDWARE
+
+#AUDIO ADC IIR filter
+INSTALL_AUDIO_ADC_IIR_FILTER
+
+#Mic bias
+HAVE_MIC_BIAS_HARDWARE
+HAVE_MIC_BIAS_0
+
+# Crescendo needs to request for resources for hardware interfaces
+INSTALL_AUDIO_RESOURCE_ROUTING
+
+NUMBER_HW_PATCHES=32
+NUMBER_INTERRUPT_SOURCES=32
+HAVE_HW_MEMORY_EXCEPTIONS
+
+# NVMEM window start addresses for code and data
+PM_ROM_WINDOW_START=0x00000000
+# KALARCH 4 does not have special regions for LS/MS
+DM_ROM_WINDOW_START=0xF8000000
+
+DM_NVMEM_WINDOW_START=0xF8000000U
+DM_NVMEM_WINDOW_SIZE =0x800000
+
+# Location of PM RAM windows in DM space
+# KALARCH 4 does not have special regions for LS/MS
+PM_RAM_WINDOW=0x00100000
+
+PM_RAM_START_ADDRESS=0x04000000
+
+# Address offset within the PM RAM window where Cache starts
+# This will change when we support multiple processors
+PM_RAM_WINDOW_CACHE_START_ADDRESS_OFFSET=0x0
+
+# Define the location and size of the BAC remote buffer access windows
+BAC_REMOTE_WINDOW_START_ADDR=0x800000
+BAC_REMOTE_WINDOW_SIZE=0x100000
+
+# aptX definitions
+#APTX_USE_EXTERNAL_MEMORY
+#ENABLE_SPRINT_SUPPORT
+
+# New stuff in Amber d01
+#HAVE_32BIT_TIMERS
+HAVE_CACHE_EXECUTE_EXCEPTION
+HAVE_15BIT_BAC_SHIFT
+INSTALL_AUDIO_FIFOS
+#INSTALL_AUDIO_STREAM_MONITORING
+
+# New audio hardware introduced with Crescendo (may be on future chips too)
+HAVE_CRESCENDO_AUDIO_MUX
+HAVE_24BIT_AUDIO
+
+# support sending messages to transaction bridge
+SUPPORT_TRB_LOG_MESSAGE
+
+# Hydra specific switches that used to be in config.COMMON (TODO_CONSIDER_DELETE comment)
+INSTALL_AUDIO_MODULE
+# Enable the simple form of common code patches
+HYDRA_SW_PATCH_SIMPLE
+# Include ability to patch libs
+# (ASM patching) only for crescendo
+PATCH_LIBS
+TODO_CRESCENDO_BUFFER
+BAC32
+BROKEN_SUBWORD_WRITE_IN_BAC_WINDOW
+TODO_CRESCENDO_STREAMS_SAMPLE_SIZE_SUPPORT
+
+INSTALL_AUDIO_DATA_SERVICE
+INSTALL_METADATA
+METADATA_USE_PMALLOC
+#Tester endpoint used to test audio data service.
+INSTALL_AUDIO_DATA_SERVICE_TESTER
+
+# this will enable support of MCLK
+# (local MPLL, External MCLK, and MCLK output generation)
+INSTALL_MCLK_SUPPORT
+
+# we won't generate MCLK output from root clock
+DONT_GENERATE_MCLK_OUTPUT_FROM_SUBSYSTEM_ROOT_CLOCK
+
+# INSTALL_BORROWED_CLOCK_MODE_SUPPORT will enable supporting
+# of clock borrowing for PCM/I2S interfaces. In crescendo
+# PCM/I2S 1&2 can borrow clock from PCM0 or EPCM
+INSTALL_BORROWED_CLOCK_MODE_SUPPORT
+
+# Cbuffer extension library that supports octet access
+INSTALL_CBUFFER_EX
+
+#CVC depends on some other assembly libraries (math, audio_proc, cbops)
+#bits of these libraries are not ported yet, but this will enable
+#building CVC capabilities for crescendo_audio
+TODO_CRESCENDO_CVC_TEST
+
+#B-203812. Current A2DP RM buffering thresholds
+#may break APTX. Have a TODO until we tune these
+#thresholds.
+TODO_CRESCENDO_A2DP_RM_TUNING
+
+# TF-13656
+# keep this until we fix the problem with cbops
+# processing, this isn't crescendo specific
+TODO_MITIGATE_CBOPS_DRIFT_IN_NON_TTP_USE_CASE
+
+# This is to power off P1 even in builds where we otherwise ignore it.
+# For chips that have multiple cores with a keyhole to access each other's
+# registers (or a limited range thereof)
+# Note: also update BUILD_CHIP_HAS_MPU_KEYHOLE below, if changed
+CHIP_HAS_MPU_KEYHOLE
+
+# Flag for nonsecure processing without licence checks (CVC, aptX, etc).
+# Don't check in with this uncommented! That would be bad.
+#NONSECURE_PROCESSING
+
+# Code starts at address zero, so make sure we got there by the expected route.
+CHECK_SP_FOR_UNEXPECTED_RESTART
+
+# Subserv status interface, needed in order to stop the subsystem after the
+# last provided service has stopped
+INSTALL_SUBSERV_STATUS
+
+# Crescendo linkscript generates and exports a checksum symbol
+# $__devtools_image_checksum that we include in the SLT
+INSTALL_LINKER_GENERATES_CHECKSUM
+
+# On this chip, the Curator supports the AudioAddressMap MIB key, which
+# controls which NVMEM window our code is made visible in and booted
+# from.
+# (FIXME: we don't currently have the ability to be built to run from
+# NVMEM1 though...)
+CHIP_HAS_SWITCHABLE_NVMEM
+
+# Skip run time log level check for L1_DBG_MSG and L2_DBG_MSG resp to save some space
+INSTALL_UNCONDITIONAL_LOG_LEVEL_1
+INSTALL_UNCONDITIONAL_LOG_LEVEL_2
+
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#   Leave an empty line after capabilities to mark end of list (for readability)
+#   and then begin a new section with % such as %cpp or %build or %list
+#
+%list CFG_CAPABILITIES
+BASIC_PASS
+
+%build
+
+# Indicate kcc this is architecture 4
+KAL_ARCH = 4
+# Indicate kcc this build uses kld
+LINKER = KLD
+
+# When building a downloadable capability we won't use reset.o, so it will empty START_GROUP
+START_GROUP = $(OUTPUT_ROOT)/components/platform/debugobj/reset.o #$(BUILD_ROOT)/compiler/crt0_withputchar.o
+
+TARGET_PLATFORM = kalimba
+TARGET_BITS = 32
+
+KCC_EXTRA_FLAGS = -mark-code-section-type -no-debug-inline
+KALASM_EXTRA_FLAGS = -mark-code-section-type
+
+MINIM_FLAGS=-minim
+COMPILE_EXTRA_WARNING_FLAGS = -WnoAccuracyLoss
+
+MAKEPROJ_FLAGS=--debugtrans=trb
+
+# For some reason crescendo builds don't support memusage
+EXTRA_KMAPPER_FLAGS=
+
+# This is to power off P1 even in builds where we otherwise ignore it.
+# Note: also update CHIP_HAS_MPU_KEYHOLE above, if changed
+BUILD_CHIP_HAS_MPU_KEYHOLE=true
+
+# Include second order filter for rate measurements
+BUILD_AUDIO_EP_RATE_MEASUREMENT_FILTER=false
+
+# While the various descendants of Crescendo have various amount of RAM available,
+# it is expected that they will reserve the same amount of memory for patches to make
+# the linker scripts more similar.
+PATCH_RESERVED_RAM=256
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+components/hydra_modules/lmgr_service
+
+# List of libraries to build
+%list CFG_LIBS
+components/hydra_modules/lmgr_service/lmgr_service
+
+# Include a patch system for crescendo
+%include config.MODIFY_PATCH

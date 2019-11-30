@@ -1,0 +1,1432 @@
+
+/home/svc-audio-dspsw/kymera_builds/builds/2019/kymera_1907221320/kalimba/kymera/tools/KCSMaker/out/4786/stre_rom_v02_release/download/debugbin/download_switched_passthrough_consumer.elf:     file format elf32-littlekalimba
+
+Disassembly of section .text_minim:
+
+84200000 <Lc_spc_process_data_1>:
+    return mode - 1;
+}
+
+/* Data processing function */
+static void spc_process_data(OPERATOR_DATA *op_data, TOUCHED_TERMINALS *touched)
+{
+84200000:	f6 1c       	pushm <FP(=SP), r4, r5, r6, r7, r8, r9, rLink>;
+84200002:	4c 4c       	SP = SP + 48;
+84200004:	43 de       	M[FP + 32] = r1;
+MAP_INSTANCE_DATA(CAP_ID_DOWNLOAD_SWITCHED_PASSTHROUGH_CONSUMER, SPC_OP_DATA)
+#endif /* CAPABILITY_DOWNLOAD_BUILD */
+
+static inline SPC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (SPC_OP_DATA *) base_op_get_instance_data(op_data);
+84200006:	02 f0 2f e6 	call (m) $_base_op_get_instance_data;
+8420000a:	4a de       	M[FP + 36] = r0;
+8420000c:	11 00       	rMAC = r0 + Null;
+    unsigned input_num;
+
+    /* Select which set of cbuffer functions to use. The normal cbuffer functions
+       are used to process PCM data. The _ex cbuffer functions are used to process
+       other data types (which may contain frames with an odd number of octets). */
+    switch (opx_data->data_format)
+8420000e:	89 98       	rMAC = M[rMAC + 40];
+84200010:	48 24       	Null = rMAC - 1;
+84200012:	03 60       	if EQ jump (m) Lc_spc_process_data_3;
+
+84200014 <Lc_spc_process_data_2>:
+84200014:	c8 24       	Null = rMAC - 3;
+84200016:	08 62       	if NE jump (m) Lc_spc_process_data_4;
+
+84200018 <Lc_spc_process_data_3>:
+    {
+        case AUDIO_DATA_FORMAT_FIXP:
+        case AUDIO_DATA_FORMAT_FIXP_WITH_METADATA: 
+            data_size = OCTETS_PER_SAMPLE;
+84200018:	01 21       	rMAC = Null + 4;
+8420001a:	51 de       	M[FP + 40] = rMAC;
+            cbuffer = &cbuffer_functions;
+8420001c:	07 f0 01 f0 	rMAC = Null + 7340160;
+84200020:	80 40 
+84200022:	59 de       	M[FP + 44] = rMAC;
+            break; 
+84200024:	07 6e       	jump (m) Lc_spc_process_data_5;
+
+84200026 <Lc_spc_process_data_4>:
+        default:
+            data_size = 1;
+84200026:	41 20       	rMAC = Null + 1;
+84200028:	51 de       	M[FP + 40] = rMAC;
+            cbuffer = &cbuffer_ex_functions;
+8420002a:	07 f0 01 f0 	rMAC = Null + 7340176;
+8420002e:	90 40 
+84200030:	59 de       	M[FP + 44] = rMAC;
+
+84200032 <Lc_spc_process_data_5>:
+            break;
+    }
+
+    if (opx_data->current_mode != opx_data->next_mode)
+84200032:	49 d8       	rMAC = M[FP + 36];
+84200034:	13 f0 25 80 	r1 = MBS[rMAC + 37];
+84200038:	11 f0 24 80 	rMAC = MBS[rMAC + 36];
+8420003c:	c8 04       	Null = rMAC - r1;
+8420003e:	0a 60       	if EQ jump (m) Lc_spc_process_data_7;
+
+84200040 <Lc_spc_process_data_6>:
+    {
+        /* We need to transition. Either between inputs, or between an 
+           input and consume all */
+
+        opx_data->current_mode = opx_data->next_mode;
+84200040:	49 d8       	rMAC = M[FP + 36];
+84200042:	13 f0 24 8a 	MB[rMAC + 36] = r1;
+        L2_DBG_MSG1("*** SPC transition success. Current now %d.",
+                        opx_data->current_mode);
+84200046:	55 f1 02 f0 	r0 = Null + 357564416;
+8420004a:	00 40 
+8420004c:	ff fd 04 f0 	call (m) 0x9b4;
+84200050:	29 eb 
+
+84200052 <Lc_spc_process_data_7>:
+    }
+
+
+    if (opx_data->current_mode > SPC_MODE_CONSUME &&
+            opx_data->ip_buffers[get_input_number(opx_data->current_mode)] == NULL)
+84200052:	49 d8       	rMAC = M[FP + 36];
+84200054:	11 f0 24 80 	rMAC = MBS[rMAC + 36];
+84200058:	08 24       	Null = rMAC - 0;
+8420005a:	0b 6c       	if LE jump (m) Lc_spc_process_data_10;
+
+8420005c <Lc_spc_process_data_8>:
+}
+
+static inline unsigned get_input_number(SPC_MODE mode)
+{
+    PL_ASSERT(mode > SPC_MODE_CONSUME);
+    return mode - 1;
+8420005c:	4a 24       	r0 = rMAC - 1;
+                        opx_data->current_mode);
+    }
+
+
+    if (opx_data->current_mode > SPC_MODE_CONSUME &&
+            opx_data->ip_buffers[get_input_number(opx_data->current_mode)] == NULL)
+8420005e:	52 54       	r0 = r0 LSHIFT 2;
+84200060:	49 d8       	rMAC = M[FP + 36];
+84200062:	89 e8       	rMAC = M[rMAC + r0];
+84200064:	06 62       	if NE jump (m) Lc_spc_process_data_10;
+
+84200066 <Lc_spc_process_data_9>:
+    {
+        /* This was a passthrough input and has been disconnected.
+         * Now we are actually consuming all, so change the state.
+         */
+        opx_data->current_mode = opx_data->next_mode = SPC_MODE_CONSUME;
+84200066:	49 d8       	rMAC = M[FP + 36];
+84200068:	10 f0 25 8a 	MB[rMAC + 37] = Null;
+8420006c:	10 f0 24 8a 	MB[rMAC + 36] = Null;
+
+84200070 <Lc_spc_process_data_10>:
+    }
+
+    tCbuffer *op_buffer = opx_data->op_buffer;
+84200070:	49 d8       	rMAC = M[FP + 36];
+84200072:	09 98       	rMAC = M[rMAC + 32];
+84200074:	61 de       	M[FP + 48] = rMAC;
+    if (opx_data->current_mode > SPC_MODE_CONSUME &&
+            op_buffer == NULL)
+84200076:	49 d8       	rMAC = M[FP + 36];
+84200078:	11 f0 24 80 	rMAC = MBS[rMAC + 36];
+8420007c:	08 24       	Null = rMAC - 0;
+8420007e:	08 6c       	if LE jump (m) Lc_spc_process_data_13;
+
+84200080 <Lc_spc_process_data_11>:
+84200080:	61 d8       	rMAC = M[FP + 48];
+84200082:	06 62       	if NE jump (m) Lc_spc_process_data_13;
+
+84200084 <Lc_spc_process_data_12>:
+    {
+        /* Output buffer has been disconnected while a passthrough.
+         * BT link might have dropped, so nothing to do about it.
+         * Consume all.
+         */
+        opx_data->current_mode = opx_data->next_mode = SPC_MODE_CONSUME;
+84200084:	49 d8       	rMAC = M[FP + 36];
+84200086:	10 f0 25 8a 	MB[rMAC + 37] = Null;
+8420008a:	10 f0 24 8a 	MB[rMAC + 36] = Null;
+
+8420008e <Lc_spc_process_data_13>:
+    }
+
+    /* Now process all inputs, consuming or passing through as relevant */
+    for (input_num = 0; input_num < SPC_NUMBER_INPUTS; input_num++)
+8420008e:	68 de       	M[FP + 52] = Null;
+84200090:	49 d8       	rMAC = M[FP + 36];
+84200092:	71 de       	M[FP + 56] = rMAC;
+84200094:	67 6e       	jump (m) Lc_spc_process_data_27;
+
+84200096 <Lc_spc_process_data_14>:
+                    complete_data = buffer_size;
+                    break;
+                }
+                else
+                {
+                    unsigned tmp = complete_data + mtag->length/data_size;
+84200096:	1a 00       	r0 = r1 + Null;
+84200098:	53 d8       	r1 = M[FP + 40];
+8420009a:	ff fd b8 f0 	call (m) 0x171b8;
+8420009e:	3f e8 
+842000a0:	d1 01       	rMAC = r0 + r5;
+                    if (tmp > data_to_handle)
+842000a2:	8f f1 00 c2 	Null = rMAC - r6;
+842000a6:	08 f0 bf e0 	if HI jump (m) Lc_spc_process_data_19;
+
+842000aa <Lc_spc_process_data_15>:
+                         * the data yet. We will not consider any of its data.
+                         */
+                        break;
+                    }
+
+                    mtag = mtag->next;
+842000aa:	36 e8       	r4 = M[r4 + Null];
+                    complete_data = tmp;
+842000ac:	0f 00       	r5 = rMAC + Null;
+
+842000ae <Lc_spc_process_data_16>:
+             * in the input buffer that corresponds to the complete tags.
+             * Only this data will be processed, together with the
+             * associated metadata. This way we will always output
+             * data aligned to metadata and can switch mode at any time.
+             */
+            while (mtag != NULL)
+842000ae:	30 04       	Null = r4 - Null;
+842000b0:	1a 60       	if EQ jump (m) Lc_spc_process_data_19;
+
+842000b2 <Lc_spc_process_data_17>:
+            {
+                if (mtag->length > buffer_size)
+842000b2:	f3 88       	r1 = M[r4 + 12];
+842000b4:	9f f3 00 c2 	Null = r1 - r7;
+842000b8:	f9 ff df ef 	if LS jump (m) Lc_spc_process_data_14;
+
+842000bc <Lc_spc_process_data_18>:
+                {
+                    /* This tag is bigger than either the input or output buffer.
+                     * This is not going to work: warn the user to increase
+                     * buffer sizes.
+                     */
+                    fault_diatribe(FAULT_AUDIO_SPC_TAG_BIGGER_THAN_BUFFER, mtag->length);
+842000bc:	02 f0 64 40 	r0 = Null + 100;
+842000c0:	ff fd 9d f0 	call (m) 0x13bcc;
+842000c4:	2d e8 
+                    L2_DBG_MSG4("SPC: [input%d] Tag is too big: %d. "
+                            "buffer sizes: in %d, out %d",
+                            input_num, mtag->length, ip_buffer->size, op_buffer->size);
+842000c6:	61 d8       	rMAC = M[FP + 48];
+842000c8:	09 e8       	rMAC = M[rMAC + Null];
+842000ca:	09 1c       	pushm <rMAC>;
+842000cc:	a5 f0 00 e8 	r3 = M[r8 + Null];
+842000d0:	f4 88       	r2 = M[r4 + 12];
+842000d2:	55 f1 02 f0 	r0 = Null + 357564516;
+842000d6:	64 40 
+842000d8:	6b d8       	r1 = M[FP + 52];
+842000da:	ff fd 04 f0 	call (m) 0x9f6;
+842000de:	3d e8 
+842000e0:	7f 4c       	SP = SP + -4;
+
+                    /* For the time being, just go on, we might be lucky and
+                     * keep working in the current mode.
+                     */
+                    complete_data = buffer_size;
+842000e2:	4f 08       	r5 = r7 + Null;
+
+842000e4 <Lc_spc_process_data_19>:
+        {
+            /* No metadata. Process all available data. */
+            complete_data = input_data;
+        }
+
+        if (complete_data != 0)
+842000e4:	38 04       	Null = r5 - Null;
+842000e6:	34 60       	if EQ jump (m) Lc_spc_process_data_26;
+
+842000e8 <Lc_spc_process_data_20>:
+        {
+            if (passthrough)
+842000e8:	79 d8       	rMAC = M[FP + 60];
+842000ea:	86 60       	if EQ jump (m) Lc_spc_process_data_38;
+
+842000ec <Lc_spc_process_data_21>:
+            {
+                unsigned copied = cbuffer->copy(op_buffer, ip_buffer, complete_data);
+842000ec:	59 d8       	rMAC = M[FP + 44];
+842000ee:	3c 00       	r2 = r5 + Null;
+842000f0:	53 08       	r1 = r8 + Null;
+842000f2:	89 88       	rMAC = M[rMAC + 8];
+842000f4:	62 d8       	r0 = M[FP + 48];
+842000f6:	d1 4c       	call rMAC;
+842000f8:	16 00       	r4 = r0 + Null;
+                L3_DBG_MSG3("SPC passed through [input%d] %d of %d",
+                        input_num, copied, input_data);
+842000fa:	01 f0 28 91 	rMAC = MBS[Null + 0x328];
+842000fe:	c8 24       	Null = rMAC - 3;
+84200100:	0a 68       	if LT jump (m) Lc_spc_process_data_23;
+
+84200102 <Lc_spc_process_data_22>:
+84200102:	55 f1 02 f0 	r0 = Null + 357564579;
+84200106:	a3 40 
+84200108:	5d 08       	r3 = r9 + Null;
+8420010a:	34 00       	r2 = r4 + Null;
+8420010c:	6b d8       	r1 = M[FP + 52];
+8420010e:	ff fd 04 f0 	call (m) 0x9de;
+84200112:	31 e6 
+
+84200114 <Lc_spc_process_data_23>:
+
+                touched->sources |= 1;
+84200114:	41 d8       	rMAC = M[FP + 32];
+84200116:	0a 00       	r0 = rMAC + Null;
+84200118:	09 e8       	rMAC = M[rMAC + Null];
+8420011a:	09 c8       	rMAC = rMAC OR 0x1;
+8420011c:	11 ee       	M[r0 + Null] = rMAC;
+                metadata_strict_transport(ip_buffer, op_buffer, copied * data_size);
+8420011e:	51 d8       	rMAC = M[FP + 40];
+84200120:	52 08       	r0 = r8 + Null;
+84200122:	74 1a       	r2 = r4 * rMAC (int);
+84200124:	63 d8       	r1 = M[FP + 48];
+84200126:	ff fd 8f f0 	call (m) 0x12076;
+8420012a:	31 ea 
+                if (copied != complete_data)
+8420012c:	f0 05       	Null = r4 - r5;
+8420012e:	0a 60       	if EQ jump (m) Lc_spc_process_data_25;
+
+84200130 <Lc_spc_process_data_24>:
+                {
+                    L2_DBG_MSG3("SPC error on [input%d] %d of %d",
+                            input_num, copied, input_data);
+84200130:	55 f1 02 f0 	r0 = Null + 357564617;
+84200134:	c9 40 
+84200136:	5d 08       	r3 = r9 + Null;
+84200138:	34 00       	r2 = r4 + Null;
+8420013a:	6b d8       	r1 = M[FP + 52];
+8420013c:	ff fd 04 f0 	call (m) 0x9de;
+84200140:	23 e5 
+
+84200142 <Lc_spc_process_data_25>:
+                }
+                touched->sinks |= touched_sink_mask;
+84200142:	41 d8       	rMAC = M[FP + 32];
+84200144:	82 d8       	r0 = M[FP + 64];
+84200146:	49 88       	rMAC = M[rMAC + 4];
+84200148:	89 12       	rMAC = rMAC OR r0;
+8420014a:	42 d8       	r0 = M[FP + 32];
+8420014c:	51 8e       	M[r0 + 4] = rMAC;
+
+8420014e <Lc_spc_process_data_26>:
+         */
+        opx_data->current_mode = opx_data->next_mode = SPC_MODE_CONSUME;
+    }
+
+    /* Now process all inputs, consuming or passing through as relevant */
+    for (input_num = 0; input_num < SPC_NUMBER_INPUTS; input_num++)
+8420014e:	69 d8       	rMAC = M[FP + 52];
+84200150:	49 20       	rMAC = rMAC + 1;
+84200152:	69 de       	M[FP + 52] = rMAC;
+84200154:	71 d8       	rMAC = M[FP + 56];
+84200156:	09 21       	rMAC = rMAC + 4;
+84200158:	71 de       	M[FP + 56] = rMAC;
+8420015a:	69 d8       	rMAC = M[FP + 52];
+8420015c:	08 26       	Null = rMAC - 8;
+8420015e:	02 f0 d9 e1 	if C jump (m) Lc_spc_process_data_42;
+
+84200162 <Lc_spc_process_data_27>:
+    {
+        unsigned input_data, data_to_handle, complete_data;
+        unsigned buffer_size;
+        tCbuffer *ip_buffer;
+        bool passthrough = FALSE;
+84200162:	78 de       	M[FP + 60] = Null;
+        unsigned touched_sink_mask = 1 << input_num ;
+84200164:	69 d8       	rMAC = M[FP + 52];
+84200166:	00 f1 92 de 	r0 = 0x1 LSHIFT rMAC;
+8420016a:	82 de       	M[FP + 64] = r0;
+
+        ip_buffer = opx_data->ip_buffers[input_num];
+8420016c:	71 d8       	rMAC = M[FP + 56];
+        if (!ip_buffer)
+8420016e:	1a f0 00 e8 	r8 = M[rMAC + Null];
+84200172:	ee 61       	if EQ jump (m) Lc_spc_process_data_26;
+
+84200174 <Lc_spc_process_data_28>:
+            /* This input is disconnected. */
+            /* Nothing more to do with this */
+            continue;
+        }
+
+        buffer_size = cbuffer_get_size_in_octets(ip_buffer);
+84200174:	52 08       	r0 = r8 + Null;
+84200176:	ff fd 93 f0 	call (m) 0x12862;
+8420017a:	2d e7 
+8420017c:	11 09       	r7 = r0 + Null;
+        input_data = cbuffer->data(ip_buffer);
+8420017e:	59 d8       	rMAC = M[FP + 44];
+84200180:	49 88       	rMAC = M[rMAC + 4];
+84200182:	52 08       	r0 = r8 + Null;
+84200184:	d1 4c       	call rMAC;
+84200186:	13 09       	r9 = r0 + Null;
+        complete_data = 0;
+84200188:	07 00       	r5 = Null + Null;
+        data_to_handle = input_data;
+8420018a:	58 09       	r6 = r9 + Null;
+        if (opx_data->current_mode > SPC_MODE_CONSUME &&
+                input_num == get_input_number(opx_data->current_mode))
+8420018c:	49 d8       	rMAC = M[FP + 36];
+8420018e:	11 f0 24 80 	rMAC = MBS[rMAC + 36];
+84200192:	08 24       	Null = rMAC - 0;
+84200194:	27 6c       	if LE jump (m) Lc_spc_process_data_36;
+
+84200196 <Lc_spc_process_data_29>:
+}
+
+static inline unsigned get_input_number(SPC_MODE mode)
+{
+    PL_ASSERT(mode > SPC_MODE_CONSUME);
+    return mode - 1;
+84200196:	49 24       	rMAC = rMAC - 1;
+        buffer_size = cbuffer_get_size_in_octets(ip_buffer);
+        input_data = cbuffer->data(ip_buffer);
+        complete_data = 0;
+        data_to_handle = input_data;
+        if (opx_data->current_mode > SPC_MODE_CONSUME &&
+                input_num == get_input_number(opx_data->current_mode))
+84200198:	6a d8       	r0 = M[FP + 52];
+8420019a:	50 04       	Null = r0 - rMAC;
+8420019c:	23 62       	if NE jump (m) Lc_spc_process_data_36;
+
+8420019e <Lc_spc_process_data_30>:
+        {
+            unsigned output_space = cbuffer->space(op_buffer);
+8420019e:	59 d8       	rMAC = M[FP + 44];
+842001a0:	09 e8       	rMAC = M[rMAC + Null];
+842001a2:	62 d8       	r0 = M[FP + 48];
+842001a4:	d1 4c       	call rMAC;
+842001a6:	16 00       	r4 = r0 + Null;
+            unsigned out_buf_size = cbuffer_get_size_in_octets(op_buffer);
+842001a8:	62 d8       	r0 = M[FP + 48];
+842001aa:	ff fd 93 f0 	call (m) 0x12862;
+842001ae:	39 e5 
+            if (buffer_size > out_buf_size)
+842001b0:	2f f9 00 c2 	Null = r7 - r0;
+842001b4:	09 f0 87 e0 	if LS jump (m) Lc_spc_process_data_32;
+
+842001b8 <Lc_spc_process_data_31>:
+            {
+                buffer_size = out_buf_size;
+842001b8:	11 09       	r7 = r0 + Null;
+
+842001ba <Lc_spc_process_data_32>:
+            }
+
+            passthrough = TRUE;
+842001ba:	41 20       	rMAC = Null + 1;
+842001bc:	79 de       	M[FP + 60] = rMAC;
+            if (output_space < input_data)
+842001be:	bf f6 00 c2 	Null = r4 - r9;
+842001c2:	02 f0 a1 e0 	if C jump (m) Lc_spc_process_data_36;
+
+842001c6 <Lc_spc_process_data_33>:
+            {
+                L3_DBG_MSG3("SPC: ### [input%d] input data %d didn't fit in space %d",
+                                            input_num, input_data, output_space);
+842001c6:	01 f0 28 91 	rMAC = MBS[Null + 0x328];
+842001ca:	c8 24       	Null = rMAC - 3;
+842001cc:	0a 68       	if LT jump (m) Lc_spc_process_data_35;
+
+842001ce <Lc_spc_process_data_34>:
+842001ce:	55 f1 02 f0 	r0 = Null + 357564460;
+842001d2:	2c 40 
+842001d4:	35 00       	r3 = r4 + Null;
+842001d6:	5c 08       	r2 = r9 + Null;
+842001d8:	6b d8       	r1 = M[FP + 52];
+842001da:	ff fd 04 f0 	call (m) 0x9de;
+842001de:	25 e0 
+
+842001e0 <Lc_spc_process_data_35>:
+                data_to_handle = output_space;
+842001e0:	30 09       	r6 = r4 + Null;
+
+842001e2 <Lc_spc_process_data_36>:
+ *
+ * \return TRUE if the buffer supports metadata. FALSE if it doesn't.
+ */
+static inline bool buff_has_metadata(tCbuffer *buff)
+{
+    if (BUFF_METADATA(buff))
+842001e2:	a1 f0 05 88 	rMAC = M[r8 + 20];
+842001e6:	49 c6       	rMAC = rMAC AND 0x8000;
+842001e8:	25 60       	if EQ jump (m) Lc_spc_process_data_41;
+
+842001ea <Lc_spc_process_data_37>:
+            }
+        }
+
+        if (buff_has_metadata(ip_buffer))
+        {
+            metadata_tag * mtag = buff_metadata_peek(ip_buffer);
+842001ea:	52 08       	r0 = r8 + Null;
+842001ec:	ff fd 8d f0 	call (m) 0x11cc6;
+842001f0:	3b e6 
+842001f2:	16 00       	r4 = r0 + Null;
+842001f4:	5d 6f       	jump (m) Lc_spc_process_data_16;
+
+842001f6 <Lc_spc_process_data_38>:
+            {
+                metadata_tag *mtag;
+                unsigned b4idx, afteridx;
+
+                L3_DBG_MSG3("SPC discard [input%d] %d of %d",
+                        input_num, complete_data, input_data);
+842001f6:	01 f0 28 91 	rMAC = MBS[Null + 0x328];
+842001fa:	c8 24       	Null = rMAC - 3;
+842001fc:	0a 68       	if LT jump (m) Lc_spc_process_data_40;
+
+842001fe <Lc_spc_process_data_39>:
+842001fe:	55 f1 02 f0 	r0 = Null + 357564649;
+84200202:	e9 40 
+84200204:	5d 08       	r3 = r9 + Null;
+84200206:	3c 00       	r2 = r5 + Null;
+84200208:	6b d8       	r1 = M[FP + 52];
+8420020a:	ff fd 03 f0 	call (m) 0x9de;
+8420020e:	35 ee 
+
+84200210 <Lc_spc_process_data_40>:
+
+                cbuffer->advance_rd_ptr(ip_buffer, complete_data);
+84200210:	59 d8       	rMAC = M[FP + 44];
+84200212:	3b 00       	r1 = r5 + Null;
+84200214:	c9 88       	rMAC = M[rMAC + 12];
+84200216:	52 08       	r0 = r8 + Null;
+84200218:	d1 4c       	call rMAC;
+                mtag = buff_metadata_remove(ip_buffer, complete_data * data_size, &b4idx, &afteridx);
+8420021a:	85 14       	r3 = FP + 72;
+8420021c:	44 14       	r2 = FP + 68;
+8420021e:	51 d8       	rMAC = M[FP + 40];
+84200220:	7b 1a       	r1 = r5 * rMAC (int);
+84200222:	52 08       	r0 = r8 + Null;
+84200224:	ff fd 8d f0 	call (m) 0x11d7a;
+84200228:	37 ea 
+                buff_metadata_tag_list_delete(mtag);
+8420022a:	ff fd 8b f0 	call (m) 0x11906;
+8420022e:	3d e6 
+84200230:	89 6f       	jump (m) Lc_spc_process_data_25;
+
+84200232 <Lc_spc_process_data_41>:
+            }
+        }
+        else
+        {
+            /* No metadata. Process all available data. */
+            complete_data = input_data;
+84200232:	5f 08       	r5 = r9 + Null;
+84200234:	58 6f       	jump (m) Lc_spc_process_data_19;
+
+84200236 <Lc_spc_process_data_42>:
+                buff_metadata_tag_list_delete(mtag);
+                touched->sinks |= touched_sink_mask;
+            }
+        }
+    }
+}
+84200236:	74 4c       	SP = SP + -48;
+84200238:	f6 48       	popm <FP, r4, r5, r6, r7, r8, r9, rLink>;
+8420023a:	d8 4c       	rts;
+
+8420023c <Lc_spc_connect_1>:
+
+    return TRUE;
+}
+
+static bool spc_connect(OPERATOR_DATA *op_data, void *message_data, unsigned *response_id, void **response_data)
+{
+8420023c:	f4 1c       	pushm <FP(=SP), r4, r5, r6, r7, rLink>;
+8420023e:	11 09       	r7 = r0 + Null;
+84200240:	1e 00       	r4 = r1 + Null;
+84200242:	2f 00       	r5 = r3 + Null;
+    tCbuffer *buffer = (tCbuffer*)(((uintptr_t *)message_data)[1]);
+84200244:	68 f0 01 88 	r6 = M[r4 + 4];
+
+    if (!base_op_connect(op_data, message_data, response_id, response_data))
+84200248:	ef fd ff ff 	call (m) 0x134;
+8420024c:	2d e7 
+8420024e:	10 04       	Null = r0 - Null;
+84200250:	03 62       	if NE jump (m) Lc_spc_connect_3;
+
+84200252 <Lc_spc_connect_2>:
+    {
+        /* Shouldn't change anything if there is not enough memory for the response.*/
+        return FALSE;
+84200252:	02 00       	r0 = Null + Null;
+84200254:	0c 6e       	jump (m) Lc_spc_connect_6;
+
+84200256 <Lc_spc_connect_3>:
+    }
+
+    if (!spc_connect_disconnect_common(op_data, message_data, buffer))
+84200256:	44 08       	r2 = r6 + Null;
+84200258:	33 00       	r1 = r4 + Null;
+8420025a:	4a 08       	r0 = r7 + Null;
+8420025c:	ba 4e       	call (m) Lc_spc_connect_disconnect_common_1;
+8420025e:	10 04       	Null = r0 - Null;
+84200260:	05 62       	if NE jump (m) Lc_spc_connect_5;
+
+84200262 <Lc_spc_connect_4>:
+ * \param  response_data Pointer to the pointer to message that is allocated in the function.
+ * \param  new_status  A status ID that is to be sent in the message.
+ */
+inline static void base_op_change_response_status(void **response_data, STATUS_KYMERA new_status)
+{
+    (((OP_STD_RSP *)(*response_data))->status = new_status);
+84200262:	01 f0 00 60 	rMAC = Null + 4096;
+84200266:	3a e8       	r0 = M[r5 + Null];
+84200268:	51 8e       	M[r0 + 4] = rMAC;
+
+8420026a <Lc_spc_connect_5>:
+    {
+         base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+         return TRUE;
+8420026a:	42 20       	r0 = Null + 1;
+
+8420026c <Lc_spc_connect_6>:
+    }
+
+    return TRUE;
+}
+8420026c:	f4 48       	popm <FP, r4, r5, r6, r7, rLink>;
+8420026e:	d8 4c       	rts;
+
+84200270 <Lc_spc_disconnect_1>:
+
+static bool spc_disconnect(OPERATOR_DATA *op_data, void *message_data, unsigned *response_id, void **response_data)
+{
+84200270:	f3 1c       	pushm <FP(=SP), r4, r5, r6, rLink>;
+84200272:	10 09       	r6 = r0 + Null;
+84200274:	1e 00       	r4 = r1 + Null;
+84200276:	2f 00       	r5 = r3 + Null;
+    if (!base_op_disconnect(op_data, message_data, response_id, response_data))
+84200278:	ef fd ff ff 	call (m) 0x146;
+8420027c:	2f e6 
+8420027e:	10 04       	Null = r0 - Null;
+84200280:	03 62       	if NE jump (m) Lc_spc_disconnect_3;
+
+84200282 <Lc_spc_disconnect_2>:
+    {
+        /* Shouldn't change anything if there is not enough memory for the response.*/
+        return FALSE;
+84200282:	02 00       	r0 = Null + Null;
+84200284:	0c 6e       	jump (m) Lc_spc_disconnect_6;
+
+84200286 <Lc_spc_disconnect_3>:
+    }
+
+    if (!spc_connect_disconnect_common(op_data, message_data, NULL))
+84200286:	04 00       	r2 = Null + Null;
+84200288:	33 00       	r1 = r4 + Null;
+8420028a:	42 08       	r0 = r6 + Null;
+8420028c:	a2 4e       	call (m) Lc_spc_connect_disconnect_common_1;
+8420028e:	10 04       	Null = r0 - Null;
+84200290:	05 62       	if NE jump (m) Lc_spc_disconnect_5;
+
+84200292 <Lc_spc_disconnect_4>:
+84200292:	01 f0 00 60 	rMAC = Null + 4096;
+84200296:	3a e8       	r0 = M[r5 + Null];
+84200298:	51 8e       	M[r0 + 4] = rMAC;
+
+8420029a <Lc_spc_disconnect_5>:
+    {
+         base_op_change_response_status(response_data, STATUS_CMD_FAILED);
+         return TRUE;
+8420029a:	42 20       	r0 = Null + 1;
+
+8420029c <Lc_spc_disconnect_6>:
+    }
+
+    return TRUE;
+}
+8420029c:	f3 48       	popm <FP, r4, r5, r6, rLink>;
+8420029e:	d8 4c       	rts;
+
+842002a0 <Lc_spc_buffer_details_1>:
+
+static bool spc_buffer_details(OPERATOR_DATA *op_data, void *message_data, unsigned *response_id, void **response_data)
+{
+842002a0:	f5 1c       	pushm <FP(=SP), r4, r5, r6, r7, r8, rLink>;
+842002a2:	10 09       	r6 = r0 + Null;
+842002a4:	19 09       	r7 = r1 + Null;
+842002a6:	27 00       	r5 = r2 + Null;
+842002a8:	2e 00       	r4 = r3 + Null;
+MAP_INSTANCE_DATA(CAP_ID_DOWNLOAD_SWITCHED_PASSTHROUGH_CONSUMER, SPC_OP_DATA)
+#endif /* CAPABILITY_DOWNLOAD_BUILD */
+
+static inline SPC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (SPC_OP_DATA *) base_op_get_instance_data(op_data);
+842002aa:	01 f0 2b e1 	call (m) $_base_op_get_instance_data;
+842002ae:	12 09       	r8 = r0 + Null;
+}
+
+static bool spc_buffer_details(OPERATOR_DATA *op_data, void *message_data, unsigned *response_id, void **response_data)
+{
+    SPC_OP_DATA *opx_data = get_instance_data(op_data);
+    bool result = base_op_buffer_details(op_data, message_data, response_id, response_data);
+842002b0:	35 00       	r3 = r4 + Null;
+842002b2:	3c 00       	r2 = r5 + Null;
+842002b4:	4b 08       	r1 = r7 + Null;
+842002b6:	42 08       	r0 = r6 + Null;
+842002b8:	ef fd ff ff 	call (m) 0xbe;
+842002bc:	27 e0 
+
+    if (result)
+842002be:	10 04       	Null = r0 - Null;
+842002c0:	11 60       	if EQ jump (m) Lc_spc_buffer_details_5;
+
+842002c2 <Lc_spc_buffer_details_2>:
+    {
+        unsigned terminal_id = ((unsigned*)message_data)[0];
+842002c2:	91 f0 00 e8 	rMAC = M[r7 + Null];
+        OP_BUF_DETAILS_RSP *resp = *response_data;
+842002c6:	33 e8       	r1 = M[r4 + Null];
+
+        if (0 == (terminal_id & TERMINAL_SINK_MASK))
+842002c8:	40 f0 11 f0 	rMAC = rMAC AND 0x800000;
+842002cc:	00 00 
+842002ce:	04 62       	if NE jump (m) Lc_spc_buffer_details_4;
+
+842002d0 <Lc_spc_buffer_details_3>:
+        {
+            /* Output, use the output buffer size */
+            resp->b.buffer_size = opx_data->output_buffer_size;
+842002d0:	a1 f0 0b 88 	rMAC = M[r8 + 44];
+842002d4:	19 8f       	M[r1 + 16] = rMAC;
+
+842002d6 <Lc_spc_buffer_details_4>:
+        }
+        resp->metadata_buffer = NULL;
+842002d6:	d8 8e       	M[r1 + 12] = Null;
+        resp->supports_metadata = TRUE;
+842002d8:	19 92       	rMAC = MBU[r1 + 8];
+842002da:	11 ff ef 1f 	rMAC = rMAC AND 0xffffffef;
+842002de:	c9 c9       	rMAC = rMAC OR 0x10;
+842002e0:	19 9a       	MB[r1 + 8] = rMAC;
+
+842002e2 <Lc_spc_buffer_details_5>:
+    }
+    return result;
+842002e2:	f5 48       	popm <FP, r4, r5, r6, r7, r8, rLink>;
+842002e4:	d8 4c       	rts;
+
+842002e6 <Lc_spc_get_sched_info_1>:
+}
+
+static bool spc_get_sched_info(OPERATOR_DATA *op_data, void *message_data, unsigned *response_id, void **response_data)
+{
+842002e6:	f2 1c       	pushm <FP(=SP), r4, r5, rLink>;
+842002e8:	17 00       	r5 = r0 + Null;
+842002ea:	2e 00       	r4 = r3 + Null;
+    OP_SCHED_INFO_RSP* resp;
+
+    resp = base_op_get_sched_info_ex(op_data, message_data, response_id);
+842002ec:	ce 4e       	call (m) $_base_op_get_sched_info_ex;
+    if (resp == NULL)
+842002ee:	10 04       	Null = r0 - Null;
+842002f0:	07 62       	if NE jump (m) Lc_spc_get_sched_info_3;
+
+842002f2 <Lc_spc_get_sched_info_2>:
+    {
+        return base_op_build_std_response_ex(op_data, STATUS_CMD_FAILED, response_data);
+842002f2:	03 f0 00 60 	r1 = Null + 4096;
+842002f6:	34 00       	r2 = r4 + Null;
+842002f8:	3a 00       	r0 = r5 + Null;
+842002fa:	d7 4e       	call (m) $_base_op_build_std_response_ex;
+842002fc:	05 6e       	jump (m) Lc_spc_get_sched_info_4;
+
+842002fe <Lc_spc_get_sched_info_3>:
+    }
+    *response_data = resp;
+842002fe:	32 ee       	M[r4 + Null] = r0;
+
+    resp->block_size = SPC_DEFAULT_BLOCK_SIZE;
+84200300:	41 20       	rMAC = Null + 1;
+84200302:	91 8e       	M[r0 + 8] = rMAC;
+
+    return TRUE;
+84200304:	0a 00       	r0 = rMAC + Null;
+
+84200306 <Lc_spc_get_sched_info_4>:
+}
+84200306:	f2 48       	popm <FP, r4, r5, rLink>;
+84200308:	d8 4c       	rts;
+
+8420030a <Lc_spc_get_data_format_1>:
+
+static bool spc_get_data_format(OPERATOR_DATA *op_data, void *message_data, unsigned *response_id, void **response_data)
+{
+8420030a:	f5 1c       	pushm <FP(=SP), r4, r5, r6, r7, r8, rLink>;
+8420030c:	10 09       	r6 = r0 + Null;
+8420030e:	1a 09       	r8 = r1 + Null;
+84200310:	27 00       	r5 = r2 + Null;
+84200312:	2e 00       	r4 = r3 + Null;
+MAP_INSTANCE_DATA(CAP_ID_DOWNLOAD_SWITCHED_PASSTHROUGH_CONSUMER, SPC_OP_DATA)
+#endif /* CAPABILITY_DOWNLOAD_BUILD */
+
+static inline SPC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (SPC_OP_DATA *) base_op_get_instance_data(op_data);
+84200314:	e0 4e       	call (m) $_base_op_get_instance_data;
+84200316:	11 09       	r7 = r0 + Null;
+}
+
+static bool spc_get_data_format(OPERATOR_DATA *op_data, void *message_data, unsigned *response_id, void **response_data)
+{
+    SPC_OP_DATA *opx_data = get_instance_data(op_data);
+    bool result = base_op_get_data_format(op_data, message_data, response_id, response_data);
+84200318:	35 00       	r3 = r4 + Null;
+8420031a:	3c 00       	r2 = r5 + Null;
+8420031c:	53 08       	r1 = r8 + Null;
+8420031e:	42 08       	r0 = r6 + Null;
+84200320:	ef fd ff ff 	call (m) 0x17a;
+84200324:	3b e2 
+
+    if (result)
+84200326:	10 04       	Null = r0 - Null;
+84200328:	05 60       	if EQ jump (m) Lc_spc_get_data_format_3;
+
+8420032a <Lc_spc_get_data_format_2>:
+    {
+        ((OP_STD_RSP*)*response_data)->resp_data.data = opx_data->data_format;
+8420032a:	91 f0 0a 88 	rMAC = M[r7 + 40];
+8420032e:	33 e8       	r1 = M[r4 + Null];
+84200330:	99 8e       	M[r1 + 8] = rMAC;
+
+84200332 <Lc_spc_get_data_format_3>:
+    }
+    return result;
+84200332:	f5 48       	popm <FP, r4, r5, r6, r7, r8, rLink>;
+84200334:	d8 4c       	rts;
+
+84200336 <Lc_spc_opmsg_transition_request_1>:
+}
+
+static bool spc_opmsg_transition_request(OPERATOR_DATA *op_data, void *message_data, 
+                                            unsigned *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+84200336:	f1 1c       	pushm <FP(=SP), r4, rLink>;
+84200338:	1e 00       	r4 = r1 + Null;
+MAP_INSTANCE_DATA(CAP_ID_DOWNLOAD_SWITCHED_PASSTHROUGH_CONSUMER, SPC_OP_DATA)
+#endif /* CAPABILITY_DOWNLOAD_BUILD */
+
+static inline SPC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (SPC_OP_DATA *) base_op_get_instance_data(op_data);
+8420033a:	cd 4e       	call (m) $_base_op_get_instance_data;
+
+static bool spc_opmsg_transition_request(OPERATOR_DATA *op_data, void *message_data, 
+                                            unsigned *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+    SPC_OP_DATA *opx_data = get_instance_data(op_data);
+    OPMSG_SPC_MODE new_mode = (OPMSG_SPC_MODE) OPMSG_FIELD_GET(message_data, OPMSG_SPC_CHANGE_MODE, NEW_MODE);
+8420033c:	f1 88       	rMAC = M[r4 + 12];
+8420033e:	89 c6       	rMAC = rMAC AND 0xffff;
+
+    if (new_mode == OPMSG_SPC_MODE_PASSTHROUGH)
+84200340:	09 08       	rMAC = SE8 rMAC;
+84200342:	05 62       	if NE jump (m) Lc_spc_opmsg_transition_request_3;
+
+84200344 <Lc_spc_opmsg_transition_request_2>:
+    {
+        opx_data->next_mode = SPC_MODE_PASSTHROUGH_0;
+84200344:	41 20       	rMAC = Null + 1;
+84200346:	21 f0 25 8a 	MB[r0 + 37] = rMAC;
+8420034a:	05 6e       	jump (m) Lc_spc_opmsg_transition_request_5;
+
+8420034c <Lc_spc_opmsg_transition_request_3>:
+        return TRUE;
+    } 
+    else if (new_mode == OPMSG_SPC_MODE_CONSUMER)
+8420034c:	48 24       	Null = rMAC - 1;
+8420034e:	05 62       	if NE jump (m) Lc_spc_opmsg_transition_request_6;
+
+84200350 <Lc_spc_opmsg_transition_request_4>:
+    {
+        opx_data->next_mode = SPC_MODE_CONSUME;
+84200350:	20 f0 25 8a 	MB[r0 + 37] = Null;
+
+84200354 <Lc_spc_opmsg_transition_request_5>:
+    OPMSG_SPC_MODE new_mode = (OPMSG_SPC_MODE) OPMSG_FIELD_GET(message_data, OPMSG_SPC_CHANGE_MODE, NEW_MODE);
+
+    if (new_mode == OPMSG_SPC_MODE_PASSTHROUGH)
+    {
+        opx_data->next_mode = SPC_MODE_PASSTHROUGH_0;
+        return TRUE;
+84200354:	42 20       	r0 = Null + 1;
+84200356:	02 6e       	jump (m) Lc_spc_opmsg_transition_request_7;
+
+84200358 <Lc_spc_opmsg_transition_request_6>:
+    {
+        opx_data->next_mode = SPC_MODE_CONSUME;
+        return TRUE;
+    }
+
+    return FALSE;
+84200358:	02 00       	r0 = Null + Null;
+
+8420035a <Lc_spc_opmsg_transition_request_7>:
+
+}
+8420035a:	f1 48       	popm <FP, r4, rLink>;
+8420035c:	d8 4c       	rts;
+
+8420035e <Lc_spc_opmsg_set_data_format_1>:
+    }
+    return TRUE;
+}
+
+static bool spc_opmsg_set_data_format(OPERATOR_DATA *op_data, void *message_data, unsigned *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+8420035e:	f1 1c       	pushm <FP(=SP), r4, rLink>;
+84200360:	1e 00       	r4 = r1 + Null;
+MAP_INSTANCE_DATA(CAP_ID_DOWNLOAD_SWITCHED_PASSTHROUGH_CONSUMER, SPC_OP_DATA)
+#endif /* CAPABILITY_DOWNLOAD_BUILD */
+
+static inline SPC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (SPC_OP_DATA *) base_op_get_instance_data(op_data);
+84200362:	b9 4e       	call (m) $_base_op_get_instance_data;
+}
+
+static bool spc_opmsg_set_data_format(OPERATOR_DATA *op_data, void *message_data, unsigned *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+    SPC_OP_DATA *opx_data = get_instance_data(op_data);
+    opx_data->data_format = OPMSG_FIELD_GET(message_data, OPMSG_SPC_SET_DATA_FORMAT, DATA_TYPE);
+84200364:	f1 88       	rMAC = M[r4 + 12];
+84200366:	89 c6       	rMAC = rMAC AND 0xffff;
+84200368:	91 9e       	M[r0 + 40] = rMAC;
+    return TRUE;
+8420036a:	42 20       	r0 = Null + 1;
+
+8420036c <Lc_spc_opmsg_set_data_format_2>:
+}
+8420036c:	f1 48       	popm <FP, r4, rLink>;
+8420036e:	d8 4c       	rts;
+
+84200370 <Lc_spc_opmsg_set_buffer_size_1>:
+
+static bool spc_opmsg_set_buffer_size(OPERATOR_DATA *op_data, void *message_data, unsigned *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+84200370:	f1 1c       	pushm <FP(=SP), r4, rLink>;
+84200372:	1e 00       	r4 = r1 + Null;
+MAP_INSTANCE_DATA(CAP_ID_DOWNLOAD_SWITCHED_PASSTHROUGH_CONSUMER, SPC_OP_DATA)
+#endif /* CAPABILITY_DOWNLOAD_BUILD */
+
+static inline SPC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (SPC_OP_DATA *) base_op_get_instance_data(op_data);
+84200374:	b0 4e       	call (m) $_base_op_get_instance_data;
+}
+
+static bool spc_opmsg_set_buffer_size(OPERATOR_DATA *op_data, void *message_data, unsigned *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+    SPC_OP_DATA *opx_data = get_instance_data(op_data);
+    opx_data->output_buffer_size = OPMSG_FIELD_GET(message_data, OPMSG_COMMON_SET_BUFFER_SIZE, BUFFER_SIZE);
+84200376:	f1 88       	rMAC = M[r4 + 12];
+84200378:	89 c6       	rMAC = rMAC AND 0xffff;
+8420037a:	d1 9e       	M[r0 + 44] = rMAC;
+    return TRUE;
+8420037c:	42 20       	r0 = Null + 1;
+
+8420037e <Lc_spc_opmsg_set_buffer_size_2>:
+}
+8420037e:	f1 48       	popm <FP, r4, rLink>;
+84200380:	d8 4c       	rts;
+
+84200382 <Lc_spc_opmsg_select_passthrough_request_1>:
+
+}
+
+static bool spc_opmsg_select_passthrough_request(OPERATOR_DATA *op_data, void *message_data, 
+                                                 unsigned *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+84200382:	f2 1c       	pushm <FP(=SP), r4, r5, rLink>;
+84200384:	16 00       	r4 = r0 + Null;
+84200386:	1f 00       	r5 = r1 + Null;
+MAP_INSTANCE_DATA(CAP_ID_DOWNLOAD_SWITCHED_PASSTHROUGH_CONSUMER, SPC_OP_DATA)
+#endif /* CAPABILITY_DOWNLOAD_BUILD */
+
+static inline SPC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (SPC_OP_DATA *) base_op_get_instance_data(op_data);
+84200388:	a6 4e       	call (m) $_base_op_get_instance_data;
+
+static bool spc_opmsg_select_passthrough_request(OPERATOR_DATA *op_data, void *message_data, 
+                                                 unsigned *resp_length, OP_OPMSG_RSP_PAYLOAD **resp_data)
+{
+    SPC_OP_DATA *opx_data = get_instance_data(op_data);
+    uint16 new_input = OPMSG_FIELD_GET(message_data, OPMSG_SPC_SELECT_PASSTHROUGH, NEW_INPUT);
+8420038a:	f9 88       	rMAC = M[r5 + 12];
+8420038c:	89 c6       	rMAC = rMAC AND 0xffff;
+    SPC_MODE new_mode;
+    
+    if (new_input >= SPC_MODE_SIZE)
+8420038e:	48 26       	Null = rMAC - 9;
+84200390:	03 68       	if LT jump (m) Lc_spc_opmsg_select_passthrough_request_3;
+
+84200392 <Lc_spc_opmsg_select_passthrough_request_2>:
+    {
+        /* Invalid input */
+        return FALSE;
+84200392:	02 00       	r0 = Null + Null;
+84200394:	1c 6e       	jump (m) Lc_spc_opmsg_select_passthrough_request_11;
+
+84200396 <Lc_spc_opmsg_select_passthrough_request_3>:
+    }
+
+    new_mode = (SPC_MODE)new_input;
+
+    if (opx_data->current_mode != opx_data->next_mode)
+84200396:	23 f0 24 80 	r1 = MBS[r0 + 36];
+8420039a:	24 f0 25 80 	r2 = MBS[r0 + 37];
+8420039e:	18 05       	Null = r1 - r2;
+842003a0:	f9 63       	if NE jump (m) Lc_spc_opmsg_select_passthrough_request_2;
+
+842003a2 <Lc_spc_opmsg_select_passthrough_request_4>:
+    {
+        /* We need to wait until the previous mode switch is complete. */
+        return FALSE;
+    }
+
+    if (new_mode > SPC_MODE_CONSUME)
+842003a2:	08 24       	Null = rMAC - 0;
+842003a4:	07 6c       	if LE jump (m) Lc_spc_opmsg_select_passthrough_request_7;
+
+842003a6 <Lc_spc_opmsg_select_passthrough_request_5>:
+}
+
+static inline unsigned get_input_number(SPC_MODE mode)
+{
+    PL_ASSERT(mode > SPC_MODE_CONSUME);
+    return mode - 1;
+842003a6:	4c 24       	r2 = rMAC - 1;
+
+    if (new_mode > SPC_MODE_CONSUME)
+    {
+        /* Switching to passthrough */
+        if (opx_data->ip_buffers[get_input_number(new_mode)] == NULL ||
+            opx_data->op_buffer == NULL )
+842003a8:	64 54       	r2 = r2 LSHIFT 2;
+842003aa:	14 e9       	r2 = M[r0 + r2];
+842003ac:	f3 61       	if EQ jump (m) Lc_spc_opmsg_select_passthrough_request_2;
+
+842003ae <Lc_spc_opmsg_select_passthrough_request_6>:
+842003ae:	14 98       	r2 = M[r0 + 32];
+842003b0:	f1 61       	if EQ jump (m) Lc_spc_opmsg_select_passthrough_request_2;
+
+842003b2 <Lc_spc_opmsg_select_passthrough_request_7>:
+             */
+            return FALSE;
+        }
+    }
+
+    opx_data->next_mode = new_mode;
+842003b2:	21 f0 25 8a 	MB[r0 + 37] = rMAC;
+
+    if (opx_data->current_mode != opx_data->next_mode &&
+            opmgr_op_is_running(op_data))
+842003b6:	58 04       	Null = r1 - rMAC;
+842003b8:	09 60       	if EQ jump (m) Lc_spc_opmsg_select_passthrough_request_10;
+
+842003ba <Lc_spc_opmsg_select_passthrough_request_8>:
+842003ba:	32 00       	r0 = r4 + Null;
+842003bc:	60 4e       	call (m) $_opmgr_op_is_running;
+842003be:	10 04       	Null = r0 - Null;
+842003c0:	05 60       	if EQ jump (m) Lc_spc_opmsg_select_passthrough_request_10;
+
+842003c2 <Lc_spc_opmsg_select_passthrough_request_9>:
+ * 
+ * \param op_data The data structure of the operator to kick
+ */
+static inline void opmgr_kick_operator(OPERATOR_DATA *op_data)
+{
+    raise_bg_int(op_data->task_id);
+842003c2:	b2 88       	r0 = M[r4 + 8];
+842003c4:	ff fd a1 f0 	call (m) 0x14766;
+842003c8:	23 ed 
+
+842003ca <Lc_spc_opmsg_select_passthrough_request_10>:
+    {
+        /* A switch is needed. Try to kick the operator to perform the switch. */
+        opmgr_kick_operator(op_data);
+    }
+    return TRUE;
+842003ca:	42 20       	r0 = Null + 1;
+
+842003cc <Lc_spc_opmsg_select_passthrough_request_11>:
+}
+842003cc:	f2 48       	popm <FP, r4, r5, rLink>;
+842003ce:	d8 4c       	rts;
+
+842003d0 <Lc_spc_connect_disconnect_common_1>:
+        }
+    }
+}
+
+static bool spc_connect_disconnect_common(OPERATOR_DATA *op_data, void *message_data, tCbuffer *buffer)
+{
+842003d0:	f4 1c       	pushm <FP(=SP), r4, r5, r6, r7, rLink>;
+842003d2:	10 09       	r6 = r0 + Null;
+842003d4:	19 09       	r7 = r1 + Null;
+842003d6:	27 00       	r5 = r2 + Null;
+MAP_INSTANCE_DATA(CAP_ID_DOWNLOAD_SWITCHED_PASSTHROUGH_CONSUMER, SPC_OP_DATA)
+#endif /* CAPABILITY_DOWNLOAD_BUILD */
+
+static inline SPC_OP_DATA *get_instance_data(OPERATOR_DATA *op_data)
+{
+    return (SPC_OP_DATA *) base_op_get_instance_data(op_data);
+842003d8:	7e 4e       	call (m) $_base_op_get_instance_data;
+842003da:	16 00       	r4 = r0 + Null;
+}
+
+static bool spc_connect_disconnect_common(OPERATOR_DATA *op_data, void *message_data, tCbuffer *buffer)
+{
+    SPC_OP_DATA *opx_data = get_instance_data(op_data);
+    unsigned terminal_id = ((unsigned*)message_data)[0];
+842003dc:	99 f0 00 e8 	r7 = M[r7 + Null];
+    bool is_sink = terminal_id & TERMINAL_SINK_MASK;
+
+    if (is_sink)
+842003e0:	40 f0 91 f0 	rMAC = r7 AND 0x800000;
+842003e4:	00 00 
+842003e6:	1d 60       	if EQ jump (m) Lc_spc_connect_disconnect_common_9;
+
+842003e8 <Lc_spc_connect_disconnect_common_2>:
+    {
+        terminal_id = terminal_id & ~TERMINAL_SINK_MASK;
+842003e8:	bf ff 99 ff 	r7 = r7 AND 0xff7fffff;
+842003ec:	ff 1f 
+        if (terminal_id >= SPC_NUMBER_INPUTS)
+842003ee:	90 f0 08 24 	Null = r7 - 8;
+842003f2:	03 64       	if NC jump (m) Lc_spc_connect_disconnect_common_4;
+
+842003f4 <Lc_spc_connect_disconnect_common_3>:
+        {
+            /* Invalid input terminal id */
+            return FALSE;
+842003f4:	02 00       	r0 = Null + Null;
+842003f6:	41 6e       	jump (m) Lc_spc_connect_disconnect_common_23;
+
+842003f8 <Lc_spc_connect_disconnect_common_4>:
+        }
+        if (buffer == NULL)
+842003f8:	38 04       	Null = r5 - Null;
+842003fa:	0f 62       	if NE jump (m) Lc_spc_connect_disconnect_common_8;
+
+842003fc <Lc_spc_connect_disconnect_common_5>:
+        {
+            /* An input terminal is being disconnected.
+             */
+
+            if (opx_data->next_mode > SPC_MODE_CONSUME &&
+                    terminal_id == get_input_number(opx_data->next_mode))
+842003fc:	61 f0 25 80 	rMAC = MBS[r4 + 37];
+84200400:	08 24       	Null = rMAC - 0;
+84200402:	0b 6c       	if LE jump (m) Lc_spc_connect_disconnect_common_8;
+
+84200404 <Lc_spc_connect_disconnect_common_6>:
+}
+
+static inline unsigned get_input_number(SPC_MODE mode)
+{
+    PL_ASSERT(mode > SPC_MODE_CONSUME);
+    return mode - 1;
+84200404:	49 24       	rMAC = rMAC - 1;
+        {
+            /* An input terminal is being disconnected.
+             */
+
+            if (opx_data->next_mode > SPC_MODE_CONSUME &&
+                    terminal_id == get_input_number(opx_data->next_mode))
+84200406:	1f f9 00 c2 	Null = r7 - rMAC;
+8420040a:	07 62       	if NE jump (m) Lc_spc_connect_disconnect_common_8;
+
+8420040c <Lc_spc_connect_disconnect_common_7>:
+            {
+                /* Input is passthrough (or will soon be)
+                 * This will be handled in process_data
+                 */
+                L2_DBG_MSG("SPC Disconnection of Passthrough input.");
+8420040c:	55 f1 02 f0 	r0 = Null + 357564680;
+84200410:	08 41 
+84200412:	ff fd 02 f0 	call (m) 0x9a2;
+84200416:	31 ec 
+
+84200418 <Lc_spc_connect_disconnect_common_8>:
+        {
+            /* An input terminal is being connected. */
+        }
+
+        /* Apply the connection/disconnection */
+        opx_data->ip_buffers[terminal_id] = buffer;
+84200418:	01 f9 d2 c8 	r0 = r7 LSHIFT 2;
+8420041c:	b7 ee       	M[r4 + r0] = r5;
+8420041e:	12 6e       	jump (m) Lc_spc_connect_disconnect_common_13;
+
+84200420 <Lc_spc_connect_disconnect_common_9>:
+    }
+    else
+    {
+        if (buffer == NULL)
+84200420:	38 04       	Null = r5 - Null;
+84200422:	12 62       	if NE jump (m) Lc_spc_connect_disconnect_common_14;
+
+84200424 <Lc_spc_connect_disconnect_common_10>:
+        {
+            /* The output terminal is being disconnected.
+             */
+            if (opx_data->next_mode != SPC_MODE_CONSUME)
+84200424:	61 f0 25 80 	rMAC = MBS[r4 + 37];
+84200428:	0c 60       	if EQ jump (m) Lc_spc_connect_disconnect_common_12;
+
+8420042a <Lc_spc_connect_disconnect_common_11>:
+            {
+                /* Operator is in passthrough mode (or will soon be).
+                 * Cannot passthrough without an output.
+                 * This will be handled in process_data
+                 */
+                L2_DBG_MSG("SPC Disconnection of output during Passthrough.");
+8420042a:	55 f1 02 f0 	r0 = Null + 357564720;
+8420042e:	30 41 
+84200430:	ff fd 02 f0 	call (m) 0x9a2;
+84200434:	33 eb 
+84200436:	82 f0 02 88 	r0 = M[r6 + 8];
+8420043a:	ff fd a1 f0 	call (m) 0x14766;
+8420043e:	2d e9 
+
+84200440 <Lc_spc_connect_disconnect_common_12>:
+                buff_metadata_set_usable_octets(buffer, usable_octets);
+            }
+        }
+
+        /* Apply the connection/disconnection */
+        opx_data->op_buffer = buffer;
+84200440:	37 9e       	M[r4 + 32] = r5;
+
+84200442 <Lc_spc_connect_disconnect_common_13>:
+    }
+
+    return TRUE;
+84200442:	42 20       	r0 = Null + 1;
+84200444:	1a 6e       	jump (m) Lc_spc_connect_disconnect_common_23;
+
+84200446 <Lc_spc_connect_disconnect_common_14>:
+84200446:	79 89       	rMAC = M[r5 + 20];
+84200448:	49 c6       	rMAC = rMAC AND 0x8000;
+8420044a:	fb 61       	if EQ jump (m) Lc_spc_connect_disconnect_common_12;
+
+8420044c <Lc_spc_connect_disconnect_common_15>:
+        else
+        {
+            /* The output terminal is being connected. */
+            if (buff_has_metadata(buffer))
+            {
+                unsigned usable_octets = get_octets_per_word(opx_data->data_format);
+8420044c:	b1 98       	rMAC = M[r4 + 40];
+} AUDIO_DATA_FORMAT;
+
+/* Returns the used octets in a word for a given format. */
+static inline unsigned get_octets_per_word(AUDIO_DATA_FORMAT format)
+{
+    if (format == AUDIO_DATA_FORMAT_24_BIT)
+8420044e:	c8 26       	Null = rMAC - 11;
+84200450:	03 62       	if NE jump (m) Lc_spc_connect_disconnect_common_17;
+
+84200452 <Lc_spc_connect_disconnect_common_16>:
+    {
+        return 3;
+84200452:	c3 20       	r1 = Null + 3;
+84200454:	0d 6e       	jump (m) Lc_spc_connect_disconnect_common_22;
+
+84200456 <Lc_spc_connect_disconnect_common_17>:
+    }
+    else if ((format == AUDIO_DATA_FORMAT_FIXP) ||
+             (format == AUDIO_DATA_FORMAT_FIXP_WITH_METADATA) ||
+             (format == SPDIF_INPUT_DATA_FORMAT) ||
+             (format == USB_AUDIO_DATA_FORMAT))
+84200456:	48 24       	Null = rMAC - 1;
+84200458:	05 60       	if EQ jump (m) Lc_spc_connect_disconnect_common_20;
+
+8420045a <Lc_spc_connect_disconnect_common_18>:
+8420045a:	c8 24       	Null = rMAC - 3;
+8420045c:	03 60       	if EQ jump (m) Lc_spc_connect_disconnect_common_20;
+
+8420045e <Lc_spc_connect_disconnect_common_19>:
+8420045e:	88 26       	Null = rMAC - 10;
+84200460:	03 62       	if NE jump (m) Lc_spc_connect_disconnect_common_21;
+
+84200462 <Lc_spc_connect_disconnect_common_20>:
+    {
+       return (DAWTH / 8);
+84200462:	03 21       	r1 = Null + 4;
+84200464:	05 6e       	jump (m) Lc_spc_connect_disconnect_common_22;
+
+84200466 <Lc_spc_connect_disconnect_common_21>:
+    else /* AUDIO_DATA_FORMAT_16_BIT, AUDIO_DATA_FORMAT_16_BIT_WITH_METADATA,
+            AUDIO_DATA_FORMAT_16_BIT_BYTE_SWAP, AUDIO_DATA_FORMAT_16_BIT_BYTE_SWAP_WITH_METADATA,
+            AUDIO_DATA_FORMAT_13_BIT, AUDIO_DATA_FORMAT_8_BIT, AUDIO_DATA_FORMAT_MU_LAW,
+            AUDIO_DATA_FORMAT_A_LAW*/
+    {
+        return 2;
+84200466:	03 21       	r1 = Null + 4;
+84200468:	08 27       	Null = rMAC - 12;
+8420046a:	a1 f0 43 ce 	if NE r1 = Null + 2;
+
+8420046e <Lc_spc_connect_disconnect_common_22>:
+                buff_metadata_set_usable_octets(buffer, usable_octets);
+8420046e:	3a 00       	r0 = r5 + Null;
+84200470:	ff fd 8b f0 	call (m) 0x11c28;
+84200474:	39 ed 
+84200476:	e5 6f       	jump (m) Lc_spc_connect_disconnect_common_12;
+
+84200478 <Lc_spc_connect_disconnect_common_23>:
+        /* Apply the connection/disconnection */
+        opx_data->op_buffer = buffer;
+    }
+
+    return TRUE;
+}
+84200478:	f4 48       	popm <FP, r4, r5, r6, r7, rLink>;
+8420047a:	d8 4c       	rts;
+
+8420047c <$_opmgr_op_is_running>:
+8420047c:	01 00       	rMAC = Null + Null;
+ *
+ * \param op_data The data structure of the operator to query
+ */
+bool opmgr_op_is_running(OPERATOR_DATA *op_data)
+{
+    return op_data->state == OP_RUNNING;
+8420047e:	10 b0       	Null = MBS[r0 + 24];
+84200480:	20 f0 41 ce 	if EQ rMAC = Null + 1;
+84200484:	0a 00       	r0 = rMAC + Null;
+
+84200486 <Lc_opmgr_op_is_running_2>:
+84200486:	d8 4c       	rts;
+
+84200488 <$_base_op_get_sched_info_ex>:
+{
+    return op_data->cap_data->id;
+}
+
+OP_SCHED_INFO_RSP* base_op_get_sched_info_ex(OPERATOR_DATA *op_data, void *message_data, unsigned *response_id)
+{
+84200488:	f1 1c       	pushm <FP(=SP), r4, rLink>;
+8420048a:	16 00       	r4 = r0 + Null;
+    OP_SCHED_INFO_RSP* resp;
+
+    resp = xzpnew(OP_SCHED_INFO_RSP);
+8420048c:	c3 20       	r1 = Null + 3;
+8420048e:	02 29       	r0 = Null + 20;
+84200490:	ff fd 25 f0 	call (m) 0x4f2a;
+84200494:	3b e4 
+    if (resp == NULL)
+84200496:	10 04       	Null = r0 - Null;
+84200498:	03 62       	if NE jump (m) Lc_base_op_get_sched_info_ex_3;
+
+8420049a <Lc_base_op_get_sched_info_ex_2>:
+    {
+        return NULL;
+8420049a:	02 00       	r0 = Null + Null;
+8420049c:	04 6e       	jump (m) Lc_base_op_get_sched_info_ex_4;
+
+8420049e <Lc_base_op_get_sched_info_ex_3>:
+    }
+
+    resp->op_id = op_data->id;
+8420049e:	71 88       	rMAC = M[r4 + 4];
+842004a0:	11 ee       	M[r0 + Null] = rMAC;
+    resp->status = STATUS_OK;
+842004a2:	50 8e       	M[r0 + 4] = Null;
+
+842004a4 <Lc_base_op_get_sched_info_ex_4>:
+
+    return resp;
+842004a4:	f1 48       	popm <FP, r4, rLink>;
+842004a6:	d8 4c       	rts;
+
+842004a8 <$_base_op_build_std_response_ex>:
+    return op_data->state == OP_RUNNING;
+}
+
+/* will allocate and create a success message, with zeroed error_code field */
+bool base_op_build_std_response_ex(OPERATOR_DATA *op_data, STATUS_KYMERA status, void **response_data)
+{
+842004a8:	f3 1c       	pushm <FP(=SP), r4, r5, r6, rLink>;
+842004aa:	16 00       	r4 = r0 + Null;
+842004ac:	1f 00       	r5 = r1 + Null;
+842004ae:	20 09       	r6 = r2 + Null;
+    OP_STD_RSP* resp = xzpnew(OP_STD_RSP);
+842004b0:	c3 20       	r1 = Null + 3;
+842004b2:	02 23       	r0 = Null + 12;
+842004b4:	ff fd 25 f0 	call (m) 0x4f2a;
+842004b8:	37 e3 
+
+    if (resp == NULL)
+842004ba:	10 04       	Null = r0 - Null;
+842004bc:	03 62       	if NE jump (m) Lc_base_op_build_std_response_ex_3;
+
+842004be <Lc_base_op_build_std_response_ex_2>:
+    {
+        return FALSE;
+842004be:	02 00       	r0 = Null + Null;
+842004c0:	08 6e       	jump (m) Lc_base_op_build_std_response_ex_4;
+
+842004c2 <Lc_base_op_build_std_response_ex_3>:
+    }
+
+    resp->op_id = op_data->id;
+842004c2:	71 88       	rMAC = M[r4 + 4];
+842004c4:	11 ee       	M[r0 + Null] = rMAC;
+    resp->resp_data.err_code = 0;
+842004c6:	90 8e       	M[r0 + 8] = Null;
+    resp->status = status;
+842004c8:	57 8e       	M[r0 + 4] = r5;
+
+    *response_data = resp;
+842004ca:	82 f0 00 ee 	M[r6 + Null] = r0;
+    return TRUE;
+842004ce:	42 20       	r0 = Null + 1;
+
+842004d0 <Lc_base_op_build_std_response_ex_4>:
+}
+842004d0:	f3 48       	popm <FP, r4, r5, r6, rLink>;
+842004d2:	d8 4c       	rts;
+
+842004d4 <$_base_op_get_instance_data>:
+
+void* base_op_get_instance_data(OPERATOR_DATA *op_data)
+{
+    return op_data->extra_op_data;
+842004d4:	12 99       	r0 = M[r0 + 48];
+
+842004d6 <Lc_base_op_get_instance_data_2>:
+842004d6:	d8 4c       	rts;
+
+842004d8 <$kdc_start>:
+.MODULE $M.kdc_start;
+.CODESEGMENT PM;
+.DATASEGMENT DM;
+
+$kdc_start:
+r0 = $_switched_passthrough_consumer_cap_data;
+842004d8:	07 f0 02 f0 	r0 = Null + 7340032;
+842004dc:	00 40 
+    /* Force this symbol to be exported in ELF */
+    Null = $___kymera_debug_map_addr;
+842004de:	20 f0 b0 41 	Null = Null + 16816;

@@ -1,0 +1,127 @@
+<ModuleData Name="sink_gatt_hid_remote_control">
+
+    <!-- Definitions for sink gatt hid remote control data module -->
+    <DefineGroup>
+        <DefinePattern
+            PatternName="SinkGattHIDRC_LookupTable"
+            ShortId="gattHidRcLookupTable">
+            <ConfigItem
+                Id="BLE Virtual Button ID"
+                ShortId="input_id"
+                Desc="The 'Virtual Button' ID the HID code translates to (allows up to 16 RC buttons to be supported)"
+                Type="enum"
+                Size="4">
+                <List use="virtual_buttons"/>
+            </ConfigItem>
+
+            <ConfigItem
+                Id="BLE HID Code [hex]"
+                ShortId="hid_code"
+                Desc="The HID Code sent by the remote control, Consumer HID has some values that are 12-bit length)"
+                Type="uint"
+                PresentHex="true"
+                Size="12" >
+            </ConfigItem>
+        </DefinePattern>
+    </DefineGroup>
+
+    <!-- Config Group for sink gatt hid remote control read only structure -->
+    <ConfigGroup
+        Id="BLE Input Monitor RO"
+        ShortId="sink_gatt_hidrc_readonly"
+        Node="Basic">
+        <ConfigGroup
+            Id="Look-up Table"
+            ShortId="hid_rc_lookup_table"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='remote_control']/[@ShortId='ble_input_monitor']">
+
+            <ConfigPatternArray
+                Id="BLE Input ID Selection"
+                ShortId="lookup_table"
+                Pattern="gattHidRcLookupTable"
+                MaxNumPatterns="16">
+                <PatternArrayRow Id="gattHidRcLookupTable Row1" ShortId="gattHidRcLookupTable_row1" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb0" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x030" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="gattHidRcLookupTable Row2" ShortId="gattHidRcLookupTable_row2" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb1" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x0EA" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="gattHidRcLookupTable Row3" ShortId="gattHidRcLookupTable_row3" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb2" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x0E9" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="gattHidRcLookupTable Row4" ShortId="gattHidRcLookupTable_row4" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb3" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x0B0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="gattHidRcLookupTable Row5" ShortId="gattHidRcLookupTable_row5" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb4" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x0B5" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="gattHidRcLookupTable Row6" ShortId="gattHidRcLookupTable_row6" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb5" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x0B6" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="gattHidRcLookupTable Row7" ShortId="gattHidRcLookupTable_row7" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb6" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x089" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="gattHidRcLookupTable Row8" ShortId="gattHidRcLookupTable_row8" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb7" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x08C" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="gattHidRcLookupTable Row9" ShortId="gattHidRcLookupTable_row9" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb8" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x093" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="gattHidRcLookupTable Row10" ShortId="gattHidRcLookupTable_row10" Node="Basic">
+                    <PatternArrayConfigItem
+                        ShortId="input_id"
+                        DefaultValue="vb9" />
+                    <PatternArrayConfigItem
+                        ShortId="hid_code"
+                        DefaultValue="0x097" />
+                </PatternArrayRow>
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+</ModuleData>

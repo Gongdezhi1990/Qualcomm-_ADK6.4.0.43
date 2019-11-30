@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright (c) 2018 Qualcomm Technologies International, Ltd.-->
+
+<chain name="CHAIN_TONE_GEN_NO_IIR" id="0" generate_operator_roles_enum="False" generate_endpoint_roles_enum="False">
+
+    <include_header name="../av_headset_chain_roles.h"/>
+
+    <operator name="OPR_TONE_GEN" id="CAP_ID_RINGTONE_GENERATOR">
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <output source="OPR_TONE_GEN.OUT" role="EPR_TONE_PROMPT_CHAIN_OUT"/>
+
+</chain>

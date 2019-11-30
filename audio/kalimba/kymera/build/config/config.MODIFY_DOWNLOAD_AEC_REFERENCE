@@ -1,0 +1,38 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017-2019 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+capabilities/aec_reference
+
+# List of global include paths
+%list ALL_INCDIRS
+capabilities/aec_reference
+
+# List of libraries to build
+%list CFG_LIBS
+# Capabilities
+capabilities/aec_reference/aec_reference
+support_lib/cbops/cbops
+support_lib/opmgr/opmgr
+support_lib/rom_reuse/rom_reuse
+#
+# Capabilities we want to include on the chip
+# The CFG_CAPABILITIES list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+# Warning: When you want to enable another variant of cVc, also remember to go
+# into the capability XML to check if the "InstallOperator" tag is defined correctly
+# for your variant ID. If not, derivation engine will not generate default
+# parameters correctly and create operator will fail.
+
+%list CFG_CAPABILITIES
+AEC_REFERENCE
+
+# Additional CPP symbols (for the download support lib)
+%cpp
+xDISABLE_PATCH_BUILD_ID_CHECK
+INSTALL_DELEGATE_RATE_ADJUST_SUPPORT
+ENABLE_SW_DAC_DC_OFFSET_COMPENSATION

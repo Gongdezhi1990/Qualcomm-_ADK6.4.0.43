@@ -1,0 +1,36 @@
+var audio__output__broadcast__chain__config_8h =
+[
+    [ "BROADCAST_BUFFER_SIZE", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a53d1d4eb7f3f4f3faa689ff5be2933a6", null ],
+    [ "LOCAL_BUFFER_SIZE", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a3037110f9846b90f6446c1f97715de0e", null ],
+    [ "PRE_PROCESSING_BUFFER_SIZE", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a4ae0612894946afe18b02893630b92f9", null ],
+    [ "SPLITTER_BUFFER_SIZE", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a503fd4701eba310d706add140748fde6", null ],
+    [ "pre_processing_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167bab1a36d2df621e703223b07c669406916", null ],
+    [ "compander_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167ba536b9818ec2becb8abb52b363c0fce61", null ],
+    [ "peq_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167ba8c6a413b702e510fbee19727e349edc4", null ],
+    [ "vse_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167bac55444896d4654f38ed474cc844b73b9", null ],
+    [ "dbe_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167ba51275361842f9ad948013f58562d460a", null ],
+    [ "cancel_headroom_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167baf40a171b1616ecc63f737348cab414a5", null ],
+    [ "encoder_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167ba4fd2be4ac089ba0c055a731319d2ee26", null ],
+    [ "splitter_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167bab28d42f6813cc0d9e2c94a663500c904", null ],
+    [ "decoder_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167ba6ee4bd7887041658aa7f244fa424727f", null ],
+    [ "broadcast_buffer_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167ba0bdf5f9bee6a94a63cbd777b44720f90", null ],
+    [ "local_buffer_role", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a7ff5f2dff38e7639981794c43dc9167bac15837b2236c8a335c1016c65f2921bf", null ],
+    [ "chain_path_role_t", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55c", [
+      [ "left_decoded_audio_input", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca36881d0d2089c4ebd076c75f9fb37672", null ],
+      [ "right_decoded_audio_input", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca038a6493abbc6984121630979c7e400b", null ],
+      [ "split_encoded_audio", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55cadcaa157fcd7288173e4604b3cd7e1915", null ],
+      [ "broadcast_encoded_audio_output", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca351faf008f717df6236aab53ef4ec757", null ],
+      [ "decode_encoded_audio", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca4da15b6f342cbb8d01f158f43d015466", null ],
+      [ "left_decoded_audio_output", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca3d60c63611cea92587aec419e80c1087", null ],
+      [ "right_decoded_audio_ouput", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55cad7dd54d2ba03b720efe7a3f00f2c4ba2", null ],
+      [ "left_decoded_audio_input", "d4/da5/audio__output__tws__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca36881d0d2089c4ebd076c75f9fb37672", null ],
+      [ "right_decoded_audio_input", "d4/da5/audio__output__tws__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca038a6493abbc6984121630979c7e400b", null ],
+      [ "split_encoded_audio", "d4/da5/audio__output__tws__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55cadcaa157fcd7288173e4604b3cd7e1915", null ],
+      [ "decode_audio", "d4/da5/audio__output__tws__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55cadb7e37fdd360e25e8b73fbee4b17a215", null ],
+      [ "encoded_audio_output", "d4/da5/audio__output__tws__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca46254c6a235d4d3e49975681a57dc273", null ],
+      [ "left_decoded_audio_output", "d4/da5/audio__output__tws__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca3d60c63611cea92587aec419e80c1087", null ],
+      [ "right_decoded_audio_ouput", "d4/da5/audio__output__tws__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55cad7dd54d2ba03b720efe7a3f00f2c4ba2", null ],
+      [ "mono_encode", "d4/da5/audio__output__tws__chain__config_8h.html#a83d4eba84ad5e0bee59a5fc78c8cf55ca7bcaea80a728264bdbdf43e98d08e68e", null ]
+    ] ],
+    [ "audioOutputBroadcastCreateChain", "d1/d0b/audio__output__broadcast__chain__config_8h.html#a2c901a4b03b3695f0327dd9d3f2fbedb", null ]
+];

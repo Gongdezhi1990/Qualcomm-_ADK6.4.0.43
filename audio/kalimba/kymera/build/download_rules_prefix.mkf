@@ -1,0 +1,59 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  Common capability download build system rules, part 1
+#
+#               This file defines the first 'common' part of capability download
+#               makefiles. Used by the makefile generated from 
+#               ../tools/KCSMaker/templates/makefile_tmpl
+#               
+############################################################################
+
+# Include goals.mkf ASAP.
+# This validates the targets supplied on the 'make' command line.
+include $(BUILD_ROOT)/goals.mkf
+
+ALL_GOALS_EXCEPT_HELP = all debug dox clean verbose
+.PHONY: $(ALL_GOALS_EXCEPT_HELP) help
+
+# Create new log file for errors
+export ERR_LOGFILE = $(OUTPUT_ROOT)/__errorsLog.txt
+
+#########################################################################
+# Build config-specific make file and pick up definitions from it
+#########################################################################
+
+ifneq ($(MAKECMDGOALS), help) # This won't get built for make help
+ifeq ($(strip $(CONFIG)), )
+$(error CONFIG must be specified. Type 'make help' for more information)
+endif
+
+ifneq ($(strip $(BUILD_EXTRA_DEFS)), )
+    CONFIG_EXTRA_DEFS_OPT = -c "$(BUILD_EXTRA_DEFS)"
+endif
+
+$(info $(shell $(MKDIR_P) $(OUTPUT_ROOT) $(STDERR_DEV_NULL)))
+
+debug: $(OUTPUT_ROOT)/$(CONFIG).mkf
+
+.PHONY: $(ERR_LOGFILE)
+
+$(ERR_LOGFILE) :
+# Create new error file
+	@echo "" > $(ERR_LOGFILE)
+
+# The include of the $(OUTPUT_ROOT)/$(CONFIG).mkf won't work if this is a direct rule
+# this is why is dependent on the $(ERR_LOGFILE).
+$(OUTPUT_ROOT)/$(CONFIG).mkf: $(ERR_LOGFILE) $(BUILD_ROOT)/gen_config.py
+	$(info ***** Parsing config files *****)
+	@$(PYTHON) $(BUILD_ROOT)/gen_config.py -o $(OUTPUT_ROOT) -k $(KYMERA_ROOT) -f config.$(CONFIG) --dnld-build-name $(TARGET_ELF_BUILD_NAME) --dnld-config-files $(DNLD_CONFIG_FILES)
+
+-include $(OUTPUT_ROOT)/$(CONFIG).mkf
+endif
+
+#TARGET_MAKEFILE = $(CURDIR/makefile)

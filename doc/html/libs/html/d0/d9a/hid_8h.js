@@ -1,0 +1,115 @@
+var hid_8h =
+[
+    [ "hid_config", "d2/dd4/structhid__config.html", "d2/dd4/structhid__config" ],
+    [ "HID_INIT_CFM_T", "db/d6f/structHID__INIT__CFM__T.html", "db/d6f/structHID__INIT__CFM__T" ],
+    [ "HID_CONNECT_IND_T", "dd/d1f/structHID__CONNECT__IND__T.html", "dd/d1f/structHID__CONNECT__IND__T" ],
+    [ "HID_CONNECT_CFM_T", "d8/da7/structHID__CONNECT__CFM__T.html", "d8/da7/structHID__CONNECT__CFM__T" ],
+    [ "HID_DISCONNECT_IND_T", "db/d71/structHID__DISCONNECT__IND__T.html", "db/d71/structHID__DISCONNECT__IND__T" ],
+    [ "HID_DISCONNECT_CFM_T", "d5/d5f/structHID__DISCONNECT__CFM__T.html", "d5/d5f/structHID__DISCONNECT__CFM__T" ],
+    [ "HID_CONTROL_IND_T", "d7/d84/structHID__CONTROL__IND__T.html", "d7/d84/structHID__CONTROL__IND__T" ],
+    [ "HID_GET_REPORT_IND_T", "d3/d5d/structHID__GET__REPORT__IND__T.html", "d3/d5d/structHID__GET__REPORT__IND__T" ],
+    [ "HID_SET_REPORT_IND_T", "dc/d3d/structHID__SET__REPORT__IND__T.html", "dc/d3d/structHID__SET__REPORT__IND__T" ],
+    [ "HID_GET_IDLE_IND_T", "d0/d80/structHID__GET__IDLE__IND__T.html", "d0/d80/structHID__GET__IDLE__IND__T" ],
+    [ "HID_SET_IDLE_IND_T", "da/d5a/structHID__SET__IDLE__IND__T.html", "da/d5a/structHID__SET__IDLE__IND__T" ],
+    [ "HID_GET_PROTOCOL_IND_T", "de/d21/structHID__GET__PROTOCOL__IND__T.html", "de/d21/structHID__GET__PROTOCOL__IND__T" ],
+    [ "HID_SET_PROTOCOL_IND_T", "df/df0/structHID__SET__PROTOCOL__IND__T.html", "df/df0/structHID__SET__PROTOCOL__IND__T" ],
+    [ "hid_pin", "dc/d56/structhid__pin.html", "dc/d56/structhid__pin" ],
+    [ "HID_DEVICE", "d0/d9a/hid_8h.html#a33896d5be01ae65756518fdcc1c5eec2", null ],
+    [ "HID_L2CAP_MTU", "d0/d9a/hid_8h.html#ac1f4940efbc824126e2356a03d591c4c", null ],
+    [ "HID_MAJOR_DEVICE_CLASS", "d0/d9a/hid_8h.html#a016f5844328847c88c617f632aed4c74", null ],
+    [ "HID_MINOR_KEYBOARD", "d0/d9a/hid_8h.html#aa5fed4b620a296277bf580757453676f", null ],
+    [ "HID_MINOR_MOUSE", "d0/d9a/hid_8h.html#a9a4d6c15c0a423347d4fe59fa78455e0", null ],
+    [ "HID_PIN_MAX_LENGTH", "d0/d9a/hid_8h.html#acf0c3255c286d3b42211548508efd285", null ],
+    [ "HID", "d0/d9a/hid_8h.html#a4a6363b2f477881b6867af4a50fd1852", null ],
+    [ "HID_DATA_IND_T", "d0/d9a/hid_8h.html#adf299fc75cc765d6736ad36a7acf0dad", null ],
+    [ "HID_LIB", "d0/d9a/hid_8h.html#a5e92a556cba9584392b6a0ad31523bac", null ],
+    [ "hid_connect_status", "d0/d9a/hid_8h.html#a528f6961580266897cc81745a3aea7cd", [
+      [ "hid_connect_success", "d0/d9a/hid_8h.html#a528f6961580266897cc81745a3aea7cda9ae4a09528713b39c4ac9869c49fd40a", null ],
+      [ "hid_connect_failed", "d0/d9a/hid_8h.html#a528f6961580266897cc81745a3aea7cda0e5cf163a56fd2ee77d3c27bd2b0b79d", null ],
+      [ "hid_connect_out_of_resources", "d0/d9a/hid_8h.html#a528f6961580266897cc81745a3aea7cdaa9fa57ac038c756520a874326503e64b", null ],
+      [ "hid_connect_timeout", "d0/d9a/hid_8h.html#a528f6961580266897cc81745a3aea7cda40b223eea42737f42c2f4b5558aac77f", null ],
+      [ "hid_connect_disconnected", "d0/d9a/hid_8h.html#a528f6961580266897cc81745a3aea7cda886693fc296decc0686f04f22ced125b", null ]
+    ] ],
+    [ "hid_control_op", "d0/d9a/hid_8h.html#a49980aac7c2b37684181741b3e00e066", [
+      [ "hid_control_op_nop", "d0/d9a/hid_8h.html#a49980aac7c2b37684181741b3e00e066a256c50dc548beaadd4cde9405dce266e", null ],
+      [ "hid_control_op_hard_reset", "d0/d9a/hid_8h.html#a49980aac7c2b37684181741b3e00e066ad2cadeffe5bbd61e01eca12555448082", null ],
+      [ "hid_control_op_soft_reset", "d0/d9a/hid_8h.html#a49980aac7c2b37684181741b3e00e066ac79950b6a45ed15c2ce9a49b2161d7fb", null ],
+      [ "hid_control_op_suspend", "d0/d9a/hid_8h.html#a49980aac7c2b37684181741b3e00e066aa508fde15801fe7eae66d2390c2b3796", null ],
+      [ "hid_control_op_exit_suspend", "d0/d9a/hid_8h.html#a49980aac7c2b37684181741b3e00e066a0354e25c7eeea4e447a08d53dd6a53ad", null ],
+      [ "hid_control_op_unplug", "d0/d9a/hid_8h.html#a49980aac7c2b37684181741b3e00e066af3c0e6501e6ef523d23d8643aa53511e", null ]
+    ] ],
+    [ "hid_disconnect_status", "d0/d9a/hid_8h.html#af31c14831eb4cbf10b96523122344892", [
+      [ "hid_disconnect_success", "d0/d9a/hid_8h.html#af31c14831eb4cbf10b96523122344892a874687c8489a5a468446893206153264", null ],
+      [ "hid_disconnect_link_loss", "d0/d9a/hid_8h.html#af31c14831eb4cbf10b96523122344892ac026f305b5dcff1d7a9ad9730c05d40f", null ],
+      [ "hid_disconnect_timeout", "d0/d9a/hid_8h.html#af31c14831eb4cbf10b96523122344892a15603ed38f6a84a1d9cd4574f2cc9f28", null ],
+      [ "hid_disconnect_violation", "d0/d9a/hid_8h.html#af31c14831eb4cbf10b96523122344892aacb7b8e7b9fc936f8f28f18704bbff5a", null ],
+      [ "hid_disconnect_error", "d0/d9a/hid_8h.html#af31c14831eb4cbf10b96523122344892a64b5b3496b3f26786759ad9d0394923a", null ],
+      [ "hid_disconnect_virtual_unplug", "d0/d9a/hid_8h.html#af31c14831eb4cbf10b96523122344892ac4b4a29a3d1407cb7f717294417ac118", null ]
+    ] ],
+    [ "hid_init_status", "d0/d9a/hid_8h.html#aa243b90a51dab45fac35add6cef90d49", [
+      [ "hid_init_success", "d0/d9a/hid_8h.html#aa243b90a51dab45fac35add6cef90d49a3638e798e45e0c161980f2c75d599b4e", null ],
+      [ "hid_init_sdp_reg_fail", "d0/d9a/hid_8h.html#aa243b90a51dab45fac35add6cef90d49a26b6638179cfcb1ade82a2e140d4fa67", null ],
+      [ "hid_init_l2cap_reg_fail", "d0/d9a/hid_8h.html#aa243b90a51dab45fac35add6cef90d49a0a9b27c4a95660c2e05131ae77818d25", null ]
+    ] ],
+    [ "hid_pin_status", "d0/d9a/hid_8h.html#a1af6d783c65e58f215fed1bdc6b1a3e3", [
+      [ "hid_pin_ok", "d0/d9a/hid_8h.html#a1af6d783c65e58f215fed1bdc6b1a3e3a21f17ad618a884da883d96e752cb1113", null ],
+      [ "hid_pin_full", "d0/d9a/hid_8h.html#a1af6d783c65e58f215fed1bdc6b1a3e3af37a76c09f7504d7b1b6658b84a44a8c", null ],
+      [ "hid_pin_complete", "d0/d9a/hid_8h.html#a1af6d783c65e58f215fed1bdc6b1a3e3aeeddb106172455b989efbe2d11b09509", null ],
+      [ "hid_pin_add", "d0/d9a/hid_8h.html#a1af6d783c65e58f215fed1bdc6b1a3e3a26b0fc2512b9b44319ea299fcf2b33d1", null ],
+      [ "hid_pin_delete", "d0/d9a/hid_8h.html#a1af6d783c65e58f215fed1bdc6b1a3e3a616fb57e09311e477cde08db1b1b7a53", null ],
+      [ "hid_pin_cleared", "d0/d9a/hid_8h.html#a1af6d783c65e58f215fed1bdc6b1a3e3aebad62be50d8254aab0148f0f2a6f762", null ],
+      [ "hid_pin_error", "d0/d9a/hid_8h.html#a1af6d783c65e58f215fed1bdc6b1a3e3a26c8d605b6f7f588b8b6d2091bd2833f", null ]
+    ] ],
+    [ "hid_protocol", "d0/d9a/hid_8h.html#a3230acd62b1889b2066d0d108cec19fb", [
+      [ "hid_protocol_boot", "d0/d9a/hid_8h.html#a3230acd62b1889b2066d0d108cec19fba7032e7167ef216c71b08b3e48dd74ba7", null ],
+      [ "hid_protocol_report", "d0/d9a/hid_8h.html#a3230acd62b1889b2066d0d108cec19fbad79c60c25cee7c96ea0d06d99aba24d3", null ]
+    ] ],
+    [ "hid_report_type", "d0/d9a/hid_8h.html#a80c11849e7798c0851f75f7d53e3768d", [
+      [ "hid_report_other", "d0/d9a/hid_8h.html#a80c11849e7798c0851f75f7d53e3768da61df254606b3ffb88f7d366a2320ec10", null ],
+      [ "hid_report_input", "d0/d9a/hid_8h.html#a80c11849e7798c0851f75f7d53e3768da3ccc1c913446154f4ae043e4dad1a0b4", null ],
+      [ "hid_report_output", "d0/d9a/hid_8h.html#a80c11849e7798c0851f75f7d53e3768daf88e7136fb5a810bf3e00e5bce1feb40", null ],
+      [ "hid_report_feature", "d0/d9a/hid_8h.html#a80c11849e7798c0851f75f7d53e3768da85cdf0a85d5cbf86d8f75ab7b6a79765", null ]
+    ] ],
+    [ "hid_status", "d0/d9a/hid_8h.html#a2aacdb3b3f294d1c20e0986949d7cb3c", [
+      [ "hid_success", "d0/d9a/hid_8h.html#a2aacdb3b3f294d1c20e0986949d7cb3ca89990f999f583afbda1e07334c00737e", null ],
+      [ "hid_busy", "d0/d9a/hid_8h.html#a2aacdb3b3f294d1c20e0986949d7cb3cadf372bf55d3dc3a10890a72824528ce9", null ],
+      [ "hid_invalid_id", "d0/d9a/hid_8h.html#a2aacdb3b3f294d1c20e0986949d7cb3ca05189e10365448c44fdd6a2cd1767fe9", null ],
+      [ "hid_unsupported", "d0/d9a/hid_8h.html#a2aacdb3b3f294d1c20e0986949d7cb3ca6dcf34475f62c79f68c4e17e1ca0cea0", null ],
+      [ "hid_invalid_param", "d0/d9a/hid_8h.html#a2aacdb3b3f294d1c20e0986949d7cb3cab28fc97dcadf9e13d0ac3a38e1200448", null ],
+      [ "hid_failed", "d0/d9a/hid_8h.html#a2aacdb3b3f294d1c20e0986949d7cb3ca33b597846b6c6f8f2789578f4d71620c", null ],
+      [ "hid_timeout", "d0/d9a/hid_8h.html#a2aacdb3b3f294d1c20e0986949d7cb3cab141db372df8272bf17e950f8114e187", null ],
+      [ "hid_resource_error", "d0/d9a/hid_8h.html#a2aacdb3b3f294d1c20e0986949d7cb3cabf24597493e52b5fa4dbb788ff2978ae", null ]
+    ] ],
+    [ "HidMessageId", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284", [
+      [ "HID_INIT_CFM", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284a8149eaa0b85e6e907c3539364d5a3db5", null ],
+      [ "HID_CONNECT_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284a769c003cbd5bcead90f34052f46f317d", null ],
+      [ "HID_CONNECT_CFM", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284a76086f31f23a504914266093ae3f4b02", null ],
+      [ "HID_DISCONNECT_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284a28f243d7b48e757166b0c8460f4826c9", null ],
+      [ "HID_DISCONNECT_CFM", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284a95883fe7e6b29ab099e2288bc46829b9", null ],
+      [ "HID_CONTROL_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284a014697e83fbf91ca73f90b2bdf497205", null ],
+      [ "HID_GET_REPORT_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284adbfeee1036dbdebaf2af8a3468f7837c", null ],
+      [ "HID_SET_REPORT_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284a7b2847c89cbeb7b2faf3cd8ef6f9ea52", null ],
+      [ "HID_GET_PROTOCOL_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284aa6fca0218aeb0ff25e916b0a1175fd52", null ],
+      [ "HID_SET_PROTOCOL_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284afd0449bf802f480a79d6393040e83ab2", null ],
+      [ "HID_GET_IDLE_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284a384ad7ef0ccde4deb63570570c9ac6f1", null ],
+      [ "HID_SET_IDLE_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284ade8dc96437507c6ca15dcb31561ab47a", null ],
+      [ "HID_DATA_IND", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284a8f5c164edbbfaec8610330b382d0d1e7", null ],
+      [ "HID_MESSAGE_TOP", "d0/d9a/hid_8h.html#ae789403a51733cb7ea9dba6837dfa284aefe26aefa937a06c5e26c755deb94f34", null ]
+    ] ],
+    [ "HidConnect", "d0/d9a/hid_8h.html#a9ec644bc7823903807f779c894fb85a1", null ],
+    [ "HidConnectResponse", "d0/d9a/hid_8h.html#ab46b458792f73a059cda24be9c3681b4", null ],
+    [ "HidControl", "d0/d9a/hid_8h.html#a2b0451c24fd9c732755b556632bea9b4", null ],
+    [ "HidDisconnect", "d0/d9a/hid_8h.html#a53efa852c716e7b06cc3ba5cadb15f80", null ],
+    [ "HidGetIdleResponse", "d0/d9a/hid_8h.html#a4c1a82887b3af83f9670901232360e8c", null ],
+    [ "HidGetProtocolResponse", "d0/d9a/hid_8h.html#a631eb953c5bd7f83e57551b8187ee3c3", null ],
+    [ "HidGetReportResponse", "d0/d9a/hid_8h.html#a17881831a7d6f434b0c6abf387013540", null ],
+    [ "HidInit", "d0/d9a/hid_8h.html#a493469250b4b75165e8bc1d4e69af97f", null ],
+    [ "HidInterruptReport", "d0/d9a/hid_8h.html#a9e1dbf1e7cf052bfe077804104409273", null ],
+    [ "HidPinCodeData", "d0/d9a/hid_8h.html#ae77e9c1c671b3b0ec89c675bdb375c1f", null ],
+    [ "HidPinCodeHandleReport", "d0/d9a/hid_8h.html#a02b9630b731be4db599bcf5993bae41d", null ],
+    [ "HidPinCodeLength", "d0/d9a/hid_8h.html#a9e3bdae80c2fc069f0d790697d95fbc8", null ],
+    [ "HidPinInit", "d0/d9a/hid_8h.html#a6162a6147f51617296e28d035bad1ba9", null ],
+    [ "HidSetIdleResponse", "d0/d9a/hid_8h.html#a3180d1e25bf694bb3d4f27feb79ab0d3", null ],
+    [ "HidSetProtocolResponse", "d0/d9a/hid_8h.html#a29ca386de2284cc08d52b0a293cb0a03", null ],
+    [ "HidSetReportResponse", "d0/d9a/hid_8h.html#a50bf45278b1b0b6ca3219dbf311e2aea", null ]
+];

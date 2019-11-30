@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2016 - 2018 Qualcomm Technologies International, Ltd. -->
+<project>
+    <configurations>
+        <configuration>
+            <property name="enable_hi_res_audio">
+                <description>Enable HI RES audio functionality. Note that enable_peer_device must be set to OFF.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">HI_RES_AUDIO </option>
+                </options>
+            </property>
+            <property name="enable_usb_hid_upgrade">
+                <description>Enable USB HID upgrade functionality.</description>
+                <default>ENABLE_USB_HID_UPGRADE</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_USB_HID_UPGRADE</option>
+                </options>
+            </property>
+            <property name="enable_avrcp_browsing">
+                <description>Enable Browsing functionality of AVRCP 1.5.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_AVRCP_BROWSING</option>
+                </options>
+            </property>
+            <property name="enable_mapc">
+                <description>Enable Message Access Profile (MAP) features.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_MAPC</option>
+                </options>
+            </property>
+            <property name="enable_gaia_persistent_user_eq_bank">
+                <description>Store User Defined EQ Bank 1 Settings in Persistent Storage for the GAIA service. Compiler flags for GAIA service must be enabled alongside this flag for this feature to be enabled.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_GAIA_PERSISTENT_USER_EQ_BANK</option>
+                </options>
+            </property>
+            <property name="enable_gaia_rfcomm">
+                <description>Use RFCOMM instead of SPP for the GAIA service.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_GAIA_RFCOMM</option>
+                </options>
+            </property>
+            <property name="enable_watchdog">
+                <description>Enable S/W Watchdog support.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_WATCHDOG</option>
+                </options>
+            </property>
+            <property name="enable_wired">
+                <description>Enable Wired Audio support.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_WIRED</option>
+                </options>
+            </property>
+            <property name="enable_allow_usb_debug">
+                <description>Enable Allow USB Debug.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_ALLOW_USB_DEBUG</option>
+                </options>
+            </property>
+            <property name="enable_avrcp_player_app">
+                <description>Enable Player Application Settings functionality of AVRCP 1.5.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_AVRCP_PLAYER_APP_SETTINGS</option>
+                </options>
+            </property>
+            <property name="enable_avrcp_now_playing">
+                <description>Enable Now Playing functionality of AVRCP 1.5.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_AVRCP_NOW_PLAYING</option>
+                </options>
+            </property>
+            <property name="ble_power_off_behaviour">
+                <description>Specifies the BLE behaviour when the application is powered off.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">BLE_ENABLED_WHEN_OFF</option>
+                </options>
+            </property>
+            <property name="gatt_gaia_server">
+                <description>Enable GATT GAIA server operation</description>
+                <default>GATT_GAIA_SERVER</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_GAIA_SERVER</option>
+                </options>
+            </property>
+            <property name="enable_dormant_support">
+                <description>Enable DORMANT support</description>
+                <default>ENABLE_DORMANT_SUPPORT</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_DORMANT_SUPPORT</option>
+                </options>
+            </property>
+            <property name="test_hf_indicators">
+                <description>Enable test of HF indicators</description>
+                <default>TEST_HF_INDICATORS</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">TEST_HF_INDICATORS </option>
+                </options>
+            </property>
+            <property name="test_scom">
+                <description>Enable test SCOM</description>
+                <default>TEST_SCOM</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">TEST_SCOM</option>
+                </options>
+            </property>
+            <property name="display_scrolling">
+                <description>Enable support for Display Scrolling Operation operation</description>
+                <default>ENABLE_DISPLAY ENABLE_DISPLAY_MIDAS</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_DISPLAY ENABLE_DISPLAY_MIDAS</option>
+                </options>
+            </property>
+            <property name="usb_hub">
+                <description>Enable support for USB HUB operation</description>
+                <default>ENABLE_USB_HUB_SUPPORT</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_USB_HUB_SUPPORT</option>
+                </options>
+            </property>
+            <property name="adk_nfc">
+                <description>Enable support for NFC operation</description>
+                <default>ENABLE_ADK_NFC</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_ADK_NFC</option>
+                </options>
+            </property>
+            <property name="usb_app_stereo">
+                <description>USB stereo audio descriptors defined by the application</description>
+                <default>ENABLE_USB_AUDIO_APP_STEREO_DESCRIPTORS</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_USB_AUDIO_APP_STEREO_DESCRIPTORS</option>
+                </options>
+            </property>
+            <property name="device_id_pskey">
+                <description>Enable Device ID Profile (DIP).
+           Allows for PS configurable Device Id information, from PSKEY_DEVICE_ID,
+           but requires permanent use of a memory pool to hold the SDP record</description>
+                <default>DEVICE_ID_PSKEY</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">DEVICE_ID_PSKEY</option>
+                </options>
+            </property>
+            <property name="enable_gatt">
+                <description>Enable BLE/GATT support in the application. GATT will only be used with a Bluetooth Low Energy link.</description>
+                <default>GATT_ENABLED</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_ENABLED</option>
+                </options>
+            </property>
+            <property name="enable_gatt_ancs_client">
+                <description>If GATT support is enabled, this option will also enable the GATT ANCS Client functionality.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_ANCS_CLIENT</option>
+                </options>
+            </property>
+            <property name="enable_hrs_client">
+                <description>If GATT support is enabled, this option will also enable the GATT Heart Rate Client (Collector) functionality.</description>
+                <default>GATT_HRS_CLIENT GATT_DIS_CLIENT</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_HRS_CLIENT GATT_DIS_CLIENT</option>
+                </options>
+            </property>
+            <property name="enable_findme_client">
+                <description>If GATT support is enabled, this option will also enable the GATT Find Me Client functionality.</description>
+                <default>GATT_IAS_CLIENT</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_IAS_CLIENT</option>
+                </options>
+            </property>
+            <property name="enable_hid_client">
+                <description>If GATT support is enabled, this option will also enable the GATT HID Client functionality.</description>
+                <default>GATT_BATTERY_CLIENT GATT_DIS_CLIENT GATT_SPC_CLIENT GATT_HID_CLIENT</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_BATTERY_CLIENT GATT_DIS_CLIENT GATT_SPC_CLIENT GATT_HID_CLIENT</option>
+                </options>
+            </property>
+            <property name="enable_gatt_battery_server">
+                <description>If GATT support is enabled, this option will also enable the GATT Battery Server functionality.</description>
+                <default>GATT_BATTERY_SERVER</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_BATTERY_SERVER</option>
+                </options>
+            </property>
+            <property name="enable_gatt_remote_battery_server">
+                <description>If GATT Battery Server is enabled, this option will also enable the GATT Remote Battery Server functionality.</description>
+                <default>GATT_BATTERY_SERVER_REMOTE</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_BATTERY_SERVER_REMOTE</option>
+                </options>
+            </property>
+            <property name="enable_gatt_peer_battery_server">
+                <description>If GATT Battery Server is enabled, this option will also enable the GATT Peer Battery Server functionality.</description>
+                <default>GATT_BATTERY_SERVER_PEER</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_BATTERY_SERVER_PEER</option>
+                </options>
+            </property>
+            <property name="enable_gatt_findme_server">
+                <description>If GATT support is enabled, this option will also enable the GATT Find Me Server functionality.</description>
+                <default>GATT_IAS_SERVER</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_IAS_SERVER</option>
+                </options>
+            </property>
+            <property name="enable_gatt_proximity_server">
+                <description>If GATT support is enabled, this option will also enable the GATT Find Me Server functionality.</description>
+                <default>GATT_IAS_SERVER GATT_LLS_SERVER GATT_TPS_SERVER</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_IAS_SERVER GATT_LLS_SERVER GATT_TPS_SERVER</option>
+                </options>
+            </property>
+            <property name="enable_heart_rate_server">
+                <description>If GATT support is enabled, this option will also enable the GATT Heart Rate Server functionality.
+
+            Note The application support for using actual sensor needs to be added based on host requirement without which
+                the measurements cannot be sent to remote device.</description>
+                <default>GATT_HRS_SERVER GATT_DIS_SERVER</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_HRS_SERVER GATT_DIS_SERVER</option>
+                </options>
+            </property>
+            <property name="enable_gatt_fast_pair_server">
+                <description>If GATT support is enabled, this option will also enable the GATT Fast Pair Server functionality.</description>
+                <default>GATT_FP_SERVER</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">GATT_FP_SERVER</option>
+                </options>
+            </property>
+            <property name="enable_avrcp">
+                <description>Enable Audio/Video Remote Control Profile (AVRCP).</description>
+                <default>ENABLE_AVRCP</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_AVRCP</option>
+                </options>
+            </property>
+            <property name="include_dsp">
+                <description>Configures the DSP to be used for SCO connections</description>
+                <default>INCLUDE_DSP</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">INCLUDE_DSP</option>
+                </options>
+            </property>
+            <property name="three_way_calling">
+                <description>Enable Three Way Calling.</description>
+                <default>THREE_WAY_CALLING</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">THREE_WAY_CALLING</option>
+                </options>
+            </property>
+            <property name="enable_partymode">
+                <description>Enable support for party mode</description>
+                <default>ENABLE_PARTYMODE</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_PARTYMODE</option>
+                </options>
+            </property>
+            <property name="enable_usb">
+                <description>Enable USB functionality.</description>
+                <default>ENABLE_USB</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_USB</option>
+                </options>
+            </property>
+            <property name="enable_usb_audio">
+                <description>Enable USB Audio functionality.</description>
+                <default>ENABLE_USB_AUDIO</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_USB_AUDIO</option>
+                </options>
+            </property>
+            <property name="enable_pbap">
+                <description>Enable Phone Book Access Profile (PBAP) features.</description>
+                <default>ENABLE_PBAP</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_PBAP</option>
+                </options>
+            </property>
+            <property name="enable_gaia">
+                <description>Enable Generic Application Interface Architecture (GAIA).</description>
+                <default>ENABLE_GAIA</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_GAIA</option>
+                </options>
+            </property>
+            <property name="include_a2dp_extra_codecs">
+                <description>Enable support for the A2DP codecs MP3, AAC and aptX.</description>
+                <default>INCLUDE_A2DP_EXTRA_CODECS</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">INCLUDE_A2DP_EXTRA_CODECS</option>
+                </options>
+            </property>
+            <property name="include_aptx_acl_sprint">
+                <description>Enable support for the A2DP codec aptX Low Latency variant.</description>
+                <default>INCLUDE_APTX_ACL_SPRINT</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">INCLUDE_APTX_ACL_SPRINT</option>
+                </options>
+            </property>
+            <property name="include_aptx_adaptive">
+                <description>Enable support for the A2DP codec aptX Adaptive variant. For compatibility with older releases of the Qualcomm Android based AGs use the deprecated service capability.</description>
+                <default>INCLUDE_APTX_ADAPTIVE</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">INCLUDE_APTX_ADAPTIVE</option>
+                </options>
+            </property>
+            <property name="enable_peer_device">
+                <description>Enable support for connections to peer devices. Incompatible with enable_hi_res_audio.
+If ENABLE_BROADCAST_AUDIO is selected, afh_update_method must be set.
+                </description>
+                <default>ENABLE_PEER PEER_TWS PEER_AVRCP</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0"></option>
+                    <option name="1">ENABLE_PEER PEER_AS PEER_AVRCP</option>
+                    <option name="2">ENABLE_PEER PEER_TWS PEER_AVRCP</option>
+                    <option name="3">ENABLE_BROADCAST_AUDIO</option>
+                </options>
+            </property>
+            <property name="enable_peer_battery_level">
+                <description>Enable support for Peer Battery level, Peer device support must be enabled as well.</description>
+                <default>ENABLE_PEER_BATTERY_LEVEL</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_PEER_BATTERY_LEVEL</option>
+                </options>
+            </property>
+            <property name="enable_upgrade">
+                <description>Enable support for device upgrade.</description>
+                <default>ENABLE_UPGRADE</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_UPGRADE</option>
+                </options>
+            </property>
+            <property name="enable_bredr_sc">
+                <description>Enable support for BR/EDR Secure Connection (SC). BR/EDR SC is a CSR8675 feature only.</description>
+                <default>ENABLE_BREDR_SC</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_BREDR_SC</option>
+                </options>
+            </property>
+            <property name="ahi_transport">
+                <description>Transport used by Config Tool.</description>
+                <default>ENABLE_AHI_USB_HOST</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_AHI_USB_HOST</option>
+                    <option name="2">ENABLE_AHI_TRB</option>
+                </options>
+            </property>
+            <property name="enable_hid_selfie">
+                <description>Enables HID selfie mode</description>
+                <default>ENABLE_HID</default>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_HID</option>
+                </options>
+            </property>
+            
+            <property name="battery_operation">
+                <description>Enable Battery Charger</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_BATTERY_OPERATION ENABLE_CHARGER_V2 ENABLE_USB_TYPE_C</option>
+                    <option name="2"></option>
+                </options>
+            </property>
+            <property name="enable_linkkey_display">
+                <description>Enable option to display the link key of the connected device on the display. This ia a test feature for during development only.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_LINKKEY_DISPLAY</option>
+                </options>
+            </property>
+            <property name="enable_active_noise_cancelling">
+                <description>Enable Active Noise Cancelling Feature</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_ANC</option>
+                </options>
+            </property>
+            <property name="enable_anc_tuning_mode">
+                <description>Enables Active Noise Cancelling Feature and configures the Tuning Mode</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_ANC ENABLE_ANC_TUNING_MODE ENABLE_USB ENABLE_USB_AUDIO</option>
+                </options>
+            </property>
+            <property name="afh_update_method">
+                <description>This defines the Adaptive Frequency Hopping (AFH) mode to use when ENABLE_BROADCAST_AUDIO is enabled in enable_peer_device</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0"></option>
+                    <option name="1">AFH_UPDATE_METHOD_SYNC_TRAIN</option>
+                    <option name="2">AFH_UPDATE_METHOD_SCM</option>
+                </options>
+            </property>
+            <property name="enable_audio_clock">
+                <description>If the device supports variable audio clock speed then enabling this setting will allow configuration of the audio clock</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0"></option>
+                    <option name="1">ENABLE_AUDIO_CLOCK</option>
+                </options>
+            </property>
+            <property name="enable_audio_ttp">
+                <description>Enable TTP Latency Configuration</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">ENABLE_AUDIO_TTP</option>
+                </options>
+            </property>
+            <property name="sbc_encoder_conformance">
+                <description>Enable SBC Encoder Conformance</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="1">SBC_ENCODER_CONFORMANCE</option>
+                </options>
+            </property>
+            <property name="enable_voice_assistant">
+                <description>Enable Voice Assistant. Select ENABLE_AMA for Alexa Mobile Accessory</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0"></option>
+                    <option name="1">ENABLE_AMA GATT_AMA_SERVER</option>
+					<option name="2">ENABLE_BISTO</option>
+                </options>
+            </property>
+            <property name="enable_bisto_ble">
+                <description>Enable support for Bisto BLE</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0"></option>
+                    <option name="1">GATT_BISTO_COMM_SERVER GATT_BMS</option>
+                    <option name="2">GATT_BISTO_COMM_SERVER GATT_AMS_CLIENT GATT_AMS_PROXY GATT_ANCS_CLIENT GATT_ANCS_PROXY GATT_BMS</option>
+                </options>
+            </property>
+            <property name="enable_random_address">
+                <description>Enable Random Private Resolvable Address for BLE.Note:Enabling this feature could have impact in BLE connection for peer device which does not support resolution of random private resolvable address</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0"></option>
+                    <option name="1">ENABLE_RANDOM_ADDR</option>
+                </options>
+            </property>
+            <property name="enable_fast_pair">
+                <description>Enable Fast Pair Feature. Note:Enable GATT_FP_SERVER and ENABLE_RANDOM_ADDR when Fast pair feature is enabled.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0"></option>
+                    <option name="1">ENABLE_FAST_PAIR</option>
+                </options>
+            </property>
+            <property name="enable_downloadable_caps">
+                <description>This option enables the processing of the downloadable capability bundles configuration.</description>
+                <default/>
+                <alias>DEFS</alias>
+                <options>
+                    <option name="0">ENABLE_DOWNLOADABLE_CAPS</option>
+                </options>
+             </property>
+        </configuration>
+    </configurations>
+</project>

@@ -1,0 +1,658 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project path="">
+    <folder name="common">
+        <folder name="interface">
+            <folder name="slt">
+                <file path="../../common/interface/slt/apps_slt_ids.h" />
+                <file path="../../common/interface/slt/apps_fingerprint.h" />
+            </folder>
+            <folder name="app">
+                <folder name="mic_bias">
+                    <file path="../../common/interface/app/mic_bias/mic_bias_if.h" />
+                </folder>
+                <folder name="stream">
+                    <file path="../../common/interface/app/stream/stream_if.h" />
+                </folder>
+                <folder name="pio">
+                    <file path="../../common/interface/app/pio/pio_if.h" />
+                </folder>
+                <folder name="bitserial">
+                    <file path="../../common/interface/app/bitserial/bitserial_if.h" />
+                </folder>
+                <folder name="vm">
+                    <file path="../../common/interface/app/vm/vm_if.h" />
+                </folder>
+                <folder name="infrared">
+                    <file path="../../common/interface/app/infrared/infrared_if.h" />
+                </folder>
+                <folder name="sd_mmc">
+                    <file path="../../common/interface/app/sd_mmc/sd_mmc_if.h" />
+                </folder>
+                <folder name="file">
+                    <file path="../../common/interface/app/file/file_if.h" />
+                </folder>
+                <folder name="operator">
+                    <file path="../../common/interface/app/operator/operator_if.h" />
+                </folder>
+                <folder name="message">
+                    <file path="../../common/interface/app/message/subsystem_if.h" />
+                    <file path="../../common/interface/app/message/system_message.h" />
+                </folder>
+                <folder name="ps">
+                    <file path="../../common/interface/app/ps/ps_if.h" />
+                </folder>
+                <folder name="usb">
+                    <file path="../../common/interface/app/usb/usb_if.h" />
+                    <file path="../../common/interface/app/usb/usb_hub_if.h" />
+                </folder>
+                <folder name="feature">
+                    <file path="../../common/interface/app/feature/feature_if.h" />
+                </folder>
+                <folder name="ringtone">
+                    <file path="../../common/interface/app/ringtone/ringtone_if.h" />
+                    <file path="../../common/interface/app/ringtone/ringtone_notes.h" />
+                </folder>
+                <folder name="voltsense">
+                    <file path="../../common/interface/app/voltsense/voltsense_if.h" />
+                </folder>
+                <folder name="adc">
+                    <file path="../../common/interface/app/adc/adc_if.h" />
+                </folder>
+                <folder name="psu">
+                    <file path="../../common/interface/app/psu/psu_if.h" />
+                </folder>
+                <folder name="capacitive_sensor">
+                    <file path="../../common/interface/app/capacitive_sensor/capacitive_sensor_if.h" />
+                </folder>
+                <folder name="status">
+                    <file path="../../common/interface/app/status/status_if.h" />
+                </folder>
+                <folder name="led">
+                    <file path="../../common/interface/app/led/led_if.h" />
+                </folder>
+                <folder name="lcd">
+                    <file path="../../common/interface/app/lcd/lcd_if.h" />
+                </folder>
+                <folder name="bluestack">
+                    <file path="../../common/interface/app/bluestack/att_prim.h" />
+                    <file path="../../common/interface/app/bluestack/dm_prim.h" />
+                    <file path="../../common/interface/app/bluestack/l2cap_prim.h" />
+                    <file path="../../common/interface/app/bluestack/rfcomm_prim.h" />
+                    <file path="../../common/interface/app/bluestack/sdc_prim.h" />
+                    <file path="../../common/interface/app/bluestack/types.h" />
+                    <file path="../../common/interface/app/bluestack/bluetooth.h" />
+                    <file path="../../common/interface/app/bluestack/hci.h" />
+                    <file path="../../common/interface/app/bluestack/sds_prim.h" />
+                </folder>
+                <folder name="dormant">
+                    <file path="../../common/interface/app/dormant/dormant_if.h" />
+                </folder>
+                <folder name="uart">
+                    <file path="../../common/interface/app/uart/uart_if.h" />
+                </folder>
+                <folder name="charger">
+                    <file path="../../common/interface/app/charger/charger_if.h" />
+                </folder>
+                <folder name="partition">
+                    <file path="../../common/interface/app/partition/partition_if.h" />
+                </folder>
+                <folder name="image_upgrade">
+                    <file path="../../common/interface/app/image_upgrade/image_upgrade_if.h" />
+                </folder>
+                <folder name="audio">
+                    <file path="../../common/interface/app/audio/audio_if.h" />
+                </folder>
+            </folder>
+            <folder name="gen">
+                <folder name="k32">
+                    <file path="../../common/interface/gen/k32/test_tunnel_prim.h" />
+                    <file path="../../common/interface/gen/k32/appcmd_prim.h" />
+                </folder>
+            </folder>
+        </folder>
+    </folder>
+    <folder name="fw">
+        <folder name="src">
+            <folder name="customer">
+                <folder name="core">
+                    <folder name="init">
+                        <file path="../../fw/src/customer/core/init/init.c" />
+                        <file path="../../fw/src/customer/core/init/init_private.h" />
+                        <file path="../../fw/src/customer/core/init/init_usb_early_init.c" />
+                        <file path="../../fw/src/customer/core/init/init.h" />
+                    </folder>
+                    <folder name="trap_api">
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_charger.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_psu.c" />
+                        <file path="../../fw/src/customer/core/trap_api/csrtypes.h" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_operator.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_sched.h" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_capacitive_sensor.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_private.h" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_stream.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_extra.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_core_pio.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_bdaddr.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_message.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_uart.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_led.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_file.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_core_util.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api.h" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_sd_mmc.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_core.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_audio.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_bluestack.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_message_log.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_test_support.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_bitserial.c" />
+                        <file path="../../fw/src/customer/core/trap_api/trap_api_csb.c" />
+                        <file path="../../fw/src/customer/core/trap_api/panicdefs.h" />
+                    </folder>
+                    <folder name="portability">
+                        <file path="../../fw/src/customer/core/portability/portability.h" />
+                    </folder>
+                </folder>
+            </folder>
+            <folder name="core">
+                <folder name="ipc">
+                    <file path="../../fw/src/core/ipc/ipc_malloc.c" />
+                    <file path="../../fw/src/core/ipc/ipc_test.c" />
+                    <file path="../../fw/src/core/ipc/ipc_send.c" />
+                    <file path="../../fw/src/core/ipc/ipc.h" />
+                    <file path="../../fw/src/core/ipc/ipc_msg_types.h" />
+                    <file path="../../fw/src/core/ipc/ipc_mmu.c" />
+                    <file path="../../fw/src/core/ipc/ipc_bluestack.c" />
+                    <file path="../../fw/src/core/ipc/ipc_sched.c" />
+                    <file path="../../fw/src/core/ipc/ipc_init.c" />
+                    <file path="../../fw/src/core/ipc/ipc_trap_api.c" />
+                    <file path="../../fw/src/core/ipc/ipc_sched.h" />
+                    <file path="../../fw/src/core/ipc/ipc_uart.c" />
+                    <file path="../../fw/src/core/ipc/ipc_private.h" />
+                    <file path="../../fw/src/core/ipc/ipc_test_tunnel.c" />
+                    <file path="../../fw/src/core/ipc/ipc_sd_mmc.c" />
+                    <file path="../../fw/src/core/ipc/ipc_recv.c" />
+                    <file path="../../fw/src/core/ipc/ipc_fault_panic.c" />
+                    <file path="../../fw/src/core/ipc/ipc_deep_sleep.c" />
+                    <file path="../../fw/src/core/ipc/ipc_memory_access.c" />
+                    <file path="../../fw/src/core/ipc/ipc_stream.c" />
+                    <file path="../../fw/src/core/ipc/ipc_test_traps.c" />
+                    <file path="../../fw/src/core/ipc/ipc_prim.h" />
+                    <file path="../../fw/src/core/ipc/ipc_pio.c" />
+                </folder>
+                <folder name="itime">
+                    <file path="../../fw/src/core/itime/itime.h" />
+                </folder>
+                <folder name="pio">
+                    <file path="../../fw/src/core/pio/pio_set_levels_mask.c" />
+                    <file path="../../fw/src/core/pio/pio_get_levels_mask.c" />
+                    <file path="../../fw/src/core/pio/pio_set_directions_mask.c" />
+                    <file path="../../fw/src/core/pio/pio.h" />
+                    <file path="../../fw/src/core/pio/pio_private.h" />
+                    <file path="../../fw/src/core/pio/init_pio.c" />
+                    <file path="../../fw/src/core/pio/pio_set_internal_owners_mask.c" />
+                </folder>
+                <folder name="int">
+                    <file path="../../fw/src/core/int/int.h" />
+                    <file path="../../fw/src/core/int/configure_interrupt.c" />
+                    <file path="../../fw/src/core/int/interrupt_inc.asm" />
+                    <file path="../../fw/src/core/int/unconfigure_sw_interrupt.c" />
+                    <file path="../../fw/src/core/int/generate_sw_interrupt.c" />
+                    <file path="../../fw/src/core/int/init_int.c" />
+                    <file path="../../fw/src/core/int/configure_sw_interrupt_raw.c" />
+                    <file path="../../fw/src/core/int/int_private.h" />
+                    <file path="../../fw/src/core/int/swint.h" />
+                    <file path="../../fw/src/core/int/interrupt.asm" />
+                    <file path="../../fw/src/core/int/swint_private.h" />
+                    <file path="../../fw/src/core/int/swint_demux.c" />
+                    <file path="../../fw/src/core/int/configure_sw_interrupt.c" />
+                </folder>
+                <folder name="utils">
+                    <file path="../../fw/src/core/utils/utils_bits_and_bobs.h" />
+                    <file path="../../fw/src/core/utils/utils_event.h" />
+                    <file path="../../fw/src/core/utils/utils_patch.h" />
+                    <file path="../../fw/src/core/utils/utils_bitarray.h" />
+                    <file path="../../fw/src/core/utils/utils_fsm.h" />
+                    <file path="../../fw/src/core/utils/utils_jobq.h" />
+                    <file path="../../fw/src/core/utils/utils.h" />
+                    <file path="../../fw/src/core/utils/utils_bit.h" />
+                    <file path="../../fw/src/core/utils/utils_fault_panic.h" />
+                    <file path="../../fw/src/core/utils/utils_strdup.h" />
+                    <file path="../../fw/src/core/utils/utils_set.h" />
+                    <file path="../../fw/src/core/utils/utils_geometry.h" />
+                    <file path="../../fw/src/core/utils/utils_sll.h" />
+                </folder>
+                <folder name="longtimer">
+                    <file path="../../fw/src/core/longtimer/longtimer.h" />
+                    <file path="../../fw/src/core/longtimer/get_milli_time.c" />
+                    <file path="../../fw/src/core/longtimer/longtimer.c" />
+                    <file path="../../fw/src/core/longtimer/get_second_time.c" />
+                    <file path="../../fw/src/core/longtimer/get_deci_time.c" />
+                    <file path="../../fw/src/core/longtimer/longtimer_private.h" />
+                </folder>
+                <folder name="piodebounce">
+                    <file path="../../fw/src/core/piodebounce/piodebounce_private.h" />
+                    <file path="../../fw/src/core/piodebounce/piodebounce_sched.h" />
+                    <file path="../../fw/src/core/piodebounce/piodebounce.c" />
+                    <file path="../../fw/src/core/piodebounce/piodebounce.h" />
+                </folder>
+                <folder name="dorm">
+                    <file path="../../fw/src/core/dorm/dorm.h" />
+                    <file path="../../fw/src/core/dorm/dorm_config.c" />
+                    <file path="../../fw/src/core/dorm/dorm_private.h" />
+                    <file path="../../fw/src/core/dorm/dorm_get_kip_flags.c" />
+                    <file path="../../fw/src/core/dorm/dorm_kalimba.c" />
+                </folder>
+                <folder name="bigint">
+                    <file path="../../fw/src/core/bigint/bigint.h" />
+                    <file path="../../fw/src/core/bigint/bigint_imp.h" />
+                </folder>
+                <folder name="io">
+                    <file path="../../fw/src/core/io/io_map.h" />
+                    <file path="../../fw/src/core/io/io_defs.h" />
+                    <folder name="aura">
+                        <folder name="d01">
+                            <folder name="io">
+                                <file path="../../fw/src/core/io/aura/d01/io/io_map.h" />
+                                <file path="../../fw/src/core/io/aura/d01/io/io_defs.asm" />
+                                <file path="../../fw/src/core/io/aura/d01/io/io_defs.h" />
+                                <file path="../../fw/src/core/io/aura/d01/io/io_map.asm" />
+                            </folder>
+                        </folder>
+                    </folder>
+                    <file path="../../fw/src/core/io/io_slt_entry.h" />
+                    <file path="../../fw/src/core/io/io.h" />
+                    <file path="../../fw/src/core/io/io_defs.asm" />
+                </folder>
+                <folder name="led">
+                    <file path="../../fw/src/core/led/led_appcmd.c" />
+                    <file path="../../fw/src/core/led/led_appcmd.h" />
+                    <file path="../../fw/src/core/led/led_private.h" />
+                    <file path="../../fw/src/core/led/led.c" />
+                    <file path="../../fw/src/core/led/led_sched.h" />
+                    <file path="../../fw/src/core/led/led.h" />
+                </folder>
+                <folder name="id">
+                    <file path="../../fw/src/core/id/id_slt_entry.h" />
+                    <file path="../../fw/src/core/id/id.h" />
+                    <file path="../../fw/src/core/id/id.c" />
+                </folder>
+                <folder name="hal">
+                    <file path="../../fw/src/core/hal/hal_led.c" />
+                    <file path="../../fw/src/core/hal/hal_data_conv_access.h" />
+                    <file path="../../fw/src/core/hal/hal_led.h" />
+                    <file path="../../fw/src/core/hal/halauxio.h" />
+                    <file path="../../fw/src/core/hal/hal_data_conv_access.c" />
+                    <file path="../../fw/src/core/hal/hal_registers.h" />
+                    <file path="../../fw/src/core/hal/hal_data_conv_cal.c" />
+                    <file path="../../fw/src/core/hal/hal_delay_us.c" />
+                    <file path="../../fw/src/core/hal/hal_macros.h" />
+                    <file path="../../fw/src/core/hal/hal_bitserial.c" />
+                    <file path="../../fw/src/core/hal/halint.h" />
+                    <file path="../../fw/src/core/hal/haltime.h" />
+                    <file path="../../fw/src/core/hal/hal_data_conv.c" />
+                    <file path="../../fw/src/core/hal/hal_data_conv.h" />
+                    <file path="../../fw/src/core/hal/hal_cross_cpu_registers.h" />
+                    <file path="../../fw/src/core/hal/hal_transaction_types.h" />
+                    <folder name="aura">
+                        <folder name="d01">
+                            <folder name="hal">
+                                <file path="../../fw/src/core/hal/aura/d01/hal/hal_macros.h" />
+                            </folder>
+                        </folder>
+                    </folder>
+                    <file path="../../fw/src/core/hal/hal.h" />
+                    <file path="../../fw/src/core/hal/hal_bitserial.h" />
+                </folder>
+                <folder name="hydra">
+                    <file path="../../fw/src/core/hydra/hydra_panicids.h" />
+                    <file path="../../fw/src/core/hydra/hydra_types.h" />
+                    <file path="../../fw/src/core/hydra/hydra_trb.h" />
+                    <file path="../../fw/src/core/hydra/hydra_macros.h" />
+                    <file path="../../fw/src/core/hydra/hydra.h" />
+                    <file path="../../fw/src/core/hydra/hydra_faultids.h" />
+                    <file path="../../fw/src/core/hydra/hydra_patch.h" />
+                </folder>
+                <folder name="itime_kal">
+                    <file path="../../fw/src/core/itime_kal/itime_kal.c" />
+                    <file path="../../fw/src/core/itime_kal/itime_kal_private.h" />
+                    <file path="../../fw/src/core/itime_kal/itime_kal.h" />
+                </folder>
+                <folder name="cache">
+                    <file path="../../fw/src/core/cache/cache.c" />
+                    <file path="../../fw/src/core/cache/cache.h" />
+                </folder>
+                <folder name="excep">
+                    <file path="../../fw/src/core/excep/excep_private.h" />
+                    <file path="../../fw/src/core/excep/excep_test.c" />
+                    <file path="../../fw/src/core/excep/excep.h" />
+                    <file path="../../fw/src/core/excep/excep.c" />
+                </folder>
+                <folder name="pioint">
+                    <file path="../../fw/src/core/pioint/pioint_private.h" />
+                    <file path="../../fw/src/core/pioint/pioint_configure.c" />
+                    <file path="../../fw/src/core/pioint/pioint_init.c" />
+                    <file path="../../fw/src/core/pioint/pioint.h" />
+                </folder>
+                <folder name="pl_timers">
+                    <file path="../../fw/src/core/pl_timers/pl_timers.h" />
+                    <file path="../../fw/src/core/pl_timers/pl_timers.c" />
+                    <file path="../../fw/src/core/pl_timers/pl_timers_private.h" />
+                </folder>
+                <folder name="pmalloc">
+                    <file path="../../fw/src/core/pmalloc/pmalloc_debug_check_block.c" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_private.h" />
+                    <file path="../../fw/src/core/pmalloc/xpmalloc.c" />
+                    <file path="../../fw/src/core/pmalloc/zpmalloc.c" />
+                    <file path="../../fw/src/core/pmalloc/init_pmalloc.c" />
+                    <file path="../../fw/src/core/pmalloc/prealloc.c" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_available.c" />
+                    <file path="../../fw/src/core/pmalloc/xpmalloc_buffer.c" />
+                    <file path="../../fw/src/core/pmalloc/xpcopy.c" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_config.c" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_trace_pc.asm" />
+                    <file path="../../fw/src/core/pmalloc/xzpmalloc.c" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_set_monitor_limits.c" />
+                    <file path="../../fw/src/core/pmalloc/prightsize.c" />
+                    <file path="../../fw/src/core/pmalloc/pfree.c" />
+                    <file path="../../fw/src/core/pmalloc/pfree_set_free_list_ptr.c" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_debug_validate_free_list.c" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_debug_validate_pool_control.c" />
+                    <file path="../../fw/src/core/pmalloc/xprealloc.c" />
+                    <file path="../../fw/src/core/pmalloc/pcopy.c" />
+                    <file path="../../fw/src/core/pmalloc/psizeof.c" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc.h" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_config_P1.h" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_debug.h" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc_trace.h" />
+                    <file path="../../fw/src/core/pmalloc/pmalloc.c" />
+                </folder>
+                <folder name="trap_version">
+                    <file path="../../fw/src/core/trap_version/trap_version.h" />
+                    <file path="../../fw/src/core/trap_version/trap_version_slt_entry.h" />
+                </folder>
+                <folder name="memprot">
+                    <file path="../../fw/src/core/memprot/memprot.c" />
+                    <file path="../../fw/src/core/memprot/memprot.h" />
+                </folder>
+                <folder name="include">
+                    <file path="../../fw/src/core/include/macros.h" />
+                    <file path="../../fw/src/core/include/faultids.h" />
+                    <file path="../../fw/src/core/include/hal_utils.h" />
+                    <file path="../../fw/src/core/include/kaldwarfregnums.h" />
+                    <file path="../../fw/src/core/include/panicids.h" />
+                    <file path="../../fw/src/core/include/types.h" />
+                    <file path="../../fw/src/core/include/dwarf_constants.h" />
+                    <file path="../../fw/src/core/include/memory_map.h" />
+                    <file path="../../fw/src/core/include/chip.h" />
+                    <file path="../../fw/src/core/include/bits.h" />
+                    <file path="../../fw/src/core/include/patch.h" />
+                </folder>
+                <folder name="panic">
+                    <file path="../../fw/src/core/panic/panic.h" />
+                    <file path="../../fw/src/core/panic/panic_private.h" />
+                    <file path="../../fw/src/core/panic/panic.c" />
+                    <file path="../../fw/src/core/panic/panic_on_assert.c" />
+                    <file path="../../fw/src/core/panic/panic_comms.c" />
+                </folder>
+                <folder name="sched">
+                    <file path="../../fw/src/core/sched/sched.h" />
+                    <file path="../../fw/src/core/sched/runlevels.h" />
+                </folder>
+                <folder name="include_fw">
+                    <file path="../../fw/src/core/include_fw/hal_macros_divert.h" />
+                    <file path="../../fw/src/core/include_fw/assert.h" />
+                </folder>
+                <folder name="optim">
+                    <file path="../../fw/src/core/optim/optim_private.h" />
+                    <file path="../../fw/src/core/optim/mempack.c" />
+                    <file path="../../fw/src/core/optim/uint64_divmod31_opt.asm" />
+                    <file path="../../fw/src/core/optim/udiv3216.c" />
+                    <file path="../../fw/src/core/optim/optim.h" />
+                </folder>
+                <folder name="timed_event">
+                    <file path="../../fw/src/core/timed_event/rtime_types.h" />
+                    <file path="../../fw/src/core/timed_event/rtime.h" />
+                    <file path="../../fw/src/core/timed_event/timed_event.h" />
+                </folder>
+                <folder name="sched_oxygen">
+                    <file path="../../fw/src/core/sched_oxygen/sched_oxygen.h" />
+                    <file path="../../fw/src/core/sched_oxygen/sched_oxygen.c" />
+                    <file path="../../fw/src/core/sched_oxygen/sched_oxygen_private.h" />
+                    <file path="../../fw/src/core/sched_oxygen/sched_oxygen_cancel.c" />
+                    <file path="../../fw/src/core/sched_oxygen/sched_oxygen_priority.h" />
+                </folder>
+                <folder name="mmu">
+                    <file path="../../fw/src/core/mmu/mmu.h" />
+                    <file path="../../fw/src/core/mmu/mmu_proc_port.h" />
+                    <file path="../../fw/src/core/mmu/memmap.h" />
+                </folder>
+                <folder name="buffer">
+                    <file path="../../fw/src/core/buffer/buf_raw_read_map_16bit_be.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_map_16bit.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_write_unmap.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_write_map_16bit.c" />
+                    <file path="../../fw/src/core/buffer/buffer_msg_ptr_access.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_unmap.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_map_16bit_be.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_only_map_16bit.c" />
+                    <file path="../../fw/src/core/buffer/buf_init_handle.c" />
+                    <file path="../../fw/src/core/buffer/buffer.h" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_map_8bit_save_state.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_update_tail_free.c" />
+                    <file path="../../fw/src/core/buffer/buffer_private.h" />
+                    <file path="../../fw/src/core/buffer/buffer_msg.h" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_map_8bit.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_only_unmap.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_update_restore_state.c" />
+                    <file path="../../fw/src/core/buffer/buffer_msg.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_write_map_8bit_save_state.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_only_map_8bit_save_state.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_map_16bit_save_state.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_map_8bit.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_only_map_8bit.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_only_map_16bit_be.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_write_map_8bit.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_unmap.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_map_8bit_save_state.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_write_map_16bit_save_state.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_update_restore_state.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_map_16bit_save_state.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_write_map_16bit.c" />
+                    <file path="../../fw/src/core/buffer/buf_raw_read_write_map_16bit_be.c" />
+                </folder>
+                <folder name="pio_cfg">
+                    <file path="../../fw/src/core/pio_cfg/pio_cfg.h" />
+                </folder>
+                <folder name="timed_event_oxygen">
+                    <file path="../../fw/src/core/timed_event_oxygen/timed_event_oxygen.h" />
+                </folder>
+                <folder name="crt">
+                    <file path="../../fw/src/core/crt/crt0.asm" />
+                    <file path="../../fw/src/core/crt/crt0_rst_maxim.asm" />
+                </folder>
+                <folder name="slt">
+                    <file path="../../fw/src/core/slt/slt_private.h" />
+                    <file path="../../fw/src/core/slt/slt.h" />
+                    <file path="../../fw/src/core/slt/slt_entry.c" />
+                    <file path="../../fw/src/core/slt/slt_header.asm" />
+                </folder>
+                <folder name="fault">
+                    <file path="../../fw/src/core/fault/fault_db.c" />
+                    <file path="../../fw/src/core/fault/fault_private.h" />
+                    <file path="../../fw/src/core/fault/fault_itime.h" />
+                    <file path="../../fw/src/core/fault/fault_comms.c" />
+                    <file path="../../fw/src/core/fault/fault.h" />
+                    <file path="../../fw/src/core/fault/fault_sched.h" />
+                    <file path="../../fw/src/core/fault/fault_appcmd.h" />
+                    <file path="../../fw/src/core/fault/fault.c" />
+                    <file path="../../fw/src/core/fault/fault_appcmd.c" />
+                </folder>
+                <folder name="kal_utils">
+                    <file path="../../fw/src/core/kal_utils/kal_utils_asm.asm" />
+                    <file path="../../fw/src/core/kal_utils/kal_utils.c" />
+                    <file path="../../fw/src/core/kal_utils/kal_utils.h" />
+                </folder>
+                <folder name="appcmd">
+                    <file path="../../fw/src/core/appcmd/appcmd_private.h" />
+                    <file path="../../fw/src/core/appcmd/appcmd_sched.h" />
+                    <file path="../../fw/src/core/appcmd/appcmd.h" />
+                    <file path="../../fw/src/core/appcmd/appcmd_call_function.asm" />
+                    <file path="../../fw/src/core/appcmd/appcmd.c" />
+                </folder>
+                <folder name="hydra_log">
+                    <file path="../../fw/src/core/hydra_log/hydra_log_firm_modules.h" />
+                    <file path="../../fw/src/core/hydra_log/hydra_log_firm.h" />
+                    <file path="../../fw/src/core/hydra_log/hydra_log_firm.c" />
+                    <file path="../../fw/src/core/hydra_log/hydra_log.h" />
+                    <file path="../../fw/src/core/hydra_log/hydra_log_disabled.h" />
+                    <file path="../../fw/src/core/hydra_log/hydra_log_soft.h" />
+                    <file path="../../fw/src/core/hydra_log/hydra_log_soft.c" />
+                </folder>
+                <folder name="led_cfg">
+                    <file path="../../fw/src/core/led_cfg/led_cfg_utils.c" />
+                    <file path="../../fw/src/core/led_cfg/led_cfg_private.h" />
+                    <file path="../../fw/src/core/led_cfg/led_cfg.c" />
+                    <file path="../../fw/src/core/led_cfg/led_cfg.h" />
+                </folder>
+            </folder>
+            <folder name="bt">
+                <folder name="bt">
+                    <file path="../../fw/src/bt/bt/bt_faultids.h" />
+                    <file path="../../fw/src/bt/bt/bluestack_types.h" />
+                    <file path="../../fw/src/bt/bt/bt_panicids.h" />
+                </folder>
+                <folder name="bluestack_if">
+                    <file path="../../fw/src/bt/bluestack_if/bluestack_if.h" />
+                </folder>
+            </folder>
+            <folder name="nfc">
+                <folder name="nfc">
+                    <file path="../../fw/src/nfc/nfc/nfc_faultids.h" />
+                    <file path="../../fw/src/nfc/nfc/nfc_panicids.h" />
+                </folder>
+            </folder>
+        <folder name="gen">
+                <folder name="customer">
+                    <folder name="core">
+                        <folder name="trap_api">
+                            <file path="../../fw/src/gen/customer/core/trap_api/message_.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/transform_.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/voltsense.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/message.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/pio.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/os.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/feature.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/csb.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/status.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/util.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/led.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/test.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/transform.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/file.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/crypto.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/dormant.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/usb_hub.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/bitserial_api.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/sdmmc.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/sram.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/api.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/operator.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/ps.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/nfc.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/operator_.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/i2c.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/otp.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/source.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/psu.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/inquiry.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/vm_.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/bdaddr_.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/adc.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/audio_anc.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/font.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/usb.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/charger.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/audio_power.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/audio_pwm.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/sink_.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/kalimba.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/infrared.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/imageupgrade.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/capacitivesensor.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/native.h" />
+                            <folder name="gen">
+                                <file path="../../fw/src/gen/customer/core/trap_api/gen/trap_api_ipc_glue.c" />
+                            </folder>
+                            <file path="../../fw/src/gen/customer/core/trap_api/panic.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/source_.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/vm.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/stream.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/audio_clock.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/codec_.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/boot.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/csb_.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/micbias.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/sink.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/lcd.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/partition.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/audio_mclk.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/host.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/energy.h" />
+                            <file path="../../fw/src/gen/customer/core/trap_api/loader.h" />
+                        </folder>
+                    </folder>
+                </folder>
+                <folder name="core">
+                    <folder name="ipc">
+                        <folder name="gen">
+                            <file path="../../fw/src/gen/core/ipc/gen/ipc_trap_api_signals.h" />
+                            <file path="../../fw/src/gen/core/ipc/gen/ipc_trap_api_prims.h" />
+                        </folder>
+                    </folder>
+                    <folder name="slt">
+                        <file path="../../fw/src/gen/core/slt/slt_entry_subsystems.h" />
+                        <file path="../../fw/src/gen/core/slt/slt_data_subsystems.h" />
+                    </folder>
+                    <folder name="itime_kal">
+                        <file path="../../fw/src/gen/core/itime_kal/itime_subsystems.h" />
+                    </folder>
+                    <folder name="hydra_log">
+                        <file path="../../fw/src/gen/core/hydra_log/hydra_log_subsystems.h" />
+                    </folder>
+                    <folder name="sched_oxygen">
+                        <file path="../../fw/src/gen/core/sched_oxygen/sched_subsystem.h" />
+                        <file path="../../fw/src/gen/core/sched_oxygen/bg_int_subsystem.h" />
+                    </folder>
+                    <folder name="trap_version">
+                        <file path="../../fw/src/gen/core/trap_version/trap_version_supported.c" />
+                    </folder>
+                </folder>
+                <file path="../../fw/src/gen/build_defs.h" />
+                </folder>
+        </folder>
+        <folder name="config">
+            <folder name="tool">
+                <file path="../../fw/config/tool/link_script_aura_common.ld" />
+                <file path="../../fw/config/tool/link_script_aura_p1.ld" />
+                <file path="../../fw/config/tool/link_script_aura_p1_d01.ld" />
+                <file path="../../fw/config/tool/link_script_common.ld" />
+            </folder>
+        </folder>
+        </folder>
+    <configurations>
+        <configuration name="makefile_project" options="clean|build|default">
+            <devkitConfiguration>makefile_project</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <property name="BUILD_TYPE">MAKEFILE</property>
+            <property name="CLEAN_ARGUMENTS">clean</property>
+            <property name="MAKEFILE_TO_CALL">Makefile</property>
+            <property name="DBG_CORE">app/p1</property>
+            <property name="OUTPUT">aura_app_p1</property>
+            <property name="DEFS">ENABLE_SHALLOW_SLEEP_TIMING INSTALL_L2CAP_STREAM P0_PROCESSOR=0 SCHED_NO_EXTERNAL_MSG_SUPPORT CHIP_HAS_BUS_MESSAGE_STATUS_REGISTER=1 TRAPSET_AUDIO_MCLK=1 TRAPSET_BLUESTACK=1 PFREE_CHECK_ALREADY_FREED HOSTIO_USB_HIGH_SPEED_SUPPORT NOT_YET_VM_STREAM INSTALL_VM_MODULE SMALLOC_RECORD_REQUESTS HOSTIO_USB_HYDRA_B_254138_LATE_EVENT_DATA SDIOEMB_FDRIVERS_MAX=1 FAULT_MODULE_PRESENT INT_MODULE_PRESENT COPY_P1_CODE_INTO_TCM SDIO_CLOCK_FREQ_MMC_52MHZ=32000000 TRAPSET_ATT=1 CHIP_HAS_SHALLOW_SLEEP_REGISTERS=1 DUMMY_BIST_DEF=0 MIN_PATCH_USE_COUNT_TO_ENFORCE=2 SCHED_NO_TIMER_PREEMPTION CHIP_REVISION_D01 TRAPSET_XIO=0 HYDRA_LOG_CHAR_BUF_SIZE=512 FSM_DEBUG_NAMES __KALIMBA__ INSTALL_STREAM_MODULE CHIP_NUMBER_OF_BUS_INTERRUPTS=16 TRAPSET_USB=1 CSR_INTERNAL_COMMENTS PIO_MODULE_PRESENT KAL_ARCH4 TRAPSET_BLE3DD=0 STACK_OVERRUN_PROTECTION_BYTES=256 HYDRA_OS_BUILD TRAPSET_CORE=1 PL_TIMERS_MODULE_PRESENT FILESYSTEM_LE32 PROCESSOR_P1 CHIP_NUM_SQIF_BUSES=2 CHIP_HAS_KA_PIO=1 NOT_YET_VM_MESSAGE CHIP_HAS_PIO_MUX_CONTROL=0 HYDRA_SSSM_IS_A_SCHEDULER_TASK EFUSE_ENFORCE_PATCH_USE_COUNT CHIP_SQIF_COUNT=1 ALLOW_MIC_BIAS_VOLTAGE_CONFIGURATION SUBSYSTEM_APPS SDIOEMB_SLOTS_MAX=NUMBER_OF_SD_SLOTS CHIP_HAS_WRITABLE_FILESYSTEM=1 BLUESTACK_HOST_IS_APPS TRAPSET_LDRUPGRADE=0 TRAPSET_IIC=1 I2C_USE_HAL SMALLOC_TRACE_OWNER_PC_ONLY KAL_UTILS_MODULE_PRESENT CHIP_HAS_USB_HOST_HARDWARE=0 MMU_LOG_PAGE_BYTES=7 TRAPSET_AUDIO_ANC=1 HOSTIO_USB_VM INSTALL_USB_STREAM INCLUDE_MBLK_DMA_SUPPORT DEBUG_PACKETISER_COLLECT_STATS TRAPSET_IIR=1 HOSTIO_USB_TX_EP_STALL_WA CHIP_HAS_PERMANENTLY_MAPPED_MMU=1 SUBSYS_ID=4 TRAPSET_RTSCTS=0 CHIP_HAS_BUS_INTERRUPT_GENERATE_HW=1 FW_UNIT_TEST KEEP_ACCMD_HISTORY TRAPSET_HOSTSTREAM=0 TRAPSET_SHUNT=0 TRB_FIRMWARE_LOG CHIP_HAS_AUX_DATA_CONV=0 TRANSPORT_USER PMALLOC_TRACE_OWNER_PC_ONLY CHIP_HAS_BTSS_ZEAGLE_IP=0 SUBMSG_PANIC_ON_FAILURE SYS_CTRL_IN_PAD_IDX=0 HOSTIO_USB_VENDOR_REQ_SUPPORT HAVE_32BIT_DATA_WIDTH SMALLOC_POOL_SIZE_BYTES=6592 TRAPSET_PARTITION=0 CHIP_HAS_HARDWARE_SECURITY_KEYS INSTALL_REGION_STREAM CHIP_HAS_BIGENDIAN_TX_BUS=0 ID_MODULE_PRESENT NUM_OF_LED_PADS=6 PMALLOC_FIXED_CONFIG_ONLY CSR_INTERNAL_DEFS LONGTIMER_MODULE_PRESENT PMALLOC_DONT_COMBINE_POOLS TRAPSET_CRYPTO=1 NOT_YET_VM_USB IPC_MODULE_PRESENT TRAPSET_AUDIO_PWM=0 OPTIM_MODULE_PRESENT SUBMSG_APP_MMU SDIO_CLOCK_FREQ_NORMAL_SPD=16000000 SLT_MODULE_PRESENT INCLUDE_MBLK_METADATA_SUPPORT INSTALL_VM_STREAM_SUPPORT NOT_YET_UPDATE_FOR_D01_B_202607 BIGINT_64BIT_INTRINSIC OS_OXYGOS CHIP_HAS_CLEAN_SHALLOW_SLEEP_CLOCK_STOP_THAT_DEFAULTS_OFF=1 CRT_MODULE_PRESENT TRAPSET_SRAM=0 DISABLE_EVT INSTALL_FAULT_TEST INSTALL_FILE_STREAM HAL_MODULE_PRESENT CACHE_MODULE_PRESENT BIGINT_64BIT_LITTLE_ENDIAN INSTALL_RFCOMM_STREAM TRAPSET_NFC=0 TRAP_VERSION_MODULE_PRESENT CHIP_FAMILY_AURA APPCMD_MODULE_PRESENT CHIP_DEF_SDIO_HOST_DOESNT_SUPPORT_SUB_DWORD_ACCESS_B_182305 TRAPSET_RFCOMM=1 FIRMWARE_PUTCHAR_LOG OPTIM_UINT64_DIVMOD31 MMU_NUM_HANDLES=102 TRAPSET_AUXDAC=0 LED_CFG_MODULE_PRESENT DMA_NUMBER_OF_QUEUES=2 TRAPSET_OTP=0 TRAPSET_ENCODE=1 PIODEBOUNCE_MODULE_PRESENT THIS_PROCESSOR=P1_PROCESSOR TRAPSET_CSB=1 CHIP_HAS_MMU_BIG_ENDIAN_MAPPING=0 MIN_PATCH_USE_COUNT_TO_ENFORCE_AURA2P1=0 TRAPSET_REFORMATSQIF=0 CHIP_HAS_PIO_PAD_CONTROL=0 P1_PROCESSOR=1 TRAPSET_IICSTREAM=1 DEFAULT_LED0_PIO=66 INSTALL_HYDRA_LOG HAVE_P1_ACCESS_CONTROL IO_DEFS_LIMIT_MODULES TRAPSET_PROFILE=1 TRAPSET_CAPACITIVE_SENSOR=0 TRAPSET_BITSERIAL=1 HYDRA_BITSERIAL FILE_MEMMAPPED_BACK_END TRAPSET_STATUS=1 INSTALL_WAKE_ON_AUDIO TRAPSET_LCD=0 KALIMBA_BUILD ENABLE_USB_DEVICE TRAPSET_KALIMBA=1 NUMBER_OF_SD_SLOTS=1 NUM_OF_LED_CTRLS=6 BLUELAB SIFLASH_STOP_P1_WHILST_BG_CMD TRAPSET_AMUXCLOCK=0 HOSTIO_USB_MULTIPLE_CONFIGURATION_SUPPORT EXCEP_MODULE_PRESENT TRAPSET_STREAM=1 PIOS_PER_BANK=32 TRAPSET_VOICE=1 CHIP_INSTALL_BITSERIAL TRAPSET_SD_MMC=0 HYDRA_LOG_MODULE_PRESENT HAVE_NUMBER_OF_BITSERIALS=2 MEMPROT_MODULE_PRESENT FILESERV_MMU_BUFFER_SIZE=256 HOSTIO_USB_ENDPOINT_OVERFLOW_PROTECTION TRAPSET_USB_HUB=1 MULTIPLE_FEATURES_ENABLED_BY_ONE_FEATURE TRAPSET_AUDIO=1 AUDIO_CORE_OFFLOAD_SUPPORT L2CAP_LARGE_BUFFER_SIZE=2048 DORM_MODULE_PRESENT TRAPSET_BC7=0 SMALLOC_STATS HYDRA_SW_PATCH_DISABLE PSFLASH_INTERFACE=0 HOSTIO_USB_HYDRA_B_135943_TX_MAP_NEXT_PAGE SDIO_CLOCK_FREQ_HIGH_SPD=32000000 TRAPSET_FONT=0 TRAPSET_HIDDONGLE=0 SIFLASH_CFG_CCP TRAPSET_FASTPIPE=0 ENABLE_SUBSYSTEM_INFO_REPORT TRAPSET_HOST=1 CHIP_HAS_PACKETISED_BT_BUFFERS=0 TRAPSET_PSU=1 TRAPSET_SPIFLASH=0 MMU_WINDOW_ADDR_BITS_PER_BUFFER=20 CHIP_HAS_SHARED_RAM=1 TRAPSET_UART=1 CHIP_HAS_BUS_PROC_STREAM_MODULE=1 SDIOEMB_FDEVS_MAX=1 TRAPSET_CHARGERMESSAGE=1 CHIP_AURA SMALLOC_RECORD_LENGTHS TRAPSET_CHARGER2=0 COPY_P0_CODE_INTO_TCM HAVE_USB TRAPSET_MICBIAS=1 INSTALL_2LE SDIO_CLOCK_FREQ_MMC_26MHZ=16000000 HYDRA_FSM_DEBUG USB_DEVICE_CLASS_REMOVE_CHARGING CONFIG_MMU_FREELIST_MAX_SIZE=196 BUFFER_MODULE_PRESENT TRAPSET_TEST=1 PRIM_LOG_BUF_SIZE=1024 CHIP_HAS_NFC=0 IO_MODULE_PRESENT TRAPSET_NATIVE=0 EFUSE_STOPDEAD_BIT_DISABLE BLUESTACK_TYPES_INT_TYPE_FILE="bt/bt/bluestack_types.h" __KALIMBA32__ PANIC_MODULE_PRESENT NUMBER_OF_PIOS=72 USB_DEVICE_CLASS_REMOVE_MASS_STORAGE CHIP_HAS_BANKED_BUS_INTERRUPTS=1 TRAPSET_DECODE=1 SD_HOST_BCLK_TARGET_MHZ=40 LED_MODULE_PRESENT TRAPSET_BDADDR=1 MMU_DATA_RAM_SIZE_BYTES=24960 TRAPSET_PIOEX1=0 FSM_NAME_LOGGING CHIP_HAS_BATTERY_CHARGER_SUPPORT=1 USE_BITFIELDS PMALLOC_RECORD_LENGTHS TRAPSET_IIR16BIT=1 INSTALL_FILE_MODULE TRAPSET_CHARGER=1 TRAPSET_FILE=1 FEATURES_ENABLED_BY_PRODUCT_CODE ENFORCE_PRODUCT_CODE_CHECK INSTALL_IIC_STREAM PMALLOC_MODULE_PRESENT INSTALL_IMAGE_UPGRADE PMALLOC_STATS TRAPSET_OPERATOR=1 HYDRA_LOG_BUF_SIZE=256 HOSTIO_USB_ENABLE_SHADOW_ISOC_BUF TRAPSET_IMAGEUPGRADE=1 CCP_CLOCK_CONTROL=1 LOG_IRQS USE_LOCAL_HYDRA_FILESYSTEM INSTALL_ATT_STREAM SCHED_OXYGEN_MODULE_PRESENT ITIME_KAL_MODULE_PRESENT CHIP_HAS_GENERIC_WINDOW_HW=0 PIOINT_MODULE_PRESENT ENFORCE_PRODUCT_CODE_SECURITY_CHECK INSTALL_DLE TRAPSET_WAKE_ON_AUDIO=1 TRAPSET_INFRARED=0 CHIP_HAS_PWM_OUTPUTS=0 PSFLASH_ENABLE_ENCRYPTION=1 L2CAP_DEFAULT_BUFFER_SIZE=1024 CHIP_HAS_DMA_DATA_CORRUPT_ISSUE_B289722=1 TRAPSET_ENERGY=1 MAX_REMOTE_MMU_TEST_INDEX=3 CHIP_HAS_XIO=0 TRAPSET_LED=1 TRANS_AUDIO_USE_SURROGATE_BUFFERS</property>
+            <property name="INCPATHS">core/include_fw ../../common/interface ../../common/interface/app customer/core customer/apps customer/libs gen/customer/core customer/core customer/apps customer/libs gen/customer/core core core/include gen/core bt customer/core/trap_api gen/customer/core/trap_api customer/core gen/customer/core customer/core/trap_api gen/customer/core/trap_api customer/core gen/customer/core .</property>
+            <property name="PREINCLUDES">gen/build_defs.h</property>
+            <property name="CHIP_TYPE">qcc512x_qcc302x</property>
+        </configuration>
+    </configurations>
+</project>

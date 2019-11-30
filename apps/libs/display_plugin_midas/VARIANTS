@@ -1,0 +1,7 @@
+
+VARIANTS := 
+
+# Default has scrolling turned on
+CFLAGS := -DENABLE_SCROLL
+# Include DEBUG, enables debug prints
+CFLAGS_debug := -DENABLE_SCROLL -DDEBUG_PRINT_ENABLED

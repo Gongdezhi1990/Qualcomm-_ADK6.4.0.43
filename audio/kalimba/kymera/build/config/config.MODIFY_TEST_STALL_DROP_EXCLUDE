@@ -1,0 +1,24 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions to exclude the test_stall_drop capability from a build
+# i.e. undo config.MODIFY_TEST_STALL_DROP
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+-TEST_STALL_DROP
+
+# List of global include paths
+%list ALL_INCDIRS
+
+
+# List of libraries to build
+%list CFG_LIBS
+-capabilities/test_stall_drop/test_stall_drop
+

@@ -1,0 +1,25 @@
+file=audio1
+
+# Select PIOs for I2S interface 1: SCK, WS, MCLK, SD_OUT, SD_IN.
+Pcm1PioConfig = [3E 3D 36 3A 38]
+
+CoreEnable = [00]
+
+CodecOutputDisableTimeout = 59000000
+
+DigMic0PioConfig = [FF FF]
+DigMic1PioConfig = [02 03]
+DigMic2PioConfig = [FF 03]
+
+
+DigMic0G722FilterEnable = true
+DigMic0G722FirEnable = true
+DigMic1G722FilterEnable = true
+DigMic1G722FirEnable = true
+
+DigMic0ClockRate = 4000
+DigMic1ClockRate = 4000
+
+IsAncIirFilter16k = true
+
+AncEnableDelay = 300

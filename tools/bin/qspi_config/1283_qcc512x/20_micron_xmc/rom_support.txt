@@ -1,0 +1,17 @@
+Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+All Rights Reserved.
+Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+The following devices have ROM support and do not need MIB keys:
+
+Micron MT25QU128ABA
+
+
+XMC flash parts use alternative suspend/resume commands. The Application
+filesystem (fw_cfg_filesystem) on QCC512x devices equipped with XMC XM25QU64A
+flash parts must contain the following entry. This key must not be set on
+QCC512x devices equipped with Micron MT25QU128ABA flash parts.
+
+SiflashSuspendResumeCommands = 0xb030b030

@@ -1,0 +1,14 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Stre ROM top-level config for kalsim testing, including kalcmd2
+# (this should eventually be folded into the main _kalsim config)
+
+# kalsim_stre_audio looks like v02 hardware
+%include config.stre_rom_v02_kalsim
+%include config.MODIFY_HYDRA_KALSIM_KALCMD2
+
+%include config.MODIFY_HYDRA_RELEASE

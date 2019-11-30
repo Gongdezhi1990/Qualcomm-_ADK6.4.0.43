@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project path="">
+    <file path="../../../../../audio/kalimba_ROM_4786/kymera/prebuilt_dkcs/stre_rom_v02_release/download_aec_reference.edkcs" />
+    <file path="../../../../../audio/kalimba_ROM_4786/kymera/prebuilt_dkcs/stre_rom_v02_release/download_aptx_demux.edkcs" />
+    <file path="../../../../../audio/kalimba_ROM_4786/kymera/prebuilt_dkcs/stre_rom_v02_release/download_async_wbs.edkcs" />
+    <file path="../../../../../audio/kalimba_ROM_4786/kymera/prebuilt_dkcs/stre_rom_v02_release/download_switched_passthrough_consumer.edkcs" />
+    <file path="../../../../../audio/kalimba_ROM_4786/kymera/prebuilt_dkcs/stre_rom_v02_release/download_aptx_decode.edkcs" />
+    <file path="../../../../../audio/kalimba_ROM_4786/kymera/prebuilt_dkcs/stre_rom_v02_release/download_anc_tuning.edkcs" />
+    <file path="../../../../../audio/kalimba_ROM_4786/kymera/prebuilt_dkcs/stre_rom_v02_release/download_aptx_adaptive_decode.edkcs" />
+    <file path="../../../../../audio/kalimba_ROM_4786/kymera/prebuilt_dkcs/stre_rom_v02_release/download_aptx_adaptive_demux.edkcs" />
+    <file path="../../../../../audio/kalimba_ROM_4786/kymera/prebuilt_dkcs/stre_rom_v02_release/download_rtp_decode.edkcs" />
+    <configurations>
+        <configuration name="filesystem" options="build|deploy|finalBuild">
+            <devkitConfiguration>filesystem</devkitConfiguration>
+            <devkitGroup>kitres://{BBAC163C-41BE-4ce7-B236-236F15FF18CA}</devkitGroup>
+            <deployProject>deploy</deployProject>
+            <property name="BUILD_TYPE" />
+            <property name="DBG_CORE" />
+            <property name="DEFS" />
+            <property name="FS_ROOT">..\customer_ro_filesystem</property>
+            <property name="INCPATHS" />
+            <property name="LIBPATHS" />
+            <property name="LIBS" />
+            <property name="OUTPUT" />
+            <property name="OUTPUT_TYPE" />
+            <property name="PRESERVED_LIBS" />
+            <property name="QUICKCHARGE_CONFIG">../../quick_charge_config/smb1352_default.xml</property>
+            <property name="STRIP_SYMBOLS" />
+            <property name="TYPE">customer_ro</property>
+            <property name="system_label">QCC512X_CONFIG</property>
+        </configuration>
+    </configurations>
+</project>

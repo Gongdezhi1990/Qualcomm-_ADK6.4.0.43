@@ -1,0 +1,34 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# definitions for downloadable sco send
+
+%cpp
+#
+# Which components do we want to include on this chip?
+#
+INSTALL_SCO
+INSTALL_PLC100
+
+#
+# Flags used by modules used by SCO
+#
+WBS_DECOUPLED
+
+# SCO-specific extra debug information (e.g. counters)
+SCO_DEBUG
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+SCO_RCV
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/sco_fw/sco_fw
+capabilities/sco_nb/sco_nb

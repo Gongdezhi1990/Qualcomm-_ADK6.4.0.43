@@ -1,0 +1,115 @@
+<ModuleData Name="Sink_USB">
+    <!--Definitions for sink USB module-->
+    <ConfigGroup Id="USB RO" ShortId="sink_usb_readonly" Node="Basic">
+        
+        <ConfigItem 
+            Id="USB Audio Always Routed"
+            ShortId="audio_always_on"
+            Desc="When set the USB audio is routed even when it is not in use."
+            Type="bool"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='usb']"
+            DefaultValue="false" />
+
+        <ConfigItem
+            Id="USB Audio Paused When Source Switched"
+            ShortId="pause_when_switching_source"
+            Desc="When set the USB audio is paused when switching from USB to another source."
+            Type="bool"
+            Size="1"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='usb']"
+            DefaultValue="false" />
+
+        <ConfigItem
+            Id="USB Plug-in Type"
+            ShortId="plugin_type"
+            Desc="Sets the USB operating mode."
+            Type="enum"
+            Size="3"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='usb']"
+            DefaultValue="Music">
+            <enum key="Music"
+                  value="0"/>
+            <enum key="Voice Narrowband"
+                  value="1"/>
+            <enum key="Voice Wideband"
+                  value="2"/>
+            <enum key="Not Available 1"
+                  value="3"/>
+            <enum key="Not Available 2"
+                  value="4"/>
+        </ConfigItem>
+
+        <ConfigItem
+            Id="USB Voice Plug-in Index"
+            ShortId="plugin_index"
+            Desc="Specifies the CVC plug-in to be used for Voice operating mode."
+            Type="enum"
+            Size="4"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='usb']"
+            DefaultValue="CVC Headset 1-Mic">
+            <List use="cvc_plugins_available"/>
+            <BuildVariant HwVariant="All -R13568v4 -R13568v4_A05 -H13672v2 -CE446_CE692 -CF376_CE692 -CF376_CE692H3 -CF376_H13732 -CF376_CE826 -CF376_CF212 -CF376_CF429 -CF376_CF440 -CF376_CG724 -CF376_CF897 -QCC3024-AA_DEV-BRD-R2-AA -QCC3034-AA_DEV-BRD-R2-AA -QCC5124-AA_DEV-BRD-R2-AA -QCC3020-AA_DEV-BRD-R2-AA -CF133 -CF133_SQIF -CG793 -CG437 -QCC3021-AA_DEV-BRD-R2-AA -QCC3031-AA_DEV-BRD-R2-AA -QCC5120-AB_DEV-BRD-R2-AA -QCC5126-AB_DEV-BRD-R2-AA -QCC5127-AA_DEV-BRD-R2-AA -QCC5127-AB_DEV-BRD-R2-AA -20-CE680-H1 -20-CE679-H1 -20-CE678-H1" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="CVC Handsfree 1-Mic"/>
+            <BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE678-H1 R13568v4 R13568v4_A05 H13672v2 CE446_CE692 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA CF133 CF133_SQIF CG793 CG437 QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="CVC Speaker 1-Mic"/>
+        </ConfigItem>
+
+        <ConfigItem
+            Id="Attach Timeout [s]"
+            ShortId="attach_timeout"
+            Desc="If after attaching the USB it does not enumerate within the attach timeout, in seconds, the Sink will set low power boot mode."
+            Type="uint"
+            Size="4"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='usb']"
+            DefaultValue="0" />
+
+        <ConfigItem
+            Id="Deconfigure Timeout [s]"
+            ShortId="deconfigured_timeout"
+            Desc="If the USB becomes deconfigured and no further action is taken within the deconfigured timeout period, in seconds, the Sink sets to low power boot mode."
+            Type="uint"
+            Size="4"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='usb']"
+            DefaultValue="0" />
+
+        <ConfigItem
+            Id="Class"
+            ShortId="device_class"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='usb']"
+            Desc="USB Class of Device. Please note: if the device is being configured over USB HID AHI transport, changing this setting may cause the device to become temporarily unavailable for configuration. If this occurs, unplug and re-plug the device's USB connection to cause it to repeat enumeration with the Host. Then refresh the ADK Configuration Tool device list and reconnect the device to continue configuration."
+            Type="bitfield"
+            Size="16"
+            DefaultValue="Microphone Audio | Speaker Audio | Battery Charging | Mass Storage | Consumer Transport Control">
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA" SwVariant="All" Value="Microphone Audio | Speaker Audio | Battery Charging | Mass Storage | Consumer Transport Control | Media Keyboard"/>
+            <bitfield key="Microphone Audio" value="0" />
+            <bitfield key="Speaker Audio" value="1" />
+            <bitfield key="Battery Charging" value="2" />
+            <bitfield key="Mass Storage" value="3" />
+            <bitfield key="Consumer Transport Control" value="4" />
+            <bitfield key="Media Keyboard" value="5" />
+        </ConfigItem>
+
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="USB RW"
+        ShortId="sink_usb_writeable"
+        Node="Basic">
+        <ConfigItem
+            Id="USB Volume (Main)"
+            ShortId="usb_main_volume"
+            Desc="Value is expressed in steps"
+            Type="uint"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='usb']"
+            DefaultValue="15" />
+        <ConfigItem
+            Id="USB Volume (Aux)"
+            ShortId="usb_aux_volume"
+            Desc="Value is expressed in steps"
+            Type="uint"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='usb']"
+            DefaultValue="15" />
+    </ConfigGroup>
+
+</ModuleData>

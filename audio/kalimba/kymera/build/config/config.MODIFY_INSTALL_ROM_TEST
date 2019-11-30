@@ -1,0 +1,22 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2014 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Install some unreachable test code so the digital team can evaluate
+# processor performance from ROM in silicon.
+# If this gets in the way once silicon is mature it can probably be
+# removed.
+
+%cpp
+INSTALL_ROM_TEST
+
+%list ALL_SRCDIRS
+components/rom_test
+
+%list ALL_INCDIRS
+components/rom_test
+
+%list CFG_LIBS
+components/rom_test/rom_test

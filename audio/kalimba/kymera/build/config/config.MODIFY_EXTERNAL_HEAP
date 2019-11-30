@@ -1,0 +1,35 @@
+############################################################################
+# Copyright (c) 2018  Qualcomm Technologies International, Ltd.
+############################################################################
+# Configuration to build an image for Stre V02 silicon running on SQIF.
+
+%cpp
+
+#enable external SRAM
+INSTALL_EXTERNAL_MEM
+
+#Dual Core EXTMEM control support
+DUALCORE_EXTMEM_UNSUPPORTED
+
+#Keep SRAM always powered at boot
+INSTALL_EXTMEM_ALWAYS_ON 
+
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+components/extmem
+components/ext_buffer
+
+# List of global include paths
+%list ALL_INCDIRS
+components/extmem
+components/ext_buffer
+
+# List of libraries to build
+%list CFG_LIBS
+components/extmem/extmem
+components/ext_buffer/ext_buffer
+ 
+%build
+EXTERNAL_MEM=true
+

@@ -1,0 +1,23 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# Macronix MX25U8035E/MX25U8035F
+QSPIFRAMLUTBaseParams = [00 c2 25 34 02 00 01 a5 00]
+QSPIFRAMLUTSPIReadParams = [00 03 02]
+QSPIFRAMLUTSPIConfVector =  [00 00]
+QSPIFRAMLUTFastConfVector =  [00 00]
+QSPIFRAMLUTWriteCmds =  [00 02 06]
+QSPIFRAMLUTEraseCmds = [00 d8 60]
+QSPIFRAMLUTStatusReadParams = [00 01 01 02 01]
+QSPIFRAMLUTStatusReadVector = [00 03 01 01 05]
+QSPIFRAMLUTDPDCmds = [00 b9 ab]
+QSPIFRAMLUTFastReadParams = [00 03 eb 00 04]
+QSPIFRAMLUTResetVector = [00 05 02 01 66 01 99]
+
+
+# Macronix MX25U8035E & MX25U8035F use alternative suspend/resume commands. As well as the
+# device manager keys listed above, the application filesystem also requires
+# configuration keys. See rom_support.txt for details.

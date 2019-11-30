@@ -1,0 +1,32 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the splitter
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+SPLITTER
+
+# List of global include paths
+%list ALL_INCDIRS
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/splitter/splitter
+support_lib/cbuffer/cbuffer
+support_lib/op_data_access/op_data_access
+support_lib/ext_buffer/ext_buffer
+#support_lib/ipc/ipc # used when SPLITTER_OFFLOAD
+
+
+%cpp
+SPLITTER_EXT_BUFFER # External memory available
+#SPLITTER_DEBUG # Enable/Disable logging
+#SPLITTER_OFFLOAD # enable support_lib/ipc/ipc too

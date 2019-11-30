@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+
+    <ext_id>
+        <uuid>{64e1e526-7740-4aa1-92d8-6e89d7a4ce58}</uuid>
+        <devkit>{3d5da188-f161-441c-a5e5-cda018a35030}</devkit>
+        <checksum>99c38a164867a47e7c2ecb4dffc56a64</checksum>
+        <version>6.4.0</version>
+        <build>43</build>
+        <target>x86</target>
+    </ext_id>
+    <ext_info>
+        <name>Extensions to menus</name>
+        <description>Adds menu options</description>
+        <build>43</build>
+    </ext_info>
+
+    <plugins type="move">
+       <project type="move">
+            <menu type="move">
+                <!-- Name should be unique for each menu item so a different prefix is recommended in different .xml files -->
+                <item name="ver_ext#0">
+                    <name>Tools/Versions/Devkit</name>
+                    <command>versions_devkit</command>
+                    <description>Discover versions of various devkit files</description>
+                </item>
+                <item name="ver_ext#1">
+                    <name>Tools/Versions/Workspace</name>
+                    <command>versions_workspace</command>
+                    <description>Discover versions of various workspace files</description>
+                </item>
+            </menu>
+        </project>
+    </plugins>
+
+    <commands type="move">
+        <command name="versions_devkit">
+            <run>./tools/python27/python.exe</run>
+            <description>Discover versions of various devkit files</description>
+            <options>
+                <option name="versions_devkit">./tools/versions/adkid.py</option>
+                <option name="kit">-d %1 -r c:\qtil\version_logs\</option>
+            </options>
+        </command>
+
+        <command name="versions_workspace">
+            <run>./tools/python27/python.exe</run>
+            <description>Discover versions of various workspace files</description>
+            <options>
+                <option name="versions_workspace">./tools/versions/adkid.py</option>
+                <option name="workspace">-d %1</option>
+            </options>
+        </command>
+    </commands>
+
+</root>

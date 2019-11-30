@@ -1,0 +1,57 @@
+############################################################################
+# Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+# Notifications and licenses are retained for attribution purposes only
+#
+############################################################################
+# Stre ROM config common for both cores with no dual core enabled.
+# This is also the de facto top-level config that most others inherit
+# from. Think carefully before making changes here.
+
+%include config.COMMON_CHIP_BASE_CRESCENDO
+%include config.COMMON_CHIP_STRE
+%include config.COMMON_CAPABILITIES
+%include config.MODIFY_STRE_ROM
+
+# Use Heap memory, and select Crescendo heap sizes including PM heap
+%include config.MODIFY_HEAP_STRE
+
+# Include TTP support
+%include config.MODIFY_TIMED_PLAYBACK
+%include config.MODIFY_TIMESTAMPED
+
+# Include Mixer, Splitter, Compander capabilities
+%include config.MODIFY_MIXER
+%include config.MODIFY_SPLITTER
+%include config.MODIFY_COMPANDER
+
+#Install the source sync capability
+%include config.MODIFY_SOURCE_SYNC
+
+#Install the ringtone generator
+%include config.MODIFY_RINGTONE_GENERATOR
+
+#Install the IIR_RESAMPLER capability
+%include config.MODIFY_IIR_RESAMPLER
+
+#Install the Programmable EQ capability
+%include config.MODIFY_PEQ
+
+#Install the Bass Enhancement capability
+%include config.MODIFY_DBE
+
+#Install the VSE capability
+%include config.MODIFY_VSE
+
+#Install the crossover capability
+%include config.MODIFY_XOVER
+
+# Install CVC-related capabilities everywhere.
+# (Licensing is enabled, so that's OK.)
+%include config.MODIFY_INSTALL_CVC_MODULES
+%include config.MODIFY_INSTALL_CVC_CAPABILITIES_STRE
+%include config.MODIFY_INSTALL_VOLUME
+
+#Install support for Persistent Storage
+%include config.MODIFY_PS_FOR_ACCMD

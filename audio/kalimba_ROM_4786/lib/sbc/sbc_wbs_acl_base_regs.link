@@ -1,0 +1,69 @@
+/*****************************************************************************
+* CONFIDENTIAL
+*
+* Copyright (c) 2014 - 2017 Qualcomm Technologies International, Ltd.
+*
+*****************************************************************************/
+/* Linkscript for the SBC library */
+
+segment WBS_SBC_ENC_WBS_FRAME_ENCODE_FUNC_PM             40          PM_REGION, flash.code;
+segment WBS_SBC_DEC_WBS_FRAME_DECODE_FUNC_PM             40          PM_REGION, flash.code;
+
+segment SBC_CRC_CALC_PM                                      40          PM_REGION, flash.code;
+segment SBC_CALC_FRAME_LENGTH_PM                             40          PM_REGION, flash.code;
+segment SBC_CALC_SCALE_FACTORS_PM                            40          PM_REGION, flash.code;
+segment SBC_CALC_BIT_ALLOCATION_PM                           40          PM_REGION, flash.code;
+segment SBCDEC_SYNTHESIS_SUBBAND_FILTER_PM                   40          PM_REGION, flash.code;
+segment SBCDEC_JOINT_STEREO_DECODE_PM                        40          PM_REGION, flash.code;
+segment SBCDEC_READ_AUDIO_SAMPLES_PM                         40          PM_REGION, flash.code;
+segment SBCDEC_READ_PADDING_BITS_PM                          40          PM_REGION, flash.code;
+segment SBCDEC_READ_SCALE_FACTORS_PM                         40          PM_REGION, flash.code;
+segment SBCDEC_SAMPLE_RECONSTRUCTION_PM                      40          PM_REGION, flash.code;
+segment SBCDEC_GET_FRAME_INFO_PM                             40          PM_REGION, flash.code;
+segment SBCDEC_SAVE_STATE_PM                                 40          PM_REGION, flash.code;
+segment SBCDEC_RESTORE_STATE_PM                              40          PM_REGION, flash.code;
+segment SBCDEC_DEINIT_DECODER_PM                             40          PM_REGION, flash.code;
+segment SBCDEC_RESET_DECODER_PM                              40          PM_REGION, flash.code;
+segment SBCDEC_SILENCE_DECODER_PM                            40          PM_REGION, flash.code;
+segment SBCDEC_GETBITS_PM                                    40          PM_REGION, flash.code;
+segment SBCDEC_FRAME_DECODE_PM                               40          PM_REGION, flash.code;
+
+segment SBCENC_SAVE_STATE_PM                                 40          PM_REGION, flash.code;
+segment SBCENC_RESTORE_STATE_PM                              40          PM_REGION, flash.code;
+segment SBCENC_DEINIT_ENCODER_PM                             40          PM_REGION, flash.code;
+segment SBCENC_RESET_ENCODER_PM                              40          PM_REGION, flash.code;
+segment SBCENC_PUTBITS_PM                                    40          PM_REGION, flash.code;
+segment SBCENC_ANALYSIS_SUBBAND_FILTER_PM                    40          PM_REGION, flash.code;
+segment SBCENC_JOINT_STEREO_ENCODE_PM                        40          PM_REGION, flash.code;
+segment SBCENC_WRITE_AUDIO_SAMPLES_PM                        40          PM_REGION, flash.code;
+segment SBCENC_WRITE_FRAME_HEADER_PM                         40          PM_REGION, flash.code;
+segment SBCENC_WRITE_PADDING_BITS_PM                         40          PM_REGION, flash.code;
+segment SBCENC_WRITE_SCALE_FACTORS_PM                        40          PM_REGION, flash.code;
+segment SBCENC_QUANTIZE_SAMPLES_PM                           40          PM_REGION, flash.code;
+segment SBCENC_ENCODER_SET_PARAMETERS_PM                     40          PM_REGION, flash.code;
+segment SBCENC_C_STUBS_PM                                    40          PM_REGION, flash.code;
+segment SBCDEC_C_STUBS_PM                                    40          PM_REGION, flash.code;
+segment SBC_INIT_TABLES_PM                                   40          PM_REGION, flash.code;
+segment SBCDEC_INIT_TABLES_PM                                40          PM_REGION, flash.code;
+segment SBCENC_INIT_TABLES_PM                                40          PM_REGION, flash.code;
+segment SBCDEC_PRIVATE_INIT_TABLES_PM                        40          PM_REGION, flash.code;
+segment SBCENC_PRIVATE_INIT_TABLES_PM                        40          PM_REGION, flash.code;
+segment SBC_PRIVATE_INIT_TABLES_COMMON_PM                    40          PM_REGION, flash.code;
+
+segment SBCDEC_GET_SAMPLING_FREQUENCY_PM                     40          PM_REGION, flash.code;
+segment SBCENC_GET_ENCODED_FRAME_INFO_PM                     40          PM_REGION, flash.code;
+segment SBCDEC_FIND_SYNC_PM                                  40          PM_REGION, flash.code;
+
+segment WBSDEC_FIND_SYNC_PM                                  40          PM_REGION, flash.code;
+segment WBSDEC_READ_FRAME_HEADER_PM                          40          PM_REGION, flash.code;
+segment WBSENC_INIT_ENCODER_PM                               40          PM_REGION, flash.code;
+segment WBSDEC_INIT_DECODER_PM                               40          PM_REGION, flash.code;
+
+
+segment SBCENC_INIT_STATIC_ENCODER_PM                        40          PM_REGION, flash.code;
+segment SBCENC_DEINIT_STATIC_ENCODER_PM                      40          PM_REGION, flash.code;
+
+segment SBCDEC_INIT_STATIC_DECODER_PM                        40          PM_REGION, flash.code;
+segment SBCDEC_DEINIT_STATIC_DECODER_PM                      40          PM_REGION, flash.code;
+
+segment SBC_INIT_COMMON_PM                                   40          PM_REGION, flash.code;

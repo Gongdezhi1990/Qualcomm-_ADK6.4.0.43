@@ -1,0 +1,46 @@
+############################################################################
+#  Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+#  All Rights Reserved.
+#  Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#  Notifications and licenses are retained for attribution purposes only
+############################################################################
+
+#Use File Manager with QVA
+%include config.MODIFY_FILE_MANAGER
+
+# Definitions required to build the QVA
+%cpp
+# define to use optimized kalimba functions
+KALIMBA_OPT
+# define to use optimized kalimba intrinsics
+USE_KAL_INTRINSICS
+# define to use external scratch memory for optimized kalimba FFT
+EXTERNAL_FFT_SCRATCH_MEMORY
+
+#
+# Capabilities to include in the build
+#
+%list CFG_CAPABILITIES
+QVA
+
+%list ALL_SRCDIRS
+capabilities/qva
+../lib_private/qva
+../lib_private/basic_op
+
+# List of global include paths
+%list ALL_INCDIRS
+../lib_private/sva
+../lib_private/basic_op
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/qva/qva
+support_lib/qva/qva
+../lib_private/sva/sva
+../lib_private/basic_op/basic_op
+
+%cpp
+# Enable VAD and VAD licensing
+USE_VAD_QVA_CAPS_LICENSING
+

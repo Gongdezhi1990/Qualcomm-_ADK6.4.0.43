@@ -1,0 +1,5 @@
+
+VARIANTS := debug
+
+CFLAGS_debug := -DGATT_TDS_SERVER_DEBUG_LIB  # flags for building debug version of TDS server lib
+

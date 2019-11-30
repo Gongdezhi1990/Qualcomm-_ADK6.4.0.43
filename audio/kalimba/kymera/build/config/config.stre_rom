@@ -1,0 +1,80 @@
+############################################################################
+# Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+# Notifications and licenses are retained for attribution purposes only
+############################################################################
+# Stre ROM config  with dual core support.
+# This is also the de facto top-level config that most others inherit
+# from. Think carefully before making changes here.
+
+%include config.stre_rom_d00_common
+
+# Include A2DP - Currently only on P0
+%include config.MODIFY_A2DP_HYDRA
+
+#Install the sco feature - Only on P0
+%include config.MODIFY_SCO_HYDRA
+
+#Install the ringtone generator
+%include config.MODIFY_RINGTONE_GENERATOR
+
+#Install the SBC encoder capability
+%include config.MODIFY_SBC_ENCODE
+
+#Install the CELT encoder capability
+%include config.MODIFY_CELT_ENCODE
+
+#Install the CELT encoder capability
+%include config.MODIFY_CELT_DECODE
+
+#Install the IIR_RESAMPLER capability
+%include config.MODIFY_IIR_RESAMPLER
+
+#Install the Programmable EQ capability
+%include config.MODIFY_PEQ
+
+#Install the Bass Enhancement capability
+%include config.MODIFY_DBE
+
+#Install the VSE capability
+%include config.MODIFY_VSE
+
+#Install the crossover capability
+%include config.MODIFY_XOVER
+
+# Add capability download feature
+%include config.MODIFY_CAP_DOWNLOAD_MGR_CRESCENDO
+
+#Install always on voice component
+%include config.MODIFY_AOV
+
+#Install aov interface
+%include config.MODIFY_AOV_INTERFACE
+
+#Install always on voice component
+%include config.MODIFY_CLK_MGR
+
+# Include FILE
+%include config.MODIFY_FILE_HYDRA
+
+# Enable dual core support
+%include config.MODIFY_STRE_DUAL_CORE
+
+#Install the VAD operator
+%include config.MODIFY_VAD
+
+#Install the QVA phrase recognition operator
+%include config.MODIFY_QVA
+
+
+%cpp
+# install AEC Reference TTP Gate
+INSTALL_AEC_REFERENCE_SPKR_TTP_GATE
+
+# Enable SVA and VAD licencing
+USE_STRE_CAPS_LICENCING
+
+
+#Install the CONVERT_FROM_AUDIO capability
+%include config.MODIFY_CONVERT_FROM_AUDIO

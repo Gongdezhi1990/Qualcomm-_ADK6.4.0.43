@@ -1,0 +1,25 @@
+var haltime_8h =
+[
+    [ "hal_cancel_timer1_event", "d7/d66/haltime_8h.html#a866a0425e224d205e0fc71c0e40cec26", null ],
+    [ "hal_cancel_timer2_event", "d7/d66/haltime_8h.html#a2057dd6677048342c12256512e18dca4", null ],
+    [ "hal_cancel_timer3_event", "d7/d66/haltime_8h.html#ab72dd2a73f66df9430d75f347f2ffa25", null ],
+    [ "hal_disconnect_timer_pio1", "d7/d66/haltime_8h.html#a757465d956ed505a9a8aee803c796692", null ],
+    [ "hal_disconnect_timer_pio2", "d7/d66/haltime_8h.html#ae4754fe438e1d321fd37f900137a6192", null ],
+    [ "hal_disconnect_timer_pio3", "d7/d66/haltime_8h.html#a79f73a553f7db57dfeb9400f64ca2cc7", null ],
+    [ "hal_get_time", "d7/d66/haltime_8h.html#a11ac095c61cfda04a9255da6174b3ac8", null ],
+    [ "hal_get_time_lsw", "d7/d66/haltime_8h.html#ac122abf6488dc346dfeac42b2a08d218", null ],
+    [ "IO_DEFS_MODULE_K32_TIMERS", "d7/d66/haltime_8h.html#ac729b6a1ce394defaa1f00b1898e86e6", null ],
+    [ "MICROSECOND", "d7/d66/haltime_8h.html#a3a7306a88d8a7487b683e741c8e7f879", null ],
+    [ "MILLISECOND", "d7/d66/haltime_8h.html#a6f1e731907521317e8a272d5ae57364e", null ],
+    [ "MINUTE", "d7/d66/haltime_8h.html#ac1454fa04f41c693f39425697a137d82", null ],
+    [ "SECOND", "d7/d66/haltime_8h.html#a94212be2394d2d37d9dfd33d07d82dba", null ],
+    [ "hal_connect_timer_pio1", "d7/d66/haltime_8h.html#ac364be1b26fe884bf2c188b54defa247", null ],
+    [ "hal_connect_timer_pio2", "d7/d66/haltime_8h.html#a86a0aefc3a59a6bd673078641e17e146", null ],
+    [ "hal_connect_timer_pio3", "d7/d66/haltime_8h.html#af6cca64558b473b3fd37277bb46f5e89", null ],
+    [ "hal_delay", "d7/d66/haltime_8h.html#aab95ad7f6df8ecf7c3beb37fd2760302", null ],
+    [ "hal_delay_us", "d7/d66/haltime_8h.html#aa1facd5c04103cff1c3ac466e95b37f7", null ],
+    [ "hal_post_timer1_event", "d7/d66/haltime_8h.html#a3ab1840561d7b151e9b315df212e7ba8", null ],
+    [ "hal_post_timer2_event", "d7/d66/haltime_8h.html#ac2819b3bb75c933f6009e4507f24862e", null ],
+    [ "hal_post_timer3_event", "d7/d66/haltime_8h.html#ad3c17c9c6aeb20bcaf19ec3cce347d3d", null ],
+    [ "init_hal_local_timer", "d7/d66/haltime_8h.html#aa4698f47b453543fe6d59190d546d4bc", null ]
+];

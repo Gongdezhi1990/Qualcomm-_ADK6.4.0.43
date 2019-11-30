@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <ext_id>
+        <uuid>{fe46395e-ea27-4fb7-9108-2bf82e157d59}</uuid>
+        <devkit>{3d5da188-f161-441c-a5e5-cda018a35030}</devkit>
+        <checksum>bc5639518767492fa99c9a673fa275a4</checksum>
+        <version>6.4.0</version>
+        <build>43</build>
+        <target>x86</target>
+    </ext_id>
+    <ext_info>
+        <name>ACAT Tab</name>
+        <description>Adds an ACAT debug tab</description>
+        <build>6.4.0</build>
+    </ext_info>
+    <plugins type="move">
+        <tabs type="move">
+            <tab name="ACAT">
+                <type>commandline</type>
+                <prompt>> </prompt>
+                <run>./tools/python27/python.exe</run>
+                <options>
+                    <option>-i ./extensions/acat_tab/py/acat_tab.py</option>
+                    <option>-a ./audio/acat/ACAT.py</option>
+                    <option name="device">-d %1</option>
+                    <option>-t ./tools/pythontools</option>
+                    <option name="workspace">-w %1</option>
+                </options>
+            </tab>
+        </tabs>
+    </plugins>
+ </root>

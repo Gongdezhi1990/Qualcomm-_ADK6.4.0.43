@@ -1,0 +1,45 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# MIB keys for AP memory APSxx04M-SQQ QSPI RAM
+
+EnableAudioSqif = true
+SqifEnableChipSelect1 = 4
+QSPIRAMSettings = 0x3000006d
+
+# The default value for the PioPadControlElements MIB key sets the pad control
+# for the pads used by Apps QSPI. When this key is set in the device manager 
+# filesystem, the default value is never set. Therefore the pad control values 
+# for the Apps QSPI must be configured here.
+#
+#                         Apps QSPI (replaces ROM default)     Audio QSPI (internally bonded)      CS1    PIO2
+PioPadControlElements = [ 0d 01 0a 02 09 59 0c 59 0b 59 0e 59  26 01 23 02 22 59 25 59 24 59 27 59 20 59  02 78 ]
+#                                                                                                         |
+#                                                                                                         RAM_EN
+
+# Pad being used for power control here is PIO2. The octets highlighted in the
+# following MIB keys must match the PIO expected to switch external circuitry
+# providing power to VDD_RAM_1V8 (pin J1). In this example, PIO2 is active low.
+# The PIO used for power control must either belong to the keep-alive domain
+# or have a default pad pull which ensures that the RAM is switched OFF when
+# the chip enters dormant mode.
+
+#                        Active level (0: Active low, 1: Active high)
+#                        |
+QSPIRAMPIOControl = 0x00003202
+#                            |
+#                            RAM_EN
+
+#                       Default state (PIO level for RAM off)
+#                       |
+PioDriveElements = [02 01]
+#                    |
+#                    RAM_EN
+
+PioDirectionElements = [02 01]
+#                        |
+#                        RAM_EN
+

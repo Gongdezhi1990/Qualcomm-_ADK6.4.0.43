@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<workspace>
+    <project default="yes" path="earbud.x2p">
+        <dependencies>
+            <project name="sys_cfg" />
+            <project name="fw_cfg" />
+            <project name="dev_cfg" />
+            <project name="ps_cfg" />
+            <project name="ro_fs" />
+            <project name="appsp0" />
+            <project name="libs" />
+            <project name="os" />
+        </dependencies>
+    </project>
+    <project default="no" name="sys_cfg" path="../common/cur_cfg_filesystem.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="fw_cfg" path="fw_cfg_filesystem.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="dev_cfg" path="dev_cfg_filesystem.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="ps_cfg" path="../common/user_ps_filesystem.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="ro_fs" path="../common/customer_ro_filesystem.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="appsp0" path="../../../../../images/apps0_firmware/common/apps0_firmware.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="audio" path="../../../../../audio/kalimba/kymera/build/kymera_audio.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="system" path="../../../../../images/curator_firmware/common/curator_firmware.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="bt" path="../../../../../images/btss_firmware/vfbga90/btss_firmware.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="os" path="../../../../../apps/fw/src/hydra_os_qcc512x_qcc302x.x2p">
+        <dependencies />
+    </project>
+    <project default="no" name="libs" path="../../../../libs/libs_qcc512x_qcc302x.x2p">
+        <dependencies>
+            <project name="os" />
+        </dependencies>
+    </project>
+    <project default="no" name="deploy" path="../common/deploy.x2p">
+        <dependencies />
+    </project>
+</workspace>

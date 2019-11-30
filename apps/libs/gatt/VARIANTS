@@ -1,0 +1,7 @@
+
+VARIANTS := debug pts_test caching_pts_test caching
+
+CFLAGS_debug := -DGATT_DEBUG_LIB
+CFLAGS_pts_test := -DGATT_PTS_TEST
+CFLAGS_caching_pts_test := -DGATT_CACHING -DGATT_PTS_TEST
+CFLAGS_caching := -DGATT_CACHING

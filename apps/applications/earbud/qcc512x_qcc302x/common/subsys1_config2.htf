@@ -1,0 +1,8 @@
+file=bt2
+
+# Change bluetooth address and device name to appropriate values
+# The FeatureLicenseKey found in subsys7_config3.htf is
+# supported for the 16 addresses from 00025b00ff00 to 00025b00ff0f.
+pskey_bdaddr={0x00ff00,0x5b,0x2}
+pskey_device_name="Q_EARBUD"
+

@@ -1,0 +1,27 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the downloadable VSE
+
+
+#
+# Capabilities to include in the build
+#
+%list CFG_CAPABILITIES
+VSE
+
+%list ALL_SRCDIRS
+capabilities/vse
+
+
+# List of global include paths
+%list ALL_INCDIRS
+
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/vse/vse
+

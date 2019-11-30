@@ -1,0 +1,211 @@
+<ModuleData Name="sink_a2dp">
+    <DefineGroup>
+        <DefineList 
+            ShortId="aptx_ad_a2dp_cap_options" 
+            Id="aptX Adaptive A2DP capability options">
+            <enum key="Advertise R1"
+                value="0"
+                desc="Advertise R1 capability"/>
+            <enum key="Advertise R2"
+                value="1"
+                desc="Advertise R2 capability"/>            
+        </DefineList>
+    </DefineGroup>
+        
+    <ConfigGroup
+        Id="A2DP Config"
+        ShortId="a2dp"
+        Node="Basic">
+        <ConfigItem
+            Id="A2DP Delay Connection Updates [ms]"
+            ShortId="A2dpConnectionUpdateDelay_ms"
+            Desc="An A2DP UI message will be delayed by this amount of time, just in case a disconnect occurs."
+            Type="uint"
+            Size="16"
+            DefaultValue="0"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']"/>
+        <ConfigItem
+            Id="A2DP Link Loss Reconnection Period [s]"
+            ShortId="A2dpLinkLossReconnectionTime_s"
+            Desc="This feature is only present in the A2DP platform. It is used to specify the period, in seconds, over which to attempt reconnection following a link loss."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x3C"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']"/>
+        <ConfigItem
+            Id="Enable A2DP Streaming"
+            ShortId="EnableA2dpStreaming"
+            Desc="When set the Sink can stream audio using an A2DP link."
+            Type="bool"
+            Size="1"
+            DefaultValue="true"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']"/>
+        <ConfigItem
+            Id="A2DP Optional Codecs Enabled"
+            ShortId="A2dpOptionalCodecsEnabled"
+            Desc="This bitmask specifies which codecs are available for use. N.b. A corresponding DSP codec application must be available if these bits are enabled or the Sink will panic."
+            Type="bitfield"
+            Size="7"
+            DefaultValue="Faststream"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']">
+            <BuildVariant HwVariant="20-CE678-H1 20-CE890-H1 20-CE751-H1 20-CE729-H1" SwVariant="All" Value="AAC | aptX | aptX Low Latency" />
+            <BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE889-H1 20-CE752-H1 20-CE690-H1 20-CE742-H1" SwVariant="All" Value="AAC" />
+            <BuildVariant HwVariant=" R13568v4 R13568v4_A05 H13672v2 CE446_CE692 CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="aptX" />
+            <BuildVariant HwVariant="QCC3024-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA" SwVariant="All" Value="" />
+            <bitfield key="MP3"
+                      value="0"/>
+            <bitfield key="AAC"
+                      value="1"/>
+            <bitfield key="Faststream"
+                      value="2"/>
+            <bitfield key="aptX"
+                      value="3"/>
+            <bitfield key="aptX Low Latency"
+                      value="4"/>
+            <bitfield key="aptX HD"
+                      value="5"/>
+            <bitfield key="aptX Adaptive"
+                      value="6"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="aptX Adaptive A2DP capability"
+            ShortId="aptx_ad_a2dp_cap"
+            Desc="The aptX Adaptive A2DP capability to advertise"
+            Type="enum"
+            Size="4"
+            DefaultValue="Advertise R1"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']">
+            <BuildVariant HwVariant="CF376_CG724 CG437" SwVariant="All" Value="Advertise R2" />
+            <List use="aptx_ad_a2dp_cap_options"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Use Medium SBC Bitpool Size"
+            ShortId="sbc_uses_medium_bitpool"
+            Desc="Decreases the SBC bitpool size limit.  This reduces the required Bluetooth bandwidth at the expense of reduced audio quality."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']">
+        </ConfigItem>
+        <ConfigItem
+            Id="A2DP Open Media on Connect"
+            ShortId="EnableA2dpMediaOpenOnConnection"
+            Desc="When set The Sink performs a media open when the A2DP signalling connection has been made and the A2DP stream had previously been suspended. This can happen if the Sink has suspended a stream and the phone has chosen to drop the signalling channel completely."
+            Type="bool"
+            Size="1"
+            DefaultValue="true"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']"/>
+        <ConfigItem
+            Id="A2DP Class"
+            ShortId="a2dpclass"
+            Desc="Sets the AV Minor Class of device"
+            Type="enum"
+            Size="2"
+            DefaultValue="Headphones"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']">
+            <BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE678-H1" SwVariant="All" Value="Speaker"/>
+            <BuildVariant HwVariant="All" SwVariant="Speaker_with_TWS Speaker_with_BA" Value="Speaker"/>
+     	    <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="Hi-fi"/>
+            <enum key="Headphones"
+                value="0"/>
+            <enum key="Hi-fi"
+                value="1"/>
+            <enum key="Speaker"
+                value="2"/>
+            <enum key="Portable"
+                value="3"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Default A2DP Volume"
+            ShortId="DefaultA2dpVolume"
+            Type="uint"
+            DefaultValue="60"
+            Range="Min=0,Max=100"
+            Size="16"
+            Desc="Default A2DP volume, expressed as a percentage. This value is used when we pair with the device for the first time."
+            ConfigGroupPath="./[@ShortId='audio']/[@ShortId='input']/[@ShortId='a2dp_input']">
+            <BuildVariant HwVariant="CE446_CE692 R13568v4 R13568v4_A05 H13672v2" SwVariant="All" Value="55"/>
+            <BuildVariant HwVariant="CF133 CF133_SQIF CG793 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="55"/>
+        </ConfigItem>
+    </ConfigGroup>
+
+    <!--Config Group for sink a2dp session and writable data structure-->
+     <ConfigGroup
+        Id="A2DP Session Data"
+        ShortId="a2dp_session"
+        Node="Expert">
+        <ConfigItem
+            Id="Audio Enhancements Disable"
+            ShortId="audio_enhancement_disable"
+            Desc=" "
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="Subwoofer Bypass"
+            ShortId="subwoofer_bypass"
+            Desc=" "
+            Type="bool"
+            Size="1"
+            DefaultValue="false">
+            <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="false"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Speaker EQ Bypass"
+            ShortId="speaker_eq_bypass"
+            Desc=" "
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="EQ Flat Enable"
+            ShortId="eq_flat_enable"
+            Desc=" "
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="User EQ Bypass"
+            ShortId="user_eq_bypass"
+            Desc=" "
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="Bass Enhance Bypass"
+            ShortId="bass_enhance_bypass"
+            Desc=" "
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="Spatial Enhance Bypass"
+            ShortId="spatial_enhance_bypass"
+            Desc=" "
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="Compander Bypass"
+            ShortId="compander_bypass"
+            Desc=" "
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="Dither Bypass"
+            ShortId="dither_bypass"
+            Desc=" "
+            Type="bool"
+            Size="1"
+            DefaultValue="true"/>
+        <ConfigItem
+            Id="Selected EQ Bank"
+            ShortId="selected_eq_bank"
+            Desc="Note: 0x7 selects the option to use the last customer defined Equaliser settings."
+            Type="uint"
+            Size="3"
+            DefaultValue="0x0">
+        </ConfigItem>
+     </ConfigGroup>
+</ModuleData>

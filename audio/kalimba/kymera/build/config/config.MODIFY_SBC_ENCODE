@@ -1,0 +1,33 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# definitions for a2d9 builds
+
+%cpp
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+SBC_ENCODE
+
+# List of global include paths
+%list ALL_INCDIRS
+../lib/codec
+../lib/sbc
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/sbc_encode/sbc_encode
+# Libraries needed by sbc capabilities
+../lib/codec/codec
+../lib/sbc/sbc
+capabilities/encoder/encoder
+
+%list MAXIM_LIBS
+../lib/sbc/sbc
+

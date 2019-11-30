@@ -1,0 +1,46 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions for dual core builds
+
+
+%cpp
+
+# Dual core support enabled restricts running cbops
+# on input buffer because it could be a P1's buffer with no P0 write
+# access. This define configures CBOPS to run inplace on the output buffer
+# instead of input buffer. This will not be possible on Bluecore
+# platforms where the output is MMU ports.
+AVOID_CBOPS_INPLACE_ON_INPUT_BUFFER
+
+# Enable HW external exceptions for dual core
+HAVE_HW_EXT_EXCEPTIONS
+
+# Install DM Bank Access control
+INSTALL_DM_BANK_ACCESS_CONTROL
+
+# Configurable heap sizes
+INSTALL_DYNAMIC_HEAP
+
+%list ALL_SRCDIRS
+components/ipc
+components/adaptor/kip
+components/kip_mgr
+
+%list ALL_INCDIRS
+components/ipc
+components/adaptor/kip
+components/kip_mgr
+
+%list CFG_LIBS
+components/ipc/ipc
+components/adaptor/kip/kip
+components/kip_mgr/kip_mgr
+
+%build
+
+DUAL_CORE_ENABLED=1
+

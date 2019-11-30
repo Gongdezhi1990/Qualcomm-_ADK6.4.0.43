@@ -1,0 +1,64 @@
+###########################################################################
+# CONFIDENTIAL
+# Copyright (c) 2008 - 2017 Qualcomm Technologies International, Ltd.
+# Unit 400, Cambridge Science Park,
+# Milton Road, Cambridge, CB4 0WH.  UK
+# Tel: +44 1223 692000  Fax: +44 1223 692001
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  rules for gcc compiler
+#
+############################################################################
+
+#########################################################################
+# Define build using these macros
+#########################################################################
+
+LIB_EXT= a
+S_EXT = asm
+
+DEBUG_LIB_DIRS=	$(DEBUG_LDIRS:%=-L%)
+# Note the duplication of LFILES below. This is to give us a better chance of
+# getting all the functions included by the link semantics
+# Pretty gross really
+LIB_FILES=	$(patsubst lib%.$(LIB_EXT),-l%,$(LFILES))
+
+#########################################################################
+# Tools to use for compilation and build
+#########################################################################
+
+ARCHIVE=	ar
+
+# These paths obviously only work for Linux / Grid builds
+# GCC builds on Windows would need Cygwin or similar, currently not supported
+COMPILE = /comm/gcc/4.3.4/bin/gcc
+LINK = /comm/gcc/4.3.4/bin/gcc
+
+#########################################################################
+# Compiler/Linker definitions
+#########################################################################
+
+GCC_WARNINGS= -Werror -Wall -Wmissing-field-initializers -Wmissing-prototypes -Wuninitialized -Wundef
+
+COMPILE_DEFS+= -UBIG_ENDIAN -ULITTLE_ENDIAN
+PRE_ARCHIVE_FLAGS+=	crs
+DEBUG_PRE_ARCHIVE_FLAGS=	$(PRE_ARCHIVE_FLAGS) $(DEBUG_TARGET_LIB)
+COMPILE_COMMON_FLAGS=	-x c -c ${COMPILE_EXTRA_FLAGS}
+COMPILE_FLAGS+=	$(COMPILE_COMMON_FLAGS) -o # Do not delete this comment
+PP_ONLY_FLAGS = -E
+ASM_FLAGS+=	$(COMPILE_COMMON_FLAGS) -S -o # Do not delete this comment
+# No support for interleaved assembler output
+override LINK_FLAGS+=	$(LINK_EXTRA_FLAGS) -lm -Xlinker --start-group $(LIB_FILES) -Xlinker --end-group $(SYSTEM_LIBS) -o # Do not delete this comment
+
+DEBUG_COMPILE_FLAGS= -g -O $(GCC_WARNINGS) $(COMPILE_FLAGS)
+DEBUG_ASM_FLAGS=  -g $(COMPILE_WARNING_FLAGS) $(ASM_FLAGS)
+DEBUG_ASMI_FLAGS=	$(DEBUG_ASM_FLAGS)
+DEBUG_LINK_FLAGS=	$(DEBUG_LIB_DIRS) -g $(LINK_FLAGS)
+
+PREINCLUDE_FLAGS = -include $(PREINCLUDE_DEFS_FILE)
+
+ifneq ($(PARTIAL_LINK),)
+PARTIAL_LINK_FLAG=	-Xlinker -r
+endif

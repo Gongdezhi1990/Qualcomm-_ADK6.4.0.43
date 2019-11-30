@@ -1,0 +1,14 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Enable the export of dynamic memory constants to files
+
+%cpp
+INSTALL_CAPABILITY_CONSTANT_EXPORT
+INSTALL_OPERATOR_CREATE_PENDING
+
+%build
+BUILD_CAPABILITY_CONSTANT_EXPORT=1

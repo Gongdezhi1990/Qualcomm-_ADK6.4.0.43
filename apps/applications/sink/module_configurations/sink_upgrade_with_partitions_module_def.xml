@@ -1,0 +1,202 @@
+<ModuleData Name="sink_upgrade_with_partitions" HeaderName="sink_upgrade">
+    <DefineGroup>
+        <DefineStruct
+            Id="Upgrade Config"
+            ShortId="upgrade_config">
+            <ConfigItem
+                Id="Enable Application Config Reset"
+                ShortId="enable_app_config_reset"
+                Desc="If this is true then the application configuration will be reset to the default values built into the upgraded application when an upgrade is committed."
+                Type="bool"
+                Size="1">
+            </ConfigItem>
+            <ConfigItem
+                Id="Protect Audio During Upgrade"
+                ShortId="protect_audio_during_upgrade"
+                Desc="If Disabled, upgrade improvements will apply and ongoing audio streaming will be suspended on an upgrade. If Enabled, ongoing audio will continue streaming, while upgrade improvements will not be applicable."
+                Type="bool"
+                Size="1">
+            </ConfigItem>
+        </DefineStruct>
+
+        <DefinePattern
+            PatternName="Logical Partitions Pattern"
+            ShortId="logical_partition_pattern">
+            <ConfigItem
+                Id="Logical Type"
+                ShortId="logical_type"
+                Desc="A logical partition can be double or single banked and mounted as a filesystem, unmounted or erased after the upgrade has completed."
+                Type="enum_disabler"
+                Size="4"
+                ShowOrdered="true">
+                <enum key="Single (erased)"
+                      value="0"
+                      disable="Partition #2"
+                      desc="Single banked partition containing a raw serial partition. The partition will be erased after the upgrade has completed."/>
+                <enum key="Double (unmounted)"
+                      value="1"
+                      disable=""
+                      desc="Double banked partition containing a raw serial partition. The active partition will not be added to the file system after the upgrade has completed."/>
+                <enum key="Double (mounted)"
+                      value="2"
+                      disable=""
+                      desc="Double banked partition containing a read only partition. The active partition will be added to the file system table after the upgrade has completed."/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Partition #1"
+                ShortId="physical_partition_1"
+                Desc="The SQIF partition to use for this logical partition."
+                Type="uint"
+                Size="8" />
+            <ConfigItem
+                Id="Partition #2"
+                ShortId="physical_partition_2"
+                Desc="The second SQIF partition to use for double banked logical partitions."
+                Type="uint"
+                Size="8" />
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        Id="Sink Upgrade Readonly"
+        ShortId="sink_upgrade_readonly"
+        Node="Basic">
+        <ConfigStruct
+            Id="Upgrade Config"
+            ShortId="upgrade_config"
+            Desc="Configurable items related to Upgrade functionality."
+            Type="struct"
+            Struct="upgrade_config">
+            <StructElementConfigItem
+                Id="Enable Application Config Reset"
+                ShortId="enable_app_config_reset"
+                Desc="If this is true then the application configuration will be reset to the default values built into the upgraded application when an upgrade is committed."
+                DefaultValue="false"
+                ConfigGroupPath="./[@ShortId='upgrade']">
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Protect Audio During Upgrade"
+                ShortId="protect_audio_during_upgrade"
+                Desc="If Disabled, upgrade improvements will apply and ongoing audio streaming will be suspended on an upgrade. If Enabled, ongoing audio will continue streaming, while upgrade improvements will not be applicable."
+                DefaultValue="false"
+                ConfigGroupPath="./[@ShortId='upgrade']">
+            </StructElementConfigItem>
+        </ConfigStruct>
+
+        <ConfigGroup
+            Id="Logical Partitions"
+            ShortId="logical_partitions"
+            Node="Array"
+            ConfigGroupPath="./[@ShortId='upgrade']">
+
+            <ConfigPatternArray
+                Id="Logical Partitions Array"
+                ShortId="logical_partitions_array"
+                Pattern="logical_partition_pattern"
+                MaxNumPatterns="16"
+                Presentation="FixedOrder">
+
+                <BuildVariant HwVariant="20-CE680-H1 20-CE679-H1 20-CE678-H1 20-CE889-H1 20-CE752-H1 20-CE890-H1 20-CE751-H1 20-CE690-H1 20-CE742-H1 20-CE729-H1" SwVariant="All">
+                    <PatternArrayRow Id="Logical Partition 0" ShortId="logical_partition_0" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="type_0"
+                            DefaultValue="Double (mounted)" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_0_0"
+                            DefaultValue="1" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_1_0"
+                            DefaultValue="2" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow Id="Logical Partition 1" ShortId="logical_partition_1" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="type_1"
+                            DefaultValue="Double (mounted)" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_0_1"
+                            DefaultValue="3" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_1_1"
+                            DefaultValue="4" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow Id="Logical Partition 2" ShortId="logical_partition_2" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="type_2"
+                            DefaultValue="Double (mounted)" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_0_2"
+                            DefaultValue="5" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_1_2"
+                            DefaultValue="6" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow Id="Logical Partition 3" ShortId="logical_partition_3" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="type_3"
+                            DefaultValue="Double (mounted)" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_0_3"
+                            DefaultValue="7" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_1_3"
+                            DefaultValue="8" />
+                    </PatternArrayRow>
+                </BuildVariant>
+
+                <BuildVariant HwVariant="All" SwVariant="All">
+                    <PatternArrayRow Id="Partition 0" ShortId="partition_0" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="type_0"
+                            DefaultValue="Single (erased)" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_0_0"
+                            DefaultValue="0" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_1_0"
+                            DefaultValue="0" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow Id="Partition 1" ShortId="partition_1" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="type_1"
+                            DefaultValue="Double (mounted)" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_0_1"
+                            DefaultValue="1" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_1_1"
+                            DefaultValue="2" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow Id="Partition 2" ShortId="partition_2" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="type_2"
+                            DefaultValue="Double (mounted)" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_0_2"
+                            DefaultValue="3" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_1_2"
+                            DefaultValue="4" />
+                    </PatternArrayRow>
+
+                    <PatternArrayRow Id="Partition 3" ShortId="partition_3" Node="Basic">
+                        <PatternArrayConfigItem
+                            ShortId="type_3"
+                            DefaultValue="Double (unmounted)" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_0_3"
+                            DefaultValue="5" />
+                        <PatternArrayConfigItem
+                            ShortId="partition_1_3"
+                            DefaultValue="6" />
+                    </PatternArrayRow>
+                </BuildVariant>
+
+            </ConfigPatternArray>
+        </ConfigGroup>
+    </ConfigGroup>
+</ModuleData>

@@ -1,0 +1,8 @@
+
+VARIANTS :=
+
+# PBAPC including debug checks
+CFLAGS_debug := -DPBAPC_LIBRARY_DEBUG
+
+# PBAPC including debug checks and print
+CFLAGS_debug_print := -DDEBUG_PRINT_ENABLED -DPBAPC_LIBRARY_DEBUG

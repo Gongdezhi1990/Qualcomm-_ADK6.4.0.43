@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['registered_5fclient_5ft',['registered_client_t',['../d1/da7/message__broker_8c.html#a7f21221f54cc4e05747a790c82e6745a',1,'message_broker.c']]],
+  ['registered_5fclients_5ft',['registered_clients_t',['../d1/da7/message__broker_8c.html#a839ebab436e150e3d98379a0e001e9c9',1,'message_broker.c']]],
+  ['removedevice',['RemoveDevice',['../dd/d0a/system_8pb-c_8h.html#ac4f0d5bae55283a4eb95fb4f07e2e273',1,'system.pb-c.h']]],
+  ['removedevice_5fclosure',['RemoveDevice_Closure',['../dd/d0a/system_8pb-c_8h.html#a6c1db5267ae0ecaa5c9de2fff1a487ec',1,'system.pb-c.h']]],
+  ['resetconnection',['ResetConnection',['../dd/d0a/system_8pb-c_8h.html#af09fbf0067b71ad02b5dfe0618291fc6',1,'system.pb-c.h']]],
+  ['resetconnection_5fclosure',['ResetConnection_Closure',['../dd/d0a/system_8pb-c_8h.html#aa1fcf8440a2fc69a03fd8ce1728e1cd0',1,'system.pb-c.h']]],
+  ['response',['Response',['../d1/dc8/accessories_8pb-c_8h.html#af04f558d24841187a21e4ae35991c0de',1,'accessories.pb-c.h']]],
+  ['response_5fclosure',['Response_Closure',['../d1/dc8/accessories_8pb-c_8h.html#a81d232727e9420f96ebed169d9c2d053',1,'accessories.pb-c.h']]],
+  ['rm_5fcallback',['rm_callback',['../da/d4d/resource__manager_8h.html#aca0b770c0ca008ea4a4410c0881f0998',1,'resource_manager.h']]],
+  ['rsa_5fmod_5ft',['rsa_mod_t',['../d1/d44/rsa__decrypt_8h.html#a1d62ef7f7f1288e21ecaaa50b4fe9fb3',1,'rsa_decrypt.h']]],
+  ['rtime24_5ft',['rtime24_t',['../dc/d3d/rtime_8h.html#a7ca686cc57480125214f318fb142c45d',1,'rtime.h']]],
+  ['rtime_5fsample_5frate_5ft',['rtime_sample_rate_t',['../dc/d3d/rtime_8h.html#a3eb96676bdee41fe0d2422a2333bbd07',1,'rtime.h']]],
+  ['rtime_5fspadj_5fmini_5ft',['rtime_spadj_mini_t',['../dc/d3d/rtime_8h.html#a1e6bb333728e8caccce1a1a3a9f61779',1,'rtime.h']]],
+  ['rtime_5fspadj_5ft',['rtime_spadj_t',['../dc/d3d/rtime_8h.html#ab06a32fc6bf45d82b5bdc9c08dd0bb0d',1,'rtime.h']]],
+  ['rtime_5ft',['rtime_t',['../dc/d3d/rtime_8h.html#a7d29a1e2e4ec23a8200b9e081760db19',1,'rtime.h']]],
+  ['rtp_5fpacket_5fmaster_5ft',['rtp_packet_master_t',['../d6/d1e/rtp__packet__master_8h.html#acfdb72e4b20aa4486810c35a1ed57a51',1,'rtp_packet_master.h']]]
+];

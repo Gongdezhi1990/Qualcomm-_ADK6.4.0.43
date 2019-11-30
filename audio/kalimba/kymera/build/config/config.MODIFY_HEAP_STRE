@@ -1,0 +1,49 @@
+############################################################################
+# Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+# Notifications and licenses are retained for attribution purposes only
+#
+############################################################################
+# definitions for heap memory on Crescendo builds
+
+%include config.MODIFY_EXTERNAL_HEAP
+
+%cpp
+INSTALL_HEAP_ALLOC
+POOL_OVERFLOW_TO_HEAP
+
+# Minimum Heap sizes (in allocation units, so octets on Crescendo)
+HEAP_SIZE_DM1=4000
+HEAP_SIZE_DM2=4000
+# HEAP_SIZE_SHARED is equal with half of the HEAP_SIZE_SHARED_MAX
+# Size of the RAM banks
+DM_RAM_BANK_SIZE=0x8000
+
+# 104*1024
+HEAP_SIZE_DM1_MAX=0x1A000
+# 72*1024
+HEAP_SIZE_DM2_MAX=0x12000
+# 16*1024
+HEAP_SIZE_SHARED_MAX=0x4000
+
+#Allow Heap will grow to free RAM area
+HEAP_OVERFLOW_TO_FREE_RAM
+
+#In dual-core builds, use small P1 heaps
+INSTALL_LEAN_P1_HEAP
+
+# Chip has no Slow DM RAM
+CHIP_HAS_NO_SLOW_DM_RAM
+
+# HEAP_SIZE_PM is based on:
+# PM End address  = 0x4009FFF
+# PM malloc start = 0x4008000
+# (PM end - PM malloc start + 1 ) / 4 = 0x81C0 (33216)
+# Heap size in 32-bit allocation units
+HEAP_SIZE_PM=2048
+
+#enable external SRAM
+EXT_RAM_READ_WINDOW=3
+EXT_RAM_WRITE_WINDOW=4
+

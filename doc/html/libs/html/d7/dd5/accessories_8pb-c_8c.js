@@ -1,0 +1,28 @@
+var accessories_8pb_c_8c =
+[
+    [ "PROTOBUF_C__NO_DEPRECATED", "d7/dd5/accessories_8pb-c_8c.html#ad9480935c25b5155174487b631af52f5", null ],
+    [ "control_envelope__free_unpacked", "d7/dd5/accessories_8pb-c_8c.html#a7484d7593e443bde69aebee990449526", null ],
+    [ "control_envelope__get_packed_size", "d7/dd5/accessories_8pb-c_8c.html#a59c6c71df4f12cedef2e749e66140834", null ],
+    [ "control_envelope__init", "d7/dd5/accessories_8pb-c_8c.html#a1eba833ef75648ac59ea6805f9fe5aeb", null ],
+    [ "control_envelope__pack", "d7/dd5/accessories_8pb-c_8c.html#a3071bc5ca358ce7ee82cbfb0d329ffe2", null ],
+    [ "control_envelope__pack_to_buffer", "d7/dd5/accessories_8pb-c_8c.html#a0632fb59c4656c9f8483fe36642f71f2", null ],
+    [ "control_envelope__unpack", "d7/dd5/accessories_8pb-c_8c.html#aafc84c31f8fefec7cf38e86e69b09205", null ],
+    [ "response__free_unpacked", "d7/dd5/accessories_8pb-c_8c.html#a3983336be3b8f0b02f0bcc8dcfc76aed", null ],
+    [ "response__get_packed_size", "d7/dd5/accessories_8pb-c_8c.html#ac47b70c4a1108ab2847d8140c96f86f2", null ],
+    [ "response__init", "d7/dd5/accessories_8pb-c_8c.html#a0c5c1d97b2bc93fad0dc474d966874d2", null ],
+    [ "response__pack", "d7/dd5/accessories_8pb-c_8c.html#a4b29417b1cc564ee2a5bf8930d913f79", null ],
+    [ "response__pack_to_buffer", "d7/dd5/accessories_8pb-c_8c.html#ab6d941755450acef001d42b5e6603895", null ],
+    [ "response__unpack", "d7/dd5/accessories_8pb-c_8c.html#acad6ec99b339e82110b3535be0578517", null ],
+    [ "command__descriptor", "d7/dd5/accessories_8pb-c_8c.html#a3de10a7b701e4b4c81fc091e75b3271d", null ],
+    [ "command__enum_values_by_name", "d7/dd5/accessories_8pb-c_8c.html#aa97c66e8965406b3459a66f3832a8789", null ],
+    [ "command__enum_values_by_number", "d7/dd5/accessories_8pb-c_8c.html#accfae6efe81e546efdf7e56f13b3ebc4", null ],
+    [ "command__value_ranges", "d7/dd5/accessories_8pb-c_8c.html#a750b6afc3111417fd096422b81eae590", null ],
+    [ "control_envelope__descriptor", "d7/dd5/accessories_8pb-c_8c.html#aaf3ffa38a05fba5d928afb4442d74b06", null ],
+    [ "control_envelope__field_descriptors", "d7/dd5/accessories_8pb-c_8c.html#af45ab7fa756d731cde5c2d0e80f14b13", null ],
+    [ "control_envelope__field_indices_by_name", "d7/dd5/accessories_8pb-c_8c.html#a429299b2793e174a505de3a5b4c42262", null ],
+    [ "control_envelope__number_ranges", "d7/dd5/accessories_8pb-c_8c.html#ae4f917451e91d0ac74b30aa3956641bc", null ],
+    [ "response__descriptor", "d7/dd5/accessories_8pb-c_8c.html#a91b70db2a1ffeed302b7f6765736912f", null ],
+    [ "response__field_descriptors", "d7/dd5/accessories_8pb-c_8c.html#adffdc4cf703a8495d5f8c7ab41a76649", null ],
+    [ "response__field_indices_by_name", "d7/dd5/accessories_8pb-c_8c.html#a675b3d0f0adad521f7f08438f9639d06", null ],
+    [ "response__number_ranges", "d7/dd5/accessories_8pb-c_8c.html#a843367ea71b338526efac01f265094d2", null ]
+];

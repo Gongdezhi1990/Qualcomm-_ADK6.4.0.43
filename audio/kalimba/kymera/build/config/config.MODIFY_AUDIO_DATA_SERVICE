@@ -1,0 +1,18 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Source directory list, used for places to look for uses of changed CPP symbols
+
+%list ALL_SRCDIRS
+components/hydra_modules/audio_data_service
+
+# List of global include paths
+%list ALL_INCDIRS
+components/hydra_modules/audio_data_service
+
+# List of libraries to build
+%list CFG_LIBS
+components/hydra_modules/audio_data_service/audio_data_service

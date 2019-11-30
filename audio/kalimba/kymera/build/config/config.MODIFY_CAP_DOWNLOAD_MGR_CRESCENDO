@@ -1,0 +1,12 @@
+############################################################################
+# Copyright (c) 2014 - 2017 Qualcomm Technologies International, Ltd.
+############################################################################
+%include config.MODIFY_CAP_DOWNLOAD_MGR
+%include config.MODIFY_CAP_DOWNLOAD_MGR_HYDRA
+
+# PM heap is shared between patches and download
+%cpp
+INSTALL_PM_HEAP_SHARE
+
+# provide a small block of static RAM for downloadable capabilities to use
+RESERVED_STATIC_BLOCK_SIZE=20

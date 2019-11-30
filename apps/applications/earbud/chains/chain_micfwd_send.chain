@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright (c) 2018 Qualcomm Technologies International, Ltd.-->
+<!--Chain for HFP (SCO). Chain used on receiving earbud. This chain is used for both wideband and narrowband SCO, and also forwards MIC -->
+
+<chain name="CHAIN_MICFWD_SEND" id="1" generate_operator_roles_enum="False" generate_endpoint_roles_enum="False">
+
+    <include_header name="../av_headset_chain_roles.h"/>
+
+    <operator name="OPR_SCOFWD_RECV" id="EB_CAP_ID_ASYNC_WBS_DEC">
+        <sink name="FORWARDED_AUDIO" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_SOURCE_SYNC" id="CAP_ID_SOURCE_SYNC">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_VOLUME_CONTROL" id="CAP_ID_VOL_CTRL_VOL">
+        <sink name="MAIN_IN" terminal="0"/>
+        <sink name="AUX_IN" terminal="1"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_SCO_AEC" id="EB_CAP_ID_AEC_REF">
+        <sink name="INPUT1" terminal="0"/>
+        <sink name="MIC1" terminal="2"/>
+        <source name="REFERENCE" terminal="0"/>
+        <source name="SPEAKER1" terminal="1"/>
+        <source name="OUTPUT1" terminal="3"/>
+    </operator>
+
+    <operator name="OPR_CVC_SEND" id="CAP_ID_CVCHS1MIC_SEND_WB" >
+        <sink name="REFERENCE" terminal="0"/>
+        <sink name="IN1" terminal="1"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_MICFWD_SEND" id="EB_CAP_ID_ASYNC_WBS_ENC">
+        <sink name="IN" terminal="0"/>
+        <source name="OUT" terminal="0"/>
+    </operator>
+
+    <operator name="OPR_SWITCHED_PASSTHROUGH_CONSUMER" id="EB_CAP_ID_SWITCHED_PASSTHROUGH">
+        <sink name="IN" terminal="0"/>
+        <source name="FORWARD" terminal="0"/>
+    </operator>
+
+    <input sink="OPR_SCOFWD_RECV.FORWARDED_AUDIO" role="EPR_SCOFWD_RX_OTA"/>
+    <input sink="OPR_SCO_AEC.MIC1" role="EPR_SCO_MIC1"/>
+    <input sink="OPR_VOLUME_CONTROL.AUX_IN" role="EPR_VOLUME_AUX"/>
+    <output source="OPR_SCO_AEC.SPEAKER1" role="EPR_SCO_SPEAKER"/>
+    <output source="OPR_SWITCHED_PASSTHROUGH_CONSUMER.FORWARD" role="EPR_MICFWD_TX_OTA"/>
+
+    <connection source="OPR_SCOFWD_RECV.OUT" sink="OPR_SOURCE_SYNC.IN"/>
+    <connection source="OPR_SOURCE_SYNC.OUT" sink="OPR_VOLUME_CONTROL.MAIN_IN"/>
+    <connection source="OPR_VOLUME_CONTROL.OUT"  sink="OPR_SCO_AEC.INPUT1"/>
+    <connection source="OPR_SCO_AEC.OUTPUT1" sink="OPR_CVC_SEND.IN1"/>
+    <connection source="OPR_SCO_AEC.REFERENCE" sink="OPR_CVC_SEND.REFERENCE"/>
+    <connection source="OPR_CVC_SEND.OUT" sink="OPR_MICFWD_SEND.IN"/>
+    <connection source="OPR_MICFWD_SEND.OUT" sink="OPR_SWITCHED_PASSTHROUGH_CONSUMER.IN"/>
+
+</chain>
+

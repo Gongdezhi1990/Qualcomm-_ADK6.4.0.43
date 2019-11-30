@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<memory_maps chip="QCC512x_302x" subsystem="audio" xmlns="urn:memorymap">
+
+  <memory_map processor_id="all">
+  
+    <address_space name="PM" type="pm">
+      <mem_region name="PM NVMEM window 0" start_address="0x00000000" end_address="0x00800000"
+                  backing_mem="rom,flash" contents_hint="code" shared="true" read_only="true"
+      />
+      <mem_region name="PM NVMEM window 1" start_address="0x00800000" end_address="0x01000000"
+                  backing_mem="rom,flash" contents_hint="code" shared="true" read_only="true"
+      />
+      <mem_region name="PM NVMEM window 2" start_address="0x01000000" end_address="0x01800000"
+                  backing_mem="rom,flash" contents_hint="code" shared="true" read_only="true"
+      />
+      <mem_region name="PM NVMEM window 3" start_address="0x01800000" end_address="0x02000000"
+                  backing_mem="rom,flash" contents_hint="code" shared="true" read_only="true"
+      />
+      <mem_region name="PM RAM" start_address="0x04000000" end_address="0x04014000"
+                  backing_mem="ram" contents_hint="code" shared="true" read_only="true" />
+    </address_space>
+    
+    <address_space name="DM" type="dm">
+      <mem_region name="DM1 RAM" start_address="0x00000000" end_address="0x00040000"
+                  backing_mem="ram" contents_hint="data" shared="true"  read_only="false"
+      />
+      <mem_region name="DM1 Mapped PM RAM" start_address="0x00100000" end_address="0x00114000"
+                  backing_mem="ram" contents_hint="data" shared="true" read_only="false"
+      />
+      <mem_region name="DM1 BAC Window 0" start_address="0x00800000" end_address="0x00900000"
+                  contents_hint="data" shared="true" read_only="false"
+      />
+      <mem_region name="DM1 BAC Window 1" start_address="0x00900000" end_address="0x00A00000"
+                  contents_hint="data" shared="true" read_only="false"
+      />
+      <mem_region name="DM1 BAC Window 2" start_address="0x00A00000" end_address="0x00B00000"
+                  contents_hint="data" shared="true" read_only="false"
+      />
+      <mem_region name="DM1 BAC Window 3" start_address="0x00B00000" end_address="0x00C00000"
+                  contents_hint="data" shared="true" read_only="false"
+      />
+      <mem_region name="DM2 NVMEM Window 0" start_address="0xF8000000" end_address="0xF8800000"
+                  backing_mem="rom,flash" contents_hint="data" shared="true" read_only="true"
+      />
+      <mem_region name="DM2 NVMEM Window 1" start_address="0xF8800000" end_address="0xF9000000"
+                  backing_mem="rom,flash" contents_hint="data" shared="true" read_only="true"
+      />
+      <mem_region name="DM2 NVMEM Window 2" start_address="0xF9000000" end_address="0xF9800000"
+                  backing_mem="rom,flash" contents_hint="data" shared="true" read_only="true"
+      />
+      <mem_region name="DM2 NVMEM Window 3" start_address="0xF9800000" end_address="0xFA000000"
+                  backing_mem="rom,flash" contents_hint="data" shared="true" read_only="true"
+      />
+      <mem_region name="DM2 NVMEM Window 4" start_address="0xFA000000" end_address="0xFA800000"
+                  backing_mem="rom,flash" contents_hint="data" shared="true" read_only="true"
+      />
+      <mem_region name="DM2 NVMEM Window 5" start_address="0xFA800000" end_address="0xFB000000"
+                  backing_mem="rom,flash" contents_hint="data" shared="true" read_only="true"
+      />
+      <mem_region name="DM2 NVMEM Window 6" start_address="0xFB000000" end_address="0xFB800000"
+                  backing_mem="rom,flash" contents_hint="data" shared="true" read_only="true"
+      />
+      <mem_region name="DM2 NVMEM Window 7" start_address="0xFB800000" end_address="0xFC000000"
+                  backing_mem="rom,flash" contents_hint="data" shared="true" read_only="true"
+      />
+      <mem_region name="DM2 RAM" start_address="0xFFF00000" end_address="0xFFF40000"
+                  backing_mem="ram" contents_hint="data" shared="true" read_only="false"
+      />
+    </address_space>
+    
+  </memory_map>
+  
+  <checksum>1b0808fce94cbdac6a9b02aa9fe25c96</checksum>
+</memory_maps>

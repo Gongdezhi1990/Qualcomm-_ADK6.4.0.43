@@ -1,0 +1,12 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# This file is required because S25xxxFL and S25xxxFS parts give the same response to the 9Fh
+# identification command but have some differences in command set. This file is for use with
+# the S25xxxFS parts.
+
+# S25xxxFS parts have configuration registers defined in ROM and as such, no vectors are required
+# here to set the quad enabled bit.

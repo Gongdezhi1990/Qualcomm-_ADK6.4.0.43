@@ -1,0 +1,7 @@
+
+VARIANTS := hydra
+
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+
+CFLAGES_hydra := -DHYDRACORE
+

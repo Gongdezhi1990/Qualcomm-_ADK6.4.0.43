@@ -1,0 +1,24 @@
+#ifndef __GATT_GAP_SERVER_DATABASE_DBI__
+#define __GATT_GAP_SERVER_DATABASE_DBI__
+
+#include "gatt_gap_server_uuids.h"
+
+primary_service {
+    uuid : UUID_GAP,
+    name : "GAP_SERVICE",
+    sdp : true,
+    characteristic {
+        uuid       : UUID_DEVICE_NAME,
+        name       : "DEVICE_NAME",
+        flags      : [ FLAG_IRQ ],
+        properties : [ read ]
+    },
+    characteristic {
+        uuid       : UUID_APPEARANCE,
+        name       : "DEVICE_APPEARANCE",
+        flags      : [ FLAG_IRQ ],
+        properties : [ read ]
+    }
+},
+#endif /* __GATT_GAP_SERVER_DATABASE_DBI__ */
+

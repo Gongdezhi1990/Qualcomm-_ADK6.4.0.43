@@ -1,0 +1,39 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Modifiers to make a Hydra config suitable for external release.
+# (Not suitable for Amber, but we're never going to release that.)
+
+# Do not include this in releases
+%include config.MODIFY_TEST_STALL_DROP_EXCLUDE
+
+%cpp
+BLD_PRIVATE
+
+%build
+# Build both internal (fully debuggable) and external (censored, for
+# release) .elf files.
+# This has two link steps, so increases build time noticeably.
+REL_EXT_BUILD=TRUE
+
+%list PRIVATE_LIBS
+components/adaptor
+components/audio
+components/cap_download_mgr
+components/hal
+components/hydra_modules
+components/io
+components/ipc
+components/kip_mgr
+components/patch
+components/ps_msg
+components/ps_router
+components/ps_sar
+components/sco_data_mgr
+components/slt
+components/spi
+components/sys_events
+../lib/celt

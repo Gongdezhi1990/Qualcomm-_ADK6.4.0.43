@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['va_5faudio_5fmgr_5fcodec_5ftype_5ft',['va_audio_mgr_codec_type_t',['../d0/dac/voice__assistant__audio__manager_8h.html#aee44f0dd778c87a6511d421bc0510279',1,'voice_assistant_audio_manager.h']]],
+  ['va_5faudio_5fmgr_5fmsg_5ft',['va_audio_mgr_msg_t',['../d0/dac/voice__assistant__audio__manager_8h.html#a65177696cb9cbc40b7b94b97cc3e6c63',1,'voice_assistant_audio_manager.h']]],
+  ['va_5faudio_5fmgr_5ftrigger_5ftype_5ft',['va_audio_mgr_trigger_type_t',['../d0/dac/voice__assistant__audio__manager_8h.html#a9c428b09521b3f427c95902e146e304e',1,'voice_assistant_audio_manager.h']]],
+  ['va_5fcapture_5fcodec_5ft',['va_capture_codec_t',['../d9/d1d/group__audio__plugin__if.html#ga1b458e4b3532a84aa74978e9152497e6',1,'audio_plugin_if.h']]],
+  ['va_5fcapture_5foperator_5frole_5ft',['va_capture_operator_role_t',['../d6/d51/audio__voice__assistant__capture__chain_8h.html#a809ab4db8140d19e6ab7eef1243fbfbd',1,'audio_voice_assistant_capture_chain.h']]],
+  ['va_5fcapture_5fpath_5frole_5ft',['va_capture_path_role_t',['../d6/d51/audio__voice__assistant__capture__chain_8h.html#a607b10640ff67d9c471134d1185179b8',1,'audio_voice_assistant_capture_chain.h']]],
+  ['va_5fcommon_5foperator_5frole_5ft',['va_common_operator_role_t',['../d1/d26/audio__voice__assistant__common__chain_8h.html#a41f2db876f3874a5fe6badc77190859d',1,'audio_voice_assistant_common_chain.h']]],
+  ['va_5fcommon_5fpath_5frole_5ft',['va_common_path_role_t',['../d1/d26/audio__voice__assistant__common__chain_8h.html#a4b734ec7049eaf6efec7add7994f890f',1,'audio_voice_assistant_common_chain.h']]],
+  ['va_5ftrigger_5foperator_5frole_5ft',['va_trigger_operator_role_t',['../d4/d08/audio__voice__assistant__trigger__chain_8h.html#ae61cf7b268aea94821bb1c690a9be724',1,'audio_voice_assistant_trigger_chain.h']]],
+  ['va_5ftrigger_5fpath_5frole_5ft',['va_trigger_path_role_t',['../d4/d08/audio__voice__assistant__trigger__chain_8h.html#a562a9236771a16168d2f6b40675c5d9a',1,'audio_voice_assistant_trigger_chain.h']]],
+  ['vad_5fworking_5fmode_5ft',['vad_working_mode_t',['../d7/d79/operators_8h.html#a0bd5e78dfdd4e5fc2a864a72013805ef',1,'operators.h']]],
+  ['voice_5fmics_5ft',['voice_mics_t',['../d0/da9/audio__plugin__voice__variants_8h.html#a3da7f9d7a6e1d004b119740e23400609',1,'audio_plugin_voice_variants.h']]],
+  ['voice_5fprompts_5fcodec_5ft',['voice_prompts_codec_t',['../d9/d1d/group__audio__plugin__if.html#ga1b9c6939e538ac37b0f0869721479311',1,'audio_plugin_if.h']]],
+  ['volumetype_5ft',['volumeType_t',['../d9/d1d/group__audio__plugin__if.html#ga04297537b622fca047687d2344995ae9',1,'audio_plugin_if.h']]],
+  ['vp_5fchain_5fmsg_5ft',['vp_chain_msg_t',['../d2/d85/audio__input__voice__prompts__chain_8h.html#aa3b52ca02e2066c9c6e42831cf6bdaf0',1,'audio_input_voice_prompts_chain.h']]],
+  ['vp_5fchain_5fstate_5ft',['vp_chain_state_t',['../d2/d85/audio__input__voice__prompts__chain_8h.html#a1dfc31a2167cbc2d898294af7e2ab5ab',1,'audio_input_voice_prompts_chain.h']]]
+];

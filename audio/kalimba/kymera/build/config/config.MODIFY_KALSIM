@@ -1,0 +1,20 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# common defintions for Kalsim builds
+
+%cpp
+RUNNING_ON_KALSIM
+DISABLE_SHALLOW_SLEEP
+# Enable CBuffer R/W pointer debug
+CBUFFER_RW_ADDR_DEBUG
+#Kalsim doesn't model cache, so turn it off
+-HAVE_CACHE
+-INSTALL_CACHE
+
+%build
+MAKEPROJ_FLAGS=--debugtrans=kalsim
+KALSIM_CONFIG=True

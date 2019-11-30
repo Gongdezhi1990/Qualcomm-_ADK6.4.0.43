@@ -1,0 +1,14 @@
+# Set the lib directories to exclude in a non-Kymera build
+CONFIG_DIRS_FILTER:=chain chain_builder operators audio_mixer audio_hardware audio_ports rtime\
+audio_input_common audio_input_a2dp audio_input_analogue audio_input_i2s \
+audio_music_processing audio_music_processing_spy audio_input_voice_prompts \
+audio_input_common_sim \
+operator_spy operator_list_spy audio_mixer_spy audio_input_usb tws_packetiser tws_packetiser_spy audio_input_tws \
+audio_input_spdif broadcast_packetiser packetiser_helper system_clock system_clock_spy scm_transport\
+operators_mock audio_plugin_forwarding audio_output_tws operators_spy audio_voice_hfp audio_anc_spy \
+audio_input_broadcast broadcast_packetiser_spy audio_output_broadcast erasure_coding erasure_coding_spy \
+audio_hardware_spy audio_voice_common audio_voice_usb aov low_power_trigger_phrase_detection audio_processor \
+audio_clock_spy audio_anc_tuning cryptovm cryptoalgo display_screens input_event_manager audio_voice_assistant \
+file_list custom_operator sport_health_algorithms sport_health_driver sport_health_hub sport_health_logging \
+sport_health_driver_imu_bmi160 sport_health_driver_ppg_max30102 power_smb1352 power_smb1352_adapter \
+logging ama gatt_ama_server protobuf csa key_value_list device device_list task_list

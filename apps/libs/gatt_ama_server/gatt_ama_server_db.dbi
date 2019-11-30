@@ -1,0 +1,39 @@
+#ifndef __GATT_AMA_SERVER_DB_DBI__
+#define __GATT_AMA_SERVER_DB_DBI__
+
+#include "gatt_ama_server_uuids.h"
+
+ 
+
+#define ADD_AMA_SERVICE(ID) 
+primary_service { 
+    uuid : UUID_AMA_ALEXA_SERVICE, 
+    name : "AMA_ALEXA_SERVICE", 
+     
+    characteristic {  
+        uuid        : UUID_AMA_ALEXA_TX_CHAR, 
+        name        :"AMA_ALEXA_TX_CHAR",  
+        flags       : [ FLAG_IRQ],  
+        properties  : [ write ], 
+        value       : 0x0 
+    },  
+	characteristic {  
+        uuid        : UUID_AMA_ALEXA_RX_CHAR,  
+        name        : "AMA_ALEXA_RX_CHAR",  
+        flags       : [ FLAG_IRQ ],  
+        properties  : [ notify, read],  
+        value       : 0x0,  
+		
+		client_config {
+        flags : [FLAG_IRQ, FLAG_ENCR_W],
+            name : "AMA_ALEXA_RX_CLIENT_C_CFG"
+        }
+    }  
+}, 
+
+#if defined(GATT_DBI_LIB)
+ADD_AMA_SERVICE()
+#endif /* GATT_DBI_LIB */
+
+#endif /* GATT_AMA_SERVER_DB_DBI__ */
+

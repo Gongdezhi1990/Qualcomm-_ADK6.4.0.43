@@ -1,0 +1,6 @@
+file=bt2
+
+# Change bluetooth address and device name to appropriate values
+pskey_bdaddr={0xff00,0x5b,0x2}
+pskey_device_name="QCC512xCustomerSample"
+

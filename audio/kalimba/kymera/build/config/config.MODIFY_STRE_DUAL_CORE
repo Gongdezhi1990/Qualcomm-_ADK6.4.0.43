@@ -1,0 +1,29 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions for dual core builds
+
+%include config.MODIFY_CRESCENDO_DUAL_CORE_COMMON
+
+%cpp
+# Install the second processor suppor and second core code in a single image.
+INSTALL_DUAL_CORE_SUPPORT
+AUDIO_SECOND_CORE
+
+# Install metadata support for dual core
+INSTALL_METADATA_DUALCORE
+
+# Dual core efuse support
+INSTALL_EFUSE_DUALCORE
+
+# Set preferntial owner
+INSTALL_PREFOWNER_DUALCORE
+
+%build
+
+BUILD_SECONDARY_CORE=true
+BUILD_DUAL_CORE=true
+BUILD_METADATA_DUALCORE=true

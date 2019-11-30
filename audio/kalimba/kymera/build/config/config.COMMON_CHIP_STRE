@@ -1,0 +1,126 @@
+############################################################################
+# CONFIDENTIAL
+#
+#  Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+#  All Rights Reserved.
+#  Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#  Notifications and licenses are retained for attribution purposes only
+#
+############################################################################
+# chip-specific definitions for Stre
+
+%cpp
+
+# Symbol name as required by Hydra common code
+# <http://wiki/Hydra_Common_Firmware/Build_Definitions>
+CHIP_STRE
+NUMBER_OF_PIOS=72
+
+#Max clock in Mhz
+CHIP_MAX_CLOCK = 120
+
+# TODO: This is deceptive
+# Stre actually has 0x10000 words of DM but the value
+# is kept as Crescendo so that the amount of memory reserved
+# for pool remains identical.
+DM_SIZE_IN_WORDS=0x20000
+
+# Size of PM RAM in 32-bit words
+PM_RAM_SIZE_WORDS=0x5000
+PM_RAM_FREE_START=0x04002000
+PM_RAM_FREE_END=0x04011fff
+
+# Size of Audio Log buffer in words
+AUDIO_LOG_BUF_SIZE=512
+
+PATCH_ADDR_MAX=0x0400bfff
+
+# Area of Program Memory for Downloadable Capabilities
+PM_DOWNLOAD_START_VIRTUAL_ADDR=0x4200000UL
+PM_DOWNLOAD_VIRTUAL_ADDR_MASK=0x7FFFFFFUL
+
+# PM RAM used by cache in words
+PM_RAM_CACHE_BANK_SIZE_WORDS=0x800
+
+# 1 stereo codecs (Channels A/B)
+NUMBER_CODEC_INSTANCES=1
+NUMBER_SPDIF_INSTANCES=2
+NUMBER_DIGITAL_MICS=6
+INSTALL_ADC
+INSTALL_DAC
+HAVE_MIC_BIAS_CONTROL
+
+NUMBER_BAC_STREAM_MONITORS=8
+
+# In Stre the clock frequency for S/PDIF Rx is always same as audio subsystem 
+# root clock frequency. 
+CHIP_SPDIF_RX_CLK_DIV_RATIO=1
+
+# Chips after Crescendo D01 has new registers controlling what PCM_INTERNAL_CLK_MODE does
+CHIP_HAS_PCM_INTERNAL_CLK_MODE_CONFIG
+PCM_INTERNAL_CLK_CNT_LIMIT=1250
+PCM_INTERNAL_CLK_HIGH_LIMIT=20
+
+# Chip requires audio endpoint sample rate change on kcodec clk change
+CHIP_NEEDS_RATE_CHANGE_ON_KCODEC_CLK 
+
+# Which PIO pin the MCLK_IN signal comes in on.
+# This is hardwired into the chip design. (Mostly only Curator needs to know
+# which actual pin it is, but unfortunately we need to know in order to
+# ask Curator to measure the frequency on it.)
+EXTERNAL_MCLK_IN_PIO=31
+
+# Stre has a newer AUX PLL compared to Crescendo, some differences
+# are exposed in CCP messages
+CHIP_HAS_AUX_PLL_V3
+
+# Hardware version numbering
+# FIXME: this schema, which dates from Amber, doesn't really allow for
+# the possibility of one digital revision (dXX) being included in more
+# than one chip spin (rXX).
+# d00 digits are in r00 and do not include the ANC block
+# v01 digits are in r00 and include the ANC block
+# d01 digits are in r01 and do not include the ANC block
+# v02 digits will be in r01 and include the ANC block
+# At build time, our firmware cares about the difference between d00/v01 and
+# d01v02, but not about the difference between r00 and r01.
+# See also <http://wiki.europe.root.pri/AuraChipVersions>.
+CHIP_MINOR_VERSION_d00=0
+CHIP_MINOR_VERSION_d01=2
+CHIP_MINOR_VERSION_v01=CHIP_MINOR_VERSION_d00
+CHIP_MINOR_VERSION_v02=CHIP_MINOR_VERSION_d01
+# XXX: this line is currently needed for d01 FPGA builds. Once digits rename
+# their stuff from "dev" to "d01", it can go.
+CHIP_MINOR_VERSION_dev=CHIP_MINOR_VERSION_d01
+
+
+CHIP_BUILD_VER_LATEST=CHIP_MINOR_VERSION_d01
+CHIP_BUILD_VER=CHIP_MINOR_VERSION_$(CHIP_VER)
+
+# Metadata tag allocation threshold
+# This isn't really a chip property, but it's a function of pool sizes 
+# and supported use cases, so it's definitely chip-specific
+DEFAULT_TAG_ALLOC_THRESHOLD = 180
+
+%build
+
+# This is used for generating a local MIB .sdb file for convenience
+# (see hydra_modules/mib/makefile).
+# For that purpose it needs to match CHIP_VERSION_MAJOR in
+# (SUB_SYS_)CHIP_VERSION in the hardware (don't include any minor/
+# variant IDs). See <http://wiki/ChipVersionIDs>.
+# It's not critical that it be correct, but it makes configcmd
+# outputs filenames that are more likely to be what you want.
+# This definition is also used by cap_download_mgr (via DSP_ID),
+# which means it shouldn't change once it's been assigned.
+CHIPVER_FOR_MIB=0x49
+
+# Used by kcc
+CHIP_NAME = stre_audio
+CHIP_NAME_KCC = QCC302x_audio
+CHIP_ARCH = hydra
+CHIP_VER = d00
+# Indicate kcc this is architecture 4
+KAL_ARCH = 4
+# Indicate kcc this build uses kld
+LINKER = KLD

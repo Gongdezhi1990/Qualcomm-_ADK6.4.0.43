@@ -1,0 +1,74 @@
+/******************************************************************************
+ *  Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+ *  %%version
+ *  %%appversion
+ *
+ *  FILE
+ *      gatt_fast_pair_server_db.dbi
+ *
+ *  DESCRIPTION
+ *
+ *      This file defines the Fast Pair Service in JSON format. This file is
+ *      included in the main application data base file which is used to
+ *      produce ATT flat data base. 
+ *
+ *****************************************************************************/
+
+#ifndef __GATT_FAST_PAIR_SERVER_DB_DBI__
+#define __GATT_FAST_PAIR_SERVER_DB_DBI__
+
+#include "gatt_fast_pair_server_uuids.h"
+ 
+/* Primary service declaration of Fast Pair Service */
+
+primary_service {
+    uuid : UUID_FAST_PAIR_SERVICE,
+    name : "FAST_PAIR_SERVICE",
+
+    /* Key-based Pairing characteristic - 16 to 80-octets. */
+
+    characteristic {
+        uuid        : UUID_KEYBASED_PAIRING,
+        name        : "KEYBASED_PAIRING",
+        flags       : [ FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ write, indicate ],
+        
+        value       : [0x00, 0x00],
+        
+        client_config {
+            name : "KEYBASED_PAIRING_CLIENT_CONFIG",
+            flags : [ FLAG_IRQ ]
+            }
+    },
+
+
+    /* Passkey characteristic - 16-octets . */
+
+    characteristic {
+        uuid        : UUID_PASSKEY,
+        name        : "PASSKEY",
+        flags       : [ FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ write, indicate ],
+        
+        value       : [ 0x00, 0x00 ],
+        
+        client_config {
+            name : "PASSKEY_CLIENT_CONFIG",
+            flags : [ FLAG_IRQ ]
+            }
+    },
+
+
+    /* Account Key characteristic - 16-octets . */
+
+    characteristic {
+        uuid        : UUID_ACCOUNT_KEY,
+        name        : "ACCOUNT_KEY",
+        flags       : [ FLAG_IRQ, FLAG_DYNLEN ],
+        properties  : [ write ],
+        
+        value       : [ 0x00, 0x00 ]
+    }
+},
+
+#endif /* __GATT_FAST_PAIR_SERVER_DB_DBI__ */

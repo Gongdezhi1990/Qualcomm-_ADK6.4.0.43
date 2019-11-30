@@ -1,0 +1,485 @@
+<ModuleData Name="Sink_tones">
+    <DefineGroup>
+        <DefinePattern
+            PatternName="tone config type"
+            ShortId="tone_config_type" >
+            <ConfigItem
+                Id="Event"
+                ShortId="event"
+                Size="16"
+                Desc="Specifies the event type"
+                Type="enum"
+                ShowOrdered="true">
+                <List use="g_user_event" prefix="0x40"/>
+                <List use="g_system_event"/>
+            </ConfigItem>
+            <ConfigItem
+                Id="Tones"
+                ShortId="tone"
+                Size="8"
+                Desc="Specifies the tone type"
+                Type="enum">
+                <List use="g_TonesType"/>
+            </ConfigItem>
+        </DefinePattern>
+    </DefineGroup>
+
+    <ConfigGroup
+        Id="Event Tones"
+        ShortId="sink_tone_writeable"
+        Node="Array"
+        ConfigGroupPath="./[@ShortId='user_interfaces']/[@ShortId='tones']">
+        <ConfigPatternArray
+            Id="Event Tones definition"
+            ShortId="gEventTones"
+            Pattern="tone_config_type"
+            MaxNumPatterns="66">
+
+            <PatternArrayRow Id="Tone_Config_1" ShortId="tone_config_1" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Power On"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="4 Note Rising Scale" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_2" ShortId="tone_config_2" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Power Off"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="4 Note Falling Scale" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_3" ShortId="tone_config_3" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Enter Pairing"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="2 Note Rising Scale" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_4" ShortId="tone_config_4" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Initiate Voice Dial"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_5" ShortId="tone_config_5" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Last Number Redial"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_6" ShortId="tone_config_6" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Answer"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="2 Note Rising Scale" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_7" ShortId="tone_config_7" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Reject"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="2 Note Falling Scale" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_8" ShortId="tone_config_8" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Cancel End"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_9" ShortId="tone_config_9" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Transfer Toggle"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_10" ShortId="tone_config_10" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Volume Orientation Toggle"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Fairly Short High Tone" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_11" ShortId="tone_config_11" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Three Way Release All Held"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_12" ShortId="tone_config_12" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Three Way Accept Waiting Release Active"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_13" ShortId="tone_config_13" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Three Way Accept Waiting Hold Active"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_14" ShortId="tone_config_14" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Three Way Add Held To 3 Way"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_15" ShortId="tone_config_15" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Three Way Connect 2 Disconnect"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_16" ShortId="tone_config_16" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Establish SLC"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="V Long High" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_17" ShortId="tone_config_17" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Microphone Mute On"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="2 Note Falling Scale" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_18" ShortId="tone_config_18" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Microphone Mute Off"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="2 Note Rising Scale" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_19" ShortId="tone_config_19" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Place Incoming Call On Hold"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_20" ShortId="tone_config_20" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Accept Held Incoming Call"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="2 Note Rising Scale" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_21" ShortId="tone_config_21" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Reject Held Incoming Call"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="2 Note Falling Scale" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_22" ShortId="tone_config_22" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="RSSI Pair"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="V Long High" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_23" ShortId="tone_config_23" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Subwoofer Start Inquiry"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="G Major Arp Up" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_24" ShortId="tone_config_24" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Reset Paired Device List"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Long Double Low" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_25" ShortId="tone_config_25" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Pairing Fail"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Long Low" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_26" ShortId="tone_config_26" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Pairing Successful"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short 1" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_27" ShortId="tone_config_27" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Battery Low"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="battery_low_tone" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_28" ShortId="tone_config_28" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Link Loss"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short Double Low" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_29" ShortId="tone_config_29" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Mute Reminder"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Long Double Low" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_30" ShortId="tone_config_30" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Multipoint Call Waiting"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short Double High" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_31" ShortId="tone_config_31" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="RSSI Pair Reminder"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Long Low" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_32" ShortId="tone_config_32" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="RSSI Pair Timeout"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Long Low" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_33" ShortId="tone_config_33" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Volume Max"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Middle 9" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_34" ShortId="tone_config_34" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Volume Min"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Middle 0" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_35" ShortId="tone_config_35" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="PBAP Dial Fail"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Double Beep Error Tone" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_36" ShortId="tone_config_36" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Ringtone 1"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="ring_valkyries" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_37" ShortId="tone_config_37" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Ringtone 2"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Phone Ring" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_38" ShortId="tone_config_38" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Primary Device Connected"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short High" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_39" ShortId="tone_config_39" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Secondary Device Connected"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Short Middle - GS7" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_40" ShortId="tone_config_40" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="BLE High Immediate Alert"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="ring_greensleeves" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_41" ShortId="tone_config_41" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="BLE High Link Loss Alert"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="ring_fairground" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_42" ShortId="tone_config_42" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="BLE ANCS Email Alert"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="G Major Arp Up" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_43" ShortId="tone_config_43" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Voice Recognition Timeout"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Double Beep Error Tone" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_44" ShortId="tone_config_44" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Voice Recognition Active"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="2 Note Rising Scale" />
+            </PatternArrayRow>
+			<PatternArrayRow Id="Tone_Config_45" ShortId="tone_config_45" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Voice Assistant Start Voice Capture"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="G Major Arp Up" />
+            </PatternArrayRow>
+            <PatternArrayRow Id="Tone_Config_46" ShortId="tone_config_46" Node="Basic" >
+                <PatternArrayConfigItem
+                    ShortId="Event"
+                    DefaultValue="Voice Assistant Session Error"/>
+                <PatternArrayConfigItem
+                    ShortId="Tone"
+                    DefaultValue="Double Beep Error Tone" />
+            </PatternArrayRow>
+        </ConfigPatternArray>
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="ConfigToneData"
+        ShortId="configtone_rdata"
+        Node="Expert">
+        <ConfigArray
+            Id="gVariableTonesdefinition"
+            ShortId="gVariableTones"
+            Desc="uint16 array of gVariableTones"
+            Type="array"
+            ElementType="uint"
+            ArraySize="1" >
+            <ArrayElementConfigItem
+                Id="Configtone value"
+                ShortId="gVariableTone"
+                Desc="User defined Variable Tones initilization value"
+                DefaultValue="0x0"/>
+        </ConfigArray>
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="Sink Tones Readonly"
+        ShortId="sink_tone_readonly"
+        Node="Basic" >
+        <ConfigItem
+            Id="PlayTonesAtFixedVolume"
+            ShortId="PlayTonesAtFixedVolume"
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            Desc="If this item is set Tones (and audio prompts) are played at a nominal fixed volume regardless of the current Profile Volume level."
+            ConfigGroupPath="./[@ShortId='user_interfaces']/[@ShortId='tones']"/>
+        <ConfigItem
+            Id="PlayLocalVolumeTone"
+            ShortId="PlayLocalVolumeTone"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="When set the Sink plays a tone when the volume is changed using the remote device i.e. the AG."
+            ConfigGroupPath="./[@ShortId='user_interfaces']/[@ShortId='tones']"/>
+        <ConfigItem
+            Id="QueueVolumeTones"
+            ShortId="QueueVolumeTones"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="This allows volume tones to be queued in the Sink."
+            ConfigGroupPath="./[@ShortId='user_interfaces']/[@ShortId='tones']"/>
+        <ConfigItem
+            Id="QueueEventTones"
+            ShortId="QueueEventTones"
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            Desc="This allows event tones to be queued in the Sink."
+            ConfigGroupPath="./[@ShortId='user_interfaces']/[@ShortId='tones']"/>
+        <ConfigItem
+            Id="MuteToneFixedVolume"
+            ShortId="MuteToneFixedVolume"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="When set the mute reminder tone is played at a fixed volume, set by the default volume level parameter 'Default Volume'."
+            ConfigGroupPath="./[@ShortId='user_interfaces']/[@ShortId='tones']"/>
+        <ConfigItem
+            Id="FixedToneVolumeLevel"
+            ShortId="FixedToneVolumeLevel"
+            Type="uint"
+            DefaultValue="10"
+            Range="Min=0,Max=15"
+            Size="5"
+            Desc="This sets the volume level at which tones (and audio prompts) are played if the fixed level has been enabled. Fixed tone volume is enabled via the PlayTonesAtFixedVolume checkbox. FixedToneVolumeLevel can be set in the range 0 to 15."
+            ConfigGroupPath="./[@ShortId='user_interfaces']/[@ShortId='tones']">
+            <BuildVariant HwVariant="H13672v2 CE446_CE692 R13568v4 R13568v4_A05 CF133 CG437 CF376_CE692 CF376_CE692H3 CF376_H13732 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="8"/>
+        </ConfigItem>
+    </ConfigGroup>
+</ModuleData>
+

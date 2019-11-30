@@ -1,0 +1,20 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# EON EN25S80B(2S)
+QSPIFRAMLUTBaseParams = [00 1c 38 14 02 00 01 a5 00]
+QSPIFRAMLUTSPIReadParams = [00 03 01]
+QSPIFRAMLUTSPIConfVector =  [00 0a 04 01 3a 01 50 02 01 40 01 04]
+QSPIFRAMLUTFastConfVector =  [00 0a 04 01 3a 01 50 02 01 40 01 04]
+QSPIFRAMLUTWriteCmds =  [00 02 06]
+QSPIFRAMLUTEraseCmds = [00 d8 60]
+QSPIFRAMLUTStatusReadParams = [00 01 01 02 01]
+QSPIFRAMLUTStatusReadVector = [00 03 01 01 05]
+QSPIFRAMLUTDPDCmds = [00 b9 ab]
+QSPIFRAMLUTFastReadParams = [00 03 eb 00 04]
+QSPIFRAMLUTResetVector = [00 05 02 01 66 01 99]
+QSPIFRAMLUT4BAMCmds = [00 00 00]
+QSPIFRAMLUTSuspendResumeCmds = [00 b0 30 b0 30]

@@ -1,0 +1,812 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  make rules for building exe and libraries
+#               NB this is not a standalone makefile. It assumes something
+#               has already set a target lib or exe, and pulled in
+#               things like roots.mkf.
+############################################################################
+
+.PHONY: all debug verbose dox clean
+
+#########################################################################
+# Pull in common definitions
+#########################################################################
+include $(BUILD_ROOT)/makerules_common.mkf
+
+#########################################################################
+# Define more helper targets.
+#########################################################################
+
+# Ideally, we'd like to output the verbose boilerplate before dependency generation.
+# That's a pain to do though, so instead we do it at some point afterwards
+# (depending on whether we invoke 'debug verbose' or 'verbose debug').
+verbose:	ALWAYS_MAKE # Verbose option so make system tells us what it is doing
+	$(info  -------------------------------------------------------------------------------)
+ifneq ($(strip $(TARGET_LIB_ROOT)),)
+	$(info  Target lib: $(TARGET_LIB_ROOT).$(LIB_EXT))
+else
+	$(info  Target exe: $(TARGET_EXE_ROOT)$(EXE_EXT))
+endif
+	$(info Built for: $(TARGET_PLATFORM) $(TARGET_COMPILER))
+	$(info C_SRC: $(C_SRC))
+	$(info S_SRC: $(S_SRC))
+	$(info H_PATH: $(H_PATH))
+	$(info LIBS: $(LIBS))
+	$(info COMPILE_DEFS \(including EXTRA_DEFS\): $(COMPILE_DEFS))
+	$(info ASSEMBLE_EXTRA_DEFS: $(ASSEMBLE_EXTRA_DEFS))
+	$(info  -------------------------------------------------------------------------------)
+
+#########################################################################
+# Define simple targets. Rules for more complex targets at end of this file
+#########################################################################
+all: verbose debug
+
+ALWAYS_MAKE:	;
+
+#########################################################################
+# Generic library macros
+#########################################################################
+LDIRS=		$(dir $(LIBS))
+RECURSE=	${LDIRS:%=%recurse}
+.PHONY:		$(RECURSE)
+
+DEBUG_LDIRS=	$(patsubst $(KYMERA_ROOT)/%/,$(OUTPUT_ROOT)/%/debugbin,${LDIRS})
+LFILES=		$(patsubst %,lib%.$(LIB_EXT),$(notdir $(LIBS)))
+DEBUG_EXT_LIBS?=$(join $(DEBUG_LDIRS:%=%/), $(LFILES))
+XUV_EXT = .xuv
+
+
+#########################################################################
+# Set extension labels. LIB_EXT and EXE_EXT are set in $(TARGET_COMPILER).mkf
+#########################################################################
+DEPEND_EXT=	d
+ifeq (true, $(strip $(PP_ONLY)))
+OBJ_EXT=	pp
+PRIV_OBJ_EXT=	pp
+else
+OBJ_EXT=	o
+PRIV_OBJ_EXT=	po
+endif
+OFFCHIP_TMP_EXT=dyn_off
+
+#########################################################################
+# Set library extension for kstrip output
+#########################################################################
+KSTRIP_EXT=.kstrip.a
+
+#########################################################################
+# Set dependencies
+#########################################################################
+C_DEPENDS=	$(C_SRC:%.c=$(DEPEND_DIR)/%.$(DEPEND_EXT))
+ifneq (gcc, $(strip $(TARGET_COMPILER)))
+ifneq (true, $(strip $(PP_ONLY)))
+S_DEPENDS=	$(S_SRC:%.$(S_EXT)=$(DEPEND_DIR)/%.$(DEPEND_EXT))
+S_DEPENDS+=	$(DYN_FILES:%.$(DYN_EXT)=$(DEPEND_DIR)/%.$(DEPEND_EXT))
+endif
+endif
+
+#.DELETE_ON_ERROR: $(C_DEPENDS) $(S_DEPENDS)
+
+########################################################################
+# Paths - default paths to use when searching for source files
+#########################################################################
+C_PATH += .
+S_PATH += .
+H_PATH += $(ALL_INCDIRS:%=$(KYMERA_ROOT)/%)
+H_PATH += $(AUTOGEN_INC_ROOT)
+H_PATH += $(AUTOGEN_INC_ROOT)/interface
+H_PATH += $(IO_ROOT)/$(CHIP_NAME)/$(CHIP_VER)
+H_PATH += $(HAL_ROOT)/$(CHIP_NAME)/$(CHIP_VER)
+H_PATH += .
+H_PATH += $(COMPILER_H_PATH)
+H_PATH += $(EXTRA_INCDIRS)
+H_PATH += $(LIB_SS_HDR_DIR)
+
+vpath %.c $(strip $(subst |, ,$(C_PATH)))
+vpath %.$(S_EXT) $(strip $(subst |, ,$(S_PATH)))
+vpath %.$(DYN_EXT) $(strip $(subst |, ,$(S_PATH)))
+
+SRC_INC_DIRS=	$(patsubst %,-I %,$(subst / , ,$(subst |, ,$(call ospath,$(H_PATH))))) #H-PATH, with -I prefixed to each path
+
+#########################################################################
+# Generate library/executable name (by adding correct extension)
+#########################################################################
+DEBUG_TARGET_EXE=	$(TARGET_EXE_ROOT:%=$(DEBUG_BIN_DIR)/%${EXE_EXT})
+DEBUG_TARGET_EXE_REL_EXT=	$(TARGET_EXE_ROOT:%=$(DEBUG_BIN_DIR)/%_external${EXE_EXT})
+
+LIB_TARGET_LIB_ROOT=	$(TARGET_LIB_ROOT:%=lib%)
+DEBUG_TARGET_LIB=	$(LIB_TARGET_LIB_ROOT:%=$(DEBUG_BIN_DIR)/%.$(LIB_EXT))
+
+
+#########################################################################
+# Calculate any dependency on .elf files from LINK_EXTRA_FLAGS
+#########################################################################
+# --just-symbols=k:\crescendo_dev\kalimba\kymera\output\crescendo_sqif_exp_const\build/debugbin/kymera_crescendo_audio.elf
+LINK_EXTRA_DEPENDENCIES:=$(patsubst --just-symbols=%,%,$(filter %.elf,$(LINK_EXTRA_FLAGS)))
+
+#########################################################################
+# Include header dependency rules (unless this is a clean build)
+#########################################################################
+# Dependency files are generated as part of the compile process, rather
+# than as a separate stage.
+# They are added as a pre-requisite for the objects, so if a .d file is
+# missing the compile stage is triggered.
+# An explicit rule for .d files ensures make does not try to build them
+# separately.
+# .PRECIOUS is used to make sure they are never tidied by make
+
+ifeq ($(findstring clean, $(MAKECMDGOALS)), )
+
+ifneq ($(strip $(C_SRC)), )
+-include $(C_DEPENDS)
+endif
+
+ifneq ($(strip $(S_SRC)$(DYN_FILES)), )
+-include $(S_DEPENDS)
+endif
+
+# Include default rule for the case when .d files do not exist 
+# and make sure make never tidies them up
+$(DEPEND_DIR)/%.$(DEPEND_EXT) : ;
+.PRECIOUS: $(DEPEND_DIR)/%.$(DEPEND_EXT)
+
+endif
+
+# $(call matchlib,$(LIST),$(PATH))
+# returns a non-empty string if any item in $(LIST) turns out to be a
+# subset of $(PATH) (doesn't have to match exactly), with some munging
+# to get rid of ".." components and to avoid substring matches within
+# path components (don't want 'audio_log' to be matched by 'audio',
+# but 'audio/foo' will match).
+# The actual string returned is not meaningful and should only be
+# tested for emptiness.
+# e.g.
+#   $(LIST) = ../lib_private components/foo components/audio
+#   $(PATH) = path/to/lib_private/aptx/aptx
+# will yield a match.
+# 
+# Trailing slash on $2 ('haystack') is to ensure it doesn't match a
+# prefix in any of the 'needles' (it's assuming input strings are such
+# that suffix matches aren't a problem).
+# Slash-substitution is because this can be called with a mix of path
+# types, so we canonicalise on forward-slash. (The path separator here
+# isn't used for anything, so doesn't need to match the host platform;
+# the choice of forward-slash is arbitrary.)
+define matchlib
+$(strip $(foreach lib, $1, $(findstring $(subst \,/,$(patsubst ..%,%,$(lib))/),$(subst \,/,$2/))))
+endef
+
+# Check whether we should be using special lib-release rules
+# We currently support two types of release builds
+# RELEASE_BUILD
+#  - Uses kalscramble to obfuscate private libraries (legacy method)
+#  - Generates one ELF file
+# REL_EXT_BUILD
+#  - Generates two ELF files (internal and external)
+#  - The internal ELF has no obfuscated contents and can be used for debugging from Qualcomm
+#  - The external ELF matches the code and data layout (checksum is equal to the internal), so customers
+#  can still debug but sensitive code, data and symbols have been obfuscated
+# If any of these is defined it will obfuscate all $(PRIVATE_LIBS).
+
+C_FLAGS = $(SPECIAL_C_FLAGS) $(DEBUG_COMPILE_FLAGS)
+ASM_FLAGS = $(SPECIAL_ASM_FLAGS) $(DEBUG_ASSEMBLE_FLAGS)
+RELEASE_BUILD?=FALSE
+REL_EXT_BUILD?=FALSE
+ifeq ($(strip $(RELEASE_BUILD)),TRUE)
+ifeq ($(strip $(REL_EXT_BUILD)),TRUE)
+$(error Only one type of release build is supported at a time)
+endif
+endif
+
+# List of just the private libraries, pre-stripping
+DEBUG_EXT_LIBS_TO_STRIP=$(foreach LIB, $(DEBUG_EXT_LIBS), $(if $(call matchlib, $(PRIVATE_LIBS),$(LIB)), $(LIB),))
+
+# List of all libraries, with the private ones replaced with stripped copies
+DEBUG_EXT_LIBS_STRIPPED=$(foreach LIB, $(DEBUG_EXT_LIBS), $(if $(call matchlib, $(PRIVATE_LIBS),$(LIB)), $(LIB)$(KSTRIP_EXT),$(LIB)))
+
+# When building an individual library, should it be built as 'private'?
+ifneq ($(call matchlib, $(PRIVATE_LIBS), $(TARGET_DIR)), )
+    OBJ_EXT = $(PRIV_OBJ_EXT)
+ifeq ($(strip $(RELEASE_BUILD)),TRUE)
+    C_FLAGS = $(RELEASE_COMPILE_FLAGS)
+    ASM_FLAGS = $(SPECIAL_ASM_FLAGS) $(RELEASE_ASSEMBLE_FLAGS)
+    RELEASE_BUILD_LIB=TRUE
+else
+ifeq ($(strip $(REL_EXT_BUILD)),TRUE)
+    C_FLAGS := $(REL_EXT_COMPILE_FLAGS) $(C_FLAGS)
+    ASM_FLAGS := $(REL_EXT_ASSEMBLE_FLAGS) $(ASM_FLAGS)
+    REL_EXT_BUILD_LIB=TRUE
+endif
+endif
+endif
+
+#########################################################################
+# Generate target list from source list
+#########################################################################
+
+DEBUG_OBJECTS+=	$(C_SRC:%.c=$(DEBUG_OBJ_DIR)/%.$(OBJ_EXT))
+ifneq (gcc, $(strip $(TARGET_COMPILER)))
+ifneq (true, $(strip $(PP_ONLY)))
+DEBUG_OBJECTS+=	$(S_SRC:%.$(S_EXT)=$(DEBUG_OBJ_DIR)/%.$(OBJ_EXT))
+DEBUG_OBJECTS+=	$(DYN_FILES:%.$(DYN_EXT)=$(DEBUG_OBJ_DIR)/%.$(OBJ_EXT))
+endif
+endif
+
+#########################################################################
+# Cleaning rules
+# Note protection against undefined path names if cleaning all files
+#########################################################################
+clean:	$(DEBUG_EXT_LIBS) ALWAYS_MAKE
+ifneq ($(strip $(DEBUG_BIN_DIR)),)
+	-$(RM_F) $(call ospath,$(DEBUG_BIN_DIR)/*)
+endif
+ifneq ($(strip $(DEBUG_EXTCONST_DIR)),)
+	-$(RM_F) $(call ospath,$(DEBUG_EXTCONST_DIR)/*)
+endif
+ifneq ($(strip $(DEPEND_DIR)),)
+	-$(RM_F) $(call ospath,$(DEPEND_DIR)/*)
+endif
+ifneq ($(strip $(DEBUG_OBJ_DIR)),)
+	-$(RM_F) $(call ospath,$(DEBUG_OBJ_DIR)/*)
+endif
+ifneq ($(strip $(LIB_SS_HDR_DIR)),)
+	-$(RM_F) $(call ospath,$(LIB_SS_HDR_DIR)/*)
+endif
+ifneq ($(strip $(STRUCT_ROOT)),)
+	-$(RM_RF) $(call ospath,$(STRUCT_ROOT)/*)
+endif
+
+#########################################################################
+# Compiler/Linker definitions
+#########################################################################
+COMPILE_DEFS+=		$(COMPILE_EXTRA_DEFS)
+DEBUG_COMPILE_DEFS+=	$(DEBUG_COMPILE_EXTRA_DEFS)
+
+COMPILE_DEFS_ASM=		$(COMPILE_DEFS) $(ASSEMBLE_EXTRA_DEFS)
+DEBUG_COMPILE_DEFS_ASM+=	$(DEBUG_COMPILE_EXTRA_DEFS)
+
+PREINCLUDE_DEFS_FILE=$(TARGET_DIR)/preinclude_defs.h
+PREINCLUDE_DEFS_ASM_FILE=$(TARGET_DIR)/preinclude_defs_asm.h
+
+$(shell $(PYTHON) $(PREINCLUDE_DEFS_GEN) +i $(DEBUG_COMPILE_DEFS) $(COMPILE_DEFS) +o $(PREINCLUDE_DEFS_FILE))
+$(shell $(PYTHON) $(PREINCLUDE_DEFS_GEN) +i $(COMPILE_DEFS_ASM) +o $(PREINCLUDE_DEFS_ASM_FILE))
+
+##########################################################################
+# Clean up definition
+##########################################################################
+# Clean up script to summarise warnings and errors at end of build process
+# The first argument must be the temporary log file
+export CLEANUP = $(BUILD_ROOT)/cleanup.py
+
+#########################################################################
+# Dependency rules
+#########################################################################
+
+DEPEND_FLAGS = -MD $(EXTRA_DEPEND_FLAGS) -MT $@ -MF $(@D)/../depend/$(basename $(@F)).$(DEPEND_EXT)
+DEPEND_FLAGS_ASM = -MD -MT $@ -MF $(@D)/../depend/$(basename $(@F)).$(DEPEND_EXT)
+
+
+
+
+
+# If we need a header or source file that doesn't exist, carry on and hope for the best.
+# The odds are that we've removed a file and are just suffering from a stale dependency.
+# If we carry on, we'll be fine. If not we'll soon find out anyway.
+
+%.c:
+	$(warn $@ seems to be missing, but continuing anyway...)
+
+%.h:
+	$(warn $@ seems to be missing, but continuing anyway...)
+
+%.dat:
+	$(warn $@ seems to be missing, but continuing anyway...)
+
+%.$(S_EXT):
+	$(warn $@ seems to be missing, but continuing anyway...)
+
+
+#########################################################################
+# Object files depend on .c and .s files (and dependencies)
+#########################################################################
+
+ifeq (true, $(strip $(PRINT_DEFINES)))
+DEBUG_COMPILE_INFO_STRING = using defines: "$(DEBUG_COMPILE_DEFS) $(COMPILE_DEFS)"
+else
+DEBUG_COMPILE_INFO_STRING =
+endif
+
+# Check whether we should build this library as Minim or not
+ifeq ($(call matchlib, $(MAXIM_LIBS), $(TARGET_DIR)/$(TARGET_LIB_ROOT)),)
+    SPECIAL_ASM_FLAGS = $(MINIM_FLAGS)
+else
+    SPECIAL_ASM_FLAGS =
+endif
+
+# Check whether we should build this library with pm keep or not
+ifneq ($(call matchlib, $(PM_KEEP_LIBS), $(TARGET_DIR)/$(TARGET_LIB_ROOT)),)
+# gcc doesn't support -preinclude switch so ignore it.
+ifneq ($(TEST_BUILD),gcc)
+# Only keep libraries in PM when building the static Kymera image
+ifeq ($(strip $(DOWNLOAD)),)
+    SPECIAL_C_FLAGS += -preinclude $(call ospath,$(BUILD_ROOT)/download_pm_keep.c)
+endif
+endif
+endif
+
+#Commands for debug builds
+$(DEBUG_OBJ_DIR)/%.$(OBJ_EXT): %.c $(DEPEND_DIR)/%.$(DEPEND_EXT) $(MAKE_DEPS) $(CLEANUP)
+ifeq (true, $(strip $(PP_ONLY)))
+	$(info Preprocessing $< $(DEBUG_COMPILE_INFO_STRING))
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(COMPILE) $(SRC_INC_DIRS) $(PP_ONLY_FLAGS) $(DEPEND_FLAGS) $(C_FLAGS) $@ $< $(PREINCLUDE_FLAGS)
+else
+	$(info Debug compiling $< $(DEBUG_COMPILE_INFO_STRING))
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(COMPILE) $(SRC_INC_DIRS) $(DEPEND_FLAGS) $(C_FLAGS) $@ $< $(PREINCLUDE_FLAGS)
+endif
+	$(SED) -i.bak 's/\S*\(preinclude_defs_asm.h\|preinclude_defs.h\)\S*//g' $(@D)/../depend/$(basename $(@F)).$(DEPEND_EXT)
+	$(RM_F) $(call ospath,$(@D)/../depend/$(basename $(@F)).$(DEPEND_EXT).bak)
+	$(call utouch,$(call ospath,$@))
+
+$(DEBUG_OBJ_DIR)/%.$(OBJ_EXT): %.$(S_EXT) $(DEPEND_DIR)/%.$(DEPEND_EXT) $(MAKE_DEPS) $(CLEANUP)
+	$(info Debug assembling $< ...)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(ASSEMBLE) $< -I $(dir $<) $(SRC_INC_DIRS) $(ASM_FLAGS) $(DEPEND_FLAGS_ASM) -o $@ -preinclude $(PREINCLUDE_DEFS_ASM_FILE)
+	$(SED) -i.bak 's/\S*\(preinclude_defs_asm.h\|preinclude_defs.h\)\S*//g' $(@D)/../depend/$(basename $(@F)).$(DEPEND_EXT)
+	$(RM_F) $(call ospath,$(@D)/../depend/$(basename $(@F)).$(DEPEND_EXT).bak)
+	$(call utouch,$(call ospath,$@))
+
+# Dynamic memory is generated by kdynmem
+# 1.    The assembler produces a partly resolved object from .dyn files
+# 2.    kdynmem parses the object and writes a funkier version .dyn.asm
+# 3a&b. This is compiled twice. Once for data kept onchip and again for data, if any, being moved to a file system
+# 4.    kdynmem is called again to export the constant data (if any). Only the path is supplied. kdynmem creates filename.
+
+ifneq ($(BUILD_CAPABILITY_CONSTANT_EXPORT),)
+# Exported constant files are named after the build ID to avoid mixups.
+# Get the build ID in a form suitable for passing to kdynmem.
+ifneq ($(strip $(RELEASE_BUILD_ID)),)
+BUILD_ID_FOR_KDYNMEM = --build_vsn=$(subst -DRELEASE_BUILD_ID=,,$(RELEASE_BUILD_ID))
+else
+# If --build_vsn is passed with no argument (and no '='), kdynmem assumes
+# 0xFFFF, which matches our id.c.
+BUILD_ID_FOR_KDYNMEM = --build_vsn
+endif
+endif
+
+$(DEBUG_OBJ_DIR)/%.$(OBJ_EXT):	%.$(DYN_EXT) $(DEPEND_DIR)/%.$(DEPEND_EXT) $(MAKE_DEPS) $(CLEANUP) $(DYNMEM_VER)
+	$(info Dynamic-memory-processing $< ...)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(ASSEMBLE) $< -I $(dir $<) $(SRC_INC_DIRS) $(ASM_FLAGS) $(DEPEND_FLAGS_ASM) -o $(subst .$(OBJ_EXT),.$(DYN_EXT).$(OBJ_EXT), $@) -preinclude $(PREINCLUDE_DEFS_ASM_FILE)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(DYNMEM) -o $(subst .$(OBJ_EXT),.$(DYN_EXT).$(S_EXT), $@) $(subst .$(OBJ_EXT),.$(DYN_EXT).$(OBJ_EXT), $@)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(ASSEMBLE) $(subst .$(OBJ_EXT),.$(DYN_EXT).$(S_EXT), $@) -I $(dir $<) -DEXPORTED_CONSTANTS_ONCHIP_BUILD=1 $(SRC_INC_DIRS) $(ASM_FLAGS) -o $@ -preinclude $(PREINCLUDE_DEFS_ASM_FILE)
+ifneq ($(BUILD_CAPABILITY_CONSTANT_EXPORT),)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(ASSEMBLE) $(subst .$(OBJ_EXT),.$(DYN_EXT).$(S_EXT), $@) -I $(dir $<) -DEXPORTED_CONSTANTS_ONCHIP_BUILD=0 $(SRC_INC_DIRS) $(ASM_FLAGS) -o $(subst .$(OBJ_EXT),.$(DYN_EXT).$(OFFCHIP_TMP_EXT).$(OBJ_EXT),$@) -preinclude $(PREINCLUDE_DEFS_ASM_FILE)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(DYNMEM) --genoffchip --subsystem $(XIP_SUBSYSTEM) $(BUILD_ID_FOR_KDYNMEM) -o $(DEBUG_EXTCONST_DIR)/ $(subst .$(OBJ_EXT),.$(DYN_EXT).$(OFFCHIP_TMP_EXT).$(OBJ_EXT), $@)
+	-$(COPY) $(call ospath,$(DEBUG_EXTCONST_DIR)/*) $(call ospath,$(DEBUG_EXTCONST_ROOT)/)
+endif
+	$(SED) -i.bak 's/\S*\(preinclude_defs_asm.h\|preinclude_defs.h\)\S*//g' $(@D)/../depend/$(basename $(@F)).$(DEPEND_EXT)
+	$(RM_F) $(call ospath,$(@D)/../depend/$(basename $(@F)).$(DEPEND_EXT).bak)
+	$(call utouch,$(call ospath,$@))
+
+# Anything in SPECIAL_S_SRC / SPECIAL_C_SRC is passed to the assembler/compiler
+# but isn't part of a library
+# This is used for the ID string, which is always built,
+# but only linked if something else changes
+
+SPECIAL_C_OBJ = $(SPECIAL_C_SRC:%.c=$(DEBUG_OBJ_DIR)/%.$(OBJ_EXT))
+SPECIAL_S_OBJ = $(SPECIAL_S_SRC:%.$(S_EXT)=$(DEBUG_OBJ_DIR)/%.$(OBJ_EXT))
+
+SPECIAL_OBJ = $(SPECIAL_C_OBJ) $(SPECIAL_S_OBJ)
+
+# As this isn't actually a prerequisite for the executable we make the default target depend on it
+# We also make it a prerequisite of .PHONY so that it's always rebuilt
+.PHONY debug: $(SPECIAL_OBJ)
+
+$(SPECIAL_C_OBJ): $(SPECIAL_C_SRC)
+	$(info Debug compiling $<  ...)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(COMPILE) $(SRC_INC_DIRS) $(C_FLAGS)$@ $< -preinclude $(PREINCLUDE_DEFS_FILE)
+
+$(SPECIAL_S_OBJ): $(SPECIAL_S_SRC)
+	$(info Debug assembling $< ...)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(ASSEMBLE) $< -I $(dir $<) $(SRC_INC_DIRS) $(ASM_FLAGS) -o $@ -preinclude $(PREINCLUDE_DEFS_ASM_FILE)
+
+#########################################################################
+# Rules to recursively make libraries needed for executable
+#########################################################################
+$(DEBUG_EXT_LIBS):	${RECURSE}
+# We just need a recipe here
+	@$(TRUE)
+
+${RECURSE}:		ALWAYS_MAKE
+ifeq ($(findstring clean, $(MAKECMDGOALS)), )
+	$(info Making libraries in ${@D})
+else
+	$(info cleaning ${@D})
+endif
+	$(MAKE) -C $(@D) $(MAKECMDGOALS) COMPILE_EXTRA_DEFS="$(COMPILE_EXTRA_DEFS)" DEBUG_COMPILE_EXTRA_DEFS="$(DEBUG_COMPILE_EXTRA_DEFS)" ASSEMBLE_EXTRA_DEFS="$(ASSEMBLE_EXTRA_DEFS)" LINK_EXTRA_FLAGS="$(LINK_EXTRA_FLAGS)" COMPILE_EXTRA_FLAGS="${COMPILE_EXTRA_FLAGS}" ASSEMBLE_EXTRA_FLAGS="${ASSEMBLE_EXTRA_FLAGS}" ALL_SRCDIRS="${ALL_SRCDIRS}" ALL_INCDIRS="${ALL_INCDIRS}" TEST_BUILD="${TEST_BUILD}" PRIVATE_LIBS="${PRIVATE_LIBS}" MAXIM_LIBS="${MAXIM_LIBS}" PM_KEEP_LIBS="${PM_KEEP_LIBS}"
+
+#########################################################################
+# Library build rules
+#########################################################################
+ifneq ($(strip $(DEBUG_TARGET_LIB)),)  # build the requested debug library
+debug:	$(DEBUG_TARGET_LIB)
+	$(info Target $(DEBUG_TARGET_LIB) built)
+	$(info ----------------------------------------)
+
+# .symbols files, which define public entry points to private libraries,
+# are optional.
+# (Such entry points can also be defined with .PUBLIC; and for REL_EXT_BUILD,
+# it's legitimate to have no public entry points at all.)
+ifneq ($(wildcard $(TARGET_LIB_ROOT).symbols),)
+
+ifeq ($(strip $(RELEASE_BUILD_LIB)),TRUE)
+$(DEBUG_TARGET_LIB): $(TARGET_LIB_ROOT).symbols
+SCRAMBLE_PUBSYMS_ARG = -i $(call ospath,$(TARGET_LIB_ROOT).symbols)
+endif  # RELEASE_BUILD_LIB
+
+ifeq ($(strip $(REL_EXT_BUILD_LIB)),TRUE)
+$(DEBUG_TARGET_LIB): $(TARGET_LIB_ROOT).symbols
+EXTRACT_PUBSYMS_ARG = -P $(call ospath,$(TARGET_LIB_ROOT).symbols)
+endif  # REL_EXT_BUILD_LIB
+
+endif  # .symbols file exists
+
+$(DEBUG_TARGET_LIB):	$(DEBUG_OBJECTS) $(DEBUG_EXT_LIBS) $(CLEANUP)
+	$(info Creating library $(DEBUG_TARGET_LIB) ...)
+ifneq (true, $(strip $(PP_ONLY))) # Don't try to build archive if only preprocessing
+# Make sure the archive files are always fresh 
+	-$(RM_F) $(call ospath,$@) $(STDOUT_STDERR_DEV_NULL)
+ifeq ($(strip $(RELEASE_BUILD_LIB)),TRUE)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(ARCHIVE) $(DEBUG_PRE_ARCHIVE_FLAGS) $@.xxx $(DEBUG_OBJECTS) $(EXTRA_DEBUG_OBJECTS) $(DEBUG_EXT_LIBS) $(DEBUG_POST_ARCHIVE_FLAGS)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(SCRAMBLE) $(SCRAMBLE_PUBSYMS_ARG) -i $(TARGET_LIB_ROOT).symbols -f $@.translation -m -o $@ $@.xxx
+	-$(COPY) $(TARGET_LIB_ROOT).symbols $(call ospath,$@).symbols
+else
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(ARCHIVE) $(DEBUG_PRE_ARCHIVE_FLAGS) $@ $(DEBUG_OBJECTS) $(EXTRA_DEBUG_OBJECTS) $(DEBUG_EXT_LIBS) $(DEBUG_POST_ARCHIVE_FLAGS)
+ifeq ($(strip $(REL_EXT_BUILD)),TRUE)
+# Censoring the right set of symbols when not using kalscramble
+# requires some extra faff:
+ifeq ($(strip $(REL_EXT_BUILD_LIB)),TRUE)
+# Make copies of the private libraries with debug information removed.
+# (It's not practical to retrospectively remove this after link, because
+# all modules' debug information gets knitted together, so we must do
+# it here.)
+	-$(COPY) $(call ospath,$@) $(call ospath,$@$(KSTRIP_EXT))
+	$(KSTRIP) $(KSTRIP_FLAGS) $@$(KSTRIP_EXT)
+# We'll need lists of .PUBLIC and .CONST symbols from each private
+# library later, when producing a _external .elf. (.PUBLIC information
+# is lost during link, as is the origin of .CONST symbols, so we must
+# collect this here.)
+# We also fold in any .symbols file that we would have passed to
+# kalscramble, were we using it.
+	$(PYTHON) $(BUILD_ROOT)/extract_syms_from_lib.py -k $(KTOOLS_ROOT) $(EXTRACT_PUBSYMS_ARG) -p $(subst .a,.public,$(call ospath,$@)) -c $(subst .a,.const,$(call ospath,$@)) $@$(KSTRIP_EXT)
+else
+# Even for public libraries, we must collect .CONST symbols, so that
+# we can later work out which of the .CONST symbols that ended up in
+# the final ELF were *only* mentioned in private libraries. (Lots
+# will be in both, and we don't want to strip those.)
+	$(PYTHON) $(BUILD_ROOT)/extract_syms_from_lib.py -k $(KTOOLS_ROOT) -c $(subst .a,.const,$(call ospath,$@)) $@
+endif   # REL_EXT_BUILD_LIB
+endif   # REL_EXT_BUILD
+endif   # RELEASE_BUILD_LIB
+endif   # PP_ONLY
+endif   # DEBUG_TARGET_LIB
+
+#########################################################################
+# Variables for doxygen
+#########################################################################
+
+# Filter out kalimba combined asm libs from the sources. These are not documented yet
+DOX_SRC_DIRS_TEMP1 = $(filter-out components/kalimba_combined_asm_libs/%,$(ALL_SRCDIRS))
+# Remove capabilities from the Doxygen documentation
+DOX_SRC_DIRS_TEMP2 = $(filter-out capabilities/%,$(DOX_SRC_DIRS_TEMP1))
+# Hydra modules causes confusions in Kymera documentation, remove it.
+DOX_SRC_DIRS = $(filter-out components/hydra_modules/%,$(DOX_SRC_DIRS_TEMP2))
+
+# add path
+DOX_SRC_PATH = $(DOX_SRC_DIRS:%=$(KYMERA_ROOT)/%)
+
+# add auto generated files and corresponding interface
+#DOX_SRC_PATH += $(AUTOGEN_ROOT)
+#DOX_SRC_PATH += $(AUTOGEN_ROOT)/interface
+#DOX_SRC_PATH += $(AUTOGEN_ROOT)/mib
+#DOX_SRC_PATH += $(AUTOGEN_ROOT)/mib/interface
+#DOX_SRC_PATH += $(IO_ROOT)/$(CHIP_NAME)/$(CHIP_VER)
+#DOX_SRC_PATH += $(HAL_ROOT)/$(CHIP_NAME)/$(CHIP_VER)
+
+#include current directory if not called from build directory
+ifneq ($(ABS_CURDIR), $(BUILD_ROOT))
+DOX_SRC_PATH += $(call myabspath,.)
+endif
+
+DOX_COMPILE_DEFS = $(COMPILE_EXTRA_DEFS:-D%=%)
+
+# Point to a known version of Doxygen for Linux build environments
+ifneq ($(findstring linux, $(OSTYPE)), )
+    DOXYGEN = /tools/bin/doxygen
+    DOTPATH = /tools/bin
+else
+    DOXYGEN = /c/doxygen/bin/doxygen
+    DOTPATH = c:\graphviz\bin\ 
+endif
+
+LAYOUTFILE=    $(BUILD_ROOT)/doxygen/MasterLayoutFile.xml
+
+#########################################################################
+# Doxygen rules
+#########################################################################
+dox:
+# Running with 'dox' will regenerate documentation, but won't
+# clean out the target directory first. If we want to remove
+# any old files, run 'dox clean'.
+ifeq ($(findstring clean, $(MAKECMDGOALS)), )
+	$(info Doxygening...)
+ifneq ($(findstring verbose, $(MAKECMDGOALS)), )
+	$(info DOXYGEN_OUTPUT_DIR:$(DOC_DIR): DOXYGEN_SOURCE_PATH:$(DOX_SRC_PATH) DOXYGEN_COMPILE_DEFINES:$(DOX_COMPILE_DEFS))
+endif
+	$(SED) "s:DOXYGEN_OUTPUT_DIR:$(DOC_DIR):" $(BUILD_ROOT)/doxygen/MasterDoxyfile | $(SED) "s:DOXYGEN_STRIP_PATH:$(KYMERA_ROOT):" | $(SED) "s:DOXYGEN_SOURCE_PATH:$(DOX_SRC_PATH):" | $(SED) "s:DOXYGEN_COMPILE_DEFINES:$(DOX_COMPILE_DEFS):" | $(SED) "s:DOT_PATH_STR:$(DOTPATH):" | $(SED) "s:LAYOUT_FILE_WITH_PATH:$(LAYOUTFILE):" > $(DOC_DIR)/doxyConfig
+	$(DOXYGEN) $(call ospath,$(DOC_DIR)/doxyConfig) $(STDOUT_DEV_NULL)
+else
+	$(info Cleaning doxygen...)
+	-$(RM_RF) $(call ospath,$(DOC_DIR)/*)
+endif
+
+#########################################################################
+# executable build rules
+#########################################################################
+ifneq ($(strip $(DEBUG_TARGET_EXE)),) # build the debug executable
+
+ifeq (true, $(strip $(ALWAYS_RELINK)))
+# Make the output executable a prerequisite for .PHONY, so it always gets rebuilt
+.PHONY: $(DEBUG_TARGET_EXE)
+
+ifeq ($(strip $(REL_EXT_BUILD)),TRUE)
+.PHONY: $(DEBUG_TARGET_EXE_REL_EXT)
+endif
+endif
+
+ifneq ($(findstring klink,$(LINK)), )
+# Use the section bellow only if klink is defined. Assemble a list of
+# per-library .link files and pass their contents to the linker.
+# If kld or any other linker is defined (i.e. kld, ld(for pc unit tests), etc)
+# skip this.
+
+LINKFILES = $(addsuffix .link, $(LIBS))
+LINKFILES += $(subst .a,.link, $(addprefix $(PREBUILT_LIB_ROOT)/,$(PREBUILT_LIBS)))
+
+ifneq ($(strip $(LINKFILES)),)
+LIB_LINK = $(DEBUG_BIN_DIR)/lib.link
+
+LINK_DEPS += $(LIB_LINK)
+
+$(LIB_LINK): ALWAYS_MAKE
+# Concatenate the per-library link files
+# Do this one file at a time, otherwise the command line can get extremely long
+	$(foreach linkfile, $(LINKFILES), @$(shell $(CAT) $(call ospath,$(linkfile)) >> $(call ospath,$(LIB_LINK)).new $(STDERR_DEV_NULL)))
+	$(PYTHON) $(BUILD_ROOT)/check_for_update.py $(call ospath,$(LIB_LINK))
+# Delete the intermediate file after checking for updates, so we don't re-add stuff to it next time
+	-$(RM) $(call ospath,$(LIB_LINK)).new
+
+DEBUG_OBJECTS += $(LIB_LINK)
+endif
+
+%.link:
+# Silently ignore nonexistent .link files, not all libs will have them
+	@$(TRUE)
+
+endif
+
+ifeq ($(strip $(MIBFILES)),true)
+ifeq ($(strip $(TEST_BUILD)),)
+EXTRA_TARGETS += mib_files
+endif
+endif
+
+ifneq ($(strip $(MERGE_DUAL_CORE_OUTPUT)),)
+EXTRA_TARGETS += dual_core_merge
+endif # MERGE_DUAL_CORE_OUTPUT
+
+ifeq ($(strip $(REL_EXT_BUILD)),TRUE)
+LST_FILE_REL_EXT := $(subst .elf,.lst,$(DEBUG_TARGET_EXE_REL_EXT))
+SYM_FILE_REL_EXT := $(subst .elf,.sym,$(DEBUG_TARGET_EXE_REL_EXT))
+KMAP_FILE_REL_EXT := $(subst .elf,.kmap,$(DEBUG_TARGET_EXE_REL_EXT))
+REL_EXT_TARGETS := $(DEBUG_TARGET_EXE_REL_EXT)
+REL_EXT_TARGETS += $(LST_FILE_REL_EXT)
+REL_EXT_TARGETS += $(SYM_FILE_REL_EXT)
+REL_EXT_TARGETS += $(KMAP_FILE_REL_EXT)
+endif
+
+debug:	$(DEBUG_TARGET_EXE) $(FINAL_OUTPUT) $(LST_FILE) $(KMAP_FILE) $(SYM_FILE) $(EXTRA_TARGETS) $(REL_EXT_TARGETS) final_cleanup
+	$(info Target $(DEBUG_TARGET_EXE) built)
+
+ifneq (true, $(strip $(PP_ONLY))) # Don't try to build executable if only preprocessing
+#for Kalimba builds also produce a .kap file and object dump file
+ifeq (kcc, $(strip $(TARGET_COMPILER)))
+EXTRA_TARGETS += final_output
+ifeq (true, $(strip $(BUILD_FS_FROM_KAP)))
+KALELF_OUTPUT = $(subst .elf,.kap,$(DEBUG_TARGET_EXE))
+FINAL_OUTPUT = $(DEBUG_BIN_DIR)/image.fs
+else
+KALELF_OUTPUT = $(subst .elf,_tmp.rom,$(DEBUG_TARGET_EXE))
+FINAL_OUTPUT = $(subst .elf,.xuv,$(DEBUG_TARGET_EXE))
+endif
+LST_FILE = $(subst .elf,.lst,$(DEBUG_TARGET_EXE))
+SYM_FILE = $(subst .elf,.sym,$(DEBUG_TARGET_EXE))
+KMAP_FILE = $(subst .elf,.kmap,$(DEBUG_TARGET_EXE))
+LINK_OUT = $(DEBUG_BIN_DIR)/map_out.txt
+LINK_OUT_REL_EXT = $(DEBUG_BIN_DIR)/map_out_external.txt
+ifeq ($(strip $(PROJFILES)),true)
+PROJ_FILE = $(subst .elf,.xip,$(DEBUG_TARGET_EXE))
+EXTRA_TARGETS += $(PROJ_FILE)
+endif
+else
+LINK_OUT = $(DEV_NULL)
+LINK_OUT_REL_EXT = $(DEV_NULL)
+endif
+endif
+
+
+
+MERGE_DUAL_CORE = $(BUILD_ROOT)/merge_dual_core.py
+P0_OUTPUT_IMAGE=  $(TARGET_EXE_ROOT:%=$(P0_DEBUG_IMAGE_DIR)/%${XUV_EXT})
+P1_OUTPUT_IMAGE=  $(FINAL_OUTPUT) 
+ 
+dual_core_merge: $(P0_OUTPUT_IMAGE) $(P1_OUTPUT_IMAGE) 
+	$(info ------Merging P0 and P1 image for dual core--------)
+	$(info The P1 final output created was $(P1_OUTPUT_IMAGE))
+	$(info The P0 final output created was $(P0_OUTPUT_IMAGE))
+	$(info Merging P0 and P1 XUV image to a single XUV)
+	$(PYTHON) $(MERGE_DUAL_CORE) $(P0_OUTPUT_IMAGE) $(P1_OUTPUT_IMAGE) $(MERGE_DUAL_CORE_OUTPUT)
+	$(info ----------------MERGE COMPLETED-----------------)
+
+mib_files:	$(DEBUG_OBJECTS) $(DEBUG_EXT_LIBS)
+	$(info Copying MIB files)
+ifeq ($(strip $(MAKE_MIB_SDB)),true)
+	-$(COPY) $(call ospath,$(AUTOGEN_ROOT)/audio_mib.sdb) $(call ospath,$(DEBUG_BIN_DIR)/audio_mib.sdb)
+endif
+	-$(COPY) $(call ospath,$(AUTOGEN_ROOT)/audio_mib.xml) $(call ospath,$(DEBUG_BIN_DIR)/audio_mib.xml)
+	-$(COPY) $(call ospath,$(AUTOGEN_ROOT)/audio_mib.html) $(call ospath,$(DEBUG_BIN_DIR)/audio_mib.html)
+	@echo DONE Copying MIB files
+	@echo Continuing build ...
+
+$(DEBUG_TARGET_EXE):	$(DEBUG_EXT_LIBS) $(LINK_DEPS) $(CLEANUP)
+
+$(DEBUG_TARGET_EXE):	${DEBUG_OBJECTS} $(BUILD_ROOT)/parse_symbols.py $(LINK_EXTRA_DEPENDENCIES)
+ifneq (true, $(strip $(PP_ONLY))) # Don't try to build executable if only preprocessing
+ifneq ($(findstring verbose, $(MAKECMDGOALS)), ) # Print out some extra info in verbose mode
+	$(info -------------------------------------------------------------------------------)
+	$(info Target exe: $(TARGET_EXE_ROOT)$(EXE_EXT))
+	$(info Built for: $(TARGET_PLATFORM) $(TARGET_COMPILER))
+	$(info C_SRC: $(C_SRC))
+	$(info S_SRC: $(S_SRC))
+	$(info H_PATH: $(H_PATH))
+	$(info LIBS: $(LIBS))
+	$(info COMPILE_DEFS \(including EXTRA_DEFS\): $(COMPILE_DEFS))
+	$(info ASSEMBLE_EXTRA_DEFS: $(ASSEMBLE_EXTRA_DEFS))
+	$(info -------------------------------------------------------------------------------)
+endif
+	$(info Linking $@ ...)
+ifeq ($(strip $(NO_EXE_BUILD)),)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(LINK) $(DEBUG_PRE_LINK_FLAGS) $(DEBUG_OBJECTS) $(EXTRA_DEBUG_OBJECTS) $(PARTIAL_LINK_FLAG) $(DEBUG_LINK_FLAGS) $@
+endif
+else #PP_ONLY
+	$(info Preprocessing only, no executable built)
+endif #PP ONLY
+
+$(DEBUG_TARGET_EXE_REL_EXT): $(DEBUG_TARGET_EXE) $(LINK_EXTRA_DEPENDENCIES) $(IO_ROOT)/$(CHIP_NAME)/$(CHIP_VER)/io.restricted $(IO_ROOT)/$(CHIP_NAME)/$(CHIP_VER)/io.restricted_extra
+	$(info Release build - Linking $@ ...)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(LINK_REL_EXT) $(DEBUG_PRE_LINK_FLAGS) $(DEBUG_OBJECTS) $(EXTRA_DEBUG_OBJECTS) $(PARTIAL_LINK_FLAG) $(DEBUG_LINK_FLAGS_REL_EXT) $@.xxx
+# Produce a linked object with some private information stripped.
+#
+# --strip-private-symbols removes every symbol that kobjdump can
+# identify as having come from a private section.
+# Information about public entry points to private libraries was lost
+# during link, so we rely on .public files created when building each
+# private library, which list the public symbols; we keep those.
+#
+# --strip-private-symbols doesn't touch .CONST symbols, because there's
+# no information on their origin at this point.
+# Again, we rely on .const files created when building libraries.
+# This is more complicated: we can't just remove .CONST symbols that
+# appear in private libraries, because those often include headers
+# which define symbols which we don't want to hide. The rule we use is
+# that if a .CONST has appeared in any public library, we keep it; if
+# it only appeared in private library/ies, we assume it's private and
+# drop it. (This rule relies on truly-common .CONSTs being included by
+# at least one 'public' library.)
+# This is implemented by a script which munges together lists of
+# constants from *all* libraries in the system, to produce the final
+# list of constants to strip (which we pass to --strip-symbols).
+# (We actually pass all libraries, public and private, to the '-p'
+# option; the script is clever enough to ignore the private ones,
+# because I was too lazy to strip them out here.)
+#
+# There's a final wrinkle: sometimes we want to strip symbols that have
+# been used in public modules, so there's more invocations of
+# --strip-symbols, which remove them regardless of the above criteria.
+	$(PYTHON) $(BUILD_ROOT)/list_private_syms.py -s $(patsubst %.a,%.const,$(DEBUG_EXT_LIBS_TO_STRIP)) -p $(patsubst %.a,%.const,$(DEBUG_EXT_LIBS)) >$(subst .elf,.const_private,$(call ospath,$@))
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(KOBJCOPY) --strip-private-symbols $(patsubst %.a,--keep-symbols=%.public,$(DEBUG_EXT_LIBS_TO_STRIP)) --strip-symbols=$(subst .elf,.const_private,$@) --strip-symbols=$(IO_ROOT)/$(CHIP_NAME)/$(CHIP_VER)/io.restricted --strip-symbols=$(IO_ROOT)/$(CHIP_NAME)/$(CHIP_VER)/io.restricted_extra $@.xxx $@
+	-$(RM) $(call ospath,$@.xxx)
+	$(PYTHON) $(BUILD_ROOT)/elf_compare.py $(DEBUG_TARGET_EXE_REL_EXT) $(DEBUG_TARGET_EXE)
+
+%.kmap: %.elf
+	$(info Generating kmap file $@)
+	$(KMAPPER) $(EXTRA_KMAPPER_FLAGS) disasm datadump $(call ospath,$<) > $(subst .elf,.kmap,$<)
+
+#for Kalimba builds also produce a .kap file and object dump file
+%.lst: %.elf
+	$(info Generating listing file $@)
+	$(OBJDUMP) $(call ospath,$<) $(OBJDUMP_FLAGS) >$(call ospath,$@)
+	@echo Done $@
+
+%.sym: %.elf
+#First make a temp symbols file we will parse and improve
+	$(READELF) --symbols --wide $(call ospath,$<) >$(subst .elf,.tsym,$(call ospath,$<)) 
+	$(PYTHON) $(BUILD_ROOT)/parse_symbols.py \
+            -l $(LINKSCRIPT_PATH)/$(LINKSCRIPT_NAME) \
+            -w $(TARGET_BITS) \
+            $(subst .elf,.tsym,$<) >$(call ospath,$@)
+#Now delete the temp file
+	-$(RM) $(subst .elf,.tsym,$(call ospath,$<))
+	@echo Done $@
+
+$(PROJ_FILE): $(DEBUG_TARGET_EXE)
+	$(info Generating $@)
+	$(PYTHON) $(BUILD_ROOT)/extract_source_files_from_elf.py -k $(KTOOLS_ROOT) -e $(call ospath,$(DEBUG_BIN_DIR))
+	$(PYTHON) $(BUILD_ROOT)/makeproj.py --config $(CONFIG) --debug_bin_dir $(call ospath,$(DEBUG_BIN_DIR)) --target_root $(TARGET_EXE_ROOT) --subsysid=$(XIP_SUBSYSTEM) $(MAKEPROJ_FLAGS)
+	@echo Done $@
+
+final_output: $(FINAL_OUTPUT) $(KALELF_OUTPUT)
+
+$(KALELF_OUTPUT): $(DEBUG_TARGET_EXE)
+	$(info Making output files)
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE) $(KALELF2X) $(KALELF2X_FLAGS) $(DEBUG_TARGET_EXE)
+	@echo DONE Making output files
+	@echo Continuing build ...
+
+ifeq (true, $(strip $(APPEND_DM_TO_XUV)))
+	$(COPY) $(call ospath,$(subst .elf,.rom,$(DEBUG_TARGET_EXE))) $(call ospath,$(KALELF_OUTPUT))
+endif
+
+BUILD_FS_IMAGE = $(BUILD_ROOT)/build_image_fs.py
+XUV_TO_ROM =     $(BUILD_ROOT)/xuv2rom.py
+
+$(FINAL_OUTPUT): $(KALELF_OUTPUT) $(DM_APPEND_SCRIPT) $(BUILD_FS_IMAGE) $(XUV_TO_ROM)
+	$(info Making $(FINAL_OUTPUT))
+ifeq (true, $(strip $(BUILD_FS_FROM_KAP)))
+	$(info Generating image.fs from $(TGT_EXE).kap)
+	$(PYTHON) $(BUILD_FS_IMAGE) $(call ospath,$(DEBUG_BIN_DIR)/$(TGT_EXE).kap) $(call ospath,$(DEBUG_BIN_DIR)) $(OSTYPE)
+else
+ifeq (true, $(strip $(APPEND_DM_TO_XUV)))
+	$(info Appending DM/PM initialisation data to XUV)
+	$(COPY) $(call ospath,$(KALELF_OUTPUT)) $(call ospath,$(subst .elf,.rom,$(DEBUG_TARGET_EXE)))
+ifeq ($(strip $(EXTRA_XUV)),)
+	$(DM_APPEND) $(basename $(DEBUG_TARGET_EXE)) $(DM_APPEND_FLAGS)
+else
+# Merge in extra prebuilt content at fixed addresses (EXTRA_XUV).
+# This was originally used to include test data for Crescendo's
+# "ROM fence". It's no longer used for that.
+	$(DM_APPEND) $(basename $(DEBUG_TARGET_EXE)) $(DM_APPEND_FLAGS) -merge $(BUILD_ROOT)/$(EXTRA_XUV)
+endif
+# For Kalsim, make a new .rom file from the xuv
+	$(PYTHON) $(XUV_TO_ROM) $(subst .elf,.xuv,$(call ospath,$(DEBUG_TARGET_EXE))) > $(subst .elf,.rom,$(call ospath,$(DEBUG_TARGET_EXE)))
+else
+	$(info No APPEND_DM_TO_XUV)
+endif # APPEND_DM_TO_XUV
+endif # BUILD_FS_FROM_KAP
+	@echo Done $(FINAL_OUTPUT)
+	@echo Continuing build ...
+
+FINAL_CLEANUP_TARGETS = $(DEBUG_TARGET_EXE) $(FINAL_OUTPUT) $(LST_FILE) $(SYM_FILE) $(PROJ_FILE) $(KMAP_FILE)
+
+final_cleanup: $(FINAL_CLEANUP_TARGETS)
+	$(info ----------------FINAL CLEANUP-----------------)
+# Call cleanup with only the output directory to indicate build has completed
+	$(PYTHON) $(CLEANUP) $(ERR_LOGFILE)
+	@echo ----------------THE END-----------------
+
+endif # DEBUG_TARGET_EXE
+

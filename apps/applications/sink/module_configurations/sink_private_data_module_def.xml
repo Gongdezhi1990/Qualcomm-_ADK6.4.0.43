@@ -1,0 +1,551 @@
+<ModuleData Name="Sink_private_data">
+    <DefineGroup>
+        <DefineStruct
+            Id="SinkPrivateData_timer"
+            ShortId="sinkdata_timer">
+            <ConfigItem
+                Id="Automatic Switch Off Time [s]"
+                ShortId="AutoSwitchOffTime_s"
+                Range="Min=0,Max=21600"
+                Desc="The time in seconds after which the Sink switches off. If set to 0 then the Sink remains on indefinitely. Supports up to maximum 6 hours."
+                Type="uint"
+                Size="16" />
+            <ConfigItem
+                Id="Disable Power Off After Power On Time [s]"
+                ShortId="DisablePowerOffAfterPOnTime_s"
+                Range="Min=0,Max=60"
+                Desc="The time in seconds after Power On for which the Power Off event has no effect. This is used for example, if the UI specifies that a long press on Power On enters pairing mode but a long press at any other time (including in the connectable state) should Power Off the Sink."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Paring Timeout [s]"
+                ShortId="PairModeTimeout_s"
+                Desc="The time in seconds that the Sink remains in the connectable / discoverable state (pairing mode). Setting this to 0 results in the Sink entering and immediately exiting discoverable mode, with the result that the device cannot be discovered. If the Sink is to always be discoverable while not connected, then the feature Remain Discoverable at All Times should be used in conjunction with this timeout."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Connectable Timeout [s]"
+                ShortId="ConnectableTimeout_s"
+                Desc="Specifies the amount of time in seconds the Sink remains connectable following a successful connection when using multipoint operational modes before not being connectable any more."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Pairing Mode Timeout if PDL is Empty [s]"
+                ShortId="PairModeTimeoutIfPDL_s"
+                Desc="Zero to disable, if set to a non zero value this is the pairing mode timeout value, in seconds, if the PDL is completely empty. If the PDL is not empty the Pairing Timeout value is used instead."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Pairing Mode Reminder Interval [s]"
+                ShortId="PairingModeReminderInterval_s"
+                Desc="Time in seconds to generate pairing mode reminder event, zero to disable."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Encryption Refresh Timeout [mins]"
+                ShortId="EncryptionRefreshTimeout_m"
+                Desc="This timer value, in minutes, causes the link encryption key to change when the timer expires, e.g. if set at 15 minutes the key used to encrypt the Bluetooth link is changed every 15 minutes, this improves the security of the Sink. Note: The encryption is only refreshed when no SCO link is open, i.e. there are no active calls. If the timer expirers when there is an active call, no action is taken and the timer is rescheduled for another timeout period."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Second AG Connection Delay Time [ms]"
+                ShortId="SecondAGConnectDelayTime_s"
+                Desc="This value determines the delay time, in ms, between the connection of AG1 and the start of connection to AG2 when using multipoint mode of operation. This value may be changed from its default value if interoperability issues are seen with certain AGs."
+                Type="uint"
+                Size="16"/>
+              <ConfigItem
+                Id="PS Defrag Timer [s]"
+                ShortId="DefragCheckTimer_s"
+                Desc="When no audio is routed the application will periodically check if a PS Defrag is required.  Time in seconds, if set to zero the feature is disabled."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Power PIO Delay on Power Down [s]"
+                ShortId="AudioAmpPDownTimeInLimbo_s"
+                Desc="Delay in seconds before signalling the change of state on the Power state output pin after system power down."
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="Auto Power On Timeout [s]"
+                ShortId="LimboTimeout_s"
+                Range="Min=0,Max=60"
+                Desc="The value in seconds that the Sink waits in the limbo state for a power on event before powering off. The limbo state is entered when the device is powered or receives a power off event."
+                Type="uint"
+                Size="16"/>
+        </DefineStruct>
+
+        <DefineStruct
+            Id="SinkPrivateData_defrag_config"
+            ShortId="defrag_config">
+            <ConfigItem
+                Id="PS Defrag Trigger - Key Size"
+                ShortId="key_size"
+                Desc="This configuration item is used in conjunction with 'PS Defrag Trigger - Minimum Available Keys' to force a PS Defrag to occur. The PS Defrag operation is checked at Power Off or optionally on a timer and will start automatically when the number of available PS Keys with a capacity greater than the specified 'PS Defrag Key Size' is less than 'PS Defrag Trigger - Minimum Available Keys'."
+                Type="uint"
+                Size="8" />
+             <ConfigItem
+                Id="PS Defrag Trigger - Minimum Available Keys"
+                ShortId="key_minimum"
+                Desc="Forces a PS defrag when the number of available PS Keys with a capacity greater than the specified 'PS Defrag Trigger - Key Size' is less than the 'PS Defrag Trigger - Minimum Available Keys' value."
+                Type="uint"
+                Size="8" />
+        </DefineStruct>
+
+        <DefineStruct
+            Id="SinkPrivateData_ssr_params"
+            ShortId="ssr_params">
+            <ConfigItem
+                Id="Max Remote Latency"
+                ShortId="max_remote_ssr_latency"
+                Desc=" "
+                Type="uint"
+                Size="16" />
+             <ConfigItem
+                Id="Min Remote Timeout"
+                ShortId="min_remote_ssr_timeout"
+                Desc=" "
+                Type="uint"
+                Size="16" />
+              <ConfigItem
+                Id="Min Local Timeout"
+                ShortId="min_local_ssr_timeout"
+                Desc=" "
+                Type="uint"
+                Size="16" />
+        </DefineStruct>
+
+        <DefineStruct
+            Id="SinkPrivateData_ssr_params"
+            ShortId="subrate">
+            <ConfigStruct
+                Id="ssr_params sco params"
+                ShortId="sco_params"
+                Desc="ssr sco_params"
+                Type="struct"
+                Struct="ssr_params"/>
+            <ConfigStruct
+                Id="ssr_params slc params"
+                ShortId="slc_params"
+                Desc="ssr slc_params"
+                Type="struct"
+                Struct="ssr_params"/>
+         </DefineStruct>
+    </DefineGroup>
+
+    <!--Config Group for sink data read only structure-->
+    <ConfigGroup
+        Id="SinkPrivateData"
+        ShortId="sinkdata_readonly"
+        Node="Basic">
+        <ConfigStruct
+            Id="Sink Private Data Timers"
+            ShortId="private_data_timers"
+            Desc="Sink Private Data Timers"
+            Type="struct"
+            Struct="sinkdata_timer">
+            <StructElementConfigItem
+                Id="Automatic Switch Off Time [s]"
+                ShortId="AutoSwitchOffTime_s"
+                Desc="The time in seconds after which the Sink switches off. If set to 0 then the Sink remains on indefinitely"
+                DefaultValue="0"
+                ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']">
+                <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="1200"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="Disable Power Off After Power On Time [s]"
+                ShortId="DisablePowerOffAfterPOnTime_s"
+                Desc="The time in seconds after Power On for which the Power Off event has no effect. This is used for example, if the UI specifies that a long press on Power On enters pairing mode but a long press at any other time (including in the connectable state) should Power Off the Sink."
+                DefaultValue="3"
+                ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"/>
+            <StructElementConfigItem
+                Id="Paring Timeout [s]"
+                ShortId="PairModeTimeout_s"
+                Desc="The time in seconds that the Sink remains in the connectable / discoverable state (pairing mode). Setting this to 0 results in the Sink entering and immediately exiting discoverable mode, with the result that the device cannot be discovered. If the Sink is to always be discoverable while not connected, then the feature Remain Discoverable at All Times should be used in conjunction with this timeout."
+                DefaultValue="600"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+            <StructElementConfigItem
+                Id="Connectable Timeout [s]"
+                ShortId="ConnectableTimeout_s"
+                Desc="Specifies the amount of time in seconds the Sink remains connectable following a successful connection when using multipoint operational modes before not being connectable any more."
+                DefaultValue="60"
+                ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"/>
+            <StructElementConfigItem
+                Id="Pairing Mode Timeout if PDL is Empty [s]"
+                ShortId="PairModeTimeoutIfPDL_s"
+                Desc="Zero to disable, if set to a non zero value this is the pairing mode timeout value, in seconds, if the PDL is completely empty. If the PDL is not empty the Pairing Timeout value is used instead."
+                DefaultValue="0"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+            <StructElementConfigItem
+                Id="Pairing Mode Reminder Interval [s]"
+                ShortId="PairingModeReminderInterval_s"
+                Desc="Time in seconds to generate pairing mode reminder event, zero to disable."
+                DefaultValue="0"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+            <StructElementConfigItem
+                Id="Encryption Refresh Timeout [mins]"
+                ShortId="EncryptionRefreshTimeout_m"
+                Desc="This timer value, in minutes, causes the link encryption key to change when the timer expires, e.g. if set at 15 minutes the key used to encrypt the Bluetooth link is changed every 15 minutes, this improves the security of the Sink. Note: The encryption is only refreshed when no SCO link is open, i.e. there are no active calls. If the timer expirers when there is an active call, no action is taken and the timer is rescheduled for another timeout period."
+                DefaultValue="15"
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='link_control']"/>
+            <StructElementConfigItem
+                Id="Second AG Connection Delay Time [ms]"
+                ShortId="SecondAGConnectDelayTime_s"
+                Desc="This value determines the delay time, in ms, between the connection of AG1 and the start of connection to AG2 when using multipoint mode of operation. This value may be changed from its default value if interoperability issues are seen with certain AGs."
+                DefaultValue="100"
+                ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"/>
+            <StructElementConfigItem
+                Id="PS Defrag Timer [s]"
+                ShortId="DefragCheckTimer_s"
+                Desc="When no audio is routed the application will periodically check if a PS Defrag is required.  Time in seconds, if set to zero the feature is disabled."
+                DefaultValue="0"
+                ConfigGroupPath="./[@ShortId='system']/[@ShortId='ps_store']"/>
+            <StructElementConfigItem
+                Id="Power PIO Delay on Power Down [s]"
+                ShortId="AudioAmpPDownTimeInLimbo_s"
+                Desc="Delay in seconds before signalling the change of state on the Power state output pin after system power down."
+                DefaultValue="3"
+                ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"/>
+            <StructElementConfigItem
+                Id="Auto Power On Timeout [s]"
+                ShortId="LimboTimeout_s"
+                Desc="The value in seconds that the Sink waits in the limbo state for a power on event before powering off. The limbo state is entered when the device is powered or receives a power off event."
+                DefaultValue="30"
+                ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"/>
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="Sink Private Data defrag"
+            ShortId="defrag"
+            Desc="Sink Private Data defrag"
+            Type="struct"
+            Struct="defrag_config"
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='ps_store']">
+            <StructElementConfigItem
+                Id="PS Defrag Trigger - Key Size"
+                ShortId="key_size"
+                Desc="This configuration item is used in conjunction with 'PS Defrag Trigger - Minimum Available Keys' to force a PS Defrag to occur. The PS Defrag operation is checked at Power Off or optionally on a timer and will start automatically when the number of available PS Keys with a capacity greater than the specified 'PS Defrag Key Size' is less than 'PS Defrag Trigger - Minimum Available Keys'."
+                DefaultValue="0x000f" />
+            <StructElementConfigItem
+                Id="PS Defrag Trigger - Minimum Available Keys"
+                ShortId="key_minimum"
+                Desc="Forces a PS defrag when the number of available PS Keys with a capacity greater than the specified 'PS Defrag Trigger - Key Size' is less than the 'PS Defrag Trigger - Minimum Available Keys' value."
+                DefaultValue="0x000f" />
+        </ConfigStruct>
+
+        <ConfigStruct
+            Id="Sink Private Data subrate"
+            ShortId="ssr_data"
+            Desc="Sink Private Data subrate"
+            Type="struct"
+            Struct="subrate">
+            <StructElementConfigItem
+                Id="SCO Params"
+                ShortId="sco_params"
+                Desc="Sco Link Parameters">
+                <StructElementConfigItem
+                    Id="Max Remote Latency sco"
+                    ShortId="max_remote_sco_latency"
+                    Desc="Max remote latency for sco link"
+                    DefaultValue="0x0000"
+                    ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='simple_speech_recognition_key']/[@ShortId='sco']"/>
+                <StructElementConfigItem
+                    Id="Min Remote Timeout sco"
+                    ShortId="min_remote_sco_timeout"
+                    Desc="Min remote latency for sco link"
+                    DefaultValue="0x0000"
+                    ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='simple_speech_recognition_key']/[@ShortId='sco']"/>
+                <StructElementConfigItem
+                    Id="Min Local Timeout sco"
+                    ShortId="min_local_sco_timeout"
+                    Desc="Min Local Timeout for sco"
+                    DefaultValue="0x0000"
+                    ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='simple_speech_recognition_key']/[@ShortId='sco']"/>
+            </StructElementConfigItem>
+            <StructElementConfigItem
+                Id="SLC Params"
+                ShortId="slc_params"
+                Desc="SLC Link Parameters">
+                <StructElementConfigItem
+                    Id="Max Remote Latency slc"
+                    ShortId="max_remote_slc_latency"
+                    Desc="Max remote latency for slc link"
+                    DefaultValue="0x0000"
+                    ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='simple_speech_recognition_key']/[@ShortId='slc']"/>
+                <StructElementConfigItem
+                    Id="Min Remote Timeout slc"
+                    ShortId="min_remote_slc_timeout"
+                    Desc="Min remote latency for slc link"
+                    DefaultValue="0x0000"
+                    ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='simple_speech_recognition_key']/[@ShortId='slc']"/>
+                <StructElementConfigItem
+                    Id="Min Local Timeout slc"
+                    ShortId="min_local_slc_timeout"
+                    Desc="Min Local Timeout for slc link"
+                    DefaultValue="0x0000"
+                    ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='simple_speech_recognition_key']/[@ShortId='slc']"/>
+            </StructElementConfigItem>
+        </ConfigStruct>
+
+        <ConfigItem
+            Id="Reconnect on Panic"
+            ShortId="ReconnectOnPanic"
+            Desc="If this item is set the Sink silently reboots and reconnects to the AG in the event of a panic."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='reconnection']"/>
+        <ConfigItem
+            Id="Power Off after PDL is Reset"
+            ShortId="PowerOffAfterPDLReset"
+            Desc="If this item is set the Sink will power off when the paired devices list is reset."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+        <ConfigItem
+            Id="Remain Discoverable at All Times"
+            ShortId="RemainDiscoverableAtAllTimes"
+            Desc="If this item is set the Sink remains discoverable at all times. This is useful for Multipoint operation."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='discovery']"/>
+        <ConfigItem
+            Id="Disable Power Off after Power On"
+            ShortId="DisablePowerOffAfterPowerOn"
+            Desc="If this item is set the Sink ignores the power off button press immediately after power on."
+            Type="bool"
+            Size="1"
+            DefaultValue="true"
+            ConfigGroupPath="./[@ShortId='system']"/>
+        <ConfigItem
+            Id="Power Off only if Vreg Enable Low"
+            ShortId="PowerOffOnlyIfVRegEnLow"
+            Desc="When set this feature prevents the Sink from powering off if the VREG enable pin is not low."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='system']">
+            <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05" SwVariant="All" Value="true"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Allow Automatic Power Off When Charging"
+            ShortId="AllowAutomaticPowerOffWhenCharging"
+            Desc="Allow automatic power off when charging and battery level is critical."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='system']"/>
+        <ConfigItem
+            Id="Enter Discoverable Mode when Connectable"
+            ShortId="pair_mode_en"
+            Desc="This automatically enables discoverable mode whenever the device is connectable."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='discovery']"/>
+        <ConfigItem
+            Id="Automatically Reconnect at Power On"
+            ShortId="AutoReconnectPowerOn"
+            Desc="Enable to force automatic reconnection after Power On. The setting 'After Power On Connect To' controls what to reconnect to. Connection can also be triggered by a 'Establish SLC' event."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='at_power_on']">
+            <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA"
+                          SwVariant="All"
+                          Value="true"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Action on Pairing Timeout"
+            ShortId="PowerDownOnDiscoTimeout"
+            Desc="This allows the action taken on a pairing mode timeout to be defined."
+            Type="enum"
+            Size="2"
+            DefaultValue="Return to connectable mode"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']">
+            <enum key="Return to connectable mode"
+                  value="0"/>
+            <enum key="Power off"
+                  value="1"/>
+            <enum key="Power off if PDL is empty"
+                  value="2"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="After Power On Connect To"
+            ShortId="ActionOnPowerOn"
+            Desc="If the setting 'Automatically Reconnect at Power On' is enabled or an 'Establish SLC' event occurs then this setting specifies what to connect to. Also know as 'ActionOnPowerOn'."
+            Type="enum"
+            Size="2"
+            DefaultValue="Initiate RSSI Inquiry (proximity pairing) mode"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='at_power_on']">
+            <List use="g_ActionOn"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Discoverable if PDL Less Than"
+            ShortId="DiscoIfPDLLessThan"
+            Desc="This forces the Sink to Enter Discoverable mode (pairing) if the paired device list is less than the entry. An entry of 2 would mean that if the Sink has previously paired with either 0 or 1 devices, then the Sink enters discoverable mode. 0 means feature disabled."
+            Type="uint"
+            Size="4"
+            DefaultValue="0x01"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='discovery']"/>
+       <ConfigItem
+            Id="Enter Pairing Mode on Failure to Connect to AG"
+            ShortId="EnterPairingModeOnFailureToConn"
+            Desc="If this item is set the sink goes into pairing mode if it fails to connect with any paired AG, otherwise it goes into connectable mode."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']">
+            <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA"
+                          SwVariant="All"
+                          Value="true"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Do Not Go Discoverable during Link Loss"
+            ShortId="DoNotDiscoDuringLinkLoss"
+            Desc="When set the Sink does not enter discoverable mode if a link loss event has occurred."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='discovery']"/>
+        <ConfigItem
+            Id="BT2.1 Man in the Middle"
+            ShortId="ManInTheMiddle"
+            Desc="When set Bluetooth 2.1 Man in the Middle enabled. Enabling this feature requires further customer development of the Sink application to support Man in the Middle mode."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+        <ConfigItem
+            Id="Different SLC Connected Event at Power On"
+            ShortId="UseDiffConnectedEventAtPowerOn"
+            Desc="When set, the event EventSLCConnectedAfterPowerOn is generated when an SLC occurs straight after power on. The event EventSLCConnected is generated on SLC events when the Sink has already been on for some time."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='at_power_on']"/>
+        <ConfigItem
+            Id="Secure Pairing Mode Enable"
+            ShortId="SecurePairing"
+            Desc="This bit enables secure pairing mode. If set, then the Sink only accepts pin code requests when in pairing mode (connectable/discoverable state). This prevents a remote user from pairing with the Sink without the Sink being specifically placed into pairing mode. This is over-ridden if the Sink initiates the connection. i.e. if a Sink attempts to connect to a remote AG without the correct link key (or has the bdaddr but not the link key) then the Sink will accept a pin code request."
+            Type="bool"
+            Size="1"
+            DefaultValue="true"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+        <ConfigItem
+            Id="Reset Chip after Power Off is Complete"
+            ShortId="ResetAfterPowerOffComplete"
+            Desc="When set the Sink will perform a chip reset after powering off. This may be used if the BlueCore IC is powered permanently with no other form of hardware reset available."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='system']"/>
+        <ConfigItem
+            Id="Auto Power On after Initialisation Enable"
+            ShortId="AutoPowerOnAfterInitialisation"
+            Desc="This feature allows a faster Sink startup period by removing the need for a power on event to be configured on a button press."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='system']"/>
+        <ConfigItem
+            Id="Disable Role Switching"
+            ShortId="DisableRoleSwitching"
+            Desc="When set the Sink will not send role switch requests to the AG. This feature may be useful if the AG does not support role switching."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='link_control']"/>
+        <ConfigItem
+            Id="Go Connectable during Link Loss"
+            ShortId="GoConnectableDuringLinkLoss"
+            Desc="When enabled the Sink is connectable while attempting to reconnect to a dropped device."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='link_control']"/>
+        <ConfigItem
+            Id="RSSI Pairing if PDL Less Than"
+            ShortId="PairIfPDLLessThan"
+            Desc="When set to a non-zero value and the number of devices in the paired devices list is less than this value, the Sink goes into RSSI Inquiry (Proximity Pairing) mode."
+            Type="uint"
+            Size="2"
+            DefaultValue="0x00"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']"/>
+        <ConfigItem
+            Id="Reconnection Action after Panic"
+            ShortId="ActionOnPanicReset"
+            Desc="Sets the reconnection action type if the chip reboots as a result of an application or firmware panic."
+            Type="enum"
+            Size="2"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='reconnection']"
+            DefaultValue="Attempt to Reconnect to the last connected AG">
+            <List use="g_ActionOn"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Reconnect Last Number of Attempts to Try"
+            ShortId="ReconnectLastAttempts"
+            Desc="When using the reconnection type of LAST, this parameter controls the number of times the Sink attempts to connect to the last connected devices, a minimum value of 2 is suggested for this parameter. The range of ReconnectLastAttempts is 0 to 7."
+            Type="uint"
+            Size="3"
+            DefaultValue="0x02"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='reconnection']"/>
+        <ConfigItem
+            Id="Disable Complete Power Off"
+            ShortId="DisableCompletePowerOff"
+            Desc="When set, this feature prevents the Sink device from physically powering off after the device is made logically off, for example, after a user initiated power off event. The device will still physically power off if the battery level reaches a critical level or temperature is outside of operating limits."
+            Type="bool"
+            Size="1"
+            DefaultValue="false"
+            ConfigGroupPath="./[@ShortId='system']"/>
+        <ConfigItem
+            Id="Max Number of Reconnection Attempt"
+            ShortId="ReconnectionAttempts"
+            Desc="This specifies the number of reconnection attempts following an establish SLC event, or automatic reconnection event, if set to 0 and the reconnection action is set to 'Attempt to connect to all 8 devices in the paired device list' the PDL will be traversed once only, if this value is set to 100 for example the PDL will be traversed for 100 connection attempts."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x00"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='reconnection']"/>
+        <ConfigItem
+            Id="Encrypt on SLC establishment"
+            ShortId="EncryptOnSLCEstablishment"
+            Desc="This forces Encryption on SLC establishment. Some phone handsets no longer force encryption on the SLC. Setting this bit ensures that encryption is used."
+            Type="bool"
+            Size="1"
+            DefaultValue="true"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='connection']"/>
+        <ConfigItem
+            Id="PDL Size"
+            ShortId="pdl_size"
+            Desc="The maximum number of entries that may be stored in the paired devices list."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x0008"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']">
+            <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05 CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 CF819 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5124-BA_FORMFACTOR-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All" Value="0x0009"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="Free partitions"
+            ShortId="partitions_free"
+            Desc="The number of free partitions available"
+            Type="uint"
+            Size="8"
+            DefaultValue="0x00"
+            ConfigGroupPath="./[@ShortId='advanced_settings']/[@ShortId='session_data']"/>
+    </ConfigGroup>
+
+    <ConfigGroup
+        Id="SinkPrivateData_Writeable"
+        ShortId="sinkdata_writeable"
+        Node="Basic">
+        <ConfigItem
+            Id="Enable Multipoint in VM App"
+            ShortId="multipoint_enable"
+            Desc="When set the possibiliy of Multipoint will be enabled in the VM Sink application. It is turned on in response to a Power On message and is turned off in response to a Restore Defaults message. In order for Multipoint to be operational it also needs to be turned on in the HFP Library, see 'Enable Multipoint in HFP Library'."
+            Type="bool"
+            Size="1"
+            DefaultValue="true"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']"/>
+    </ConfigGroup>
+</ModuleData>

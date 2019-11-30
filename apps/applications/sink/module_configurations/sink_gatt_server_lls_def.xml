@@ -1,0 +1,23 @@
+<ModuleData Name="Sink_gatt_server_lls">
+    <ConfigGroup
+        ShortId="gatt_lls_readonly"
+        Id="Proximity_readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="Proximity Tone Period [s]"
+            ShortId="LinkLossTimer_s"
+            Desc="The time, in seconds, that the system waits before repeating the alert event"
+            Type="uint"
+            DefaultValue="5"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']/ConfigGroup[@ShortId='proximity']"/>
+        <ConfigItem
+            Id="Proximity Tone Timeout [s]"
+            ShortId="LinkLossAlertStopTimeout_s"
+            Desc="The time, in seconds, that the system waits before stopping the alert"
+            Type="uint"
+            DefaultValue="60"
+            Size="16"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='ble_profiles']/[@ShortId='proximity']"/>
+    </ConfigGroup>    
+</ModuleData>

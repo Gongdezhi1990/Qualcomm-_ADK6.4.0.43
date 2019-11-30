@@ -1,0 +1,33 @@
+<ModuleData Name="sink_powermanager_onchip_charger_configuration_v1" HeaderName="sink_power_manager_charger_configuration">
+
+    <DefineGroup>
+
+        <DefineStruct Id="Charger Progress Structure" ShortId="charger_progress_structure">
+            <ConfigItem Id="Limit" ShortId="limit"
+                Desc="Vchg threshold" Type="uint" Size="16" />
+            <ConfigItem Id="Current taken by external devices" ShortId="current_external_devices"
+                Desc="Current External Devices" Type="uint" Size="8" />
+        </DefineStruct>
+
+    </DefineGroup>
+
+    <ConfigGroup ShortId="charger_progress" Id="Charger Progress"
+        Node="Basic">
+        <ConfigStruct Id="Instance of a charger_progress_structure"
+            ShortId="chg_progress" Desc="." Type="struct" Struct="charger_progress_structure">
+            <StructElementConfigItem Id="Vchg Termination Voltage (Vfloat) [mV]"
+                ShortId="limit"
+                Desc="Sets the default charger termination voltage threshold (USB VBUS). This is the charger termination voltage except when overridden by the battery temperature regions table. The charge current can be limited if Vchg voltages drops below this level."
+                ConfigGroupPath="./[@ShortId='battery']/[@ShortId='charger_configuration']"
+                DefaultValue="0x109A">
+            </StructElementConfigItem>
+            <StructElementConfigItem Id="Current taken by external devices directly from charger [mA]"
+                ShortId="current_external_devices"
+                Desc="The current taken directly from the charger for external devices such as the backlight, when supplied by the charger. If external devices are supplied from the battery this setting should be 0mA. This value will be subtracted from the requested charger current before it is applied. This is done to ensure that the current drawn does not exceed the requested charge current. This is primarily used to ensure USB current limitations are met."
+                ConfigGroupPath="./[@ShortId='battery']/[@ShortId='charger_configuration']"
+                DefaultValue="0">
+            </StructElementConfigItem>
+        </ConfigStruct>
+    </ConfigGroup>
+
+</ModuleData>

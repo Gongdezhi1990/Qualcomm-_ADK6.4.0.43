@@ -1,0 +1,46 @@
+var audio__plugin__forwarding_8h =
+[
+    [ "audio_plugin_forwarding_ports_t", "d7/d82/structaudio__plugin__forwarding__ports__t.html", "d7/d82/structaudio__plugin__forwarding__ports__t" ],
+    [ "audio_plugin_forwarding_streams_t", "d7/da1/structaudio__plugin__forwarding__streams__t.html", "d7/da1/structaudio__plugin__forwarding__streams__t" ],
+    [ "audio_plugin_sbc_encode_params_t", "dc/dad/structaudio__plugin__sbc__encode__params__t.html", "dc/dad/structaudio__plugin__sbc__encode__params__t" ],
+    [ "audio_plugin_forwarding_transcode_t", "d9/d57/structaudio__plugin__forwarding__transcode__t.html", "d9/d57/structaudio__plugin__forwarding__transcode__t" ],
+    [ "audio_plugin_forwarding_params_t", "de/d9a/structaudio__plugin__forwarding__params__t.html", "de/d9a/structaudio__plugin__forwarding__params__t" ],
+    [ "AUDIO_PLUGIN_FORWARDING_CREATE_REQ_T", "dc/dff/structAUDIO__PLUGIN__FORWARDING__CREATE__REQ__T.html", "dc/dff/structAUDIO__PLUGIN__FORWARDING__CREATE__REQ__T" ],
+    [ "AUDIO_PLUGIN_FORWARDING_CREATE_CFM_T", "df/d38/structAUDIO__PLUGIN__FORWARDING__CREATE__CFM__T.html", "df/d38/structAUDIO__PLUGIN__FORWARDING__CREATE__CFM__T" ],
+    [ "AUDIO_PLUGIN_FORWARDING_START_REQ_T", "d3/d69/structAUDIO__PLUGIN__FORWARDING__START__REQ__T.html", "d3/d69/structAUDIO__PLUGIN__FORWARDING__START__REQ__T" ],
+    [ "AUDIO_PLUGIN_FORWARDING_START_CFM_T", "d6/d41/structAUDIO__PLUGIN__FORWARDING__START__CFM__T.html", "d6/d41/structAUDIO__PLUGIN__FORWARDING__START__CFM__T" ],
+    [ "AUDIO_PLUGIN_FORWARDING_STOP_REQ_T", "d1/dbb/structAUDIO__PLUGIN__FORWARDING__STOP__REQ__T.html", "d1/dbb/structAUDIO__PLUGIN__FORWARDING__STOP__REQ__T" ],
+    [ "AUDIO_PLUGIN_FORWARDING_STOP_CFM_T", "d6/dbd/structAUDIO__PLUGIN__FORWARDING__STOP__CFM__T.html", "d6/dbd/structAUDIO__PLUGIN__FORWARDING__STOP__CFM__T" ],
+    [ "AUDIO_PLUGIN_FORWARDING_DESTROY_REQ_T", "da/d2b/structAUDIO__PLUGIN__FORWARDING__DESTROY__REQ__T.html", "da/d2b/structAUDIO__PLUGIN__FORWARDING__DESTROY__REQ__T" ],
+    [ "AUDIO_PLUGIN_FORWARDING_DESTROY_CFM_T", "d2/d1a/structAUDIO__PLUGIN__FORWARDING__DESTROY__CFM__T.html", "d2/d1a/structAUDIO__PLUGIN__FORWARDING__DESTROY__CFM__T" ],
+    [ "AUDIO_PLUGIN_FORWARDING_SOFT_MUTE_IND_T", "d5/d25/structAUDIO__PLUGIN__FORWARDING__SOFT__MUTE__IND__T.html", "d5/d25/structAUDIO__PLUGIN__FORWARDING__SOFT__MUTE__IND__T" ],
+    [ "audio_plugin_forwarding_message_t", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51", [
+      [ "AUDIO_PLUGIN_FORWARDING_CREATE_REQ", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51a8863b558004a07e0b061f6746b3a5f25", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_CREATE_CFM", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51a26e7715af50c98308435b6e7d2484abb", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_START_REQ", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51ad020ef91000fb7dca7f917f8861002a0", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_START_CFM", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51aced5093fdf4213b1c0fe16bbf2f6d3fe", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_STOP_REQ", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51a46c1f9a9aa5d91a60dc9aa3dec0af187", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_STOP_CFM", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51a6bd3eb28bde101a27a33042408b718da", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_DESTROY_REQ", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51a3dcdc50c7618d486deb966de1e91ba1a", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_DESTROY_CFM", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51af171fe8a8b6ff680c686ab213b8ab715", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_STREAMING_IND", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51aa440f552be958a38e8e748655493e2c1", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_VOLUME_CHANGE_IND", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51a87c6aac13fa8045b76d4b118b4e3dddf", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_SOFT_MUTE_IND", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51a8a54d342ddcf6e781dadac43ce0ca1ae", null ],
+      [ "AUDIO_PLUGIN_FORWARDING_TOP", "d9/d07/audio__plugin__forwarding_8h.html#a2718f9a761293332786dc94048d1cc51aa31603a815196da7172bc652179d0fe9", null ]
+    ] ],
+    [ "audio_plugin_forwarding_status_t", "d9/d07/audio__plugin__forwarding_8h.html#a57260569318137b76ae1a28a9e3c27a7", [
+      [ "audio_output_success", "d9/d07/audio__plugin__forwarding_8h.html#a57260569318137b76ae1a28a9e3c27a7a33d7fc1ba4281a89ad6d4c09fef1299e", null ],
+      [ "audio_output_failed_packetiser", "d9/d07/audio__plugin__forwarding_8h.html#a57260569318137b76ae1a28a9e3c27a7aab11790677a1b1ccec4c51fdad472044", null ]
+    ] ],
+    [ "AudioPluginForwardingCreate", "d9/d07/audio__plugin__forwarding_8h.html#a95d65ba4a1444e37f1bbb66ad12d029b", null ],
+    [ "AudioPluginForwardingCreateCfm", "d9/d07/audio__plugin__forwarding_8h.html#a42b23613a9ef796c7ad1b5c9f224e72d", null ],
+    [ "AudioPluginForwardingDestroy", "d9/d07/audio__plugin__forwarding_8h.html#afd7471076fccd3893d7f2be66a156430", null ],
+    [ "AudioPluginForwardingDestroyCfm", "d9/d07/audio__plugin__forwarding_8h.html#a5f25b0aa51333a4f63d0ab63f656d78c", null ],
+    [ "AudioPluginForwardingSoftMuteInd", "d9/d07/audio__plugin__forwarding_8h.html#ab6ef2065596fbceebb800907837751c0", null ],
+    [ "AudioPluginForwardingStart", "d9/d07/audio__plugin__forwarding_8h.html#a529a9b0d5dfea17cb101c4c86bef645f", null ],
+    [ "AudioPluginForwardingStartCfm", "d9/d07/audio__plugin__forwarding_8h.html#aefdad88350d71d948e79ce3c65fbffc9", null ],
+    [ "AudioPluginForwardingStop", "d9/d07/audio__plugin__forwarding_8h.html#a7f1a9da7871ec64ebc00c25cc520784a", null ],
+    [ "AudioPluginForwardingStopCfm", "d9/d07/audio__plugin__forwarding_8h.html#ad4e9390bd1ed61a97811e761ac0ec1b1", null ],
+    [ "AudioPluginForwardingStreamingInd", "d9/d07/audio__plugin__forwarding_8h.html#a3550ea20dd5c8fe233d2a9adfe80e084", null ],
+    [ "AudioPluginForwardingVolumeChangeInd", "d9/d07/audio__plugin__forwarding_8h.html#a4dff1cec3cf95fa3ad97da4be6227ef8", null ]
+];

@@ -1,0 +1,14 @@
+Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+All Rights Reserved.
+Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+The following devices have ROM support and do not need MIB keys:
+
+W25Q80EW
+W25Q16FW
+W25Q32FW/W25Q32JW
+W25Q64FW/W25Q64JW
+W25Q128FW/W25Q128JW
+W25Q256JW

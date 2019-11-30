@@ -1,0 +1,63 @@
+#include "gatt_server_db.dbi"
+#include "gatt_gap_server_db.dbi"
+//DONT CHANGE THE ORDER OF SEQUENCE FOR BROADCAST AUDIO
+#ifdef ENABLE_BROADCAST_AUDIO
+#include "gatt_broadcast_server_db.dbi"
+#endif
+#ifdef GATT_BATTERY_SERVER
+#include "gatt_battery_server_db.dbi"
+#endif
+#ifdef GATT_TPS_SERVER
+#include "gatt_transmit_power_server_db.dbi"
+#endif
+#ifdef GATT_IAS_SERVER
+#include "gatt_imm_alert_server_db.dbi"
+#endif
+#ifdef GATT_LLS_SERVER
+#include "gatt_link_loss_server_db.dbi"
+#endif
+#ifdef GATT_HRS_SERVER
+#include "gatt_heart_rate_server_db.dbi"
+#endif
+#ifdef GATT_DIS_SERVER
+#include "gatt_device_info_server_db.dbi"
+#endif
+#if defined GATT_GAIA_SERVER && defined ENABLE_GAIA
+#include "gaia_db.dbi"
+#endif
+#ifdef GATT_AMA_SERVER
+#include "gatt_ama_server_db.dbi"
+#endif
+#ifdef GATT_BISTO_COMM_SERVER
+#include "gatt_bisto_comm_server_db.dbi"
+#endif
+#if defined GATT_AMS_PROXY
+#include "gatt_ams_proxy_server_db.dbi"
+#endif
+#if defined GATT_ANCS_PROXY
+#include "gatt_ancs_proxy_server_db.dbi"
+#endif
+#if defined GATT_BMS
+#include "gatt_bms_server_db.dbi"
+#endif
+#ifdef ACTIVITY_MONITORING
+#ifdef GATT_RSCS_SERVER
+#include "gatt_running_speed_cadence_server_db.dbi"
+#endif
+#ifdef GATT_LOGGING_SERVER
+#include "gatt_logging_server_db.dbi"
+#endif
+#endif
+#ifdef GATT_FP_SERVER
+#include "gatt_fast_pair_server_db.dbi"
+#endif
+#ifdef GATT_BATTERY_SERVER
+ADD_BATTERY_SERVICE(1)
+#ifdef GATT_BATTERY_SERVER_REMOTE
+ADD_BATTERY_SERVICE(2)
+#endif
+#ifdef GATT_BATTERY_SERVER_PEER
+ADD_BATTERY_SERVICE(3)
+#endif
+#endif
+

@@ -1,0 +1,28 @@
+############################################################################
+#  Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+#  All Rights Reserved.
+#  Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#  Notifications and licenses are retained for attribution purposes only
+############################################################################
+
+%cpp
+
+# Implement closed loop rate matching in audio EP
+INSTALL_AUDIO_EP_CLRM
+
+# ... but disable enacting fast rate adjustments by default (B-251506)
+TODO_AUDIO_EP_CLRM_DISABLE_MATCH
+
+# Implement measurements for closed loop rate matching in SCO EP
+INSTALL_SCO_EP_CLRM
+
+# Select rate library implementations of rate matching adaptive responsiveness.
+# Add implementations as follows:
+#   INSTALL_RATE_MATCH_ADAPT_x
+# Define exactly one RATE_MATCH_ADAPT_DEFAULT_...:
+#   RATE_MATCH_ADAPT_DEFAULT_x
+
+RATE_MATCH_ADAPT_DEFAULT_NONE
+
+
+# %build

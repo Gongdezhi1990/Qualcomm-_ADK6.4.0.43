@@ -1,0 +1,8 @@
+
+VARIANTS :=
+
+CFLAGS_debug := -DAVRCP_DEBUG_LIB  # flags for building debug version of the avrcp lib
+
+CFLAGS_controller := -DAVRCP_CT_ONLY_LIB # Controller only library , Disable the Target part
+
+CFLAGS_target := -DAVRCP_TG_ONLY_LIB     # Target only  Library, Disable the Controller part 

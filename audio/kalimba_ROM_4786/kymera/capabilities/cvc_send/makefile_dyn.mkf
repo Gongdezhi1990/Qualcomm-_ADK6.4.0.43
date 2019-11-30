@@ -1,0 +1,13 @@
+############################################################################
+# CONFIDENTIAL
+# Copyright 2017 Qualcomm Technologies International, Ltd.
+############################################################################
+
+DYN_FILES += $(if $(BUILD_CVC_AUTO_1MIC), cvc_send_auto_1mic.dyn,)
+DYN_FILES += $(if $(BUILD_CVC_AUTO_2MIC), cvc_send_auto_2mic.dyn,)
+DYN_FILES += $(if $(BUILD_CVC_HEADSET_1MIC), cvc_send_headset_1mic.dyn,)
+DYN_FILES += $(if $(BUILD_CVC_HEADSET_2MIC), cvc_send_headset_2mic.dyn,)
+DYN_FILES += $(if $(BUILD_CVC_SPEAKER_1MIC), cvc_send_speaker_1mic.dyn,)
+DYN_FILES += $(if $(BUILD_CVC_SPEAKER_2MIC), cvc_send_speaker_2mic.dyn,)
+DYN_FILES += $(if $(BUILD_CVC_SPEAKER_3MIC), cvc_send_speaker_3mic.dyn,)
+DYN_FILES += $(if $(BUILD_CVC_SPEAKER_4MIC), cvc_send_speaker_4mic.dyn,)

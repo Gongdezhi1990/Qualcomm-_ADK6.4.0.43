@@ -1,0 +1,13 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the downloadable basic_passthrough
+
+%list ALL_INCDIRS
+capabilities/basic_passthrough
+
+%list CFG_LIBS
+capabilities/basic_passthrough/basic_passthrough

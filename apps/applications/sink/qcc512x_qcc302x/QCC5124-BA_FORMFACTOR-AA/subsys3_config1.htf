@@ -1,0 +1,16 @@
+file=audio1
+
+DigMic0PioConfig = [14 15]
+DigMic1PioConfig = [35 34]
+DigMic2PioConfig = [10 11]
+
+AoVDutyCycleParameters = [0A 23]
+CoreEnable = [ 00 ]
+USBSourceBufferSize = 1280
+
+DigMic0G722FilterEnable = true
+DigMic0G722FirEnable = true
+DigMic1G722FilterEnable = true
+DigMic1G722FirEnable = true
+DigMic2G722FilterEnable = true
+DigMic2G722FirEnable = true

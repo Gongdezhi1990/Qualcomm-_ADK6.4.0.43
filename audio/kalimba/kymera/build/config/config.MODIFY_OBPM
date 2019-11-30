@@ -1,0 +1,19 @@
+############################################################################
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+############################################################################
+
+%list ALL_SRCDIRS
+components/adaptor/obpm
+components/spi
+
+%list ALL_INCDIRS
+components/adaptor/obpm
+components/spi
+
+%list CFG_LIBS
+components/adaptor/obpm/obpm
+components/spi/spi
+
+%cpp
+INSTALL_OBPM_ADAPTOR
+INSTALL_SPI_INTERFACE

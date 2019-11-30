@@ -1,0 +1,149 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2011 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Common definitions for all Hydra chips
+
+%cpp
+CHIP_BASE_HYDRA
+
+# Symbols required by Hydra common code
+# <http://wiki/Hydra_Common_Firmware/Build_Definitions>
+SUBSYSTEM_AUDIO
+HYDRA_SSSM_IS_A_SCHEDULER_TASK
+P0=0
+
+# Fileserv MMU buffer size
+FILESERV_MMU_BUFFER_SIZE=256
+
+# Make submsg panic when something goes wrong
+SUBMSG_PANIC_ON_FAILURE
+
+# Don't use timed_event.h in ccp autogen
+CCP_DONT_INCLUDE_TIMED_EVENT_TIMED_EVENT_H
+
+
+INSTALL_HYDRA
+
+# Define when ACCMD is being used
+USE_ACCMD
+
+# Hydra builds use dorm module for deep sleep support
+DORM_MODULE_PRESENT
+
+FILESERV_MODULE_PRESENT
+
+# Enable audio debug logging
+INSTALL_AUDIO_LOG
+
+# Use MIB for configuration data
+INSTALL_MIB
+
+# Enable post-mortem damage limiting of buffer wrap in audio sink output
+SINK_WRAP_POST_MORTEM
+
+# DSP_ID is used by cap_download_mgr as one check that a .kcs file is
+# suitable for the firmware. It's not actually tied to hardware at all.
+# However, on Hydra chips we conventionally use CHIP_VERSION_MAJOR from
+# GBL_CHIP_VERSION (as per <http://wiki/ChipVersionIDs>, which our build
+# system has to know anyway for generating MIB .sdb files.
+# (No Hydra chip still in use has an independent ID for just-the-Kalimba,
+# see B-110333.)
+DSP_ID=$(CHIPVER_FOR_MIB)
+
+%build
+XIP_SUBSYSTEM=3
+MIBFILES=true
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+components/adaptor/accmd
+components/audio
+components/buffer/hydra
+components/const_data
+components/hydra_modules/bigint
+components/hydra_modules/bmsg
+components/hydra_modules/bus_interrupt
+components/hydra_modules/bus_message
+components/hydra_modules/ccp
+components/hydra_modules/conman
+components/hydra_modules/dorm
+components/hydra_modules/fileserv
+components/hydra_modules/hydra_service
+components/hydra_modules/hydra_sssm
+components/hydra_modules/isp_router
+components/hydra_modules/mib
+components/hydra_modules/mibcmd
+components/hydra_modules/optim
+components/hydra_modules/pio
+components/hydra_modules/ssccp
+components/hydra_modules/sub_bit_config
+components/hydra_modules/sub_host_wake
+components/hydra_modules/subauxtemp
+components/hydra_modules/subclockinfo
+components/hydra_modules/submeas
+components/hydra_modules/submsg
+components/hydra_modules/subpmu
+components/hydra_modules/subreport
+components/hydra_modules/subres
+components/hydra_modules/subserv
+components/hydra_modules/subsleep
+components/hydra_modules/subwd
+components/hydra_modules/utils
+components/hydra_modules/vararr
+components/hydra_modules/vlint
+
+# List of global include paths
+%list ALL_INCDIRS
+common/hydra/interface
+common/hydra/mib
+common/bc/interface/app/kalimba
+components/adaptor/accmd
+components/audio
+components/buffer/hydra
+components/const_data
+
+# List of libraries to build
+%list CFG_LIBS
+components/adaptor/accmd/accmd
+components/audio/audio
+components/const_data/const_data
+components/hydra_modules/bigint/bigint
+components/hydra_modules/bmsg/bmsg
+components/hydra_modules/bus_interrupt/bus_interrupt
+components/hydra_modules/bus_message/bus_message
+components/hydra_modules/ccp/ccp
+components/hydra_modules/conman/conman
+components/hydra_modules/dorm/dorm
+components/hydra_modules/fileserv/fileserv
+components/hydra_modules/hydra_service/hydra_service
+components/hydra_modules/hydra_sssm/hydra_sssm
+components/hydra_modules/itime_kal/itime_kal
+components/hydra_modules/isp_router/isp_router
+components/hydra_modules/mib/mib
+components/hydra_modules/mibcmd/mibcmd
+components/hydra_modules/optim/optim
+components/hydra_modules/pio/pio
+components/hydra_modules/ssccp/ssccp
+components/hydra_modules/sub_bit_config/sub_bit_config
+components/hydra_modules/sub_host_wake/sub_host_wake
+components/hydra_modules/subauxtemp/subauxtemp
+components/hydra_modules/subclockinfo/subclockinfo
+components/hydra_modules/submeas/submeas
+components/hydra_modules/submsg/submsg
+components/hydra_modules/subpmu/subpmu
+components/hydra_modules/subreport/subreport
+components/hydra_modules/subres/subres
+components/hydra_modules/subserv/subserv
+components/hydra_modules/subsleep/subsleep
+components/hydra_modules/subwd/subwd
+components/hydra_modules/utils/utils
+components/hydra_modules/vararr/vararr
+components/hydra_modules/vlint/vlint
+
+%list AUTOGEN_DEPS
+components/hydra_modules/subserv:components/hydra_modules/ccp
+
+

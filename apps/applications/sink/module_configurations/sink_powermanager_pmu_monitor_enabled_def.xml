@@ -1,0 +1,66 @@
+<ModuleData Name="sink_power_manager_pmu_monitor_enabled" HeaderName="sink_power_manager_pmu_monitor">
+
+    <ConfigGroup
+        ShortId="sink_pmu_mon_config"
+        Id="PMU Charger Monitor"
+        Node="Basic"
+        ConfigGroupPath="./[@ShortId='battery']">
+        <ConfigItem
+            Id="Minimum charge current [mA]"
+            ShortId="min_charge_i"
+            Desc="The charge current will not be decreased below this minimum level by the PMU Charger Monitor."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x0A"/>
+        <ConfigItem
+            Id="Maximum charge current [mA]"
+            ShortId="max_charge_i"
+            Desc="The charge current will not be increased above this maximum level by the PMU Charger Monitor."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x64"/>
+        <ConfigItem
+            Id="Charger current step size [mA]"
+            ShortId="charger_i_step"
+            Desc="This is the amount by which the charge current will be altered when it is between the minimum and maximum charge levels based on the monitored temperature."
+            Type="uint"
+            Size="8"
+            DefaultValue="0x0A"/>
+        <ConfigItem
+            Id="Temp Lower Bound [degC]"
+            ShortId="no_incr_i_temp"
+            Desc="Temperature where current will not be increased. This forms the lower temperature bound for the PMU monitor. Below this temperature the current will not be increased."
+            Type="uint"
+            Size="8"
+            DefaultValue="0x32"/>
+        <ConfigItem
+            Id="Temp Upper Bound [degC]"
+            ShortId="decr_i_temp"
+            Desc="Temperature where current will be decreased. This forms the upper limit of the tolerated temperature bound after which the charge current will be decreased."
+            Type="uint"
+            Size="8"
+            DefaultValue="0x3C"/>
+        <ConfigItem
+            Id="Temp monitor period if charger active [ms]"
+            ShortId="monitor_period_active"
+            Desc="Temperature monitoring period when the charger is active [ms]."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x0000"/>
+        <ConfigItem
+            Id="Temp monitor period if charger idle [ms]"
+            ShortId="monitor_period_idle"
+            Desc="Temperature monitoring period when the charger is idle [ms]."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x0000"/>
+        <ConfigItem
+            Id="Temp monitor period if charger has no power [ms]"
+            ShortId="monitor_period_nopwr"
+            Desc="Temperature monitoring period when the charger has no power [ms]."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x00000"/>
+    </ConfigGroup>
+
+</ModuleData>

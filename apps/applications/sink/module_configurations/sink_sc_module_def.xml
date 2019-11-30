@@ -1,0 +1,32 @@
+<ModuleData Name="sink_secure_connection">
+    <ConfigGroup
+        Id="Sink Secure Connection"
+        ShortId="sink_sec_readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="Secure Connection"
+            ShortId="SecureConnectionMode"
+            Desc="Configure the Secure Connection Mode. LE SC is enabled by default. BT2.1 Man in the Middle needs to be enabled for Secure Connection Only Mode."
+            Type="enum"
+            Size="2"
+            DefaultValue="No BR/EDR Secure Connection"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']">
+            <enum key="No BR/EDR Secure Connection"
+                  value="0"/>
+            <enum key="BR/EDR Secure Connection Enable"
+                  value="1"/>
+            <enum key="BR/EDR SC Only mode and LE SC Only Mode"
+                  value="2"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="BR/EDR Authenticated Payload Timeout"
+            ShortId="BrEdrAuthenticatedPayloadTO_s"
+            Desc="The Authenticated_Payload_Timeout configuration parameter allows the Host to configure the maximum interval between packets containing a MIC received from the remote device when AES-CCM encryption is enabled on BR/EDR link."
+            Type="uint"
+            Size="16"
+            DefaultValue="0x03E8"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='connection_management']/[@ShortId='pairing']">
+            <BuildVariant HwVariant="All" SwVariant="Soundbar-Subwoofer" Value="0xBB8"/>
+        </ConfigItem>
+    </ConfigGroup>
+</ModuleData>

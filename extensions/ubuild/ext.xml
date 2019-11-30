@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root type="move">
+    <ext_id>
+        <uuid>{945a70db-a5d1-4101-a54c-06ce4914345f}</uuid>
+        <devkit>{3d5da188-f161-441c-a5e5-cda018a35030}</devkit>
+        <checksum>85bc08cfd924bbc0021605fe007af192</checksum>
+        <version>6.4.0</version>
+        <build>43</build>
+        <target>x86</target>
+    </ext_id>
+    <ext_info>
+        <name>Special build option</name>
+        <description>Adds pylib debug tabs</description>
+        <build>43</build>
+    </ext_info>	
+
+    <commands type="move">
+        <command type="move" name="build">
+            <options type="move">
+                <option type="move" name="build_nvscmd">--special "flash=nvscmd"</option>
+            </options>
+        </command>
+        <command type="move" name="clean">
+            <options type="move" >
+                <option type="move" name="clean_nvscmd">--special "flash=nvscmd"</option>
+            </options>
+        </command>
+        <command type="move" name="deploy">
+            <options type="move">
+                <option name="all_steps">--special "flash=nvscmd deploy_all=%1"</option>
+            </options>
+        </command>
+    </commands>
+</root>

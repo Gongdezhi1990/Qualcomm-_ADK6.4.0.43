@@ -1,0 +1,7 @@
+file=audio2
+
+Spdif0InPioConfig = 46
+
+#This key offloads the capability processing to audio P1 processor, providing the capability to QCC5120.
+#AudioThreadOffload = 0x01
+

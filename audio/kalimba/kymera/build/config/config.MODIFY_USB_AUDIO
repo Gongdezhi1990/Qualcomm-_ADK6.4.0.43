@@ -1,0 +1,35 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# definitions for including usb audio support
+
+%cpp
+
+# include usb audio endpoint
+INSTALL_USB_AUDIO
+
+# include usb audio rx and tx capabilities
+%list CFG_CAPABILITIES
+USB_AUDIO
+
+%build
+# We base this on another variable for unit tests so that usb_audio can be turned on
+# at the top level unit test makefile
+BUILD_USB_AUDIO=$(if $(TEST_BUILD),$(TEST_BUILD_USB_AUDIO),true)
+
+%list ALL_SRCDIRS
+../lib/buffer_interleave
+capabilities/usb_audio
+
+# List of global include paths
+%list ALL_INCDIRS
+../lib/buffer_interleave
+capabilities/usb_audio
+
+# List of libraries to build
+%list CFG_LIBS
+../lib/buffer_interleave/buffer_interleave
+capabilities/usb_audio/usb_audio

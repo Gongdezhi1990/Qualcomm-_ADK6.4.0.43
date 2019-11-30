@@ -1,0 +1,76 @@
+var av__headset__pairing_8h =
+[
+    [ "PAIR_REQ_T", "d7/dbc/structPAIR__REQ__T.html", "d7/dbc/structPAIR__REQ__T" ],
+    [ "pairingTaskData", "da/db3/structpairingTaskData.html", "da/db3/structpairingTaskData" ],
+    [ "PAIRING_PEER_PAIR_CFM_T", "d0/d40/structPAIRING__PEER__PAIR__CFM__T.html", "d0/d40/structPAIRING__PEER__PAIR__CFM__T" ],
+    [ "PAIRING_HANDSET_PAIR_CFM_T", "dd/d5b/structPAIRING__HANDSET__PAIR__CFM__T.html", "dd/d5b/structPAIRING__HANDSET__PAIR__CFM__T" ],
+    [ "appPairingIsIdle", "d5/d76/av__headset__pairing_8h.html#a8b24dc02c0a6d1adf889160d9080852c", null ],
+    [ "pairingState", "d5/d76/av__headset__pairing_8h.html#a77cc3125c9a992002fc22d067d7e65cd", null ],
+    [ "pairingStatus", "d5/d76/av__headset__pairing_8h.html#ac833e9f1366fd0d3ed2cf32dac632e3d", null ],
+    [ "av_headset_pairing_messages", "d5/d76/av__headset__pairing_8h.html#aea2bdac59469aa1b9f1884b7c96346a8", [
+      [ "PAIRING_INIT_CFM", "d5/d76/av__headset__pairing_8h.html#aea2bdac59469aa1b9f1884b7c96346a8a9d75a15d59ea27c2f85982484a3ec7d9", null ],
+      [ "PAIRING_PEER_PAIR_CFM", "d5/d76/av__headset__pairing_8h.html#aea2bdac59469aa1b9f1884b7c96346a8a0f7a52fe11da15d9a5d40fe712c5ad4c", null ],
+      [ "PAIRING_HANDSET_PAIR_CFM", "d5/d76/av__headset__pairing_8h.html#aea2bdac59469aa1b9f1884b7c96346a8a1f1f731afaf6dd892df7765071e5b231", null ]
+    ] ],
+    [ "pairing_internal_message_ids", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1", [
+      [ "PAIRING_INTERNAL_PEER_PAIR_REQ", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1a62e4c36a10ce1a16482f95e63358ff2e", null ],
+      [ "PAIRING_INTERNAL_HANDSET_PAIR_REQ", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1a64416f007bcc98c56623ff6cfe920457", null ],
+      [ "PAIRING_INTERNAL_TIMEOUT_IND", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1a8fe183d31f17f26aa551066b3436975a", null ],
+      [ "PAIRING_INTERNAL_CHECK_HANDSET_LINKKEYS", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1a8279e5b47f5709ba3d6183ef9c70f4fa", null ],
+      [ "PAIRING_INTERNAL_PEER_PAIR_CANCEL", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1a07093bbc8f6ecd8338a7e21d616005a6", null ],
+      [ "PAIRING_INTERNAL_HANDSET_PAIR_CANCEL", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1adcf3410689482014ef0ad5f01580453f", null ],
+      [ "PAIRING_INTERNAL_PEER_SDP_SEARCH", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1af4b959db2ae4f3570efc703c5ec34a3a", null ],
+      [ "PAIRING_INTERNAL_HANDSET_SDP_SEARCH", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1afcb27c860eb22268ee44de67feda93cb", null ],
+      [ "PAIRING_INTERNAL_DISABLE_SCAN", "d5/d76/av__headset__pairing_8h.html#a368d618eb3f9e288fdf8e0c95838a7e1aba0179ef72644a3ce04bb87a5b48b25e", null ]
+    ] ],
+    [ "pairing_states", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000", [
+      [ "PAIRING_STATE_NULL", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000a9cb5966e270d0ca395f7a9082711a566", null ],
+      [ "PAIRING_STATE_INITIALISING", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000a909d0fe72a95b295d74545c6073f74d2", null ],
+      [ "PAIRING_STATE_IDLE", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000abc5f4b55e1b6a21c7939d6e93ef5216e", null ],
+      [ "PAIRING_STATE_PEER_INQUIRY", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000ae436aa60f20ef024ddf8c42e7b9d064b", null ],
+      [ "PAIRING_STATE_PEER_SDP_SEARCH", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000af24bae3f9ae67e40182c3a982ae3e52c", null ],
+      [ "PAIRING_STATE_PEER_AUTHENTICATE", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000a55edb0830f77944efefbc03dbe395b86", null ],
+      [ "PAIRING_STATE_PEER_DISCOVERABLE", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000a4144f498bf14384671188bca600b6b49", null ],
+      [ "PAIRING_STATE_PEER_PENDING_AUTHENTICATION", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000a5daea1750d62ef78cf7b40520e47a27f", null ],
+      [ "PAIRING_STATE_PEER_SDP_SEARCH_AUTHENTICATED", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000ab2fb8ab61bbd805d18ad4e0ab0b296d1", null ],
+      [ "PAIRING_STATE_PEER_SCO_FWD_SDP_SEARCH", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000adde02f7425a3221fc7ef088a9b97dd0a", null ],
+      [ "PAIRING_STATE_HANDSET_DISCOVERABLE", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000a7b75f970d2bc7daef3f2fcc5e5409d44", null ],
+      [ "PAIRING_STATE_HANDSET_PENDING_AUTHENTICATION", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000af0b8d0bd2593db653808105286d67f9f", null ],
+      [ "PAIRING_STATE_HANDSET_SDP_SEARCH_AUTHENTICATED", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000a87609f9bac4d45d7940eeec880502bae", null ],
+      [ "PAIRING_STATE_CHECKING_HANDSET_LINKKEYS", "d5/d76/av__headset__pairing_8h.html#affa0e67a7286fae3a01b9074db9f7000a1fe7ecdd297e4cf5e87737070f0bfccd", null ]
+    ] ],
+    [ "pairing_status", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0", [
+      [ "pairingSuccess", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0a38e7390b9d1898114a46f551499a33de", null ],
+      [ "pairingNotReady", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0acb66841e0ef92d584cab7281d7911763", null ],
+      [ "pairingNoPeerFound", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0a80b23f71c8a1f219528b08411c715987", null ],
+      [ "pairingNoPeerServiceRecord", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0a6e46468a2cdf1ecb8e0918c2ad55bda3", null ],
+      [ "pairingPeerAuthenticationFailed", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0a363858f63b73e871fec10cfe01f85b3b", null ],
+      [ "pairingPeerVersionMismatch", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0a9d31d98631d3ffaa8fc7979081c943db", null ],
+      [ "pairingPeerTimeout", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0ae289836a251cf3d94d78e0975cfdb530", null ],
+      [ "pairingPeerCancelled", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0abecb67d2f1c87b6973477b1450a72989", null ],
+      [ "pairingHandsetSuccess", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0a3435581896485a7693dade0a9f8a0709", null ],
+      [ "pairingHandsetAuthenticationFailed", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0ab0eb063ae20eaf4b3d2ee97a060eb59e", null ],
+      [ "pairingHandsetNoLinkKey", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0ae5262811908410076e149824189a8654", null ],
+      [ "pairingHandsetTimeout", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0aee0f56753f1e8b65a54eab1b36c8a2e8", null ],
+      [ "pairingHandsetUnknown", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0afd9f4648177d8501103b0da60de91442", null ],
+      [ "pairingHandsetCancelled", "d5/d76/av__headset__pairing_8h.html#a0169aa3c3d0981f3d1f66c99b29e7ef0a46ad28f537597d954ffbd0f92bb126cb", null ]
+    ] ],
+    [ "pairingBlePermission", "d5/d76/av__headset__pairing_8h.html#aca47d09c510a1184a2753fe11a6894db", [
+      [ "pairingBleDisallowed", "d5/d76/av__headset__pairing_8h.html#aca47d09c510a1184a2753fe11a6894dba4a24abbbd043913f886f8915b160eaa4", null ],
+      [ "pairingBleOnlyPairedHandsets", "d5/d76/av__headset__pairing_8h.html#aca47d09c510a1184a2753fe11a6894dba29e41a856b75d7856a42dd639edb99ff", null ],
+      [ "pairingBleAllowOnlyResolvable", "d5/d76/av__headset__pairing_8h.html#aca47d09c510a1184a2753fe11a6894dbaa0939ea9d12e508aa08a00339ce747fb", null ],
+      [ "pairingBleAllowAll", "d5/d76/av__headset__pairing_8h.html#aca47d09c510a1184a2753fe11a6894dbab9e1929225a945dc2452d60a208c4e82", null ]
+    ] ],
+    [ "appPairingBlePermission", "d5/d76/av__headset__pairing_8h.html#adb406ced2f7085c6732b621eae06a11a", null ],
+    [ "appPairingClearHandsetLinkTxReqd", "d5/d76/av__headset__pairing_8h.html#ab0d82c0e57e5315b43476516c2cd6498", null ],
+    [ "appPairingGenerateLinkKey", "d5/d76/av__headset__pairing_8h.html#a0104999fc3ab74c1fea0828c338d100e", null ],
+    [ "appPairingHandleConnectionLibraryMessages", "d5/d76/av__headset__pairing_8h.html#a70683b7910861b99faddca2104a82496", null ],
+    [ "appPairingHandsetPair", "d5/d76/av__headset__pairing_8h.html#aaca40417c01e18ad0cf9e9015e8347b3", null ],
+    [ "appPairingHandsetPairAddress", "d5/d76/av__headset__pairing_8h.html#aa5f8c211f58226b194d0d9e174ef11fb", null ],
+    [ "appPairingHandsetPairCancel", "d5/d76/av__headset__pairing_8h.html#af385207f5ebcc60653c9df3061d04f21", null ],
+    [ "appPairingInit", "d5/d76/av__headset__pairing_8h.html#af0fb264ac996b8e898f40bf11b35ddcd", null ],
+    [ "appPairingPeerPair", "d5/d76/av__headset__pairing_8h.html#afe31d4c501d3e4ada6a27804d3aedb90", null ],
+    [ "appPairingPeerPairCancel", "d5/d76/av__headset__pairing_8h.html#a57fdd26abe7a3e69f7b5572f8ecfe94c", null ],
+    [ "appPairingSetHandsetLinkTxReqd", "d5/d76/av__headset__pairing_8h.html#aea2568eef744767a492f0bae523fe1fb", null ],
+    [ "appPairingTransmitHandsetLinkKeysReq", "d5/d76/av__headset__pairing_8h.html#a3267f5dfca8de7a69d0722824adb60a7", null ]
+];

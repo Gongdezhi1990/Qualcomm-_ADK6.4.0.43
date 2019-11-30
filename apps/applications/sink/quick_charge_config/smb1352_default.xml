@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Summit>
+  <header>
+    <part_name>SMB1352</part_name>
+    <gui_version>1.0.0</gui_version>
+    <tracking_code>XX</tracking_code>
+    <checksum>e70b8de0b4cf2b059b80ad84b3a3f303</checksum>
+    <timestamp>22/05/2018 13:41:05</timestamp>
+  </header>
+  <config>
+    <R00_To_R14>5D 61 97 E3 0F 11 7E 4F 80 18 20 40 CF BF 99 00 77 27 60 8D 18</R00_To_R14>
+  </config>
+  <Summit_Values>
+    <T15_To_T2E>00 00 00 00 00 00 00 0B 00 00 00 00 00 00 00 00 00 00 20 00 00 00 00 00 00 00 </T15_To_T2E>
+  </Summit_Values>
+  <factory_prog>
+    <AFVCWhenEnteringTaper>Enable</AFVCWhenEnteringTaper>
+    <VCHGIINV>Vchg Measures Charge Current</VCHGIINV>
+    <AFVCOverride>Enable</AFVCOverride>
+    <SYSOKPinConfiguration>Open Drain</SYSOKPinConfiguration>
+    <SlaveAddress>0</SlaveAddress>
+    <VolatileWrites>Enabled</VolatileWrites>
+    <VSYSTracking>50mV</VSYSTracking>
+    <INOKSelectSource>Input FET On</INOKSelectSource>
+    <QuickCharge3.0OptimizationAlgorithm>Advanced Optimization Algorithm</QuickCharge3.0OptimizationAlgorithm>
+    <DeadBatteryTimer>Enabled</DeadBatteryTimer>
+    <ReloadonUnplug>Enabled</ReloadonUnplug>
+    <USBINRerunforAICL>Disabled</USBINRerunforAICL>
+    <SYSOKBMAOption>SYSOK Option B Waits for BMA Result</SYSOKBMAOption>
+  </factory_prog>
+  <thermistor_values>
+    <R1>100.0</R1>
+    <R2>0.0</R2>
+    <RT>100.0</RT>
+    <Beta>3750</Beta>
+  </thermistor_values>
+  <status>
+    <R36_To_R47>00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</R36_To_R47>
+  </status>
+</Summit>

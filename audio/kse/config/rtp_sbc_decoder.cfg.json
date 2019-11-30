@@ -1,0 +1,144 @@
+{
+    "stream": [
+        {
+            "interface": "a2dp",
+            "type": "source",
+            "kwargs": {
+                "backing": "file",
+                "filename": "resource/153_Prompts_176.4_kHz_Music_Detected_48k_rtp.sbc",
+                "sample_rate": 0,
+                "sample_width": 8,
+                "frame_size": 85,
+                "metadata_enable": true
+            }
+        },
+        {
+            "interface": "pcm",
+            "type": "sink",
+            "kwargs": {
+                "backing": "file",
+                "filename": "tmp/rtp_sbc_decoder_0.wav",
+                "sample_rate": 48000,
+                "sample_width": 16
+            }
+        },
+        {
+            "interface": "pcm",
+            "type": "sink",
+            "kwargs": {
+                "backing": "file",
+                "filename": "tmp/rtp_sbc_decoder_1.wav",
+                "sample_rate": 48000,
+                "sample_width": 16
+            }
+        }
+    ],
+    "endpoint": [
+        {
+            "interface": "a2dp",
+            "type": "source",
+            "kwargs": {
+                "stream": 0
+            }
+        },
+        {
+            "interface": "pcm",
+            "type": "sink",
+            "kwargs": {
+                "instance": 0,
+                "channel": 0,
+                "pcm_sync_rate": 48000,
+                "pcm_sample_rising_edge": 0,
+                "pcm_master_mode": 1,
+                "pcm_slot_count": 4,
+                "pcm_sample_format": 1,
+                "pcm_master_clock_rate": 3072000
+            }
+        },
+        {
+            "interface": "pcm",
+            "type": "sink",
+            "kwargs": {
+                "instance": 0,
+                "channel": 1,
+                "pcm_sync_rate": 48000,
+                "pcm_sample_rising_edge": 0,
+                "pcm_master_mode": 1,
+                "pcm_slot_count": 4,
+                "pcm_sample_format": 1,
+                "pcm_master_clock_rate": 3072000
+            }
+        }
+    ],
+    "operator": [
+        {
+            "interface": "RTP_DECODER",
+            "args": [
+                [
+                    "OPMSG_RTP_DECODE_ID_SET_WORKING_MODE",
+                    [
+                        1
+                    ]
+                ],
+                [
+                    "OPMSG_RTP_DECODE_ID_SET_RTP_CODEC_TYPE",
+                    [
+                        1
+                    ]
+                ],
+                [
+                    "SET_SAMPLE_RATE",
+                    [
+                        1920
+                    ]
+                ],
+                [
+                    "SET_TTP_LATENCY",
+                    [
+                        3,
+                        3392
+                    ]
+                ],
+                [
+                    "SET_BUFFER_SIZE",
+                    [
+                        4819
+                    ]
+                ]
+            ]
+        },
+        {
+            "interface": "SBC_DECODER"
+        }
+    ],
+    "graph": [
+        [
+            "stream0",
+            "endpoint0"
+        ],
+        [
+            "endpoint0",
+            "operator0i0"
+        ],
+        [
+            "operator0o0",
+            "operator1i0"
+        ],
+        [
+            "operator1o0",
+            "endpoint1"
+        ],
+        [
+            "operator1o1",
+            "endpoint2"
+        ],
+        [
+            "endpoint1",
+            "stream1"
+        ],
+        [
+            "endpoint2",
+            "stream2"
+        ]
+    ]
+}

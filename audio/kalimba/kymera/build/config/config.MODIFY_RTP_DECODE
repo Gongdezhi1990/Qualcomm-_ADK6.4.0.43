@@ -1,0 +1,9 @@
+%list CFG_CAPABILITIES
+RTP_DECODE
+
+# List of global include paths
+%list ALL_INCDIRS
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/rtp_decode/rtp_decode

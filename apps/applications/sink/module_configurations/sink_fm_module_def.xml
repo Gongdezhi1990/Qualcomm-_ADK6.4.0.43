@@ -1,0 +1,236 @@
+<ModuleData Name="Sink_fm">
+    <DefineGroup>      
+        <DefineStruct
+            Id="fm stored freq"
+            ShortId="fm_stored_freq" >
+            <ConfigArray
+                Id="Freq array"
+                ShortId="freq"
+                Desc="Value of stored freq"
+                Type="array"
+                ElementType="uint"
+                ArraySize="3" />
+        </DefineStruct>        
+
+        <DefineStruct
+            Id="fm rx config"
+            ShortId="fm_rx_config">
+            <ConfigItem
+                Id="seek band bottom"
+                ShortId="seek_band_bottom"
+                Desc="Value of seek band bottom"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="seek_band_top"
+                ShortId="seek_band_top"
+                Desc="seek band top"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="seek freq spacing"
+                ShortId="seek_freq_spacing"
+                Desc="seek freq spacing"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="seek tune rssi"
+                ShortId="seek_tune_rssi"
+                Desc="seek tune rssi"
+                Type="uint"
+                Size="16"/>      
+            <ConfigItem
+                Id="seek tune snr"
+                ShortId="seek_tune_snr"
+                Desc="seek tune snr"
+                Type="uint"
+                Size="16"/>         
+            <ConfigItem
+                Id="seek_band_top"
+                ShortId="rsq_rssi_low"
+                Desc="seek band top"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="seek band bottom"
+                ShortId="rsq_rssi_high"
+                Desc="seek band bottom"
+                Type="uint"
+                Size="16"/>
+            <ConfigItem
+                Id="seek_band_top"
+                ShortId="rsq_snr_low"
+                Desc="seek band top"
+                Type="uint"
+                Size="16"/>      
+            <ConfigItem
+                Id="rsq_snr_high"
+                ShortId="rsq_snr_high"
+                Desc="rsq_snr_high"
+                Type="uint"
+                Size="16"/>
+             <ConfigItem
+                Id="antenna_source"
+                ShortId="antenna_source"
+                Desc="antenna_source"
+                Type="uint"
+                Size="16"/>      
+            <ConfigItem
+                Id="hardware_pio"
+                ShortId="hardware_pio"
+                Desc="hardware_pio"
+                Type="uint"
+                Size="16"/>
+        </DefineStruct>
+
+        <DefineStruct
+            Id="volume_info config"
+            ShortId="volume_info">
+            <ConfigItem
+                Id="main_volume"
+                ShortId="main_volume"
+                Desc="main_volume"
+                Type="int"
+                Size="16"/>
+            <ConfigItem
+                Id="aux_volume"
+                ShortId="aux_volume"
+                Desc="aux_volume"
+                Type="int"
+                Size="16"/>      
+        </DefineStruct>  
+    </DefineGroup>
+
+    <ConfigGroup
+        Id="Sink FM Readonly"
+        ShortId="sink_fm_readonly"
+        Node="Basic">
+        <ConfigStruct 
+            Id="fm rx config" 
+            ShortId="config"
+            Desc="Config pattern" 
+            Type="struct"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='audio']"
+            Struct="fm_rx_config">
+            <StructElementConfigItem
+                Id="seek band bottom"
+                ShortId="seek_band_bottom"
+                Desc="seekband_bottom" 
+                DefaultValue="0x226A" />
+            <StructElementConfigItem
+                Id="seek band top"
+                ShortId="seek_band_top"
+                Desc="seekband_top" 
+                DefaultValue="0x2A26" />
+            <StructElementConfigItem
+                Id="seek freq spacing"
+                ShortId="seek_freq_spacing"
+                Desc="seekfreq_spacing"
+                DefaultValue="0x000A" />
+            <StructElementConfigItem
+                Id="seek tune rssi"
+                ShortId="seek_tune_rssi"
+                Desc="seektunerssi"
+                DefaultValue="0x0014" />
+            <StructElementConfigItem
+                Id="seek tune snr"
+                ShortId="seek_tune_snr"
+                Desc="seektunesnr"
+                DefaultValue="0x0003" />
+            <StructElementConfigItem
+                Id="rsq rssi low"
+                ShortId="rsq_rssi_low"
+                Desc="rsqrssilow"
+                DefaultValue="0x0000" />
+            <StructElementConfigItem
+                Id="rsq rssi high"
+                ShortId="rsq_rssi_high"
+                Desc="rsqrssi_high"
+                DefaultValue="0x007F" />
+            <StructElementConfigItem
+                Id="rsq snr low"
+                ShortId="rsq_snr_low"
+                Desc="rsqsnr_low"
+                DefaultValue="0x0000" />
+             <StructElementConfigItem
+                Id="rsq snr high"
+                ShortId="rsq_snr_high"
+                Desc="rsqsnr_high"
+                DefaultValue="0x007F" />
+            <StructElementConfigItem
+                Id="antenna source"
+                ShortId="antenna_source"
+                Desc="antennasource"
+                DefaultValue="0x0001" />
+            <StructElementConfigItem
+                Id="hardware pio"
+                ShortId="hardware_pio"
+                Desc="hardwarepio"
+                DefaultValue="0x0003" />
+        </ConfigStruct>
+    </ConfigGroup> 
+
+    <ConfigGroup
+        Id="Sink FM writeable"
+        ShortId="sink_fm_writeable"
+        Node="Basic">    
+        <ConfigStruct 
+            Id="fm Stored Freq instance" 
+            ShortId="fmStoredFreq"
+            Desc="fmStoredFreq array use" 
+            Type="struct"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='audio']"
+            Struct="fm_stored_freq">
+            <StructElementConfigItem
+                Id="Freq max preset stations array"
+                ShortId="instance_of_freq_array"
+                Desc="Freq max preset stations array">
+                <ArrayElementConfigItem
+                    Id="Freq Array Item index 0"
+                    ShortId="freq_r0"
+                    Desc="freq[0] value"
+                    DefaultValue="0x0"/>
+                <ArrayElementConfigItem
+                    Id="Freq Array Item index 1"
+                    ShortId="freq_r1"
+                    Desc="freq[1] value"
+                    DefaultValue="0x0"/>
+                <ArrayElementConfigItem
+                    Id="Freq Array Item index 2"
+                    ShortId="freq_r2"
+                    Desc="freq[2] value"
+                    DefaultValue="0x0"/>
+            </StructElementConfigItem>
+        </ConfigStruct>
+
+        <ConfigStruct 
+            Id="fm_volume" 
+            ShortId="fm_volume"
+            Desc="fm_volume pattern" 
+            Type="struct"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='audio']"
+            Struct="volume_info">
+            <StructElementConfigItem
+                Id="main volume"
+                ShortId="main_volume"
+                Desc="mainvolume"
+                DefaultValue="0" />
+            <StructElementConfigItem
+                Id="aux _volume"
+                ShortId="aux_volume"
+                Desc="auxvolume"
+                DefaultValue="0" />
+        </ConfigStruct>
+
+         <ConfigItem
+                Id="fmRxTunedFreq"
+                ShortId="fmRxTunedFreq"
+                Type="uint"
+                DefaultValue="0"
+                Size="16"
+                Desc="fmRxTunedFreq."
+                ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='audio']">
+         </ConfigItem>
+     </ConfigGroup>
+</ModuleData>
+

@@ -1,0 +1,16 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the downloadable third-party licence check example
+
+%list ALL_INCDIRS
+capabilities/secure_basic_passthrough
+
+%list CFG_LIBS
+capabilities/secure_basic_passthrough/secure_basic_passthrough
+support_lib/op_data_access/op_data_access
+support_lib/third_party_security/tpseclib
+

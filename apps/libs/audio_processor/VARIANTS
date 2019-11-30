@@ -1,0 +1,9 @@
+
+VARIANTS :=  debug speed debug_speed
+
+# Include DEBUG
+CFLAGS_debug := -DDEBUG_PRINT_ENABLED
+# Include SPEED
+CFLAGS_speed := -DAUDIO_DSP_SPEED
+# Include DEBUG and SPEED
+CFLAGS_debug_speed := -DDEBUG_PRINT_ENABLED -DAUDIO_DSP_SPEED

@@ -1,0 +1,107 @@
+<ModuleData Name="Sink_gaia">
+    <DefineGroup>
+        <DefinePattern  PatternName="GAIA PIO Pattern" ShortId="gaia_pio_pattern" >
+            <ConfigItem Id="Physical PIO" ShortId="pio" Desc="Physical PIO that maps to the GAIA PIO at this position" Type="enum" Size="8" >
+                <List use="pio_7_bit"/>
+                <List use="pio_not_sel"/>
+            </ConfigItem>
+        </DefinePattern>
+    </DefineGroup>
+    <ConfigGroup
+        ShortId="gaia_read_only"
+        Id="GAIA_readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="Enable GAIA Session"
+            ShortId="GaiaEnableSession"
+            Type="bool"
+            DefaultValue="true"
+            Size="1"
+            Desc="GAIA session enabled on connection."
+            ConfigGroupPath="./[@ShortId='gaia']"/>
+        <ConfigItem
+            Id="GAIA User Defined EQ Settings Persistent Store Timeout [s]"
+            ShortId="StoreCurrentPEQSettingsTimeout_s"
+            Type="uint"
+            DefaultValue="0x0005"
+            Size="16"
+            Desc="The time in seconds elapsed after the last GAIA command has been received to store EQ settings into PS Store."
+            ConfigGroupPath="./[@ShortId='system']/[@ShortId='timers']"/>
+        <ConfigItem
+            Id="GAIA DFU Partition"
+            ShortId="dfu_partition"
+            Type="uint"
+            DefaultValue="0x0"
+            Size="4"
+            Desc="This specifies the SQIF partition to use for GAIA Over-the-Air Device Firmware Upgrade."
+            Range="Min=0,Max=14"
+            ConfigGroupPath="./[@ShortId='gaia']"/>
+		<ConfigItem
+            Id="Maintain Connection After Power Off"
+            ShortId="GaiaRemainConnected"
+            Type="bool"
+            DefaultValue="false"
+            Size="1"
+            Desc="GAIA connection remains after power off."
+            ConfigGroupPath="./[@ShortId='gaia']"/>
+    </ConfigGroup> 
+    
+    <ConfigGroup
+        ShortId="gaia_pio_translation"
+        Id="GAIA_pio_translation"
+        Node="Array"
+        ConfigGroupPath="./[@ShortId='gaia']/[@ShortId='gaia_pio_mapping']" >
+        <ConfigPatternArray Id="GAIA PIO Array"
+                            ShortId="gaia_pio_array"
+                            Pattern="gaia_pio_pattern"
+                            MaxNumPatterns="32">
+            <BuildVariant HwVariant="All" SwVariant="All">
+                <PatternArrayRow Id="PIO Map Row 1" ShortId="pio_map_row_1" Node="Basic">
+                    <PatternArrayConfigItem ShortId="gaia_pm_row1" DefaultValue="PIO 0" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="PIO Map Row 2" ShortId="pio_map_row_2" Node="Basic">
+                    <PatternArrayConfigItem ShortId="gaia_pm_row2" DefaultValue="PIO 1" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="PIO Map Row 3" ShortId="pio_map_row_3" Node="Basic">
+                    <PatternArrayConfigItem ShortId="gaia_pm_row2" DefaultValue="PIO 2" />
+                </PatternArrayRow>
+            </BuildVariant>
+
+            <BuildVariant HwVariant="H13672v2 R13568v4 R13568v4_A05 CF133 CF133_SQIF CG793 CG437 CF376_CE826 CF376_CF212 CF376_CF429 CF376_CF440 CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC3021-AA_DEV-BRD-R2-AA QCC3031-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5126-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA QCC5127-AB_DEV-BRD-R2-AA" SwVariant="All">
+                <PatternArrayRow Id="PIO Map Row 1" ShortId="pio_map_row_1" Node="Basic">
+                    <PatternArrayConfigItem ShortId="gaia_pm_row1" DefaultValue="N/A" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="PIO Map Row 2" ShortId="pio_map_row_2" Node="Basic">
+                    <PatternArrayConfigItem ShortId="gaia_pm_row2" DefaultValue="N/A" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="PIO Map Row 3" ShortId="pio_map_row_3" Node="Basic">
+                    <PatternArrayConfigItem ShortId="gaia_pm_row2" DefaultValue="N/A" />
+                </PatternArrayRow>
+            </BuildVariant>
+
+            <BuildVariant HwVariant="CE446_CE692 CF376_CE692 CF376_CE692H3 CF376_H13732" SwVariant="All">
+                <PatternArrayRow Id="PIO Map Row 1" ShortId="pio_map_row_1" Node="Basic">
+                    <PatternArrayConfigItem ShortId="gaia_pm_row1" DefaultValue="PIO 79" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="PIO Map Row 2" ShortId="pio_map_row_2" Node="Basic">
+                    <PatternArrayConfigItem ShortId="gaia_pm_row2" DefaultValue="N/A" />
+                </PatternArrayRow>
+                <PatternArrayRow Id="PIO Map Row 3" ShortId="pio_map_row_3" Node="Basic">
+                    <PatternArrayConfigItem ShortId="gaia_pm_row2" DefaultValue="N/A" />
+                </PatternArrayRow>
+            </BuildVariant>
+            <BuildVariant HwVariant="QCC5124-BA_FORMFACTOR-AA" SwVariant="All" >
+                <PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="pio" DefaultValue="N/A" />
+                </PatternArrayRow>
+                <PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="pio" DefaultValue="N/A" />
+                </PatternArrayRow>
+                <PatternArrayRow Node="Basic" ShortId="pattern_row" Id="Pattern Row" >
+                    <PatternArrayConfigItem ShortId="pio" DefaultValue="N/A" />
+                </PatternArrayRow>
+            </BuildVariant>
+        </ConfigPatternArray>
+    </ConfigGroup>
+
+</ModuleData>

@@ -1,0 +1,29 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2015 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build the downloadable ANC tuning capability
+
+%cpp
+# do not call framework patches associated with stream_anc_user1 and stream_anc_user2
+#NO_ANC_TUNING_PATCHES
+
+#
+# Capabilities to include in the build
+#
+%list CFG_CAPABILITIES
+ANC_TUNING
+
+%list ALL_SRCDIRS
+capabilities/anc_tuning
+
+
+# List of global include paths
+%list ALL_INCDIRS
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/anc_tuning/anc_tuning
+

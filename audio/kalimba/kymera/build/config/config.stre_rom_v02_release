@@ -1,0 +1,11 @@
+#CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Crescendo top-level config that builds private libraries with obfuscation
+
+%include config.stre_rom_v02
+%include config.MODIFY_HYDRA_RELEASE
+%include config.MODIFY_STRE_RELEASE
+

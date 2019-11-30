@@ -1,0 +1,34 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2016 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions required to build and use the TTP module
+# Also enables the time-to-play variant of the basic passthrough capability
+
+%cpp
+INSTALL_TTP
+
+# If AEC_REFERENCE is included, also include TTP support for AEC reference
+INSTALL_AEC_REFERENCE_SPKR_TTP
+# places need to look at later
+TODO_AEC_REFERENCE_TTP
+
+# Add some extra debug messages etc
+TTP_GEN_DEBUG
+
+%list CFG_CAPABILITIES
+TTP_PASS
+
+%list ALL_SRCDIRS
+components/ttp
+
+# List of global include paths
+%list ALL_INCDIRS
+components/ttp
+
+# List of libraries to build
+%list CFG_LIBS
+components/ttp/ttp
+

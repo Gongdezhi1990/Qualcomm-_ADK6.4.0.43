@@ -1,0 +1,68 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2010 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+asm_files = cmpd100.asm \
+delay.asm \
+mute_control.asm \
+peak_monitor.asm \
+peq.asm \
+hq_peq.asm \
+dh_peq.asm \
+peq_coeff_gen.asm \
+dbe.asm \
+dbe_variables.asm \
+vse.asm \
+vse_variables.asm \
+xover.asm \
+compander.asm \
+xover_variables.asm \
+stereo_3d_enhancement.asm \
+stream_gain.asm \
+stream_mixer.asm \
+stereo_copy.asm \
+mic_grouping.asm \
+audio_mux_NxM.asm \
+frame_iir_resamplev2.asm \
+iir_resamplev2_coefs_static.asm \
+iir_resamplev2_common.asm 
+
+
+header_files = audio_proc_library.h \
+cmpd100.h \
+delay.h \
+mute_control.h \
+peak_monitor.h \
+peq.h \
+peq_coeff_gen.h \
+dbe.h \
+vse.h \
+xover.h \
+compander.h \
+stereo_3d_enhancement.h \
+stream_gain.h \
+stream_mixer.h \
+stereo_copy.h \
+audio_mux_NxM.h \
+iir_resamplerv2_common_static.h \
+frame_iir_resamplerv2_static.h \
+mic_grouping.h
+
+
+$(eval $(call header_rules,$(header_files)))
+
+$(eval $(call rules,$(asm_files)))
+
+# one line per variant...
+$(eval $(call rules_variant,debug,$(FL_DEBUG),$(asm_files)))
+
+# some base register variants
+$(foreach hw,$(KAL_BASE_REG_CORES), \
+  $(eval $(call rules_variant_core,base_regs,$(FL_BASE_REG),$(asm_files),$(hw))) \
+  $(eval $(call rules_variant_core,base_regs_patch_libs,$(FL_BASE_REG) $(FL_PATCH),$(asm_files),$(hw))) \
+  $(eval $(call rules_variant_core,mux14_base_regs,$(FL_BASE_REG) -DMUX_IN_14,$(asm_files),$(hw))) \
+  $(eval $(call rules_variant_core,mux12_base_regs,$(FL_BASE_REG) -DMUX_IN_12,$(asm_files),$(hw))) \
+)
+

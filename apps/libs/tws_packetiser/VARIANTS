@@ -1,0 +1,4 @@
+VARIANTS := debug
+
+CFLAGS :=
+CFLAGS_debug := -DTWS_PACKETISER_DEBUG_LIB

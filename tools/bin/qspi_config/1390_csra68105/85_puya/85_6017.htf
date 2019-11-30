@@ -1,0 +1,21 @@
+# Copyright (c) 2018 Qualcomm Technologies International, Ltd.
+# All Rights Reserved.
+# Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+
+
+
+# Puya P25Q64L
+# The maximum supported clock rate for this part is 70MHz. This configuration uses the 80MHz source divided by two.
+QSPIFRAMLUTBaseParams = [00 85 60 17 10 00 01 20 00]
+QSPIFRAMLUTSPIReadParams = [00 03 02]
+QSPIFRAMLUTSPIConfVector =  [00 06 02 01 50 02 31 02]
+QSPIFRAMLUTFastConfVector =  [00 06 02 01 50 02 31 02]
+QSPIFRAMLUTWriteCmds =  [00 02 06]
+QSPIFRAMLUTEraseCmds = [00 d8 60]
+QSPIFRAMLUTStatusReadParams = [00 01 01 02 01]
+QSPIFRAMLUTStatusReadVector = [00 03 01 01 05]
+QSPIFRAMLUTDPDCmds = [00 b9 ab]
+QSPIFRAMLUTFastReadParams = [00 03 eb 01 04]
+QSPIFRAMLUTResetVector = [00 05 02 01 66 01 99]
+QSPIFRAMLUT4BAMCmds = [00 00 00]
+QSPIFRAMLUTSuspendResumeCmds = [00 75 7A 75 7A]

@@ -1,0 +1,77 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2014 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Definitions for A2DP in Hydra builds.
+# Kymera doesn't support shunt on Hydra, so don't include any shunt stuff.
+
+%cpp
+#
+# Which components do we want to include on this chip?
+#
+INSTALL_A2DP
+
+#
+# Definitions for aptX library (equivalent to aptx_base_regs_external_memory variant)
+#
+APTX_USE_EXTERNAL_MEMORY
+APTX_LOW_RAM
+APTX_ENABLE_MERGED_HD
+
+# Extended Aptx 'licence' functionality (B-250914)
+APTX_LICENCE_EXTENSIONS
+
+#
+# Capabilities we want to include on the chip
+# This list gets turned into a set of defines of the form INSTALL_OPERATOR_XXXX
+#
+%list CFG_CAPABILITIES
+SBC_DECODE
+APTX_CLASSIC_DECODE
+APTXHD_DECODE
+APTX_LOW_LATENCY_DECODE
+AAC_DECODE
+APTX_CLASSIC_MONO_DECODER
+APTX_CLASSIC_MONO_DECODER_NO_AUTOSYNC
+APTX_CLASSIC_ENCODE
+APTXHD_ENCODE
+
+%build
+# We base this on another variable for unit tests so that a2dp can be turned on
+# at the top level unit test makefile
+BUILD_A2DP=$(if $(TEST_BUILD),$(TEST_BUILD_A2DP),true)
+
+# List of global include paths
+%list ALL_INCDIRS
+../lib/codec
+../lib/sbc
+../lib/aac
+../lib_private/aptx
+../lib_private/aptx_processing
+capabilities/a2dp_decode
+
+# List of libraries to build
+%list CFG_LIBS
+capabilities/sbc_decode/sbc_decode
+capabilities/aac_decode/aac_decode
+capabilities/aptx_decode/aptx_decode
+capabilities/a2dp_decode/a2dp_decode
+capabilities/aptx_encode/aptx_encode
+
+# Libraries needed by a2dp capabilities
+../lib/codec/codec
+../lib/sbc/sbc
+../lib/aac/aac
+../lib_private/aptx/aptx
+../lib_private/aptx_processing/aptx_processing
+capabilities/encoder/encoder
+
+%list MAXIM_LIBS
+../lib/sbc/sbc
+../lib/aac/aac
+../lib_private/aptx/aptx
+../lib_private/aptx_processing/aptx_processing
+
+%include config.MODIFY_RTP_DECODE

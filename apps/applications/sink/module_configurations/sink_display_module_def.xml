@@ -1,0 +1,66 @@
+<ModuleData Name="sink_display">
+    <ConfigGroup
+        Id="Sink Display"
+        ShortId="sink_display"
+        Node="Basic">
+        <ConfigItem
+            Id="Display Reset PIO"
+            ShortId="disp_reset_pio"
+            Type="enum"
+            DefaultValue="N/A"
+            Size="8"
+            Desc="Configures the reset PIO of the LCD Display"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+            <BuildVariant HwVariant="CF376_CE826"
+                          SwVariant="All"
+                          Value="PIO 28" />
+            <BuildVariant HwVariant="CF376_CG724"
+                          SwVariant="All"
+                          Value="PIO 55" />
+            <BuildVariant HwVariant="CF376_CF212"
+                          SwVariant="All"
+                          Value="PIO 43" />
+            <BuildVariant HwVariant="CE446_CE692 CF376_CE692 CF376_CE692H3 CF376_H13732 R13568v4 R13568v4_A05 H13672v2"
+                          SwVariant="All"
+                          Value="PIO 26" />
+            <BuildVariant HwVariant="CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 21" />
+            <BuildVariant HwVariant="QCC5126-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 54" />
+            <BuildVariant HwVariant="QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 5" />              
+                          
+        </ConfigItem>
+        <ConfigItem
+            Id="Display Backlight PIO"
+            ShortId="disp_backlight_pio"
+            Type="enum"
+            DefaultValue="N/A"
+            Size="8"
+            Desc="Configures the backlight PIO of the LCD Display"
+            ConfigGroupPath="./[@ShortId='input_output']/[@ShortId='output_pios']">
+            <List use="pio_7_bit"/>
+            <List use="pio_not_sel"/>
+            <BuildVariant HwVariant="CF376_CE826"
+                          SwVariant="All"
+                          Value="PIO 24" />
+            <BuildVariant HwVariant="CF376_CF212 QCC5127-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 45" />
+            <BuildVariant HwVariant="CF376_CE692 CF376_CE692H3 CF376_H13732"
+                          SwVariant="All"
+                          Value="PIO 72" />
+            <BuildVariant HwVariant="CF376_CG724 CF376_CF897 QCC3024-AA_DEV-BRD-R2-AA QCC3034-AA_DEV-BRD-R2-AA QCC5124-AA_DEV-BRD-R2-AA QCC3020-AA_DEV-BRD-R2-AA QCC5120-AB_DEV-BRD-R2-AA QCC5127-AA_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 54" />
+            <BuildVariant HwVariant="QCC5126-AB_DEV-BRD-R2-AA"
+                          SwVariant="All"
+                          Value="PIO 61" />       
+        </ConfigItem>
+    </ConfigGroup>    
+</ModuleData>

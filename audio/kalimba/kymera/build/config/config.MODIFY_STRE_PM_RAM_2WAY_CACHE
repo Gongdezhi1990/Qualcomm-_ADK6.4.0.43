@@ -1,0 +1,16 @@
+############################################################################
+#  Copyright (c) 2015 Qualcomm Technologies International, Ltd.
+#  All Rights Reserved.
+#  Qualcomm Technologies International, Ltd. Confidential and Proprietary.
+#  Notifications and licenses are retained for attribution purposes only
+############################################################################
+# Configuration file to make use of Kalimba's 2-Way cache.
+# This is useful for chips running from SQIF and having enough Program RAM.
+# If neither this file nor config.MODIFY_STRE_PM_RAM_2WAYHALF_CACHE is
+# included, then direct cache will be used.
+
+%cpp
+INSTALL_2WAY_CACHE
+
+%build
+USE_2WAY_CACHE=1

@@ -1,0 +1,36 @@
+############################################################################
+# CONFIDENTIAL
+#
+# Copyright (c) 2013 - 2017 Qualcomm Technologies International, Ltd.
+#
+############################################################################
+# Common definitions for standard capabilities
+
+%list CFG_CAPABILITIES
+BASIC_PASS
+
+# Source directory list, used for places to look for uses of changed CPP symbols
+%list ALL_SRCDIRS
+capabilities
+../lib/audio_fadeout
+
+# List of global include paths
+%list ALL_INCDIRS
+capabilities/common
+capabilities/base_op
+capabilities/database
+capabilities
+../lib/audio_fadeout
+support_lib
+
+# List of libraries to build
+%list CFG_LIBS
+# Capabilities
+capabilities/database/database
+capabilities/common/common
+capabilities/base_op/base_op
+capabilities/base_multi_chan_op/base_multi_chan_op
+capabilities/basic_passthrough/basic_passthrough
+# Libraries needed by certain capabilities
+../lib/audio_fadeout/audio_fadeout
+support_lib/cbops/cbops

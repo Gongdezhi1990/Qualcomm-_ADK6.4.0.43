@@ -1,0 +1,102 @@
+<ModuleData Name="sink_sbc">
+    <ConfigGroup
+        ShortId="sink_sbc_read_only"
+        Id="sbc_readonly"
+        Node="Basic">
+        <ConfigItem
+            Id="SBC Sampling Frequency"
+            ShortId="sampling_freq"
+            Desc="Sets the SBC Codec Sampling Frequency"
+            Type="enum"
+            Size="8"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']/[@ShortId='sbc_config']"
+            DefaultValue="Sampling Frequency 44.1Khz">
+            <enum key="Sampling Frequency 48Khz"
+                  value="16"/>
+            <enum key="Sampling Frequency 44.1Khz"
+                  value="32"/>
+            <enum key="Sampling Frequency 32Khz"
+                  value="64"/>
+            <enum key="Sampling Frequency 16Khz"
+                  value="128"/>
+        </ConfigItem>       
+        <ConfigItem
+            Id="SBC Channel Mode"
+            ShortId="channel_mode"
+            Desc="Sets the SBC Codec Channel Mode"
+            Type="enum"
+            Size="8"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']/[@ShortId='sbc_config']"
+            DefaultValue="Joint Stereo">
+            <enum key="Joint Stereo"
+                  value="1"/>
+            <enum key="Stereo"
+                  value="2"/>
+            <enum key="Dual Channel"
+                  value="4"/>
+            <enum key="Mono"
+                  value="8"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="SBC Block Length"
+            ShortId="block_length"
+            Desc="Sets the SBC Block Length"
+            Type="enum"
+            Size="8"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']/[@ShortId='sbc_config']"
+            DefaultValue="Block Length 16">
+            <enum key="Block Length 16"
+                  value="16"/>
+            <enum key="Block Length 12"
+                  value="32"/>
+            <enum key="Block Length 8"
+                  value="64"/>
+            <enum key="Block Length 4"
+                  value="128"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="SBC Subbands"
+            ShortId="subbands"
+            Desc="Sets the SBC Subbands"
+            Type="enum"
+            Size="8"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']/[@ShortId='sbc_config']"
+            DefaultValue="Subband 8">
+            <enum key="Subband 8"
+                  value="4"/>
+            <enum key="Subband 4"
+                  value="8"/>
+        </ConfigItem>
+        <ConfigItem
+            Id="SBC Allocation Method"
+            ShortId="alloc_method"
+            Desc="Sets the SBC Allocation Method"
+            Type="enum"
+            Size="8"
+            ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']/[@ShortId='sbc_config']"
+            DefaultValue="Allocation Method Loudness">
+            <enum key="Allocation Method Loudness"
+                  value="1"/>
+            <enum key="Allocation Method SNR"
+                  value="2"/>
+        </ConfigItem>
+	<ConfigItem
+        	Id="Maximum Bitpool"
+        	ShortId="sbc_max_bitpool"
+        	Desc="Specifies the maximum bitpool size supported for SBC. Source will use the maximum SBC bitpool that was configured"
+        	Range="Min=2,Max=250"
+        	Type="uint"
+        	Size="8"
+              DefaultValue="53"
+        	ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']/[@ShortId='sbc_config']"/>
+        <ConfigItem
+        	Id="Minimum Bitpool"
+        	ShortId="sbc_min_bitpool"
+        	Desc="Specifies the minimum bitpool size supported for SBC."
+        	Range="Min=2,Max=250"
+        	Type="uint"
+        	Size="8"
+              DefaultValue="2"
+        	ConfigGroupPath="./[@ShortId='bluetooth']/[@ShortId='br_edr_profiles']/[@ShortId='a2dp_g']/[@ShortId='sbc_config']"/>
+   </ConfigGroup> 
+</ModuleData>

@@ -1,0 +1,117 @@
+###########################################################################
+# CONFIDENTIAL
+# Copyright (c) 2008 - 2017 Qualcomm Technologies International, Ltd.
+# Unit 400, Cambridge Science Park,
+# Milton Road, Cambridge, CB4 0WH.  UK
+# Tel: +44 1223 692000  Fax: +44 1223 692001
+#
+############################################################################
+#
+# COMPONENT:    Build system
+# DESCRIPTION:  rules to set and check valid platform and compiler combination
+#
+############################################################################
+
+# Modify these lists as additional platforms and compilers are added:
+PLATFORMS=	pentium kalimba
+COMPILERS=	gcc kcc
+
+# if this is a unit test build is for host we need to set this up here as
+# CONFIGs set targets incorrectly
+ifeq ($(TEST_BUILD), gcc)
+TARGET_COMPILER=gcc
+TARGET_PLATFORM=pentium
+endif
+
+#TARGET_PLATFORM and _COMPILER are passed in...
+# check that they exist in the above lists:
+FOUND_TARGET_PLATFORM:= $(filter $(PLATFORMS), $(TARGET_PLATFORM))
+FOUND_TARGET_COMPILER:= $(filter $(COMPILERS), $(TARGET_COMPILER))
+
+# Now count just how many words have been specified as targets so that we
+# can easily spot the cases when no target is specified or more than one is!
+PLATFORM_WORDS= $(words $(TARGET_PLATFORM))
+COMPILER_WORDS= $(words $(TARGET_COMPILER))
+
+FOUND_PLATFORM_WORDS= $(words $(FOUND_TARGET_PLATFORM))
+FOUND_COMPILER_WORDS= $(words $(FOUND_TARGET_COMPILER))
+
+
+#########################################################################
+# Platform
+#########################################################################
+
+# Too many defined
+ifneq ("0", "$(FOUND_PLATFORM_WORDS)")
+  ifneq ("1", "$(FOUND_PLATFORM_WORDS)")
+    $(error Do not know how to build for multiple platforms "$(TARGET_PLATFORM)")
+  endif
+endif
+
+# Unrecognised
+ifneq ("0", "$(PLATFORM_WORDS)")
+  ifeq ("0", "$(FOUND_PLATFORM_WORDS)")
+    $(error Do not know how to build for platform "$(TARGET_PLATFORM)")
+  endif
+endif
+
+# No platform defined - choose pentium by default
+ifeq ("0", "$(PLATFORM_WORDS)")
+    TARGET_PLATFORM=pentium
+endif
+
+#########################################################################
+# Compiler
+#########################################################################
+# Too many defined
+ifneq ("0", "$(FOUND_COMPILER_WORDS)")
+  ifneq ("1", "$(FOUND_COMPILER_WORDS)")
+    $(error Do not know how to build for multiple compilers "$(TARGET_COMPILER)")
+  endif
+endif
+
+# Unrecognised
+ifneq ("0", "$(COMPILER_WORDS)")
+  ifeq ("0", "$(FOUND_COMPILER_WORDS)")
+    $(error Do not know how to build for compiler "$(TARGET_COMPILER)")
+  endif
+endif
+
+#No compiler defined - choose depending on platform. 
+ifeq ("0", "$(COMPILER_WORDS)")
+
+    ifeq ("pentium", "$(strip $(TARGET_PLATFORM))")    #By default gcc for pentium platforms
+        TARGET_COMPILER= gcc
+    endif
+
+    ifeq ("kalimba", "$(strip $(TARGET_PLATFORM))")    #By default kcc for kalimba platforms
+        TARGET_COMPILER= kcc
+    endif
+
+endif
+
+#########################################################################
+# Check for a valid combination
+#########################################################################
+
+# Raise error if no compiler or no platform has been se
+ifeq ("", "$(strip $(TARGET_COMPILER))") 
+    $(error No compiler set)
+endif
+ifeq ("", "$(strip $(TARGET_PLATFORM))") 
+    $(error No platform set)
+endif
+
+# For Kalimba, the only valid compiler is kcc
+ifeq ("kalimba", "$(strip $(TARGET_PLATFORM))") 
+    ifneq ("kcc", "$(strip $(TARGET_COMPILER))") 
+        $(error compiler "$(TARGET_COMPILER)" is not valid for Kalimba builds)
+    endif
+endif
+
+# Its not valid to use kcc for pentium builds
+ifeq ("pentium", "$(strip $(TARGET_PLATFORM))") 
+    ifeq ("kcc", "$(strip $(TARGET_COMPILER))") 
+        $(error kcc compiler is not valid for pentium builds)
+    endif
+endif
